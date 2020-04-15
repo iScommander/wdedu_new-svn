@@ -1,0 +1,804 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>首页</title>
+    <link href="r/wdedu/css/public.css" rel="stylesheet" type="text/css"/>
+</head>
+<body onkeydown="_keyLogin()">
+<div class="index_top_bg">
+    <div class="index_top">
+        <div class="index_top_l fl">
+            <p>欢迎光临沃得生涯教育集团！</p>
+            <span>免费热线：<i>400-9288-985</i></span>
+            <div class="clearfix"></div>
+        </div>
+        <div class="index_top_r fr">
+            <p><a href="">新手教程</a></p>
+            <p><a href="">官方微信</a></p>
+            <i><a href="javascript:showDialog3()">会员中心</a></i>
+            <span><a href="javascript:showDialog2()">快速登录</a></span><span><a href="javascript:showDialog()">/&nbsp;注册</a></span>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="index_logo">
+    <div class="index_logo_l fl">
+        <a href=""><img src="r/wdedu/images/index_3.png"></a>
+    </div>
+    <div class="index_logo_city fl">
+        <div class="city">
+            <div class="city_now" onclick="dk()">
+                <span class="fl" id="text">北京</span>
+                <div class="fl">
+                    <span class="city_nav" id="city_nav"><img src="r/wdedu/images/city_2.png"></span>
+                </div>
+            </div>
+            <div id="city_link" class="city_link">
+                <div class="city_show">
+                    <span class="f_red f_r" href="javascript:;" title="关闭窗口" onclick="gb()">[关闭]</span>
+                </div>
+                <a class="city_links" href="#" onclick="qz(this)">南京</a>
+                <a class="city_links" href="#" onclick="qz(this)">上海</a>
+                <a class="city_links" href="#" onclick="qz(this)">河南</a>
+                <a class="city_links" href="#" onclick="qz(this)">深圳</a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        window.isMoused = false;
+
+        function qz(obj) {
+            var text = $(obj).text();
+            document.getElementById("text").innerText = text;
+            gb();
+
+        }
+
+        function gb() {
+            document.getElementById('city_nav').className = 'city_nav';
+            document.getElementById('city_link').className = 'city_link';
+            window.isMoused = false;
+            return !1;
+        }
+
+        function dk() {
+            if (window.isMoused) {
+                gb()
+                window.isMoused = false;
+            } else {
+                document.getElementById('city_link').className = 'city_link city_hovers'
+                window.isMoused = true;
+            }
+        }
+
+    </script>
+    <div class="index_logo_c fl">
+        <form id="form1" name="form1" method="post" action="">
+            <input type="text" name="textfield" id="textfield" class="qgt_ssnr" placeholder="查大学 / 查专业 / 搜文章"/>
+            <input type="image" name="button" id="button" value="提交" src="r/wdedu/images/index_5.png" class="qgt_ssan"/>
+        </form>
+    </div>
+    <div class="index_logo_r fr">
+        <p><a href="${base}/NewsDisplay/EntranceCard.jspx">开通VIP</a></p><span><a href="">高考小助手</a></span>
+        <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<script type='text/javascript' src='r/wdedu/js/dropdown.js'></script>
+
+
+<div class="navbox">
+    <div class="navbox_bg">
+        <div class="nav_l fl">
+            <div id="nav">
+                <ul id="navMenu">
+                    <li><a href=''>首页</a></li>
+                    <li><a href='' rel='dropmenu1'>新高考选科</a></li>
+                    <li><a href='' rel='dropmenu2'>多元录取</a></li>
+                    <li><a href='' rel='dropmenu3'>综合素质提升</a></li>
+                    <li><a href='' rel='dropmenu4'>志愿填报</a></li>
+                    <li><a href='' rel='dropmenu5'>名师大讲堂</a></li>
+                    <li><a href='' rel='dropmenu6'>专家团队</a></li>
+                    <li><a href='' rel='dropmenu7'>一站式服务</a></li>
+                    <li><a href='' rel='dropmenu8'>沃得学院</a></li>
+                </ul>
+            </div>
+            <ul id="dropmenu1" class="dropMenu">
+                <li><a href="${base}/evaluation/index.jspx">选科测评</a></li>
+                <li><a href="${base}/NewsDisplay/InformationOnTheNewCollegeEntranceExamination.jspx">新高考资讯</a></li>
+                <li><a href=" ">根据大学选科目</a></li>
+                <li><a href="${base}/kxxk/courceToMajor.jspx">根据科目选专业</a></li>
+                <li><a href="${base}/kxxk/majorToCource.jspx">根据专业选科目</a></li>
+                <li><a href="${base}/kxxk/professionToMajor.jspx">根据职业选专业</a></li>
+            </ul>
+            <ul id="dropmenu2" class="dropMenu">
+
+                <li><a href="${base}/NewsDisplay/IndependentRecruitment.jspx">自主招生</a></li>
+                <li><a href="${base}/NewsDisplay/ComprehensiveAssessment.jspx">综合评价</a></li>
+                <li><a href="${base}/NewsDisplay/SinoforeignCooperativeEducation.jspx">中外合作办学</a></li>
+                <li><a href="${base}/NewsDisplay/HongKongMacaoTaiwan.jspx">港澳台申请</a></li>
+                <li><a href="${base}/NewsDisplay/Arts.jspx">艺术类</a></li>
+            </ul>
+            <ul id="dropmenu3" class="dropMenu">
+                <li><a href="${base}/NewsDisplay/BackgroundAscension.jspx">背景提升</a></li>
+                <li><a href="${base}/NewsDisplay/UniversityStudies.jspx">高校研学</a></li>
+                <li><a href="${base}/NewsDisplay/InternationalStudies.jspx">名企研习</a></li>
+                <li><a href="${base}/NewsDisplay/WorkExperience.jspx">职业体验</a></li>
+                <li><a href="${base}/NewsDisplay/SubjectStudy.jspx">课题研究</a></li>
+                <li><a href="${base}/NewsDisplay/EventGuide.jspx">竞赛指南</a></li>
+                <li><a href="${base}/NewsDisplay/Yoosure.jspx">海外游学</a></li>
+                <li><a href="${base}/NewsDisplay/SocialPractice.jspx">社会实践</a></li>
+
+            </ul>
+            <ul id="dropmenu4" class="dropMenu">
+                <li><a href="${base}/zytb/project.jspx">填志愿</a></li>
+                <li><a href="${base}/searchUnivAndMajor/searchUnivList.jspx">找大学</a></li>
+                <li><a href="${base}/searchUnivAndMajor/searchMajor.jspx">查专业</a></li>
+                <li><a href="${base}/searchUnivAndMajor/searchClass1.jspx">看就业</a></li>
+                <li><a href="${base}/kxxk/majorToCource.jspx">测性格</a></li>
+                <li><a href="${base}/bcdsj/universityRank.jspx">排行榜</a></li>
+                <li><a href="#">大数据</a></li>
+            </ul>
+            <ul id="dropmenu5" class="dropMenu">
+                <li><a href="${base}/ActiveDetailAct/expertLectures.jspx">公益讲座</a></li>
+                <!--<li><a href="${base}/NewsDisplay/AdmissionsOfficeLectureHall.jspx">招办讲堂</a></li>-->
+                <li><a href="${base}/NewsDisplay/WodecareerELesson.jspx">沃得e课</a></li>
+                <li><a href="${base}/NewsDisplay/MediaInterviews.jspx">媒体访谈</a></li>
+              <!--  <li><a href="${base}/NewsDisplay/TheNationalTour.jspx">全国巡讲</a></li>-->
+            </ul>
+            <ul id="dropmenu6" class="dropMenu">
+                <li><a href="${base}/NewsDisplay/TeamOfExperts.jspx"">专家团队</a></li>
+                <li><a href="${base}/NewsDisplay/AllCases.jspx">历年案例</a></li>
+                <li><a href="${base}/NewsDisplay/HonorList.jspx">荣誉榜单</a></li>
+                <li><a href="${base}/NewsDisplay/ParentsFeedback.jspx">家长反馈</a></li>
+            </ul>
+            <ul id="dropmenu7" class="dropMenu">
+                <li><a href="${base}/NewsDisplay/AcademicPlanningExpertServices.jspx">升学卡服务</a></li>
+                <li><a href="${base}/NewsDisplay/AcademicPlanningExpertServices.jspx">升学规划专家服务</a></li>
+                <li><a href="${base}/NewsDisplay/MultipleAdmissionExpertServices.jspx">多元录取专家服务</a></li>
+                <li><a href="${base}/NewsDisplay/VolunteerExpertServices.jspx">志愿填报专家服务</a></li>
+                <li><a href="${base}/NewsDisplay/ApplicationServiceForHongKongMacaoTaiwan.jspx">港澳台申请服务</a></li>
+            </ul>
+            <ul id="dropmenu8">
+            </ul>
+        </div>
+        <div class="nav_r fr">
+            <a href="">189****8843</a>
+        </div>
+        <div class="clearfix"></div>
+        <script type="text/javascript">cssdropdown.startchrome("navMenu")</script>
+    </div>
+</div>
+
+
+<div id="solid">
+    <ul>
+        <li><a href=""><img src="r/wdedu/images/index_banner_1.png" alt=""/></a></li>
+        <li><a href=""><img src="r/wdedu/images/index_banner_1.png" alt=""/></a></li>
+        <li><a href=""><img src="r/wdedu/images/index_banner_1.png" alt=""/></a></li>
+    </ul>
+    <div id="btt">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="index_banner_bd_bg_zd">
+        <div class="index_banner_bd_bg">
+            <div class="index_banner_bd">
+            <div class="index_kz1" >
+                <h3>用户登录</h3>
+                <!--<input type="text" name="textfield2" id="index_banner_bd_name" placeholder="请输入您的手机号/卡号">-->
+                <!--<input type="text" name="textfield3" id="index_banner_bd_key" placeholder="请输入您的密码">-->
+                <!--<input type="submit" name="submit" id="index_banner_bd_tj" value="立即登录">-->
+                <!--<p><span><a href="">忘记密码？</a></span><i><a href="">立即注册</a></i><div class="clearfix"></div></p>-->
+
+                <form id="jvForm" action="${base}/login.jspx" method="post">
+
+
+                        <input type="text" name="username" id="username" placeholder="请输入您的手机号/卡号" class="index_banner_bd_name" >
+                        <input type="password" name="password" id="password" placeholder="请输入您的密码" class="index_banner_bd_key">
+                        <input type="button" onclick="_login()" name="button" id="login" value="立即登录" class="index_banner_bd_tj" >
+                        <p><span><a href="${base}/user_register.jspx">忘记密码？</a></span><i><a href="${base}/user_register.jspx">立即注册</a></i><div class="clearfix"></div></p>
+                </form>
+                </div>
+                <div class="index_kz2" style="display:none;" >
+                                    <h3>模拟高考志愿填报</h3>
+                                    <ol class="score-board ">
+                							<li>省份学科
+                								<span class="score-infor">
+                									广东   |   理科
+                								</span>
+                							</li>
+                							<li>预估总分
+                								<span class="score-infor">
+                									360 分
+                								</span>
+                							</li>
+
+                							<li>预估排名
+                								<span class="score-infor">
+                									---    名
+                								</span>
+                							</li>
+
+                					</ol>
+
+                                    <div class="submit-btn-index ui-btn">
+                								<a href="/zhiyuan?showType=sch">开始推荐学校</a>
+                					</div>
+                                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 大图 B -->
+<script src="r/wdedu/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="r/wdedu/js/fordboy.js"></script>
+<!-- 大图 E -->
+<!--大图 over-->
+<script>
+    $(function () {
+        var obj = $('.index_guihua_r_con>ul>li');
+        obj.each(function (i) {
+            $(this).attr('id', "tab1_p_" + i);
+        })
+    })</script>
+	<div class="index_guihua">
+		<div class="index_guihua_tit1">新高考选科规划<a href="">查看更多+</a></div>
+		<div class="index_guihua_l fl">
+			<div class="index_guihua_l_tit">
+				<span>选科测评</span><i><a href="">适合我的专业>></a></i><div class="clearfix"></div>
+			</div>
+			<div class="index_guihua_l_con">
+				<div class="index_guihua_l_con_one">
+					<div class="index_guihua_l_con_one_l fl">
+						<p>选科意向测评</p>
+						<span>个人兴趣、学业信心、发展期望、社会支持等测评维度为您推荐适合学习的高中科目......</span>
+					</div>
+					<div class="index_guihua_l_con_one_r fr">
+						<a href="">开始测评</a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="index_guihua_l_con_two">
+					<div class="index_guihua_l_con_two_l fl">
+						<p>选科专业测评</p>
+						<span>依霍兰德、MBTI、社会支持因素等测评维度推荐适合未来学习的大学专业</span>
+					</div>
+					<div class="index_guihua_l_con_two_r fr">
+						<a href="">开始测评</a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+		<div class="index_guihua_r fr">
+			<div class="index_guihua_r_tit">选科规划</div>
+			<div class="index_guihua_r_con">
+				<ul>
+					<li>
+						<p><img src="r/wdedu/images/index_18.png"></p>
+						<i>科目选专业</i>
+						<span>根据自己所选科目，帮助查找目标的大学与专业</span>
+					</li>
+					<li>
+						<p><img src="r/wdedu/images/index_19.png"></p>
+						<i>专业选科目</i>
+						<span>根据自己偏爱专业，帮助推荐高中需要选择科目</span>
+					</li>
+					<li>
+						<p><img src="r/wdedu/images/index_20.png"></p>
+						<i>职业选专业</i>
+						<span>根据未来希望就业方向，推荐需要选择专业与科目</span>
+					</li>
+					<div class="clearfix"></div>
+				</ul>
+				<a href="">开始选科</a>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+    <div class="index_tis_bg1">
+		<div class="index_tis">
+			<div class="index_guihua_tit1">多元招生录取<a href="${base}/NewsDisplay/IndependentRecruitment.jspx">查看更多+</a></div>
+			<div class="index_dylq f_l">
+				<a href ="${base}/NewsDisplay/IndependentRecruitment.jspx">
+            	<div class="index_dylq_img f_l">
+                <img src="r/wdedu/images/index_dylq_1.png"/></div>
+            	<div class="index_dylq_js f_l">
+                  <span>自主招生</span>
+            	<div class="index_dylq_tb">
+                <img src="r/wdedu/images/index_dylq_4.png"/>
+                </div>
+				</div>
+				</a>
+            </div>
+            <div class="index_dylq f_l">
+				<a href ="${base}/NewsDisplay/ComprehensiveAssessment.jspx">
+            	<div class="index_dylq_img f_l">
+                <img src="r/wdedu/images/index_dylq_2.png"/></div>
+            	<div class="index_dylq_js f_l">
+                  <span>综合评价</span>
+            	<div class="index_dylq_tb">
+                <img src="r/wdedu/images/index_dylq_4.png"/>
+                </div>
+                </div>
+             </div>
+             <div class="index_dylq f_l">
+				<a href ="${base}/NewsDisplay/Arts.jspx">
+            	<div class="index_dylq_img f_l">
+                <img src="r/wdedu/images/index_dylq_3.png"/></div>
+            	<div class="index_dylq_js f_l">
+                  <span>艺术类</span>
+            	<div class="index_dylq_tb">
+                <img src="r/wdedu/images/index_dylq_4.png"/>
+                </div>
+                </div>
+			 </a>
+            </div>
+            <div class="clearfix"></div>
+            </div>
+	</div>
+
+	<div class="index_tis_bg">
+		<div class="index_tis">
+			[@cms_content_list typeId='1,2,3' count='1' titLen='15' channelId='154' orderBy='0' channelOption='0' dateFormat='yyyy-MM-dd']
+			[#list tag_list as a]
+			 <div class="index_guihua_tit1">综合素质提升<a href="${base}/NewsDisplay/UniversityStudies.jspx?contentId=${a.id!}">查看更多+</a></div>
+			[/#list]
+			[/@cms_content_list]
+			<div class="index_zh_con">
+			<ul>
+
+				[@cms_content_list typeId='1,2,3' count='3' titLen='15' channelId='154' orderBy='0' channelOption='0' dateFormat='yyyy-MM-dd']
+				[#list tag_list as a]
+				<li>
+				    <a href="${base}/NewsDisplay/UniversityStudies.jspx?contentId=${a.id!}">
+						<p>
+							<strong><img src="${a.titleImg!}"></strong>
+						</p>
+						<h5>[@text_cut s=a.title len=30 append='...'/]</h5>
+						<span>
+							<big>${a.shortTitle!}</big>
+							<small>2019-10-12</small>
+							<div class="clearfix"></div>
+						</span>
+					</a>
+
+				</li>
+				[/#list]
+				[/@cms_content_list]
+				<div class="clearfix"></div>
+			</ul>
+		</div>
+		</div>
+	</div>
+	<div class="index_jiangt">
+		<div class="index_guihua_tit1">名师大讲堂<a href="${base}/NewsDisplay/WodecareerELesson.jspx">查看更多+</a></div>
+		<div class="index_jiangt_con">
+			<ul>
+				[@cms_content_list typeId='1,2,3' count='10' titLen='15' channelId='187' orderBy='4' channelOption='0' dateFormat='yyyy-MM-dd']
+				[#list tag_list as a]
+				<li>
+					<a href="${a.url!}" target="_blank">
+						<p><strong>
+							<img src="${a.titleImg!}">
+							<i><img src="r/wdedu/images/index_28.png"></i>
+						</strong></p>
+						<h5>${a.title!}</h5>
+						<span>
+							<big>${a.shortTitle!'暂无分类'}</big>
+							<small>已有1W+人观看</small>
+							<div class="clearfix"></div>
+						</span>
+					</a>
+				</li>
+				[/#list]
+				[/@cms_content_list]
+				<div class="clearfix"></div>
+			</ul>
+		</div>
+	</div>
+
+<script type="text/javascript" src="r/wdedu/js/scroll.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.list_lh li:even').addClass('lieven');
+    })
+    $(function () {
+        $("div.list_lh").myScroll({
+            speed: 70, //数值越大，速度越慢
+            rowHeight: 128 //li的高度
+        });
+    });
+</script>
+<div class="index_tout">
+
+		<div class="index_tout_l fl">
+        <div class="index_guihua_tit1" style="width:808px">高考头条号</div>
+			<div class="index_tout_l_l fl">
+				<p><a href=""><img src="r/wdedu/images/index_30.jpg"></a></p>
+				<i>2019-09-09</i>
+				<span><a href="">工智能正主导着全球企业的创新——无论是大型企业集团还是年轻的初创企业。据市场研究报告《从技术和垂直...</a></span>
+			</div>
+			<div class="index_tout_l_r fr">
+				<ul>
+					<li>
+						<a href="">
+							<p>工智能正主导着全球企业的创新——无论是大型的......</p>
+							<span>2019-09-09</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<p>工智能正主导着全球企业的创新——无论是大型的......</p>
+							<span>2019-09-09</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<p>工智能正主导着全球企业的创新——无论是大型的......</p>
+							<span>2019-09-09</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<p>工智能正主导着全球企业的创新——无论是大型的......</p>
+							<span>2019-09-09</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<p>工智能正主导着全球企业的创新——无论是大型的......</p>
+							<span>2019-09-09</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="index_tout_r fr">
+        <div class="index_guihua_tit1" >沃得讲座<a href="">查看更多+</a></div>
+
+			<div class="bcon">
+				<div class="list_lh">
+					<ul>
+						<li>
+							<p>
+								<i>南京市</i>
+								<a href="">立即报名</a>
+							</p>
+							<span>
+								<h4><a href="">主题：《江苏名师大讲堂》2019...</a></h4>
+								<big>地点：南京大学鼓楼校区</big>
+								<small>时间：2019-09-25 09:00:00</small>
+							</span>
+							<div class="clearfix"></div>
+						</li>
+						<li>
+							<p>
+								<i>南京市</i>
+								<a href="">立即报名</a>
+							</p>
+							<span>
+								<h4><a href="">主题：《江苏名师大讲堂》2019...</a></h4>
+								<big>地点：南京大学鼓楼校区</big>
+								<small>时间：2019-09-25 09:00:00</small>
+							</span>
+							<div class="clearfix"></div>
+						</li>
+						<li>
+							<p>
+								<i>南京市</i>
+								<a href="">立即报名</a>
+							</p>
+							<span>
+								<h4><a href="">主题：《江苏名师大讲堂》2019...</a></h4>
+								<big>地点：南京大学鼓楼校区</big>
+								<small>时间：2019-09-25 09:00:00</small>
+							</span>
+							<div class="clearfix"></div>
+						</li>
+						<li>
+							<p>
+								<i>南京市</i>
+								<a href="">立即报名</a>
+							</p>
+							<span>
+								<h4><a href="">主题：《江苏名师大讲堂》2019...</a></h4>
+								<big>地点：南京大学鼓楼校区</big>
+								<small>时间：2019-09-25 09:00:00</small>
+							</span>
+							<div class="clearfix"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+<script src="r/wdedu/js/tab.js"></script>
+
+<div class="index_team">
+		<div class="index_guihua_tit1" >专家团队<a href="">查看更多+</a></div>
+		<div class="index_team_con">
+				<div class="blk_18">
+					<div class="pcont" id="ISL_Cont_1">
+						<div class="ScrCont">
+							<div id="List1_1">
+								<!-- piclist begin -->
+								<ul>
+									<li class="pl">
+										<p>
+											<a href=""><img src="r/wdedu/images/index_34.png"></a>
+											<i>资深讲师</i>
+										</p>
+										<big><a href="">曾昆老师</a></big>
+										<strong></strong>
+										<small>擅长文学，小语种，哲学</small>
+										<span><a href="">立即咨询</a></span>
+									</li>
+									<li class="pl">
+										<p>
+											<a href=""><img src="r/wdedu/images/index_34.png"></a>
+											<i>资深讲师</i>
+										</p>
+										<big><a href="">曾昆老师</a></big>
+										<strong></strong>
+										<small>擅长文学，小语种，哲学</small>
+										<span><a href="">立即咨询</a></span>
+									</li>
+									<li class="pl">
+										<p>
+											<a href=""><img src="r/wdedu/images/index_34.png"></a>
+											<i>资深讲师</i>
+										</p>
+										<big><a href="">曾昆老师</a></big>
+										<strong></strong>
+										<small>擅长文学，小语种，哲学</small>
+										<span><a href="">立即咨询</a></span>
+									</li>
+									<li class="pl">
+										<p>
+											<a href=""><img src="r/wdedu/images/index_34.png"></a>
+											<i>资深讲师</i>
+										</p>
+										<big><a href="">曾昆老师</a></big>
+										<strong></strong>
+										<small>擅长文学，小语种，哲学</small>
+										<span><a href="">立即咨询</a></span>
+									</li>
+									<li class="pl">
+										<p>
+											<a href=""><img src="r/wdedu/images/index_34.png"></a>
+											<i>资深讲师</i>
+										</p>
+										<big><a href="">曾昆老师</a></big>
+										<strong></strong>
+										<small>擅长文学，小语种，哲学</small>
+										<span><a href="">立即咨询</a></span>
+									</li>
+									<div class="clearfix"></div>
+								</ul>
+
+								<!-- piclist end -->
+							</div>
+						<div id="List2_1"></div>
+						</div>
+					</div>
+				  <a class="LeftBotton" onmousedown="ISL_GoUp_1()" onmouseup="ISL_StopUp_1()" onmouseout="ISL_StopUp_1()" href="javascript:void(0);" target="_self"></a>
+				  <a class="RightBotton" onmousedown="ISL_GoDown_1()" onmouseup="ISL_StopDown_1()" onmouseout="ISL_StopDown_1()" href="javascript:void(0);" target="_self"></a>
+				  <div class="clearfix"></div>
+				</div>
+
+			<div class="c"></div>
+			<script type="text/javascript">
+			        <!--
+			        picrun_ini()
+			        //-->
+		    </script>
+			</div>
+
+
+	</div>
+<div class="index_footer_bg">
+    <div class="index_footer">
+        <div class="index_footer_l fl">
+            <img src="r/wdedu/images/index_35.png">
+        </div>
+        <div class="index_footer_c fl">
+            <i><a href="">沃得生涯服务</a><a href="">新高考选科 </a><a href="">综合素质提升</a><a href="">自招综评</a><a href="">志愿填报</a>
+                <div class="clearfix"></div>
+            </i>
+            <i><a href="">关于沃得生涯</a><a href="">了解沃得 </a><a href="">沃得声明 </a><a href="">加入沃得</a><a href="">合作加盟</a><a
+                    href="">联系沃得</a>
+                <div class="clearfix"></div>
+            </i>
+        </div>
+        <div class="index_footer_r fr">
+            <p><img src="r/wdedu/images/index_36.png"></p>
+            <span>【 扫码进入沃得公众号 】</span>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="index_last_bg">
+    <div class="index_last">
+        <p>备案号：苏ICP备18041837号-2</p><span>沃得生涯教育咨询有限公司</span>
+        <div class="clearfix"></div>
+    </div>
+</div>
+ <!-- ===================================================用户注册-->
+    <div class="ui-mask" id="mask" onselectstart="return false" style="display:none;"></div>
+  <div class="ui-dialog" id="dialogMove" onselectstart='return false;' >
+  <span class="close2" onClick="hideDialog()"></span>
+    <div class="ui-dialog-title" id="dialogDrag"  style="margin-top:50px;" >
+        用户注册<span>我的高中生涯，沃得生涯规划！</span>
+    </div>
+    <div class="ui-dialog-content">
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input ui-dialog-input-username" type="input" placeholder="请输入11位数字手机号码" />
+        </div>
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input2 ui-dialog-input-password2" type="input" placeholder="请输入短信验证密码密码" />
+           <button type="button" class="ui_yzm">获取验证码</button><div class="clearfix"></div>
+        </div>
+                <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input ui-dialog-input-password" type="input" placeholder="请设置您的密码" />
+        </div>
+        <div class="ui-dialog-l40">
+            <a href="#">已有账号立即登录</a>
+        </div>
+        <div>
+            <a class="ui-dialog-submit" href="#" >立即注册</a>
+        </div>
+
+    </div>
+</div>
+
+<!--===============================用户登录=============================-->
+    <div class="ui-mask" id="mask2" onselectstart="return false" style="display:none;"></div>
+  <div class="ui-dialog" id="dialogMove2" onselectstart='return false;' >
+  <span class="close2"onClick="hideDialog2()"></span>
+    <div class="ui-dialog-title" id="dialogDrag2"  style="margin-top:50px;" >
+        用户登录<span>我的高中生涯，沃得生涯规划！</span>
+
+    </div>
+    <div class="ui-dialog-content">
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input ui-dialog-input-username" type="input" placeholder="请输入您的手机号/卡号" />
+        </div>
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input2 ui-dialog-input-password2" type="input" placeholder="请输入短信验证密码密码" />
+           <button type="button" class="ui_yzm">获取验证码</button><div class="clearfix"></div>
+        </div>
+                <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input ui-dialog-input-password" type="input" placeholder="请输入您的密码" />
+        </div>
+        <div class="ui-dialog-l40">
+            <a href="#">还没有账户 / 忘记密码？</a>
+        </div>
+        <div>
+            <a class="ui-dialog-submit" href="#" >立即登录</a>
+        </div>
+    </div>
+</div>
+
+<!--================================激活卡==============================-->
+    <div class="ui-mask" id="mask3" onselectstart="return false" style="display:none;"></div>
+  <div class="ui-dialog" id="dialogMove3" onselectstart='return false;'>
+  <span class="close2" onClick="hideDialog3()"></span>
+    <div class="ui-dialog-title" id="dialogDrag3"   >
+        请激活卡<span>我的高中生涯，沃得生涯规划！</span>
+
+    </div>
+    <div class="ui-dialog-content">
+            <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input ui-dialog-input-username3" type="input" placeholder="请输入您的卡号" />
+        </div>
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input ui-dialog-input-username" type="input" placeholder="请输入11位数字手机号码" />
+        </div>
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input2 ui-dialog-input-password2" type="input" placeholder="请输入短信验证密码密码" />
+           <button type="button" class="ui_yzm">获取验证码</button><div class="clearfix"></div>
+        </div>
+                <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input ui-dialog-input-password" type="input" placeholder="请设置您的密码" />
+        </div>
+        <div class="ui-dialog-l40">
+            <a href="#">已有账号立即登录</a>
+        </div>
+        <div>
+            <a class="ui-dialog-submit" href="#" >立即注册</a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+<script>
+    //input选中变色
+/*    window.onload = function () {
+        var aInput = document.getElementsByTagName('input');
+        for (var i = 0; i < aInput.length; i++) {
+            aInput[i].onfocus = function () {
+                this.className = 'f-text';
+            }
+            aInput[i].onblur = function () {
+                this.className = 'f-origin';
+            }
+        }
+    }*/
+
+    function _rtnBtn() {
+        location.href = '${base}/';
+    }
+
+    //
+    function _login() {
+        var username = $("#username").val();
+        var password = $("#password").val();
+
+        if (username == '') {
+            alert("请填入用户名！");
+            return false;
+        }
+        if (password == '') {
+            alert("请填入密码！");
+            return false;
+        }
+
+        //验证是不是卡号
+        var card = /^[0-9]*$/;
+        // if(card.test(username)){
+        // 	$.ajax({
+        // 		url : 'check_card.jspx',
+        // 		type : "post",
+        // 		async:false,
+        // 		data:{cardId:username},
+        // 		error : function(){
+        // 			alert("提交出现异常！");
+        // 		},
+        // 		success : function(data){
+        // 			var res = eval('(' + data + ')');
+        // 			if(res && res.success == true){
+        // 				$.ajax({
+        // 					url : 'login_with_card.jspx',
+        // 					type : "post",
+        // 					async:false,
+        // 					data:{cardId:username,password:password},
+        // 					error : function(){
+        // 						alert("提交出现异常！");
+        // 					},
+        // 					success : function(data){
+        // 						var res = eval('(' + data + ')');
+        // 						if(res && res.success == true){
+        // 							event.returnValue=false;
+        // 							location.href=res.msg;
+        // 						}else {
+        // 							alert(res.msg);
+        // 						}
+        // 					}
+        // 				});
+        // 			}else {
+        // 				$("#jvForm").submit();
+        // 			}
+        // 		}
+        // 	});
+        // } else {
+        $("#jvForm").submit();
+        // }
+    }
+
+    function _keyLogin() {
+        if (event.keyCode == 13) {
+            $("#login").click();  //调用登录按钮的登录事件
+        }
+    }
+</script>
+</html>

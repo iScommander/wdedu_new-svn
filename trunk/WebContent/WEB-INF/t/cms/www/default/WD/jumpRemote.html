@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="${base}/r/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css"/>
+    <script src="${base}/r/js/jQuery.js"></script>
+    <style>
+        header {
+            background: #d7f5f9;
+            height: 73px;
+            line-height: 73px;
+            text-align: center;
+        }
+
+        header > div {
+            color: #51412a;
+            font-size: 24px;
+        }
+
+        .collegePlansMain .flex-container1 li {
+            background: url(${base}/r/img/tabBg.png) no-repeat;
+            width: 157px;
+            height: 47px;
+            position: relative;
+            left: 0;
+        }
+
+        .collegePlansMain .flex-container1 li:nth-child(2) {
+            left: -10px;
+        }
+
+        .collegePlansMain .flex-container1 li:nth-child(3) {
+            left: -20px;
+        }
+
+        .collegePlansMain .flex-container1 li:nth-child(4) {
+            left: -30px;
+        }
+
+        .collegePlansMain .flex-container1 li:nth-child(5) {
+            left: -40px;
+        }
+
+        .collegePlansMain .flex-container1 li:nth-child(6) {
+            left: -50px;
+        }
+
+        .collegePlansMain .flex-container1 li.active {
+            background: url(${base}/r/img/tabBg1.png) no-repeat;
+            width: 157px;
+            z-index: 99;
+        }
+
+        .collegePlansMain .flex-container1 li a p {
+            color: #fff;
+            height: 47px;
+            line-height: 47px;
+            margin-left: 38px;
+        }
+
+        .collegePlansMain .flex-container1 li.jihua-4 a p {
+            margin-left: 20px;
+        }
+
+        .collegePlansMain .collegePlansMainTab-content div.shuoming {
+            margin: 15px 0;
+        }
+
+        .collegePlansMain .collegePlansMainTab-content div.shuoming > p {
+            color: #e84c3d;
+            margin: 8px 0;
+        }
+
+        .collegePlansMain > p {
+            text-align: center;
+            font-size: 18px;
+            color: #51412a;
+            margin: 25px 0 40px;
+        }
+
+        .collegePlansMain .collegePlansMainTab-content .collegePlansBtn {
+            text-align: center;
+        }
+
+        .collegePlansMain .collegePlansMainTab-content .collegePlansBtn button {
+            width: 153px;
+            height: 45px;
+            margin: 70px 10px 50px;
+        }
+
+        .collegePlansMain .collegePlansMainTab-content table tr {
+            font-size: 14px;
+        }
+
+        .collegePlansMain .collegePlansMainTab-content table tr td > a {
+            color: #2bbdc7;
+        }
+
+        .collegePlansMain .collegePlansMainTab-content #jihuaList_6 > table {
+            margin: 20px 0;
+        }
+
+        .collegePlansMain .collegePlansMainTab-content #jihuaList_6 > div > p {
+            color: #e84c3d;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        #jihuaList_2 table {
+            margin: 20px 0 40px;
+        }
+
+        ul.liList li {
+            float: left;
+            border: 1px solid #000;
+            border-bottom: 0;
+            border-left: 0;
+            border-top: 0;
+            width: 60px;
+        }
+
+        table.tablePadding tr td,
+        table.tablePadding tr th {
+            padding: 8px 0;
+        }
+
+        #tb2 tr:nth-child(even){
+            background-color: #ffffff !important;
+            color: #333;
+        }
+
+        #tb2 tr:nth-child(odd){
+            background-color: rgb(204, 204, 204);
+
+        }
+
+        .major_name {
+            width: 200px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+
+
+    </style>
+
+    <script type="text/javascript">
+
+        /*$(document).ready(function()
+              {
+                  var scroll_bar = $("#scroll_bar");//表格的id
+                  var bar_head = $("#bar_head");//表头
+                  var bar_height = bar_head.height();//表头高
+                  var bar_rank = $("#rank").height();
+                  var sroll_header= scroll_bar.clone().attr('id','bb');//更改复制的表格id
+                  $(window).scroll(function(){
+                      var scroll_top = $('body').scrollTop() - scroll_bar.offset().top;//判断是否到达窗口顶部
+
+                      if (scroll_top > 0) {
+                          $('body').append('<div id="shelter"></div>');//复制的表格所在的容器
+                          $("#shelter").css({'height':bar_height,'position':'fixed','top':'0','width':'$(bar_head).width','margin': '0 auto','left':'16px','right':'0','border-bottom':'1px solid #c8c8c8'});
+                          sroll_header.appendTo('#shelter');
+                          $('#shelter table').removeClass(); //删除table原来有的默认class，防止margin,padding等值影响样式
+                          $('#shelter table').addClass("table table-bordered deeptable tablePadding");
+                          $('#shelter table tr th').css('height', bar_height);//此处可以自行发挥
+
+                          $('#shelter').show();
+
+                      }else {
+                          $('#shelter').hide();
+                      }
+                  });
+          });*/
+
+
+        function xlh() {
+            var tbl = document.getElementById("tbl");
+            var rows = tbl.rows.length;
+            for (var i = 1; i < rows; i++) {
+                if (i % 2 == 0) {
+                    tbl.rows[i].style.backgroundColor = "#cccccc";
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="xlh()">
+<div class="modal-body">
+    <p>查看各批次线</p>
+    <div class="modal-body flex-container2" style="max-height:640px;overflow: auto;">
+        <div style="width: 62%;">
+            <p style="color: #05b8c3;font-size: 14px;padding: 9px;">*数据来源教育考试院- 招生计划 ,点击填报，则选中该专业，再次点击填报按钮，则取消该专业选择</p>
+            <input id="max_major_num" value="${max_major_num}" name="max_major_num" type="hidden">
+            <form id="itemForm">
+                <table class="table deeptable table-striped volunteer_list">
+                    <tr>
+                        <th width="70">代码</th>
+                        <th width="200">大学/专业名称</th>
+                        <th>填报</th>
+                        <th>计划</th>
+                        <th>学费</th>
+                        <th>学制</th>
+                        <th>备注</th>
+                    </tr>
+                        <tr>
+                            <td>${univM.univ_code!}</td>
+                            <td>
+                                <div class="major_name" style="text-align: left" title="${univM.univ_name!}">${univM.univ_name!}</div>
+                            </td>
+                            <td></td>
+                            <td>${univM.plan_num!}</td>
+                            <td>${univM.plan_fee!}</td>
+                            <td>${univM.plan_school_length!}</td>
+                            <td>${univM.plan_remark!}</td>
+                        </tr>
+                        [#if univList?? ]
+                        [#list univList as a ]
+                        <tr>
+                            <td>${a.major_code!}</td>
+                            <td>
+                                <div class="major_name" style="text-align: left" title="${a.major_name!}">${a.major_name!}</div>
+                            </td>
+                            <td class="checkbox_base" style="padding-left: 8px;text-align: center">
+                                [#if intentMajorId??]
+                                [#if intentMajorId?seq_contains('${a.id!}')]
+                                <input id="volunteer_sele_${a.id!}" type="checkbox" value="${a.id!}" checked="checked">
+                                <label for="volunteer_sele_${a.id!}">填报</label>
+                                [#else]
+                                <input id="volunteer_selec_${a.id!}" type="checkbox" value="${a.id!}">
+                                <label for="volunteer_selec_${a.id!}">填报</label>
+                                [/#if]
+                                [#else]
+                                <input id="volunteer_select_${a.id!}" type="checkbox" value="${a.id!}">
+                                <label for="volunteer_select_${a.id!}">填报</label>
+                                [/#if]
+                            </td>
+                            <td>${a.plan_num!}</td>
+                            <td>${a.plan_fee!}</td>
+                            <td title="${a.planSchoolLength!}">${a.plan_school_length!}</td>
+                            <td><div title="${a.remark!}">${a.plan_remark!}</div></td>
+                        </tr>
+                        [/#list]
+                        [/#if]
+
+                </table>
+                <input type="hidden" id="applicationId" value="${applicationId!}"/>
+                <input type="hidden" id="batchId" value="${batchId!}"/>
+                <input type="hidden" id="univId" value="${univId!}"/>
+            </form>
+        </div>
+        <div style="width: 36%;">
+            <ul id="yearTab" class="nav nav-tabs ChooseToOption_tabs yearTab_tabs">
+                <li class="active">
+                    <a href="#yearTab1" data-toggle="tab">${year!}</a>
+                </li>
+                <li>
+                    <a href="#yearTab2" data-toggle="tab">${year1!}</a>
+                </li>
+                <li>
+                    <a href="#yearTab3" data-toggle="tab">${year2!}</a>
+                </li>
+            </ul>
+            <div id="yearTabContent" class="tab-content" style="max-height:480px;overflow: auto">
+                <div class="tab-pane in active" id="yearTab1">
+                    <table class="table deeptable table deeptable letterSpacing0 table-striped">
+                        <tr>
+                            <th>大学/专业名称</th>
+                            <th>最低分/排名</th>
+                            <th>平均分/排名</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="major_name" style="font-size: 20px;font-weight: bold" title="${univM.univ_name!}">${univM.univ_name!}</div>
+                            </td>
+                            <td > <font color="red">${univDetail.scoreLow1!}</font>/<font color="blue">${univDetail.rankScoreLow1!}</font> </td>
+                        </tr>
+                        [#if  yearAgo1?? ]
+                        [#list yearAgo1 as a ]
+                        <tr>
+                            <td><div class="major_name" title="${a.majorName!}" style="text-align: left">${a.major_name!}</div></td>
+                            <td><font color="red">${a.hist_low_score!}</font>/<font color="blue">${a.hist_low_rank!}</font></td>
+                            <td><font color="yellow"> ${a.histAveScore!}</font>/<font color="green">${a.hist_ave_rank!}</font></td>
+                        </tr>
+                        [/#list]
+                        [/#if]
+                    </table>
+                </div>
+
+                <div class="tab-pane in " id="yearTab2">
+                    <table class="table deeptable table deeptable letterSpacing0 table-striped">
+                        <tr>
+                            <th>大学/专业名称</th>
+                            <th>最低分/排名</th>
+                            <th>平均分/排名</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="major_name" style="font-size: 20px;font-weight: bold" title="${univM.univ_name!}">${univM.univ_name!}</div>
+                            </td>
+                            <td > <font color="red">${univDetail.scoreLow2!}</font>/<font color="blue">${univDetail.rankScoreLow2!}</font> </td>
+                        </tr>
+                        [#if  yearAgo2?? ]
+                        [#list yearAgo2 as a ]
+                        <tr>
+                            <td><div class="major_name" title="${a.majorName!}" style="text-align: left">${a.major_name!}</div></td>
+                            <td><font color="red">${a.hist_low_score!}</font>/<font color="blue">${a.hist_low_rank!}</font></td>
+                            <td><font color="yellow"> ${a.histAveScore!}</font>/<font color="green">${a.hist_ave_rank!}</font></td>
+                        </tr>
+                        [/#list]
+                        [/#if]
+                    </table>
+                </div>
+
+                <div class="tab-pane in " id="yearTab3">
+                    <table class="table deeptable table deeptable letterSpacing0 table-striped">
+                        <tr>
+                            <th>大学/专业名称</th>
+                            <th>最低分/排名</th>
+                            <th>平均分/排名</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="major_name" style="font-size: 20px;font-weight: bold" title="${univM.univ_name!}">${univM.univ_name!}</div>
+                            </td>
+                            <td > <font color="red">${univDetail.scoreLow3!}</font>/<font color="blue">${univDetail.rankScoreLow3!}</font> </td>
+                        </tr>
+                        [#if  yearAgo3?? ]
+                        [#list yearAgo3 as a ]
+                        <tr>
+                            <td><div class="major_name" title="${a.majorName!}" style="text-align: left">${a.major_name!}</div></td>
+                            <td><font color="red">${a.hist_low_score!}</font>/<font color="blue">${a.hist_low_rank!}</font></td>
+                            <td><font color="yellow"> ${a.histAveScore!}</font>/<font color="green">${a.hist_ave_rank!}</font></td>
+                        </tr>
+                        [/#list]
+                        [/#if]
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="${base}/r/js/jQuery.js"></script>
+<script src="${base}/r/js/bootstrap.min.js"></script>
+<script src="${base}/r/js/itemsJs/filtrate.js"></script>
+<script src="${base}/r/js/itemsJs/common.js"></script>
+<script src="${base}/r/js/Sortable.js"></script>
+<script>
+
+    function checkNum(){
+
+        var checkNum = $("input[type='checkbox']:checked").length;
+        var num = $("#max_major_num").val();
+        if (checkNum > num) {
+            alert("本批次每所院校限报" + num + "个专业");
+            return false;
+        }
+
+    }
+
+    function saveDetail(){
+        /*var checkNum = $("input[type='checkbox']:checked").length;
+        var num = $("#max_major_num").val();
+        if (checkNum > num) {
+            alert("本批次每所院校限报"+num+"个专业");
+
+            return false;
+        }*/
+        var voteList = [];
+        $('input:checkbox').each(function(){
+            if($(this).is(':checked')==true){
+                voteList.push($(this).val());
+            }
+        })
+        console.log(voteList);
+        var majorId= voteList.join("|");
+        var applicationId = $("#applicationId").val();
+        var univId = $("#univId").val();
+        var batchId = $("#batchId").val();
+        $.ajax({
+            url : '${base}/fastZytb/saveOrUpdateIntentMajor.jspx',
+            data: {
+                majorId:majorId,
+                applicationId:applicationId,
+                batchId:batchId,
+                intent_univId:univId
+            },
+            type : "POST",
+            async:false,
+            error : function(data) {
+                alert("提交失败！\r\n"+data);
+            },
+            success : function(data) {
+                alert(data.msg);
+                parent._hideIframe();
+            }
+
+        });
+    }
+</script>
+
+</html>
+

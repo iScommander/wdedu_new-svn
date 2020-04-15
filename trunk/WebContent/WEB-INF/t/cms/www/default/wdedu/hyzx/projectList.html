@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>志愿填报</title>
+     <link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="${base}/r/wdedu/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${base}/r/css/combo.select.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css"/>
+  <link rel="stylesheet" href="${base}/r/wdedu/css/common.css"/>
+
+    <script src="${base}/r/cms/front.js"></script>
+    <link rel="stylesheet" type="text/css" href="${base}/r/css/xcConfirm.css"/>
+    <script src="${base}/r/css/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="${base}/r/js/jquery.mloading.css">
+    <script src="${base}/r/css/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${base}/r/css/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="${base}/r/css/sweetalert.css">
+    <script src="${base}/r/wdedu/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        function updateScore(applcationId){
+
+
+            var scoreTmp = $("#score_input_"+applcationId+"").val();
+            var applicationNameTmp = $("#application_name_"+applcationId+"").val();
+            $.ajax({
+                url: "${base}/admissonSvcAct/updateApplicationScore.jspx",
+                type: 'post',
+                data:{applicationId:applcationId,
+                    applicationName:applicationNameTmp,
+                    score:scoreTmp
+                },
+                dataType:'json',
+                success:function(data){
+                    alert(data.msg);
+                    window.location.reload();
+                }
+            });
+
+
+
+        }
+
+        function op(aid,apid){
+            window.location.href="${base}/pdf/createPdf.jspx?applicationId="+aid+"&provinceId="+apid;
+            $("body").mLoading({
+                text:"选择比努力更重要,评估报告生成中..."
+            });
+        }
+        function openDialog(application_id){
+
+            // $("#appHidden").val(application_id) ;
+            /*document.getElementById('light').style.display='block';*/
+            var txt=  "请输入手机号";
+            window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.input,{
+                onOk:function(v){
+                    // console.log(v);
+                    var mobile = v;
+                    var application_idd = application_id ;
+
+                    $.ajax({
+                        url: "${base}/zytb/sendApp.jspx",
+                        type: 'post',
+                        async: true,
+                        data: {
+                            mobile:mobile,
+                            application_idd:application_idd
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            var isSuccess = data.success;
+                            var msg = data.msg;
+                            alert(msg);
+                        }
+                    });
+                }
+            });
+
+        }
+
+        function bangding_order(application_id,orderId){
+
+            var orderId=prompt("请输入需要绑定的订单ID","")
+            if (orderId == null || orderId ==""){
+                alert("请输入订单ID");
+                return;
+            }
+            alert(orderId)
+            window.location.href="${base}/zytb/bangDingOrder.jspx?application_id="+application_id+"&orderId="+orderId;
+        }
+
+        //根据批次查询
+        function get_score_rank() {
+            var info = {
+                batchId: $("#batch option:selected").val(),
+                provinceId: $("#province").val(),
+                majorTypeId: $("#major_type input[type='radio']:checked").val(),
+                gap: $("#gap").val()
+            };
+            $.ajax({
+                url: "${base}/admissonSvcAct/batch.jspx",
+                type: 'post', //GET++
+                async: true,    //或false,是否异步
+                data: {
+                    batchId: $("#batch option:selected").val(),
+                    provinceId: $("#province").val(),
+                    majorTypeId: $("#major_type input[type='radio']:checked").val(),
+                    gap: $("#gap").val()
+                },
+                dataType: 'json',
+                success: function (data) {
+                    var batchId = $("#batch option:selected").val();
+                    if (batchId == null || batchId == "") {
+                        $("#batch").empty();
+                        $("#batch").prepend('<option value="" disabled selected hidden>选择批次</option>')
+                        for (var i = 0; i < data.length; i++) {
+                            $("#batch").append('<option value="' + data[i][0] + '">' + data[i][1] + '</option>')
+                        }
+                        $("#batch").comboSelect();
+                    } else {
+                        $("#score").val(data[0][2]);
+                        $("#rank").val(data[0][3]);
+                    }
+                }
+            });
+        }
+        //分页查询
+        function _gotoPage(pageNo) {
+            try {
+                var tableForm = document.getElementById("tableForm");
+                $('#pageNo').val(pageNo);
+                tableForm.action = "${base}/admissonSvcAct/findApplicationList.jspx?pageNo="+pageNo;
+                tableForm.submit();
+            } catch (e) {
+                alert('_gotoPage(pageNo)方法出错');
+            }
+        }
+        //删除
+        remove = function (id, self) {
+            $(self).parent().parent().remove();
+            alert("删除成功");
+            $.ajax({
+                url: "${base}/admissonSvcAct/removeProject.jspx",
+                type: 'post', //GET
+                async: true,
+                data: {
+                    applicationId: id
+                },
+                success: function (data) {
+                    $("#search_project").click();
+
+                    var msg = data.msg;
+
+                    bootbox.confirm({
+                        massage: msg
+                    })
+                }
+            });
+        }
+
+        //根据分数查排名
+        function get_rank_by_score() {
+            $.ajax({
+                url: "${base}/admissonSvcAct/rank.jspx",
+                type: 'post', //GET
+                async: true,    //或false,是否异步
+                dataType: 'json',
+                data: {
+                    provinceId: $("#province").val(),
+                    majorTypeId: $("#major_type input[type='radio']:checked").val(),
+                    score: $("#score").val()
+                },
+                success: function (data) {
+                    $("#rank").val(data.rank || "");
+                }
+            });
+        }
+
+        //根据分数查排名
+        function get_score_by_rank() {
+            $.ajax({
+                url: "${base}/admissonSvcAct/rank.jspx",
+                type: 'post', //GET
+                async: true,    //或false,是否异步
+                dataType: 'json',
+                data: {
+                    provinceId: $("#province").val(),
+                    majorTypeId: $("#major_type input[type='radio']:checked").val(),
+                    rank: $("#rank").val()
+                },
+                success: function (data) {
+                    $("#score").val(data.score || "");
+                }
+            });
+        }
+
+        $("#radio1").click(function () {
+            $("#gap").prop("readOnly", false);
+            $("#score").prop("readOnly", true);
+        });
+        $("#radio2").click(function () {
+            $("#score").prop("readOnly", false);
+            $("#gap").prop("readOnly", true);
+        });
+    </script>
+
+    <style>
+        .foot_kz{background-color: #f0f0f0;}
+        .combo-select {
+            width: 170px !important;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th
+        {
+             vertical-align: middle;}
+
+
+        .combo-select select {
+            width: 0 !important;
+        }
+
+        .radio_base label {
+            font-weight: normal;
+        }
+
+        .fillIn form div.flex-container1 > ul > li > div {
+            margin: 20px 15px;
+        }
+
+        .fillIn form div.flex-container1 > ul > li.projectInstruction > span {
+            display: block;
+            font-size: 20px;
+            color: #ff0000;
+            margin: 30px 0;
+        }
+        .fillIn form div.flex-container1 > ul > li.projectInstruction > p {
+            margin: 15px 0;
+        }
+
+        .fillIn form div.textC button {
+            margin: 32px;
+        }
+
+        .fillIn form div.textC button.chakan {
+            background: #fff;
+            color: #05b8c3;
+            border: 1px solid #05b8c3;
+        }
+                #bkdw {
+
+                }
+                #bkdw1 {
+
+                }
+
+                .flex-container1_new {
+                    /* width: 800px; */
+                    /* margin-top: 10px; */
+                }
+                .flex-container1_new {
+                    display: -webkit-flex;
+                    /* display: flex; */
+                    -webkit-justify-content: flex-start;
+                    /* justify-content: flex-start; */
+                }
+                .zyb_news  img{ width: 20px; float: left;margin-right: 10px;}
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            var province_id = $("#province").val();
+            if (province_id == "17") { //江苏
+                $("#major_type_1").show();
+                $("#major_type_2").show();
+                $("#major_type_3").hide();
+            } else if (province_id == "18" || province_id == "16") { //浙江、上海
+                $("#major_type_1").hide();
+                $("#major_type_2").hide();
+                $("#major_type_3").show();
+            } else { //其他
+                $("#major_type_1").show();
+                $("#major_type_2").show();
+                $("#major_type_3").hide();
+                $("#subjects_type").hide();
+            }
+
+
+        })
+
+        //    限制选中数量
+        function checkZJDate() {
+
+            var checkNum = 0;
+
+            for (var i = 0; i < sForm.subjects.length; i++) {
+                if(sForm.subjects[i].checked)
+                {
+                    checkNum ++;
+                }
+            }
+
+            if (checkNum > 3) {
+                alert("请选择三门科目！");
+                return false;
+                // $(":checkbox").css(disabled, "disabled");
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        var time = new Date();
+        var nowYear = time.getFullYear();
+    </script>
+</head>
+
+<body>
+[#include "../include/header_address.html"/]
+[#include "../include/header_hyzx.html"/]
+
+		<div class="mbxdh_bg">
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">个人中心</a>&nbsp;&gt; &nbsp; <a href="#">我的志愿表</a>
+		</div>
+	</div>
+<!--主体-->
+
+<div class="bgs">
+    	<div class="con2 ">
+        <div class="hyzx_yc_bt">
+            	<div class="hyzx_yc_bt_z f_l">
+                    <div class="hyzx_img_zt">
+                        <div class="hyzx_yc_z_img f_l">
+                            <img src="${base}/r/wdedu/images/index_34.png"/>
+                        </div>
+                        <div class="hyzx_img_xq f_r">
+                            <span>你好，${user.userExtSet[0].realname!}</span>
+                            <div class="hyzx_vip">[#if user.groups?size > 0]已开通VIP服务[#else]未开通VIP服务[/#if] </div>
+                            <div class="hyzx_sjh">账号：[@text_cut s=user.username?substring(0,5) len=3 append='..'/]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注册时间：${user.registerTime!}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最后登录：${user.lastLoginTime!}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登录次数：${user.loginCount!}</div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="hyzx_yc_bt_y f_r">
+                	<p>十载寒窗，勤学苦练，何人健步登金榜</p>
+                	<p>满腔热血，万丈豪情，我辈英才夺桂冠</p>
+                    <p class="hyzx_zz">-苏轼</p>
+                </div>
+            <div class="clearfix"></div>
+            </div>
+        	<div class="hyzx_zc f_l">
+                <div class="hyzx_z_dh">
+                    <div class="hyzx_bt">
+                        <span>升学服务</span>
+                    </div>
+                    <div class="hyzx_z_list ">
+                        <a href="${base}/admissonSvcAct/findbaseInfo.jspx">基本信息</a>
+                    </div>
+                    <div class="hyzx_z_list">
+                        <a href="${base}/admissonSvcAct/changePassword.jspx">修改密码</a>
+                    </div>
+                    <div class="hyzx_z_list">
+                        <a href="${base}/admissonSvcAct/findActiveList.jspx">讲座信息</a>
+                    </div>
+                    <div class="hyzx_z_list">
+                        <a href="${base}/admissonSvcAct/findProducts.jspx">我的服务</a>
+                    </div>
+                </div>
+             <div class="hyzx_z_dh1">
+            	<div class="hyzx_bt2">
+                <span>测评信息</span>
+                </div>
+                 <div class="hyzx_z_list ">
+                     <a href="${base}/evaluation/newGKXK.jspx">选科测评</a>
+                 </div>
+                 <div class="hyzx_z_list">
+                     <a href="${base}/evaluation/index.jspx">专业测评</a>
+                 </div>
+
+            </div>
+        <div class="hyzx_z_dh1">
+            	<div class="hyzx_bt3">
+                <span>志愿管理</span>
+                </div>
+            	<div class="hyzx_z_list hyzx_ys">
+                    <a href="${base}/admissonSvcAct/findApplicationList.jspx">我的志愿表</a>
+                </div>
+   <div class="hyzx_z_list">
+                                <a href="${base}/admissonSvcAct/bigData.jspx">大数据查询</a>
+                                </div>
+            </div>
+
+
+            </div>
+            <div class="hyzx_yc f_r">
+        <div class="simulationTable">
+        <div class="fillIn">
+        <div class="volunteer_z_zt">
+        <div class="f_l">
+        <form id="tableForm" method="post" action="${base}/admissonSvcAct/findApplicationList.jspx">
+        <input type="text" style="border-radius:10px 0px 0px 10px;height:42px;line-height:42px;border-right: none;" name="applicationName" id="search_project" class="volunteer_suo f_l" placeholder="输入方案名称，点击查找志愿方案或者创建志愿方案">
+            <button id="search_project" class="volunteer_suo_tj f_l" type="submit">查找志愿方案</button>
+        </form>
+        </div>
+
+    <!--    <div class="volunteer_y f_r">
+        <div class="volunteer_y_lq1">
+        <a href="#" class="volunteer_y_lq f_r" onclick="queryNB()">查看历年招生录取数据</a><div class="clearfix"></div></div>
+
+        </div> -->
+            <div class="volunteer_y f_r">
+                  <div class="volunteer_y_lq1">
+                  <a href="${base}/admissonSvcAct/findVoluntary.jspx" class="volunteer_y_lq f_r">创建志愿方案</a>
+                      <div class="clearfix"></div>
+                  </div>
+                  </div>
+                    <div class="clearfix">
+
+                    </div>
+                   <!--查找志愿方案-->
+                    <div class="findfangan">
+                        <!--搜索-->
+                        <form id="tableForm" action="${base}/admissonSvcAct/findApplicationList.jspx" method="post">
+                            <input type="hidden" id="pageNo" name="pageNo"/>
+                        </form>
+                        <!--列表-->
+                        <div>
+                            <table class="table table-striped deeptable">
+                                <tr>
+                                    <th>方案名称</th>
+                                    <th>填报</th>
+                                    <th>省份</th>
+                                    <th>届别</th>
+                                    <th>文理科</th>
+                                    <th>选考科目</th>
+                                    <th>成绩</th>
+                                    <th>排名</th>
+                                    <th>操作</th>
+                                </tr>
+                                [#if pagination?? ]
+                                [#list pagination.list as a ]
+                                <tr>
+                                    <!--<td>${a.applicationName!}</td>-->
+                                    <td><input type="text" name="application_name_${a.id!}" id="application_name_${a.id!}"  value="${a.applicationName!}" onchange="updateScore(${a.id!})" style="text-align: center;width: 120px;"></td>
+
+                                    <td>
+                                        <a href="${base}/zytb/project.jspx?applicationId=${a.id!}" class="ToFillIn">开始填报</a>
+                                    </td>
+                                    [#if provinceMap??]
+                                    <td>${provinceMap['${a.provinceId!"0"}']}</td>
+                                    [/#if]
+                                    <td>${a.year!}届</td>
+                                    <td>${(a.majorTypeId!"-")?replace(1,'文科')?replace(2,'理科')?replace(3,'综合改革')?replace(0,'-')}</td>
+                                    <td>
+                                        ${(a.subjects!"-")?replace('1','物理')?replace('2','化学')?replace('3','生物')?replace('4','政治')?replace('5','历史')?replace('6','地理')?replace('7','技术')?replace(0,'-')}
+                                        ${(a.subjectsLevel!"-")?replace('1','A+')?replace('2','A')?replace('3','B+')?replace('4','B')?replace('5','C')?replace('6','D')?replace(0,'-')}
+                                    </td>
+                                    <td><input type="text" name="score_input_${a.id!}" id="score_input_${a.id!}"  value="${a.score!}" onchange="updateScore(${a.id!})" style="text-align: center;width: 48px;"></td>
+                                    <!--<td>${a.score!}</td>-->
+                                    <td>${a.rank!}</td>
+                                    <td>
+                                        <button type="button"
+                                                onclick="javascript:window.location.href='${base}/zytb/voluntary.jspx?applicationId=${a.id!}'"
+                                                class="btn_xg btnColorGreen">查看
+                                        </button>
+
+                                        [#if userInfo??]
+                                        [#if userInfo.isSuper]
+                                        <button class="btn_xg btnColorGreen"
+                                                onclick="javascript:window.location.href='${base}/zytb/excelExport.jspx?applicationId=${a.id!}'">导出
+                                        </button>
+
+                                      <!--  <button class="btn_xg btnColorGreen"  onclick="op('${a.id!}','${a.provinceId!}')">评估</button>-->
+                                        <!--<div>-->
+                                            <!--<input type="text" name="order_id" id="orderId">-->
+                                        <!--</div>-->
+                                        <button class="btn_xg btnColorGreen" onclick="bangding_order('${a.id}')">绑定</button>
+                                        <button class="btn_xg btnColorGreen" onclick = "openDialog('${a.id}')">发送</button>
+                                        [/#if]
+                                        [/#if]
+                                        <button onclick="remove('${a.id!}', this)" class="btn_xg btnColorRed">删除</button>
+                                    </td>
+                                </tr>
+                                [/#list]
+                                [/#if]
+                            </table>
+                        </div>
+                    </div>
+                    <!--分页-->
+                    <div class="textC paging">
+                        <tr>
+                            <td colspan="8" style="padding:20px 0;">
+                                <input type="hidden" name="pageNo"/>
+                                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td align="center" class="pn-sp">
+                                            共 ${pagination.totalCount} 条&nbsp; 每页 ${pagination.pageSize} 条&nbsp; 当前
+                                            ${pagination.pageNo}/${pagination.totalPage} 页 &nbsp;转到第<input type="text" id="_goPs"
+                                                                                                           onfocus="this.select();"
+                                                                                                           onkeypress="if(event.keyCode==13){$('#_goPage').click();return false;}"
+                                                                                                           style="width:50px; border:1px solid #e7e7e7;"/>页
+                                            <input id="_goPage" type="button" value="转" onclick="_gotoPage($('#_goPs').val());" [#if
+                                                   pagination.totalPage==1] disabled="disabled" [/#if] />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="button" value="首 页" onclick="_gotoPage('1');" [#if pagination.firstPage]
+                                                   disabled="disabled" [/#if]/>
+                                            <input type="button" value="上一页" onclick="_gotoPage('${pagination.prePage}');" [#if
+                                                   pagination.firstPage] disabled="disabled" [/#if]/>
+                                            <input type="button" value="下一页" onclick="_gotoPage('${pagination.nextPage}');" [#if
+                                                   pagination.lastPage] disabled="disabled" [/#if]/>
+                                            <input type="button" value="尾 页" onclick="_gotoPage('${pagination.totalPage}');" [#if
+                                                   pagination.lastPage] disabled="disabled" [/#if]/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </div>
+                    <div>
+                  <!-- <div id="light" class="white_content"   >
+                        <input type="hidden" name="appHidden" id="appHidden">
+                        <input type="text" name="fs_username" id="fsUsername">
+                        <a href = "javascript:void(0)" onclick = "closeDialog()">发送</a>
+                        <input type="button" onclick="closeDialog()">发送
+                    </div>-->
+                    </div>
+
+        </div>
+
+        </div>
+    </div>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+    </div>
+    <div class="clearfix"></div>
+    </div>
+
+<!--底部-->
+
+[#include "../include/footer_new.html"/]
+<!--js-->
+<script src="${base}/r/js/jQuery.js"></script>
+<script src="${base}/r/js/bootstrap.min.js"></script>
+<script src="${base}/r/js/jquery.combo.select.js"></script>
+<script src="${base}/r/js/itemsJs/common.js"></script>
+<script src="${base}/r/js/jquery.mloading.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<div class="navbox">
+    <div class="navbox_bg">
+        <div class="nav_l fl">
+            <div id="nav">
+                <ul id="navMenu">
+                    <li><a href='${base}/'>首页</a></li>
+                    <li><a  href='${base}/NewsDisplay/InformationOnTheNewCollegeEntranceExamination.jspx' rel='dropmenu1'>新高考资讯</a></li>
+                    <li><a href='${base}/evaluation/index.jspx' rel='dropmenu2'>选科测评</a></li>
+                    <!--<li><a href='' rel='dropmenu3' style="width:140px;">根据大学选专业</a></li>-->
+                    <li><a href='${base}/kxxk/courceToMajor.jspx' rel='dropmenu4' style="width:140px;">根据科目选专业</a></li>
+                    <li><a href='${base}/kxxk/majorToCource.jspx' rel='dropmenu5' style="width:140px;">根据专业选科目</a></li>
+                    <!--<li><a href='${base}/kxxk/professionToMajor.jspx' rel='dropmenu6' style="width:140px;">根据职业选专业</a></li>-->
+                </ul>
+            </div>
+
+        </div>
+        [#if user??]
+        <div class="nav_r fr">
+            <a href="">尊敬的[@text_cut s=user.username?substring(0,5) len=3 append='..'/]</a>
+        </div>
+        [/#if]
+        <div class="clearfix"></div>
+    </div>
+</div>

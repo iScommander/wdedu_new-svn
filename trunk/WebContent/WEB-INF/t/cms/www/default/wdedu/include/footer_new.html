@@ -1,0 +1,44 @@
+ <div class="foot_kz"></div>
+<div class="index_footer_bg">
+    		<div class="index_footer">
+    			<div class="index_footer_l fl">
+    				<img src="${base}/r/wdedu/images/index_35.png">
+    			</div>
+    			<div class="index_footer_c fl">
+    				<i><a href="${base}/NewsDisplay/IndependentRecruitment.jspx">强基计划</a><a href="${base}/NewsDisplay/ComprehensiveAssessment.jspx">综合评价 </a><a href="${base}/NewsDisplay/SinoforeignCooperativeEducation.jspx">中外合作办学</a><a href="${base}/NewsDisplay/HongKongMacaoTaiwan.jspx">港澳台申请</a><a href="${base}/NewsDisplay/Arts.jspx">艺术类</a><div class="clearfix"></div></i>
+    				<i><a href="${base}/NewsDisplay/companyProfile.jspx">关于沃得生涯</a><a href="${base}/NewsDisplay/companyProfile.jspx">了解沃得 </a><a href="${base}/NewsDisplay/companyProfile.jspx">沃得声明 </a><a href="${base}/NewsDisplay/companyProfile.jspx">加入沃得</a><a href="${base}/NewsDisplay/companyProfile.jspx">合作加盟</a><a href="${base}/NewsDisplay/companyProfile.jspx">联系沃得</a><div class="clearfix"></div></i>
+    			</div>
+    			<div class="index_footer_r fr">
+    				<p><img src="${base}/r/wdedu/images/index_36.png"></p>
+    				<span>【 扫码进入沃得公众号 】</span>
+    			</div>
+    			<div class="clearfix"></div>
+    		</div>
+    	</div>
+    	<div class="index_last_bg">
+    		<div class="index_last">
+    			<p><a href="http://www.beian.miit.gov.cn"> 备案号：苏ICP备18041837号-2</a></p><span>沃得生涯教育咨询有限公司</span><div class="clearfix"></div>
+    		</div>
+    	</div>
+    	<script  type="text/javascript">
+    	window.onload=bt();
+    	function bt(){
+        var str=$(".mbxdh a").last().text();
+        var ul2=document.getElementById('navMenu').getElementsByTagName('a');
+            for(var i = 0; i <ul2.length ; i++) {
+           var a= ul2[i].innerText;
+               if (str ==a){
+                   ul2[i].className="current";
+               }
+            }
+
+                  	var timedate= new Date("7,7,2020");
+                    	var now = new Date();
+                    	var date = timedate.getTime() - now.getTime();    //得出的为毫秒
+                    	var time = Math.ceil(date/(1000 * 60 * 60 * 24));  //1000 * 60 * 60 * 24一天的秒数
+                    	if(time > 0 ){
+                    		document.getElementById('timeShow').innerHTML = time;
+    	}
+
+        }
+</script>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<title>获得专利</title>
+<link href="${base}/r/css/head_footer.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="${base}/r/css/ydyfw.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="${base}/r/js/jquery-1.8.3.min.js" language="javascript"></script>
+<script src="${base}/thirdparty/My97DatePicker/WdatePicker.js" language="javascript"></script>
+<!--[if lte IE 9]>
+<script src="${base}/r/js/html5shiv.js" language="javascript"></script>
+<script src="${base}/r/js/respond.min.js" language="javascript"></script>
+<![endif]-->
+<style>
+html,body{
+	height:100%;
+}
+	.add_shhd_div{
+	    border: 1px dashed #DDD;
+	    height: 70px;
+	    width: 98%;
+	    font-size: 15px;
+	    text-align: center;
+	    background-color: #fAFAFA;
+	    margin: 10px 1% 10px 1%;
+	    padding-top:13px;
+	}
+	.add_shhd_tableOut{
+	    margin: 10px 1% 10px 1%;
+	    //border: 1px dashed red;
+	    padding:10px 0 20px 0;
+	}
+	.add_shhd_table{
+		width:100%;
+	}
+	.add_shhd_table tr{
+		height:65px;
+	}
+	.input-style01{
+		width:404px; 
+		height:30px;
+		line-height:30px;
+		outline:none;
+		border:1px solid #BBBBBB;
+		text-indent:14px;
+		font-size:16px;
+	}
+	.input-style02{
+		width:187px; 
+		height:30px;
+		line-height:30px;
+		outline:none;
+		border:1px solid #BBBBBB;
+		text-indent:14px;
+		font-size:16px;
+	}
+	.img_div{
+		width:47%;
+		float:left;
+		margin-right:2%;
+		border:1px solid #BBBBBB;
+	}
+	.img_p{
+		width:100%;
+		text-align:center;
+		font-size:16px;
+		margin:5px 0;
+	}
+	.img_span{
+		display:block;
+		width:100%;
+		text-align:center;
+		height:45px;
+	}
+	.img_span span{
+		border:1px solid #BBBBBB;
+		display:inline-block;
+		width:68%;
+		height:30px;
+		line-height:30px;
+		vertical-align:middle;
+	}
+	.img_span a{
+		border:1px solid #BBBBBB;
+		display:inline-block;
+		width:68%;
+		height:30px;
+		line-height:30px;
+		vertical-align:middle;
+	}
+	.img_span input{
+		border:1px solid #BBBBBB;
+		display:inline-block;
+		width:20%;
+		height:30px;
+		line-height:30px;
+		vertical-align:middle;
+		letter-spacing:6px;
+	}
+	.input_out{
+		height:50px;
+		line-height:50px;
+		width:100%;
+		text-align:center;
+	}
+	.input_file{
+		width: 66px;
+		margin-right:23px;
+	}
+	.bt-div-out{
+		width:100%;
+		text-align:right;
+	}
+	.bt_a{
+	display:inline-block;
+	width:15%;
+	height:34px;
+	line-height:34px;
+	text-align:center;
+	font-size:18px;
+	letter-spacing:4px;
+	background-color:#3399FF;
+	color:#FFF;
+	margin:30px 14px 30px 0;
+	border:none;
+}
+.bt_a2{
+	display:inline-block;
+	width:15%;
+	height:34px;
+	line-height:34px;
+	text-align:center;
+	font-size:18px;
+	letter-spacing:4px;
+	background-color:#FF4141;
+	color:#FFF;
+	margin:30px 34px 30px 0;
+	border:none;
+}
+.onload_span{
+	display:inline-block;
+	width:90px;
+	height:30px;
+	line-height:30px;
+	color:#FFF;
+	background-color:#3399ff;
+	cursor:pointer;
+	font-size:16px;
+}
+</style>
+</head>
+<body>
+	<div class="z_body" style="background-color:#F2F2F2;">
+		[#include "../wdedu/include/header_address.html"/]
+		[#include "../wdedu/include/header_dylq.html"/]
+		<div class="z_width_out">
+			<div class="on_line">
+				<div class="bzy_where">
+					&nbsp;您当前位置：<a href="${base}"><span class="">主页&nbsp;</span></a>><a href="${base}/ydyfw/queryOrder.jspx"><span class="">我的一对一服务清单&nbsp;</span></a>><a href="${base}/mnwb/jbxx.jspx?orderId=${order.orderId}"><span class="">&nbsp;填报个人信息&nbsp;</span></a>><span class="">&nbsp;新增修改专利</span>
+				</div>
+			</div>
+		</div>
+		<div class="z_width_out">
+			<div class="on_line">
+				<div style="background:#FFF;overflow:hidden;padding:10px 0 30px 0;margin:15px 0 30px 0 ;">
+					<div class="add_shhd_div">
+						<font color="red">注意：</font>本页面对于证明材料的删除，上传操作，均在点击“新增”或“保存”按钮之后才会生效。
+						<br>（<font color="red">* </font>为必填项，注意：请填写高中期间获得的专利）
+					</div>
+					<div class="add_shhd_tableOut">
+						<form action="uploadPatent.jspx" method="post"  id="form1" enctype="multipart/form-data">
+							<table class="add_shhd_table">
+								<tr>
+									<td style="width:14%;" align="right"><font color="red">*&nbsp;&nbsp;</font>专利名称：</td>
+									<td style="width:86%;"><input class="input-style01" id="patentName" name="patentName" type="text" [#if patent??] value="${patent.patentName}" [/#if]></td>
+								</tr>
+								<tr>
+									<td align="right"><font color="red">*&nbsp;&nbsp;</font>专利类型：</td>
+									<td>
+									[#if patent??]
+									[@p.select name="patentType" id="patentType" class="input-style01" value=patent.patentType list=patentTypeList listKey="code" listValue="name" /]
+									[#else]
+									[@p.select name="patentType" id="patentType" class="input-style01" value='' list=patentTypeList listKey="code" listValue="name" /]
+									[/#if]
+									</td>
+								</tr>
+								<tr>
+									<td align="right"><font color="red">*&nbsp;&nbsp;</font>发明人/设计人：</td>
+									<td><input class="input-style01" id="patentee" name="patentee" type="text" [#if patent??] value="${patent.patentee}" [/#if]></td>
+								</tr>
+								<tr>
+									<td align="right"><font color="red">*&nbsp;&nbsp;</font>专利申请日：</td>
+									<td>
+										<input class="input-style02" id="applydate" name="applydate" type="text" [#if patent??] value="${patent.applydate}" [/#if] onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" >
+									
+									</td>
+								</tr>
+								<tr>
+									<td align="right"><font color="red">*&nbsp;&nbsp;</font>专利授权日：</td>
+									<td>
+										<input class="input-style02" id="accreditDate" name="accreditDate" type="text" [#if patent??] value="${patent.accreditDate}" [/#if] onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" >
+									
+									</td>
+								</tr>
+								<tr>
+									<td align="right"><font color="red">*&nbsp;&nbsp;</font>专利权人：</td>
+									<td><input class="input-style01" id="patentHolder" name="patentHolder" type="text" [#if patent??] value="${patent.patentHolder}" [/#if]></td>
+								</tr>
+								<tr>
+									<td align="right"><font color="red">*&nbsp;&nbsp;</font>专利号：</td>
+									<td><input class="input-style01" id="patentNumber" name="patentNumber" type="text" [#if patent??] value="${patent.patentNumber}" [/#if]></td>
+								</tr>
+								<tr>
+									<td align="right"><font color="red">*&nbsp;&nbsp;</font>材料证明：</td>
+									<td>
+										[#if fileList??]
+										<div id="fileList" class="img_div">
+											<p class="img_p">已上传文件</p>
+											[#list fileList as l]
+												<div id="file_${l_index}" class="img_span">
+													<a href="${l.fileUrl}">${l.fileName}</a><input type="button" value="删除" onclick="_delete('${l.id}',${l_index})" class="input_file">
+												</div>
+											[/#list]
+										</div>
+										[/#if]
+										<div id="newFile" class="img_div">
+											<p class="img_p">新上传文件</p>
+											<div id="newFile1" class="input_out">
+												<input type="file" name="files" value="" id="file1"  onchange="setImagePreview(1,this);" style="display:none;"/>
+												<span id="load1" onclick="loadFile('1',this);" class="onload_span">选择文件</span>
+											</div>
+										</div>
+										<div class="clear"></div>
+									</td>
+								</tr>
+							</table>
+							<div class="bt-div-out">
+								<input class="bt_a" type="button"  value="保存"  onclick="_sub()"/>
+								<input class="bt_a2" type="button" value="取消" onclick='javascript:history.go(-1);' />
+								<input type="hidden" name="deleteId" id="deleteId">
+								<input type="hidden" name="id" [#if patent??] value="${patent.id}"[/#if]>
+								<input type="hidden" name="photoCount" id="photoCount" [#if patent??] value="${patent.photoCount}" [#else]  value="0" [/#if]> 
+								<input type="hidden" name="orderId" value="${order.orderId}">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 底部栏目 -->
+		[#include "../wdedu/include/footer_new.html"/]
+	</div>
+<script type="text/javascript">
+
+
+function loadFile(num,obj){
+	$("#file"+num).click();
+}
+function setImagePreview(num,docObj){
+    var count = $("#photoCount").val();
+    count++;
+    $("#photoCount").val(count);
+    if (docObj.files && docObj.files[0]) {
+    	var newName = "<span class='img_span'><span>"+docObj.files[0].name+"</span><input  type='button' value='删除' onclick='_delete2("+num+")'>";
+    	$('#newFile'+num).append(newName);
+	   	$(docObj).hide();
+	   	$('#file'+num).hide();
+	   	$('#load'+num).hide();
+	   	num++;
+	   	var newDiv = "<div id='newFile"+num+"' class='input_out'>"
+		    +"<input type='file' name='files' value='' id='file"+num+"'  onchange='setImagePreview("+num+",this);' style='display:none;'/>"
+			+"<span id='load"+num+"' onclick='loadFile("+num+",this);' class='onload_span'>选择文件</span>"
+		    +"</div>"
+		$('#newFile').append(newDiv);
+    }
+    return true;
+}
+
+function _sub(){
+	
+	var patentName = $("#patentName").val();
+	if(!check(patentName,"请填写专利名称")){return;}
+	
+	var patentType = $("#patentType").val();
+	if(!check(patentType,"请填写专利类型")){return;}
+	
+	var patentee = $("#patentee").val();
+	if(!check(patentee,"请填写发明人/设计人")){return;}
+	
+	var applydate = $("#applydate").val();
+	if(!check(applydate,"请填写专利申请日")){return;}
+	
+	var accreditDate = $("#accreditDate").val();
+	if(!check(accreditDate,"请填写专利授权日")){return;}
+	
+	var patentHolder = $("#patentHolder").val();
+	if(!check(patentHolder,"请填写专利权人")){return;}
+	
+	var patentNumber = $("#patentNumber").val();
+	if(!check(patentNumber,"请填写专利号")){return;}
+	
+	
+	var count = $("#photoCount").val();
+	if(count<1){
+		alert("请至少上传一份材料！");
+		return false;
+	}
+	if(confirm('确认提交?')){
+		$("#form1").submit();
+	}
+}
+
+
+function check(obj,object){
+	if (obj==""){
+		alert(object);
+		return false;
+	}
+	return true;
+}
+
+function _delete2(num){
+	var count = $("#photoCount").val();
+	$('#newFile'+num).remove();
+    count--;
+    $("#photoCount").val(count);
+}
+
+function _delete(id,num){
+	if(confirm('确认删除?')){
+		var count = $("#photoCount").val();
+		var ids = $("#deleteId").val();
+		$('#file_'+num).remove();
+		if(ids==''){
+			ids=id;
+		}else{
+			ids+=";"+id
+		}
+		$("#deleteId").val(ids);
+		count--;
+		$("#photoCount").val(count);
+	}
+}
+
+</script>
+</body>
+</html>

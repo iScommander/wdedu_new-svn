@@ -1,0 +1,22 @@
+  <div class="navbox">
+		<div class="navbox_bg">
+			<div class="nav_l fl">
+				<div id="nav">
+				<ul id="navMenu">
+				<li><a href='${base}/'>首页</a></li>
+				<li><a  href='${base}/NewsDisplay/IndependentRecruitment.jspx' rel='dropmenu1'>强基计划</a></li>
+				<li><a  href='${base}/NewsDisplay/ComprehensiveAssessment.jspx' rel='dropmenu2'>综合评价</a></li>
+				<li><a  href='${base}/NewsDisplay/SinoforeignCooperativeEducation.jspx' rel='dropmenu3'>中外合作办学</a></li>
+				<li><a href='${base}/NewsDisplay/HongKongMacaoTaiwan.jspx' rel='dropmenu4'>港澳台申请</a></li>
+				<li><a href='${base}/NewsDisplay/Arts.jspx' rel='dropmenu5'>艺术类</a></li>
+				</ul>
+				</div>
+			</div>
+			[#if user??]
+			<div class="nav_r fr">
+				<a href="${base}/admissonSvcAct/findbaseInfo.jspx">尊敬的[@text_cut s=user.username?substring(0,5) len=3 append='..'/]</a>
+			</div>
+			[/#if]
+		<div class="clearfix"></div>
+		</div>
+	</div>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>查专业</title>
+<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+	   <script src="${base}/r/wdedu/js/jquery-1.11.1.min.js" type="text/javascript" ></script>
+    		<script  type="text/javascript">
+    			$(document).ready(function(){
+
+    				$("#ben").show();
+    				$("#zhuan").hide();
+
+
+
+    			});
+
+    		window.isMoused=false;
+    		function qz(obj){
+    			var text = $(obj).text();
+    			document.getElementById("text").innerText =text;
+    			gb();
+
+    		}
+    		function gb(){
+    			document.getElementById('city_nav').className='city_nav';document.getElementById('city_link').className='city_link';window.isMoused =false;return !1;
+    		}
+    			function dk(){
+    				if(window.isMoused){
+    					 gb()
+    					window.isMoused = false;
+    				   }else{
+    					   document.getElementById('city_link').className='city_link city_hovers'
+    					   window.isMoused =true;
+    				   }
+    			}
+
+    			function findSecThr(majorId) {
+    				$("#ben").hide();
+    				$("#zhuan").hide();
+                    $("#third").html("");
+
+                    $.ajax({
+                        url: "${base}/searchUnivAndMajor/MajorSecThr.jspx",    //请求的url地址
+                        dataType: "json",
+                        async: true,
+                        data: {"majorId": majorId},
+                        type: "POST",
+                        success: function (data) {
+
+                            var second = data.listSecond;
+                            var three = data.listThree;
+
+                            $(second).each(
+                                function (i, obj1) {
+                                    var s = '<div class="czy_yc_bt_bg"><div class="czy_yc_bt">\n' +
+                                        '<span class="czy_yc_bt_dm"><b>'+obj1.majorId+'</b> <i>'+obj1.majorName+'</i></span>\n' +
+                                        '</div>'
+
+                                    $("#third").append(s);
+                                    $(three).each(
+                                        function (j, obj2) {
+                                            if(obj2.parentMajorId==obj1.majorId){
+                                            var majorId =obj2.majorId;
+
+                                                var t = '<div class="czy_yc_bt_nr">\n' +
+                                                    '<a href="${base}/searchUnivAndMajor/majorDetail.jspx?majorId='+obj2.majorId+'" style="margin-left: 40px;width: 180px">'+obj2.majorName+'</a>\n';
+
+                                                $("#third").append(t);
+                                            }
+                                    })
+                                    var a ='<div class="clearfix"></div>\n' +
+                                        '<div class="czydw"></div>\n' +
+                                        '</div>\n' +
+                                        '</div>';
+                                    $("#third").append(a);
+                            })
+                        }
+                    });
+                }
+
+
+    			function tt0() {
+    				$("#third").html("");
+    				$("#zhuan").hide();
+    				$("#ben").show();
+    			}
+
+    			function tt1(){
+    				$("#third").html("");
+    				$("#ben").hide();
+    				$("#zhuan").show();
+
+    			}
+
+				function findMajorName(){
+					$("#ben").hide();
+					$("#zhuan").hide();
+					$("#third").html("");
+    				var majorName = $("#majorName").val();
+					$.ajax({
+						url: "${base}/searchUnivAndMajor/searchMajorByMajorName.jspx",    //请求的url地址
+						dataType: "json",
+						async: true,
+						data: {"majorName": majorName},
+						type: "POST",
+						success: function (data) {
+
+							var list =data.list;
+							var list2 =data.list2;
+
+							$(list).each(
+									function (i, obj1) {
+										var s = '<div class="czy_yc_bt_bg"><div class="czy_yc_bt">\n' +
+												'<span class="czy_yc_bt_dm"><b>'+obj1.majorId+'</b> <i>'+obj1.majorName+'</i></span>\n' +
+												'</div>'
+
+										$("#third").append(s);
+										$(list2).each(
+												function (j, obj2) {
+													if(obj2.parentMajorId==obj1.majorId){
+														var majorId =obj2.majorId;
+
+														var t = '<div class="czy_yc_bt_nr">\n' +
+																'<a href="${base}/searchUnivAndMajor/majorDetail.jspx?majorId='+obj2.majorId+'" style="margin-left: 40px;width: 180px">'+obj2.majorName+'</a>\n';
+
+														$("#third").append(t);
+													}
+												})
+										var a ='<div class="clearfix"></div>\n' +
+												'<div class="czydw"></div>\n' +
+												'</div>\n' +
+												'</div>';
+										$("#third").append(a);
+									})
+
+							/*var majorId = data.list2[0].majorId;
+							var majorName = data.list2[0].majorName;
+							var list3 = data.list3;
+
+
+							var s = '<div class="czy_yc_bt_bg"><div class="czy_yc_bt">\n' +
+									'<span class="czy_yc_bt_dm"><b>'+majorId+'</b> <i>'+majorName+'</i></span>\n' +
+									'</div>'
+							$("#third").append(s);
+							$(list3).each(
+									function (j, obj) {
+
+											var t = '<div class="czy_yc_bt_nr">\n' +
+													'<a href="${base}/searchUnivAndMajor/majorDetail.jspx?majorId='+obj.majorId+'" style="margin-left: 40px;width: 180px">'+obj.majorName+'</a>\n';
+
+											$("#third").append(t);
+
+									})
+							var a ='<div class="clearfix"></div>\n' +
+									'<div class="czydw"></div>\n' +
+									'</div>\n' +
+									'</div>';
+							$("#third").append(a);*/
+
+						},
+
+					})
+
+				}
+    	</script>
+	<script type='text/javascript' src='${base}/r/wdedu/js/dropdown.js'></script>
+    
+    [#include "../include/header_address.html"/]
+    [#include "../include/header_zytb.html"/]
+
+	<div class="mbxdh_bg">
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="${base}/zytb/project.jspx">志愿填报</a>&nbsp;&gt; &nbsp; <a href="#">查专业</a>
+		</div>  
+	</div>   
+	<div class="con">					
+    <div class="xgkxk_so_zt">
+    <form action="#">
+    <div class="xgkxk_so f_l">
+    <input id="majorName" type="text" placeholder="&nbsp; &nbsp;&nbsp; &nbsp;输入专业名称，点击右边的搜索按钮"/>
+    </div>
+    <div class="xgkxk_so_an f_l">
+    <input type="button" value="搜索" onclick="findMajorName()"/>
+    </div>
+      <div class="clearfix"></div>
+    </form>
+    </div>
+    	<div class="czy_zc f_l">
+        <div class="tab-group">
+		<section id="tab1" title="本科">
+				<ul>
+                [#if listBen??]
+                [#list listBen as ben]
+                <li><a onclick="findSecThr(${ben.majorId!})">${ben.majorName!}<span class="f_r">&gt;</span><input type="hidden" value="${ben.majorId!}"><div class="clearfix"></div></a></li>
+
+                [/#list]
+                [/#if]
+                </ul>
+		</section>
+		<section id="tab2"  title="专科">
+				<ul>
+                    [#if listZhuan??]
+                    [#list listZhuan as zhuan]
+                    <li><a onclick="findSecThr(${zhuan.majorId!})">${zhuan.majorName!}</a><span class="f_r">&gt;</span><input type="hidden" value="${zhuan.majorId!}"><div class="clearfix"></div></li>
+                    [/#list]
+                    [/#if]
+
+                </ul>
+		</section>
+	  </div>
+        </div>	
+             <div id="sec" class="czy_yc f_r">
+				 <div id="ben">
+				 [#if listSecondBen??]
+				 [#list listSecondBen as sb]
+             <div  class="czy_yc_bt_bg">
+             		<div class="czy_yc_bt">
+                    		<span class="czy_yc_bt_dm"><b>${sb.majorId!}</b> <i>${sb.majorName!}</i></span>
+                    </div>
+				 [#if listThreeBen??]
+				 [#list listThreeBen as tb]
+				 [#if tb.parentMajorId == sb.majorId]
+                    <div class="czy_yc_bt_nr">
+                    	<a href="${base}/searchUnivAndMajor/majorDetail.jspx?majorId=${tb.majorId!}">${tb.majorName!}</a>
+                        <!--<a href="zhuanyejieshao.html">经济学</a>
+                        <a href="zhuanyejieshao.html">能源经济</a>
+                        <a href="zhuanyejieshao.html">国民经济管理</a>
+                        <a href="zhuanyejieshao.html">资源与环境经济学</a>
+                        <a href="zhuanyejieshao.html">经济学类</a>
+                        <a href="zhuanyejieshao.html">经济学</a>
+                        <a href="zhuanyejieshao.html">能源经济</a>
+                        <a href="zhuanyejieshao.html">国民经济管理</a>
+                        <a href="zhuanyejieshao.html">资源与环境经济学</a>-->
+
+                    </div>
+				 [/#if]
+				 [/#list]
+				 [/#if]
+				 <div class="clearfix"></div>
+				 <div class="czydw"></div>
+             </div>
+				 [/#list]
+				 [/#if]
+				 </div>
+
+				 <div id="zhuan">
+				 [#if listSecondZhuan??]
+				 [#list listSecondZhuan as sz]
+				 <div  class="czy_yc_bt_bg">
+					 <div class="czy_yc_bt">
+						 <span class="czy_yc_bt_dm"><b>${sz.majorId!}</b> <i>${sz.majorName!}</i></span>
+					 </div>
+					 [#if listThreeZhuan??]
+					 [#list listThreeZhuan as tz]
+					 [#if tz.parentMajorId == sz.majorId]
+					 <div class="czy_yc_bt_nr">
+						 <a href="${base}/searchUnivAndMajor/majorDetail.jspx?majorId=${tz.majorId!}">${tz.majorName!}</a>
+
+					 </div>
+					 [/#if]
+					 [/#list]
+					 [/#if]
+					 <div class="clearfix"></div>
+					 <div class="czydw"></div>
+				 </div>
+				 [/#list]
+				 [/#if]
+				 </div>
+             </div>
+
+			<div id="third" class="czy_yc f_r">
+			</div>
+              <div class="clearfix"></div> 
+                    
+     </div>	
+    		
+
+[#include "../include/footer_new.html"/]
+    
+    <script src="${base}/r/wdedu/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="${base}/r/wdedu/js/jquery-tab.js"></script>
+<script type="text/javascript">
+	$(function(){
+		// Calling the plugin
+		$('.tab-group').tabify();
+	})
+</script>
+    
+</body>
+</html>

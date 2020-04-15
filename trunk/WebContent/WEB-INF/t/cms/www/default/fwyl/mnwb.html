@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>章程&资讯</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+	</head>
+	<body>
+		<!--顶部-->
+		[#include "../include/header.html"/]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container width1200">
+				<div>首页 &lt;&lt; 自主&综评 &lt;&lt; 自招招生模拟网报</div>
+				<div></div>
+			</div>
+		</div>
+		<!--搜索框-->
+		<div class="flex-container">
+			<div class="flex-item hugeSearch">
+				<input type="text" placeholder="" />
+			</div>
+			<div class="flex-item">
+				<button class="btn6 btnColorGreen advancedSearch">搜索<tton>
+			</div>
+		</div>
+		<!--主体-->
+		<main class="zizhuJudgedBy3Main width1200">
+			<div class="flex-container2">
+				<!--自主招生章程-->
+				<div class="admissionsNews">
+					<p class="zizhuTitlt"><span>自主招生</span>招生模拟网报</p>
+					<p class="zizhuTitltEnglish">Analog Application</p>
+					<div class="zizhuJournalism">
+						<ul>
+							[@cms_content_list typeId='1'  channelId='118' dateFormat='yyyy-MM-dd']
+							[#list tag_list as a]
+							<li>
+								<div href="" class="flex-container">
+									<!--日期-->
+									<div class="JournalismDate" style="width:20%">
+										<p>${a.sortDate!?string("yyyy-MM")}</p>
+										<b>${a.sortDate!?string("dd")}</b>
+									</div>
+									<!--内容-->
+									<div class="JournalismContent" style="width:80%">
+										<a href="${a.url}" target="_blank">[@text_cut s=a.title len=20 append='...'/]</a>
+										<span>[@text_cut s=a.description len=50 append='...'/]</span>
+									</div>
+								</div>
+							</li>
+							[/#list]
+							[/@cms_content_list]
+						</ul>
+					</div>
+				</div>
+				<!--搜索热点-->
+				<div class="SearchForHot">
+					<p>
+						<img src="${base}/r/img/huo.png" alt="" />
+						<span>搜索热点</span>
+					</p>
+					<ul>
+						<li>
+							<a href="">
+								<img src="${base}/r/img/11.png" alt="" />
+								<span>借助专业测评工具，帮孩子选科和定位专业！帮孩子选科和定位专业</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="${base}/r/img/22.png" alt="" />
+								<span>借助专业测评工具，帮孩子选科和定位专业！</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="${base}/r/img/33.png" alt="" />
+								<span>借助专业测评工具，帮孩子选科和定位专业！</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="${base}/r/img/44.png" alt="" />
+								<span>借助专业测评工具，帮孩子选科和定位专业！</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="${base}/r/img/55.png" alt="" />
+								<span>借助专业测评工具，帮孩子选科和定位专业！</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="${base}/r/img/66.png" alt="" />
+								<span>借助专业测评工具，帮孩子选科和定位专业！</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="${base}/r/img/77.png" alt="" />
+								<span>借助专业测评工具，帮孩子选科和定位专业！</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="${base}/r/img/88.png" alt="" />
+								<span>借助专业测评工具，帮孩子选科和定位专业！</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="${base}/r/img/99.png" alt="" />
+								<span>借助专业测评工具，帮孩子选科和定位专业！</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="${base}/r/img/00.png" alt="" />
+								<span>借助专业测评工具，帮孩子选科和定位专业！</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</main>
+		<!--底部-->
+		[#include "../include/footer.html"/]
+		
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+	</body>
+</html>

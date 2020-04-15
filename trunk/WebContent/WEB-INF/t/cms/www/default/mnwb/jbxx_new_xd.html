@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<title>志愿服务-基本信息查询</title>
+<link href="${base}/r/css/head_footer.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="${base}/r/css/zywy_xdxt_net.css" rel="stylesheet" type="text/css" media="screen" />
+<!--[if lte IE 9]>
+<script src="${base}/r/js/html5shiv.js" language="javascript"></script>
+<script src="${base}/r/js/respond.min.js" language="javascript"></script>
+<![endif]-->
+<script src="${base}/r/js/jquery-1.8.3.min.js" language="javascript"></script>
+<script src="${base}/thirdparty/My97DatePicker/WdatePicker.js" language="javascript"></script>
+<style>
+	.xdxt_zy_selSay_span01::before{
+		content:'';
+		display:block;
+		width:100%;
+		height:3px;
+		background:#86D73B;
+		position:absolute;
+		bottom:0;
+		left:0;
+	}
+	.xdxt_zy_selSay_span01{
+		color:#86D73B;
+	}
+	.style_table td{
+		border:none !important;
+	}
+</style>
+</head>
+<body>
+	<div class="z_body">
+		<div class="z_width_out">
+			<div class="on_line">
+				<div class="xdxtSY" style="margin:0 0 20px 0;">
+					<div class="xdxtSY_tit">
+		        		<span class="xdxtSY_titLt xdxtSY_bgClor03"></span>
+		        		<span class="xdxtSY_titRt">详细资料</span>
+		        	</div>
+					<div class="xd_jbxx_out">
+						<form id="jbxxForm" mothod="POST">
+							<table class="xd_jbxx_tb">
+								<tr>
+									<td width="25%" class="xd_jbxx_td01"><font color="red">*&nbsp;&nbsp;</font><span class="xd_sib_styspan">姓名：</span></td>
+									<td width="75%" class="xd_jbxx_td02">
+										<input class="xd_sib_sty" id="userName" name="userName" [#if tnUser??] value="${tnUser.userName!}" [#else] value="${user.realname!?html}" [/#if]  type="text" maxlength="20">
+									</td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><font color="red">*&nbsp;&nbsp;</font><span class="xd_sib_styspan">证件号码：</span></td>
+									<td class="xd_jbxx_td02">
+										<input class="xd_sib_sty" id="identityNumber" name="identityNumber" [#if tnUser??] value="${tnUser.identityNumber!}" [/#if] onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="18">
+									</td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><font color="red">*&nbsp;&nbsp;</font><span class="xd_sib_styspan">手机号码：</span></td>
+									<td class="xd_jbxx_td02">
+										<input class="xd_sib_sty" id="telephone" name="telephone"  maxlength="11"  type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" [#if tnUser??] value="${tnUser.telephone!}" [/#if]>
+									</td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><font color="red">*&nbsp;&nbsp;</font><span class="xd_sib_styspan">性别：</span></td>
+									<td class="xd_jbxx_td02">
+										<input type="radio" name="sex" id="sex1" value="1" [#if tnUser?? && tnUser.sex?? && tnUser.sex=='1'] checked [/#if]>&nbsp;<label for="sex1">男</label>&nbsp;&nbsp;
+										<input type="radio" name="sex" id="sex2" value="2" [#if tnUser?? && tnUser.sex?? && tnUser.sex=='2'] checked [/#if]>&nbsp;<label for="sex2">女</label>
+									</td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><font color="red">*&nbsp;&nbsp;</font><span class="xd_sib_styspan">出生日期：</span></td>
+									<td class="xd_jbxx_td02">
+										<input class="xd_sib_sty" type="text" id="birthday" name="birthday" [#if tnUser??] value="${tnUser.birthday!}" [/#if] onclick="WdatePicker(({startDate:'{%y-18}-01-01'}))" [#if tnUser??] value="${tnUser.birthday!}"[/#if] class="Wdate" readonly="readonly" />
+									</td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><font color="red">*&nbsp;&nbsp;</font><span class="xd_sib_styspan">民族：</span></td>
+									<td class="xd_jbxx_td02">
+									[#if tnUser??]
+										[@p.select name="nation" id="nation" class="xd_sib_sty" value=tnUser.nation list=nationList listKey="code" listValue="name" /]
+									[#else]
+										[@p.select name="nation" id="nation" class="xd_sib_sty" value='' list=nationList listKey="code" listValue="name" /]
+									[/#if]
+									</td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><font color="red">*&nbsp;&nbsp;</font><span class="xd_sib_styspan">政治面貌：</span></td>
+									<td class="xd_jbxx_td02">
+									[#if tnUser??]
+										[@p.select name="politics" id="politics" class="xd_sib_sty" value=tnUser.politics list=politicsList listKey="code" listValue="name" /]
+									[#else]
+										[@p.select name="politics" id="politics" class="xd_sib_sty" value='' list=politicsList listKey="code" listValue="name" /]
+									[/#if]
+									</td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><span class="xd_sib_styspan">裸眼视力（左/右）：</span></td>
+									<td class="xd_jbxx_td02">
+										左&nbsp;&nbsp;<input class="xdxt_jbxx_ipsty02" id="leftEyesight" name="leftEyesight" [#if tnUser??] value="${tnUser.leftEyesight!}" [/#if]>
+										&nbsp;&nbsp;&nbsp;&nbsp;右&nbsp;&nbsp;<input class="xdxt_jbxx_ipsty02" id="rightEyesight" name="rightEyesight" [#if tnUser??] value="${tnUser.rightEyesight!}" [/#if]>
+										<span style="color:#666;margin-left:20px;">*&nbsp;&nbsp;视力标准为 0.1-1.5（或 4.0-5.2）</span>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="xdxt_jbxx_td3">请查看学校招生简章，如果报考专业对视力、是否色盲、身高、体重有要求，则必须填写。</td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><span class="xd_sib_styspan">是否色盲：</span></td>
+									<td class="xd_jbxx_td02">
+									[#if tnUser??]
+										[@p.select name="colorBlind" id="colorBlind" class="xd_sib_sty" value=tnUser.colorBlind list=colorBlindList listKey="code" listValue="name" /]
+									[#else]
+										[@p.select name="colorBlind" id="colorBlind" class="xd_sib_sty" value='' list=colorBlindList listKey="code" listValue="name" /]
+									[/#if]
+									</td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><span class="xd_sib_styspan">身高(cm)：</span></td>
+									<td class="xd_jbxx_td02"><input class="xd_sib_sty" id="height" name="height" [#if tnUser??] value="${tnUser.height!}" [/#if]></td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><span class="xd_sib_styspan">体重(kg)：</span></td>
+									<td class="xd_jbxx_td02"><input class="xd_sib_sty" id="weight" name="weight" [#if tnUser??] value="${tnUser.weight!}" [/#if]></td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><font color="red">*&nbsp;&nbsp;</font><span class="xd_sib_styspan">高考报名所在地：</span></td>
+									<td class="xd_jbxx_td02">
+									[#if tnUser??]
+										[@p.select name="province" id="province" class="xd_sib_sty" value=tnUser.examProvince list=proList listKey="pro_code" listValue="pro_name" onchange="selectProvince()" headerKey="0" headerValue="请选择"/]
+									[#else]
+										[@p.select name="province" id="province" class="xd_sib_sty" value='' list=proList listKey="pro_code" listValue="pro_name" onchange="selectProvince()" headerKey="0" headerValue="请选择"/]
+									[/#if]
+										&nbsp;&nbsp;&nbsp;&nbsp;
+									[#if tnUser??]
+										[@p.select name="city" id="city" class="xd_sib_sty" value=tnUser.examCity list=cityList listKey="city_code" listValue="city_name" onchange="selectCity()" headerKey="0" headerValue="请选择"/]
+									[#else]
+										[@p.select name="city" id="city" class="xd_sib_sty" value='' list=cityList listKey="city_code" listValue="city_name" onchange="selectCity()" headerKey="0" headerValue="请选择"/]
+									[/#if]
+										&nbsp;&nbsp;&nbsp;&nbsp;
+									[#if tnUser??]
+										[@p.select name="region" id="region" class="xd_sib_sty" value=tnUser.examRegion list=boroughList listKey="quxian_code" listValue="quxian_name" headerKey="0" headerValue="请选择"/]
+									[#else]
+										[@p.select name="region" id="region" class="xd_sib_sty" value='' list=boroughList listKey="quxian_code" listValue="quxian_name" headerKey="0" headerValue="请选择"/]
+									[/#if]
+										<input type="hidden" name="examProvince" id="examProvince">
+										<input type="hidden" name="examCity" id="examCity">
+										<input type="hidden" name="examRegion" id="examRegion">
+										<input type="hidden" name="orderId" value="${order.orderId}">
+									</td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><span class="xd_sib_styspan">高考报名号：</span></td>
+									<td class="xd_jbxx_td02"><input class="xd_sib_sty" id="examNumber" name="examNumber" [#if tnUser??] value="${tnUser.examNumber!}" [/#if]></td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><font color="red">*&nbsp;&nbsp;</font><span class="xd_sib_styspan">考生类型：</span></td>
+									<td class="xd_jbxx_td02">
+									[#if tnUser??]
+										[@p.select name="studentType" id="studentType" class="xd_sib_sty" value=tnUser.studentType list=studentTypeList listKey="code" listValue="name" /]
+									[#else]
+										[@p.select name="studentType" id="studentType" class="xd_sib_sty" value='' list=studentTypeList listKey="code" listValue="name" /]
+									[/#if]
+									</td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><font color="red">*&nbsp;&nbsp;</font><span class="xd_sib_styspan">外语语种：</span></td>
+									<td class="xd_jbxx_td02">
+									[#if tnUser??]
+										[@p.select name="language" id="language" class="xd_sib_sty" value=tnUser.language list=languageList listKey="code" listValue="name" /]
+									[#else]
+										[@p.select name="language" id="language" class="xd_sib_sty" value='' list=languageList listKey="code" listValue="name" /]
+									[/#if]
+									</td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><font color="red">*&nbsp;&nbsp;</font><span class="xd_sib_styspan">学科类型：</span></td>
+									<td class="xd_jbxx_td02">
+									[#if tnUser??]
+										[@p.select name="subjectType" id="subjectType" class="xd_sib_sty" value=tnUser.subjectType list=subjectTypeList listKey="code" listValue="name" /]
+									[#else]
+										[@p.select name="subjectType" id="subjectType" class="xd_sib_sty" value='' list=subjectTypeList listKey="code" listValue="name" /]
+									[/#if]
+									</td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><font color="red">*&nbsp;&nbsp;</font><span class="xd_sib_styspan">联系电话：</span></td>
+									<td class="xd_jbxx_td02"><input class="xd_sib_sty" id="phoneNumber" name="phoneNumber" [#if tnUser??] value="${tnUser.phoneNumber!}" [/#if]></td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><font color="red">*&nbsp;&nbsp;</font><span class="xd_sib_styspan">联系地址：</span></td>
+									<td class="xd_jbxx_td02">
+										<input class="xd_sib_sty" id="mailAddress" name="mailAddress" [#if tnUser??] value="${tnUser.mailAddress!}" [/#if]>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="xdxt_jbxx_td3">最多可输入50个字符；地址请写明街道名称、门牌号码、楼层和房间号等信息。</td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01"><font color="red">*&nbsp;&nbsp;</font><span class="xd_sib_styspan">邮政编码：</span></td>
+									<td class="xd_jbxx_td02"><input class="xd_sib_sty" id="postcode" name="postcode" [#if tnUser??] value="${tnUser.postcode!}" [/#if]></td>
+								</tr>
+								<tr>
+									<td class="xd_jbxx_td01" valign="top"><font color="red">*&nbsp;&nbsp;</font><span class="xd_sib_styspan">家庭信息：</span></td>
+									<td class="xdxt_jbxx_td4" style="padding-top:0;padding-bottom:0;">
+										<table class="xdxt_jbxx_tbtb style_table">
+											<tr>
+												<td align="right">父亲姓名：</td><td><input class="xd_sib_sty" id="name1" name="name1" [#if father??] value="${father.name!}" [/#if]></td>
+												<td align="right">联系电话：</td><td><input class="xd_sib_sty" id="telephone1" name="telephone1" [#if father??] value="${father.telephone!}" [/#if]></td>
+											</tr>
+											<tr>
+												<td align="right">文化程度：</td>
+												<td>
+												[#if father??]
+													[@p.select name="educationLevel1" id="educationLevel1" class="xd_sib_sty" value=father.educationLevel list=educationLevelList listKey="code" listValue="name" /]
+												[#else]
+													[@p.select name="educationLevel1" id="educationLevel1" class="xd_sib_sty" value='' list=educationLevelList listKey="code" listValue="name" /]
+												[/#if]
+												</td>
+												<td align="right">职业：</td><td><input class="xd_sib_sty" id="job1" name="job1" [#if father??] value="${father.job!}" [/#if]></td>
+											</tr>
+											<tr>
+												<td align="right">工作单位：</td><td><input class="xd_sib_sty" id="office1" name="office1" [#if father??] value="${father.office!}" [/#if]></td>
+												<td align="right">职务：</td><td><input class="xd_sib_sty" id="vote1" name="vote1" [#if father??] value="${father.vote!}" [/#if]></td>
+											</tr>
+											<tr>
+												<td align="right">母亲姓名：</td><td><input class="xd_sib_sty" id="name2" name="name2" [#if mother??] value="${mother.name!}" [/#if]></td>
+												<td align="right">联系电话：</td><td><input class="xd_sib_sty" id="telephone2" name="telephone2" [#if mother??] value="${mother.telephone!}" [/#if]></td>
+											</tr>
+											<tr>
+												<td align="right">文化程度：</td>
+												<td>
+												[#if mother??]
+													[@p.select name="educationLevel2" id="educationLevel2" class="xd_sib_sty" value=mother.educationLevel list=educationLevelList listKey="code" listValue="name" /]
+												[#else]
+													[@p.select name="educationLevel2" id="educationLevel2" class="xd_sib_sty" value='' list=educationLevelList listKey="code" listValue="name" /]
+												[/#if]
+												</td>
+												<td align="right">职业：</td><td><input class="xd_sib_sty" id="job2" name="job2" [#if mother??] value="${mother.job!}" [/#if]></td>
+											</tr>
+											<tr>
+												<td align="right">工作单位：</td><td><input class="xd_sib_sty" id="office2" name="office2" [#if mother??] value="${mother.office!}" [/#if]></td>
+												<td align="right">职务：</td><td><input class="xd_sib_sty" id="vote2" name="vote2" [#if mother??] value="${mother.vote!}" [/#if]></td>
+											</tr>
+										</table>
+										<input type="hidden" id="id1" name="id1" [#if father??] value="${father.id!}" [/#if]/>
+										<input type="hidden" id="id2" name="id2" [#if mother??] value="${mother.id!}" [/#if]/>
+									</td>
+								</tr>
+								<tr>
+									<td class="xdxt_jbxx_td5" colspan="2">
+										<a id="_save" class="xdxt_bt_a1">保存</a>
+										<a class="xdxt_bt_a2" onclick="_goView();">取消</a>
+									</td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+	function _goView(){
+		var url = "${base}/mnwb/jbxx.jspx?orderId=${order.orderId}";
+	    jQuery.get(url, function(result){
+	        $("#jbxx").html(result);
+	    });
+	}
+
+		jQuery(document).ready(function (){
+		   jQuery('#jbxxForm').bind("submit", function(){
+		         var options = {
+		                url: '${base}/mnwb/jbxx_save.jspx',
+		                type: 'post',
+		                dataType: 'text',
+		                data: $("#jbxxForm").serialize(),
+		                success: function (data) {
+		                    if (data.length > 0)
+		                        jQuery("#jbxx").html(data);
+		                }
+		         };
+		         $.ajax(options);
+		         return false;
+		   })
+
+		   $('#_save').click(function(){
+			   var userName = $('#userName').val();
+				var identityNumber = $('#identityNumber').val();
+				var telephone = $('#telephone').val();
+				var sex = $("input[type='radio']:checked").val();
+				var birthday = $('#birthday').val();
+				
+				var nation = $('#nation').val();
+				var politics = $('#politics').val();
+				var province = $('#province').val();
+				var city = $('#city').val();
+				var region = $('#region').val();
+				
+				var StudentType = $('#studentType').val();
+				var language = $('#language').val();
+				var subjectType = $('#subjectType').val();
+				var phoneNumber = $('#phoneNumber').val();
+				var mailAddress = $('#mailAddress').val();
+				
+				var postcode = $('#postcode').val();
+				var name1 = $('#name1').val();
+				var name2 = $('#name2').val();
+				
+				if(userName==""){
+					alert("请填写报考人姓名！")
+					return;
+				}
+				if(identityNumber==""){
+					alert("请填写证件号码！")
+					return;
+				}
+
+				if(telephone==""){
+					alert("请填写手机号码！")
+					return;
+				}
+				
+				if(!(/^1[34578]\d{9}$/.test(telephone))){ 
+			        alert("手机号码有误，请重填");  
+			        return false; 
+			    } 
+				
+				if(sex==null){
+					alert("请选择性别！")
+					return;
+				}
+				if(birthday==""){
+					alert("请填写出生日期！")
+					return;
+				}
+				
+				if(nation==""){
+					alert("请填写民族！")
+					return;
+				}
+				if(politics==""){
+					alert("请填写政治面貌！")
+					return;
+				}
+				if(province==""){
+					alert("请选择省份！")
+					return;
+				}
+				$('#examProvince').val($("#province").find("option:selected").val());
+				if(city=="-1"){
+					alert("请选择城市！")
+					return;
+				}
+				$('#examCity').val($("#city").find("option:selected").val());
+				if(region=="-1"){
+					alert("请选择区县！")
+					return;
+				}
+				$('#examRegion').val($("#region").find("option:selected").val());
+				if( StudentType==""){
+					alert("请选择考生类型！")
+					return;
+				}
+				if( language==""){
+					alert("请填写外语语种！")
+					return;
+				}
+				if( subjectType==""){
+					alert("请填写学科类型！")
+					return;
+				}
+				if( phoneNumber==""){
+					alert("请填写联系电话！")
+					return;
+				}
+				if( mailAddress==""){
+					alert("请填写联系地址！")
+					return;
+				}
+				
+				if( postcode==""){
+					alert("请填写邮编！")
+					return;
+				}
+				if( name1==""){
+					alert("请填写父亲信息！")
+					return;
+				}
+				if( name2==""){
+					alert("请填写母亲信息！")
+					return;
+				}
+
+		        $('#jbxxForm').submit();
+		   })
+		});
+
+		$(function(){
+			$("#tbgrxx").addClass("checked-style02");
+		});
+		
+		function selectProvince(){
+			$("#city").empty();
+			$("#region").empty();
+		    var province=$("#province").val();
+		    if(province!='')
+			{
+		    	 $.ajax({
+					　　url : '${base}/mnwb/getCity.jspx',
+					   data:{pro_code:province},
+					　　type : "POST",
+					   async:false,
+					   error:function(request) {
+			              alert("提交出现异常啦。。。。");
+			          },
+					　　success : function(data) 
+					   {		
+						     　　var res = eval('(' + data + ')');	
+						   var option2 = $("<option>").val("-1").text("请选择");
+						   $("#city").append(option2);
+						    for(var o in res)
+						    	{
+						    		var option = $("<option>").val(res[o].city_code).text(res[o].city_name);
+						    		$("#city").append(option);					    									   
+						    	}				
+					   }
+				 		 
+				}); 
+		    	
+			} 	    
+		}
+		
+		
+		
+		function selectCity(){
+			$("#region").empty();
+		    var province=$("#province").val();
+		    var city=$("#city").val();
+		    if(province!='' && city!='')
+			{
+		    	 $.ajax({
+					　　url : '${base}/mnwb/getBorough.jspx',
+					   data:{pro_code:province,city_code:city},
+					　　type : "POST",
+					   async:false,
+					   error:function(request) {
+			              alert("提交出现异常啦。。。。");
+			          },
+					　　success : function(data) 
+					   {		
+						     　var res = eval('(' + data + ')');
+							   var option2 = $("<option>").val("-1").text("请选择");
+							   $("#region").append(option2);	
+						   for(var o in res)
+						    {
+						    	var option = $("<option>").val(res[o].quxian_code).text(res[o].quxian_name);
+						    	$("#region").append(option);					    									   
+						    }				
+					   }
+				 		 
+				}); 
+		    	
+			} 	    
+		}
+		
+		function check(){
+			var userName = $('#userName').val();
+			var identityNumber = $('#identityNumber').val();
+			var telephone = $('#telephone').val();
+			var sex = $("input[type='radio']:checked").val();
+			var birthday = $('#birthday').val();
+			
+			var nation = $('#nation').val();
+			var politics = $('#politics').val();
+			var province = $('#province').val();
+			var city = $('#city').val();
+			var region = $('#region').val();
+			
+			var StudentType = $('#studentType').val();
+			var language = $('#language').val();
+			var subjectType = $('#subjectType').val();
+			var phoneNumber = $('#phoneNumber').val();
+			var mailAddress = $('#mailAddress').val();
+			
+			var postcode = $('#postcode').val();
+			var name1 = $('#name1').val();
+			var name2 = $('#name2').val();
+			
+			if(userName==""){
+				alert("请填写报考人姓名！")
+				return;
+			}
+			if(identityNumber==""){
+				alert("请填写证件号码！")
+				return;
+			}
+
+			if(telephone==""){
+				alert("请填写手机号码！")
+				return;
+			}
+			
+			if(!(/^1[34578]\d{9}$/.test(telephone))){ 
+		        alert("手机号码有误，请重填");  
+		        return false; 
+		    } 
+			
+			if(sex==null){
+				alert("请选择性别！")
+				return;
+			}
+			if(birthday==""){
+				alert("请填写出生日期！")
+				return;
+			}
+			
+			if(nation==""){
+				alert("请填写民族！")
+				return;
+			}
+			if(politics==""){
+				alert("请填写政治面貌！")
+				return;
+			}
+			if(province==""){
+				alert("请选择省份！")
+				return;
+			}
+			$('#examProvince').val($("#province").find("option:selected").val());
+			if(city=="-1"){
+				alert("请选择城市！")
+				return;
+			}
+			$('#examCity').val($("#city").find("option:selected").val());
+			if(region=="-1"){
+				alert("请选择区县！")
+				return;
+			}
+			$('#examRegion').val($("#region").find("option:selected").val());
+			if( StudentType==""){
+				alert("请选择考生类型！")
+				return;
+			}
+			if( language==""){
+				alert("请填写外语语种！")
+				return;
+			}
+			if( subjectType==""){
+				alert("请填写学科类型！")
+				return;
+			}
+			if( phoneNumber==""){
+				alert("请填写联系电话！")
+				return;
+			}
+			if( mailAddress==""){
+				alert("请填写联系地址！")
+				return;
+			}
+			
+			if( postcode==""){
+				alert("请填写邮编！")
+				return;
+			}
+			if( name1==""){
+				alert("请填写父亲信息！")
+				return;
+			}
+			if( name2==""){
+				alert("请填写母亲信息！")
+				return;
+			}
+		}
+		
+		//制保留1位小数  
+	    function toDecimal2(x) {    
+	        var f = parseFloat(x);    
+	        if (isNaN(f)) {    
+	            return false;    
+	        }    
+	        var f = Math.round(x*10)/10;    
+	        var s = f.toString();    
+	        var rs = s.indexOf('.');    
+	        if (rs < 0) {    
+	            rs = s.length;    
+	            s += '.';    
+	        }    
+	        while (s.length <= rs + 1) {    
+	            s += '0';    
+	        }    
+	        return s;    
+	    }
+		
+	</script>
+</body>
+</html>

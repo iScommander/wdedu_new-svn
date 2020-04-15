@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>志愿填报表</title>
+	<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+	<style>
+		span.delete:hover{
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body onload="chushihua()">
+<!--<input type="hidden" id="refreshed" value="no">-->
+	<!--顶部线条-->
+	<div class="topLine"></div>
+	<!--tab切换  导航-->
+	[#include "../include/header_zy.html"/]
+	<!--路径-->
+	<div class="route">
+		<div class="flex-container1 width1200">
+			<div>
+				<a href="${base}">首页 </a> &lt;&lt;志愿填报 &lt;&lt;开始填报</div>
+				<button onclick="beforePrint();window.print();afterPrint();" id="renderPdf" style="float: right;margin-left: 800px;margin-top: 10px;" class="btn btn-primary">生成pdf</button>
+		</div>
+	</div>
+	<!--主体-->
+	<main class="voluntaryMain width1200">
+
+		<!--标题-->
+		<div class="reportedTitle">
+			<p>2019年志愿模拟填报表</p>
+			<p>Voluntary simulation report form 2019</p>
+			<span>【沃得教育出品】</span>
+		</div>
+		<!--个人信息    批次填报-->
+		<div class="information-BatchFill">
+			<!--个人信息-->
+			[#if applicationsInfo??]
+			<div class="flex-container information">
+				<div class="flex-item">
+					方案名称：<span>${applicationsInfo.applicationName!}</span>
+				</div>
+				[#if provinceMap??]
+				<div class="flex-item">
+					地区：<span>${provinceMap['${applicationsInfo.provinceId!"0"}']}</span>
+				</div>
+				[/#if]
+				<div class="flex-item">
+					文理科：<span>${applicationsInfo.majorTypeId?replace(1,'文科')?replace(2,'理科')?replace(3,'综合改革')}</span>
+				</div>
+				<div class="flex-item">
+					成绩：<span>${applicationsInfo.score!}</span>
+				</div>
+				[#if applicationsInfo.subjects??]
+				<div class="flex-item">
+					选科：<span>${(applicationsInfo.subjects!"")?replace('1','物理')?replace('2','化学')?replace('3','生物')?replace('4','政治')?replace('5','历史')?replace('6','地理')?replace('7','技术')}
+								${(applicationsInfo.subjectsLevel!"")?replace('1','A+')?replace('2','A')?replace('3','B+')?replace('4','B')?replace('5','C')?replace('6','D')}</span>
+				</div>
+				[/#if]
+				<div class="flex-item">
+					排名：<span>${applicationsInfo.rank!}</span>
+				</div>
+			</div>
+
+			<!--批次填报-->
+			<div class="BatchFill">
+				[#if univNumMap??]
+				[#if batchMap??]
+				[#if batchList??]
+				[#list batchList as batch]
+				<div>
+					<div class="flex-container2">
+						<div class="eachBatch">
+							报考批次：<span>${batch.batchName!}</span>； 批次线：
+							<span>${batch.score!}</span>； 可报志愿：
+							<span>${batch.univNum!}(${univNumMap['${batch.batchId!}']!"0"})个</span>； 备选志愿：
+							<span>${batch.extraNum!}</span>；报考结束时间：
+							<span>${batch.fillDate!}</span>；
+						</div>
+						<div>
+							<button class="btn8 btnColorYellow" onclick="javascrtpt:window.location.href='beginFillIn.jspx?batchId=${batch.batchId!}&planId=${applicationsInfo.id!}'">批次填报</button>
+						</div>
+					</div>
+					<table class="table table-striped deeptable school_list">
+						<tr>
+							<th>志愿顺序</th>
+							<th>院校名称</th>
+							<th>选报专业</th>
+							<th>服从调剂</th>
+						</tr>
+						[#if batchMap['${batch.batchId!}']??]
+						[#assign univList=batchMap['${batch.batchId!}']/]
+						[#list univList as univ]
+						<tr class="school_info">
+							<td >
+								<input type="hidden" name="batchIds" value="${univ.batchId!}"/>
+								[#if batch.ceePre == '顺序志愿']
+								[#if univ.isFormal == '0']
+								顺序志愿${univ_index?replace(0,'一')?replace(1,'二')?replace(2,'三')?replace(3,'四')?replace(4,'五')}
+								[#else]
+								备选志愿${univ_index!}
+								[/#if]
+								[#elseif batch.ceePre == '平行志愿']
+								平行志愿<span class="abc">${univ_index?replace(24,'Y')?replace(23,'X')?replace(22,'W')?replace(21,'V')?replace(20,'U')?replace('19','T')?replace('18','S')?replace('17','R')?replace('16','Q')?replace('15','P')?replace('14','O')?replace('13','N')?replace('12','M')?replace('11','L')?replace('10','K')?replace('9','J')?replace('8','I')?replace('7','H')?replace('6','G')?replace('5','F')?replace('4','E')?replace('3','D')?replace('2','C')?replace('1','B')?replace('0','A')}</span>
+								[/#if]
+								<input name="univ_code" type="hidden"/>
+								<div class="flex-item">
+									<button class="btn3 btnColorGreen" onclick="javascrtpt:window.location.href='beginFillIn.jspx?batchId=${batch.batchId!}&planId=${applicationsInfo.id!}'">志愿填报</button>
+								</div>
+							</td>
+							<td class="fanyuehaoniubi">
+
+								[#if univ.univCode ?? ]
+								[#if univ.univCode =='null']
+								[#else]
+								<div class="beyondHidden28">【${univ.univCode!?replace('null','')}】${univ.univName!?replace('null','')}</div>
+								<div class="flex-item">
+									<span>
+										<span class="school_info_move">
+											<img class="school_info_move_up" src="${base}/r/img/shiftUp.png" onclick="upMoveYX(this)" />
+											<img class="school_info_move_down" src="${base}/r/img/shiftDown.png" alt="" onclick="downMoveYX(this)" />
+										</span>
+									</span>
+									<span class="delete" onclick="remove_app('${applicationsInfo.id}','${univ.univId!}','${univ.univCode!}', '${univ.univName!}','${univ.isFormal!}', this)">删除</span>
+								</div>
+								[/#if]
+								[/#if]
+							</td>
+							<td>
+								<ul class="specialtyList">
+									[#assign univMap=appMap['${batch.batchId!}']/]
+									[#assign detailList=univMap['${univ.univOrder!}']/]
+									[#list detailList as detail]
+									[#if detail.majorCode ??]
+									<li class="flex-container2 specialty_move">
+										<input type="hidden" name="id" value="${detail.id}"/>
+										<div class="flex-item6 beyondHidden35">【${detail.majorCode!}】${detail.majorName!}</div>
+										<div class="flex-item6">
+											<b class="specialty_up">上移</b>
+											<b class="specialty_down">下移</b>
+										</div>
+									</li>
+									[#else]
+										<input type="hidden" name="id" value="${detail.id}"/>
+									[/#if]
+									[/#list]
+								</ul>
+							</td>
+							<td>
+								<ul class="WhetherObey">
+									<li>
+										[#if univ.isObey??]
+										[#if univ.isObey =='1']
+										<button class="obey active" value="1">服从</button>
+										<button class="noObey" value="0">不服从</button>
+										[#else]
+										<button class="obey" value="1">服从</button>
+										<button class="noObey active" value="0">不服从</button>
+										[/#if]
+										[/#if]
+									</li>
+								</ul>
+							</td>
+						</tr>
+						[/#list]
+						[/#if]
+						[#if batchMaps['${batch.batchId!}']??]
+						[#assign univList=batchMaps['${batch.batchId!}']/]
+						[#list univList as univ]
+						<tr class="school_info_beixuan">
+							<td>
+								<input type="hidden" name="batchIds" value="${univ.batchId!}"/>
+								[#if univ.isFormal == '1']
+								备选志愿<span class="abc">${univ_index?replace(0,'一')?replace(1,'二')?replace(2,'三')?replace(3,'四')?replace(4,'五')}</span>
+								[/#if]
+								<input name="univ_code" type="hidden"/>
+								<div class="flex-item">
+									<button class="btn3 btnColorGreen" onclick="javascrtpt:window.location.href='beginFillIn.jspx?batchId=${batch.batchId!}&planId=${applicationsInfo.id!}'">志愿填报</button>
+								</div>
+							</td>
+							<td class="fanyuehaoniubi">
+								[#if univ.univCode ?? ]
+								[#if univ.univCode =='null']
+								[#else]
+								<div class="beyondHidden28">【${univ.univCode!?replace('null','')}】${univ.univName!?replace('null','')}</div>
+								<div class="flex-item">
+									<span>
+										<span class="school_info_move">
+											<img class="school_info_move_up" src="${base}/r/img/shiftUp.png" onclick="upMoveBXYX(this)" />
+											<img class="school_info_move_down" src="${base}/r/img/shiftDown.png" alt="" onclick="downMoveBYYX(this)" />
+										</span>
+									</span>
+									<span class="delete" onclick="remove_app('${applicationsInfo.id}', '${univ.univCode}', this)">删除</span>
+								</div>
+								[/#if]
+								[/#if]
+							</td>
+							<td>
+								<ul class="specialtyList">
+									[#assign univMap=appMaps['${batch.batchId!}']/]
+									[#assign detailList=univMap['${univ.univOrder!}']/]
+									[#list detailList as detail]
+									[#if detail.majorCode ??]
+									<li class="flex-container2 specialty_move">
+										<input type="hidden" name="id" value="${detail.id}"/>
+										<div class="flex-item6 beyondHidden35">【${detail.majorCode!}】${detail.majorName!}</div>
+										<div class="flex-item6">
+											<b class="specialty_up">上移</b>
+											<b class="specialty_down">下移</b>
+										</div>
+									</li>
+									[#else]
+									<input type="hidden" name="id" value="${detail.id}"/>
+									[/#if]
+									[/#list]
+								</ul>
+							</td>
+							<td>
+								<ul class="WhetherObey">
+									<li>
+										[#if univ.isObey??]
+										[#if univ.isObey =='1']
+										<button class="obey active" value="1">服从</button>
+										<button class="noObey" value="0">不服从</button>
+										[#else]
+										<button class="obey" value="1">服从</button>
+										<button class="noObey active" value="0">不服从</button>
+										[/#if]
+										[/#if]
+									</li>
+								</ul>
+							</td>
+						</tr>
+						[/#list]
+						[/#if]
+					</table>
+
+				</div>
+				[/#list]
+				[/#if]
+				[/#if]
+				[/#if]
+			</div>
+			[/#if]
+		</div>
+	</main>
+	<!--4个大按钮-->
+	<div class="volunteerButton">
+		<div class="flex-container2 width1200" style="margin: 0 auto;height: 100px;">
+			<div class="flex-item7">
+				<button class="btn6 btnColorOrange" onclick="window.location.href='${base}/zytb/project.jspx'">返回填报</button>
+			</div>
+			<div class="flex-item7">
+				<button class="btn6 btnColorOrange" onclick="save_app()">方案评估</button>
+			</div>
+			<div class="flex-item7">
+				<button class="btn6 btnColorOrange" onclick="window.location.href='${base}/FindUniv/findUnivList.jspx'">院校对比</button>
+			</div>
+			<div class="flex-item7">
+				<button class="btn6 btnColorOrange" onclick="window.location.href='${base}/admissonSvcAct/findVoluntary.jspx'">再建一个方案</button>
+			</div>
+		</div>
+	</div>
+
+	<!--底部-->
+	[#include "../include/footer.html"/]
+
+	<!--js-->
+	<script src="${base}/r/js/jQuery.js"></script>
+	<script src="${base}/r/js/bootstrap.min.js"></script>
+	<script src="${base}/r/js/jquery.combo.select.js"></script>
+	<script src="${base}/r/js/itemsJs/common.js"></script>
+	<script>
+
+	function beforePrint(){
+        $('.indexNav').hide(); //隐藏头部
+        $('.pdfyc').hide();
+        $('.volunteerButton').hide();
+        $('.route').hide(); //隐藏面包屑 $('#block-region-side-pre').hide(); //隐藏左侧导航栏
+     }
+
+     function afterPrint(){
+        $('.indexNav').show();
+        $('.pdfyc').show();
+        $('.volunteerButton').show();
+        $('.route').show();
+     }
+
+		//服从  不服从  按钮
+		$(".WhetherObey .obey").click(function () {
+			var IsCheck = $(this).hasClass("active");
+			$(this).parent().find("button").removeClass("active");
+			if (!IsCheck) {
+				$(this).addClass("active");
+			}
+		})
+		$(".WhetherObey .noObey").click(function () {
+			var IsCheck = $(this).hasClass("active");
+			$(this).parent().find("button").removeClass("active");
+			if (!IsCheck) {
+				$(this).addClass("active");
+			}
+		})
+		//上移  下移
+		$(".specialtyList .specialty_move b").click(function () {
+			var parent = $(this).parents(".specialty_move");
+			var this_index = $(this).parent().parent().index();
+			var list = $(this).parents(".specialtyList").find(".specialty_move");
+			var list_count = list.length - 1;
+			var this_IsUp = $(this).hasClass("specialty_up"); //上移操作还是下移操作
+			if (this_index == 0 && this_IsUp) {
+				alert('顶部')
+				return;
+			} else if (this_index == list_count && !this_IsUp) {
+				alert('底部')
+				return;
+			}
+			var next_index = this_IsUp ? this_index + -1 : this_index + 1;
+			if (this_IsUp) {
+				var prev = parent.prev();
+				parent.insertBefore(prev);
+			} else {
+				var next = parent.next();
+				parent.insertAfter(next);
+			}
+		})
+		// $(".school_list .school_info_move img").click(function () {
+		// 	var parent = $(this).parents(".school_info");
+		// 	var this_index = $(this).parents(".school_info").index() - 1;
+		// 	var list = $(this).parents(".school_list").find(".school_info");
+		// 	var list_count = list.length - 1;
+		// 	var this_IsUp = $(this).hasClass("school_info_move_up"); //上移操作还是下移操作
+		//
+		// 	if (this_index == 0 && this_IsUp) {
+		// 		alert('顶部')
+		// 		return;
+		// 	} else if (this_index == list_count && !this_IsUp) {
+		// 		alert('底部')
+		// 		return;
+		// 	}
+		// 	var next_index = this_IsUp ? this_index + -1 : this_index + 1;
+		// 	if (this_IsUp) {
+		// 		var prev = parent.prev();
+		// 		parent.insertBefore(prev);
+		// 	} else {
+		// 		var next = parent.next();
+		// 		parent.insertAfter(next);
+		// 	}
+		// })
+		//保存排序
+
+		function save_app() {
+		    var arr = new Array();
+			//获取所有志愿排序信息
+			$("table.school_list tr").each(function (index, ele) {
+				var univ_order = index; //院校排序
+				var batchId = $(ele).find("input[name='batchIds']").val();
+				var is_obey = $(ele).find("ul.WhetherObey button.active").val();
+				if ($(ele).find("ul.specialtyList li").length ==0){
+				    var app = {};
+                    app.isObey = 0;
+                    app.univOrder = univ_order;
+                    app.majorOrder = 0;
+                    app.id = $(ele).find("input[name='id']").val();
+                    app.batchId = batchId;
+                    arr.push(app);
+				} else{
+                    $(ele).find("ul.specialtyList li").each(function (index, ele) {
+                        var app = {};
+                        app.isObey = is_obey;
+                        app.univOrder = univ_order;
+                        app.majorOrder = index;
+                        app.id = $(ele).find("input").val();
+                        app.batchId = batchId;
+                        arr.push(app);
+                    })
+				}
+
+            });
+			//提交后台修改
+			$.ajax({
+                url:"updateProjectDetail.jspx",
+                type:'post', //GET
+                async:true,    //或false,是否异步
+                dataType:'json',
+                contentType:"application/x-www-form-urlencoded; charset=utf-8",
+                traditional: true,
+                data:{
+                    apps : JSON.stringify(arr)
+				},
+				success:function () {
+
+                },
+				complete:function () {
+                    alert("保存成功");
+                    window.location.reload();
+                }
+			});
+        }
+
+        function chushihua() {
+            var arr = new Array();
+            //获取所有志愿排序信息
+            $("table.school_list tr").each(function (index, ele) {
+                var univ_order = index; //院校排序
+                var batchId = $(ele).find("input[name='batchIds']").val();
+                var is_obey = $(ele).find("ul.WhetherObey button.active").val();
+                if ($(ele).find("ul.specialtyList li").length ==0){
+                    var app = {};
+                    app.isObey = 0;
+                    app.univOrder = univ_order;
+                    app.majorOrder = 0;
+                    app.id = $(ele).find("input[name='id']").val();
+                    app.batchId = batchId;
+                    arr.push(app);
+                } else{
+                    $(ele).find("ul.specialtyList li").each(function (index, ele) {
+                        var app = {};
+                        app.isObey = is_obey;
+                        app.univOrder = univ_order;
+                        app.majorOrder = index;
+                        app.id = $(ele).find("input").val();
+                        app.batchId = batchId;
+                        arr.push(app);
+                    })
+                }
+
+            });
+            //提交后台修改
+            $.ajax({
+                url:"updateProjectDetail.jspx",
+                type:'post', //GET
+                async:true,    //或false,是否异步
+                dataType:'json',
+                contentType:"application/x-www-form-urlencoded; charset=utf-8",
+                traditional: true,
+                data:{
+                    apps : JSON.stringify(arr)
+                },
+                success:function () {
+
+                },
+                complete:function () {
+                }
+            });
+        }
+        //删除学校
+        function remove_app(app_id,univ_id, univ_code,univ_name,is_formal, self) {
+			// $(self).parent().parent().parent().remove();
+			$.ajax({
+                url:"removeUniv.jspx",
+                type:'post', //GET
+                async:true,    //或false,是否异步
+                dataType:'json',
+                contentType:"application/x-www-form-urlencoded; charset=utf-8",
+                traditional: true,
+                data:{
+                    applicationId : app_id,
+					univId : univ_id,
+                    univCode : univ_code,
+                    univName : univ_name,
+					isFormal : is_formal
+                },
+                complete:function () {
+                    alert("操作成功");
+                    window.location.reload();
+                }
+			})
+        }
+
+
+
+        //上移平行/顺序院校
+        function upMoveYX(obj) {
+            var parent = $(this).parents(".school_info");
+            var this_index = $(this).parents(".school_info").index() - 1;
+            var list = $(this).parents(".school_list").find(".school_info");
+            var list_count = list.length - 1;
+            var this_IsUp = $(this).hasClass("school_info_move_up"); //上移操作还是下移操作
+
+            if (this_index == 0 && this_IsUp) {
+                alert('顶部')
+                return;
+            } else if (this_index == list_count && !this_IsUp) {
+                alert('底部')
+                return;
+            }
+            var next_index = this_IsUp ? this_index + -1 : this_index + 1;
+            if (this_IsUp) {
+                var prev = parent.prev();
+                parent.insertBefore(prev);
+            } else {
+                var next = parent.next();
+                parent.insertAfter(next);
+            }
+            var $parentTr = $(obj).parent().parent().parent().parent().parent();
+            var parentIndex = $parentTr.index();
+            if(parentIndex === 0 ) { //第一个
+                return false;
+            };
+            //插入到上一位元素之前
+            $parentTr.parent().children().eq(parentIndex)
+                .insertBefore($parentTr.parent().children().eq(parentIndex-1));
+            //自身排名减一
+            var valthis =	"";
+            var upvalthis = $parentTr.parent().children().eq(parentIndex-1).children().eq(0).find("span").text() ;
+            var arry = new Array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','一','二','四','五','六','七','八','九','十','十一','十二','十二','十三','十四','十五','十六','十七','十八','十九','二十','二十一','二十二');
+                if (upvalthis ==arry[arry.indexOf(upvalthis)] ){
+                    valthis =arry[arry.indexOf(upvalthis)-1]
+                    $parentTr.parent().children().eq(parentIndex-1)
+                        .children().eq(0).find("span").text(valthis);
+                }
+            console.log(valthis)
+            //上一位排名加一
+            var valprev = ""
+			var upvalprev=$parentTr.parent().children().eq(parentIndex-1).children().eq(0).find("span").text();
+            if (upvalprev ==arry[arry.indexOf(upvalprev)] ){
+                valprev =arry[arry.indexOf(upvalprev)+1]
+                $parentTr.parent().children().eq(parentIndex)
+                        .children().eq(0).find("span").text(valprev);
+            }
+        };
+		//上移备选志愿
+        function upMoveBXYX(obj) {
+            var parent = $(this).parents(".school_info_beixuan");
+            var this_index = $(this).parents(".school_info_beixuan").index() - 1;
+            var list = $(this).parents(".school_list").find(".school_info_beixuan");
+            var list_count = list.length - 1;
+            var this_IsUp = $(this).hasClass("school_info_move_up"); //上移操作还是下移操作
+
+            if (this_index == 0 && this_IsUp) {
+                alert('顶部')
+                return;
+            } else if (this_index == list_count && !this_IsUp) {
+                alert('底部')
+                return;
+            }
+            var next_index = this_IsUp ? this_index + -1 : this_index + 1;
+            if (this_IsUp) {
+                var prev = parent.prev();
+                parent.insertBefore(prev);
+            } else {
+                var next = parent.next();
+                parent.insertAfter(next);
+            }
+            var $parentTr = $(obj).parent().parent().parent().parent().parent();
+            var parentIndex = $parentTr.index();
+            if(parentIndex === 0 ) { //第一个
+                alert("顶部")
+                return false;
+            };
+            //插入到上一位元素之前
+            $parentTr.parent().children().eq(parentIndex)
+                .insertBefore($parentTr.parent().children().eq(parentIndex-1));
+            //自身排名减一
+            var valthis =	"";
+            var upvalthis = $parentTr.parent().children().eq(parentIndex-1).children().eq(0).find("span").text() ;
+            var arry = new Array('一','二','三','四','五','六','七','八','九','十','十一','十二','十二','十三','十四','十五','十六','十七','十八','十九','二十','二十一','二十二');
+            if (upvalthis ==arry[arry.indexOf(upvalthis)] ){
+                valthis =arry[arry.indexOf(upvalthis)-1]
+                $parentTr.parent().children().eq(parentIndex-1)
+                    .children().eq(0).find("span").text(valthis);
+            }
+            console.log(valthis)
+            //上一位排名加一
+            var valprev = ""
+            var upvalprev=$parentTr.parent().children().eq(parentIndex-1).children().eq(0).find("span").text();
+            if (upvalprev ==arry[arry.indexOf(upvalprev)] ){
+                valprev =arry[arry.indexOf(upvalprev)+1]
+                $parentTr.parent().children().eq(parentIndex)
+                    .children().eq(0).find("span").text(valprev);
+            }
+        };
+        //下移平行/顺序院校
+        function downMoveYX(obj) {
+            var parent = $(this).parents(".school_info");
+            var this_index = $(this).parents(".school_info").index() - 1;
+            var list = $(this).parents(".school_list").find(".school_info");
+            var list_count = list.length - 1;
+            var this_IsUp = $(this).hasClass("school_info_move_up"); //上移操作还是下移操作
+
+            if (this_index == 0 && this_IsUp) {
+                alert('顶部')
+                return;
+            } else if (this_index == list_count && !this_IsUp) {
+                alert('底部')
+                return;
+            }
+            var next_index = this_IsUp ? this_index + -1 : this_index + 1;
+            if (this_IsUp) {
+                var prev = parent.prev();
+                parent.insertBefore(prev);
+            } else {
+                var next = parent.next();
+                parent.insertAfter(next);
+            }
+            var $parentTr = $(obj).parent().parent().parent().parent().parent();
+            var allLen = $parentTr.length - 1;
+            var parentIndex = $parentTr.index();
+            if(parentIndex === allLen ) { //最后一个
+                return false;
+            };
+            //插入到上一位元素之后
+            $parentTr.parent().children().eq(parentIndex)
+                .insertAfter($parentTr.parent().children().eq(parentIndex+1));
+            //自身排名加一
+            var valthis =	"";
+            var upvalthis = $parentTr.parent().children().eq(parentIndex+1).children().eq(0).find("span").text() ;
+            var arry = new Array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+            if (upvalthis ==arry[arry.indexOf(upvalthis)] ){
+                valthis =arry[arry.indexOf(upvalthis)+1]
+                $parentTr.parent().children().eq(parentIndex+1)
+                    .children().eq(0).find("span").text(valthis);
+            }
+            console.log(valthis)
+            //上一位排名加一
+            var valprev = ""
+            var upvalprev=$parentTr.parent().children().eq(parentIndex+1).children().eq(0).find("span").text();
+            if (upvalprev ==arry[arry.indexOf(upvalprev)] ){
+                valprev =arry[arry.indexOf(upvalprev)-1]
+                $parentTr.parent().children().eq(parentIndex)
+                    .children().eq(0).find("span").text(valprev);
+            }
+        };
+        //下移备选志愿
+
+        function downMoveBYYX(obj) {
+            var parent = $(this).parents(".school_info_beixuan");
+            var this_index = $(obj).parents(".school_info_beixuan").index() - 1;
+            var list = $(this).parents(".school_list").find(".school_info_beixuan");
+            var list_count = list.length - 1;
+            var this_IsUp = $(obj).hasClass("school_info_move_up"); //上移操作还是下移操作
+
+            if (this_index == 0 && this_IsUp) {
+                alert('顶部')
+                return;
+            } else if (this_index == list_count && !this_IsUp) {
+                alert('底部')
+                return;
+            }
+            var next_index = this_IsUp ? this_index + -1 : this_index + 1;
+            if (this_IsUp) {
+                var prev = parent.prev();
+                parent.insertBefore(prev);
+            } else {
+                var next = parent.next();
+                parent.insertAfter(next);
+            }
+            var $parentTr = $(obj).parent().parent().parent().parent().parent();
+            var allLen = $parentTr.length - 1;
+            var parentIndex = $parentTr.index();
+            if(parentIndex === allLen ) { //最后一个
+                return false;
+            };
+            //插入到上一位元素之后
+            $parentTr.parent().children().eq(parentIndex)
+                .insertAfter($parentTr.parent().children().eq(parentIndex+1));
+            //自身排名加一
+            var valthis =	"";
+            var upvalthis = $parentTr.parent().children().eq(parentIndex+1).children().eq(0).find("span").text() ;
+            var arry = new Array('一','二','三','四','五','六','七','八','九','十','十一','十二','十二','十三','十四','十五','十六','十七','十八','十九','二十','二十一','二十二');
+            if (upvalthis ==arry[arry.indexOf(upvalthis)] ){
+                valthis =arry[arry.indexOf(upvalthis)+1]
+                $parentTr.parent().children().eq(parentIndex+1)
+                    .children().eq(0).find("span").text(valthis);
+            }
+            console.log(valthis)
+            //上一位排名加一
+            var valprev = ""
+            var upvalprev=$parentTr.parent().children().eq(parentIndex+1).children().eq(0).find("span").text();
+            if (upvalprev ==arry[arry.indexOf(upvalprev)] ){
+                valprev =arry[arry.indexOf(upvalprev)-1]
+                $parentTr.parent().children().eq(parentIndex)
+                    .children().eq(0).find("span").text(valprev);
+            }
+        };
+
+	</script>
+
+	<script type="text/javascript">
+		if ((/iphone|ipod|ipad.*os 5/gi).test(navigator.appVersion)) {
+			window.onpageshow = function(event) {
+				if (event.persisted) {
+					window.location.reload()
+				}
+			};
+		}else{
+			onload=function(){
+				var refreshedId=document.getElementById("refreshed");
+				if(refreshedId.value=="no"){
+					refreshedId.value="yes";
+				} else{
+					refreshedId.value="no";
+					location.reload();
+				}
+			}
+		}
+	</script >
+
+       <script type="text/javascript">
+		if(window.name!="hasLoad"){
+			location.reload();
+			window.name = "hasLoad";
+		}else{
+			window.name="";
+		}
+		</script>
+</body>
+
+</html>

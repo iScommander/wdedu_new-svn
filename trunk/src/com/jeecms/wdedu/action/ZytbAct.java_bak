@@ -1,0 +1,1471 @@
+package com.jeecms.wdedu.action;
+
+import com.alibaba.fastjson.JSON;
+import com.jeecms.common.page.Pagination;
+import com.jeecms.common.web.CookieUtils;
+import com.jeecms.core.entity.CmsGroup;
+import com.jeecms.core.entity.CmsSite;
+import com.jeecms.core.entity.CmsUser;
+import com.jeecms.core.web.util.CmsUtils;
+import com.jeecms.core.web.util.FrontUtils;
+import com.jeecms.wdedu.entity.*;
+import com.jeecms.wdedu.service.CommonSvc;
+import com.jeecms.wdedu.service.ZytbSvc;
+import com.utils.BrowserUtils;
+import com.utils.StringUtil;
+import com.utils.excel.ExcelExportUtil;
+import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import static com.jeecms.common.page.SimplePage.cpn;
+
+/**
+ * @author yangchao
+ * @ProjectName wdedu
+ * @Description: 志愿填报
+ * @date 2018/10/18
+ */
+@Controller
+@RequestMapping("/zytb")
+public class ZytbAct_bak {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ZytbAct_bak.class);
+    public final static String TPLDIR_ZYTB = "zytb";
+    public final static String APPLICATIONS_RESULT = "project";
+    public final static String APPLICATIONS_DETAIL_RESULT = "voluntary";
+    public static final SimpleDateFormat yyyy_MM_dd_HH_mm_ss = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    @Autowired
+    private ZytbSvc zytbSvc;
+    @Autowired
+    private CommonSvc commonSvc;
+
+    /**
+     * 查询志愿方案列表
+     *
+     * @param applicationName 方案名称
+     * @param pageNo          页码
+     * @param request         request
+     * @param model           model
+     * @return string
+     */
+    @RequiresPermissions("ZhiyuanTianbao:*")
+    @RequestMapping("/project.jspx")
+    public String getProject(String applicationName, Integer pageNo, HttpServletRequest request, ModelMap model) {
+        CmsSite site = CmsUtils.getSite(request);
+        CmsUser user = CmsUtils.getUser(request);
+        if (user == null) {
+            return FrontUtils.showLogin(request, model, site);
+        }
+        //判断用户是否有省份选择和文理科选择的权限，有的话能动态选择省份
+        Set<CmsGroup> groups = user.getGroups();
+        Iterator<CmsGroup> groupIt = groups.iterator();
+        String yesOrNo = "false";
+        while (groupIt.hasNext()) {
+            Set<String> groupss = groupIt.next().getPerms();
+            Iterator<String> groupssIt = groupss.iterator();
+            while (groupssIt.hasNext()) {
+                if ("shengfenXuanze:*".equals(groupssIt.next())) {
+                    model.addAttribute("roledId", "3");
+                    yesOrNo = "true";
+                    break;
+                }
+            }
+        }
+//        //判断角色是否是服务专家
+//        Set<CmsRole> roledIds = user.getRoles();
+//        Iterator<CmsRole> it = roledIds.iterator();
+//        String roleId = "";
+//        while (it.hasNext()) {
+//            roleId = String.valueOf( it.next().getId() );
+//            if ("3".equals( roleId )) {
+//                model.addAttribute( "roledId", "3" );
+//                break;
+//            }
+//        }
+
+
+        //方案分页列表
+        Pagination pagination = zytbSvc.queryProjects(user.getId(), applicationName, cpn(pageNo), CookieUtils.getPageSize(request));
+        //用户信息
+        Map userInfo = new HashMap();
+        userInfo.put("topRoleLevel", user.getTopRoleLevel());
+        userInfo.put("provinceId", user.getAttr().get("province_id"));
+        userInfo.put("majorTypeId", user.getAttr().get("major_type_id"));
+        /*判断是否为管理角色*/
+        boolean isSuper = false;
+        if (user.getRoleIds() != null && user.getRoleIds().length != 0) {
+            isSuper = true;
+        }
+        if (user.isSuper()) {
+            isSuper = true;
+        }
+        /**/
+        userInfo.put("isSuper", isSuper);
+        //省份列表
+        List<TBaseProvince> provinceList = commonSvc.loadAll(TBaseProvince.class);
+        Map<String, String> provinceMap = new HashMap<>();
+        for (TBaseProvince t : provinceList) {
+            provinceMap.put(String.valueOf(t.getProvinceId()), t.getProvinceName());
+        }
+        //批次排名信息
+        List batchInfo = zytbSvc.getBatchInfo(userInfo);
+        model.addAttribute("userInfo", userInfo);
+        model.addAttribute("provinceList", provinceList);
+        model.addAttribute("provinceMap", provinceMap);
+        model.addAttribute("pagination", pagination);
+        model.addAttribute("batchInfo", batchInfo);
+        model.addAttribute("majorTypeId", user.getAttr().get("major_type_id"));
+        model.addAttribute("provinceId", user.getAttr().get("province_id"));
+        FrontUtils.frontData(request, model, site);
+        return FrontUtils.getTplPath(site.getSolutionPath(), TPLDIR_ZYTB, APPLICATIONS_RESULT);
+    }
+
+    /**
+     * 查询分数和排名
+     *
+     * @return
+     */
+    @RequestMapping(value = "/batch.jspx")
+    public void getBatchInfo(HttpServletRequest request, HttpServletResponse response) {
+        CmsUser user = CmsUtils.getUser(request);
+        Map<String, String> param = new HashMap<>();
+        param.put("batchId", request.getParameter("batchId"));
+        param.put("provinceId", request.getParameter("provinceId"));
+        param.put("majorTypeId", request.getParameter("majorTypeId"));
+        param.put("gap", request.getParameter("gap"));
+        if (StringUtils.isEmpty(param.get("provinceId"))) {
+            param.put("provinceId", user.getAttr().get("province_id"));
+        }
+        if (StringUtils.isEmpty(param.get("majorTypeId"))) {
+            param.put("majorTypeId", user.getAttr().get("major_type_id"));
+        }
+        if (StringUtils.isEmpty(param.get("gap"))) {
+            param.put("gap", "0");
+        }
+        List list = zytbSvc.getScoreAndRankFromBatch(param);
+        try {
+            response.setCharacterEncoding("utf-8");
+            response.getWriter().write(JSON.toJSONString(list));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 查询一分一段
+     *
+     * @param score
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/rank.jspx")
+    public void getRankByScore(String score, String provinceId, String rank, String majorTypeId, HttpServletRequest request, HttpServletResponse response) {
+        CmsUser user = CmsUtils.getUser(request);
+        if (StringUtils.isEmpty(provinceId)) {
+            provinceId = user.getAttr().get("province_id");
+        }
+        if (StringUtils.isEmpty(majorTypeId)) {
+            majorTypeId = user.getAttr().get("major_type_id");
+        }
+        Integer year = commonSvc.singleResult("select max(year) from TCeeBatch");
+        String hql = "from TCeeScoreRank where year=" + year +
+                " and provinceId=" + provinceId + " and majorTypeId=" + majorTypeId;
+        if (StringUtils.isNotBlank(score)) {
+            hql += " and score=" + score;
+        }
+        if (StringUtils.isNotBlank(rank)) {
+            hql += " and rank >=" + rank + "order by score desc";
+        }
+        List<TCeeScoreRank> list = commonSvc.findByQueryString(hql);
+        try {
+            response.setCharacterEncoding("utf-8");
+            response.getWriter().write(JSON.toJSONString(list.size() > 0 ? list.get(0) : ""));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 查询方案详细信息
+     *
+     * @param applicationId 方案ID
+     * @param request       request
+     * @param model         model
+     * @return string
+     */
+    @RequestMapping("/voluntary.jspx")
+    public String getProjectDetail(Integer applicationId, HttpServletRequest request, ModelMap model, HttpServletResponse response) {
+        CmsSite site = CmsUtils.getSite(request);
+        CmsUser user = CmsUtils.getUser(request);
+        //查询方案信息
+        TCeeApplications applicationsInfo = commonSvc.findUniqueByProperty(TCeeApplications.class, "id", applicationId);
+        if (applicationsInfo == null) {
+            return "";
+        }
+
+        if (request.getProtocol().compareTo("HTTP/1.0") == 0) {
+            response.setHeader("Pragma", "no-cache");
+        } else if (request.getProtocol().compareTo("HTTP/1.1") == 0) {
+            response.setHeader("Cache-Control", "no-cache");
+        }
+
+        //查询方案详情信息
+        //List<TCeeApplicationsDetail> applicationsDetailList = commonSvc.findByProperty(TCeeApplicationsDetail.class, "applicationId", applicationId);
+        List<TCeeApplicationsDetail> applicationsDetailList = zytbSvc.queryProjectDetailList(applicationId);
+        List<TCeeApplicationsDetail> applicationsDetailList1 = commonSvc.findByQueryString("FROM TCeeApplicationsDetail WHERE applicationId = '" + applicationId + "' AND isFormal = 1 order by  isFormal,univOrder,majorOrder");
+        Map<String, List<Map<String, String>>> batchMaps = new HashMap<>();  //存批次、院校对应信息
+        Map<String, Map<String, List<TCeeApplicationsDetail>>> appMaps = new HashMap(); //存院校、专业对应信息
+        for (TCeeApplicationsDetail tcee : applicationsDetailList1) {
+            String batchIds = String.valueOf(tcee.getBatchId());
+            String univCode = String.valueOf(tcee.getUnivCode()); //院校code
+            String univName = String.valueOf(tcee.getUnivName()); //院校name
+            String isObey = String.valueOf(tcee.getIsObey()); //是否服从
+            String univOrder = String.valueOf(tcee.getUnivOrder());//院校顺序
+            String isFormal = String.valueOf(tcee.getIsFormal());//是否为备选专业
+            String fanYueId = String.valueOf(tcee.getId());//ID
+            Map<String, String> m = new HashMap();
+            m.put("univCode", univCode);
+            m.put("univName", univName);
+            m.put("isObey", isObey);
+            m.put("univOrder", univOrder);
+            m.put("isFormal", isFormal);
+            m.put("batchId", batchIds);
+            if (!batchMaps.containsKey(batchIds)) {
+                batchMaps.put(batchIds, new ArrayList<Map<String, String>>());
+            }
+            if (!batchMaps.get(batchIds).contains(m) || univCode == "null") {
+                batchMaps.get(batchIds).add(m);
+            }
+            if (!appMaps.containsKey(batchIds)) {
+                appMaps.put(batchIds, new HashMap<String, List<TCeeApplicationsDetail>>());
+            }
+            if (!appMaps.get(batchIds).containsKey(univOrder)) {
+                appMaps.get(batchIds).put(univOrder, new ArrayList<TCeeApplicationsDetail>());
+            }
+            appMaps.get(batchIds).get(univOrder).add(tcee);
+        }
+        Map<String, List<Map<String, String>>> batchMap = new HashMap<>();  //存批次、院校对应信息
+        Map<String, Map<String, List<TCeeApplicationsDetail>>> appMap = new HashMap(); //存院校、专业对应信息
+        for (TCeeApplicationsDetail app : applicationsDetailList) {
+            String batchId = String.valueOf(app.getBatchId()); //批次ID
+            String univCode = String.valueOf(app.getUnivCode()); //院校code
+            String univName = String.valueOf(app.getUnivName()); //院校name
+            String isObey = String.valueOf(app.getIsObey()); //是否服从
+            String univOrder = String.valueOf(app.getUnivOrder());//院校顺序
+            String isFormal = String.valueOf(app.getIsFormal());//是否为备选专业
+            String fanYueId = String.valueOf(app.getId());//ID
+            Map<String, String> m = new HashMap();
+            m.put("univCode", univCode);
+            m.put("univName", univName);
+            m.put("isObey", isObey);
+            m.put("univOrder", univOrder);
+            m.put("isFormal", isFormal);
+            m.put("batchId", batchId);
+            if (!batchMap.containsKey(batchId)) {
+                batchMap.put(batchId, new ArrayList<Map<String, String>>());
+            }
+            if (!batchMap.get(batchId).contains(m) || univCode == "null") {
+                batchMap.get(batchId).add(m);
+            }
+            if (!appMap.containsKey(batchId)) {
+                appMap.put(batchId, new HashMap<String, List<TCeeApplicationsDetail>>());
+            }
+            if (!appMap.get(batchId).containsKey(univOrder)) {
+                appMap.get(batchId).put(univOrder, new ArrayList<TCeeApplicationsDetail>());
+            }
+            appMap.get(batchId).get(univOrder).add(app);
+        }
+        //省份列表
+        List<TBaseProvince> provinceList = commonSvc.loadAll(TBaseProvince.class);
+        Map<String, String> provinceMap = new HashMap<>();
+        for (TBaseProvince t : provinceList) {
+            provinceMap.put(String.valueOf(t.getProvinceId()), t.getProvinceName());
+        }
+        //查询批次信息
+        int year = applicationsInfo.getYear();
+        List<TCeeBatch> batchList = zytbSvc.getBatchList(Integer.valueOf(year), Integer.valueOf(applicationsInfo.getProvinceId()), Integer.valueOf(applicationsInfo.getMajorTypeId()));
+        //查询已报志愿数量
+        List univNumList = zytbSvc.getUnivNum(applicationsInfo.getId());
+        Map univNumMap = new HashMap();
+        for (Object obj : univNumList) {
+            Object[] arr = (Object[]) obj;
+            univNumMap.put(String.valueOf(arr[0]), String.valueOf(arr[1]));
+        }
+
+
+        model.addAttribute("applicationsInfo", applicationsInfo);
+        model.addAttribute("provinceMap", provinceMap);
+        model.addAttribute("univNumMap", univNumMap);
+        model.addAttribute("batchList", batchList);
+        model.addAttribute("batchMap", batchMap);
+        model.addAttribute("appMap", appMap);
+        model.addAttribute("batchMaps", batchMaps);
+        model.addAttribute("appMaps", appMaps);
+        FrontUtils.frontData(request, model, site);
+        return FrontUtils.getTplPath(site.getSolutionPath(), TPLDIR_ZYTB, APPLICATIONS_DETAIL_RESULT);
+    }
+
+    /**
+     * 删除方案
+     *
+     * @param applicationId 方案ID
+     * @param request       request
+     * @param model         model
+     * @return string
+     */
+    @RequiresPermissions("shanchu:*")
+    @RequestMapping("/removeProject.jspx")
+    public void removeProject(Integer applicationId, HttpServletRequest request, ModelMap model) {
+        CmsSite site = CmsUtils.getSite(request);
+        commonSvc.deleteEntityById(TCeeApplications.class, applicationId);
+    }
+
+    /**
+     * 保存志愿方案详情
+     *
+     * @param apps
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping("/updateProjectDetail.jspx")
+    public String saveProjectDetail(String apps, HttpServletRequest request, ModelMap model, HttpServletResponse response) {
+        CmsSite site = CmsUtils.getSite(request);
+        //bean = zytbSvc.saveProjectDetail(bean);
+        //zytbSvc.update(apps);
+        List<TCeeApplicationsDetail> beans = JSON.parseArray(apps, TCeeApplicationsDetail.class);
+        for (TCeeApplicationsDetail bean :
+                beans) {
+            String sql = "update t_cee_applications_detail set univ_order=" + bean.getUnivOrder() +
+                    ", major_order=" + bean.getMajorOrder() +
+                    ", is_obey=" + bean.getIsObey() +
+                    "  where id=" + bean.getId();
+            commonSvc.updateBySqlString(sql);
+        }
+        response.setCharacterEncoding("utf-8");
+        try {
+            response.getWriter().write("success");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+
+    @RequestMapping("/removeUniv.jspx")
+    public void deleteUniv(String applicationId, String univCode) {
+        if (StringUtils.isNotBlank(applicationId) && StringUtils.isNotBlank(univCode) && !"null".equals(univCode)) {
+
+            String query = "select *  from t_cee_applications_detail where application_id=" + applicationId +
+                    " and univ_code=" + univCode;
+            List<TCeeApplicationsDetail> tceeList = commonSvc.findListbySql(query, TCeeApplicationsDetail.class);
+//            for (TCeeApplicationsDetail tCeeApplicationsDetail : tceeList) {
+//
+//            }
+            int apptionId = tceeList.get(0).getApplicationId();//方案ID
+            int univOrder = tceeList.get(0).getUnivOrder();//顺序
+            int batchId = tceeList.get(0).getBatchId();//批次
+            int proId = tceeList.get(0).getProvinceId();//省份
+            int majorTypeId = tceeList.get(0).getMajorTypeId();//文理科
+            int isFomal = tceeList.get(0).getIsFormal();//是否备选
+
+            String sql = "delete from t_cee_applications_detail where application_id=" + applicationId +
+                    " and univ_code=" + univCode;
+            commonSvc.updateBySqlString(sql);//删除
+            TCeeApplicationsDetail tCeeApplicationsDetail = new TCeeApplicationsDetail();
+            tCeeApplicationsDetail.setIsFormal(isFomal);
+            tCeeApplicationsDetail.setBatchId(batchId);
+            tCeeApplicationsDetail.setMajorTypeId(majorTypeId);
+            tCeeApplicationsDetail.setProvinceId(proId);
+            tCeeApplicationsDetail.setUnivOrder(univOrder);
+            tCeeApplicationsDetail.setApplicationId(apptionId);
+            commonSvc.save(tCeeApplicationsDetail);
+        }
+    }
+
+    /**
+     * 保存志愿方案
+     *
+     * @param bean
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping("/saveProject.jspx")
+    public String saveProject(TCeeApplications bean, HttpServletRequest request, ModelMap model) {
+        CmsSite site = CmsUtils.getSite(request);
+        CmsUser user = CmsUtils.getUser(request);
+        if (user == null) {
+            return FrontUtils.showLogin(request, model, site);
+        }
+        Map<String, String> userAttr = user.getAttr(); //jc_user_attr 属性表信息
+        if (userAttr != null) {
+            //判断角色 如果不是老师 则从登陆信息获取
+            if (user.getTopRoleLevel() < 10) {
+                bean.setProvinceId(Integer.parseInt(userAttr.get("province_id"))); //省份ID
+                bean.setMajorTypeId(Integer.parseInt(userAttr.get("major_type_id"))); //文理科
+//                bean.setMajorTypeId(Integer.parseInt(userAttr.get("major_type_id"))); //文理科
+            }
+            //当前年份
+//            bean.setYear(Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date())));
+            bean.setYear(2018);
+        }
+        bean.setUserId(user.getId());
+        bean.setUserName(user.getUsername());
+        Timestamp now = new Timestamp(new Date().getTime());
+        bean.setCreateTime(now);
+        bean.setUpdateTime(now);
+        bean.setApplicationType(2); //手动方案
+        //zytbSvc.saveProject(bean);
+        //设置默认方案名称
+        if (!StringUtils.isNotBlank(bean.getApplicationName())) {
+            bean.setApplicationName("我的方案[" + bean.getScore() + "]");
+        }
+        int id = (int) commonSvc.save(bean);
+        List<TCeeApplications> detail = commonSvc.findByQueryString("FROM TCeeApplications WHERE id ='" + id + "'");
+        for (TCeeApplications tCeeApplications : detail) {
+            int province_id = tCeeApplications.getProvinceId();
+            int major_type_id = tCeeApplications.getMajorTypeId();
+            int year = tCeeApplications.getYear();
+            List<TCeeBatch> tCeeBatchList = commonSvc.findByQueryString("FROM TCeeBatch WHERE provinceId = '" + province_id + "' AND majorTypeId = '" + major_type_id + "' AND year = '" + year + "' AND isShow=1 order by order");
+            for (TCeeBatch tCeeBatch : tCeeBatchList) {
+                String batchName = tCeeBatch.getBatchName();
+                int batchId = tCeeBatch.getBatchId();
+                int univNum = tCeeBatch.getUnivNum();
+                int extraNum = tCeeBatch.getExtraNum();
+                int majorsNumber = univNum + extraNum;
+                for (int i = 1; i <= majorsNumber; i++) {
+                    TCeeApplicationsDetail tCeeApplicationsDetail = new TCeeApplicationsDetail();
+                    tCeeApplicationsDetail.setUnivOrder(i);
+                    tCeeApplicationsDetail.setApplicationId(id);
+                    tCeeApplicationsDetail.setProvinceId(province_id);
+                    tCeeApplicationsDetail.setMajorTypeId(major_type_id);
+                    tCeeApplicationsDetail.setYear(year);
+                    tCeeApplicationsDetail.setBatchId(batchId);
+                    tCeeApplicationsDetail.setIsFormal(0);
+                    commonSvc.save(tCeeApplicationsDetail);
+                    if (i >= univNum) {
+                        for (int j = 0; j < extraNum; j++) {
+                            i++;
+                            TCeeApplicationsDetail tcee = new TCeeApplicationsDetail();
+                            tcee.setUnivOrder(j);
+                            tcee.setApplicationId(id);
+                            tcee.setProvinceId(province_id);
+                            tcee.setMajorTypeId(major_type_id);
+                            tcee.setYear(year);
+                            tcee.setBatchId(batchId);
+                            tcee.setIsFormal(1);
+                            commonSvc.save(tcee);
+                        }
+                    }
+                }
+            }
+        }
+        return "redirect:project.jspx";
+    }
+
+
+    /**
+     * 志愿填报表
+     *
+     * @param univ
+     * @param major
+     * @param city
+     * @param univProvince
+     * @param univType
+     * @param is985
+     * @param is211
+     * @param isDefence
+     * @param isExcel
+     * @param isIndepen
+     * @param isFirstUniv
+     * @param isFirstMajor
+     * @param planId
+     * @param batchId
+     * @param pageNo
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/beginFillIn.jspx")
+    public String beginFillIn(Integer tabs, String univ, String major, String city, Integer[] univProvince, String univType, Integer is985, Integer is211,
+                              Integer isDefence, Integer isExcel, Integer isIndepen, Integer isFirstUniv, Integer isFirstMajor,
+                              Integer planId, Integer batchId, String type, Integer sc, Integer pageNo, HttpServletRequest request,
+                              HttpServletResponse response, ModelMap model, String fenlei, String majorName) {
+        CmsSite site = CmsUtils.getSite(request);
+        FrontUtils.frontData(request, model, site);
+
+        Map requestMap = new HashMap();
+//        requestMap.put("univOrMajor", univOrMajor);
+        requestMap.put("univ", univ);
+        requestMap.put("major", major);
+        requestMap.put("city", city);
+        requestMap.put("univProvince", univProvince);
+        requestMap.put("univType", univType);
+        requestMap.put("is985", is985);
+        requestMap.put("is211", is211);
+        requestMap.put("isDefence", isDefence);
+        requestMap.put("isExcel", isExcel);
+        requestMap.put("isIndepen", isIndepen);
+        requestMap.put("isFirstUniv", isFirstUniv);
+        requestMap.put("isFirstMajor", isFirstMajor);
+        requestMap.put("fenlei", fenlei);
+        requestMap.put("batchId", batchId);
+        List<TBaseProvince> provinceList = commonSvc.loadAll(TBaseProvince.class);
+        model.addAttribute("provinceList", provinceList);
+
+        String proName = "";
+        if (StringUtil.isNotEmpty(univProvince)) {
+
+            //回填数据
+            for (Integer proId : univProvince) {
+                for (TBaseProvince tBaseProvince : provinceList) {
+                    if (proId.equals(tBaseProvince.getProvinceId())) {
+                        proName += tBaseProvince.getProvinceName() + ",";
+                        break;
+                    }
+                }
+            }
+        }
+        model.addAttribute("proName", proName);
+
+        //根据方案id获取方案信息
+        TCeeApplications tCeeApplications = commonSvc.get(TCeeApplications.class, planId);
+        //根据方案id及批次id查询已报学校
+        List univDetailList = commonSvc.singleResultList("SELECT DISTINCT univId FROM TCeeApplicationsDetail WHERE  applicationId=" + planId + " and batchId=" + batchId);
+
+        //username
+        String username = tCeeApplications.getUserName();
+        model.addAttribute("userName", username);
+        //省份id
+        Integer provinceId = tCeeApplications.getProvinceId();
+        model.addAttribute("provinceId", provinceId);
+        //文理科
+        Integer majorType = tCeeApplications.getMajorTypeId();
+        String subjects = tCeeApplications.getSubjects();
+        String subjectsLevel = tCeeApplications.getSubjectsLevel();
+        model.addAttribute("majorType", majorType);
+        model.addAttribute("subjects", subjects);
+        model.addAttribute("subjectsLevel", subjectsLevel);
+        //年
+        Integer year = commonSvc.singleResult("select max(year) from TCeeEnrollUnivList where provinceId=" + provinceId + "and majorTypeId=" + majorType + " and batchId=" + batchId);
+        if (year == null) {
+            year = Calendar.getInstance().get(Calendar.YEAR);
+        }
+        //成绩
+        Integer score = tCeeApplications.getScore();
+        model.addAttribute("score", score);//分数
+        //排名
+        Integer rank = tCeeApplications.getRank();
+        model.addAttribute("rank", rank);//排名
+        //选测等级
+        Integer level = 11;
+        if (tCeeApplications.getSubjectsLevel() != null) {
+            level = Integer.parseInt(tCeeApplications.getSubjectsLevel().replace(",", ""));
+        }
+        model.addAttribute("level", level);
+        // 学校类型
+        List<TDataUniversityType> universityType = commonSvc.loadAll(TDataUniversityType.class);
+        model.addAttribute("universityType", universityType);
+        //查询专业信息
+        List<TDataMajor> majorList = commonSvc.findByProperty(TDataMajor.class, "parentMajorId", "1");
+        model.addAttribute("majorList", majorList);
+        //查询批次信息
+        List<TCeeBatch> batchList = zytbSvc.getBatchList(year, provinceId, majorType);
+        model.addAttribute("batchList", batchList);
+        List<TCeeBatch> batchNum = commonSvc.findByQueryString("FROM TCeeBatch where year =" + year + " and provinceId =" + provinceId + " and majorTypeId =" + majorType + " and batchId=" + batchId);
+        //查询热门专业
+
+//        changePlanNum
+
+        //根据排名过滤 查询符合的院校
+        if (StringUtils.isNotBlank(type)) {
+            Integer lowScore = 0;
+            Integer highScore = 0;
+            switch (type) {
+                case "1": //稳
+                    lowScore = score - sc;
+                    highScore = score + sc;
+                    break;
+                case "2": //冲
+                    lowScore = score;
+                    highScore = score + sc;
+                    break;
+                case "3": //保
+                    lowScore = score - sc;
+                    highScore = score;
+                    break;
+            }
+            String hql = "from TCeeScoreRank where " + "(score = " + lowScore + " or score=" + highScore + ") and year = "
+                    + year + " and provinceId=" + provinceId + " and majorTypeId=" + majorType;
+            List<TCeeScoreRank> rankList = commonSvc.findByQueryString(hql);
+
+            hql = "select distinct univId from TCeeEnrollUnivList where province_id=" + provinceId + " and year = " + year + " and majorTypeId="
+                    + majorType + " and rankScoreLow1 BETWEEN " + rankList.get(0).getRank() + " and " + rankList.get(1).getRank();
+            List univIds = commonSvc.findByQueryString(hql);
+            requestMap.put("univIdFromScore", univIds);
+            requestMap.put("type", type);
+            requestMap.put("sc", sc);
+        }
+
+        //查询已选专业的院校
+        if (StringUtils.isNotBlank(majorName)) {
+            String sql = "select distinct univId from TCeeEnrollMajorList where dataType=1";
+            String[] majorNames = majorName.split(",");
+            String condition = "";
+            for (int i = 0; i < majorNames.length; i++) {
+                if (i == 0) {
+                    condition += " and (";
+                } else {
+                    condition += " or";
+                }
+                condition += " majorName like '%" + majorNames[i] + "%'";
+                if (i == majorNames.length - 1) {
+                    condition += " )";
+                }
+            }
+            List univIds = commonSvc.findByQueryString(sql + condition);
+            requestMap.put("univIdFromMajor", univIds);
+        }
+
+        //查询已报志愿数量
+        List univNumList = zytbSvc.getUnivNum(tCeeApplications.getId());
+        Map univNumMap = new HashMap();
+        for (Object obj : univNumList) {
+            Object[] arr = (Object[]) obj;
+            univNumMap.put(String.valueOf(arr[0]), String.valueOf(arr[1]));
+        }
+
+        //查询方案详细
+        List<TCeeApplicationsDetail> applicationsDetailList = zytbSvc.queryProjectDetailList(tCeeApplications.getId());
+        Map<String, List<Map<String, String>>> batchMap = new HashMap<>();  //存批次、院校对应信息
+        Map<String, Map<String, List<TCeeApplicationsDetail>>> appMap = new HashMap(); //存院校、专业对应信息
+        for (TCeeApplicationsDetail app : applicationsDetailList) {
+            String bId = String.valueOf(app.getBatchId()); //批次ID
+            String univCode = String.valueOf(app.getUnivCode()); //院校code
+            String univName = String.valueOf(app.getUnivName()); //院校name
+            String isObey = String.valueOf(app.getIsObey()); //是否服从
+            String univOrder = String.valueOf(app.getUnivOrder());//院校顺序
+            String isFormal = String.valueOf(app.getIsFormal());//是否为备选专业
+            Map<String, String> m = new HashMap();
+            m.put("univCode", univCode);
+            m.put("univName", univName);
+            m.put("isObey", isObey);
+            m.put("univOrder", univOrder);
+            m.put("isFormal", isFormal);
+            if (!batchMap.containsKey(bId)) {
+                batchMap.put(bId, new ArrayList<Map<String, String>>());
+            }
+            if (!batchMap.get(bId).contains(m)) {
+                batchMap.get(bId).add(m);
+            }
+            if (!appMap.containsKey(bId)) {
+                appMap.put(bId, new HashMap<String, List<TCeeApplicationsDetail>>());
+            }
+            if (!appMap.get(bId).containsKey(univCode)) {
+                appMap.get(bId).put(univCode, new ArrayList<TCeeApplicationsDetail>());
+            }
+            appMap.get(bId).get(univCode).add(app);
+        }
+        List<TCeeApplicationsDetail> applicationsDetailList1 = commonSvc.findByQueryString("FROM TCeeApplicationsDetail WHERE applicationId = '" + tCeeApplications.getId() + "' AND isFormal = 1 order by  isFormal,univOrder,majorOrder");
+        Map<String, List<Map<String, String>>> batchMaps = new HashMap<>();  //存批次、院校对应信息
+        Map<String, Map<String, List<TCeeApplicationsDetail>>> appMaps = new HashMap(); //存院校、专业对应信息
+        for (TCeeApplicationsDetail tcee : applicationsDetailList1) {
+            String batchIds = String.valueOf(tcee.getBatchId());
+            String univCode = String.valueOf(tcee.getUnivCode()); //院校code
+            String univName = String.valueOf(tcee.getUnivName()); //院校name
+            String isObey = String.valueOf(tcee.getIsObey()); //是否服从
+            String univOrder = String.valueOf(tcee.getUnivOrder());//院校顺序
+            String isFormal = String.valueOf(tcee.getIsFormal());//是否为备选专业
+            String fanYueId = String.valueOf(tcee.getId());//ID
+            Map<String, String> m = new HashMap();
+            m.put("univCode", univCode);
+            m.put("univName", univName);
+            m.put("isObey", isObey);
+            m.put("univOrder", univOrder);
+            m.put("isFormal", isFormal);
+            m.put("batchId", batchIds);
+            if (!batchMaps.containsKey(batchIds)) {
+                batchMaps.put(batchIds, new ArrayList<Map<String, String>>());
+            }
+            if (!batchMaps.get(batchIds).contains(m) || univCode == "null") {
+                batchMaps.get(batchIds).add(m);
+            }
+            if (!appMaps.containsKey(batchIds)) {
+                appMaps.put(batchIds, new HashMap<String, List<TCeeApplicationsDetail>>());
+            }
+            if (!appMaps.get(batchIds).containsKey(univOrder)) {
+                appMaps.get(batchIds).put(univOrder, new ArrayList<TCeeApplicationsDetail>());
+            }
+            appMaps.get(batchIds).get(univOrder).add(tcee);
+        }
+
+        //志愿筛选
+        Pagination pagination = null;
+
+        if (tabs == null || tabs == 1) {
+            //全部院校信息
+            tabs = 1;
+            pagination = zytbSvc.getUnivInfo(requestMap, year, provinceId, majorType, batchId, cpn(pageNo), CookieUtils.getPageSize(request));
+        } else if (tabs == 2) {
+//            TCeeApplicationsDetail
+            //已选志愿
+            List univList = commonSvc.singleResultList("SELECT DISTINCT univId FROM TCeeApplicationsDetail WHERE  applicationId=" + planId + " and batchId=" + batchId + " and univId IS NOT NULL");
+            pagination = zytbSvc.getUnivList(requestMap, univList, cpn(pageNo), CookieUtils.getPageSize(request), "Y", year, provinceId, majorType, batchId);
+        } else if (tabs == 3) {
+            //未选志愿
+            List univList = commonSvc.singleResultList("SELECT DISTINCT univId FROM TCeeApplicationsDetail WHERE  applicationId=" + planId + " and batchId=" + batchId + " and univId IS NOT NULL");
+            pagination = zytbSvc.getUnivList(requestMap, univList, cpn(pageNo), CookieUtils.getPageSize(request), "N", year, provinceId, majorType, batchId);
+        } else if (tabs == 4) {
+            //有资格
+            pagination = zytbSvc.getLevelUnivList(requestMap, "Y", level, year, provinceId, majorType, batchId, cpn(pageNo), CookieUtils.getPageSize(request));
+        } else if (tabs == 5) {
+            //无资格
+            pagination = zytbSvc.getLevelUnivList(requestMap, "N", level, year, provinceId, majorType, batchId, cpn(pageNo), CookieUtils.getPageSize(request));
+        }
+
+//        model.addAttribute("num",batchNum.get(0).getUnivNum());
+//        model.addAttribute("univOrMajor", univOrMajor);
+        model.addAttribute("univ", univ);
+        model.addAttribute("major", major);
+        model.addAttribute("pagination", pagination);
+        model.addAttribute("univDetailList", univDetailList);
+        model.addAttribute("tabs", tabs);
+        model.addAttribute("univNumMap", univNumMap);
+        model.addAttribute("batchMap", batchMap);
+        model.addAttribute("appMap", appMap);
+        model.addAttribute("batchMaps", batchMaps);
+        model.addAttribute("appMaps", appMaps);
+        model.addAttribute("batchId", batchId);//批次id
+        model.addAttribute("planId", planId);//方案id
+
+
+        //去除map中为空参数
+        Iterator<Map.Entry<String, String>> it = requestMap.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<String, String> entry = it.next();
+            String value = String.valueOf(entry.getValue());
+            String key = entry.getKey();
+            if (StringUtils.isEmpty(value) || value == "null") {
+                it.remove();
+            }
+        }
+
+        model.addAttribute("requestMap", requestMap);
+
+        return FrontUtils.getTplPath(site.getSolutionPath(), TPLDIR_ZYTB, "beginFillIn");
+
+    }
+
+    /**
+     * 查询majorId 下所有层级
+     *
+     * @param majorId
+     * @param response
+     */
+    @RequestMapping("/major.jspx")
+    public void getMajor(String majorId, HttpServletResponse response) {
+        List list = new ArrayList();
+        List<Map> majorList = zytbSvc.getMajorList(majorId);
+        for (Map major : majorList) {
+            String mjId = major.get("majorId").toString();
+            String mjName = major.get("majorName").toString();
+            Map map = new HashMap();
+            map.put("key", mjId);
+            map.put("title", mjName);
+            map.put("list", zytbSvc.getMajorList(mjId));
+            list.add(map);
+        }
+        response.setCharacterEncoding("utf-8");
+        try {
+            response.getWriter().write(JSON.toJSONString(list));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 判断是否还可以报志愿
+     *
+     * @param planId
+     * @param batchId
+     * @param univListId
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/isReportUniv.jspx")
+    public void isReportUniv(Integer planId, Integer batchId, Integer isFormal, Integer univListId, Integer replaceCode, HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+        CmsSite site = CmsUtils.getSite(request);
+        FrontUtils.frontData(request, model, site);
+
+        //根据方案id获取方案信息
+        TCeeApplications tCeeApplications = commonSvc.get(TCeeApplications.class, planId);
+        //省份id
+        Integer provinceId = tCeeApplications.getProvinceId();
+        //文理科
+        Integer majorType = tCeeApplications.getMajorTypeId();
+
+        Integer year = commonSvc.singleResult("select max(year) from TCeeEnrollMajorList where provinceId=" + provinceId + "and majorTypeId=" + majorType + " and batchId=" + batchId);
+
+        //查询当前批次信息可报院校数
+        List<TCeeBatch> batchList = zytbSvc.getBatchList(year, provinceId, majorType);
+        Integer univNum = 0;
+        Integer majorNum = 0;
+        for (TCeeBatch tCeeBatch : batchList) {
+            if (batchId.equals(tCeeBatch.getBatchId())) {
+                univNum = tCeeBatch.getUnivNum();
+                majorNum = tCeeBatch.getMajorNum();
+                break;
+            }
+        }
+        //已报院校数
+        List ybUnivNum = commonSvc.singleResultList("SELECT DISTINCT univCode FROM TCeeApplicationsDetail WHERE  applicationId="
+                + planId + " and batchId=" + batchId);
+
+        //判断是否还可以继续填报
+        Map<String, Object> returnMap = new HashMap<>();
+        if (ybUnivNum.size() < univNum || replaceCode != null) {
+            returnMap.put("success", true);
+            returnMap.put("msg", "remote.jspx?planId=" + planId + "&batchId=" + batchId + "&univListId=" + univListId + "&majorNum=" + majorNum + "&replaceCode=" + replaceCode + "&isFormal=" + isFormal);
+            String sql = "SELECT a.univ_name univName,a.year,b.batch_name batchName,c.province_name provinceName " +
+                    "FROM t_cee_enroll_univ_list a,t_cee_batch b,t_base_province c " +
+                    "where a.id = " + univListId + " and a.year=b.year and a.province_id=b.province_id and a.major_type_id=b.major_type_id " +
+                    "and a.batch_id=b.batch_id and a.province_id=c.province_id";
+            Map m = commonSvc.findOneForJdbc(sql);
+            returnMap.put("univInfo", m);
+            returnResp(response, returnMap);
+            return;
+        } else {
+            returnMap.put("success", false);
+            returnMap.put("msg", "该批次志愿已至最大可报志愿数");
+            returnResp(response, returnMap);
+            return;
+        }
+    }
+
+    @RequestMapping(value = "/isReportUpd.jspx")
+    public void isReportUpd(Integer planId, Integer batchId, Integer univListId, Integer replaceCode, HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+        CmsSite site = CmsUtils.getSite(request);
+        FrontUtils.frontData(request, model, site);
+
+        //根据方案id获取方案信息
+        TCeeApplications tCeeApplications = commonSvc.get(TCeeApplications.class, planId);
+        //省份id
+        Integer provinceId = tCeeApplications.getProvinceId();
+        //文理科
+        Integer majorType = tCeeApplications.getMajorTypeId();
+
+        Integer year = commonSvc.singleResult("select max(year) from TCeeEnrollMajorList where provinceId=" + provinceId + "and majorTypeId=" + majorType + " and batchId=" + batchId);
+
+        //查询当前批次信息可报院校数
+        List<TCeeBatch> batchList = zytbSvc.getBatchList(year, provinceId, majorType);
+        Integer univNum = 0;
+        Integer majorNum = 0;
+        for (TCeeBatch tCeeBatch : batchList) {
+            if (batchId.equals(tCeeBatch.getBatchId())) {
+                univNum = tCeeBatch.getUnivNum();
+                majorNum = tCeeBatch.getMajorNum();
+                break;
+            }
+        }
+        //已报院校数
+        List ybUnivNum = commonSvc.singleResultList("SELECT DISTINCT univCode FROM TCeeApplicationsDetail WHERE  applicationId="
+                + planId + " and batchId=" + batchId);
+
+        //判断是否还可以继续填报
+        Map<String, Object> returnMap = new HashMap<>();
+        if (ybUnivNum.size() <= univNum || replaceCode != null) {
+            returnMap.put("success", true);
+            returnMap.put("msg", "remote.jspx?planId=" + planId + "&batchId=" + batchId + "&univListId=" + univListId + "&majorNum=" + majorNum + "&univCodes=" + replaceCode);
+            String sql = "SELECT a.univ_name univName,a.year,b.batch_name batchName,c.province_name provinceName " +
+                    "FROM t_cee_enroll_univ_list a,t_cee_batch b,t_base_province c " +
+                    "where a.id = " + univListId + " and a.year=b.year and a.province_id=b.province_id and a.major_type_id=b.major_type_id " +
+                    "and a.batch_id=b.batch_id and a.province_id=c.province_id";
+            Map m = commonSvc.findOneForJdbc(sql);
+            returnMap.put("univInfo", m);
+            returnResp(response, returnMap);
+            return;
+        } else {
+            returnMap.put("success", false);
+            returnMap.put("msg", "该批次志愿已至最大可报志愿数");
+            returnResp(response, returnMap);
+            return;
+        }
+    }
+
+    //浙江院校 可选报数量校验
+    @RequestMapping(value = "/isReportUMSP.jspx")
+    public void isReportUMSP(Integer planId, Integer batchId, Integer isFormal, Integer univListId, Integer replaceCode, HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+        CmsSite site = CmsUtils.getSite(request);
+        FrontUtils.frontData(request, model, site);
+
+        //根据方案id获取方案信息
+        TCeeApplications tCeeApplications = commonSvc.get(TCeeApplications.class, planId);
+        //省份id
+        Integer provinceId = tCeeApplications.getProvinceId();
+        //文理科
+        Integer majorType = tCeeApplications.getMajorTypeId();
+
+        Integer year = commonSvc.singleResult("select max(year) from TCeeEnrollMajorList where provinceId=" + provinceId + "and majorTypeId=" + majorType + " and batchId=" + batchId);
+
+        //查询当前批次信息可报院校数
+        List<TCeeBatch> batchList = zytbSvc.getBatchList(year, provinceId, majorType);
+
+        Integer univNum = 0;
+        Integer majorNum = 0;
+        for (TCeeBatch tCeeBatch : batchList) {
+            if (batchId.equals(tCeeBatch.getBatchId())) {
+                univNum = tCeeBatch.getUnivNum();
+                majorNum = tCeeBatch.getMajorNum();
+                break;
+            }
+        }
+
+        List ybNum = commonSvc.singleResultList("SELECT DISTINCT  univCode,majorId,majorCode,majorName FROM TCeeApplicationsDetail WHERE  applicationId="
+                + planId + " and batchId=" + batchId);
+
+        //判断是否还可以继续填报
+        Map<String, Object> returnMap = new HashMap<>();
+//        int a = ybNum.size();
+//        && replaceCode != null
+        int ybNumSize = ybNum.size();
+        if (ybNum.size() < majorNum) {
+            returnMap.put("success", true);
+            returnMap.put("msg", "remote.jspx?planId=" + planId + "&batchId=" + batchId + "&univListId=" + univListId + "&majorNum=" + majorNum + "&replaceCode=" + replaceCode + "&isFormal=" + isFormal + "&ybNumSize=" + ybNumSize);
+            String sql = "SELECT a.univ_name univName,a.year,b.batch_name batchName,c.province_name provinceName " +
+                    "FROM t_cee_enroll_univ_list a,t_cee_batch b,t_base_province c " +
+                    "where a.id = " + univListId + " and a.year=b.year and a.province_id=b.province_id and a.major_type_id=b.major_type_id " +
+                    "and a.batch_id=b.batch_id and a.province_id=c.province_id";
+            Map m = commonSvc.findOneForJdbc(sql);
+            returnMap.put("univInfo", m);
+            returnResp(response, returnMap);
+            return;
+        } else {
+            returnMap.put("success", false);
+            returnMap.put("msg", "该批次志愿已至最大可报志愿数!请返回志愿方案中心删除。");
+            returnResp(response, returnMap);
+            return;
+        }
+    }
+
+
+    @RequestMapping(value = "/getbatch.jspx")
+    public void batch(Integer planId, Integer batchId, Integer univListId, HttpServletRequest request, HttpServletResponse response, ModelMap model, Integer order) {
+        CmsSite site = CmsUtils.getSite(request);
+        FrontUtils.frontData(request, model, site);
+
+        //根据方案id获取方案信息
+        TCeeApplications tCeeApplications = commonSvc.get(TCeeApplications.class, planId);
+        //省份id
+        Integer provinceId = tCeeApplications.getProvinceId();
+        //文理科
+        Integer majorType = tCeeApplications.getMajorTypeId();
+
+        Integer year = commonSvc.singleResult("select max(year) from TCeeEnrollMajorList where provinceId=" + provinceId + "and majorTypeId=" + majorType + " and batchId=" + batchId);
+
+        //查询当前批次信息可报院校数
+        List<TCeeBatch> batchList = zytbSvc.getBatchList(year, provinceId, majorType);
+        Integer univNum = 0;
+        Integer majorNum = 0;
+        for (TCeeBatch tCeeBatch : batchList) {
+            if (batchId.equals(tCeeBatch.getBatchId())) {
+                univNum = tCeeBatch.getUnivNum();
+                majorNum = tCeeBatch.getMajorNum();
+                break;
+            }
+        }
+        //已报院校数
+        List ybUnivNum = commonSvc.singleResultList("SELECT DISTINCT univCode FROM TCeeApplicationsDetail WHERE  applicationId="
+                + planId + " and batchId=" + batchId);
+
+        //判断是否还可以继续填报
+        Map<String, Object> returnMap = new HashMap<>();
+        if (ybUnivNum.size() < univNum) {
+            returnMap.put("success", true);
+            returnMap.put("msg", "getbatchnext.jspx?planId=" + planId + "&batchId=" + batchId + "&univListId=" + univListId + "&majorNum=" + majorNum + "&order=" + order);
+            String sql = "SELECT a.univ_name univName,a.year,b.batch_name batchName,c.province_name provinceName " +
+                    "FROM t_cee_enroll_univ_list a,t_cee_batch b,t_base_province c " +
+                    "where a.id = " + univListId + " and a.year=b.year and a.province_id=b.province_id and a.major_type_id=b.major_type_id " +
+                    "and a.batch_id=b.batch_id and a.province_id=c.province_id";
+            Map m = commonSvc.findOneForJdbc(sql);
+            returnMap.put("univInfo", m);
+            returnResp(response, returnMap);
+            return;
+        } else {
+            returnMap.put("success", false);
+            returnMap.put("msg", "该批次志愿已至最大可报志愿数");
+            returnResp(response, returnMap);
+            return;
+        }
+    }
+
+    /**
+     * 专业选报
+     *
+     * @param planId
+     * @param batchId
+     * @param univListId
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/remote.jspx")
+    public String report(Integer planId, Integer batchId, Integer univCodes, Integer univListId, Integer isFormal, Integer replaceCode, Integer majorNum, Integer ybNumSize, HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+        CmsSite site = CmsUtils.getSite(request);
+        FrontUtils.frontData(request, model, site);
+
+        //根据方案id获取方案信息
+        TCeeApplications tCeeApplications = commonSvc.get(TCeeApplications.class, planId);
+        //省份id
+        Integer provinceId = tCeeApplications.getProvinceId();
+        //文理科
+        Integer majorType = tCeeApplications.getMajorTypeId();
+
+        Integer year = commonSvc.singleResult("select max(year) from TCeeEnrollMajorList where provinceId=" + provinceId + "and majorTypeId=" + majorType + " and batchId=" + batchId);
+
+        //根据univListId查询t_cee_enroll_univ_list对应的院校信息
+        TCeeEnrollUnivList univDetail = commonSvc.get(TCeeEnrollUnivList.class, univListId);
+        //根据方案id和批次id及学校id查询专业id
+        List<TCeeApplicationsDetail> mojrDetailList = commonSvc.singleResultList("FROM TCeeApplicationsDetail WHERE  applicationId="
+                + planId + " and batchId=" + batchId + " and univId=" + univDetail.getUnivId());
+        List mojrList = new ArrayList();
+        for (int i = 0; i < mojrDetailList.size(); i++) {
+            mojrList.add(mojrDetailList.get(i).getMajorNumId());
+        }
+
+        //计划专业数据
+        List<TCeeEnrollMajorList> planList = zytbSvc.getPlanList(univListId);
+        //前一年历史专业数据
+        List yearsAgo1 = zytbSvc.getYearsAgo(univListId, year);
+        //前两年历史专业数据
+        List yearsAgo2 = zytbSvc.getYearsAgo(univListId, year - 1);
+        //前三年历史专业数据
+        List yearsAgo3 = zytbSvc.getYearsAgo(univListId, year - 2);
+
+        //查询院校总计划数据
+        String sql = "select * from t_cee_enroll_major_list where 1=1 and plan_or_history=1 and data_type=0 and univ_list_id=" + univListId;
+        Map m = commonSvc.findOneForJdbc(sql);
+
+        model.addAttribute("year", year);
+        model.addAttribute("planId", planId);
+        model.addAttribute("batchId", batchId);
+        model.addAttribute("replaceCode", replaceCode);
+        model.addAttribute("univCodes", univCodes);
+        model.addAttribute("isFormal", isFormal);
+        model.addAttribute("planList", planList);
+        model.addAttribute("yearsAgo1", yearsAgo1);
+        model.addAttribute("yearsAgo2", yearsAgo2);
+        model.addAttribute("yearsAgo3", yearsAgo3);
+        model.addAttribute("mojrList", mojrList);
+        model.addAttribute("mojrDetailList", mojrDetailList);
+        model.addAttribute("univPlan", m);
+        model.addAttribute("majorNum", majorNum);
+        model.addAttribute("ybNumSize", ybNumSize);
+        model.addAttribute("univDetail", univDetail);
+
+        return FrontUtils.getTplPath(site.getSolutionPath(), TPLDIR_ZYTB, "remote");
+    }
+
+    /**
+     * @param planId
+     * @param batchId
+     * @param univListId
+     * @param majorNum
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/getbatchnext.jspx")
+    public String next(Integer planId, Integer batchId, Integer univListId, Integer order, Integer majorNum, HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+        CmsSite site = CmsUtils.getSite(request);
+        FrontUtils.frontData(request, model, site);
+
+        //根据方案id获取方案信息
+        TCeeApplications tCeeApplications = commonSvc.get(TCeeApplications.class, planId);
+        //省份id
+        Integer provinceId = tCeeApplications.getProvinceId();
+        //文理科
+        Integer majorType = tCeeApplications.getMajorTypeId();
+
+        Integer year = commonSvc.singleResult("select max(year) from TCeeEnrollMajorList where provinceId=" + provinceId + "and majorTypeId=" + majorType + " and batchId=" + batchId);
+
+        //根据univListId查询t_cee_enroll_univ_list对应的院校信息
+        TCeeEnrollUnivList univDetail = commonSvc.get(TCeeEnrollUnivList.class, univListId);
+        //根据方案id和批次id及学校id查询专业id
+        List<TCeeApplicationsDetail> mojrDetailList = commonSvc.singleResultList("FROM TCeeApplicationsDetail WHERE  applicationId="
+                + planId + " and batchId=" + batchId + " and univId=" + univDetail.getUnivId());
+        List mojrList = new ArrayList();
+        for (int i = 0; i < mojrDetailList.size(); i++) {
+            mojrList.add(mojrDetailList.get(i).getMajorId());
+        }
+
+        //计划专业数据
+        List<TCeeEnrollMajorList> planList = zytbSvc.getPlanList(univListId);
+        //前一年历史专业数据
+        List yearsAgo1 = zytbSvc.getYearsAgo(univListId, year);
+        //前两年历史专业数据
+        List yearsAgo2 = zytbSvc.getYearsAgo(univListId, year - 1);
+        //前三年历史专业数据
+        List yearsAgo3 = zytbSvc.getYearsAgo(univListId, year - 2);
+
+        //查询院校总计划数据
+        String sql = "select * from t_cee_enroll_major_list where 1=1 and plan_or_history=1 and data_type=0 and univ_list_id=" + univListId;
+        Map m = commonSvc.findOneForJdbc(sql);
+
+
+        model.addAttribute("univDetail", univDetail);
+        model.addAttribute("year", year);
+        model.addAttribute("planId", planId);
+        model.addAttribute("batchId", batchId);
+        model.addAttribute("order", order);
+        model.addAttribute("planList", planList);
+        model.addAttribute("yearsAgo1", yearsAgo1);
+        model.addAttribute("yearsAgo2", yearsAgo2);
+        model.addAttribute("yearsAgo3", yearsAgo3);
+        model.addAttribute("mojrList", mojrList);
+        model.addAttribute("mojrDetailList", mojrDetailList);
+        model.addAttribute("univPlan", m);
+        model.addAttribute("majorNum", majorNum);
+
+        return FrontUtils.getTplPath(site.getSolutionPath(), TPLDIR_ZYTB, "remote");
+    }
+
+    /**
+     * 判断是否可报专业
+     *
+     * @param planId
+     * @param batchId
+     * @param isSelect
+     * @param request
+     * @param response
+     * @param model
+     */
+    @RequestMapping(value = "/isReportMajor.jspx")
+    public void isReportMajor(Integer planId, Integer batchId, Integer isFormal, String isSelect, Integer replaceCode, Integer univCodes, HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+        CmsSite site = CmsUtils.getSite(request);
+        FrontUtils.frontData(request, model, site);
+
+        //根据方案id获取方案信息
+        TCeeApplications tCeeApplications = commonSvc.get(TCeeApplications.class, planId);
+        //省份id
+        Integer provinceId = tCeeApplications.getProvinceId();
+        //文理科
+        Integer majorType = tCeeApplications.getMajorTypeId();
+
+        Integer year = commonSvc.singleResult("select max(year) from TCeeEnrollMajorList where provinceId=" + provinceId + "and majorTypeId=" + majorType + " and batchId=" + batchId);
+
+        //查询当前批次信息可报专业数
+        List<TCeeBatch> batchList = zytbSvc.getBatchList(year, provinceId, majorType);
+        Integer majorNum = 0;
+        for (TCeeBatch tCeeBatch : batchList) {
+            if (batchId.equals(tCeeBatch.getBatchId())) {
+                majorNum = tCeeBatch.getMajorNum();
+                break;
+            }
+        }
+
+        //已选专业数
+        Integer ybMajorNum = 0;
+        if (StringUtils.isNotBlank(isSelect) && !"null".equals(isSelect)) {
+            String[] isSelects = isSelect.split(",");
+            ybMajorNum = isSelects.length;
+        }
+        //判断是否还可以继续填报
+        Map<String, Object> returnMap = new HashMap<>();
+        if (ybMajorNum <= majorNum) {
+            String msg = "savePlanDetail.jspx?planId=" + planId + "&batchId=" + batchId + "&isSelect=" + isSelect;
+            if (replaceCode != null) {
+                msg += "&replaceCode=" + replaceCode;
+            }
+            if (univCodes != null) {
+                msg += "&univCodes=" + univCodes;
+            }
+            if (isFormal != null) {
+                msg += "&isFormal=" + isFormal;
+            }
+            returnMap.put("success", true);
+            returnMap.put("msg", msg);
+            returnResp(response, returnMap);
+            return;
+        } else {
+            returnMap.put("success", false);
+            returnMap.put("msg", "专业数量超过可选报专业数");
+            returnResp(response, returnMap);
+            return;
+        }
+    }
+
+    /**
+     * 保存志愿数据
+     *
+     * @param planId
+     * @param batchId
+     * @param isSelect
+     * @param request
+     * @param response
+     * @param model
+     */
+    @RequestMapping(value = "/savePlanDetail.jspx")
+    public void savePlanDetail(Integer planId, Integer batchId, Integer isFormal, String isSelect, Integer replaceCode, Integer univCodes, HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+        CmsSite site = CmsUtils.getSite(request);
+        FrontUtils.frontData(request, model, site);
+        List<TCeeApplicationsDetail> detailList = new ArrayList<>();
+
+        //方案信息
+        TCeeApplications tCeeApplications = commonSvc.get(TCeeApplications.class, planId);
+
+        //如果有需要替换的志愿
+//        Integer univOrder = 0;
+//        if (order!= null){
+//            univOrder = order;
+        //取被替换志愿院校
+        String sql = "select * from t_cee_applications_detail where application_id=" + planId + " AND batch_id=" + batchId;
+
+        if (!StringUtils.isEmpty(ObjectUtils.toString(univCodes))) {
+            sql += " AND univ_code = " + univCodes;
+        }
+        if (isFormal != null) {
+            sql += " AND is_formal = " + isFormal;
+//            sql += "select * from t_cee_applications_detail where application_id="+ planId +" AND batch_id="+batchId+" AND univ_order = "+replaceCode+" AND is_formal = "+isFormal;
+        }
+        if (!StringUtils.isEmpty(ObjectUtils.toString(replaceCode))) {
+            sql += " AND univ_order = " + replaceCode;
+        }
+        List<TCeeApplicationsDetail> appList = commonSvc.findListbySql(sql, TCeeApplicationsDetail.class);
+        //取出排序
+//            univOrder = appList.get(0).getUnivOrder();
+        commonSvc.deleteAllEntitie(appList);
+//        }
+//        if (replaceCode != null) {
+//        }
+
+        if (StringUtils.isNotBlank(isSelect) && !"null".equals(isSelect)) {
+            String[] isSelects = isSelect.split(",");
+            for (int i = 0; i < isSelects.length; i++) {
+                if (StringUtil.isNotEmpty(isSelects[i])) {
+                    //专业信息
+                    TCeeEnrollMajorList majorList = commonSvc.get(TCeeEnrollMajorList.class, Integer.parseInt(isSelects[i]));
+
+                    String univId = majorList.getUnivId();
+                    if (StringUtil.isNotEmpty(univId)) {
+
+                        //删除该批次下对应学校的所有专业信息
+                        //DELETE  FROM `t_cee_applications_detail` WHERE application_id=1017771 AND batch_id=1 AND univ_code='3131'
+                        sql = "DELETE  FROM t_cee_applications_detail WHERE application_id=" + planId + " AND batch_id=" + batchId + " AND univ_id = '" + univId + "'";
+                        commonSvc.executeSql(sql);
+
+                        TCeeApplicationsDetail detail = new TCeeApplicationsDetail();
+                        detail.setApplicationId(planId);
+                        detail.setYear(tCeeApplications.getYear());
+                        detail.setProvinceId(tCeeApplications.getProvinceId());
+                        detail.setMajorTypeId(tCeeApplications.getMajorTypeId());
+                        detail.setBatchId(batchId);
+                        detail.setUnivId(univId);
+                        detail.setUnivCode(majorList.getUnivCode());
+                        detail.setUnivName(majorList.getUnivName());
+                        detail.setMajorNumId(isSelects[i]);
+                        if (StringUtil.isNotEmpty(majorList.getMajorId())) {
+                            detail.setMajorId(majorList.getMajorId());
+                        }
+                        detail.setMajorCode(majorList.getMajorCode());
+                        detail.setMajorName(majorList.getMajorName());
+                        detail.setMajorOrder(i);
+                        if (StringUtils.isEmpty(ObjectUtils.toString(replaceCode))) {
+                            replaceCode = appList.get(0).getUnivOrder();
+                        }
+                        if (isFormal == null) {
+                            isFormal = appList.get(0).getIsFormal();
+                        }
+                        detail.setUnivOrder(replaceCode);
+                        detail.setIsFormal(isFormal);
+                        detail.setMajorSubjectsLevel(majorList.getMajorSubjectsLevel());
+                        detail.setIsObey("1");
+
+                        detailList.add(detail);
+                    }
+
+                }
+            }
+            commonSvc.batchSaveOrUpdate(detailList);
+        }
+    }
+
+    /**
+     * 批次线
+     *
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping("/batchLine.jspx")
+    public String batchLine(HttpServletRequest request, ModelMap model) {
+        CmsSite site = CmsUtils.getSite(request);
+        FrontUtils.frontData(request, model, site);
+        return FrontUtils.getTplPath(site.getSolutionPath(), TPLDIR_ZYTB, "batchLine");
+    }
+
+    /**
+     * 志愿填报服务
+     *
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping("/toCollegeService.jspx")
+    public String toCollegeService(HttpServletRequest request, ModelMap model) {
+        CmsSite site = CmsUtils.getSite(request);
+        FrontUtils.frontData(request, model, site);
+        return FrontUtils.getTplPath(site.getSolutionPath(), TPLDIR_ZYTB, "toCollegeService");
+    }
+
+    @RequestMapping("/userCenter.jspx")
+    public String userCenter(HttpServletRequest request, ModelMap model) {
+        CmsSite site = CmsUtils.getSite(request);
+        FrontUtils.frontData(request, model, site);
+        return FrontUtils.getTplPath(site.getSolutionPath(), TPLDIR_ZYTB, "userCenter");
+    }
+
+    /**
+     * 绑定订单
+     *
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping("/bangDingOrder.jspx")
+    public String bangDingOrder(HttpServletRequest request, ModelMap model, String application_id, String orderId) {
+        CmsSite site = CmsUtils.getSite(request);
+        CmsUser user = CmsUtils.getUser(request);
+        String userName = user.getRealname();
+        TMgrSrvNode tMgrSrvNode = new TMgrSrvNode();
+        Date now = new Date();
+        tMgrSrvNode.setModifyTime(yyyy_MM_dd_HH_mm_ss.format(now));
+        String id = tMgrSrvNode.getId();
+        if (StringUtils.isBlank(id)) {
+            id = getNodeKey();
+            tMgrSrvNode.setId(id);
+        }
+        tMgrSrvNode.setText1(application_id);
+        tMgrSrvNode.setFwName(userName);
+        tMgrSrvNode.setOrderId(orderId);
+        tMgrSrvNode.setNodeType("院校专业推荐");
+        commonSvc.saveOrUpdate(tMgrSrvNode);
+
+        FrontUtils.frontData(request, model, site);
+        return "redirect:project.jspx";
+    }
+
+    /**
+     * 获取node ID  JD + 当前日期（6位） + 当日序列（8位）
+     *
+     * @return
+     */
+    public String getNodeKey() {
+        String now = new SimpleDateFormat("yyyyMMdd").format(new Date());
+        //查询最后一条记录的id
+        String sql = "select max(id) id from t_mgr_srv_node";
+        Map<String, Object> map = commonSvc.findOneForJdbc(sql);
+        if (map != null && map.get("id") != null) {
+            String id = map.get("id").toString();
+
+            String id_date = id.substring(2, 10);
+            String id_seq = id.substring(10);
+
+            if (now.equals(id_date)) {
+                return "JD" + id_date + String.format("%08d", (Integer.parseInt(id_seq) + 1));
+            }
+        }
+        return "JD" + now + "00000001";
+    }
+
+    /**
+     * 统一返回方法
+     *
+     * @param response
+     * @param returnMap
+     */
+    private void returnResp(HttpServletResponse response, Map<String, Object> returnMap) {
+        try {
+            String json = JSON.toJSONString(returnMap);
+            response.setCharacterEncoding("utf-8");
+            response.getWriter().write(json);
+        } catch (IOException e) {
+            LOG.error("IO流读写失败", e);
+        }
+    }
+
+    /**
+     * 导出
+     *
+     * @param applicationId
+     * @param request
+     * @param response
+     */
+    @RequiresPermissions("daochu:*")
+    @RequestMapping("/excelExport.jspx")
+    public void excelExport(Integer applicationId, HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+
+        // 生成提示信息，
+        response.setContentType("application/vnd.ms-excel");
+        String codedFileName = null;
+        OutputStream fOut = null;
+        try {
+            codedFileName = "志愿信息";
+            // 根据浏览器进行转码，使其支持中文文件名
+            String browse = BrowserUtils.checkBrowse(request);
+            if ("MSIE".equalsIgnoreCase(browse.substring(0, 4))) {
+                response.setHeader("content-disposition", "attachment;filename=" + java.net.URLEncoder.encode(codedFileName, "UTF-8")
+                        + ".xls");
+            } else {
+                String newtitle = new String(codedFileName.getBytes("UTF-8"), "ISO8859-1");
+                response.setHeader("content-disposition", "attachment;filename=" + newtitle + ".xls");
+            }
+            // 进行转码，使其支持中文文件名
+            // 产生工作簿对象
+            HSSFWorkbook workbook = null;
+//            HSSFCellStyle cellStyle = workbook.createCellStyle();
+
+            applicationId = 1111111;
+
+            List<TCeeApplicationsExports> apps = commonSvc.findByProperty(TCeeApplicationsExports.class, "applicationId", applicationId);
+            //List<TCeeApplicationsExports> apps = commonSvc.findListbySql("select  * from t_cee_applications_exports where application_id = "+applicationId+" " , TCeeApplicationsExports.class);
+            workbook = ExcelExportUtil.exportExcel("导出信息", TCeeApplicationsExports.class, apps);
+
+            fOut = response.getOutputStream();
+            workbook.write(fOut);
+        } catch (UnsupportedEncodingException e1) {
+
+        } catch (Exception e) {
+
+        } finally {
+            try {
+                fOut.flush();
+                fOut.close();
+            } catch (IOException e) {
+
+            }
+        }
+    }
+}

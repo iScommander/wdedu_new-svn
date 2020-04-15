@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>专家团队</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<script src="${base}/r/cms/front.js"></script>
+		<style>
+			.zhuanjiatuanduiMain .flex-item25-4 img {
+				display: inline-block;
+				width: 100%;
+				height: 320px;
+				position: relative;
+			}
+
+
+			.zhuanjiatuanduiMain .flex-item25-4 {
+				position: relative;
+				width: 250px;
+				height: 400px;
+				margin: 0 25px;
+			}
+
+			.zhuanjiatuanduiMain .cnt1 {
+				width: 100%;
+				height: 80%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				background: rgba(0, 64, 101, .8);
+				color: #fff;
+				font-size: 12px;
+				line-height: 1.6em;
+				display: none;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				padding: 20px;
+			}
+			.zhuanjiatuanduiMain .flex-item25-4:hover .cnt1 {
+				display: flex;
+			}
+			
+			.zhuanjiatuanduiMain .cnt1 p {
+				text-align: justify;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 10;
+				overflow: hidden;
+				overflow: hidden;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 10;
+			}
+			
+			.zhuanjiatuanduiMain .teacherBrief p {
+				font-size: 20px;
+				color: #333;
+				text-align: center;
+			}
+			
+			.zhuanjiatuanduiMain .teacherBrief span {
+				display: block;
+				color: #666;
+				text-align: center;
+			}
+			.zhuanjiatuanduiMain .flex-item25-4.liaobiaodongtai{
+				background: #eef2f5;
+				text-align: center;
+				padding: 10px 0;
+				height: 380px;
+			}
+			.zhuanjiatuanduiMain .flex-item25-4.liaobiaodongtai ul li{
+				margin-bottom: 35px;
+			}
+			.zhuanjiatuanduiMain .flex-item25-4.liaobiaodongtai ul li a{
+				font-size: 18px;
+			}
+			.zhuanjiatuanduiMain .flex-item25-4.liaobiaodongtai ul li:last-child{
+				text-align: left;
+				margin-left: 20px;
+			}
+			.zhuanjiatuanduiMain .flex-item25-4.liaobiaodongtai ul li:last-child a{
+				color: #05b8c3;
+				
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--顶部-->
+		[#include "../include/header.html"/]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container width1200">
+				<div>
+					<a href="${base}">首页</a> &lt;&lt; 沃得研究院&lt;&lt; 专家团队</div>
+				<div></div>
+			</div>
+		</div>
+		<!--主体-->
+
+		<main class="width1200 zhuanjiatuanduiMain">
+			<form  action="teacherList.jspx" method="post" id="comSearch">
+			<div class="flex-container3">
+				[#if pagination??]
+				[#list pagination.list as list]
+				<div class="flex-item25-4">
+					<a onclick="window.location.href='${base}/ActivityAct/zhuanjixiangqing.jspx?teacher_id='+${list.teacherId}">
+						<img src="${list.image1}" alt="" />
+						<div class="teacherBrief">
+							<p>${list.name!}</p>
+							<span>${list.introduce0!}</span>
+						</div>
+						<div class="cnt1">
+							<p>${list.strintroduce4!}</p>
+						</div>
+					</a>
+				</div>
+				[/#list]
+				[/#if]
+			</div>
+			</form>
+			<!--分页-->
+			<div class="textC paging">
+				<tr>
+					<td colspan="8" style="padding:20px 0;">
+						<input type="hidden" name="pageNo" />
+						<table width="100%" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td align="center" class="pn-sp">
+									共 ${pagination.totalCount} 条&nbsp; 每页 ${pagination.pageSize} 条&nbsp; 当前 ${pagination.pageNo}/${pagination.totalPage} 页 &nbsp;转到第<input type="text" id="_goPs" onfocus="this.select();" onkeypress="if(event.keyCode==13){$('#_goPage').click();return false;}" style="width:50px; border:1px solid #e7e7e7;" />页
+									<input id="_goPage" type="button" value="转" onclick="_gotoPage($('#_goPs').val());" [#if pagination.totalPage==1] disabled="disabled" [/#if] />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="button" value="首 页" onclick="_gotoPage('1');" [#if pagination.firstPage] disabled="disabled" [/#if]/>
+									<input type="button" value="上一页" onclick="_gotoPage('${pagination.prePage}');" [#if pagination.firstPage] disabled="disabled" [/#if]/>
+									<input type="button" value="下一页" onclick="_gotoPage('${pagination.nextPage}');" [#if pagination.lastPage] disabled="disabled" [/#if]/>
+									<input type="button" value="尾 页" onclick="_gotoPage('${pagination.totalPage}');" [#if pagination.lastPage] disabled="disabled" [/#if]/>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</div>
+		</main>
+
+		<!--底部-->
+		[#include "../include/footer.html"/]
+		<!--<iframe MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no src="${base}/r/footer.html" height="360px" width="100%"></iframe>-->
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/bootstrap-treeview.min.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+		<script src="${base}/r/js/itemsJs/filtrate.js"></script>
+
+	<script>
+        function _gotoPage(pageNo) {
+            try {
+                var comSearch = document.getElementById("comSearch");
+                $('#pageNo').val(pageNo)
+                comSearch.action = "teacherList.jspx";
+                comSearch.submit();
+            } catch (e) {
+                alert('_gotoPage(pageNo)方法出错');
+            }
+        }
+	</script>
+	</body>
+
+</html>

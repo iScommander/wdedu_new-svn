@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>千人场</title>
+		<script>
+			window.paceOptions = {
+				ajax: true,
+				restartOnRequestAfter: false
+			}
+		</script>
+		<script src="${base}/r/sign/pace.js"></script>
+		<link rel="stylesheet" href="${base}/r/sign/pace-theme-center-atom.css" />
+		<link rel="stylesheet" href="${base}/r/sign/rem.css" />
+		<script src="${base}/r/sign/jquery-1.11.3.min.js"></script>
+		<style type="text/css">
+			.index-main{width: 100%;height: 100%;background-image: url(${base}/r/sign/img/index-bg.jpg);background-size: 100% 100%;}
+			.index-main h3{padding-top: 1.2rem;text-align: center;color: #fff;font-size: 1.6rem;}
+			.rcq,.qd{display: block;width: 86%;margin: 0 auto;}
+			.rcq{margin-top: 25%;}
+			.qd{margin-top: 2rem;}
+			#content{display:none;}
+		</style>
+	</head>
+	<body>
+	<div id="content">
+		<div class="index-main">
+			<h3>千人场讲座活动</h3>
+			<a href="${base}/sign/ticketindex.jspx" class="rcq">
+				<img src="${base}/r/sign/img/rcq.png" alt="领取入场券" />
+			</a>
+			<a href="${base}/sign/signindex.jspx" class="qd">
+				<img src="${base}/r/sign/img/qd.png" alt="讲座签到"></img>
+			</a>
+		</div>
+		</div>
+	</body>
+	<script>
+	$(function(){
+		$.ajax({
+			type: "get",
+			url: "${base}/sign/getquxian.jspx",
+			error: function(msg){
+				console.log(msg);
+			},
+			success: function(data){
+				console.log('data',data)
+				localStorage.setItem('res',data);
+			}
+		});
+	});
+	window.onload = function(){
+		Pace.on('done',function(){
+			$('#content').show();
+		});
+		Pace.on('restart',function(){
+			Pace.hide();
+		});
+	};
+	</script>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>沃得资讯</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<script src="${base}/r/cms/front.js"></script>
+		<script type="text/javascript">
+            $(function() {
+                Cms.siteFlow("${base}", location.href, document.referrer,"${site.config.flowSwitch?string}");
+            });
+		</script>
+	</head>
+	<style>
+		.zizhuJournalism ul li .JournalismContent a {
+			font-size: 18px;
+			color: #05B8C3;
+			margin-bottom: 15px;
+			font-weight: bold;
+		}
+		main.zizhuJudgedBy3Main .zizhuJournalism ul li .JournalismContent span {
+			display: block !important;
+		}
+		main.zixunTab .intentionMainTab-content ul li {
+			height: 100px !important;
+		}
+	</style>
+
+	<body>
+		<!--顶部-->
+		<!--tab切换  导航-->
+		[#include "../include/header.html"/]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container width1200">
+				<div>
+					<a href="${base}">首页</a> &lt;&lt; 沃得研究院&lt;&lt; 沃得资讯</div>
+				<div></div>
+			</div>
+		</div>
+		<!--主体-->
+		<main class="width1200 zixunTab zizhuJudgedBy3Main">
+			<div class="tab-pane in active" id="zixunList">
+				<ul class="nav nav-tabs menu-list flex-container2">
+					<li class="zixun-1 active">
+						<a href="#zixunList_1" data-toggle="tab">
+							<p>生涯规划</p>
+						</a>
+					</li>
+					<li class="zixun-2">
+						<a href="#zixunList_2" data-toggle="tab">
+							<p>招考资讯</p>
+						</a>
+					</li>
+					<li class="zixun-3">
+						<a href="#zixunList_3" data-toggle="tab">
+							<p>自主&综评</p>
+						</a>
+					</li>
+					<li class="zixun-4">
+						<a href="#zixunList_4" data-toggle="tab">
+							<p>背景提升</p>
+						</a>
+					</li>
+					<li class="zixun-5">
+						<a href="#zixunList_5" data-toggle="tab">
+							<p>留学&港澳台</p>
+						</a>
+					</li>
+					<li class="zixun-6">
+						<a href="#zixunList_6" data-toggle="tab">
+							<p>沃得研究院</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="intentionMainTab-content">
+				<div class="tab-content">
+					<!--生涯规划-->
+					<div class="tab-pane in active" id="zixunList_1">
+						<form action="zixun.jspx" method="post">
+							<div class="textC hugeSearch">
+								<input type="text" placeholder="输入标题名称，点击右边的搜索按钮" name="title1" value="${title1!}"/>
+								<button class="btn1 btnColorGreen" type="submit">搜索</button>
+							</div>
+						</form>
+						<div class="zizhuJournalism">
+							[@cms_content_page title=title1! channelId='102' count='5' titLen='30' append='...' orderBy='2' dateFormat='MM-dd' channelOption='1']
+							<ul>
+								[#list tag_list as a]
+								<li>
+									<div href="" class="flex-container">
+										<!--日期-->
+										<div class="JournalismDate" style="width:20%">
+											<p>${a.sortDate!?string("yyyy-MM")}</p>
+											<b>${a.sortDate!?string("dd")}</b>
+										</div>
+										<!--内容-->
+										<div class="JournalismContent" style="width:80%">
+											<a href="${a.url}" target="_blank">[@text_cut s=a.title len=20 append='...'/]</a>
+											<span>[@text_cut s=a.description len=50 append='...'/]</span>
+										</div>
+									</div>
+								</li>
+								[/#list]
+							</ul>
+							[#include "../include/page.html"/]
+							[/@cms_content_page]
+						</div>
+
+					</div>
+					<!--招考资讯-->
+					<div class="tab-pane" id="zixunList_2">
+						<form action="zixun.jspx" method="post">
+							<div class="textC hugeSearch">
+								<input type="text" placeholder="输入标题名称" name="title2" value="${title2!}"/>
+								<button class="btn1 btnColorGreen" type="submit">搜索</button>
+							</div>
+						</form>
+						<div class="zizhuJournalism">
+							[@cms_content_page title=title2! channelId='103' count='5' titLen='30' append='...' orderBy='2' dateFormat='MM-dd' channelOption='1']
+							<ul>
+								[#list tag_pagination.list as a]
+								<li>
+									<div href="" class="flex-container">
+										<!--日期-->
+										<div class="JournalismDate" style="width:20%">
+											<p>${a.sortDate!?string("yyyy-MM")}</p>
+											<b>${a.sortDate!?string("dd")}</b>
+										</div>
+										<!--内容-->
+										<div class="JournalismContent" style="width:80%">
+											<a href="${a.url}" target="_blank">[@text_cut s=a.title len=20 append='...'/]</a>
+											<span>[@text_cut s=a.description len=50 append='...'/]</span>
+										</div>
+									</div>
+								</li>
+								[/#list]
+							</ul>
+							[#include "../include/page.html"/]
+							[/@cms_content_page]
+
+						</div>
+					</div>
+					<!--自主&综评-->
+					<div class="tab-pane" id="zixunList_3">
+						<div class="zizhuJournalism">
+							<ul>
+								[@cms_content_list typeId='1'  channelId='104' dateFormat='yyyy-MM-dd']
+								[#list tag_list as a]
+								<li>
+									<div href="" class="flex-container">
+										<!--日期-->
+										<div class="JournalismDate" style="width:20%">
+											<p>${a.sortDate!?string("yyyy-MM")}</p>
+											<b>${a.sortDate!?string("dd")}</b>
+										</div>
+										<!--内容-->
+										<div class="JournalismContent" style="width:80%">
+											<a href="${a.url}" target="_blank">[@text_cut s=a.title len=20 append='...'/]</a>
+											<span>[@text_cut s=a.description len=50 append='...'/]</span>
+										</div>
+									</div>
+								</li>
+								[/#list]
+								[/@cms_content_list]
+							</ul>
+						</div>
+					</div>
+					<!--背景提升-->
+					<div class="tab-pane" id="zixunList_4">
+						<div class="zizhuJournalism">
+							<ul>
+								[@cms_content_list typeId='1'  channelId='105' dateFormat='yyyy-MM-dd']
+								[#list tag_list as a]
+								<li>
+									<div href="" class="flex-container">
+										<!--日期-->
+										<div class="JournalismDate" style="width:20%">
+											<p>${a.sortDate!?string("yyyy-MM")}</p>
+											<b>${a.sortDate!?string("dd")}</b>
+										</div>
+										<!--内容-->
+										<div class="JournalismContent" style="width:80%">
+											<a href="${a.url}" target="_blank">[@text_cut s=a.title len=20 append='...'/]</a>
+											<span>[@text_cut s=a.description len=50 append='...'/]</span>
+										</div>
+									</div>
+								</li>
+								[/#list]
+								[/@cms_content_list]
+							</ul>
+						</div>
+					</div>
+					<!--留学&港澳台-->
+					<div class="tab-pane" id="zixunList_5">
+						<div class="zizhuJournalism">
+							<ul>
+								[@cms_content_list typeId='1'  channelId='106' dateFormat='yyyy-MM-dd']
+								[#list tag_list as a]
+								<li>
+									<div href="" class="flex-container">
+										<!--日期-->
+										<div class="JournalismDate" style="width:20%">
+											<p>${a.sortDate!?string("yyyy-MM")}</p>
+											<b>${a.sortDate!?string("dd")}</b>
+										</div>
+										<!--内容-->
+										<div class="JournalismContent" style="width:80%">
+											<a href="${a.url}" target="_blank">[@text_cut s=a.title len=20 append='...'/]</a>
+											<span>[@text_cut s=a.description len=50 append='...'/]</span>
+										</div>
+									</div>
+								</li>
+								[/#list]
+								[/@cms_content_list]
+							</ul>
+						</div>
+					</div>
+					<!--沃得研究院-->
+					<div class="tab-pane" id="zixunList_6">
+						<div class="zizhuJournalism">
+							<ul>
+								[@cms_content_list typeId='1'  channelId='107' dateFormat='yyyy-MM-dd']
+								[#list tag_list as a]
+								<li>
+									<div href="" class="flex-container">
+										<!--日期-->
+										<div class="JournalismDate" style="width:20%">
+											<p>${a.sortDate!?string("yyyy-MM")}</p>
+											<b>${a.sortDate!?string("dd")}</b>
+										</div>
+										<!--内容-->
+										<div class="JournalismContent" style="width:80%">
+											<a href="${a.url}" target="_blank">[@text_cut s=a.title len=20 append='...'/]</a>
+											<span>[@text_cut s=a.description len=50 append='...'/]</span>
+										</div>
+									</div>
+								</li>
+								[/#list]
+								[/@cms_content_list]
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<!--底部-->
+		[#include "../include/footer.html"/]
+		<!--<iframe MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no src="${base}/r/footer.html" height="360px" width="100%"></iframe>-->
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/${base}/r/js/bootstrap-treeview.min.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+	</body>
+
+</html>

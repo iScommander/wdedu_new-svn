@@ -1,0 +1,817 @@
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>志愿视频</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css"/>
+        <link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css"/>
+        <link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css"/>
+        <script src="${base}/u/cms/www/zytbsy/js/Chart.min.js"></script>
+	</head>
+	<style>
+		.listbor{
+			min-width: 230px;
+			text-align: center;
+			display: table;
+			color: #05b8c3;
+			font-size: 18px;
+			font-weight: bold;
+			padding: 4px 15px;
+			border: 1px solid #05b8c3;
+			border-radius: 5px;
+			margin: 10px auto;
+		}
+		.list_icon{
+			display: flex;
+			flex-direction: row;
+			padding: 20px 0;
+			margin: 20px 0;
+		}
+		.list_icon li{
+			display: flex;
+			flex: 1;
+			flex-direction: row;
+			justify-content: center;
+			border-right: 1px solid #999;
+		}
+		.list_icon li:last-child{
+			border: none;
+		}
+		.list_icon li div{
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+		.list_icon li div img{
+			width: 35px;
+		}
+		.list_icon li div.list_iconcont{
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			padding-left: 15px;
+		}
+		.borshaw{
+			box-shadow: 1px 1px 1px 1px #dbe9ef;
+		}
+		.col7{
+			color: #707070;
+			font-size: 14px;
+		}
+		.martop{
+			margin-top: 20px;
+		}
+		.duction{
+			display: flex;
+			flex-direction: row;
+			margin-bottom: 40px;
+		}
+		.duction .duction_bo{
+			width: 30%;
+			height: 300px;
+			overflow: hidden;
+			padding: 30px 10px;
+		}
+		.duction .duction_bo:nth-of-type(2){
+			margin-left: 5%;
+			margin-right: 5%;
+		}
+		.duction .duction_bo h4{
+			background: url(${base}/u/cms/www/zytbsy/img/tupian/mark.png) left 10px center no-repeat;
+			padding: 4px 0;
+			padding-left: 45px;
+		}
+		.inform{
+			padding: 20px;
+			margin-top: 30px;
+		}
+		.inform ul li{
+			padding: 5px 0;
+			font-weight: bold;
+		}
+		.inform ul li label{
+			/*font-weight: normal;*/
+		}
+		.batch{
+			padding: 20px;
+			margin-top: 30px;
+		}
+		.batch ul li p{
+			font-weight: bold;
+			padding: 5px 0;
+		}
+		.batch ul li span{
+			font-size: 14px;
+		}
+		.screen{
+			padding-top: 20px;
+		}
+		.screen table{
+			width: 100%;
+			border: 1px solid #dadada;
+			margin-top: 20px;
+		}
+		.screen table tr{
+			border-bottom: 1px solid #dadada;
+		}
+		.screen table tr td{
+			padding: 5px 0;
+			border-right: 1px solid #dadada;
+		}
+		.screen table tr td:nth-of-type(1){
+			width: 30%;
+			background-color: #52c0d3;
+		}
+		.foldline{
+			margin-top: 40px;
+		}
+		.borleft{
+			border-left: 5px solid #52c0d3;
+			font-weight: bold;
+			padding-left: 5px;
+			margin: 10px 0;
+			margin-left: 10px;
+		}
+		.borleft span{
+			color: #FF0000;
+		}
+		.fold_p{
+			font-size: 14px;
+			font-weight: bold;
+			padding: 0 10px;
+		}
+		table.table{
+			font-size: 14px;
+		}
+		.line-font{
+			height: 400px;
+		}
+		.agricul{
+			border: 1px solid #dadada;
+			margin-top: 50px;
+		}
+		.agricul .agricul_cen{
+			text-align: center;
+			padding: 7px 0;
+			border-bottom: 1px solid #DADADA;
+		}
+		.agricul div.agricul_cen{
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+		.agricul div.agricul_cen p:nth-of-type(2){
+			color: #0be626;
+		}
+		.bgcol{
+			background-color: #004468;
+			text-align: center;
+			color: #fff;
+		}
+		table.newtab{
+			margin-bottom: 0;
+		}
+		.newtab tr:nth-of-type(2){
+			background: #004468;
+		}
+		.newtab tr:nth-of-type(2) th.bg{
+			background-color: #05b8c3;
+			border-right: 1px solid #004468;
+			color: #fff;
+		}
+		.textcol{
+			margin-bottom: 30px;
+		}
+		.textcol .col7{
+			padding: 0 10px;
+		}
+		.lastbat{
+			padding-bottom: 100px;
+			margin-top: 30px;
+		}
+		.textcol .marborp{
+			border: 1px solid #00283F;
+			padding-top: 20px;
+			padding-bottom: 20px;
+		}
+	</style>
+	<body>
+		<!--顶部线条-->
+		<div class="topLine"></div>
+		<!--tab切换  导航-->
+		<nav class="indexNav">
+			<div class="flex-container1 width1200">
+				<div class="marginR50">
+            <a href="${base}/index.jhtml"><img src="${base}/u/cms/www/logo/logo.png" alt=""/></a>
+            <a href="${base}/index.jhtml"><img src="${base}/u/cms/www/logo/name.png" alt=""/></a>
+				</div>
+				<div id="pdf">
+					<ul class="nav nav-pills">
+						<li role="presentation" class="dropdown">
+							<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">志愿填报</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="../volunteer/volunteerFlexible.html">志愿填报</a>
+								</li>
+								<li>
+									<a href="toCollege/volunteer/volunteerFiltrate.html">志愿筛选</a>
+								</li>
+								<li>
+									<a href="bigData/runAschool.html">生成志愿</a>
+								</li>
+								<li>
+									<a href="bigData/laboratory.html">评估报告</a>
+								</li>
+							</ul>
+						</li>
+						<li role="presentation">
+							<a href="volunteerPage.html">志愿</a>
+						</li>
+						<li role="presentation">
+							<a href="volunteerVideo.html">志愿视频</a>
+						</li>
+						<li role="presentation">
+							<a href="majorAppraisal.html">专业测评</a>
+						</li>
+						<li role="presentation" class="dropdown">
+							<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">报考大数据</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="toCollege/bigData/academyRankingList.html">院校排行榜</a>
+								</li>
+								<li>
+									<a href="toCollege/bigData/specialtyRankingList.html">专业排行榜</a>
+								</li>
+								<li>
+									<a href="toCollege/bigData/runAschool.html">中外合作办学</a>
+								</li>
+								<li>
+									<a href="toCollege/bigData/laboratory.html">重点学科实验室</a>
+								</li>
+								<li>
+									<a href="toCollege/bigData/ProfessionalBooks.html">职业大全</a>
+								</li>
+								<li>
+									<a href="toCollege/bigData/recruitStudent.html">招生章程</a>
+								</li>
+							</ul>
+						</li>
+						<li role="presentation">
+							<a href="completeExplain.html">填报说明</a>
+						</li>
+						<li role="presentation">
+							<a href="${base}/BkyxAct/userCenter.jspx">用户中心</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<button id="renderPdf">生成pdf</button>
+		<!--路径-->
+		<!--<div class="route">
+			<div class="flex-container1 width1200">
+				<div><a href="${base}/index.html">首页 </a> &lt;&lt;志愿 &lt;&lt;评估报告</div>
+			</div>
+		</div>
+		&lt;!&ndash;主体&ndash;&gt;
+		<main class="width1200 shipinMain">
+			&lt;!&ndash;分类&ndash;&gt;
+			<button id="renderPdf">生成pdf</button>
+			<div>
+				<span claRss="listbor">志愿填报总体原则</span>
+				<ul class="list_icon borshaw">
+					<li>
+						<div>
+							<img src="${base}/u/cms/www/zytbsy/img/tupian/person.png" />
+							<div class="list_iconcont">
+								<p class="col7">姓名</p>
+								  <td class="cmd_td3">
+                               <p>${(name)!}</p>
+                                </td>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<img src="${base}/u/cms/www/zytbsy/img/tupian/position.png" />
+							<div class="list_iconcont">
+								<p class="col7">省份</p>
+								<p>${(proName)!}</p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<img src="${base}/u/cms/www/zytbsy/img/tupian/ficat.png" />
+							<div class="list_iconcont">
+								<p class="col7">科别</p>
+								<p>[#if major == '1']
+								    文科
+								    [#elseif major == '2']
+								    理科
+								    [/#if]</p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<img src="${base}/u/cms/www/zytbsy/img/tupian/results.png" />
+							<div class="list_iconcont">
+								<p class="col7">成绩</p>
+								<p>${(socre)!}分</p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<img src="${base}/u/cms/www/zytbsy/img/tupian/ranking.png" />
+							<div class="list_iconcont">
+								<p class="col7">排名</p>
+								<p>${(rank)!}</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			&lt;!&ndash;分类end&ndash;&gt;
+			<div class="duction">
+				<div class="duction_bo borshaw">
+					<h4>方案完整度</h4>
+					<p class="col7 martop">
+					${(programme)!}
+					</p>
+				</div>
+				<div class="duction_bo borshaw">
+					<h4>志愿合理度</h4>
+					<p class="col7 martop">
+						志愿结构合理性应遵循“稳中求胜，冷热搭配”，最重要的是填志愿的时候一定要耐心
+					</p>
+				</div>
+				<div class="duction_bo borshaw">
+					<h4>志愿梯度性</h4>
+					<p class="col7 martop">
+						平行志愿填报的口诀“冲一冲，稳一稳，保一保”平行志愿填报的口诀“冲一冲，稳一稳，保一保”
+						平行志愿填报的口诀“冲一冲，稳一稳，保一保”平行志愿填报的口诀“冲一冲，稳一稳，保一保”
+						平行志愿填报的口诀“冲一冲，稳一稳，保一保”平行志愿填报的口诀“冲一冲，稳一稳，保一保”
+						平行志愿填报的口诀“冲一冲，稳一稳，保一保”平行志愿填报的口诀“冲一冲，稳一稳，保一保”
+					</p>
+				</div>
+			</div>
+			&lt;!&ndash;分类&ndash;&gt;
+			<div>
+				<span class="listbor">志愿填报总体原则</span>
+				<ul class="list_icon borshaw">
+					<li>
+						<div>
+							<img src="${base}/u/cms/www/zytbsy/img/tupian/person.png" />
+							<div class="list_iconcont">
+								<p class="col7">姓名</p>
+								<p>${(name)!}</p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<img src="${base}/u/cms/www/zytbsy/img/tupian/position.png" />
+							<div class="list_iconcont">
+								<p class="col7">省份</p>
+								<p>${(proName)!}</p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<img src="${base}/u/cms/www/zytbsy/img/tupian/ficat.png" />
+							<div class="list_iconcont">
+								<p class="col7">科别</p>
+								<p>[#if major == '1']
+                                	 文科
+                               [#elseif major == '2']
+                                	理科
+                                [/#if]</p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<img src="${base}/u/cms/www/zytbsy/img/tupian/results.png" />
+							<div class="list_iconcont">
+								<p class="col7">成绩</p>
+								<p>${(socre)!}分</p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<img src="${base}/u/cms/www/zytbsy/img/tupian/ranking.png" />
+							<div class="list_iconcont">
+								<p class="col7">排名</p>
+								<p>${(rank)!}</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			&lt;!&ndash;分类end&ndash;&gt;
+			&lt;!&ndash;考生信息&ndash;&gt;
+			<div class="borshaw inform">
+				<ul>
+					<li>
+						<label>考生姓名：</label>
+						<span>${(name)!}</span>
+					</li>
+					<li>
+						<label>所在地区：</label>
+						<span>${(proName)!}</span>
+					</li>
+					<li>
+						<label>所在中学：</label>
+						<span>北京市房山区房山中学（固定）</span>
+					</li>
+					<li>
+						<label>高考分数：</label>
+						<span>${(socre)!}分</span>
+					</li>
+					<li>
+						<label>文理科：</label>
+						<span>[#if major == '1']
+                            文科
+                            [#elseif major == '2']
+                             理科
+                         [/#if]</span>
+					</li>
+					<li>
+						<label>全省排名：</label>
+						<span>${(rank)!}</span>
+					</li>
+					<li>
+						<label>友情提示：</label>
+						<span>报考有风险，报考也技巧，合理利用考分，最大限度满足考生所去向的地区</span>
+					</li>
+				</ul>
+			</div>-->
+			<!--考生信息end-->
+			<!--录取批次-->
+		<!--	<div class="borshaw batch">
+				<ul>
+					<li>
+						<p> > 本科提前A段 </p>
+						<span>艺术院校（专业）、体育院校（专业）、军事院校、艺术院校（专业）、体育院校（专业）、艺术院校（专业）、体育院校（专业）、</span>
+					</li>
+					<li>
+						<p> > 本科第一批 </p>
+						<span>无</span>
+					</li>
+					<li>
+						<p> > 本科第二批 </p>
+						<span>无</span>
+					</li>
+					<li>
+						<p> > 专科提前 </p>
+						<span>专科提前批设置两个顺序志愿，每个志愿填报1所志愿高校</span>
+					</li>
+					<li>
+						<p> > 专科批次 </p>
+						<span>专科普通批次为平行志愿设置20个志愿高校、体育院校（专业）、</span>
+					</li>
+					<li>
+						<p> > 专科提前录取B段 </p>
+						<span>艺术院校（专业）、体育院校（专业）、军事院校、艺术院校（专业）、体育院校（专业）、艺术院校（专业）、体育院校（专业）、</span>
+					</li>
+					<li>
+						<p> > 专科提前录取C段</p>
+						<span>艺术院校（专业）、体育院校（专业）、军事院校、艺术院校（专业）、体育院校（专业）、艺术院校（专业）、体育院校（专业）、</span>
+					</li>
+					<li>
+						<p> > 特殊院校批次 </p>
+						<span>艺术院校（专业）、体育院校（专业）、军事院校、艺术院校（专业）、体育院校（专业）、艺术院校（专业）、体育院校（专业）、</span>
+					</li>
+				</ul>
+			</div>
+			&lt;!&ndash;录取批次end&ndash;&gt;
+			<div class="borshaw lastbat">
+				<div class="screen">
+					<span class="listbor">志愿筛选</span>
+					<table>
+						<tr>
+							<td>选择内容</td>
+							<td colspan="3">选择意向</td>
+						</tr>
+						<tr>
+							<td>地区选择意向</td>
+							<td colspan="3">123</td>
+						</tr>
+						<tr>
+							<td>院校意向选择</td>
+							<td>123</td>
+							<td>123</td>
+							<td>123</td>
+						</tr>
+						<tr>
+							<td>专业意向选择</td>
+							<td colspan="3">1</td>
+						</tr>
+						<tr>
+							<td>冲、稳、保</td>
+							<td colspan="3">0</td>
+						</tr>
+					</table>
+				</div>
+				<div class="foldline">
+					<span class="listbor">本科第一批志愿总体评估</span>
+					<div class="borleft">完整度检查</div>
+					<p class="fold_p">【概要】根据您的成绩和排名，具备据您的成绩和排名，具备填报据您的成绩和排名，具备填报据您的成绩和排名，具备填报据您的成绩和排名，具备填报填报批次的资格</p>
+					<table class="table table-striped deeptable">
+						<tr>
+							<th>志愿名称</th>
+							<th>院校名称</th>
+							<th>院校可报专业</th>
+							<th>志愿可选专业/已选专业数量</th>
+							<th>调剂</th>
+							<th>检查结果</th>
+							<th>2017</th>
+							<th>2016</th>
+							<th>2015</th>
+							<th>风险提示</th>
+						</tr>
+						<tr>
+							<td>平行志愿1</td>
+							<td>东北农林大学</td>
+							<td>12</td>
+							<td>6/6</td>
+							<td>服从</td>
+							<td>专业志愿设置完成</td>
+							<td>3883</td>
+							<td>3883</td>
+							<td>3883</td>
+							<td>未找到该院校历史录取数据</td>
+						</tr>
+						<tr>
+							<td>平行志愿1</td>
+							<td>东北农林大学</td>
+							<td>12</td>
+							<td>6/6</td>
+							<td>服从</td>
+							<td>专业志愿设置完成</td>
+							<td>3883</td>
+							<td>3883</td>
+							<td>3883</td>
+							<td>未找到该院校历史录取数据</td>
+						</tr><tr>
+							<td>平行志愿1</td>
+							<td>东北农林大学</td>
+							<td>12</td>
+							<td>6/6</td>
+							<td>服从</td>
+							<td>专业志愿设置完成</td>
+							<td>3883</td>
+							<td>3883</td>
+							<td>3883</td>
+							<td>未找到该院校历史录取数据</td>
+						</tr><tr>
+							<td>平行志愿1</td>
+							<td>东北农林大学</td>
+							<td>12</td>
+							<td>6/6</td>
+							<td>服从</td>
+							<td>专业志愿设置完成</td>
+							<td>3883</td>
+							<td>3883</td>
+							<td>3883</td>
+							<td>未找到该院校历史录取数据</td>
+						</tr><tr>
+							<td>平行志愿1</td>
+							<td>东北农林大学</td>
+							<td>12</td>
+							<td>6/6</td>
+							<td>服从</td>
+							<td>专业志愿设置完成</td>
+							<td>3883</td>
+							<td>3883</td>
+							<td>3883</td>
+							<td>未找到该院校历史录取数据</td>
+						</tr>
+					</table>
+					
+					&lt;!&ndash;折现&ndash;&gt;
+					<div class="borleft">院校录取排名解读<span>【未找到该院校历史录取数据】</span></div>
+					<div class="line-font">
+                            <canvas id="chartjs-line-chart"></canvas>
+                     </div>
+					&lt;!&ndash;东北林业大学&ndash;&gt;
+					<div>
+						<span class="listbor">本科第一批平行志愿1【东北林业大学(哈尔滨)】评估</span>
+						<div class="agricul">
+							<p class="agricul_cen">本科第一批平行志愿1</p>
+							<div class="agricul_cen">
+								<p>【2301】东北林业大学(哈尔滨)     服从调剂</p>
+								<p>【未找到该院校历史录取数据】</p>
+							</div>
+							<table class="table table-striped deeptable newtab">
+								<tr>
+									<th colspan="5">专业</th>
+								</tr>
+								<tr>
+									<th colspan="2"></th>
+									<th class="bg">2017</th>
+									<th class="bg">2016</th>
+									<th class="bg">2015</th>
+								</tr>
+								<tr>
+									<td>【09】</td>
+									<td>动物医学</td>
+									<td>11</td>
+									<td>12</td>
+									<td>13</td>
+								</tr>
+								<tr>
+									<td>【09】</td>
+									<td>动物医学</td>
+									<td>11</td>
+									<td>12</td>
+									<td>13</td>
+								</tr>
+								<tr>
+									<td>【09】</td>
+									<td>动物医学</td>
+									<td>11</td>
+									<td>12</td>
+									<td>13</td>
+								</tr>
+								
+							</table>
+						</div>
+					</div>
+					&lt;!&ndash;东北林业大学end&ndash;&gt;
+					&lt;!&ndash;折现&ndash;&gt;
+					<div class="borleft">院校录取排名解读<span>【未找到该院校历史录取数据】</span></div>
+					<div class="line-font">
+                            <canvas id="chartjs-line-chart1"></canvas>
+                        </div>
+					&lt;!&ndash;介绍&ndash;&gt;
+					<div class="textcol">
+						<div class="borleft">院校介绍</div>
+						<p class="col7">东北林业大学（Northeast Forestry University），简称“东北林大、NEFU”，是黑龙江省一所以林业工程为特色的多科性教育部直属全国重点大学，国家“211工程”、“985工程优势学科创新平台、</p>
+					</div>
+					<div class="textcol">
+						<div class="borleft">大学实力与重点实验室</div>
+						<p class="col7">东北林业大学创建于1952年7月，原名东北林学院，是在浙江大学农学院森林系和东北农学院森林系基础上建立的，由原国家林业部直属管理。1985年8月，更名为“东北林业大学”</p>
+					</div>
+					<div class="textcol">
+						<div class="borleft">招生章程要点解析</div>
+						<p class="col7">截至2018年3月，学校有9个博士后科研流动站，1个博士后科研工作站，8个一级学科博士点、38个二级学科博士点，22个一级学科硕士点、95个二级学科硕士点、11个种类32个领域的专业学位硕士点；2个世界一流学科建设学科，3个一级学科国家重点学科，11个二级学科国家重点学科，6个国家林业局重点学科，2个国家林业局重点（培育）学科，1个黑龙江省重点学科群，7个黑龙江省重点一级学科。1985年8月，更名为“东北林业大学”
+						截至2018年3月，学校有9个博士后科研流动站，1个博士后科研工作站，8个一级学科博士点、38个二级学科博士点，22个一级学科硕士点、95个二级学科硕士点、11个种类32个领域的专业学位硕士点；2个世界一流学科建设学科，3个一级学科国家重点学科，11个二级学科国家重点学科，6个国家林业局重点学科，2个国家林业局重点（培育）学科，1个黑龙江省重点学科群，7个黑龙江省重点一级学科
+						截至2018年3月，学校有9个博士后科研流动站，1个博士后科研工作站，8个一级学科博士点、38个二级学科博士点，22个一级学科硕士点、95个二级学科硕士点、11个种类32个领域的专业学位硕士点；2个世界一流学科建设学科，3个一级学科国家重点学科，11个二级学科国家重点学科，6个国家林业局重点学科，2个国家林业局重点（培育）学科，1个黑龙江省重点学科群，7个黑龙江省重点一级学科
+						截至2018年3月，学校有9个博士后科研流动站，1个博士后科研工作站，8个一级学科博士点、38个二级学科博士点，22个一级学科硕士点、95个二级学科硕士点、11个种类32个领域的专业学位硕士点；2个世界一流学科建设学科，3个一级学科国家重点学科，11个二级学科国家重点学科，6个国家林业局重点学科，2个国家林业局重点（培育）学科，1个黑龙江省重点学科群，7个黑龙江省重点一级学科
+						截至2018年3月，学校有9个博士后科研流动站，1个博士后科研工作站，8个一级学科博士点、38个二级学科博士点，22个一级学科硕士点、95个二级学科硕士点、11个种类32个领域的专业学位硕士点；2个世界一流学科建设学科，3个一级学科国家重点学科，11个二级学科国家重点学科，6个国家林业局重点学科，2个国家林业局重点（培育）学科，1个黑龙江省重点学科群，7个黑龙江省重点一级学科
+						截至2018年3月，学校有9个博士后科研流动站，1个博士后科研工作站，8个一级学科博士点、38个二级学科博士点，22个一级学科硕士点、95个二级学科硕士点、11个种类32个领域的专业学位硕士点；2个世界一流学科建设学科，3个一级学科国家重点学科，11个二级学科国家重点学科，6个国家林业局重点学科，2个国家林业局重点（培育）学科，1个黑龙江省重点学科群，7个黑龙江省重点一级学科
+						</p>
+					</div>
+					<div class="textcol">
+						<div class="borleft">志愿无忧专家总结</div>
+						<p class="col7 marborp">应用经济学、法学、马克思主义理论、外国语言文学、数学、化学、统计学、光学工程、控制科学与工程、计算机科学与技术、建筑学、土木工程、环境科学与工程、城乡规划学、软件工程、农业资源与环境、畜牧学、药学、管理科学与工程、工商管理、公共管理、设计学
+						应用经济学、法学、马克思主义理论、外国语言文学、数学、化学、统计学、光学工程、控制科学与工程、计算机科学与技术、建筑学、土木工程、环境科学与工程、城乡规划学、软件工程、农业资源与环境、畜牧学、药学、管理科学与工程、工商管理、公共管理、设计学
+						应用经济学、法学、马克思主义理论、外国语言文学、数学、化学、统计学、光学工程、控制科学与工程、计算机科学与技术、建筑学、土木工程、环境科学与工程、城乡规划学、软件工程、农业资源与环境、畜牧学、药学、管理科学与工程、工商管理、公共管理、设计学</p>
+					</div>
+				</div>
+			</div>-->
+		</main>
+		<!--底部-->
+
+		<script src="${base}/r/js/jquery-1.8.3.min.js"></script>
+		<script src="${base}/r/js/html2canvas.js"></script>
+		<script src="${base}/r/js/jspdf.js"></script>
+
+
+
+		<!--js弧线图-->
+            <script>
+                 window.chartColors = {
+                    red: 'rgb(255, 99, 132)',
+                    orange: 'rgb(255, 159, 64)',
+                    yellow: 'rgb(255, 205, 86)',
+                    green: 'rgb(75, 192, 192)',
+                    blue: 'rgb(54, 162, 235)',
+                    purple: 'rgb(153, 102, 255)',
+                    grey: 'rgb(201, 203, 207)'
+                };
+                window.randomScalingFactor = function () {
+                    return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+                };
+                var lineConfig = {
+                    type: 'line',
+                    data: {
+                        labels: ["January", "February", "March", "April", "May", "June", "July"],
+                        datasets: [{
+                            label: "My First dataset",
+                            backgroundColor: window.chartColors.red,
+                            borderColor: window.chartColors.red,
+                            data: [
+                                randomScalingFactor(),
+                                randomScalingFactor(),
+                                randomScalingFactor(),
+                                randomScalingFactor(),
+                                randomScalingFactor(),
+                                randomScalingFactor(),
+                                randomScalingFactor()
+                            ],
+                            fill: false,
+                        }, {
+                            label: "My Second dataset",
+                            fill: false,
+                            backgroundColor: window.chartColors.blue,
+                            borderColor: window.chartColors.blue,
+                            data: [
+                                randomScalingFactor(),
+                                randomScalingFactor(),
+                                randomScalingFactor(),
+                                randomScalingFactor(),
+                                randomScalingFactor(),
+                                randomScalingFactor(),
+                                randomScalingFactor()
+                            ],
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        title: {
+                            display: true,
+                            text: 'Line Chart'
+                        },
+                        tooltips: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        hover: {
+                            mode: 'nearest',
+                            intersect: true
+                        },
+                        scales: {
+                            xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Month'
+                                }
+                            }],
+                            yAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Value'
+                                }
+                            }]
+                        }
+                    }
+                };
+             /*   var lineCtx = document.getElementById("chartjs-line-chart").getContext("2d");
+                window.myLine = new Chart(lineCtx, lineConfig);
+                 var lineCtx1 = document.getElementById("chartjs-line-chart1").getContext("2d");
+                 window.myLine = new Chart(lineCtx1, lineConfig);*/
+
+
+
+				 var downPdf = document.getElementById("renderPdf");
+				 downPdf.onclick = function () {
+					 html2canvas(document.body).then(function (canvas) {
+						 //返回图片dataURL，参数：图片格式和清晰度(0-1)
+						 var pageData = canvas.toDataURL('image/jpeg', 1.0);
+
+						 //方向默认竖直，尺寸ponits，格式a4[595.28,841.89]
+						 var pdf = new jsPDF('', 'pt', 'a4');
+
+						 //addImage后两个参数控制添加图片的尺寸，此处将页面高度按照a4纸宽高比列进行压缩
+						 pdf.addImage(pageData, 'JPEG', 0, 0, 595.28, 592.28 / canvas.width * canvas.height);
+						 var pdfData = pdf.output('dataurlstring')//获取到base64 的pdf
+						 // console.info(pdfData);
+						 var base64 = pdfData.substring(28); //然后把这个字符串送到后台解密
+						 console.info(base64);
+						 base64=base64.replace(/\+/g, "%2B");
+						 base64=base64.replace(/&/g, "%26");
+						 $.ajax({
+                                         async: false,
+                                         data: {file:base64},
+                                         url:  "${base}/pdf/generatePdf.jspx?t=" + new Date().getTime(),
+										 ContentType:"application/x-www-form-urlencoded;charset=UTF-8",
+							 			//dataType: "json",
+                                         type: "POST",
+                                         success: function (data) {
+                                             alert(data);
+                                         }
+                                     });
+                                 })
+
+
+                 }
+
+
+
+            </script>
+	</body>
+</html>

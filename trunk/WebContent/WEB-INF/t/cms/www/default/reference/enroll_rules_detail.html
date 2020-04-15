@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>资讯内容</title>
+    <link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+    <style>
+        .zixunContentMain .zixunContent{
+            width: 75%;
+            border: 10px solid #05b8c3;
+            min-height: 800px;
+            margin-right: 2%;
+            padding: 10px;
+            text-align: center;
+        }
+        .zixunContentMain .zixuntuijian{
+            width: 23%;
+
+        }
+        .zixunContentMain .zixuntuijian>div{
+            border: 2px solid #05b8c3;
+            margin-bottom: 5px;
+            padding: 5px;
+        }
+        .zixunContentMain .zixuntuijian>div ul li{
+            width:260px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: left;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+<!--顶部线条-->
+<div class="topLine"></div>
+<!--tab切换  导航-->
+[#include "../include/header_zy.html"/]
+<!--路径-->
+<div class="route">
+    <div class="flex-container1 width1200">
+        <div><a href="${base}/">首页 </a> &lt;&lt;报考大数据 &lt;&lt;招生章程</div>
+    </div>
+</div>
+<!--主体-->
+<mian class="width1200 flex-container2 zixunContentMain">
+    <div class="zixunContent">
+        [#if type == 1]
+            ${detail.zszc!}
+        [#else]
+            ${detail.zzzsZc!}
+        [/#if]
+    </div>
+    <div class="zixuntuijian">
+        <div>
+            <h3>相关内容推荐</h3>
+            <ul>
+                <li>
+                    <a href="">
+                        <img src="../../img/li1.png" alt="" />
+                        <span title="上海科技大学2018综合评价招招招招招">上海科技大学2018综合评价招招招招招</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="../../img/li2.png" alt="" />
+                        <span title="上海科技大学2018综合评价招招招招招">上海科技大学2018综合评价招招招招招</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="../../img/li3.png" alt="" />
+                        <span title="上海科技大学2018综合评价招招招招招">上海科技大学2018综合评价招招招招招</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="../../img/li4.png" alt="" />
+                        <span title="上海科技大学2018综合评价招招招招招">上海科技大学2018综合评价招招招招招</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="../../img/li5.png" alt="" />
+                        <span title="上海科技大学2018综合评价招招招招招">上海科技大学2018综合评价招招招招招</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="../../img/li6.png" alt="" />
+                        <span title="上海科技大学2018综合评价招招招招招">上海科技大学2018综合评价招招招招招</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="../../img/li7.png" alt="" />
+                        <span title="上海科技大学2018综合评价招招招招招">上海科技大学2018综合评价招招招招招</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="../../img/li8.png" alt="" />
+                        <span title="上海科技大学2018综合评价招招招招招">上海科技大学2018综合评价招招招招招</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="../../img/li9.png" alt="" />
+                        <span title="上海科技大学2018综合评价招招招招招">上海科技大学2018综合评价招招招招招</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="../../img/li9.png" alt="" />
+                        <span title="上海科技大学2018综合评价招招招招招">上海科技大学2018综合评价招招招招招</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h3>热门内容推荐</h3>
+            <ul>
+                <li>
+                    <a href="" title="新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额">
+                        新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额">
+                        新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额">
+                        新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额">
+                        新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额">
+                        新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额">
+                        新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额">
+                        新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额">
+                        新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额">
+                        新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额">
+                        新鲜出炉！2017年具备自主招生资质的的的额的的的额额额额额
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</mian>
+<!--底部-->
+[#include "../include/footer.html"/]
+<!--js-->
+<script src="${base}/r/js/jQuery.js"></script>
+<script src="${base}/r/js/bootstrap.min.js"></script>
+<script src="${base}/r/js/jquery.combo.select.js"></script>
+<script src="${base}/r/js/itemsJs/common.js"></script>
+</body>
+
+</html>

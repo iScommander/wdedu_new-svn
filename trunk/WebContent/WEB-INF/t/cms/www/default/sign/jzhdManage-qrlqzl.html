@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>讲座活动名单</title>
+		<link rel="stylesheet" href="${base}/r/sign/jedate.css" />
+		<link rel="stylesheet" href="${base}/r/sign/jzhd-manage.css" />
+		<script src="${base}/r/sign/jquery-1.11.3.min.js"></script>
+		<script src="${base}/r/sign/city.min.js"></script>
+		<style type="text/css">
+			.btn-search{right: 200px;}
+			.btn-excel{right: 0;background: #43D5CA;}
+		</style>
+	</head>
+	<body class="iframe-body">
+		<h4 class="con-title">领取资料名单</h4>
+		 <form action="confirmlist.jspx"  id="form">	
+		 <input type="hidden"  name="pageNo">
+		<div class="search-wrap gps">
+			<div class="search-item">
+				<label>讲座时间:</label>
+				<span><input type="text" class="date-icon" id="inpstart"  placeholder="开始日期" readonly="readonly"></span>
+				<span class="line">--</span>
+				<span><input type="text" class="date-icon" id="inpend"    placeholder="结束日期" readonly="" disabled="disabled"></span>
+			</div>
+			<div class="search-item">
+				<label>选择省份:</label>
+				<span class="select-wrap">
+					<select id="pro" name="pro">
+						<option value="none">--请选择--</option>
+					</select>
+				</span>
+			</div>
+			<div class="search-item">
+				<label>手机号:</label>
+				<input type="text" placeholder="11位手机号码" name="telephone"  />
+			</div>
+			
+			<div class="search-item">
+				<label>讲座序号:</label>
+				<input type="text" value="${active_id!}" name="active_id"  />
+			</div>			
+			<button type="submit" class="btn-search">查询</button>
+		</div>
+		
+		<table>
+			<thead>
+				<tr>
+					<th>讲座序号</th>
+					<th>姓名</th>
+					<th>省份</th>
+					<th>市区</th>
+					<th>电话</th>
+					<th>学校名称</th>
+					<th>年级</th>
+					<th>文理科</th>
+					<th>是否报名</th>
+					<th>是否签到</th>
+					<th>领取资料状态</th>
+					<th>用户类型</th>
+					<th>退款情况</th>
+					<th>资料领取时间</th>	
+					<th>编号</th>	
+									
+				</tr>
+			</thead>
+			<tbody>
+				[#if pagination??]
+			    [#list pagination.list as list]
+				<tr>
+					<td>${list.active_id!}</td>
+					<td>${list.name!}</td>
+					<td>${list.pro!}</td>
+					<td>${list.city!}</td>
+					<td>${list.telephone!}</td>
+					<td>${list.school_name!}</td>
+					<td>${list.classes!}</td>
+					<td>${list.major_type!}</td>
+					<td>${list.ruchangquan_type!}</td>
+					<td>${list.qiandao_type!}</td>
+					
+					
+					<td>
+					[#if list.lingquziliao?? && list.lingquziliao == "已经领取"]
+						<button disabled>已经领取</button>	
+					 [#else]	
+					      <a href="${base}/active/confirm.jspx?id=${list.id}&ispay=${list.ispay!}&pageNo=${pageNo!}&active_id=${list.active_id!}">确认领取</a>
+					 [/#if]				
+					</td>
+					<td>${list.isfufei!}</td>
+					<td>${list.info_pay_success!}</td>
+					<td>${list.lzl_time!}</td>
+					<td>${list.id!}</td>								
+					[/#list]
+				[/#if]
+			</tbody>
+			</table>
+				<ol class="paging">
+						<div class="paging" >
+							<button type="button"  onclick="_gotoPage('1');">首页</button>
+							<button type="button"  onclick="_gotoPage('${pagination.prePage}');">上一页</button>
+							<button type="button"  onclick="_gotoPage('${pagination.nextPage}');">下一页</button>
+							<button type="button"  onclick="_gotoPage('${pagination.totalPage}');">尾页</button>	
+							<button type="button"  value="${pagination.pageNo}">当前页:${pagination.pageNo}</button>	
+							<button type="button"  >总页数:${pagination.totalPage}</button>																											
+						</div>	
+				</ol>			
+			</form>	
+	</body>
+	<script src="${base}/r/sign/jquery.jedate.min.js"></script>
+	<script type="text/javascript">
+	
+	 function _gotoPage(pageNo) {
+			try{
+				$("input[name='pageNo']").val(pageNo);
+				$('#form').submit();
+			} catch(e) {
+				alert('_gotoPage(pageNo)方法出错');
+			}
+		};
+	
+		$(function() {
+			//省市
+			function getSeectList(obj,data){
+				var html = '<option value="none">--请选择--</option>';
+				$.each(data, function(i,val) {
+					html += '<option value="'+val.id+'">'+val.value+'</option>';
+				});
+				$(obj).html(html);
+			};
+			getSeectList('#pro',prolist);
+			$('#pro').on('change',function(){
+				var pro = $(this).val();
+				if(pro=='none'){
+					alert('请选择省份，否则无法选择市区！');
+					$('#city').attr('disabled','disabled');		
+					$('#quxian').attr('disabled','disabled');
+					return false;
+				};
+				console.log(pro);
+				var cityData = [];
+				$.each(citylist, function(j,val) {
+					if(val.parentId==pro){
+						cityData.push(citylist[j]);
+					}
+				});
+				getSeectList('#city',cityData);
+				$('#city').removeAttr('disabled');
+			});
+			$('#city').on('change',function(){
+				var city = $(this).val();
+				if(city=='none'){
+					alert('请选择市区！');
+					return false;
+				};
+			});
+			//时间选择
+			var start = {
+			    format: 'YYYY-MM-DD',
+			    onClose: false, 
+			    minDate: $.nowDate({DD:0}),
+			    okfun: function(obj){
+			        end.minDate = obj.val;
+			        $("#inpend").removeAttr("disabled");
+			        endDates();
+			    }
+			};
+			var end = {
+			    format: 'YYYY-MM-DD',
+			    onClose: false,
+			    minDate: $.nowDate({DD:0}),
+			};
+			function endDates() {
+			    end.trigger = false;
+			    $("#inpend").jeDate(end);
+			};
+			$('#inpstart').jeDate(start);
+			$('#inpend').jeDate(end);
+		})
+	</script>
+</html>

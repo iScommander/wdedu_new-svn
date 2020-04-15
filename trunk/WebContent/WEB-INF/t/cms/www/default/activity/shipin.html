@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>讲座视频</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<script src="${base}/r/cms/front.js"></script>
+	</head>
+
+	<body>
+		<!--顶部-->
+		[#include "../include/header.html"/]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container width1200">
+				<div><a href="${base}">首页</a> &lt;&lt; 沃得研究院&lt;&lt; 讲座视频</div>
+				<div></div>
+			</div>
+		</div>
+		<!--主体-->
+		<main class="width1200 shipinMain">
+
+			<div style="padding-left: 20px;padding-bottom: 10px;font-size: 20px">志愿填报技巧及系统操作指南</div>
+			<div class="flex-container3 row">
+
+				[@cms_content_list typeId='1' channelId='148' ]
+				[#list tag_list as a]
+
+				<div class="col-md-3">
+					<video src="${a.mediaPath!}"  controls="controls" class="shipinwenjian">您的浏览器不支持 video 标签。</video>
+					<p>${a.title}</p>
+				</div>
+				[/#list]
+				[/@cms_content_list]
+			</div>
+			<div style="padding-left: 20px;padding-bottom: 10px;font-size: 20px">专业视频解读</div>
+			<div class="flex-container3 row">
+
+				[#if majorTypeId == "2"]
+				[@cms_content_list typeId='1' channelId='146' ]
+				[#list tag_list as a]
+				<div class="col-md-3">
+					<video src="${a.mediaPath!}"  controls="controls" controlslist="nodownload" class="shipinwenjian">您的浏览器不支持 video 标签。</video>
+					<p>${a.title}</p>
+				</div>
+				[/#list]
+				[/@cms_content_list]
+				[#elseif majorTypeId == "1"]
+				[@cms_content_list typeId='1' channelId='147' ]
+				[#list tag_list as a]
+				<div class="col-md-3">
+					<video src="${a.mediaPath!}" controls="controls" controlslist="nodownload" class="shipinwenjian">您的浏览器不支持 video 标签。</video>
+					<p>${a.title}</p>
+				</div>
+				[/#list]
+				[/@cms_content_list]
+				[/#if]
+
+			</div>
+
+		</main>
+		<!--底部-->
+		[#include "../include/footer.html"/]
+		<!--<iframe MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no src="../../footer.html" height="360px" width="100%"></iframe>-->
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/bootstrap-treeview.min.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+	</body>
+
+</html>

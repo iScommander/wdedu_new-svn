@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>全国巡讲列表</title>
+    <link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<script src="${base}/r/wdedu/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+[#include "../include/header_address.html"/]
+[#include "../include/header_msdjt.html"/]
+
+<div class="mbxdh_bg">
+    <div class="mbxdh">
+        <a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="${base}/NewsDisplay/TheNationalTour.jspx">全国巡讲</a>&nbsp;&gt; &nbsp; <a href="#">全国巡讲详情</a>
+    </div>
+</div>
+<div class="con">
+    <div class="qgxj_l fl">
+        <div class="qgxj_l_tit">
+
+            [@cms_content_list typeId='1' channelId='296' dateFormat='yyyy-MM-dd']
+            [#list tag_list as a]
+            [#if a.id= newContentId ]
+            <h4>
+                ${a.title!}
+            </h4>
+            <div class="qgxj_l_tit_con">
+                <span>发布时间：${(a.releaseDate?string('yyyy-MM-dd'))!}</span><span>编辑:${a.author!'本站编辑'}</span><span>来源:${a.origin!'来源网络侵删'}</span>
+            </div>
+            [/#if]
+            [/#list]
+            [/@cms_content_list]
+        </div>
+        <div class="qgxj_l_con">
+            [@cms_content_list typeId='1' channelId='296' dateFormat='yyyy-MM-dd']
+            [#list tag_list as a]
+            [#if a.id=newContentId]
+            ${a.txt!}
+            [/#if]
+            [/#list]
+            [/@cms_content_list]
+        </div>
+
+
+    </div>
+    <div class="qgxj_r fr">
+        <div class="qgxj_r_tit">
+            最新巡讲
+        </div>
+        [@cms_content_list typeId='1' channelId='296' dateFormat='yyyy-MM-dd']
+        [#list tag_list as a]
+        <div class="quxj_xq_one ">
+            <div class="quxj_xq_img">
+                <img src="${base}/r/wdedu/images/gxu_1.png" />
+            </div>
+            <a href="${base}/NewsDisplay/TheNationalTourDetail.jspx?contentId=${a.id!}">[@text_cut s=a.title! len=20 append='...'/]</a>
+        </div>
+        [/#list]
+        [/@cms_content_list]
+        <!--
+                      <div class="quxj_xq_one ">
+                    <div class="quxj_xq_img">
+                    <img src="${base}/r/wdedu/images/gxu_1.png" />
+                    </div>
+                    <a href="#">九中高二家长会吕晓李老师开讲</a>
+                    </div>
+        -->
+        <div class="clearfix"></div>
+
+    </div>
+    <div class="clearfix"></div>
+</div>
+[#include "../include/footer_new.html"/]
+</body>
+</html>

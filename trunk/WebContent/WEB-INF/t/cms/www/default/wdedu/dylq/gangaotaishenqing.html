@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>港澳台申请</title>
+    <link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+    <script type='text/javascript' src='${base}/r/wdedu/js/fudong.js'></script>
+    <script src="${base}/r/wdedu/js/jquery-1.9.1.min.js"></script>
+
+    <script  type="text/javascript">
+        function apply() {
+            var user = $("#user").val();
+            var type = $("#type").val();
+
+            if(user==null||user==""){
+                showDialog2()
+            }else {
+
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: "${base}/activeApplyAct/applyActive.jspx",
+                    data: {
+                        "activityType": type
+                    },
+
+                    success: function (data) {
+                        alert(data.msg);
+                    }
+                })
+            }
+        }
+    </script>
+</head>
+[#include "../include/header_address.html"/]
+[#include "../include/header_dylq.html"/]
+<div class="mbxdh_bg">
+    <div class="mbxdh">
+        <a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">多元录取</a>&nbsp;&gt; &nbsp; <a href="#">港澳台申请</a>
+    </div>
+</div>
+<input id="user" value="${user!}" type="hidden">
+<div class="con">
+    <div class="zz_zs_im">
+        <img  src="${base}/r/wdedu/images/gangaotaishenqing.jpg"/>
+    </div>
+
+    <div class="zz_zs_z_ul f_l">
+        <ul>
+            [@cms_content_list typeId='1,2,3' count='5' titLen='25' channelId='176' orderBy='4' channelOption='0' dateFormat='yyyy-MM-dd']
+            [#list tag_list as a]
+            <li><a href="${base}/NewsDisplay/HongKongMacaoTaiwanDetail.jspx?contentId=${a.id!}">${a.title!}</a></li>
+            [/#list]
+            [/@cms_content_list]
+        </ul>
+    </div>
+    <div class="zz_zs_y_ul f_r">
+        <ul>
+            [@cms_content_list typeId='1,2,3' count='5' titLen='25' channelId='177' orderBy='4' channelOption='0' dateFormat='yyyy-MM-dd']
+            [#list tag_list as a]
+            <li><a href="${base}/NewsDisplay/HongKongMacaoTaiwanDetail.jspx?contentId=${a.id!}">${a.title!}</a></li>
+            [/#list]
+            [/@cms_content_list]
+        </ul>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="zz_zs_sj">
+        <div class="zz_zs_sj_bt">
+            <span>2020港澳申请招生时间表</span>
+        </div>
+        <div class="zz_zs_sj_img" style="margin-top:15px">
+            <img src="${base}/r/wdedu/images/gangaotaishijian.png"/>
+        </div>
+        <div class="zz_zs_sj_bt">
+            <span>2020年具有港澳申请资格的高校及招生简章</span>
+        </div>
+        <div class="zz_zs_sj_bg">
+
+            <table width="100%" border="0" cellpadding="0" cellspacing="1" style="background-color:#e2e2e2;">
+                [@cms_content_list typeId='1,2,3'  titLen='25' channelId='282' orderBy='1' channelOption='0' dateFormat='yyyy-MM-dd']
+                [#list tag_list as a]
+                [#if (a_index)%3 = 0]
+                <tr>
+                    [/#if]
+                    <td align="center" valign="middle" bgcolor="#FFFFFF"><a href="${base}/NewsDisplay/HongKongMacaoTaiwanDetail.jspx?contentId=${a.id!}">${a.shortTitle!}</a></td>
+                    [#if ((a_index+1)*2)%3 = 0]
+                </tr>
+                [/#if]
+                [/#list]
+                [/@cms_content_list]
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+</div>
+
+<div class="mb_db_gd" id="box2">
+    <div class="mb_db_gd_zt">
+        <span>"我想到 香港 澳门 读大学"&nbsp;&nbsp;港澳申请</span>
+        <a class="mb_db_gd_an" onclick="apply()">立即报名</a>
+        <input type="hidden" id="type" value="港澳台申请">
+    </div>
+    <div class="clearfix"></div>
+</div>
+</div>
+[#include "../include/footer_new.html"/]
+
+<body>
+</body>
+</html>

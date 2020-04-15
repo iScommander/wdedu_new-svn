@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>志愿填报</title>
+		<link rel="stylesheet" href="../css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../css/combo.select.css" />
+		<link rel="stylesheet" href="../css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="../css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="../css/itemsCSS/extend.css" />
+		<style>
+			.combo-select {
+				width: 170px;
+				height: 40px;
+				line-height: 40px;
+			}
+			
+			.combo-select select {
+				width: 0 !important;
+			}
+			.radio_base label {
+			    font-weight: normal;
+			}
+			.fillIn form div.flex-container1>ul>li>div{
+				margin: 20px 15px;
+			}
+			.fillIn form div.flex-container1>ul>li.projectInstruction>span{
+				display: block;
+				font-size: 20px;
+				color: #ff0000;
+				margin: 30px 0;
+			}
+			.fillIn form div.flex-container1>ul>li.projectInstruction>p{
+				margin: 15px 0;
+			}
+			.fillIn form div.textC button{
+				margin: 32px;
+			}
+			.fillIn form div.textC button.chakan{
+				background: #fff;
+				color: #05b8c3;
+				border: 1px solid #05b8c3;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--顶部线条-->
+		<div class="topLine"></div>
+		<!--tab切换  导航-->
+		<nav class="indexNav">
+			<div class="flex-container1 width1200">
+				<div class="marginR50">
+					<img src="../img/logo.png" alt="" />
+					<img src="../img/name.png" alt="" />
+				</div>
+				<div>
+					<ul class="nav nav-pills">
+						<li role="presentation">
+							<a href="evaluation.html">专业测评</a>
+						</li>
+						<li role="presentation">
+							<a href="intention.html">报考意向</a>
+						</li>
+						<li role="presentation">
+							<a href="toCollege.html">志愿填报</a>
+						</li>
+						<li role="presentation" class="dropdown">
+							<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">填报参考</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="FillReference/TableByTable.html">一分一段表</a>
+								</li>
+								<li>
+									<a href="FillReference/enrollmentPlan.html">招生计划</a>
+								</li>
+								<li>
+									<a href="FillReference/admissionHistory.html">历史录取</a>
+								</li>
+								<li>
+									<a href="FillReference/batchQuery.html">批次查询</a>
+								</li>
+							</ul>
+						</li>
+						<li role="presentation" class="dropdown">
+							<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">报考大数据</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="bigData/academyRankingList.html">院校排行榜</a>
+								</li>
+								<li>
+									<a href="bigData/specialtyRankingList.html">专业排行榜</a>
+								</li>
+								<li>
+									<a href="bigData/runAschool.html">中外合作办学</a>
+								</li>
+								<li>
+									<a href="bigData/laboratory.html">重点学科实验室</a>
+								</li>
+								<li>
+									<a href="bigData/ProfessionalBooks.html">职业大全</a>
+								</li>
+								<li>
+									<a href="bigData/recruitStudent.html">招生章程</a>
+								</li>
+							</ul>
+						</li>
+						<li role="presentation">
+							<a href="userCenter.html">用户中心</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container1 width1200">
+				<div>
+					<a href="../index.html">首页 </a> &lt;&lt;志愿填报 &lt;&lt;志愿填报</div>
+			</div>
+		</div>
+		<!--主体-->
+		<main class="width1200">
+			<!--模拟填报表-->
+			<div class="simulationTable">
+				<p>2019年志愿模拟填报表</p>
+				<span>Voluntary simulation report form 2019</span>
+				<div class="fillIn">
+					<form action="">
+						<div class="flex-container1">
+							<ul style="width: 55%;">
+								<!--省份选择-->
+								<li class="flex-container1">
+									<div class="width150 paddingTop6">
+										<span class="paddingLeft10 paddingLeft30">省份选择</span>
+									</div>
+									<div>
+										<select class="provincewenli">
+											<option value="" disabled selected hidden>选择省份</option>
+											<option value="1">111</option>
+										</select>
+									</div>
+								</li>
+								<!--文理科选择-->
+								<li class="flex-container1">
+									<div class="width150 paddingTop6">
+										<span class="paddingLeft10 paddingLeft30">文理科选择</span>
+									</div>
+									<div class="paddingTop6">
+										<div class="radio_base">
+											<input id="radio_base1" class="styled indexRadio" type="radio" name="radio_base">
+											<label for="radio_base1" class="font-bolder">文科</label>
+										</div>
+										<div class="radio_base">
+											<input id="radio_base2" class="styled indexRadio" type="radio" name="radio_base">
+											<label for="radio_base2" class="font-bolder">理科</label>
+										</div>
+										<div class="radio_base">
+											<input id="radio_base3" class="styled indexRadio" type="radio" name="radio_base">
+											<label for="radio_base3" class="font-bolder">综合改革</label>
+										</div>
+									</div>
+								</li>
+								<!--方案名称-->
+								<li class="flex-container1">
+									<div class="width150 paddingTop6">
+										<img src="../img/designation.png" alt="" />
+										<span class="paddingLeft10">方案名称</span>
+									</div>
+									<div>
+										<input type="text" placeholder="输入汉字，数字等" />
+									</div>
+								</li>
+								<!--输入批次查分-->
+								<li class="flex-container1">
+									<div class="width150 paddingTop6">
+										<div class="radio_base">
+											<input id="radio1" class="styled indexRadio" type="radio" name="radio">
+											<label for="radio1" class="font-bolder">输入批次查分</label>
+										</div>
+									</div>
+									<div class="comboBox">
+										<select class="batch">
+											<option value="" disabled selected hidden>选择批次</option>
+											<option value="1">本科一批</option>
+											<option value="2">本科二批</option>
+											<option value="3">本科三批</option>
+											<option value="4">专科批</option>
+										</select>
+									</div>
+									<div>
+										<input type="text" placeholder="输入分差值(例如：10)" />
+									</div>
+									<!--<div>注意：根据开始成绩和批次线换算高考成绩</div>-->
+								</li>
+								<!--输入高考总分-->
+								<li class="flex-container1">
+									<div class="width150 paddingTop6">
+										<div class="radio_base">
+											<input id="radio2" class="styled indexRadio" type="radio" name="radio">
+											<label for="radio2" class="font-bolder">输入高考总分</label>
+										</div>
+									</div>
+									<div>
+										<input type="text" placeholder="" />
+									</div>
+									<div class="paddingTop6">
+										<a href="FillReference/TableByTable.html" style="color: #05b8c3;font-size: 14px;">查看一分一段表</a>
+									</div>
+								</li>
+									<!--本省排名-->
+								<li class="flex-container1">
+									<div class="width150 paddingTop6 paddingLeft30">本省排名</div>
+									<div>
+										<input type="text" placeholder="" />
+									</div>
+									<div style="padding-top: 5px;margin: 25px 10px;">
+										<div class="checkbox_base">
+											<input id="flex-item10-20" type="checkbox" />
+											<label for="flex-item10-20" style="font-size: 12px;color: #ff0000;">输入准确排名/已知准确排名</label>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<ul style="width: 45%;">
+								<!--模拟志愿方案说明：-->
+								<li class="projectInstruction">
+									<span>模拟志愿方案说明：</span>
+									<p>1，选择“输入批次查分“，使用模考成绩模拟填报志愿</p>
+									<p>2，或选”输入高考总分“，使用高考成绩模拟填报志愿</p>
+									<p>3，高考出分后，只能输入一次高考成绩，生成一次志愿方案</p>
+									<p>4，保存成绩创建志愿方案，根据成绩和排名，填写志愿方案</p>
+									<p>5，查看院校计划与历史数据，查看我省招生录取详细数据</p>
+								</li>
+								<!--选择高考选考科目-->
+								<li style="border-bottom: none;">
+									<p class="" style="font-size: 20px;color: #81c6ed;margin-top:35px;">选择高考选考科目</p>
+									<!--<div class="flex-container2 examinationSubject">
+										<div>
+											<div class="checkbox_base">
+												<input id="test" type="checkbox" />
+												<label for="test">物理</label>
+											</div>
+										</div>
+										<div>
+											<div class="checkbox_base">
+												<input id="test1" type="checkbox" />
+												<label for="test1">化学</label>
+											</div>
+										</div>
+										<div>
+											<div class="checkbox_base">
+												<input id="test2" type="checkbox" />
+												<label for="test2">生物</label>
+											</div>
+										</div>
+										<div>
+											<div class="checkbox_base">
+												<input id="test3" type="checkbox" />
+												<label for="test3">政治</label>
+											</div>
+										</div>
+										<div>
+											<div class="checkbox_base">
+												<input id="test4" type="checkbox" />
+												<label for="test4">历史</label>
+											</div>
+										</div>
+										<div>
+											<div class="checkbox_base">
+												<input id="test5" type="checkbox" />
+												<label for="test5">地理</label>
+											</div>
+										</div>
+										<div>
+											<div class="checkbox_base">
+												<input id="test6" type="checkbox" />
+												<label for="test6">技术</label>
+											</div>
+										</div>
+									</div>-->
+									<div class="flex-container1">
+										<div class="width150 paddingTop6">选测科目一</div>
+										<div class="comboBox flex-item1">
+											<select class="batch">
+												<option value="" disabled selected hidden>请选择</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+											</select>
+										</div>
+										<div class="comboBox flex-item1">
+											<select class="batch">
+												<option value="" disabled selected hidden>请选择</option>
+												<option value="1">A+</option>
+												<option value="2">A</option>
+												<option value="3">B+</option>
+												<option value="4">B</option>
+												<option value="5">C+</option>
+												<option value="6">C</option>
+											</select>
+										</div>
+									</div>
+									<div class="flex-container1">
+										<div class="width150 paddingTop6">选测科目二</div>
+										<div class="comboBox flex-item1">
+											<select class="batch">
+												<option value="" disabled selected hidden>请选择</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+											</select>
+										</div>
+										<div class="comboBox flex-item1">
+											<select class="batch">
+												<option value="" disabled selected hidden>请选择</option>
+												<option value="1">A+</option>
+												<option value="2">A</option>
+												<option value="3">B+</option>
+												<option value="4">B</option>
+												<option value="5">C+</option>
+												<option value="6">C</option>
+											</select>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="textC">
+							<button class="btn5 btnColorGreen">保存成绩并创建志愿方案</button>
+							<button class="btn5 chakan">查看高校计划与历史数据</button>
+						</div>
+					</form>
+
+				</div>
+			</div>
+			<!--查找志愿方案-->
+			<div class="findfangan">
+				<!--搜索-->
+				<div class="hugeSearch">
+					<input type="text" placeholder="输入方案名称，点击搜索方案或者创建志愿方案，点击“方案名称” 可修改" />
+					<button class="btn1 btnColorGreen" type="submit">查找志愿方案</button>
+				</div>
+				<!--列表-->
+				<div>
+					<table class="table table-striped deeptable">
+						<tr>
+							<th>方案名称</th>
+							<th>填报</th>
+							<th>省份</th>
+							<th>届别</th>
+							<th>文理科</th>
+							<th>选考科目</th>
+							<th>成绩</th>
+							<th>排名</th>
+							<th>操作</th>
+						</tr>
+						<tr>
+							<td>一模成绩方案</td>
+							<td>
+								<a href="voluntary.html" class="ToFillIn">开始填报</a>
+							</td>
+							<td>北京</td>
+							<td>19届</td>
+							<td>理科</td>
+							<td>物理：A+;化学：B</td>
+							<td>550</td>
+							<td>121212</td>
+							<td>
+								<button class="btn4 btnColorGreen" onclick="javascrtpt:window.location.href='voluntary.html'">查看</button>
+								<button class="btn4 btnColorGreen">导出</button>
+								<button class="btn4 btnColorGreen">评估</button>
+								<button class="btn4 btnColorGreen">绑定</button>
+								<button class="btn4 btnColorGreen">发送</button>
+								<button class="btn4 btnColorRed">删除</button>
+							</td>
+						</tr>
+						<tr>
+							<td>一模成绩方案</td>
+							<td>
+								<a href="voluntary.html" class="ToFillIn">开始填报</a>
+							</td>
+							<td>北京</td>
+							<td>19届</td>
+							<td>理科</td>
+							<td>物理：A+;化学：B</td>
+							<td>550</td>
+							<td>121212</td>
+							<td>
+								<button class="btn4 btnColorGreen">查看</button>
+								<button class="btn4 btnColorGreen">导出</button>
+								<button class="btn4 btnColorGreen">评估</button>
+								<button class="btn4 btnColorGreen">绑定</button>
+								<button class="btn4 btnColorGreen">发送</button>
+								<button class="btn4 btnColorRed">删除</button>
+							</td>
+						</tr>
+						<tr>
+							<td>一模成绩方案</td>
+							<td>
+								<a href="voluntary.html" class="ToFillIn">开始填报</a>
+							</td>
+							<td>北京</td>
+							<td>19届</td>
+							<td>理科</td>
+							<td>物理：A+;化学：B</td>
+							<td>550</td>
+							<td>121212</td>
+							<td>
+								<button class="btn4 btnColorGreen">查看</button>
+								<button class="btn4 btnColorGreen">导出</button>
+								<button class="btn4 btnColorGreen">评估</button>
+								<button class="btn4 btnColorGreen">绑定</button>
+								<button class="btn4 btnColorGreen">发送</button>
+								<button class="btn4 btnColorRed">删除</button>
+							</td>
+						</tr>
+						<tr>
+							<td>一模成绩方案</td>
+							<td>
+								<a href="voluntary.html" class="ToFillIn">开始填报</a>
+							</td>
+							<td>北京</td>
+							<td>19届</td>
+							<td>理科</td>
+							<td>物理：A+;化学：B</td>
+							<td>550</td>
+							<td>121212</td>
+							<td>
+								<button class="btn4 btnColorGreen">查看</button>
+								<button class="btn4 btnColorGreen">导出</button>
+								<button class="btn4 btnColorGreen">评估</button>
+								<button class="btn4 btnColorGreen">绑定</button>
+								<button class="btn4 btnColorGreen">发送</button>
+								<button class="btn4 btnColorRed">删除</button>
+							</td>
+						</tr>
+						<tr>
+							<td>一模成绩方案</td>
+							<td>
+								<a href="voluntary.html" class="ToFillIn">开始填报</a>
+							</td>
+							<td>北京</td>
+							<td>19届</td>
+							<td>理科</td>
+							<td>物理：A+;化学：B</td>
+							<td>550</td>
+							<td>121212</td>
+							<td>
+								<button class="btn4 btnColorGreen">查看</button>
+								<button class="btn4 btnColorGreen">导出</button>
+								<button class="btn4 btnColorGreen">评估</button>
+								<button class="btn4 btnColorGreen">绑定</button>
+								<button class="btn4 btnColorGreen">发送</button>
+								<button class="btn4 btnColorRed">删除</button>
+							</td>
+						</tr>
+						<tr>
+							<td>一模成绩方案</td>
+							<td>
+								<a href="voluntary.html" class="ToFillIn">开始填报</a>
+							</td>
+							<td>北京</td>
+							<td>19届</td>
+							<td>理科</td>
+							<td>物理：A+;化学：B</td>
+							<td>550</td>
+							<td>121212</td>
+							<td>
+								<button class="btn4 btnColorGreen">查看</button>
+								<button class="btn4 btnColorGreen">导出</button>
+								<button class="btn4 btnColorGreen">评估</button>
+								<button class="btn4 btnColorGreen">绑定</button>
+								<button class="btn4 btnColorGreen">发送</button>
+								<button class="btn4 btnColorRed">删除</button>
+							</td>
+						</tr>
+						<tr>
+							<td>一模成绩方案</td>
+							<td>
+								<a href="voluntary.html" class="ToFillIn">开始填报</a>
+							</td>
+							<td>北京</td>
+							<td>19届</td>
+							<td>理科</td>
+							<td>物理：A+;化学：B</td>
+							<td>550</td>
+							<td>121212</td>
+							<td>
+								<button class="btn4 btnColorGreen">查看</button>
+								<button class="btn4 btnColorGreen">导出</button>
+								<button class="btn4 btnColorGreen">评估</button>
+								<button class="btn4 btnColorGreen">绑定</button>
+								<button class="btn4 btnColorGreen">发送</button>
+								<button class="btn4 btnColorRed">删除</button>
+							</td>
+						</tr>
+						<tr>
+							<td>一模成绩方案</td>
+							<td>
+								<a href="voluntary.html" class="ToFillIn">开始填报</a>
+							</td>
+							<td>北京</td>
+							<td>19届</td>
+							<td>理科</td>
+							<td>物理：A+;化学：B</td>
+							<td>550</td>
+							<td>121212</td>
+							<td>
+								<button class="btn4 btnColorGreen">查看</button>
+								<button class="btn4 btnColorGreen">导出</button>
+								<button class="btn4 btnColorGreen">评估</button>
+								<button class="btn4 btnColorGreen">绑定</button>
+								<button class="btn4 btnColorGreen">发送</button>
+								<button class="btn4 btnColorRed">删除</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<!--分页-->
+			<div class="textC paging">
+				<tr>
+					<td colspan="8" style="padding:20px 0;">
+						<input type="hidden" name="pageNo" />
+						<table width="100%" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td align="center" class="pn-sp">
+									共 ${pagination.totalCount} 条&nbsp; 每页 ${pagination.pageSize} 条&nbsp; 当前 ${pagination.pageNo}/${pagination.totalPage} 页 &nbsp;转到第<input type="text" id="_goPs" onfocus="this.select();" onkeypress="if(event.keyCode==13){$('#_goPage').click();return false;}" style="width:50px; border:1px solid #e7e7e7;" />页
+									<input id="_goPage" type="button" value="转" onclick="_gotoPage($('#_goPs').val());" [#if pagination.totalPage==1] disabled="disabled" [/#if] />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="button" value="首 页" onclick="_gotoPage('1');" [#if pagination.firstPage] disabled="disabled" [/#if]/>
+									<input type="button" value="上一页" onclick="_gotoPage('${pagination.prePage}');" [#if pagination.firstPage] disabled="disabled" [/#if]/> <input type="button" value="下一页" onclick="_gotoPage('${pagination.nextPage}');" [#if pagination.lastPage] disabled="disabled" [/#if]/> <input type="button" value="尾 页" onclick="_gotoPage('${pagination.totalPage}');" [#if pagination.lastPage] disabled="disabled" [/#if]/> </td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</div>
+		</main>
+		<!--底部-->
+		<iframe MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no src="../footer.html" height="360px" width="100%"></iframe>
+
+		<!--js-->
+		<script src="../js/jQuery.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="../js/jquery.combo.select.js"></script>
+		<script src="../js/itemsJs/common.js"></script>
+		<script>
+			//下拉弹出框
+			$(function() {
+				$('select').comboSelect();
+				$(".combo-input").attr("readonly", "readonly").css("cursor", "pointer")
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>我的志愿表</title>
+<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<script src="${base}/r/wdedu/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+[#include "../include/header_address.html"/]
+    
+    
+  [#include "../include/header_hyzx.html"/]
+        
+		<div class="mbxdh_bg">
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">个人中心</a>&nbsp;&gt; &nbsp; <a href="#">我的服务</a>
+		</div>  
+	</div>
+    <div class="bgs">
+    	<div class="con2 ">
+        <div class="hyzx_yc_bt">
+            	<div class="hyzx_yc_bt_z f_l">
+                    <div class="hyzx_img_zt">
+                        <div class="hyzx_yc_z_img f_l">
+                            <img src="${base}/r/wdedu/images/index_34.png"/>
+                        </div>
+                        <div class="hyzx_img_xq f_r">
+                            <span>你好，${user.userExtSet[0].realname!}</span>
+                            <div class="hyzx_vip">[#if user.groups?size > 0]已开通VIP服务[#else]未开通VIP服务[/#if] </div>
+                            <div class="hyzx_sjh">账号：[@text_cut s=user.username?substring(0,5) len=3 append='..'/]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注册时间：${user.registerTime!}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最后登录：${user.lastLoginTime!}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登录次数：${user.loginCount!}</div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="hyzx_yc_bt_y f_r">
+                	<p>十载寒窗，勤学苦练，何人健步登金榜</p>
+                	<p>满腔热血，万丈豪情，我辈英才夺桂冠</p>
+                    <p class="hyzx_zz">-苏轼</p>
+                </div>
+            <div class="clearfix"></div>
+            </div>
+        	<div class="hyzx_zc f_l">
+        	<div class="hyzx_z_dh">
+            	<div class="hyzx_bt">
+                <span>升学服务</span>
+                </div>
+            	<div class="hyzx_z_list ">
+                <a href="${base}/admissonSvcAct/findbaseInfo.jspx">基本信息</a>
+                </div>
+                <div class="hyzx_z_list">
+                <a href="${base}/admissonSvcAct/changePassword.jspx">修改密码</a>
+                </div>
+                <div class="hyzx_z_list ">
+                <a href="jiangzuoxinxi.html">讲座信息</a>
+                </div>
+                <div class="hyzx_z_list">
+                <a href="${base}/admissonSvcAct/findProducts.jspx">我的服务</a>
+                </div>
+            </div>
+             <div class="hyzx_z_dh1">
+            	<div class="hyzx_bt2">
+                <span>测评信息</span>
+                </div>
+            	<div class="hyzx_z_list ">
+                <a href="grzxxuankecepin.html">选课测评</a>
+                </div>
+                <div class="hyzx_z_list">
+                <a href="grzxzhuanyecepin.html">专业测评</a>
+                </div>
+
+            </div>
+        <div class="hyzx_z_dh1">
+            	<div class="hyzx_bt3">
+                <span>志愿管理</span>
+                </div>
+            	<div class="hyzx_z_list hyzx_ys">
+                <a href="${base}/admissonSvcAct/findVoluntary.jspx">我的志愿表</a>
+                </div>
+   <div class="hyzx_z_list">
+                                <a href="${base}/admissonSvcAct/bigData.jspx">大数据查询</a>
+                                </div>
+            </div>
+            
+            
+            </div>
+            <div class="hyzx_yc f_r">
+            	<div class="volunteer">
+                	<div class="volunteer_z f_l">
+                    <div class="volunteer_z_zt">
+                    <form id="form2" name="form1" method="post" action="">
+					<input type="text" name="textfield" id="textfield" class="volunteer_suo f_l" placeholder="输入方案名称，点击查找志愿方案或者创建志愿方案" />
+					<input type="button" name="button" id="button" value="查看志愿方案"  class="volunteer_suo_tj f_l" />
+                    
+					</form>
+                    </div>
+                     </div>
+                	<div class="volunteer_y f_r">
+                    <div class="volunteer_y_lq1">
+                    <a href="#" class="volunteer_y_lq f_r">查看历年招生录取数据</a><div class="clearfix"></div></div>
+                      
+                    </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="hyzx_bd">
+            	<div class="hyzx_bd_l f_l">
+                    
+                    <div class="volunteer_input">
+                    方案名称： <input type="text" name="fa_name" id="fa_name" class="fa_name" placeholder="请输入汉字，数字等"/>  
+                    </div>
+                  <div class="paim2">
+                                    <div class="cancel_xc paddingTop6 f_l">省份选择：</div>
+                                    <div class="comboBox flex-item1 f_l">
+                                        <select name="subjects" class="batch2" id="bx">
+                                            <option value="" disabled selected hidden>请选择</option>
+                                            <option value="5">江苏</option>
+                                        </select>
+                                    </div>
+
+                                       <div class="clearfix"></div> 
+                               
+                    </div>
+                    <div class="hyzx_txxx">
+                	
+                  <div class="hyzx_xlk1 f_l">文理科选择：</div>  
+                  <div class="hyzx_xldx2 f_l">
+                  <div class="male f_l">
+    				<input type="radio" id="male" class="ui-radio" name="sex">
+    				<label for="male">文科</label>
+					</div>
+				<div class="male f_l">                
+    				<input type="radio" id="male1" class="ui-radio" name="sex">
+    				<label for="male1">理科</label>
+				</div>
+                <div class="clearfix"></div>
+				</div>
+
+                <div class="clearfix"></div>
+                  
+                </div>
+                    
+                    <span class="volunteer_span">
+                    批次查分/高考总分  二选一
+                    </span>
+                    <div class="volunteer_cf">
+
+                        <div class=" paddingTop6">
+                         
+                    		<div class="volunteer_male f_l">
+    							<input type="radio" id="radio1" class="ui-radio" name="cf">
+    							<label for="radio1">输入批次查分：</label>
+							</div>
+                            <div class="nice-select_wdzyb f_l" name="nice-select_wdzyb">
+				<input type="text" value="请选择" readonly style="cursor: pointer;"/>
+				<ul>
+				<li data-value="1">江苏</li>
+
+				<li data-value="2">安徽</li>
+
+				<li data-value="3">北京</li>
+				</ul>
+				</div>
+ 				<input type="text" value="请输入分差值（例如：6）" class="wdzyb_cfz f_l"/>
+                <div class="clearfix"></div>        
+                </div>
+                       
+       
+                       <div>
+                       <div class="volunteer_male f_l">
+    							<input type="radio" id="radio2" class="ui-radio" name="cf">
+    							<label for="radio2">输入高考总分：</label>
+							</div>
+                       <input type="text" value="请输入分数" class="wdzyb_cfz f_l"/>  
+                       <div class="clearfix"></div>
+                       </div>
+                                      
+                    </div>
+                    <div class="paim">
+                  本省排名： <input type="text" value="请输入准确排名/已知准确排名" class="wdzyb_bspm"/>   </div>
+                     </div>
+                     <div class="hyzx_bd_r f_r">
+                    
+                      <div class="volunteer_y_ts">
+
+                      <div class="volunteer_y_ts_sm">模拟志愿方案说明</div>
+                      <div class="volunteer_y_ts_sm_p">
+                    <p>
+                    1，选择“输入批次查分“，使用模考成绩模拟填报志愿
+或选”输入高考总分“，使用高考成绩模拟填报志愿；</p>
+ <p>
+2，高考出分后，只能输入一次高考成绩，生成一次志愿方案；</p>
+<p>
+3，保存成绩创建志愿方案，根据成绩和排名，填写志愿方案；
+</p>
+<p>
+4，查看院校计划与历史数据，查看我省招生录取详细数据。</p>
+</div>
+                    </div>
+                    </div>
+                    <div class="clearfix"></div>
+            </div>
+  
+                      <div class="cancel">
+             <div class="cancel_span">
+              <span>选择高考选考科目:</span>
+              </div>
+               
+               <div class="cancel_input">
+               <label><input name="Fruit" type="checkbox" value="" />物理 </label> 
+<label><input name="Fruit" type="checkbox" value="" />化学</label> 
+<label><input name="Fruit" type="checkbox" value="" />生物</label> 
+<label><input name="Fruit" type="checkbox" value="" />政治</label> 
+<label><input name="Fruit" type="checkbox" value="" />历史</label> 
+<label><input name="Fruit" type="checkbox" value="" />地理</label> 
+<label><input name="Fruit" type="checkbox" value="" />技术</label> 
+               </div>
+               <div class="cancel_ts">注：可选三个科目</div>
+             </div>
+
+			<div class="create">
+            		<a href="#">创建我的志愿方案</a>
+            </div>
+            <div class="hint">
+            <span>温馨提示</span>
+            <div class="hint_p">
+                <p> 1、本系统依据历年院校录取数据提供高考志愿填报智能模拟功能,不等同于实际的网上填报志愿,建议考生在填报志愿时,结合本系统的推荐以完善志愿表;</p>
+<p>2、2019年招生计划已更新;</p>
+<p>3、2012- 2018年各院校录取数据，参考各省市出版的填报指南以及各本专科院校的官网历年录取数据;</p>
+<!--<p>4、您正在使用的是湖北版,提供”普通类文理科本-批、本二批、专科批、”3个批次的志愿智能模拟功能,您可以按系统的重点填报提示选择适合自己的批次模拟,也可直接选择自己关注的批次模拟;</p>-->
+<p>4、在正式填报时，以教育考试院公布的最新招生计划为准;</p>
+<p>5、若推荐院校招生计划数出现新增专业,会提示”新增专业“且历三年录取数据展示默认采用该院校最低录取分数线。</p>
+            
+            </div>
+            </div>
+        </div>
+               
+        <div class="clearfix"></div>
+           
+    </div>
+    <div class="clearfix"></div>
+    </div>
+[#include "../include/footer_new.html"/]
+<script>
+		$('[name="nice-select_wdzyb"]').click(function(e){
+			 if($(this).find('ul').is(':hidden')){
+			$('[name="nice-select_wdzyb"]').find('ul').hide();
+		    $(this).find('ul').show();
+			e.stopPropagation();
+				 }
+			 else{
+		
+		    $(this).find('ul').hide();
+			e.stopPropagation();
+				 }
+		});
+
+		$('[name="nice-select_wdzyb"] li').hover(function(e){
+
+			$(this).toggleClass('on');
+
+			e.stopPropagation();
+
+		});
+
+		$('[name="nice-select_wdzyb"] li').click(function(e){
+
+			var val = $(this).text();
+
+			$(this).parents('[name="nice-select_wdzyb"]').find('input').val(val);
+
+			$('[name="nice-select_wdzyb"] ul').hide();
+
+			e.stopPropagation();
+
+		});
+
+		$(document).click(function(){
+
+			$('[name="nice-select_wdzyb"] ul').hide();
+			
+
+		});
+
+	</script>
+
+</body>
+</html>

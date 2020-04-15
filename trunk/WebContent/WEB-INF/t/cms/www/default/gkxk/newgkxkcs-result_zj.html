@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<title>新高考选科意向测评报告</title>
+		<link rel="stylesheet" href="${resSys}/res/css/head-footer.css" />
+		<link rel="stylesheet" href="${resSys}/res/css/cs.css" />
+		<style type="text/css">
+			mark{background: none;}
+			.num-year{color: #595959;left: 500px;top: 50px;font-size: 42px;}
+            .num-year span{color:#049AAB;}
+			.num-name,.num-date{color: #666;bottom: 20%;font-size: 26px;}
+			.num-name{left: 500px;}.num-date{left: 720px;}
+			.title{position: absolute;top: 130px;left: 500px;color: #595959;font-size: 44px;}
+			.title mark{color: #9DD946;position: relative;}
+            .title span{color:#049AAB;}
+			.mark{position: absolute;top: 210px;left: 500px;background: #D0CECF;padding: 4px;color: #fff;font-size: 18px;}
+			.center{width: 1050px;margin: 0 auto;}
+			.perface{font-size: 18px;padding: 30px 0 20px 40px;color: #049AAB;}
+            .icon-left{display: inline-block;width: 20px;height: 20px;-moz-transform: rotate(45deg);-webkit-transform: rotate(45deg);-ms-transform: rotate(45deg);transform: rotate(45deg);vertical-align: -2px;}
+            .icon-left{border:1px solid #626262;position: relative;margin-right: 20px;}
+            .icon-left:after{position: absolute;top: -6px;right: -6px;content: '';width: 20px;height: 20px;}
+            .perface .icon-left:after{background: #049AAB;}
+            .perface span{color: #626262;margin-left: 10px;font-size: 16px;font-weight: 500;}
+            .sec-one{overflow: hidden;}
+            .sec-one p{padding: 0 50px;text-align: justify;line-height: 1.5em;font-size: 16px;}
+            .sec-one-aside{position: absolute;bottom: -6px;right:0;width: 72px;height: 290px;background: url(${resSys}/res/img/cpIndex/newcs-1.png) 0 0 no-repeat;}
+            .sec-one ol{background: #f1f3f4;padding: 25px 60px 20px 40px;font-size: 0;}
+            .sec-one li{display: inline-block;width: 25%;font-size: 16px;text-align: center;}
+            .sec-one li i{display: block;margin: 0 auto; width: 118px; height: 118px;background-image: url(${resSys}/res/img/cpIndex/newcs-icon.png);}
+            .bg-4{background-position: -5px -5px;}
+            .bg-1{background-position: -5px -133px;}
+            .bg-2 { background-position: -5px -261px;}
+            .bg-3 {background-position: -5px -389px;}
+            .sec-one li h3{padding: 4px;}
+            .sec-one li p{color: #999;text-transform: uppercase;font-size: 14px;padding: 8px 0 8px;text-align: center;}
+            .p{background: #e4e7e8;padding: 10px 50px;text-align: justify;line-height: 1.5em;font-size: 16px;}
+            .sec-two{background: #3b89b8;padding: 40px 0;}
+            .in-title{font-size: 20px;color: #fff;text-align: center;}
+            .in-p{text-align: center;color:rgba(255,255,255,0.75);text-transform: uppercase;padding: 6px 0 30px;}
+            .in-title .icon-left{border-color: #fff;}
+            .in-title .icon-left:after{background-color: #fff;}
+            .sec-two table th{background-color: #2c6587;}
+            .sec-two table tbody tr{border-bottom: 1px solid #E3E7EA;}
+            .sec-two table tbody tr:last-child{border: none;}
+            .sec-two tbody tr td{background: #fff;border-bottom:none;}
+            .sec-two tbody tr td:first-child{color:#fff;background: #2cc2d9;border:none;}
+            .sec-two tbody tr td:nth-child(2){color:#fff;background: #a1d359;border:none;}
+            .two-p{color: #fff;padding: 8px; font-size: 15px;}
+            .nav-title{position: relative;text-align: center;font-size: 18px;color: #fff;line-height: 45px;}
+            .nav-title:before,.nav-title:after{position: absolute;content: '';width: 90px;height: 2px;background: #fff;top: 50%;}
+            .nav-title:before{left:33%;} .nav-title:after{right:33%;}
+            .three .nav-title{background:#51a4d6;}
+            .three{background: #3b89b8;padding-bottom: 40px;}
+            .chart-xqcs{margin-top: 20px;}
+            .three .center,.four .center,.five .center,.six .center{border: 2px solid #fff;border-radius: 10px;margin-top: 20px;padding: 10px;}
+            .fx{width:266px;text-align: center;margin: -26px auto 10px;border-radius: 4px;color:#fff;line-height: 30px;font-size: 16px;background: -webkit-linear-gradient(to right,#29CDC2,#8EE86B);background: -moz-linear-gradient(to right,#29CDC2,#8EE86B);background: linear-gradient(to right,#29CDC2,#8EE86B);}
+            .inner{background: #fff;border-radius: 10px;padding: 15px;}
+            .inner:before{position: absolute;content: '';top: 0;left: 15px;width:18px;height: 28px;background: url(${resSys}/res/img/dlsy/gkxkcs-bage.png) 0 0 no-repeat;}
+            .inner .p-t{font-size: 16px;line-height: 1.5em;text-align: justify;padding: 20px 0 10px;}
+            .result{position: relative;display: table;padding-right:2em;line-height: 40px;color: #fff;font-size: 16px;margin-top: 10px;} 
+            .result span{display: inline-block;width: 50px;text-align: center;margin-right: 1em;}
+            .r1{background:  #92d050;}.r1 span{background:#7cb342;}
+            .r2{background:  #63dadc;}.r2 span{background:#2bc4c6;}
+            .r3{background:  #fdbf44;}.r3 span{background:#fda444;}
+            .result:after{position: absolute;content: '';width: 0;height: 0;border-top: 20px solid transparent;border-left: 15px solid #92d050;border-bottom: 20px solid transparent;top: 0;right: -15px;}
+            .r2:after{border-left-color: #63dadc;}
+            .r3:after{border-left-color: #fdbf44;}
+            .rrs{margin-top: 10px;background: #f0f0f0;padding: 8px; text-align: justify;font-size: 16px;color: #666;line-height: 1.4em;}
+            .four{background-color: #2899a4;padding-bottom: 40px;}
+            .four .nav-title{background:#3bcddb;}
+            .four .fx{background: -webkit-linear-gradient(to right,#29CDC2,#5FC387);background: -moz-linear-gradient(to right,#29CDC2,#5FC387);background: linear-gradient(to right,#29CDC2,#5FC387);}
+            .five{background-color: #1999d1;padding-bottom: 40px;}
+            .five .nav-title{background:#30ade3;}
+            .five .fx{background: -webkit-linear-gradient(to right,#41C9E2,#D5C3F0);background: -moz-linear-gradient(to right,#41C9E2,#D5C3F0);background: linear-gradient(to right,#41C9E2,#D5C3F0);}
+            .six{background-color: #3f84bb;padding-bottom: 40px;}
+            .six .nav-title{background:#3f84bb;}
+            .six .fx{background: -webkit-linear-gradient(to right,#41C9E2,#89C5E8);background: -moz-linear-gradient(to right,#41C9E2,#89C5E8);background: linear-gradient(to right,#41C9E2,#89C5E8);}
+            .six .center{margin-bottom: 60px;}
+            .six .in-p{padding-left: 3em;}
+            .over{width: 1050px;margin: 0 auto;padding: 20px;font-size: 16px;color: #fff;line-height: 1.4em;text-align: justify;}
+		</style>
+		<script src="${resSys}/res/js/jquery-1.11.3.min.js"></script>
+		<script src="${resSys}/res/js/echarts.min.js"></script>
+	</head>
+	<body class="center-block">
+	<!-- <p>浙江的</p> -->
+		<section class="gps">
+			<img src="${resSys}/res/img/cpIndex/newcs.jpg" alt="" />
+			<section class="center-block abs-center" style="height: 100%;">
+				<h1 class="title"><mark>新高考</mark><span>选科意向心理</span>测评报告</h1>
+				<mark class="mark">A report on the psychological evaluation of the new college entrance examination</mark>
+				<h1 class="num-year">20<span>${date?substring(2,4)}</span></h1>
+				<h2 class="num-name">姓名：${name!}</h2>
+				<h2 class="num-date">日期：${date!}</h2>
+			</section>
+		</section>
+		<section class="gps sec-one">
+            <h3 class="perface"><i class="icon-left"></i>前言<span>PERFACE</span></h3>
+            <p>高中是个人职业生涯规划的重要阶段，高考科目的选择与我们将来在大学中学习什么专业以及将来从事何种职业都有着潜在的联动。因此，从高考选科开始，我们就将渐渐步入自己职业生涯的轨道。</p>	
+            <p>本报告基于职业兴趣理论(Theory of Vocational Interest)和社会认知职业理论(Social Cognitive Career Theory), 从多个维度对你的高考选科心理意向进行分析。测评涉及的维度包括： </p>
+            <div class="sec-one-aside"></div>
+            <ol>
+                <li>
+                    <i class="bg-1"></i>
+                    <h3>职业兴趣</h3>
+                    <p>Vocational interest</p>
+                </li>
+                <li>
+                    <i class="bg-2"></i>
+                    <h3>自我效能</h3>
+                    <p>Self-efficacy</p>
+                </li>
+                 <li>
+                    <i class="bg-3"></i>
+                    <h3>职业期望</h3>
+                    <p>Career expectation</p>
+                </li>
+                <li>
+                    <i class="bg-4"></i>
+                    <h3>社会支持</h3>
+                    <p>Social support</p>
+                </li>
+            </ol>
+        </section>
+        <div class="p">通过这份报告，你将对你自己和你所面临的选择拥有更加全面和透彻的了解。现在，请你花一点时间从头到尾仔细地阅读这份报告。在报告的结尾，我们将会对你在六门科目中的选择做出具体的建议。</div>
+        <section class="sec-two">
+            <div class="center">
+                <h3 class="in-title"><i class="icon-left"></i>我适合的科目排名</h3>
+                <p class="in-p">Appropriate list of subjects</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:60px">排名</th>
+                            <th style="width:100px">学科</th>
+                            <th style="width:160px">匹配总分</th>
+                            <th>学科对应的大学专业</th>
+                        </tr>
+                        <tbody>
+                        [#list computerMajorInterestlist as list]
+                            <tr>
+                                <td>${list_index+1}</td>
+                                <td>${list.subject!}</td>
+                                <td>${list.num!}</td>
+                                <td>${list.major!}</td>
+                            </tr>
+   						[/#list]
+                        </tbody>
+                </table>
+                <div class="two-p">所谓知己知彼、百战不殆。希望你全面参考报告中所有的测评结果和建议，做出适合你自己的学科选择！</div>
+            </div>
+        </section>
+        <section class="three">
+            <h3 class="nav-title">我的学科兴趣分布</h3>
+            <div id="Echart1" class="chart-xqcs"></div>
+            <div class="center">
+                <div class="fx">结果分析</div>
+                <div class="inner gps">
+                    <p class="p-t">兴趣是预测一个人能否在某个领域取得高成就的关键因素。职业兴趣(vocational interest)是指人们在职业和专业情境下所表现出来的一些比较稳定持久的心理倾向和行为风格。心理学家John Holland最先提出了职业兴趣的概念，并提供了一套将个人的职业兴趣和各个专业环境相匹配的方法。不断有研究证实，基于职业兴趣的测量，一个人与自己所处于的专业环境匹配程度越高，这个人将会更有可能在他/她所处的专业环境中获得高度成就以及积极的心理状态。通过专业兴趣匹配方法，我们将你的个人兴趣和新高考七门学科分别进行了系统的匹配。结果表明：</p>
+                  [#if subjectInterestlistMap.gdStr??]
+                    <div class="result r1"><span>强烈</span>你对${subjectInterestlistMap.gdStr!}有着高度的潜在兴趣</div>
+                    <p class="rrs">这表示，从个人兴趣的角度来看，你非常适合学习${subjectInterestlistMap.gdStr!}学科；同时，你也会对${subjectInterestlistMap.gdStr!}所对应的一些大学专业甚至社会职业很感兴趣——在将来进入大学选择专业时，你会希望选择这个科目所对应的专业继续学习。 </p>
+                  [/#if]
+                  [#if subjectInterestlistMap.zdStr??]  
+                    <div class="result r2"><span>中等</span>你对${subjectInterestlistMap.zdStr!}有着中度的兴趣</div>
+                    <p class="rrs">这表示，从个人兴趣的角度来看，你非常适合学习${subjectInterestlistMap.zdStr!}学科；同时，你也会对${subjectInterestlistMap.zdStr!}所对应的一些大学专业甚至社会职业很感兴趣——在将来进入大学选择专业时，你会希望选择这个科目所对应的专业继续学习。 </p>
+                     [/#if]
+                  [#if subjectInterestlistMap.ddStr??]  
+                    <div class="result r3"><span>低度</span>你对学习${subjectInterestlistMap.ddStr!}的兴趣较弱</div>
+                    <p class="rrs">这表示，至少从目前来看，你对${subjectInterestlistMap.ddStr!}以及其潜在对应的大学专业或社会职业都不太感兴趣。 </p>
+                  [/#if] 
+                </div>
+            </div>
+        </section>
+       <section class="four">
+            <h3 class="nav-title">我的学业自我效能分布</h3>
+            <div id="Echart2" class="chart-xqcs"></div>
+            <div class="center">
+                <div class="fx">结果分析</div>
+                <div class="inner gps">
+                    <p class="p-t">自我效能(self-efficacy)是指一个人对自己是否能够成功地进行某一成就行为的主观信心。一般来说，一个人对进行某一行为自我效能与他/她的过往经验有关：成功的经验会增强自我效能，而失败的经验则相反，会削弱他/她对于进行这一行为的自我效能。职业心理学家Robert Lent及其团队首次将自我效能的概念囊括在了职业行为的预测模型中，建立了社会认知职业理论。基于该理论，一个人对自己在某一专业领域领域内取得成就的主观信心越高，则他/她将更有可能在这一领域内取得较高的短期成就(如较好的短期学业成绩、较高的学业满意度等)和长期成就(如较好的长期学业成绩、在这一领域内持续稳定的发展等)。 基于社会认知职业理论模型，我们分别测算出了你对于学习这七门学科的信心分数。结果表明：</p>
+                   [#if academicConfidenceMAp.gdStr??]  
+                    <div class="result r1"><span>强烈</span>你对${academicConfidenceMAp.gdStr!}有高度的学业信心</div>
+                    <p class="rrs">这表示，你自信能够从容应对高中阶段${academicConfidenceMAp.gdStr!}课程的学习，就算学习过程中遇到困难，你也相信自己能够克服，并最终在高考中取得理想的成绩。</p>
+                   [/#if]
+                   [#if academicConfidenceMAp.zdStr??]  
+                    <div class="result r2"><span>中等</span>你对${academicConfidenceMAp.zdStr!}有一般强度的学业信心</div>
+                    <p class="rrs">这表示，你对学好${academicConfidenceMAp.zdStr!}具有一定的自信，但信心程度还不是特别强烈。在学习过程中遇到困难时，你需要注意调整自己的心态，让自己积极地应对困难、维持自信。</p>
+                   [/#if]
+                   [#if academicConfidenceMAp.ddStr??] 
+                    <div class="result r3"><span>低度</span>你对学习${academicConfidenceMAp.ddStr!}的信心较弱</div>
+                    <p class="rrs">这表示，你对于自己学习${academicConfidenceMAp.ddStr!}的能力没有什么信心，也没有太大把握最终能在化学、物理的考试中取得令你自己满意的成绩。</p>
+               	   [/#if]
+                </div>
+            </div>
+       </section>
+       <section class="five">
+            <h3 class="nav-title">我的职业期望分布</h3>
+            <div id="Echart3" class="chart-xqcs"></div>
+            <div class="center">
+                <div class="fx">结果分析</div>
+                <div class="inner gps">
+                    <p class="p-t">基于社会认知职业理论模型，除了自我效能之外，职业期望(career expectation)也是影响个人专业发展的重要因素。职业期望是指一个人对现阶段在某一专业或学科领域内的学习在自己长期职业发展规划中的重要性的展望。从长远的角度来看，基于某个学科的未来发展期望也是一个人选择学习领域时需要考虑的重要因素——短期来说，职业期望将影响一个人在某一学科领域中学习的动力和积极性；长远来看，职业期望也是个人长期职业规划所必要考虑的部分。在测评中，我们也请你展望了七门学科分别在你今后的职业发展和人生道路中所将发挥的重要性。结果表明：</p>
+                   [#if expectMAp.gdStr??] 
+                    <div class="result r1"><span>强烈</span>在你的长期发展展望中，${expectMAp.gdStr!}占有非常重要的地位</div>
+                    <p class="rrs">这表示，学习${expectMAp.gdStr!}是你长期职业规划和人生规划的重要部分，你将来希望能够从事和${expectMAp.gdStr!}相关的专业或职业，同时你也觉得你在${expectMAp.gdStr!}学习过程中获得的知识和能力能帮助你更好地生活以及认识世界。</p>
+                  [/#if]
+                  [#if expectMAp.zdStr??] 
+                    <div class="result r2"><span>中等</span>在你的长期发展展望中，${expectMAp.zdStr!}占有一般重要的地位</div>
+                    <p class="rrs">这表示，你认为学习${expectMAp.zdStr!}在你的职业规划和人生规划中具有一定的重要性，但也不一定是不可缺少的。你觉得在${expectMAp.zdStr!}学习过程中获得的知识和能力对你更好地生活以及认识世界有着一定的帮助。</p>
+                  [/#if]
+                  [#if expectMAp.ddStr??] 
+                    <div class="result r3"><span>低度</span>在你的长期发展展望中，${expectMAp.ddStr!}的地位不太重要</div>
+                    <p class="rrs">这表示，你认为学习${expectMAp.ddStr!}只是为了应付学校课程和考试；并且，你认为在学习物理过程中所获得的知识和能力对你的长期职业规划和人生发展并没有什么帮助。</p>
+               	  [/#if]
+                </div>
+            </div>
+       </section>
+       <section class="six">
+            <h3 class="nav-title">我的社会支持分布</h3>
+            <div id="Echart4" class="chart-xqcs"></div>
+            <div class="center">
+                <div class="fx">结果分析</div>
+                <div class="inner gps">
+                    <p class="p-t">社会支持（contextual support）是指个人在某个领域内学习时所感知到的外在支持因素。Robert Lent及其团队在经典的社会认知职业理论中除了提及自我效能、职业期望这些个人因素对于人在某一领域内的短期学业成就及长期发展的影响之外，也指出了社会支持因素的重要作用。反复的研究已经证明，如家人朋友的态度、社会学习资源等社会环境因素能或直接或间接地影响一个人的学习动机和效果。因此，在选择学习的方向时，一些外在的社会环境因素也值得被考虑。在测评中，我们分别测试了你在七个不同学科领域内学习时所感受到的社会支持因素。结果显示：</p>
+                	 [#if socialSupportMap.gdStr??] 
+                    <div class="result r1"><span>强烈</span>你在${socialSupportMap.gdStr!}领域内的学习能够得到较高社会支持</div>
+                    <p class="rrs">这表示，你身边的家人朋友普遍支持你选择${socialSupportMap.gdStr!}作为主要科目继续学习；同时，当你在学习${socialSupportMap.gdStr!}的过程中需要帮助时，你身边有很多有益的社会资源（老师、朋友、父母亲戚）能够为你提供帮助。</p>
+                	[/#if]
+                	[#if socialSupportMap.zdStr??] 
+                    <div class="result r2"><span>中等</span>你在${socialSupportMap.zdStr!}领域内的学习能够得到中等程度的社会支持</div>
+                    <p class="rrs">这表示，你身边的家人朋友对你选择${socialSupportMap.zdStr!}作为主要科目并没有表达非常明确的支持或反对，或是你身边能为你在${socialSupportMap.zdStr!}中学习提供帮助的社会资源（老师、朋友、父母亲戚）一般。</p>
+                    [/#if]
+                	[#if socialSupportMap.ddStr??] 
+                    <div class="result r3"><span>低度</span>你在${socialSupportMap.ddStr!}领域内的学习能够得的社会支持较弱</div>
+                    <p class="rrs">这表示，你身边的家人朋友不太支持你选择${socialSupportMap.ddStr!}作为主要科目继续学习。同时，你身边暂时也没有什么有益的社会资源支持你在生物、化学中的学习。</p>
+                   [/#if]
+                </div>
+            </div>
+            <h3 class="in-title"><i class="icon-left"></i>建议和结语</h3>
+            <p class="in-p">proposal</p>
+            <div class="over">现在，你已经从个人兴趣、学业信心、发展期望以及社会支持这几个不同的维度分别了解了你和新高考六门学科的适合情况。综合你在这几个维度上的得分，我们为你继续学习这六门学科的合适程度做了一个总排序，排序越靠前，就说明这门学科越适合你学习。同时，高考的学科选择不仅仅是应对考试的策略，它更是个人长期职业规划的一部分。因此，我们还为你列出了每一门学科对应的细化专业选择，通过此，你可以了解到通过学习这门学科，你在将来有可能进入到的大学专业。</div>
+       </section>
+	</body>
+	<script type="text/javascript">
+		var myChart1 = echarts.init(document.getElementById('Echart1'));
+        var myChart2 = echarts.init(document.getElementById('Echart2'));
+        var myChart3 = echarts.init(document.getElementById('Echart3'));
+        var myChart4 = echarts.init(document.getElementById('Echart4'));
+        var radar = {
+            indicator: [
+                {
+                    name: 'zz',//政治
+                    max: 18,
+                },
+                {
+                    name: 'js',//技术
+                    max: 18,
+                },
+                {
+                    name: 'wl',//物理
+                    max: 18,
+                },
+                {
+                    name: 'hx',//化学
+                    max: 18
+                },
+                {
+                    name: 'sw',//生物
+                    max: 18
+                },
+                {
+                    name: 'dl',//地理
+                    max: 18
+                },
+                {
+                    name: 'ls',//历史
+                    max: 18
+                }
+            ],
+            center: ['50%', '50%'],
+            radius: 200,
+            name: {
+                formatter: function(value) {
+                    return '{' + value + '|}\n';
+                },
+                rich: {
+                    value: {
+                        color: 'transparent',
+                    },
+                    zz: {
+                        height: 60,
+                        verticalAlign:"bottom",
+                        lineHeight:36,
+                        backgroundColor: {
+                            image: "${resSys}/res/img/xbsy/e1.png"
+                        }
+                    },
+                    js:{
+                        height: 25,
+                        verticalAlign:"top",
+                        lineHeight: 36,
+                        backgroundColor: {
+                            image: "${resSys}/res/img/xbsy/e7.png"
+                        } 
+                    },
+                    wl: {
+                        height: 19,
+                        lineHeight: 6,
+                        verticalAlign:"top",
+                        backgroundColor: {
+                            image: "${resSys}/res/img/xbsy/e6.png"
+                        }
+                    },
+                    hx: {
+                        height: 36,
+                        lineHeight: 88,
+                        verticalAlign:"bottom",
+                        backgroundColor: {
+                            image: "${resSys}/res/img/xbsy/e5.png"
+                        }
+                    },
+                    sw: {
+                        height: 38,
+                        verticalAlign:"bottom",
+                        lineHeight:90,
+                        backgroundColor: {
+                            image: "${resSys}/res/img/xbsy/e4.png"
+                        }
+                    },
+                    dl: {
+                        height: 20,
+                        verticalAlign:"bottom",
+                        lineHeight:30,
+                        backgroundColor: {
+                            image: "${resSys}/res/img/xbsy/e3.png"
+                        }
+                    },
+                    ls: {
+                        height: 26,
+                        verticalAlign:"top",
+                        backgroundColor: {
+                            image: "${resSys}/res/img/xbsy/e2.png"
+                        }
+                    }
+                },
+            },
+            shape: "polygon",
+            nameGap: -15,
+            splitArea: {
+                show: true,
+                areaStyle: {
+                   /*  color: ['#89C3FF', '#F7DD64', '#FFB539', '#AADD60', '#11CBDD'] */
+                  	 color:['#e3e2e2', '#89c3ff', '#f6dd68', '#ffb539', '#78d8d6']
+                }
+            },
+            // axisLabel:{
+            // 	show:true
+            // },
+            axisLine: {
+                show:true,
+                lineStyle: {
+                    color: 'rgba(70,99,106,.6)',
+                    width: 2,
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: 'rgb(217,233,246)',
+                    width: 2,
+                    /* type:'dotted' */
+                }
+            }
+        };
+        var label = {
+            normal: {
+                show: true,
+                color: '#fff',
+                fontSize: 20,
+                distance: 0,
+                verticalAlign: 'top',
+                offset: [12, -5],
+                fontWeight: 500,
+                fontFamily: "Helvetica  Arial"
+            }
+        };
+//			tooltip:{
+//					trigger:'item',
+//					padding:[5,20,5,8],
+//					formatter: function(params){
+//						var data = params.data.value;
+//						var html = "测评结果:<br/>";
+//						html += 'A艺术型： '+data[0]+'<br/>';
+//						html += 'I 研究型：  '+data[1]+'<br/>';
+//						html += 'R实际型： '+data[2]+'<br/>';
+//						html += 'C传统型： '+data[3]+'<br/>';
+//						html += 'E企业型： '+data[4]+'<br/>';
+//						html += 'S社会型： '+data[5]+'<br/>';
+//						return html;
+//					}
+//				},
+        //顺序：政治 技术  物理  化学 生物 地理 历史
+		var xkxq =['${subjectInterestlistMap.政治}', '${subjectInterestlistMap.技术}', '${subjectInterestlistMap.物理}', '${subjectInterestlistMap.化学}', '${subjectInterestlistMap.生物}', '${subjectInterestlistMap.地理}','${subjectInterestlistMap.历史}'];//学科兴趣
+        var xyxx =['${academicConfidenceMAp.zz}', '${academicConfidenceMAp.js}', '${academicConfidenceMAp.wl}', '${academicConfidenceMAp.hx}', '${academicConfidenceMAp.sw}', '${academicConfidenceMAp.dl}','${academicConfidenceMAp.ls}'];//学业信心
+        var fzqw =['${expectMAp.zz}', '${expectMAp.js}', '${expectMAp.wl}', '${expectMAp.hx}', '${expectMAp.sw}', '${expectMAp.dl}','${expectMAp.ls}'];//发展期望
+        var shzc =['${socialSupportMap.zz}', '${socialSupportMap.js}', '${socialSupportMap.wl}', '${socialSupportMap.hx}', '${socialSupportMap.sw}', '${socialSupportMap.dl}','${socialSupportMap.ls}'];//社会支持
+        myChart1.setOption({
+            radar: radar,
+			series: [{
+				name: "学科兴趣",
+				type: 'radar',
+				symbol: "circle",
+				symbolSize: 10,
+				label: label,
+				itemStyle: {normal: {color: 'rgba(245,110,29,.8)'}},
+				lineStyle: {normal: {color: 'rgba(0,0,0,0)'}},
+				areaStyle: {normal: {color: "rgba(204,0,255,.75)"}},
+				silent:true,
+				data: [{
+					value: xkxq
+				}]
+			}]
+        });
+        myChart2.setOption({
+            radar: radar,
+			series: [{
+				name: "学业信心",
+				type: 'radar',
+				symbol: "circle",
+				symbolSize: 10,
+				label: label,
+				itemStyle: {normal: {color: 'rgba(245,110,29,.8)'}},
+				lineStyle: {normal: {color: 'rgba(0,0,0,0)'}},
+				areaStyle: {normal: {color: "rgba(204,0,255,.75)"}},
+				silent:true,
+				data: [{
+					value: xyxx
+				}]
+			}]
+        });
+        myChart3.setOption({
+            radar: radar,
+			series: [{
+				name: "发展期望",
+				type: 'radar',
+				symbol: "circle",
+				symbolSize: 10,
+				label: label,
+				itemStyle: {normal: {color: 'rgba(245,110,29,.8)'}},
+				lineStyle: {normal: {color: 'rgba(0,0,0,0)'}},
+				areaStyle: {normal: {color: "rgba(204,0,255,.75)"}},
+				silent:true,
+				data: [{
+					value: fzqw
+				}]
+			}]
+        });
+        myChart4.setOption({
+            radar: radar,
+			series: [{
+				name: "社会支持",
+				type: 'radar',
+				symbol: "circle",
+				symbolSize: 10,
+				label: label,
+				itemStyle: {normal: {color: 'rgba(245,110,29,.8)'}},
+				lineStyle: {normal: {color: 'rgba(0,0,0,0)'}},
+				areaStyle: {normal: {color: "rgba(204,0,255,.75)"}},
+				silent:true,
+				data: [{
+					value: shzc
+				}]
+			}]
+        });
+	</script>
+</html>

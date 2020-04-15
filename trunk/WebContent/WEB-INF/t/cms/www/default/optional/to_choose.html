@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>高考选课</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<script src="${base}/r/cms/front.js"></script>
+	</head>
+
+	<body>
+		<!--tab切换  导航-->
+		[#include "../include/header.html"/]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container width1200">
+				<div>首页 &lt;&lt; 新高考选科</div>
+				<div></div>
+			</div>
+		</div>
+		<!--选科系统-->
+		<div class="toChooseSystem">
+			<div class="flex-container width1200">
+				<!--左-->
+				<div class="systemleft">
+					<div>新高考选科系统(6选3或7选3)</div>
+					<div>
+						<div class="flex-container">
+							<div class="flex-item4">
+								<img src="${base}/r/img/physics.png" alt="" />
+								<p>物理</p>
+							</div>
+							<div class="flex-item4">
+								<img src="${base}/r/img/chemistry.png" alt="" />
+								<p>化学</p>
+							</div>
+							<div class="flex-item4">
+								<img src="${base}/r/img/biology.png" alt="" />
+								<p>生物</p>
+							</div>
+							<div class="flex-item4">
+								<img src="${base}/r/img/politics.png" alt="" />
+								<p>政治</p>
+							</div>
+							<div class="flex-item4">
+								<img src="${base}/r/img/history.png" alt="" />
+								<p>历史</p>
+							</div>
+							<div class="flex-item4">
+								<img src="${base}/r/img/geography.png" alt="" />
+								<p>地理</p>
+							</div>
+							<div class="flex-item4">
+								<img src="${base}/r/img/technology.png" alt="" />
+								<p>技术</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--右-->
+				<div class="systemright">
+					<div><span class="diamonds"></span>新高考选科系统</div>
+					<div>根据“职业——专业——选科”这条主线选择科目。如果不想读工学专业，物理可以不选；选考历史、地理、政治三门，是绝对不</div>
+					<div class="textC" style="margin-top: 25px;">
+						<!--<button class="btn1" data-toggle="modal" data-target="#myModal">咨询专家</button>-->
+						[#if user?? || group??]
+						[#if group.id!=3]
+						<button class="btn1 btnColorYellow" onclick="suzhouzuhe()">选科志愿设置</button>
+						<button class="btn1 btnColorYellow" onclick="tianzhuan()">选科意向调查</button>
+						[#else]
+						<button class="btn1 btnColorYellow" onclick="javascript:location='http://www.Yuncareer.com/sygh'">开始选科</button>
+						[/#if]
+						[#else]
+						<button class="btn1 btnColorGreen" onclick="login()">点击登陆</button>
+						[/#if]
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class ="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">专家热线</h4>
+					</div>
+					<div class="modal-body textC" style="height: 100px;line-height: 70px;">请拨打电话：400-9288-985</div>
+				</div>
+			</div>
+		</div>
+		<!--主体内容-->
+		<main class="toChooseMain">
+			<div class="flex-container width1200">
+				<div style="width:80%;border-right: 5px solid #e3e1e1;" class="tabPanel">
+					<ul class="toChoose-tab">
+						<li class="toChoose1 active">
+							<span>新高考选科政策解读</span>
+						</li>
+						<li class="toChoose2 ">
+							<span>认识自我，开始测评</span>
+						</li>
+						<li class="toChoose3 ">
+							<span>确定目标，高考选科</span>
+						</li>
+						<li class="toChoose4 ">
+							<span>成绩分析，目标规划</span>
+						</li>
+						<li class="toChoose5 ">
+							<span>生涯档案，专家服务</span>
+						</li>
+					</ul>
+					<div class="panes">
+						[@cms_content_list typeId='1'  channelId='95' dateFormat='yyyy-MM-dd']
+						<div class="pane" style="display:block;" >
+							[#list tag_list as a]
+							[#if a.id=142]
+								${a.txt!}
+							[/#if]
+							[/#list]
+						</div>
+						<div class="pane" style="display:none;">
+							[#list tag_list as a]
+							[#if a.id=143]
+								${a.txt!}
+							[/#if]
+							[/#list]
+						</div>
+						<div class="pane" style="display:none;">
+							[#list tag_list as a]
+							[#if a.id=144]
+							${a.txt!}
+							[/#if]
+							[/#list]
+						</div>
+						<div class="pane" style="display:none;">
+							[#list tag_list as a]
+							[#if a.id=145]
+							${a.txt!}
+							[/#if]
+							[/#list]
+						</div>
+						<div class="pane" style="display:none;">
+							[#list tag_list as a]
+							[#if a.id=146]
+							${a.txt!}
+							[/#if]
+							[/#list]
+						</div>
+						[/@cms_content_list]
+					</div>
+				</div>
+				<div style="width:20%;">
+					 <p>其他服务</p>
+					<a href="${base}/zytb/toCollegeService.jspx"><p class="serve serve1"></p></a>
+					<a href="${base}/FwYl/zpfw.jspx"><p class="serve serve2"></p></a>
+					<a href="${base}/FwYl/BackgroundAscension.jspx"><p class="serve serve3"></p></a>
+					<a href="${base}/FwYl/zpfw.jspx"><p class="serve serve4"></p></a>
+					<a href="${base}/alipay/fuwuzhongxin.jspx"><p class="serve serve5"></p></a>
+					<a href="##"><p class="serve serve6"></p></a>
+					<a href="${base}/FwYl/zpfw.jspx"><p class="serve serve7"></p></a>
+				</div>
+			</div>
+		</main>
+		<!--底部-->
+		[#include "../include/footer.html"/]
+		<!--<footer class="foot">-->
+			<!--<iframe MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no src="" height="540px" width="100%"></iframe>-->
+		<!--</footer>-->
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+		<script>
+			//tab切换
+			$(".toChoose-tab li").click(function(){
+				$(".toChoose-tab li").removeClass("active");
+				$(this).addClass("active");
+			});
+			
+			$(function() {
+				$('.tabPanel ul li').click(function() {
+					$(this).addClass('hit').siblings().removeClass('hit');
+					$('.panes>div:eq(' + $(this).index() + ')').show().siblings().hide();
+				})
+			})
+			function login() {
+				window.location.href='${base}/login.jspx';
+            }
+
+			function suzhouzuhe(){
+//			    window.location.href='http://www.yuncareer.com:9092/wdedu/choosecoursefirst.jspx';
+				window.location.href='${base}/chooseCourseSuzhouFirst.jspx';
+			}
+
+            function tianzhuan(){
+//			    window.location.href='http://www.yuncareer.com:9092/wdedu/choosecoursefirst.jspx';
+                window.location.href='${base}/choosecoursefirst.jspx';
+			}
+		</script>
+	</body>
+
+</html>

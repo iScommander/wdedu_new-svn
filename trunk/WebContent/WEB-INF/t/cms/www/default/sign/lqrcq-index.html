@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="format-detection" content="email=no">
+		<title>领取入场券</title>
+		<script src="${base}/r/sign/pace.js"></script>
+		<link rel="stylesheet" href="${base}/r/sign/pace-theme-center-atom.css" />
+		<link rel="stylesheet" href="${base}/r/sign/rem.css" />
+		<script src="${base}/r/sign/jquery-1.11.3.min.js"></script>
+		<style type="text/css">
+			body{height: 100%;}
+			.index-main{width: 100%;height: 100%;background-image: url(${base}/r/sign/img/index-bg.jpg);background-size: 100% 100%;}
+			.index-main h3{padding-top: 1.2rem;text-align: center;color: #fff;font-size: 1.6rem;}
+			.rcq{display: block;width: 86%;margin: 0 auto;margin-top: 45%;}
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<div class="index-main">
+				<h3>千人场讲座活动</h3>
+				<a href="lqrcq.html" class="rcq">
+					<img src="${base}/r/sign/img/rcq.png" alt="领取入场券" />
+				</a>
+			</div>
+		</div>	
+	</body>
+	<script>
+		window.onload = function(){
+			Pace.on('done',function(){
+				$('#content').show();
+			});
+		};
+	</script>
+</html>

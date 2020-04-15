@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>讲座签到</title>
+		<script src="${base}/r/sign/pace.js"></script>
+		<link rel="stylesheet" href="${base}/r/sign/pace-theme-center-atom.css" />
+		<link rel="stylesheet" href="${base}/r/sign/iosSelect.css" />
+		<link rel="stylesheet" href="${base}/r/sign/rem.css" />
+		<script src="${base}/r/sign/jquery-1.11.3.min.js"></script>
+		<script src="${base}/r/sign/iosSelect.js"></script>
+		<style type="text/css">
+			body{background:#8C4D93;}
+			.main{width: 100%;padding-bottom: 2.5rem;background: #8C4D93;}
+			.main:after{position: absolute;content: '';bottom: 0;left: 0;width: 100%;height: 1.25rem;background: #995AA1;}
+			.jzqd-head{width: 100%;height: 18.25rem;background-image:url(${base}/r/sign/img/qd-bg.jpg) ;background-size: 100% 100%;}
+			#jxqd{width: 86%;margin: .4rem auto 0;padding: .6rem 0;background: rgba(255,255,255,.6);border-radius: 2px;}
+			.item{margin: 1rem auto;font-size: 1.25rem;}
+			.item label{display: inline-block;width: 25%;height: 2.6rem;text-align: right;line-height: 2.6rem;margin-right: 10px;color: #fff;}
+			.item input{width: 54%;height: 2.6rem;font-size: 1.1rem;}
+			#tel,#code,#joinNum{width: 31%;}
+			.warn{display: inline-block;color: #FF9535;padding-left: 0;font-size: 12px;}
+			#confirmBtn{width: 5.6667rem;height: 2.6667rem;text-align: center;line-height: 2.5rem;color: #c55813;margin-left: .3rem;vertical-align: middle;font-size: 1rem;background-image: url(${base}/r/sign/img/btn-code.png);background-size: 100% 100%;}
+			#qdBtn{display: block;width: 9.3333rem;height: 2.75rem;margin: 0 auto .5rem;background-image: url(${base}/r/sign/img/btn-qd.png);background-size: 100% 100%;border-radius: 2rem;}
+			.tip-1,.tip-2{width: 24rem;}
+			.fixed-filter,.tip-1,.tip-2{display: none;}
+			h6{color: #959595;font-size: 11px;font-weight: normal;text-align:center;padding-top: 3px;}
+			#hide{display: none;}
+			#tip{width: 23.41667rem;font-size: 1rem;color: #555;}
+			.tip-img{position: absolute;top:0;left: 0;width: 23.41667rem;height: 4.8333rem;margin-top: -4rem;background-image: url(${base}/r/sign/img/tips.png);background-size: 100% 100%;}
+			.tips{width: 90%;margin: 0 auto;padding: 3rem 1.2rem 2rem;background: #fff;border-radius: 3px;background: #fff;}
+			#tip div{line-height: 1.3em;}
+			#tip  p{text-indent: 2em;text-align: justify;padding: .5em 0;}
+			#tip h4{font-weight: normal;}
+			#tip span{font-size: 1rem;color: #FF9858;margin: 0 2px;font-size: bold;}
+		</style>
+	</head>
+	<body>
+	<div id="content">
+		<div class="main gps">
+			<div class="jzqd-head"></div>
+			<div id="jxqd">
+				<input type="hidden" name="activeId" id="activeId" value="${activeId!}"/>
+				<div class="item">
+					<label>手机号</label>
+					<input id="tel" type="tel" name="telphoto" placeholder="请输入手机号" maxlength="11"/>
+					<button id="confirmBtn" type="button">确认号码</button>
+					<br />
+					<h6>请输入准确的手机号,凭手机号签到退款！</h6>
+				</div>
+				<div id="hide">
+				<div class="item">
+					<label>姓名</label>
+					<input id='name' type="text" placeholder="请输入姓名"/>
+				</div>
+				<div id="codeItem" class="item">
+					<label>验证码</label>
+					<input id="code" type="tel" placeholder="请输入验证码" maxlength="6"/>
+				</div>
+					[#if isShowKind?? && isShowKind==1]
+				<div class="item">
+					<label>市区</label>
+					<input id="city" type="text" placeholder="请选择地区" readonly="readonly"/>
+				</div>
+				<div class="item">
+					<label>学校</label>
+					<input id="school" type="text" placeholder="请选择学校" readonly="readonly" disabled/>
+				</div>
+				<div class="item">
+					<label>毕业年份</label>
+					<input id="grade" type="text" placeholder="请选择年级" readonly="readonly"/>
+				</div>
+				<div class="item">
+					<label>文理科</label>
+					<input id="wl" type="text" placeholder="请选择文理科" readonly="readonly"/>
+				</div>
+					[/#if]
+				<!--<div class="item">-->
+					<!--<label>年级排名</label>-->
+					<!--<input id="rank" type="tel" placeholder="请输入年级排名" maxlength="5"/>-->
+					<!--<br />-->
+					<!--<h6>最近考试的总分年级排名！</h6>-->
+				<!--</div>-->
+					<div style="margin-left: 24%;font-size: 0.6rem;color: blue;"><input style="display: inline-block;height: 20px;width: 20px" type="checkbox" value="true" id="ifzxd" name="ifzxd">
+						<a style="font-size: 1.5rem;">我要申请免费咨询</a> <br/><br/>
+						<p style="font-size: 1.0rem;color: red;"> 1、定位省排名，确定目标大学</p>
+						<p style="font-size: 1.0rem;color: red;">2、自招&综评材料准备</p>
+						<p style="font-size: 1.0rem;color: red;">3、了解高考政策与录取规则</p>
+						<p style="font-size: 1.0rem;color: red;">4、咨询自招&综评、志愿填报个性化服务</p>
+					</div>
+				</div>
+				</div>
+				<button id="qdBtn" type="button"></button>
+			</div>
+		</div>
+		<div class="fixed-filter">
+			<div class="abs-center">
+				<div id="tip" class="gps">
+					<div class="tip-img"></div>
+					<div class="tips">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="toast" class="abs-center"></div>
+	</div>
+	</body>
+	<script src="${base}/r/sign/city.min.js"></script>
+	<script type="text/javascript">
+	window.onload = function(){
+		Pace.on('done',function(){
+			$('#content').show();
+		});
+	};
+	var activeid=$('#activeId').val();
+	var gradeList = [
+	    {'id':'1','value':'2019届'},
+	    {'id':'2','value':'2020届'},
+	    {'id':'3','value':'2021届'}
+	  ];
+ 	var wlList = [
+	     {'id':'1','value':'文科'},
+	     {'id':'2','value':'理科'},
+	     {'id':'3','value':'综合改革'}
+	   ];
+ 	var joinList = [
+	     {'id':'1','value':'1人'},
+	     {'id':'2','value':'2人'},
+	     {'id':'3','value':'3人'}
+	   ];
+ 	//toast
+	function toast(type){
+		if(type=='getError'){
+			$('#toast').html('领取失败，请稍后重试！');
+		};
+		$('#toast').fadeIn();
+		setTimeout(function(){
+			$('#toast').fadeOut();
+		},2000);
+	};
+	//获取验证码
+	var proName = '',cityName = '',qxName = '',grade='',wl='',schoolName='';
+	$('#confirmBtn').click(function(){
+		//检测手机
+		var	regTel = /^1[34578]\d{9}$/;
+		var tel = $('#tel').val();
+		if(!regTel.test(tel)){
+			$('#toast').html('请检查手机号！');
+			toast();
+			return false;
+		};
+		$.ajax({
+			url : 'getCapt.jspx',
+			data:{
+				telphoto:$("#tel").val(),
+				activeid:activeid,
+				type:'qd'
+			},
+			type : "GET",
+			error: function(msg){
+				console.log(msg);
+				$('#toast').html('请稍后重试！');
+				toast();
+				return false;
+			},
+			success: function(data) {
+			　 		var res = eval('(' + data + ')');
+				　 	console.log(res);
+				　 	//未参与
+				 	if(res.type==0){
+				 		type=0;
+				 		$('#hide').slideDown('fast');
+						$('.rcq-body').addClass('body');
+						$('.by-left').show();
+						$('.by-right').show();
+                        $('#city').attr('data-province-code', res.userinfo.pro_code);
+                        $('#city').attr('data-city-code', res.userinfo.city_code);
+						var count = 60;
+					 	var resend = setInterval(function(){
+			                count--;
+			                if (count > 0){
+			                	$('#confirmBtn').text(count+'s').attr('disabled','disabled');
+			                }else {
+			                    clearInterval(resend);
+			                    $('#confirmBtn').text('重新获取').removeAttr('disabled');
+			                }
+			            }, 1000);
+				 	};
+				 	//禁止重复领取
+				 	if(res.type==1){
+				 		type=1;
+				 		var adInfo = res.activeinfo;
+				 		console.log('ad',adInfo)
+				 		var html ='<h4>尊敬的<span>'+adInfo.username+'</span>家长:</h4>'+
+		 				'<p>欢迎您参加《'+adInfo.theme+'》讲座';
+		 				if(adInfo.lqzl_content){
+		 					html+=','+adInfo.lqzl_content;
+		 				};
+						html+='</p><div>您是第<span>'+adInfo.qd_rank+'</span>位签到的家长！</div>'+
+						'<h4>请截图并保存当前页面！</h4>';
+						$('.tips').html(html);	
+		 				$('.fixed-filter').fadeIn();
+				 	};
+				 	//已注册未付款
+					if(res.type==2){
+						type=2;
+						var oldInfo = res.userinfo;
+						$('#codeItem').hide();
+						$('#hide').slideDown('fast');
+						$('.rcq-body').addClass('body');
+						$('.by-left').show();
+						$('.by-right').show();
+						if(oldInfo){
+							$('#name').val(oldInfo.username);
+							if(oldInfo.province!=null){  
+								$('#rank').val(oldInfo.class_rank);
+						 		$('#city').attr('data-province-code', oldInfo.pro_code);
+			                    $('#city').attr('data-city-code', oldInfo.city_code);
+			                    $('#city').attr('data-district-code', oldInfo.quxian_code);
+						 		$('#city').val(oldInfo.province + ' ' + oldInfo.city + ' ' + oldInfo.quxian);
+						 		$('#school').attr('data-school-code', oldInfo.school_code);
+						 		$('#school').val(oldInfo.school_name);
+						 		$('#grade').attr('grade', oldInfo.classes);
+						 		if(oldInfo.classes==1){
+						 			$('#grade').val("高一");
+						 		};
+						 		if(oldInfo.classes==2){
+						 			$('#grade').val("高二");
+						 		};
+						 		if(oldInfo.classes==3){
+						 			$('#grade').val("高三");
+						 		};
+						 		$('#wl').attr('wl', oldInfo.majortype);
+						 		$('#wl').val(oldInfo.major_type);
+						 		var allName =  $('#city').val().split(' ');
+						 		proName = allName[0],cityName = allName[1],qxName = allName[2];
+						 		grade = oldInfo.classes;
+						 		wl = oldInfo.major_type;
+							};
+					 	};
+				 	};
+				 	
+				}
+		});
+	});
+	//选择市区
+	var schoolData=[];
+	$('#city').on('click', function () {
+		var oneLevelId = $('#city').attr('data-province-code');
+		var twoLevelId = $('#city').attr('data-city-code');
+		var threeLevelId = $('#city').attr('data-district-code');
+		var iosSelect = new IosSelect(3, [prolist, citylist, quxianlist],
+			{
+                title: '选择市区',
+                itemHeight: 40,
+                itemShowCount: 5,
+                relation: [1, 1],
+                oneLevelId: oneLevelId,
+                twoLevelId: twoLevelId,
+                threeLevelId: threeLevelId,
+                callback: function (selectOneObj, selectTwoObj, selectThreeObj) {
+                    $('#city').attr('data-province-code', selectOneObj.id);
+                    $('#city').attr('data-city-code', selectTwoObj.id);
+                    $('#city').attr('data-district-code', selectThreeObj.id);
+                    $('#city').val(selectOneObj.value + ' ' + selectTwoObj.value + ' ' + selectThreeObj.value);
+                    if(selectThreeObj.value == '全部'){
+                    	$('#toast').html('请不要选择全部地区！');
+    					toast();
+    					return false;
+                    };
+                    proName =  selectOneObj.value;
+                	cityName =  selectTwoObj.value;
+                	qxName =  selectThreeObj.value;
+                	$.ajax({
+        				url : '${base}/sign/getschool.jspx',
+        				data:'quxiancode='+selectThreeObj.id,
+        				type : "get",
+        				error: function(msg){
+        					console.log(msg);
+        					$('#toast').html('获取学校信息失败，请稍后重试！');
+        					toast();
+        					return false;
+        				},
+        				beforeSend:function(){
+        					$('#school').attr('disabled','disabled');
+        				},
+        				success: function(data) {
+        				  var res = eval('(' + data + ')');
+        				  var schoolList =  res.schoollist;
+        				  if(schoolList.length==0){
+	                        	schoolData = [{'id': '0000', 'value': '暂无数据，请重新选择地区',"parentId":"0000"}];
+	                    	}else{
+	                         	schoolData=schoolList;
+	                   	 	};
+	                   	 	$('#school').removeAttr('disabled');
+        				}
+        			});
+                }
+       		}
+		);
+    });
+    //选择学校
+    $('#school').on('click',function(){
+    	//检测市区
+		var city = $('#city').val();
+		if(city==null||city==0||city==undefined){
+			$('#toast').html('请先选择市区！');
+			toast();
+			return false;
+		};
+        var oneLevelId = $('#school').attr('data-school-code');
+        var iosSelect = new IosSelect(1, [schoolData],
+     		{
+                title: '选择学校',
+                itemHeight: 40,
+                itemShowCount: 5,
+                oneLevelId: oneLevelId, 
+                callback: function (selectOneObj) {
+                	 $('#school').attr('data-school-code',selectOneObj.id);
+                     $('#school').val(selectOneObj.value);
+                     schoolName=selectOneObj.value;
+            	}
+        });
+    });
+    //选择年级
+    $('#grade').on('click',function(){
+    	var oneLevelId = $('#grade').attr('grade');
+        var iosSelect = new IosSelect(1, [gradeList],
+     		{
+                title: '选择年级',
+                itemHeight: 40,
+                itemShowCount: 3,
+                oneLevelId: oneLevelId,
+                callback: function (selectOneObj) {
+                	$('#grade').attr('grade',selectOneObj.id);
+                     $('#grade').val(selectOneObj.value);
+                     grade=selectOneObj.value;
+            	}
+        });
+    });
+    //选择文理科
+    $('#wl').on('click',function(){
+    	var oneLevelId = $('#wl').attr('wl');
+        var iosSelect = new IosSelect(1, [wlList],
+     		{
+                title: '选择文理科',
+                itemHeight: 40,
+                itemShowCount: 3,
+                oneLevelId: oneLevelId,
+                callback: function (selectOneObj) {
+                	 $('#wl').attr('wl',selectOneObj.id);
+                     $('#wl').val(selectOneObj.value);
+                    wl=selectOneObj.value;
+            	}
+        });
+    });
+  
+	//领取入场券
+	$('#qdBtn').click(function(){
+		//检测姓名
+		var regName = /^[\u4e00-\u9fa5]{2,4}$/;
+		var name = $('#name').val();
+		if(!regName.test(name)){
+			$('#toast').html('请检查姓名！');
+			toast();
+			return false;
+		};
+		//检测手机
+		var	regTel = /^1[34578]\d{9}$/;
+		var tel = $('#tel').val();
+		if(!regTel.test(tel)){
+			$('#toast').html('请检查手机号！');
+			toast();
+			return false;
+		};
+		//检测验证码
+		if(type==0){
+			var codeInput = $('#code').val();
+			if(codeInput.length!=6){
+				$('#toast').html('请检查验证码！');
+				toast();
+				return false;
+			};
+		};
+        var ifzxd = $("input[type='checkbox']").prop('checked');
+		$(this).attr('disabled','disabled');
+		 $.ajax({
+			　    url: "${base}/sign/signing.jspx",
+			   data:{
+				   name:name,
+				   telphoto:tel,
+                   pro:proName,
+                   city:cityName,
+				   county:qxName,
+                   schoolName:schoolName,
+                   majorType:wl,
+                   grade:grade,
+                   ifzxd:ifzxd,
+				   activeId:activeid
+				},
+			　　type : "POST",
+			   error:function(request) {
+				   console.log(request);
+				   $('#toast').html('签到失败，请稍后重试！');
+					toast();
+					return false;
+	          	},
+			　　success : function(data){
+				var res = eval('(' + data + ')');
+					var adInfo = res.activeinfo;
+			 		console.log('ad',adInfo)
+			 		var html ='<h4>尊敬的<span>'+adInfo.username+'</span>家长:</h4>'+
+	 				'<p>欢迎您参加《'+adInfo.theme+'》讲座';
+	 				if(adInfo.lqzl_content){
+	 					html+=','+adInfo.lqzl_content;
+	 				};
+					html+='</p><div>您是第<span>'+adInfo.qd_rank+'</span>位签到的家长！</div>'+
+					'<h4>请截图并保存当前页面！</h4>';
+					$('.tips').html(html);	
+	 				$('.fixed-filter').fadeIn();
+		      }
+		});
+	});
+	</script>
+</html>

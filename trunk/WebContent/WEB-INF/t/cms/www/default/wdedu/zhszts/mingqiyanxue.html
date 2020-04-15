@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>名企研学</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link href="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
+	<script  type="text/javascript">
+		function apply() {
+			var user = $("#user").val();
+			var type = $("#type").val();
+			var contentId =$("#contentId").val();
+
+			if(user==null||user==""){
+				window.location.href="${base}/activeApplyAct/testUser.jspx";
+			}else {
+
+				$.ajax({
+					type: "post",
+					dataType: "json",
+					url: "${base}/activeApplyAct/applyActive.jspx",
+					data: {
+						"activityType": type,
+						"contentId": contentId
+					},
+
+					success: function (data) {
+						alert(data.msg);
+					}
+				})
+			}
+		}
+	</script>
+</head>
+<body>
+[#include "../include/header_address.html"/]
+    
+    
+   [#include "../include/header_zhszts.html"/]
+        
+		<div class="mbxdh_bg">
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">综合素质提升</a>&nbsp;&gt; &nbsp; <a href="#">名企研学</a>
+		</div>  
+	</div>
+<input type="hidden" id="type" value="名企研学">
+<input id="user" value="${user!}" type="hidden">
+<div class="con">
+	<div class="clearfix">
+		<div class="con_l fl" style=" width:880px">
+
+			<div class="con_l_con">
+				[@cms_content_list typeId='1,2,3' titLen='25' channelId='154' orderBy='2' channelOption='0' dateFormat='yyyy-MM-dd']
+				[#list tag_list as a]
+				[#if a.id=newContentId]
+				${a.txt!}
+				<input id="contentId" value="${a.id!}" type="hidden">
+				[/#if]
+				[/#list]
+				[/@cms_content_list]
+			</div>
+		</div>
+		<div class="con_r fl" style="margin-left:40px;">
+			<div class="con_r_tit">最新活动
+            </div>
+            <div class="clearfix"></div>
+            <div class="gxyx_r_ol">
+			<ol class="list-unstyled" id="listuns">
+				[@cms_content_list typeId='1' channelId='154' orderby='2' dateFormat='yyyy-MM-dd']
+				[#list tag_list as a]
+				<li>
+					<a href="${base}/NewsDisplay/UniversityStudies.jspx?contentId=${a.id!}">
+					<div class="titleImg"><img src="${a.titleImg!}"/></div>
+						<div class="gxyx_r_bjys" >
+							<a href="${base}/NewsDisplay/UniversityStudies.jspx?contentId=${a.id!}" class="gxyx_right_bt1">${a.title!}</a>
+							<div class="gxyx_right_an">${a.shortTitle!}</div><div class="gxyx_right_sj">2019-10-12</div><div class="clearfix"></div>
+							</div>
+					</a>
+				</li>
+
+
+				[/#list]
+				[/@cms_content_list]
+			</ol>
+            </div>
+		</div>
+        <div class="clearfix"></div>
+	</div>
+</div>
+	[#include "../include/footer_new.html"/]
+
+		<div class="mb_db_gd" id="box2">
+			<div class="mb_db_gd_zt">
+				[@cms_content_list typeId='1,2,3' titLen='25' channelId='154' orderBy='2' channelOption='0' dateFormat='yyyy-MM-dd']
+				[#list tag_list as a]
+				[#if a.id=newContentId]
+				<span>${a.title!}&nbsp;&nbsp;名企研学</span>
+				<a class="mb_db_gd_an" onclick="apply()">立即报名</a>
+				[/#if]
+				[/#list]
+				[/@cms_content_list]
+			</div>
+			<div class="clearfix"></div>
+			<input type="hidden" id="type" value="名企研学">
+			<input id="user" value="${user!}" type="hidden">
+		</div>
+</body>
+</html>

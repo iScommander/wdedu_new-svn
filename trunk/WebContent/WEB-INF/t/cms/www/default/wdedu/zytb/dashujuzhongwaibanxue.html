@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>大数据</title>
+<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+[#include "../include/header_address.html"/]
+    
+    
+       [#include "../include/header_zytb.html"/]
+	<div class="mbxdh_bg">
+
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">志愿填报</a>&nbsp;&gt; &nbsp; <a href="#">大数据</a>
+		</div>  
+	</div>   
+	<div class="con">
+    <div class="kjy_zydq_z f_l">
+    	<div class="kjy_bt">职业大全</div>
+    	<div class="kjy_list">
+        	<ul>
+           <li><a href="dashuju.html"><p>一分一段表</p> <span >&gt;</span><div class="clearfix"></div></a></li>
+            <li><a href="dashujupicichaxun.html"><p>批次查询</p> <span >&gt;</span><div class="clearfix"></div></a></li>
+            <li><a  href="dashujuzhongwaibanxue.html"><p style="color:#ff8d00;">中外合作办学</p> <span style="color:#ff8d00;">&gt;</span><div class="clearfix"></div></a></li>
+            <li><a href="dashujuzhongdianxk.html"><p>重点学科实验室</p> <span>&gt;</span><div class="clearfix"></div></a></li>
+            </ul>
+        </div>
+    </div>
+        <div class="dsj_tabe3 f_r">
+        <div class="dsjzwbx_so_zt">
+    			<form action="#">
+    		<div class="dsjzwbx_so f_l">
+    		<input type="text" placeholder="&nbsp; &nbsp;&nbsp; &nbsp;输入文章标题或文章关键字，开始搜索"/>
+    		</div>
+    		<div class="dsjzwbx_so_an f_l">
+    			<input type="submit" value="查询"/>
+    		</div>
+     	 <div class="clearfix"></div>
+    		</form>
+   		 </div>
+			<div class="dsj_tabe3_bt">院校列表</div>
+    		<div class="dsj_tabe3_list">
+           	<a href="#">北京大学北京大学</a>
+            <a href="#">北京大学</a>
+            <a href="#">北京大学</a>
+            <a href="#">北京大学</a>
+            <a href="#">北京大学</a>
+            <a href="#">北京大学</a>
+            
+             <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="dsjzwbx_nr" id="dsjner">
+    <span>北京大学</span>
+    <p>截至2015年1月，学校先后与世界上100多所高校建立起合作交流关系，设有教育部批准的河北省第一个中外合作办学机构——河北大学－中央兰开夏传媒与创意学院，在俄罗斯、马来西亚等国家设有汉语教学中心，在巴西里约热内卢天主教大学、美国路易斯安那泽维尔大学设立孔子学院2所，为50多个国家、地区培养博士、硕士、学士及短期留学生3000余名，是“教育部留学出国人员培训与研究中心”试点高校、河北省首家具有接收中国政府奖学金生资格的高校。</p>
+    </div>
+    	</div>
+    <div class="clearfix"></div>
+    
+    </div>	
+    		
+
+[#include "../include/footer_new.html"/]
+    
+    <script src="${base}/r/wdedu/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="${base}/r/wdedu/js/jquery-tab.js"></script>
+<script type="text/javascript">
+	$(function(){
+		// Calling the plugin
+		$('.tab-group').tabify();
+	})
+</script>
+<script>
+$(function(){
+$(".dsj_tabe3_list a").on("click",function(){
+$(".dsj_tabe3_list a").css("background-color","#ffffff");
+$(".dsj_tabe3_list a").css("color","#000000");
+$(this).css("background-color","#ff8d00");
+$(this).css("color","#ffffff");
+$("#dsjner").html("=======更改值，js内添加================")
+
+})
+});
+</script>
+</body>
+</html>

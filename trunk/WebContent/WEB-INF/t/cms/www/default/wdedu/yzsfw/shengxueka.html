@@ -1,0 +1,507 @@
+<!DOCTYPE >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>升学卡</title>
+    <link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+    <script src="${base}/r/wdedu/js/jquery-1.9.1.min.js"></script>
+    <script language="javascript" src="${base}/r/wdedu/js/common.js"></script>
+    <link  type="text/css" rel="stylesheet" href="${base}/r/wdedu/css/style.css" />
+    <script src="${base}/r/wdedu/js/qrcode.js" language="javascript"></script>
+    <style type="text/css">
+#myWin {
+width: 70%;
+height: 490px;
+display: none;
+z-index: 9999;
+border: 1px solid #D5D5D5;
+background:#fff;
+border-radius: 5px;
+position: fixed;
+top: 100px;left: 15%;
+
+
+}
+.pay_xx_z {
+    width: 47%;cursor: pointer;
+
+}
+.pay_xx_y {
+    width: 47%;cursor: pointer;
+
+}
+.pay{padding: 30px 30px 0px 50px;}
+.pay_xs{margin: 50px auto 0px auto;}
+.pay_z_bt span{margin-bottom: 60px;}
+.pay_je{margin-top: 80px;}
+.zhezhao{
+ width:100%;
+ height:100%;
+ background-color:#000;
+ filter:alpha(opacity=50);
+ -moz-opacity:0.5;
+ opacity:0.5;
+ position:fixed;
+ left:0px;
+ top:0px;
+
+ display:none;
+
+}
+
+</style>
+
+
+</head>
+
+<body>
+<script src="${base}/r/wdedu/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+[#include "../include/header_address.html"/]
+
+[#include "../include/header_yzsfw.html"/]
+
+<div class="mbxdh_bg">
+    <div class="mbxdh">
+        <a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">一站式服务</a>&nbsp;&gt; &nbsp; <a href="#">升学卡服务</a>
+    </div>
+</div>
+<div class="con">
+    <div class="sxk_gm">
+        <div class="sxk_img f_l">
+            <img src="${base}/r/wdedu/images/zztb_1.jpg" id="img_pre"/>
+        </div>
+        <div class="sxk_gmxx f_r">
+            <div class="sxk_gmxx_bt">
+                <span id="sxk_mc">
+                    ${k1.name!}
+                </span>
+                <i>考试院专家推荐平台，录取参考数据与省考试院完全一致</i>
+            </div>
+            <div class="sxk_gmxx_sj">
+
+                <span>原价：<i id="sxk_sjy" style="text-decoration:line-through;">￥${k1.cost/100!}</i>&nbsp;&nbsp;售价:<i id="sxk_sj">&nbsp;&nbsp;￥${k1.discount_cost/100!}</i></span>
+
+            </div>
+            <div class="card-type">
+                    [#if list??]
+                    [#list list as a]
+                     [#if a_index==0]
+                     <a class="choosed" data-type="${a_index+1}" id="type${a_index+1}" name="${a.id!}" href="javascript:;" onclick="qh(this,'${a.desc!}','${a.cost!}','${a.discount_cost!}','${a.user_id!}','${isAdmin!}');">${a.name!}</a>
+                     [#else]
+                     <a class="type" data-type="${a_index+1}" id="type${a_index+1}" name="${a.id!}" href="javascript:;" onclick="qh(this,'${a.desc!}','${a.cost!}','${a.discount_cost!}','${a.user_id!}','${isAdmin!}');">${a.name!}</a>
+                     [/#if]
+                     [/#list]
+                     [/#if]
+                <div class="clearfix"></div>
+
+            </div>
+            <div class="sxk_an">
+                <div class="sxk_ss_y2 ">
+                    <button type="button" id="kzgm" class="sxk_ss_y2_an sxk_ss1" [#if (isAdmin??&&isAdmin==1)||(list[0].user_id??)] style="pointer-events: none;background: #a4a4a4"  [/#if] onclick="play();">立即购买</button>
+                <!--    <button type="button" class="sxk_ss_y2_an2 sxk_ss2" [#if isAdmin??&&isAdmin==1] style="pointer-events: none;"  [/#if] onclick="upgrade()">立即升级</button>-->
+                </div>
+                <div class="sxk_nr_js">
+                    <p id="sxk_nr_js_p">
+                        1、开通志愿卡：畅享查、测、填、学、问5大核心功能。<br />
+                        2、开通智能填报服务：在享受志愿卡功能服务的基础上，可以根据个人条件一键自动填报志愿。<br />
+                        3、开通生涯规划系统卡：测评性格，专业，职业，规划人生道路。<br />
+                        4、1000部学长学姐讲专业、500部专家讲志愿在线视频讲座，帮助考生科学填志愿。<br />
+                        5、适用对象：普通类文理科考生、新高考选科类考生（提前批次、自主招生及艺术体育类考生暂不适用）。<br />
+                        6、使用时效：有效期截止到用户自行选择高考年的9月1日为止（非高考年,高考期间仅提供数据查询）。<br />
+                        7、上海不提供普通类“专科批次”模拟填报服务（全端设备）<br />
+                        8、陕西不提供普通类文理“单设本科批次”模拟填报服务（全端设备）<br />
+                    </p>
+                </div>
+            </div>
+        </div>
+<input type="hidden" value="${user!}" id="user"/>
+        <div class="clearfix"></div>
+        <div class="sxk_f">
+
+            <div class="sxk_title">
+
+                <div class="on5">服务介绍</div>
+
+                <div>用户评价(12365+)</div>
+
+                <div>常见问题</div>
+
+            </div>
+
+            <div class="sxk_con">
+
+                <div class="sxk_con_list">
+                    <div class="sxk_fwnr f_l">
+                        <div class="sxk_img_xt f_l">
+                            <img src="${base}/r/wdedu/images/index_34.png"/>
+                        </div>
+                        <div class="sxk_nr_xt f_r">
+                            <a href="#">智能生成志愿表</a>
+                            <div class="sxk_hx"></div>
+                            <span>（完整版）暂时不适用内蒙古</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="sxk_fwnr f_l">
+                        <div class="sxk_img_xt f_l">
+                            <img src="${base}/r/wdedu/images/index_34.png"/>
+                        </div>
+                        <div class="sxk_nr_xt f_r">
+                            <a href="#">智能生成志愿表</a>
+                            <div class="sxk_hx"></div>
+                            <span>（完整版）暂时不适用内蒙古</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="sxk_fwnr f_l">
+                        <div class="sxk_img_xt f_l">
+                            <img src="${base}/r/wdedu/images/index_34.png"/>
+                        </div>
+                        <div class="sxk_nr_xt f_r">
+                            <a href="#">智能生成志愿表</a>
+                            <div class="sxk_hx"></div>
+                            <span>（完整版）暂时不适用内蒙古</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="sxk_fwnr f_l">
+                        <div class="sxk_img_xt f_l">
+                            <img src="${base}/r/wdedu/images/index_34.png"/>
+                        </div>
+                        <div class="sxk_nr_xt f_r">
+                            <a href="#">智能生成志愿表</a>
+                            <div class="sxk_hx"></div>
+                            <span>（完整版）暂时不适用内蒙古</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="sxk_fwnr f_l">
+                        <div class="sxk_img_xt f_l">
+                            <img src="${base}/r/wdedu/images/index_34.png"/>
+                        </div>
+                        <div class="sxk_nr_xt f_r">
+                            <a href="#">智能生成志愿表</a>
+                            <div class="sxk_hx"></div>
+                            <span>（完整版）暂时不适用内蒙古</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="sxk_con_list">
+                    <div class="sxk_yhpj">
+                        <div class="sxk_yhpj_img f_l">
+                            <div class="sxk_yhzx">
+                                <div class="sxk_yhpj_img_yh">
+                                    <img src="${base}/r/wdedu/images/index_34.png"/>
+                                </div>
+                                <span>1860****559</span>
+                            </div>
+                        </div>
+                        <div class="sxk_yhpj_xq f_l">
+                            <div class="sxk_yhpj_xq1">
+                                <p>网站关于高考的内容还是比较全面的，功能性很强，信息的更新也很快，服务功能也算合理，特别推荐大家看下几位专家专题视频，个人觉得很受用。</p>
+                                <span>2019-11-16  10:20</span>
+                            </div>
+                        </div>
+                        <div class="sxk_sfgm f_r">
+                            <span>成功开通服务</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="sxk_yhpj">
+                        <div class="sxk_yhpj_img f_l">
+                            <div class="sxk_yhzx">
+                                <div class="sxk_yhpj_img_yh">
+                                    <img src="${base}/r/wdedu/images/index_34.png"/>
+                                </div>
+                                <span>1860****559</span>
+                            </div>
+                        </div>
+                        <div class="sxk_yhpj_xq f_l">
+                            <div class="sxk_yhpj_xq1">
+                                <p>网站关于高考的内容还是比较全面的，功能性很强，信息的更新也很快，服务功能也算合理，特别推荐大家看下几位专家专题视频，个人觉得很受用。</p>
+                                <span>2019-11-16  10:20</span>
+                            </div>
+                        </div>
+                        <div class="sxk_sfgm f_r">
+                            <span>成功开通服务</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="sxk_yhpj">
+                        <div class="sxk_yhpj_img f_l">
+                            <div class="sxk_yhzx">
+                                <div class="sxk_yhpj_img_yh">
+                                    <img src="${base}/r/wdedu/images/index_34.png"/>
+                                </div>
+                                <span>1860****559</span>
+                            </div>
+                        </div>
+                        <div class="sxk_yhpj_xq f_l">
+                            <div class="sxk_yhpj_xq1">
+                                <p>网站关于高考的内容还是比较全面的，功能性很强，信息的更新也很快，服务功能也算合理，特别推荐大家看下几位专家专题视频，个人觉得很受用。</p>
+                                <span>2019-11-16  10:20</span>
+                            </div>
+                        </div>
+                        <div class="sxk_sfgm f_r">
+                            <span>成功开通服务</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+
+                </div>
+
+                <div class="sxk_con_list" >
+
+                    <p>该页面链接至系统管理统一发布</p>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+</div>
+        <input type="hidden" value="${strm!}" id="strm"/>
+<div class="pay" id="myWin" >
+        		<div class="pay_z f_l">
+                		<div class="pay_z_bt">
+                        	<span>支付方式：</span>
+                            <div class="pay_z_zt">
+
+                            <div class="pay_xx_z f_l pay_kz2"  onclick="paykz(this);">
+                             <div class="pay_z_zt_nr">
+                            <input type="radio" name="pay" id="wx" value="wx" checked="true"/>
+                            <label for="wx">
+                            <div class="pay_img f_l">
+                            <img src="${base}/r/wdedu/images/pay_1.png"/>
+                            </div>
+							<small>微信支付</small></label>
+                             <div class="clearfix"></div>
+                            </div>
+                            </div>
+                            <div class="pay_xx_y f_r pay_kz" onclick="paykz(this);">
+
+                             <div class="pay_y_zt_nr" >
+                            <input type="radio" name="pay" id="albaba" value="albaba"  />
+                            <label for="albaba">
+                            <div class="pay_img f_l">
+                            <img src="${base}/r/wdedu/images/pay_2.png"/>
+                            </div>
+							<small>支付宝支付</small></label>
+
+                             <div class="clearfix"></div>
+                            </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            </div>
+                            <div class="pay_je"><span>支付金额：<i id="play_zf">263</i>元</span></div>
+                            <div class="wxts"><span>温馨提示:使用手机访问网页的用户请将右侧二维码，截屏保存到相册，使用相应的支付工具，“扫一扫”进行支付</span></div>
+                        </div>
+
+                </div>
+                <div class="pay_y f_r">
+                    <a class="closePlay" onclick="closePlay();">关闭</a>
+                    <div class="clearfix"></div>
+                		<div class="pay_xs">
+                        <i>扫码支付</i>
+                        <div class="pay_ew_img" id="pay_ew_img">
+
+                        </div>
+                        <span>使用<b id="PlayName">微信</b>APP扫码完成支付</span>
+                        </div>
+
+                </div>
+
+        <div class="clearfix"></div>
+        </div>
+<div class="zhezhao" id="zhezhao">
+
+</div>
+
+[#include "../include/footer_new.html"/]
+
+<script>
+ var time1;
+/*点击关闭弹出层消失*/
+function closePlay() {
+  $("#zhezhao").hide()
+  $("#myWin").hide();
+  clearInterval(time1);
+}
+/*控制卡信息转换*/
+function qh(obj,name,cost,discountCost,ct,isadmin){
+  $('.choosed').removeClass('choosed').addClass('type');
+  $(obj).removeClass('type');
+  $(obj).addClass('choosed');
+  if (ct!=null||isadmin==1){
+     $("#kzgm").css("background","#a4a4a4");
+     $("#kzgm").css("pointer-events","none");
+  }else{
+     $("#kzgm").css("background","#ff8d00");
+     $("#kzgm").css("pointer-events","");
+  }
+
+  document.getElementById("sxk_mc").innerText = name;
+ document.getElementById("sxk_sjy").innerText ="￥"+ cost/100;
+ document.getElementById("sxk_sj").innerText ="￥"+ discountCost/100;
+}
+
+/*判断用户是否登录并且跳转*/
+function play(){
+    var user= $("#user").val();
+if(user==null||user==""){
+window.location.href="${base}/activeApplyAct/testUser.jspx";
+}else{
+var productId=$(".choosed").attr("name");
+ wx(productId);
+  time1 = setInterval(function(){payStatus(productId)},3000);
+  function payStatus(productId) {
+    $.ajax({
+        url : '${base}/admissonSvcAct/testUserJump.jspx',
+        data:{"productId":productId},
+        type : "POST",
+        success : function(data){
+            var pdd=eval('(' + data + ')');
+                     if(pdd.msg==true){
+                         alert("购买成功");
+                         closePlay();
+        window.location.href ="${base}/NewsDisplay/testSxk.jspx";
+                     }
+              	}
+    });
+ }
+}
+}
+  //  $(function(){
+   //     $('.sxk_ss_y2 button').click(function(){
+       //     $('.sxk_ss1').removeClass('sxk_ss1').addClass('sxk_ss2');
+      //      $(this).removeClass('sxk_ss2');
+      //      $(this).addClass('sxk_ss1');
+     //   });
+   // });
+
+function paykz(kx){
+      //  $(kx).children().find("input")
+	var val=$('input:radio[name="pay"]:checked').val();
+				if(val=="wx"){
+					$(".pay_xx_z").removeClass("pay_kz")
+					$(".pay_xx_z").addClass("pay_kz2");
+					$(".pay_xx_y").removeClass("pay_kz2")
+					$(".pay_xx_y").addClass("pay_kz");
+                 $("#PlayName").text("微信");
+                 var productId=$(".choosed").attr("name");
+                       wx(productId);
+					}
+					if(val=="albaba"){
+					var element=document.getElementById("pay_ew_img");
+					element.innerHTML="";
+					$(".pay_xx_y").removeClass("pay_kz")
+					$(".pay_xx_y").addClass("pay_kz2");
+					$(".pay_xx_z").removeClass("pay_kz2")
+					$(".pay_xx_z").addClass("pay_kz");
+					var productId=$(".choosed").attr("name");
+                    $("#PlayName").text("支付宝")
+                    albaba(productId);
+					}
+		}
+		function albaba(productId) {
+		   $.ajax({
+      	　　url : '${base}/admissonSvcAct/aliPay/buyCard.jspx',
+      	   data:{"productId":productId},
+      	　　type : "POST",
+      	   async:false,
+      	   error:function(request) {
+                alert("提交出现异常啦。。。。");
+            },
+      	　　success : function(data){
+                var r = eval('(' + data + ')');
+                    if (r.msg=="已购买"){
+                        alert(r.msg)
+                    }else {
+                        url=r.qr_code;
+                        var sp_fee1 = r.sp_fee1;
+                        var sp_fee2 = r.sp_fee2;
+                        //参数1表示图像大小，取值范围1-10；参数2表示质量，取值范围'L','M','Q','H'
+                        var qr_code = qrcode(10, 'M');
+                        qr_code.addData(url);
+                        qr_code.make();
+                       var element=document.getElementById("pay_ew_img");
+                        var str = qr_code.createImgTag();
+                        element.innerHTML=str;
+                            var q=  r.cost;
+                        $("#play_zf").text(q)
+                        $("#myWin").show();
+                        $("#zhezhao").show()
+                    }
+            }
+                          		});
+		}
+		function wx(productId) {
+		   $.ajax({
+      	　　url : '${base}/admissonSvcAct/wxpay/buyCard.jspx',
+      	   data:{"productId":productId},
+      	　　type : "POST",
+      	   async:false,
+      	   error:function(request) {
+                alert("提交出现异常啦。。。。");
+            },
+      	　　success : function(data){
+                var r = eval('(' + data + ')');
+                    if (r.msg=="已购买"){
+                        alert(r.msg)
+                    }else {
+                        var url = "weixin://wxpay/payurl?pr=IrbGhQm";
+                        url=r.result;
+                        var sp_fee1 = r.sp_fee1;
+                        var sp_fee2 = r.sp_fee2;
+                        //参数1表示图像大小，取值范围1-10；参数2表示质量，取值范围'L','M','Q','H'
+                        var qr = qrcode(10, 'M');
+                        qr.addData(url);
+                        qr.make();
+                       var element=document.getElementById("pay_ew_img");
+                        var str = qr.createImgTag();
+                        element.innerHTML=str;
+                      var q=  r.cost;
+                        $("#play_zf").text(q)
+                        $("#myWin").show();
+                        $("#zhezhao").show()
+                    }
+            }
+                          		});
+		}
+		function upgrade() {
+            alert("尽请期待！")
+        }
+        window.onload=function () {
+          var orderList = '${orderList!}';
+          var list_new = '${list_new!}';
+            list_new = eval(list_new);
+               orderList = eval(orderList);
+               if (orderList!= null) {
+                          for(var i = 0; i <orderList.length ; i++) {
+                             for(var j = 0; j < list_new.length; j++) {
+                                       if (list_new[j].id == orderList[i].productId){
+                                           var ids="a[name="+list_new[j].id+"]";
+                                     $(ids).css('background', '#a4a4a4');
+                                      $(ids).css("border","1px solid #a4a4a4");
+                                     $(ids).css('color', '#fff');
+                                       }
+                             }
+                          }
+               }
+          }
+</script>
+</body>
+</html>

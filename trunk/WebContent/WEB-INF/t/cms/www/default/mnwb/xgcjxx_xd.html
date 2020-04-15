@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<title>成绩信息</title>
+<link href="${base}/r/css/head_footer.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="${base}/r/css/zywy_xdxt_net.css" rel="stylesheet" type="text/css" media="screen" />
+<script src="${base}/r/js/jquery-1.8.3.min.js" language="javascript"></script>
+<!--[if lte IE 9]>
+<script src="${base}/r/js/html5shiv.js" language="javascript"></script>
+<script src="${base}/r/js/respond.min.js" language="javascript"></script>
+<![endif]-->
+<style>
+	.xdxt_zy_selSay_span06::before{
+		content:'';
+		display:block;
+		width:100%;
+		height:3px;
+		background:#0066ff;
+		position:absolute;
+		bottom:0;
+		left:0;
+	}
+	.xdxt_zy_selSay_span06{
+		color:#0066ff;
+	}
+</style>
+</head>
+<body>
+	<div class="z_body">
+		[#include "../include/header_xd.html"/]
+		<div class="z_width_out">
+			<div class="on_line">
+				[#include "../include/xd_topLine.html"/]
+		    </div>
+		</div>
+		<div class="z_width_out">
+			<div class="on_line">
+				<div class="xdxtSY" style="margin:0 0 20px 0;">
+					<div class="xdxtSY_tit">
+		        		<span class="xdxtSY_titLt xdxtSY_bgClor08"></span>
+		        		<span class="xdxtSY_titRt">成绩录入</span>
+		        	</div>
+		        	<form id="form1" name="form1" action="insertOrupdatecjxx.jspx" method="post">
+						<table class="xdcjxx-table">
+						<tr>
+							<th style="width:10%;"><span>科目\学期</span></th>
+							<th style="width:14%;"><span>高一(上)期末<br />成绩/满分</span></th>
+							<th style="width:14%;"><span>高一(下)期末<br />成绩/满分</span></th>
+							<th style="width:14%;"><span>高二(上)期末<br />成绩/满分</span></th>
+							<th style="width:14%;"><span>高二(下)期末<br />成绩/满分</span></th>
+							<th style="width:14%;"><span>高三(上)期末<br />成绩/满分</span></th>
+							<th style="width:20%;"><span>学业水平(会考)<br />等级/最高等级(成绩/满分)</span></th>
+						</tr>
+							<tr>
+								<td>语文</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input value="${a.id!}" id="id${a_index+1}" name="id${a_index+1}" type="hidden" /> 
+									<input type="text" name="chinese${a_index+1}" id="chinese${a_index+1}" maxlength="6" value="${a.chinese!}" />
+									—
+									<input type="text" name="chineseTotal${a_index+1}" id="chineseTotal${a_index+1}" maxlength="6" value="${a.chineseTotal!}" />
+								</td>
+								[/#list]
+							</tr>
+							<tr>
+								<td>数学</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input type="text" name="math${a_index+1}" id="math${a_index+1}" maxlength="6" value="${a.math!}" />
+									—
+									<input type="text" name="mathTotal${a_index+1}" id="mathTotal${a_index+1}" maxlength="6" value="${a.mathTotal!}" />
+								</td>
+								[/#list]
+							</tr>
+							<tr>
+								<td>外语</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input type="text" name="english${a_index+1}" id="english${a_index+1}" maxlength="6" value="${a.english!}" />
+									—
+									<input type="text" name="englishTotal${a_index+1}" id="englishTotal${a_index+1}" maxlength="6" value="${a.englishTotal!}" />
+								</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td>政治</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input type="text" name="politics${a_index+1}" id="politics${a_index+1}" maxlength="6" value="${a.politics!}" />
+									—
+									<input type="text" name="politicsTotal${a_index+1}" id="politicsTotal${a_index+1}" maxlength="6" value="${a.politicsTotal!}" />
+								</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td>历史</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input type="text" name="history${a_index+1}" id="history${a_index+1}" maxlength="6" value="${a.history!}" />
+									—
+									<input type="text" name="historyTotal${a_index+1}" id="historyTotal${a_index+1}" maxlength="6" value="${a.historyTotal!}" />
+								</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td>地理</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input type="text" name="geography${a_index+1}" id="geography${a_index+1}" maxlength="6" value="${a.geography!}" />
+									—
+									<input type="text" name="geographyTotal${a_index+1}" id="geographyTotal${a_index+1}" maxlength="6" value="${a.geographyTotal!}" />
+								</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td>物理</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input type="text" name="physical${a_index+1}" id="physical${a_index+1}" maxlength="6" value="${a.physical!}" />
+									—
+									<input type="text" name="physicalTotal${a_index+1}" id="physicalTotal${a_index+1}" maxlength="6" value="${a.physicalTotal!}" />
+								</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td>化学</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input type="text" name="chemistry${a_index+1}" id="chemistry${a_index+1}" maxlength="6" value="${a.chemistry!}" />
+									—
+									<input type="text" name="chemistryTotal${a_index+1}" id="chemistryTotal${a_index+1}" maxlength="6" value="${a.chemistryTotal!}" />
+								</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td>生物</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input type="text" name="biology${a_index+1}" id="biology${a_index+1}" maxlength="6" value="${a.biology!}" />
+									—
+									<input type="text" name="biologyTotal${a_index+1}" id="biologyTotal${a_index+1}" maxlength="6" value="${a.biologyTotal!}" />
+								</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td>美术</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input type="text" name="painting${a_index+1}" id="painting${a_index+1}" maxlength="6" value="${a.painting!}" />
+									—
+									<input type="text" name="paintingTotal${a_index+1}" id="paintingTotal${a_index+1}" maxlength="6" value="${a.paintingTotal!}" />
+								</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td>体育</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input type="text" name="sports${a_index+1}" id="sports${a_index+1}" maxlength="6" value="${a.sports!}" />
+									—
+									<input type="text" name="sportsTotal${a_index+1}" id="sportsTotal${a_index+1}" maxlength="6" value="${a.sportsTotal!}" />
+								</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td>音乐</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input type="text" name="music${a_index+1}" id="music${a_index+1}" maxlength="6" value="${a.music!}" />
+									—
+									<input type="text" name="musicTotal${a_index+1}" id="musicTotal${a_index+1}" maxlength="6" value="${a.musicTotal!}" />
+								</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td>信息技术</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input type="text" name="technology${a_index+1}" id="technology${a_index+1}" maxlength="6" value="${a.technology!}" />
+									—
+									<input type="text" name="technologyTotal${a_index+1}" id="technologyTotal${a_index+1}" maxlength="6" value="${a.technologyTotal!}" />
+								</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td>文科综合</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input type="text" name="liberalarts${a_index+1}" id="liberalarts${a_index+1}" maxlength="6" value="${a.liberalarts!}" />
+									—
+									<input type="text" name="liberalartsTotal${a_index+1}" id="liberalartsTotal${a_index+1}" maxlength="6" value="${a.liberalartsTotal!}" />
+								</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td>理科综合</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input type="text" name="science${a_index+1}" id="science${a_index+1}" maxlength="6" value="${a.science!}" />
+									—
+									<input type="text" name="scienceTotal${a_index+1}" maxlength="6" id="scienceTotal${a_index+1}" value="${a.scienceTotal!}" />
+								</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td>总分</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input type="text" name="courseScore${a_index+1}" id="courseScore${a_index+1}" maxlength="6" value="${a.courseScore!}" />
+									—
+									<input type="text" name="total${a_index+1}" maxlength="10" id="total${a_index+1}" value="${a.total!}" />
+								</td>
+								[/#list]
+							</tr>
+							<tr>
+								<td>年级排名</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input type="text" name="rank${a_index+1}" id="rank${a_index+1}" maxlength="6" value="${a.rank!}" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
+								</td> [/#list]
+							</tr>
+							<tr>
+								<td>年级人数</td> 
+								[#list list as a ]
+								<td class="style-other">
+									<input type="text" name="studentCount${a_index+1}" id="studentCount${a_index+1}" maxlength="6" value="${a.studentCount!}" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
+								</td>
+								[/#list]
+								<input type="hidden" name="orderId" value="${order.orderId}">
+							</tr>
+						</table>
+						<div class="submit-div">
+							<input type="submit" id="commitMkcjxx_0" value="保存" class="submit_a" />
+						</div>
+					</form>
+		        </div>
+		    </div>
+	    </div>
+		<!-- 底部栏目 -->
+		[#include "../include/footer_xd.html"/]
+	</div>
+</body>
+</html>

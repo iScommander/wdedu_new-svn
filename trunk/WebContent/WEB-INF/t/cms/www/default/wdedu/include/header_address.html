@@ -1,0 +1,670 @@
+    	<div class="index_top_bg">
+		<div class="index_top">
+			<div class="index_top_l fl">
+				<p>欢迎光临沃得生涯教育集团！</p>
+				<span>免费热线：<i id="dhhm">400-9288-985</i></span>
+				<div class="clearfix"></div>
+			</div>
+            <div class="index_top_r fr">
+                <p><a href="">新手教程</a></p>
+                <p><a href="javascript:" class="weixin social">官方微信
+                <img class="qrcode" src="${base}/r/wdedu/images/index_wx.gif" alt="微信二维码">
+                </a></p>
+                <i><a href="javascript:yhpd(2);">会员中心</a></i>
+                [#if user??]
+                <span><a href="javascript:logout()">退出登录</a></span>
+                [#else]
+                <span><a href="javascript:showDialog2()">快速登录</a></span>
+                <span><a href="javascript:showDialog()">/&nbsp;注册</a></span>
+                [/#if]
+
+                <div class="clearfix"></div>
+            </div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+    	<div class="index_logo">
+		<div class="index_logo_l fl">
+			<a href="${base}/"><img src="${base}/r/wdedu/images/index_3.png"></a>
+		</div>
+		<input type="hidden" id="user" value="${user!}">
+		<div class="index_logo_city fl">
+            <div class="city">
+                <div class="city_now" onclick="dk()">
+                    <span class="fl" id="text" >北京</span>
+                    <div class="fl">
+                        <span class="city_nav" id="city_nav" ><img src="${base}/r/wdedu/images/city_2.png"></span>
+                    </div>
+                </div>
+                  <div id="city_link" class="city_link">
+                                <div class="city_show">
+                                    <span class="f_red f_r" href="javascript:;" title="关闭窗口" onclick="gb()">[关闭]</span>
+                                </div>
+                              <!--  <a class="city_links" href="#" onclick="qz(this,17)">江苏</a>
+                                <a class="city_links" href="#" onclick="qz(this,18)">浙江</a>
+                                <a class="city_links" href="#" onclick="qz(this,2)">天津</a>
+                                <a class="city_links" href="#" onclick="qz(this,4)">河北</a>
+                                <a class="city_links" href="#" onclick="qz(this,23)">云南</a>
+                                <a class="city_links" href="#" onclick="qz(this,25)">四川</a>
+                                <a class="city_links" href="#" onclick="qz(this,1)">北京</a>-->
+                 <a class="city_links" href="#" onclick="qz(this,1)">北京</a>
+                   <a class="city_links" href="#" onclick="qz(this,2)">天津</a>
+                <a class="city_links" href="#" onclick="qz(this,17)">江苏</a>
+                  <a class="city_links" href="#" onclick="qz(this,4)">河北</a>
+                            </div>
+            </div>
+        </div>
+         <div class="index_logo_c fl">
+         <div class="txtshow">距离高考还有<span  id="timeShow"></span>天</div>
+          </div>
+
+		<script  type="text/javascript">
+		 $(function () {
+                            $.ajax({
+                                url: '${base}/NewsDisplay/getUser.jspx',
+                                dataType: 'json',
+                                success: function (data) {
+                                    if (data != null) {
+                                       var un = data.user_name;
+                                         var pn = data.province_name;
+                                         var mt = data.major_type_id;
+                                         var wl = "文科";
+                                         if (mt == "1") {
+                                             wl = "文科";
+                                         } else if (mt == "2") {
+                                             wl = "理科";
+                                         } else if (mt == "3") {
+                                             wl = "综合改革";
+                                         }
+                        var str=$(".mbxdh a").last().text();
+                                         if(str!="基本信息"){
+                                              if(pn == "未知" ){
+                                             alert("请完善省份信息,页面即将跳转");
+                                             location.href ="${base}/admissonSvcAct/findbaseInfo.jspx";
+
+                                         }
+                                         if( mt == "未知"){
+                                             alert("请完善文理科信息,页面即将跳转");
+                                             location.href ="${base}/admissonSvcAct/findbaseInfo.jspx";
+                                         }
+                                         }
+                                        var chooseProvinceId = data.chooseProvince;
+                                        var chooseProvinceName = "北京";
+                                        if(chooseProvinceId == 1) {
+                                               chooseProvinceName = "北京";
+                                               $("#dhhm").html("010-82084281");
+                                           }else if(chooseProvinceId == 2){
+                                               chooseProvinceName = "天津";
+                                               $("#dhhm").html("010-82084281");
+                                           }else if(chooseProvinceId == 17){
+                                               chooseProvinceName = "江苏";
+                                               $("#dhhm").html("010-82084281");
+                                           }else if(chooseProvinceId == 18){
+                                               chooseProvinceName = "浙江";
+                                               $("#dhhm").html("010-82084281");
+                                           }else if(chooseProvinceId == 4){
+                                               chooseProvinceName = "河北";
+                                               $("#dhhm").html("010-82084281");
+                                           }else if(chooseProvinceId == 23){
+                                               chooseProvinceName = "云南";
+                                               $("#dhhm").html("010-82084281");
+                                           }else if(chooseProvinceId == 25){
+                                               chooseProvinceName = "四川";
+                                               $("#dhhm").html("010-82084281");
+                                           }
+                                        document.getElementById("text").innerText = chooseProvinceName;
+                                                        //var tds= data.tScActiveDetails;
+                               }
+                                }
+                            });
+                        });
+		//window.isMoused=false;
+		 //function qz(obj,chooseProvinceId) {
+                    //var text = $(obj).text();
+                    //document.getElementById("text").innerText = text;
+                    //gb();
+
+                    //$.ajax({
+                        //url: '${base}/NewsDisplay/getUser.jspx',
+                        //dataType: 'json',
+                        //data: {id: chooseProvinceId},
+                        //type : "post",
+                        //success:function (data) {
+
+                            //var tds= data.tScActiveDetails;
+                            //var html = document.getElementById("index_wdjz").innerHTML = "";
+                            //for(var i = 0; i <tds.length ; i++) {
+                                //var sb='                    <li>';
+                                //sb+='                        <p>';
+                                //sb+='                            <i>'+tds[i].province+''+tds[i].city+'</i>';
+                                //sb+='                            <a href="">立即报名</a>';
+                                //sb+='                        </p>';
+                                //sb+='                        <span>';
+                                //sb+='                         <h4><a href="">主题：'+tds[i].theme+'</a></h4>';
+                                //sb+='                         <big>地点：'+tds[i].address+'</big>';
+                                //sb+='                         <small>时间：'+tds[i].activeTime+'</small>';
+                                //sb+='                      </span>';
+                                //sb+='                        <div class="clearfix"></div>';
+                                //sb+='                    </li>';
+                                //$("#index_wdjz").append(sb);
+                            //}
+
+                        //}
+                    //})
+
+
+                //}
+		//function gb(){
+			//document.getElementById('city_nav').className='city_nav';document.getElementById('city_link').className='city_link';window.isMoused =false;return !1;
+		//}
+			//function dk(){
+				//if(window.isMoused){
+					 //gb()
+					//window.isMoused = false;
+				   //}else{
+					   //document.getElementById('city_link').className='city_link city_hovers'
+					   //window.isMoused =true;
+				   //}
+			//}
+    function logout() {
+        if (confirm('系统提示，您确定要退出本次登录吗?')) {
+           location.href = "${base}/logout.jspx";
+       }
+   }
+
+	</script>
+	<!--	<div class="index_logo_c fl">
+			<form id="form1" name="form1" method="post" action="">
+			<input type="text" name="textfield" id="textfield" class="qgt_ssnr" placeholder="查大学 / 查专业 / 搜文章" />
+				<input type="image" name="button" id="button" value="提交" src="${base}/r/wdedu/images/index_5.png" class="qgt_ssan" />
+			</form>
+		</div> -->
+
+		<div class="index_logo_r fr">
+                <p><a href="${base}/NewsDisplay/testSxk.jspx">开通VIP</a></p><!--<span><a href="${base}/admissonSvcAct/development.jspx">高考小助手</a></span>--><div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+<!-- =============================用户注册=====================================-->
+<div class="ui-mask" id="mask" onselectstart="return false" style="display:none;"></div>
+<div class="ui-dialog" id="dialogMove" onselectstart='return false;'>
+    <span class="close2" onClick="hideDialog()"></span>
+    <div class="ui-dialog-title" id="dialogDrag" style="margin-top:50px;">
+        用户注册/密码修改<span>我的高中生涯，沃得生涯规划！</span>
+    </div>
+    <div class="ui-dialog-content">
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input ui-dialog-input-username" id="usernamezc" name="usernamezc" type="input"
+                   placeholder="请输入11位数字手机号码"/>
+        </div>
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input2 ui-dialog-input-password2" name="captchazc" type="input" id="captchazc"
+                   placeholder="请输入短信验证码"/>
+            <input type="button" onclick="getCaptchazc(this);" class="ui_yzm" placeholder="获取验证码" value=" 获取验证码">
+            <div class="clearfix"></div>
+        </div>
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input name="passwordzc" class="ui-dialog-input ui-dialog-input-password" type="input"
+                   placeholder="请设置您的密码"/>
+        </div>
+        <div class="ui-dialog-l40">
+            <a href="${base}/">已有账号立即登录</a>
+        </div>
+        <div>
+            <a class="ui-dialog-submit" href="javascript:_submitzc()">立即注册</a>
+        </div>
+    </div>
+</div>
+
+<!--===============================用户登录=============================-->
+<div class="ui-mask" id="mask2" onselectstart="return false" style="display:none;"></div>
+<div class="ui-dialog" id="dialogMove2" onselectstart='return false;'>
+    <span class="close2" onClick="hideDialog2()"></span>
+    <div class="ui-dialog-title" id="dialogDrag2" style="margin-top:50px;">
+        用户登录<span>我的高中生涯，沃得生涯规划！</span>
+    </div>
+    <div class="ui-dialog-content">
+<form id="jvForm2" action="${base}/login.jspx" method="post">
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input ui-dialog-input-username" name="username" id="usernamedl" type="text"
+                   placeholder="请输入您的手机号/卡号"/>
+        </div>
+        <!--<div class="ui-dialog-l40 ui-dialog-pt15">-->
+        <!--<input class="ui-dialog-input2 ui-dialog-input-password2" type="input" placeholder="请输入短信验证密码密码" />-->
+        <!--<button type="button" class="ui_yzm">获取验证码</button><div class="clearfix"></div>-->
+        <!--</div>-->
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input ui-dialog-input-password" name="password" id="passworddl" type="password"
+                   placeholder="请输入您的密码"/>
+        </div>
+        <div class="ui-dialog-l40">
+            <a href="${base}/">还没有账户 / 忘记密码？</a>
+        </div>
+        <div>
+            <a class="ui-dialog-submit" href="javascript:_logindl()">立即登录</a>
+        </div>
+</form>
+    </div>
+</div>
+
+<!--================================激活卡==============================-->
+<div class="ui-mask" id="mask3" onselectstart="return false" style="display:none;"></div>
+<div class="ui-dialog" id="dialogMove3" onselectstart='return false;'>
+    <span class="close2" onClick="hideDialog3()"></span>
+    <div class="ui-dialog-title" id="dialogDrag3">
+        请激活卡<span>我的高中生涯，沃得生涯规划！</span>
+
+    </div>
+    <div class="ui-dialog-content">
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input ui-dialog-input-username" name="cardIdjh" id="cardIdjh" type="input" readonly="readonly" placeholder="请输入您的卡号"/>
+        </div>
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input ui-dialog-input-username" id="usernamejh" name="usernamejh" type="input"
+                   placeholder="请输入11位数字手机号码"/>
+        </div>
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input2 ui-dialog-input-password2" name="captchajh" type="input" id="captchajh"
+                   placeholder="请输入短信验证码"/>
+            <input type="button" class="ui_yzm" onclick="getCaptchajh(this)"placeholder="获取验证码" value="获取验证码">
+            <div class="clearfix"></div>
+        </div>
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input name="passwordjh" id="passwordjh" class="ui-dialog-input ui-dialog-input-password" type="password"
+                   placeholder="请设置您的密码"/>
+        </div>
+        <div class="ui-dialog-l40">
+            <a href="${base}/">已有账号立即登录</a>
+        </div>
+        <div>
+            <a class="ui-dialog-submit" href="javascript:_submitjh()">立即激活</a>
+        </div>
+
+    </div>
+</div>
+	<script src="${base}/r/wdedu/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+	<script type='text/javascript' src='${base}/r/wdedu/js/dropdown.js'></script>
+     <script>
+    function yhpd(xh){
+    var user =$("#user").val();
+    if (user!=null&&user!=''){
+        if (xh==1){
+            //新高考选课
+             location.href="${base}/evaluation/index.jspx";
+        }
+        if (xh==2){
+                //会员中心
+              location.href="${base}/admissonSvcAct/findbaseInfo.jspx";
+            }
+       if (xh==3){
+                        //根据科目选专业
+                      location.href="${base}/kxxk/courceToMajor.jspx";
+                    }
+      if (xh==4){
+              //根据专业选科目
+            location.href="${base}/kxxk/majorToCource.jspx";
+          }
+           if (xh==5){
+                       //根据职业选专业
+        location.href="${base}/kxxk/professionToMajor.jspx";
+      }
+       if (xh==6){
+         //填志愿
+        location.href="${base}/zytb/project.jspx";
+        }
+        if (xh==7){
+         //找大学
+        location.href="${base}/searchUnivAndMajor/searchUnivList.jspx";
+        }
+            if (xh==8){
+            //查专业
+           location.href="${base}/searchUnivAndMajor/searchMajor.jspx";
+           }
+             if (xh==9){
+            //看就业
+           location.href="${base}/searchUnivAndMajor/searchClass1.jspx";
+           }
+         if (xh==10){
+           //测性格
+          location.href="${base}/evaluation/index.jspx";
+          }
+          if (xh==11){
+          //排行榜
+         location.href="${base}/bcdsj/universityRank.jspx";
+         }
+         if (xh==12){
+               //大数据
+              location.href="${base}/bkck/one_segment_query.jspx";
+              }
+    }else{
+        showDialog2()
+    }
+    }
+    </script>
+    <script>
+
+
+
+        $(".logout").click(function () {
+            if (confirm('系统提示，您确定要退出本次登录吗?')) {
+                location.href = "${base}/logout.jspx";
+            }
+        });
+
+        function logout() {
+            if (confirm('系统提示，您确定要退出本次登录吗?')) {
+                location.href = "${base}/logout.jspx";
+            }
+        }
+        function _rtnBtn() {
+            location.href = '${base}/';
+        }
+
+        function _login() {
+            var username = $("#username").val();
+            var password = $("#password").val();
+
+            if (username == '') {
+                alert("请填入用户名！");
+                return false;
+            }
+            if (password == '') {
+                alert("请填入密码！");
+                return false;
+            }
+
+            //验证是不是卡号
+            var card = /^[0-9]*$/;
+            if (card.test(username)) {
+                /*验证是否为卡号登录*/
+                $.ajax({
+                    url: 'check_card.jspx',
+                    type: "post",
+                    async: false,
+                    data: {cardId: username},
+                    error: function () {
+                        alert("提交出现异常！");
+                    },
+                    success: function (data) {
+                        var res = eval('(' + data + ')');
+                        if (res && res.success == true) {
+                            /*使用卡号登录*/
+                            $.ajax({
+                                url: 'login_with_card.jspx',
+                                type: "post",
+                                async: false,
+                                data: {cardId: username, password: password},
+                                error: function () {
+                                    alert("提交出现异常！");
+                                },
+                                success: function (data) {
+                                    var res = eval('(' + data + ')');
+                                    if (res && res.success == true) {
+                                        event.returnValue = false;
+                                        if (res.msg == "show") {
+                                            showDialog3();
+                                              var card=res.cardId;
+                                               $("#cardIdjh").val(card)
+                                        } else {
+                                            location.href = res.msg;
+                                        }
+
+                                    } else {
+                                        alert(res.msg);
+                                    }
+                                }
+                            });
+                        } else {
+                            $("#jvForm").submit();
+                        }
+                    }
+                });
+            } else {
+                $("#jvForm").submit();
+            }
+        }
+
+        function _logindl() {
+
+            var username = $("#usernamedl").val();
+            var password = $("#passworddl").val();
+            if (username == '') {
+                alert("请填入用户名！");
+                return false;
+            }
+            if (password == '') {
+                alert("请填入密码！");
+                return false;
+            }
+
+            //验证是不是卡号
+            var card = /^[0-9]*$/;
+            if (card.test(username)) {
+                /*验证是否为卡号登录*/
+
+                $.ajax({
+                    url: '${base}/check_card.jspx',
+                    type: "post",
+                    async: false,
+                    data: {cardId: username},
+                    error: function () {
+                        alert("提交出现异常！");
+                    },
+                    success: function (data) {
+                        var res = eval('(' + data + ')');
+                        if (res && res.success == true) {
+                            /*使用卡号登录*/
+                            $.ajax({
+                                url: '${base}/login_with_card.jspx',
+                                type: "post",
+                                async: false,
+                                data: {cardId: username, password: password},
+                                error: function () {
+                                    alert("提交出现异常！");
+                                },
+                                success: function (data) {
+                                    var res = eval('(' + data + ')');
+                                    if (res && res.success == true) {
+                                        /*    event.returnValue=false;*/
+                                        if (res.msg == "show") {
+                                            hideDialog2();
+                                            showDialog3();
+                                              var card=res.cardId;
+                                             $("#cardIdjh").val(card)
+                                        } else {
+                                            location.href = res.msg;
+                                        }
+                                    } else {
+
+                                        alert(res.msg);
+                                    }
+                                }
+                            });
+                        } else {
+                            $("#jvForm2").submit();
+                        }
+                    }
+                });
+            } else {
+                $("#jvForm2").submit();
+            }
+        }
+
+        function _keyLogin() {
+            if (event.keyCode == 13) {
+                $("#login").click();  //调用登录按钮的登录事件
+            }
+        }
+
+        // 获取激活验证码
+        function getCaptchajh(val) {
+            var phone = /^1(3|4|5|7|8)\d{9}$/;
+            if (!phone.test($("#usernamejh").val())) {
+                alert("手机号输入有误!");
+                return;
+            }
+
+            var count = 60;
+            var resend = setInterval(function () {
+                count--;
+                if (count > 0) {
+                    val.value = "重新发送(" + count + ")";
+                } else {
+                    val.removeAttribute("disabled");
+                    val.value = "获取验证码";
+                    clearInterval(resend);
+                }
+            }, 1000);
+
+            val.setAttribute("disabled", true);
+
+            $.ajax({
+                url: '${base}/get_captcha.jspx',
+                data: {
+                    phone: $("#usernamejh").val()
+                },
+                type: "POST",
+                async: false,
+                success: function (data) {
+                }
+            });
+        }
+
+        // 激活提交
+        function _submitjh() {
+                     var cardId = $("#cardIdjh").val();
+                     var username = $("#usernamejh").val();
+                     var captcha = $("#captchajh").val();
+                     var password = $("#passwordjh").val();
+                     if (cardId == ''&& username==''&& captcha==''&& password=='') {
+                         alert("必填项不能为空！")
+                         return false;
+                     }
+            $.ajax({
+                url: '${base}/activate_card.jspx',
+                data: {"cardId":cardId,"username":username,"captcha":captcha,"password":password},
+                type: "post",
+                async: false,
+                error: function (data) {
+                    alert("激活失败！\r\n" + data);
+                },
+                success: function (data) {
+                    var res = eval('(' + data + ')');
+                    if (res && res.success == true) {
+                        alert("激活成功");
+                        event.returnValue = false;
+                        parent.location.href = "${base}/ActivityAct/huiyuanshezhi.jspx"
+                    } else {
+                        alert("激活失败\r\n" + res.msg);
+                    }
+                }
+            });
+        }
+
+        // 获取注册验证码
+        function getCaptchazc(val) {
+            var phone = /^1(3|4|5|7|8)\d{9}$/;
+            if (!phone.test($("#usernamezc").val())) {
+                alert("手机号输入有误!");
+                return;
+            }
+
+            var count = 60;
+            var resend = setInterval(function () {
+                count--;
+                if (count > 0) {
+                    val.value = "重新发送(" + count + ")";
+                } else {
+                    val.removeAttribute("disabled");
+                    val.value = "获取验证码";
+                    clearInterval(resend);
+                }
+            }, 1000);
+
+            val.setAttribute("disabled", true);
+
+            $.ajax({
+                url: '${base}/get_captcha.jspx',
+                data: {
+                    phone: $("#usernamezc").val()
+                },
+                type: "POST",
+                async: false,
+                success: function (data) {
+                }
+            });
+        }
+
+        // 注册提交
+        function _submitzc() {
+  var username = $("#usernamezc").val();
+  var password = $("#captchazc").val();
+  var captcha = $("#captchazc").val();
+  if (username == '') {
+      alert("请填入用户名！");
+      return false;
+  }
+  if (password == '') {
+      alert("请填入密码！");
+      return false;
+  }
+    if (captcha == '') {
+             alert("请填入验证码！");
+             return false;
+                          }
+            $.ajax({
+                url: 'user_submit.jspx',
+                data: {"username":username,"password":password,"captcha":captcha},
+                type: "POST",
+                async: false,
+                error: function (data) {
+                    alert("注册失败！\r\n" + data);
+                },
+                success: function (data) {
+                    var res = eval('(' + data + ')');
+                    if (res && res.success == true) {
+                        alert(res.submit_msg);
+                        // event.returnValue = false;
+                        parent.location.href = "${base}/admissonSvcAct/findbaseInfo.jspx"
+                    } else {
+                        alert("注册失败!\r\n" + res.submit_msg);
+                    }
+                }
+            });
+        }
+    window.isMoused=false;
+    		function qz(obj,chooseProvinceId){
+    			var text = $(obj).text();
+    	 if(text=="北京"){
+                $("#dhhm").html("010-82084281");
+           }else if(text=="江苏"){
+               $("#dhhm").html("400-9288-985");
+           }else {
+                $("#dhhm").html("010-82084281");
+           }
+    			document.getElementById("text").innerText =text;
+    			gb();
+  $.ajax({
+                url: '${base}/NewsDisplay/getUser.jspx',
+                dataType: 'json',
+                data: {id: chooseProvinceId},
+                type : "post",
+                success:function (data) {
+                }
+            })
+    		}
+    		function gb(){
+    			document.getElementById('city_nav').className='city_nav';document.getElementById('city_link').className='city_link';window.isMoused =false;return !1;
+    		}
+    			function dk(){
+    				if(window.isMoused){
+    					 gb()
+    					window.isMoused = false;
+    				   }else{
+    					   document.getElementById('city_link').className='city_link city_hovers'
+    					   window.isMoused =true;
+    				   }
+    			}
+
+    </script>

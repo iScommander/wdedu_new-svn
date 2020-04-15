@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>院校对比</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<style>
+			.beyondHidden {
+				max-height: 300px;
+				overflow: hidden;
+			}
+			
+			.schoolComparisonMain .basicInformation>p,
+			.schoolComparisonMain .keyInformation>p {
+				width: 205px;
+				height: 80px;
+				line-height: 80px;
+				background: #05b8c3;
+				font-size: 24px;
+				color: #fff;
+				padding: 0 50px;
+			}
+			.schoolComparisonMain .keyInformationList td>p {
+				text-align: justify;
+				margin: 10px 0;
+			}
+			
+			.schoolComparisonMain .toudangfen ul {
+				position: relative;
+				padding-left: 40px;
+				background: #004468;
+    			padding-left: 40px;
+			}
+			
+			.schoolComparisonMain .toudangfen ul::before {
+				position: absolute;
+				content: "投档分";
+				width: 1em;
+				color: #fff;
+				top: 1px;
+				left: 12px;
+			}
+			.schoolComparisonMain .toudangfen ul li{
+				border-left: 1px solid #fff;
+				color: #fff;
+				text-align: center;
+			}
+			.schoolComparisonMain .toudangfen ul li:not(:last-child) {
+			    border-bottom: 1px solid #fff;
+			}
+			.schoolComparisonMain .yuanxiao{
+				width: 100px;
+				height: 218px;
+				background: #004468;
+				margin-bottom: 4px;
+			}
+			.schoolComparisonMain .yuanxiao span{
+				color: #fff;
+				font-size: 30px;
+				display: inline-block;
+				width: 30px;
+				margin: 64px 35px;
+			}
+			.schoolComparisonMain .academyMessage{
+				margin: 30px 0;
+			}
+			.schoolComparisonMain .academyTitle{
+				text-align: center;
+			}
+			.schoolComparisonMain .academyTitle>p{
+				font-size: 36px;
+				font-weight: bold;
+				letter-spacing:10px;
+			}
+			.schoolComparisonMain .academyTitle>span{
+				color: #999;
+			}
+			.schoolComparisonMain .academyName{
+				height: 218px;
+				padding: 15px 10px;
+			}
+			.schoolComparisonMain .academyName ul li{
+				text-align: center;
+				margin-bottom: 10px;
+			}
+			.schoolComparisonMain .academyScore{
+				margin-top: 6px;
+			}
+			.schoolComparisonMain .academyScore ul li{
+				text-align: center;
+			}
+			.schoolComparisonMain .academyScore ul li:nth-child(2n+1){
+				background: #daf5f9;
+			}
+			.schoolComparisonMain .academyList>div{
+				background: #f9f9f9;
+				width: 260px;
+				margin:0 8.5px;
+			}
+			 .universityList>ul>li>a>div.flex-container2>div>img{
+				 width: 100px;
+				 height: 100px;
+			 }
+		</style>
+	</head>
+
+	<body>
+		[#include "../include/header.html"/]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container width1200">
+				<div>
+					<a href="${base}/r/index.html">首页 </a> &lt;&lt; 志愿填报 &lt;&lt;找大学 &lt;&lt;院校对比</div>
+				<div></div>
+			</div>
+		</div>
+		<!--主体-->
+		<main class="schoolComparisonMain width1200">
+			<!--院校-->
+			<div class="academyTitle">
+				<p>院校对比结果</p>
+				<span>Comparison of colleges and Universities</span>
+			</div>
+			<div class="flex-container1 academyMessage" style="">
+				<!--院校投档分  年份-->
+				<div>
+					<div class="yuanxiao"><span>院校</span></div>
+					<div class="toudangfen">
+						<ul>
+							<li>2018</li>
+							<li>2017</li>
+							<li>2016</li>
+						</ul>
+					</div>
+				</div>
+				<!--各个院校对比展示-->
+				<div class="flex-container1 academyList">
+
+					<!--<div>-->
+						<!--<div class="academyName">-->
+							<!--<ul>-->
+								<!--<li>-->
+									<!--<img src="${base}/r/img/bjdxtu.png" alt="" />-->
+									<!--<p>北京大学</p>-->
+								<!--</li>-->
+								<!--<li class="schoolCardColor">-->
+									<!--<span class="jiu85">985</span>-->
+									<!--<span class="er11">211</span>-->
+									<!--<span class="zi">自</span>-->
+									<!--<span class="zhong">重</span>-->
+									<!--<span class="zhuo">卓</span>-->
+									<!--<span class="shuang">双一流</span>-->
+								<!--</li>-->
+								<!--<li>北京-北京市</li>-->
+								<!--<li>本科第一批</li>-->
+							<!--</ul>-->
+						<!--</div>-->
+						<!--<div class="academyScore">-->
+							<!--<ul>-->
+								<!--<li>660</li>-->
+								<!--<li>660</li>-->
+								<!--<li>660</li>-->
+							<!--</ul>-->
+						<!--</div>-->
+					<!--</div>-->
+
+
+					[#if univList??]
+					[#list univList as a]
+					<div>
+						<div class="academyName">
+							<ul>
+								<li>
+									<img src="${a.logoUrl!}" alt="" style=" width: 100px;height: 100px;"/>
+									<p>${a.univName!}</p>
+								</li>
+								<li class="schoolCardColor">
+									[#if a.is211 ?? && a.is211==1]
+									<span class="er11">211</span>
+									[/#if]
+									[#if a.is985 ?? && a.is985==1]
+									<span class="jiu85">985</span>
+									[/#if]
+									[#if a.isIndependence ?? && a.isIndependence==1]
+									<span class="zi">自</span>
+									[/#if]
+									[#if a.isKeylab ?? && a.isKeylab==1]
+									<span class="zhong">重</span>
+									[/#if]
+									[#if a.isExcellent ?? && a.isExcellent==1]
+									<span class="zhuo">卓</span>
+									[/#if]
+									[#if a.isFirstRateUniv ?? && a.isFirstRateUniv==1]
+									<span class="shuang">双一流</span>
+									[/#if]
+									[#if a.isFirstRateMajor ?? && a.isFirstRateMajor==1]
+									<span class="yiliu">一流学科</span>
+									[/#if]
+								</li>
+								<li>
+									[#if provinceList?? ]
+									[#list provinceList as p]
+									[#if p.provinceName!="未知"]
+									[#if a.provinceId?? && p.provinceId==a.provinceId]
+									<span>${p.provinceName!}-${a.location}</span>
+									[/#if]
+									[/#if]
+									[/#list]
+									[/#if]
+								</li>
+								<li></li>
+							</ul>
+						</div>
+						<div class="academyScore">
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</div>
+					</div>
+					[/#list]
+					[/#if]
+
+
+
+				</div>
+			</div>
+			<!--基本信息-->
+			<div class="basicInformation">
+				<p>基本信息</p>
+				<table class="table deeptable table-striped">
+					<tr>
+						<th>院校名称</th>
+						[#if univList??]
+						[#list univList as a]
+						<th>${a.univName!}</th>
+						[/#list]
+						[/#if]
+					</tr>
+					<tr>
+						<td>高校所在地</td>
+						[#if univList??]
+						[#list univList as a]
+						<td>${a.location!}</td>
+						[/#list]
+						[/#if]
+					</tr>
+					<tr>
+						<td>办公性质</td>
+						[#if univList??]
+						[#list univList as a]
+						<td>${a.offOrVol!}</td>
+						[/#list]
+						[/#if]
+					</tr>
+					<tr>
+						<td>是否211</td>
+						[#if univList??]
+						[#list univList as a]
+							[#if a.is211 == 1]
+							<td><img src="${base}/r/img/dui.png" alt="" /></td>
+							[#else]
+							<td><img src="${base}/r/img/cuo.png" alt="" /></td>
+							[/#if]
+						[/#list]
+						[/#if]
+					</tr>
+					<tr>
+						<td>是否985</td>
+						[#if univList??]
+						[#list univList as a]
+						[#if a.is985 == 1]
+						<td><img src="${base}/r/img/dui.png" alt="" /></td>
+						[#else]
+						<td><img src="${base}/r/img/cuo.png" alt="" /></td>
+						[/#if]
+						[/#list]
+						[/#if]
+					</tr>
+					<tr>
+						<td>综合排名</td>
+						[#if rankList??]
+						[#list rankList as a]
+						<td>${a.rank!}</td>
+						[/#list]
+						[/#if]
+					</tr>
+					<tr>
+						<td>院校隶属</td>
+						[#if univList??]
+						[#list univList as a]
+						<td>${a.univBelong!}</td>
+						[/#list]
+						[/#if]
+					</tr>
+					<tr>
+						<td>重点学科重点实验室</td>
+						[#if countList??]
+						[#list countList as a]
+						<td>${a!}</td>
+						[/#list]
+						[/#if]
+					</tr>
+					<tr>
+						<td>院校类型</td>
+						[#if univList??]
+						[#list univList as a]
+						<td>${a.univType!}</td>
+						[/#list]
+						[/#if]
+					</tr>
+					<!--<tr>-->
+						<!--<td>硕士点</td>-->
+						<!--<td>244个</td>-->
+						<!--<td>244个</td>-->
+						<!--<td>244个</td>-->
+						<!--<td>244个</td>-->
+					<!--</tr>-->
+					<!--<tr>-->
+						<!--<td>博士点</td>-->
+						<!--<td>200个</td>-->
+						<!--<td>200个</td>-->
+						<!--<td>200个</td>-->
+						<!--<td>200个 </td>-->
+					<!--</tr>-->
+				</table>
+			</div>
+			<!--重点信息-->
+			<div class="keyInformation">
+				<p>重点信息</p>
+				<table class="table deeptable table-striped">
+					<tr>
+						<th width="150">信息</th>
+						[#if univList??]
+						[#list univList as a]
+						<th width="220">${a.univName!}</th>
+						[/#list]
+						[/#if]
+						<th width="120">操作</th>
+					</tr>
+					<tr class="keyInformationList">
+						<td>重点学科<br/>重点实验室</td>
+						[#if subjectList??]
+						[#list subjectList as a]
+						<td>
+							<p>
+								${a!}
+							</p>
+						</td>
+						[/#list]
+						[/#if]
+						<td>
+							<button class="btn btnColorYellow OnAll">展开全部</button>
+						</td>
+					</tr>
+					<tr class="keyInformationList">
+						<td>师资力量</td>
+						[#if szllList??]
+						[#list szllList as a]
+						<td>
+							<p>
+								${a!}
+							</p>
+						</td>
+						[/#list]
+						[/#if]
+						<td>
+							<button class="btn btnColorYellow OnAll">展开全部</button>
+						</td>
+					</tr>
+					<tr class="keyInformationList">
+						<td>专业对比</td>
+						[#if zydbList??]
+						[#list zydbList as a]
+						<td>
+							<p>
+								${a!}
+							</p>
+						</td>
+						[/#list]
+						[/#if]
+						<td>
+							<button class="btn btnColorYellow OnAll">展开全部</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</main>
+		<!--底部-->
+			[#include "../include/footer.html"/]
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/itemsJs/filtrate.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+		<script>
+			$('.keyInformationList td p').addClass("beyondHidden");
+			$('.OnAll').click(function() {
+
+				var check_text_show = $(this).parent().parent().find("td p").hasClass("beyondHidden");
+				if(check_text_show) {
+					$(this).parent().parent().find("td p").removeClass("beyondHidden");
+					$(this).html('收起');
+				} else {
+					$(this).parent().parent().find("td p").addClass("beyondHidden");
+					$(this).html('展开全部');
+				}
+			})
+		</script>
+	</body>
+
+</html>

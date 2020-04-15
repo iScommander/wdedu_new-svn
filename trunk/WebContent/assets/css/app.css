@@ -1,0 +1,118 @@
+/* Write your styles */
+
+/*** reset. use these tags only ***/
+html,body{height:100%}html{overflow-y:auto;zoom:1}body{border:0;margin:0}
+
+h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;font-weight:400}
+dl{margin-top:0;margin-bottom:0}dd{margin-left:0}
+ul,ol{padding:0;margin:0;list-style:none}
+p{margin-top:0;margin-bottom:0}
+
+strong,b,small{font-weight:400}em,i{font-style:normal}u{text-decoration:none}sub,sup{ font-size:inherit; vertical-align:baseline;}
+img{border:none;-ms-interpolation-mode:bicubic}
+
+table{border-collapse:collapse;border-spacing:0}th,td{padding:0}th{font-weight:400}
+
+/*** preset ***/
+/* body{line-height:17px;color:#222;font-size:12px;
+font-family:"Microsoft Yahei","Simsun",Tahoma,arial,Helvetica,verdana,sans-serif;
+background-color:#fff}
+h1{font-size:18px}h2{font-size:16px}
+h3{font-size:14px}h4{font-size:12px} 
+
+/* a:link{color:#003399;text-decoration:none}
+a:visited{color:#777;text-decoration:none}
+a:focus,a:active{outline:none;}:focus,:active{outline:none;}
+a:hover{color:#f60;text-decoration: underline} */
+
+.hide{ display:none;}
+
+/* 自动清除浮动 父 */
+.cf:before,.cf:after{display:table;line-height:0;content:' '}
+.cf:after{clear:both}
+.cf{*zoom:1}
+
+/* 人工清除浮动 幺儿 */
+.cl{clear:both}
+
+.tac{ text-align:center;}
+
+
+
+
+
+/*** table ***/
+.tbmod{border:1px solid #99bfd0;margin-bottom:0px;}
+.tbmh{ line-height:30px; padding-left:9px;border-bottom:1px solid #9abfcf;
+position:relative;
+    background: -moz-linear-gradient(90deg, rgba(224,234,243,1) 0%, rgba(255,255,255,1) 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(224,234,243,1))); /* safari4+,chrome */
+    background: -webkit-linear-gradient(90deg, rgba(224,234,243,1) 0%, rgba(255,255,255,1) 100%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(90deg, rgba(224,234,243,1) 0%, rgba(255,255,255,1) 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(90deg, rgba(224,234,243,1) 0%, rgba(255,255,255,1) 100%); /* ie10+ */
+    background: linear-gradient(0deg, rgba(224,234,243,1) 0%, rgba(255,255,255,1) 100%); /* w3c */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e0eaf3',GradientType=0 ); /* ie6-9 */}
+
+.tbmor{ position:absolute; right:10px; top:0px;}
+.tbmor:after{content:'展开';}
+.curr .tbmor:after{content:'收起';}
+
+
+.tbcot{border:1px solid #fff;}
+
+/**table shape**/
+.tb{width:100%;font-size:14px;letter-spacing:1px;}
+.tb th,.tb td{line-height:19px;padding:4px 4px; text-align:center;}
+.tb th{background-color:#ffeeff;}
+.tb td{border-top:1px solid #eee;border-right:1px solid #eee;}
+
+
+.tb2{width:100%;}
+.tb2 th,.tb2 td{line-height:19px;padding:4px 16px;text-align:left;}
+.tb2 td{border-top:1px solid #eee;border-right:1px solid #eee;}
+.tb2 td:last-child{border-right:0; width:40%;}
+.tb2 tr.first td{border-top:0 !important;}
+.tb2 th:last-child{width:40%;}
+
+.pm,.rd{display:inline-block;*display:inline;*zoom:1;}
+.pm{width:16px;line-height:16px;
+color:#fff;font-size:12px;border-radius:4px;}
+
+.pm1{background-color: #fff;}
+.pm2{background-color: #f33;}
+.pm3{background-color: #f36;}
+
+.pm4{background-color:#F60;}
+.pm5{background-color:#F63;}
+.pm6{background-color:#F66;}
+
+.pm7{background-color: #F90;}
+.pm8{background-color: #F93;}
+.pm9{background-color:#F96;}
+
+.daihao{color:#0e90d2;}
+.ckbt{display:inline-block;*display:inline;*zoom:1;padding:1px 5px;
+color:#fff;font-size:12px; cursor:pointer; visibility:hidden;
+border-radius:3px;}
+.ck0{background-color:#39F;}
+.ck1{background-color:#3cF;}
+.tb:hover .ckbt{ visibility:visible;}
+
+
+.zyb{ margin:20px;}
+
+
+.userInfo{	 
+	background-color:white;
+	z-index: 1000;
+}
+.bt3{
+	margin-left:20px;
+	margin-top:10px;
+	text-align:center;
+}
+.bt4{
+	margin:10px auto;width:960px;
+	text-align:center;
+}
+

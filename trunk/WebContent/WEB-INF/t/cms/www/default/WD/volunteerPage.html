@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>志愿</title>
+		<link rel="stylesheet" href="${base}/u/cms/www/zytbsy/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="${base}/u/cms/www/zytbsy/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css"/>
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css"/>
+		<script src="${base}/r/cms/front.js"></script>
+	</head>
+	<style>
+		.top{
+			width: 1200px;
+			display: flex;
+			justify-content: flex-start; 
+			margin: auto;
+		}
+        .nianfen{
+        	
+        	margin: auto;
+        	display: block;
+        }
+        .wenzi{
+        	padding-right: 10px;
+        }
+        .provincewenli{
+        	    width: 160px;
+			    line-height: 45px;
+			    height: 45px;
+			    padding-left: 10px;
+			    border-radius: 5px;
+        }
+        .wwiw{
+        	display: flex;
+        	align-items:center;
+        }
+        .flex-item10-20 input{
+        	    width: 160px;
+			    line-height: 45px;
+			    height: 45px;
+			    padding-left: 10px;
+			    border-radius: 5px;
+        }
+        .biaoge{
+        	width: 1200px;
+        	margin: auto;
+        }
+table.deeptable tr:first-child{
+	    background: #004468;
+    color: #fff;
+    line-height: 50px;
+    height: 50px;
+}
+table.deeptable tr {
+     height: 50px; 
+}
+a {
+    color: #05b8c3;
+}
+a:hover {
+    color: red;
+}
+	</style>
+	<body>
+		<!--顶部线条-->
+		<div class="topLine"></div>
+		<!--tab切换  导航-->
+		<nav class="indexNav">
+			<div class="flex-container1 width1200">
+				<div class="marginR50">
+					            <a href="${base}/index.jhtml"><img src="${base}/u/cms/www/zytbsy/img/logo.png" alt=""/></a>
+                                <a href="${base}/index.jhtml"><img src="${base}/u/cms/www/zytbsy/img/name.png" alt=""/></a>
+				</div>
+				<div>
+					<ul class="nav nav-pills">
+						<li role="presentation" class="dropdown">
+							<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">志愿填报</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="${base}/zytbcx/volunteerFlexible.jspx">志愿填报</a>
+								</li>
+								<li>
+									<a href="toCollege/volunteer/volunteerFiltrate.html">志愿筛选</a>
+								</li>
+								<li>
+									<a href="bigData/runAschool.html">生成志愿</a>
+								</li>
+								<li>
+									<a href="bigData/laboratory.html">评估报告</a>
+								</li>
+							</ul>
+						</li>
+						<li role="presentation">
+							<a href="${base}/zytbcx/volunteerPage.jspx">志愿</a>
+						</li>
+						<li role="presentation">
+							<a href="volunteerVideo.html">志愿视频</a>
+						</li>
+						<li role="presentation">
+							<a href="${base}/evaluation/index.jspx">专业测评</a>
+						</li>
+						<li role="presentation" class="dropdown">
+							<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">报考大数据</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="toCollege/bigData/academyRankingList.html">院校排行榜</a>
+								</li>
+								<li>
+									<a href="toCollege/bigData/specialtyRankingList.html">专业排行榜</a>
+								</li>
+								<li>
+									<a href="toCollege/bigData/runAschool.html">中外合作办学</a>
+								</li>
+								<li>
+									<a href="toCollege/bigData/laboratory.html">重点学科实验室</a>
+								</li>
+								<li>
+									<a href="toCollege/bigData/ProfessionalBooks.html">职业大全</a>
+								</li>
+								<li>
+									<a href="toCollege/bigData/recruitStudent.html">招生章程</a>
+								</li>
+							</ul>
+						</li>
+						<li role="presentation">
+							<a href="completeExplain.html">填报说明</a>
+						</li>
+						<li role="presentation">
+							<a href="${base}/BkyxAct/userCenter.jspx">用户中心</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container1 width1200">
+				<div><a href="index.html">首页 </a> &lt;&lt;志愿管理 &lt;&lt;志愿</div>
+			</div>
+		</div>
+		<!--主体-->
+		<main class="evaluationMain">
+			<!--上边-->
+			<form method="post" action="">
+			<div class="top">
+				<div class="nianfen">
+					<li class="wwiw">
+							<span class="wenzi">年份</span>
+						<div class="flex-item10-20">
+							<select class="provincewenli">
+								<option value="" disabled selected hidden  name="year" id="year">全部</option>
+								<option value="1">111</option>
+							</select>
+						</div>
+				    </li>
+			    </div>
+				<div class="nianfen">
+					<li class="wwiw">
+							<span class="wenzi">省份</span>
+						<div class="flex-item10-20">
+							<select class="provincewenli">
+								<option value="" disabled selected hidden name="province" id="province">全部</option>
+								<option value="1">111</option>
+							</select>
+						</div>
+				    </li>
+				</div>
+				<div class="nianfen">
+					<li class="wwiw">
+							<span class="wenzi">负责人</span>
+					        <div class="flex-item10-20">
+						        <input class="xdxt_zysearchOut_ipsty1" type="text" id="mainTeacher" name="mainTeacher" value="${mainTeacher!}"/>
+					        </div>
+				    </li>
+				</div>
+				<div class="nianfen">
+					<li class="wwiw">
+							<span class="wenzi">签单人</span>
+					        <div class="flex-item10-20">
+						        <input class="xdxt_zysearchOut_ipsty1" type="text" id="singler" name="singler" value="${singler!}"/>
+					        </div>
+				    </li>
+				</div>
+			</div>
+			
+			
+			<!--下边-->
+			
+			<div class="top">
+				<div class="nianfen">
+					<li class="wwiw">
+							<span class="wenzi">服务状态</span>
+						<div class="flex-item10-20">
+							<select class="provincewenli" name="status" id="status">
+								<option value="" disabled selected hidden>全部</option>
+                               <option [#if status?? && status=='1' ] selected [/#if] value="1">未付款</option>
+								<option [#if status?? && status=='2' ] selected [/#if] value="2">未派发</option>
+								<option [#if status?? && status=='3' ] selected [/#if] value="3">待服务</option>
+								<option [#if status?? && status=='4' ] selected [/#if] value="4">进行中</option>
+								<option [#if status?? && status=='5' ] selected [/#if] value="5">结束服务</option>
+							</select>
+						</div>
+				    </li>
+			    </div>
+				<div class="nianfen">
+					<li class="wwiw">
+							<span class="wenzi">服务类型</span>
+						<div class="flex-item10-20">
+							<select class="provincewenli" name="serviceType" id="serviceType">
+								<option value="" disabled selected hidden>全部</option>
+								<option value="zzzs" [#if serviceType?? && serviceType='zzzs'] selected [/#if]>自主招生一对一</option>
+                               <option value="gat" [#if serviceType?? && serviceType='gat'] selected [/#if]>港澳台一对一</option>
+                               <option value="zytb" [#if serviceType?? && serviceType='zytb'] selected [/#if]>志愿填报一对一</option>
+                                <option value="xdzy" [#if serviceType?? && serviceType='xdzy'] selected [/#if]>学大志愿一对一</option>
+							</select>
+						</div>
+				    </li>
+				</div>
+				<div class="nianfen">
+					<li class="wwiw">
+							<span class="wenzi">签单时间</span>
+					        <div class="flex-item10-20">
+						        <input type="date" placeholder="" id="singleTime1" name="singleTime1" />
+					        </div>
+					        <span>至</span>
+					        <div class="flex-item10-20">
+						        <input type="date" placeholder="" id="singleTime2" name="singleTime2" />
+					        </div>
+				    </li>
+				</div>
+			</div>
+			<input type="submit" value="搜索"/>
+			</form>
+			<!--列表-->
+			<div class="biaoge">
+					<table class="table table-striped deeptable">
+						<tr>
+							<th>订单号</th>
+							<th>姓名</th>
+							<th>电话号码</th>
+							<th>地区</th>
+							<th>服务类型</th>
+							<th>当前节点</th>
+							<th>负责人</th>
+							<th>服务状态</th>
+							<th>更新时间</th>
+							<th>操作</th>
+						</tr>
+						<tr>
+							<td>D2017062402922</td>
+							<td>侯雨馨</td>
+							<td>13801262681</td>
+							<td>北京</td>
+							<td>学大志愿一对一</td>
+							<td>报考意向管理</td>
+							<td>学大专家</td>
+							<td>进行中</td>
+							<td>2019-04-19</td>
+							<td>
+								<a href="assessmentReport.html">进入服务</a>
+							</td>
+						</tr>
+						<tr>
+							<td>D2017062402922</td>
+							<td>侯雨馨</td>
+							<td>13801262681</td>
+							<td>北京</td>
+							<td>学大志愿一对一</td>
+							<td>报考意向管理</td>
+							<td>学大专家</td>
+							<td>进行中</td>
+							<td>2019-04-19</td>
+							<td>
+								<a href="assessmentReport.html">进入服务</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			
+			<!--分页-->
+			<div class="textC paging">
+				<tr>
+					<td colspan="8" style="padding:20px 0;">
+						<input type="hidden" name="pageNo" />
+						<table width="100%" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td align="center" class="pn-sp">
+									共 ${pagination.totalCount} 条&nbsp; 每页 ${pagination.pageSize} 条&nbsp; 当前 ${pagination.pageNo}/${pagination.totalPage} 页 &nbsp;转到第<input type="text" id="_goPs" onfocus="this.select();" onkeypress="if(event.keyCode==13){$('#_goPage').click();return false;}" style="width:50px; border:1px solid #e7e7e7;" />页
+									<input id="_goPage" type="button" value="转" onclick="_gotoPage($('#_goPs').val());" [#if pagination.totalPage==1] disabled="disabled" [/#if] />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="button" value="首 页" onclick="_gotoPage('1');" [#if pagination.firstPage] disabled="disabled" [/#if]/>
+									<input type="button" value="上一页" onclick="_gotoPage('${pagination.prePage}');" [#if pagination.firstPage] disabled="disabled" [/#if]/> <input type="button" value="下一页" onclick="_gotoPage('${pagination.nextPage}');" [#if pagination.lastPage] disabled="disabled" [/#if]/> <input type="button" value="尾 页" onclick="_gotoPage('${pagination.totalPage}');" [#if pagination.lastPage] disabled="disabled" [/#if]/> </td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</div>
+		</main>
+		<!--底部-->
+	<!--	<iframe MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no src="footer.html" height="360px" width="100%"></iframe>
+        		<!--js-->
+	</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>排行榜</title>
+<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+<script src="http://www.jq22.com/jquery/1.9.1/jquery.min.js"></script>
+<script language="javascript" src="${base}/r/wdedu/js/common.js"></script>
+<link  type="text/css" rel="stylesheet" href="${base}/r/wdedu/css/style.css" />
+</head>
+<body>
+ [#include "../wdedu/include/header_address.html"/]
+ [#include "../wdedu/include/header_zytb.html"/]
+	<div class="mbxdh_bg">
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">志愿填报</a>&nbsp;&gt; &nbsp; <a href="#">排行榜</a>
+		</div>  
+	</div>   
+		<div class="con">
+        		<div class="phb_z f_l">
+                		<div class="phb_z_s">
+                        		<div class="phb_z_s_dh"><span>院校排行榜</span></div>
+                        		<div class="phb_z_s_dh_z"><span><a href="${base}/bcdsj/universityRank.jspx">大学名次排行榜</a><i>&nbsp;&gt; &nbsp;</i></span></div>
+                                <div class="phb_z_s_dh_z"><span><a href="${base}/bcdsj/universityEnrollRank.jspx">大学录取排行榜</a><i>&nbsp;&gt; &nbsp;</i></span></div>
+                                <div class="phb_z_s_dh_z"><span><a href="${base}/bcdsj/universitySalaryRank.jspx" style="color: #ff8d00">大学薪酬排行榜</a><i style="color: #ff8d00">&nbsp;&gt; &nbsp;</i></span></div>
+                        </div>
+                        <div class="phb_z_x">
+                        		<div class="phb_z_s_dh"><span>专业排行榜</span></div>
+                        		<div class="phb_z_s_dh_z"><span><a href="${base}/bcdsj/professionRank.jspx">学科专业排行榜</a><i>&nbsp;&gt; &nbsp;</i></span></div>
+                           <!--     <div class="phb_z_s_dh_z"><span><a href="${base}/bcdsj/professionEnrollRank.jspx">专业录取排行榜</a><i>&nbsp;&gt; &nbsp;</i></span></div>-->
+                                <div class="phb_z_s_dh_z"><span><a href="${base}/bcdsj/professionSalaryRank.jspx">专业薪酬排行榜</a><i>&nbsp;&gt; &nbsp;</i></span></div>
+                        </div>
+                </div>
+        
+        <div class="phb_y f_l" style="border-top: 1px solid #e5e9ff;">
+      	<div class="base-line2">
+       			<form id="comSearch" action="universitySalaryRank.jspx" method="POST">
+                <label>学校地区<i>&nbsp;&gt; &nbsp;</i></label>
+               <div class="zdx_suo2">
+
+
+                    [#if provinceList?? ]
+                    [#list provinceList as p]
+                    [#if p.provinceName != "未知"]
+                   <div class="zdx_suo_an2 f_l">
+                        <input id="checkbox_shengfen_${p.provinceId!}" value="${p.provinceId!}"
+                               name="univProvinces" type="checkbox" hidden [#if univProvince?? && univProvince?contains('${p.provinceName!}')]
+                        checked="checked" [/#if]>
+                        <label for="checkbox_shengfen_${p.provinceId!}">${p.provinceName!}</label>
+                    </div>
+                    [/#if]
+                    [/#list]
+                    [/#if]
+
+                    <div class="clearfix">
+                        <!--<input type="hidden" name ="univProvinces" id="univProvinces">-->
+                    </div>
+                </div>
+                 <span class="dw" style="border-bottom: none"></span>
+                 
+            <div class="base-line2" style="border-bottom:1px solid #e5e9ff">
+                <label>学校类型<i>&nbsp;&gt; &nbsp;</i></label>
+                 <div class="zdx_suo2">
+
+
+                    [#if tBasecateNameList??]
+                    [#list tBasecateNameList as tsc]
+                     <div class="zdx_suo_an2 f_l">
+                      <input id="radio_lx_1${tsc_index!}" value="${tsc!}" name="univTypes"  type="checkbox" hidden [#if univType?? && univType?contains('${tsc!}')] checked [/#if]>
+                      <label for="radio_lx_1${tsc_index!}">[#if univType?? && univType?contains('${tsc!}')]  [/#if]${tsc!}</label>
+                        </div>
+                    [/#list]
+                    [/#if]
+
+                    <div class="clearfix">
+                        <input type="hidden" name ="univTypes" id="univTypes">
+                    </div>
+                </div>
+                <button id="submitTo" class="gyjz_ss_y5_qc btn btnColorYellow" style="line-height:normal;">立即搜索</button>
+                <div class="clearfix"></div>
+            </div>
+             <input type="hidden" id="PaginationPageNo" name="PaginationPageNo"/>
+             <input type="hidden" id="PaginationSetPageNum" name="PaginationSetPageNum"/>
+            </form>
+            </div>
+
+            <div class="investment_f">
+  <div class="investment_con">
+    <div class="investment_con_list">
+      <table width="100%"  cellspacing="0" cellpadding="0" style="position: relative">
+          <tr>
+            <th scope="col" width="126px" height="44px">排名</th>
+            <th scope="col" width="226px" height="44px" style="line-height:44px; text-align:center">  
+       院校名称
+  			</th>
+            <div class="clearfix"></div>
+            <th scope="col" width="141px" height="44px">院校类型</th>
+            <th scope="col" width="136px" height="44px" style="position: relative">
+所在地
+            </th>
+            <th scope="col" width="202px" height="44px">所属部委</th>
+              <th scope="col" width="150px" height="44px">办学层次</th>
+              <th scope="col" width="150px" height="44px">办学类型</th>
+              <th scope="col" width="150px" height="44px">毕业五年薪酬</th>
+
+          </tr>
+          [#if pagination?? ]
+          [#list pagination.list as a ]
+          <tr>
+              <td>${(pagination.pageNo-1)*SetPageNum+a_index+1}</td>
+              <td>${a[0].univName!}</td>
+              <td>${a[1]!}</td>
+              <td>${a[2]!}</td>
+              <td>${a[3]!}</td>
+              <td>${a[4]!}</td>
+              <td>${a[5]!}</td>
+              <td>${a[0].fiveYearSalary!}</td>
+          </tr>
+          [/#list]
+          [/#if]
+        </table>
+        <div class="textC paging">
+            <tr>
+                <td colspan="8" style="padding:20px 0;">
+
+                    <div class="pn-sp">
+                        共${pagination.totalCount}条&nbsp;每页<input type="text" id="_PaginationSetPsNum" value="${SetPageNum!}" onfocus="this.select();" style="width:50px; border:1px solid #e7e7e7;" /> 条&nbsp; <input id="_setPage" type="button" value="确定" onclick="_setPageNum1($('#_PaginationSetPsNum').val());" />
+                        &nbsp;|&nbsp;当前${pagination.pageNo}/${pagination.totalPage}页&nbsp;转到第<input type="text" id="_goPs1" onfocus="this.select();" onkeypress="if(event.keyCode==13){$('#_goPage1').click();return false;}" style="width:50px; border:1px solid #e7e7e7;" />页
+                        <input id="_goPage1" type="button" value="确定" onclick="_gotoPage1($('#_goPs1').val());" [#if pagination.totalPage==1] disabled="disabled" [/#if] />
+                    </div>
+                    <div>
+                        <input type="button" value="首 页" onclick="_gotoPage1('1');" [#if pagination.firstPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="上一页" onclick="_gotoPage1('${pagination.prePage}');" [#if pagination.firstPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="下一页" onclick="_gotoPage1('${pagination.nextPage}');" [#if pagination.lastPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="尾 页" onclick="_gotoPage1('${pagination.totalPage}');" [#if pagination.lastPage] disabled="disabled" [/#if]/>
+                    </div>
+                </td>
+            </tr>
+        </div>
+    </div>
+
+
+  </div>
+
+</div>
+        </div>
+        <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+[#include "../wdedu/include/footer_new.html"/]
+    
+
+<script>
+  $(function () {
+
+      $(".checkbox_2").click(function () {
+          if ($(this).hasClass('checked')) {
+              $(this).removeClass('checked');
+              $(this).parent().find("span").removeAttr("style");
+              $(this).parent().find("span").css('color', '#333333')
+              var typess = $("#univTypes").val();
+              var type = $(this).next().text();
+              var str = "," + type;
+              var test = typess.replace(str, "");
+              $("#univTypes").val(test);
+
+          } else {
+              $(this).addClass('checked');
+              $(this).parent().find("span").css('color', '#ff8d00')
+              var typess = $("#univTypes").val();
+              var type = $(this).next().text();
+              var test = typess + "," + type;
+              $("#univTypes").val(test);
+          }
+
+      })
+
+      $(".checkbox_1").click(function () {
+          if ($(this).hasClass('checked')) {
+              $(this).removeClass('checked');
+              $(this).parent().find("span").removeAttr("style");
+              $(this).parent().find("span").css('color', '#333333')
+              var cityss = $("#univProvinces").val();
+              var city = $(this).next().text();
+              var str = "," + city;
+              var test = cityss.replace(str, "");
+              $("#univProvinces").val(test);
+
+          } else {
+              $(this).addClass('checked');
+              $(this).parent().find("span").css('color', '#ff8d00')
+              var cityss = $("#univProvinces").val();
+              var city = $(this).next().text();
+              var test = cityss + "," + city;
+              $("#univProvinces").val(test);
+          }
+      })
+
+
+
+    $(".arrUp").on("click", function () {
+      $(this).css("border-bottom-color", "#b2b2b2");
+      $(".arrDown").css("border-top-color", "#ccc")
+    });
+    $(".arrDown").on("click", function () {
+      $(this).css("border-top-color", "#b2b2b2")
+      $(".arrUp").css("border-bottom-color", "#ccc")
+    })
+  })
+
+
+  //分页
+  function _gotoPage1(pageNo) {
+      try {
+          var comSearch = document.getElementById("comSearch");
+          $('#PaginationPageNo').val(pageNo);
+          $('#PaginationSetPageNum').val( $('#_PaginationSetPsNum').val());
+          comSearch.submit();
+
+      } catch (e) {
+          alert(e)
+          // alert('_gotoPage(pageNo)方法出错');
+      }
+  }
+  function _setPageNum1(setPageNum) {
+      try {
+          var comSearch = document.getElementById("comSearch");
+          $('#PaginationSetPageNum').val(setPageNum);
+          comSearch.submit();
+
+      } catch (e) {
+          alert('_setPageNum(pageNum)方法出错');
+      }
+  }
+</script>
+</body>
+</html>

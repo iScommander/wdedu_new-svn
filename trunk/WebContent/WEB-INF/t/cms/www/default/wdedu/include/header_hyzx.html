@@ -1,0 +1,26 @@
+<div class="navbox">
+		<div class="navbox_bg">
+			<div class="nav_l fl">
+				<div id="nav">
+				<ul id="navMenu">
+				<li><a href='${base}/'>首页</a></li>
+				<li><a href='${base}/admissonSvcAct/findbaseInfo.jspx' rel='dropmenu1'>基本信息</a></li>
+				<li><a  href='${base}/admissonSvcAct/changePassword.jspx' rel='dropmenu2'>修改密码</a></li>
+				<li><a  href='${base}/admissonSvcAct/findActiveList.jspx' rel='dropmenu3'>讲座信息</a></li>
+				<li><a href='${base}/admissonSvcAct/findProducts.jspx' rel='dropmenu4'>我的服务</a></li>
+				<li><a href='${base}/evaluation/newGKXK.jspx' rel='dropmenu5'>选科测评</a></li>
+				<li><a href='${base}/evaluation/index.jspx' rel='dropmenu6'>专业测评</a></li>
+				<li><a href='${base}/admissonSvcAct/findApplicationList.jspx' rel='dropmenu7'>我的志愿表</a></li>
+				<li><a href='${base}/admissonSvcAct/bigData.jspx' rel='dropmenu8'>大数据查询</a></li>
+				</ul>
+				</div>
+
+			</div>
+			[#if user??]
+			<div class="nav_r fr">
+				<a href="${base}/admissonSvcAct/findbaseInfo.jspx">尊敬的[@text_cut s=user.username?substring(0,5) len=3 append='..'/]</a>
+			</div>
+			[/#if]
+		<div class="clearfix"></div>
+		</div>
+	</div>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<title>高考选科测评报告--MBTI</title>
+		<link rel="stylesheet" href="${resSys}/res/css/head-footer.css" />
+		<link rel="stylesheet" href="${resSys}/res/css/cs.css" />
+		<style type="text/css">
+			mark{background: none;}
+			.num-year{display: table;color: #fff;left: 450px;top: 50px;font-size: 42px;padding: .3em .5em;background: #8bc145;}
+			.num-name,.num-date{color: #666;bottom: 12%;font-size: 26px;}
+			.num-name{left: 450px;}.num-date{left: 650px;}
+			.title{position: absolute;top: 140px;left: 450px;color: #676565;font-size: 44px;letter-spacing: 2px;}
+			.title mark{color: #8bc145;position: relative;}
+			.mark{position: absolute;top: 210px;left: 450px;background: #cecccc;color: #fff;font-size: 18px;letter-spacing: 2px;padding: 4px 8px;}
+			.head-desc{position: absolute;left: 450px;top: 250px;font-size: 18px;color: #676565;}
+			.head-desc i{display: inline-block;width: 12px;height: 12px;border-radius: 50%;background: #8bc145;margin-right: 5px;}
+			.head-desc span{margin-right: 25px;}
+			.sec-one{height: 300px;background: url(${resSys}/res/img/dlsy/gkxkcs-m1.jpg);padding: 20px 150px;}
+			.sec-one h3{padding-bottom: 5px;width: 720px;font-size: 20px;color: #8bc145;padding-top: 30px;border-bottom:2px solid #E3E1E1;}
+			.sec-one h3 span{color: #1d9a78;letter-spacing: 2px;}
+			.sec-one p{font-size: 16px;width: 700px;line-height: 1.5em;padding-top: 40px;color: #666;}
+			.sec-two{padding: 30px;background-image: url(${resSys}/res/img/dlsy/gkxkcs-m2.jpg);background-size: 100% 100%;}
+			.sec-two-in{width: 1020px;margin:0 auto;border:2px solid #fff;padding: 15px;}
+			.sec-two-in:before,.sec-two-in:after{position: absolute;content: '';width: 40px;height: 40px;}
+			.sec-two-in:before{top: -3px;left: -3px;border-left:4px solid #fff;border-top: 4px solid #fff;}
+			.sec-two-in:after{bottom: -3px;right: -3px;border-right:4px solid #fff;border-bottom: 4px solid #fff;}
+			.sectwo-cont{background: #fff;padding: 10px 40px;}
+			.sectwo-cont h2{color: #1d9a78;font-size: 18px;padding: 15px 0;text-align: center;}
+			.sectwo-cont h2 mark{color: #8bc145;}
+			.f1{font-size: 16px;padding: 20px 0;text-align: justify;line-height: 25px;}
+			.f1 mark{color: #36afce;letter-spacing: 2px;}
+			.f2{display: table;height: 40px;line-height: 40px;background: #f0f0f0;font-size: 16px;padding-right: 10px;}
+			.f2 mark{margin: 0 5px;}.f2 i{margin: 0 10px;}
+			.f2 span{display: inline-block;width: 40px;text-align: center;margin-right: 10px;color: #fff;}
+			.f2 .chos{color: #86b946;}.f3{font-size: 16px;padding: 20px 0;}
+			.f3 p{padding-bottom:10px;line-height: 1.2em;text-align: justify;}
+			.f3 .chos{color: #36afd6;}.c1{background: #1E9A78;}
+			.c2{background: #37B0CF;}.c3{background: #FDBF44;}.c4{background: #2AC4C6;}
+			.sec-three{background: #44546B;padding: 30px 100px;margin-top: -2px;}
+			.sec-three .f1{color: #fff;text-align: justify;}
+			.sec-three h2,.sec-three h3,.sec-f h3{text-align: center;color: #fff;font-size: 20px;padding-bottom: 30px;letter-spacing: 2px;}
+			.sec-three h3 mark{color: #2bc4c6;}
+			.fs-wrap{width: 720px;margin: 0 auto 60px;}
+			.fs-top,.fs-bottom{color: #fff;font-size: 0;margin-bottom: 25px;}
+			.fs-top{border-bottom:1px solid #7C8897;}
+			.fs-top li,.fs-bottom li{display: inline-block;width: 60px;position: relative;font-size: 14px;}
+			.fs-top li{text-indent: -7px;}
+			
+			.fs-top li:nth-child(6),.fs-top li:nth-child(7),.fs-top li:nth-child(8){text-indent: -4px;}
+			.fs-top:before,.fs-top:after,.fs-bottom:before,.fs-bottom:after,
+			.fs-top li:after,.fs-bottom li:after{position: absolute;content: '';bottom: -8px;width: 1px;height: 8px;background: #7C8897;}
+			.fs-bottom:before,.fs-bottom:after{top: -8px;}
+			.fs-bottom li:after{top: -12px;}.fs-top:before{left: 0;}
+			.fs-top:after,.fs-top li:after,.fs-bottom:after,.fs-bottom li:after{right: 0;}
+			.fs-top li:last-child:before{position: absolute;content: '30';right: -7px;top: 0;}
+			.fs-wrap div{font-size: 0;height: 35px;background: #697687;margin-bottom: 15px;position: relative;}
+			.fs-wrap div:before,.fs-wrap div:after{position: absolute;top: 0;color: #fff;font-size: 15px;line-height: 35px;}
+			.fs-wrap div:before{left: -60px;}.fs-wrap div:after{right: -60px;}
+			.fs-m1:before{content: '外向(E)';}.fs-m1:after{content: '(I)内向';}
+			.fs-m2:before{content: '感觉(S)';}.fs-m2:after{content: '(N)直觉';}
+			.fs-m3:before{content: '思维(T)';}.fs-m3:after{content: '(F)情感';}
+			.fs-m4:before{content: '判决(J)';}.fs-m4:after{content: '(P)知觉';}
+			.fs-wrap div span{position: relative;display:inline-block;width:50%;height: 35px;font-size:14px;color: #fff;overflow: hidden;}
+			.fs-wrap div span i{display: inline-block;text-align: center;line-height:35px;position: absolute;top: 0;}
+			.fs-wrap div span:first-child i{right:0;border-top-left-radius: 5px;border-bottom-left-radius: 5px;}
+			.fs-wrap div span:last-child i{left: 0;border-top-right-radius: 5px;border-bottom-right-radius: 5px;}
+			.fs-m1 span .yes{background: #FDD212;}.fs-m2 span .yes{background: #91DE30;}
+			.fs-m3 span .yes{background: #35C3E7;}.fs-m4 span .yes{background: #FD47F2;}
+			.fs-wrap .fs-m4{margin-bottom: 25px;}
+			.fs-bottom{border-top:1px solid #7C8897;padding-top: 4px;}
+			.fs-bottom li{text-align: center;width: 120px;}
+			.fs-bottom li:first-child,.fs-bottom li:last-child{width: 60px;}
+			.secth-nav{display: table;padding: 0 1em 0 30px;background: #fff;line-height: 32px;font-size: 15px;margin-left: 12px;color: #44546a;}
+			.secth-nav:before{position: absolute;content: '';top: 4px;left: -12px;width: 23px;height: 23px;background: #2bc4c6;-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);-ms-transform: rotate(45deg);transform: rotate(45deg);}
+			.sec-three ul{font-size: 16px;color: #fff;padding: 15px 30px;}
+			.sec-three ul li{line-height: 22px;color:rgba(255, 255, 255, .8)}
+			.sec-f .line{width: 2em;height: 3px;background: #fff;margin: -22px auto 0;}
+			.sec-f{padding: 30px 0;color: #fff;background-size: 100% 100%;background-image:url(${resSys}/res/img/dlsy/gkxkcs-m3.jpg) ;}
+			.sec-f p{padding: 30px 120px;text-align: justify;font-size: 16px;line-height: 1.4em;}
+			.next{display:table;margin:20px auto;padding:.4em 1em;border-radius:2px;background:#44D0E5;color:#fff;font-size:16px;}
+.mb_db_gd_zt {
+    text-align: center;
+    caret-color: transparent;
+}.mb_db_gd {
+     height: 64px;
+ }
+ .mb_db_gd {
+     height: 95px;
+     background-color: #5e6b9b;
+     opacity: 0.9;
+     position: fixed;
+     z-index: 1;
+     bottom: 0;
+     padding-left: 15px;
+     width: 100%;
+ }.mb_db_gd span {
+      color: #FFF;
+      font-size: 28px;
+      text-align: center;
+      line-height: 95px;
+  }.mb_db_gd_an {
+       width: 200px;
+       height: 48px;
+       line-height: 48px;
+   }
+   .mb_db_gd_an {
+       display: inline-block;
+       background-color: #ff8d00;
+       width: 244px;
+       height: 60px;
+       font-size: 24px;
+       color: #FFFFFF;
+       border-radius: 5px;
+       line-height: 60px;
+       text-align: center;
+       margin-left: 20px;
+       cursor: pointer;
+   }
+			</style>
+		<script src="${resSys}/res/js/jquery-1.11.3.min.js"></script>
+	</head>
+	<body  >
+	<input type="hidden" value="${haveTianZhiyuan!}" name="haveTianZhiyuan"/>
+	<div class="center-block">
+		<section class="gps">
+			<img src="${resSys}/res/img/dlsy/gkxkcs-m.jpg" alt="" />
+			<section class="center-block abs-center" style="height: 100%;">
+				<h1 class="title"><mark>MBTI</mark>人格测评报告</h1>
+				<mark class="mark">MBTI personality assessment report</mark>
+				<h1 class="num-year">${date?substring(0,4)}</h1>
+				<h2 class="num-name">姓名：${qstResult.user_name!}</h2>
+				<h2 class="num-date">日期：${date!}</h2>
+				<div class="head-desc">
+					<i></i><span>自我认知</span>
+					<i></i><span>评估性格类型</span>
+					<i></i><span>建立自信</span>
+				</div>
+			</section>
+		</section>
+		<section class="sec-one">
+			<h3><span>前言  /</span> Perface</h3>
+			<p>这篇报告将帮助你理解自己的人格特质。和Holland职业兴趣不同的是，MBTI人格不仅仅反映你在工作情境中的风格和喜好，它是你在各种不同的活动和情境中所展现出的一贯、稳定的特质，这些活动和情境包括了人际沟通、学习知识、团队合作等等。本报告将深入地分析你的人格特质，帮助你认识你的优势和盲点，以及你的人格特质在工作环境中将会如何展现。</p>
+		</section>
+[#if haveTianZhiyuan??&&haveTianZhiyuan=="true"]
+		<section class="sec-two">
+			<div class="sec-two-in gps">
+				<div class="sectwo-cont">
+					<h2>我的MBTI人格： <mark>${myPersonalityMap.title!}</mark></h2>
+					<div class="f1">MBTI人格测验测试了你在四组对立且对等的处事风格中所表现出的倾向。<br />在这四组风格中，你的倾向表现为：<mark>${myPersonalityMap.details!}</mark></div>
+					[#if myPersonalityMap.one?? && myPersonalityMap.one=="E"]
+					<div class="f2"><span class="c1">01</span>你发挥和补充自我能量的方式?<i>--</i><mark class="chos">外倾(E)</mark>VS<mark>内倾(I)</mark></div>
+					<div class="f3">
+						<p class="chos">外倾：外倾型人倾向于将他们自身的能量发挥向外部世界，并且通过和他人的交互来得到自我的能量的补充。</p>
+						<p>内倾：内倾型人倾向于将他们自身的能量引导向自我的内心世界，并且通过反省、探索自己的内在想法和经验来得到自我能量的补充。</p>
+					</div>
+					[#else]
+					<div class="f2"><span class="c1">01</span>你发挥和补充自我能量的方式?<i>--</i><mark>外倾(E)</mark>VS<mark class="chos">内倾(I)</mark></div>
+					<div class="f3">
+						<p>外倾：外倾型人倾向于将他们自身的能量发挥向外部世界，并且通过和他人的交互来得到自我的能量的补充。</p>
+						<p class="chos">>内倾：内倾型人倾向于将他们自身的能量引导向自我的内心世界，并且通过反省、探索自己的内在想法和经验来得到自我能量的补充。</p>
+					</div>
+					[/#if]
+					
+					[#if myPersonalityMap.two?? && myPersonalityMap.two=="N"]
+					<div class="f2"><span class="c2">02</span>你接收信息的方式?<i>--</i><mark>感觉(S)</mark>VS<mark class="chos">直觉(N)</mark></div>
+					<div class="f3">
+						<p>感觉：感觉型人喜欢接收具体、实在的信息，他们倾向于信赖五官所能听到、看到、闻到、感觉到、尝到的有形有据、实实在在的信息。</p>
+						<p class="chos">直觉：直觉型人倾向于从宏观的角度把握信息。比起那些具体琐碎的信息，他们更关注事物之间的关联、因果、变化趋势等。</p>
+					</div>
+					[#else]
+					<div class="f2"><span class="c2">02</span>你接收信息的方式?<i>--</i><mark class="chos">感觉(S)</mark>VS<mark >直觉(N)</mark></div>
+					<div class="f3">
+						<p class="chos">感觉：感觉型人喜欢接收具体、实在的信息，他们倾向于信赖五官所能听到、看到、闻到、感觉到、尝到的有形有据、实实在在的信息。</p>
+						<p >直觉：直觉型人倾向于从宏观的角度把握信息。比起那些具体琐碎的信息，他们更关注事物之间的关联、因果、变化趋势等。</p>
+					</div>
+					[/#if]
+					
+					[#if myPersonalityMap.three?? && myPersonalityMap.three=="F"]
+					<div class="f2"><span class="c3">03</span>你做决策或为事物下结论的方式?<i>--</i><mark>思维(T)</mark>VS<mark class="chos">情感(F)</mark></div>
+					<div class="f3">
+						<p>思维：思维型人倾向于基于脉络清晰的逻辑分析来做决策或下结论，他们的决策或结论客观、精准且不容变通。</p>
+						<p class="chos">情感：情感型人倾向于从自我和社会的价值观念的出发，从情感的角度理解事态，变通地得出自己认为对的决策或结论 。</p>
+					</div>
+					[#else]
+					<div class="f2"><span class="c3">03</span>你做决策或为事物下结论的方式?<i>--</i><mark  class="chos">思维(T)</mark>VS<mark>情感(F)</mark></div>
+					<div class="f3">
+						<p class="chos">思维：思维型人倾向于基于脉络清晰的逻辑分析来做决策或下结论，他们的决策或结论客观、精准且不容变通。</p>
+						<p >情感：情感型人倾向于从自我和社会的价值观念的出发，从情感的角度理解事态，变通地得出自己认为对的决策或结论 。</p>
+					</div>
+					[/#if]
+					
+					[#if myPersonalityMap.four?? && myPersonalityMap.four=="P"]
+					<div class="f2"><span class="c4">04</span>你做决策或为事物下结论的方式?<i>--</i><mark>判断(J)</mark>VS<mark class="chos">直觉(P)</mark></div>
+					<div class="f3">
+						<p>判断：判断型人通常很快对事物下结论，且希望快速进入到下一任务。他们喜欢有组织、有计划地进行任务。</p>
+						<p class="chos">直觉：直觉型人倾向于慢一些下结论，希望在下结论之前收集更多的信息。他们喜欢有弹性的、随心所欲的任务方式。</p>
+					</div>
+					[#else]
+					<div class="f2"><span class="c4">04</span>你做决策或为事物下结论的方式?<i>--</i><mark class="chos">判断(J)</mark>VS<mark >直觉(P)</mark></div>
+					<div class="f3">
+						<p class="chos">判断：判断型人通常很快对事物下结论，且希望快速进入到下一任务。他们喜欢有组织、有计划地进行任务。</p>
+						<p>直觉：直觉型人倾向于慢一些下结论，希望在下结论之前收集更多的信息。他们喜欢有弹性的、随心所欲的任务方式。</p>
+					</div>
+					[/#if]
+				</div>
+			</div>
+		</section>
+		<section class="sec-three">
+			<div class="f1">当然，就算是表现出同一种MBTI人格类型的人，他们在这一人格上的强度和稳定性也是不尽相同的。你可以从下图中看出你在<mark>外倾、直觉、情感、知觉</mark>这四种特质上所呈现的稳定性和强度。你在某一种特质上所得分数越高，说明你在不同情境中所表现出来这种特质的可能性越大，强度越高。</div>
+			<h2>我的MBTI人格分数表</h2>
+			<div class="fs-wrap gps">
+				<ol class="fs-top gps">
+					<li>30</li><li>25</li><li>20</li><li>15</li><li>10</li><li>5</li>
+					<li>0</li>
+					<li>5</li><li>10</li><li>15</li><li>20</li><li>25</li>
+				</ol>
+				[#if myPersonalityMap.one?? && myPersonalityMap.one=="E"]
+				<div class="fs-m1">
+					<span><i class="yes" style="width: ${myPersonalityMap.onevalue!}%;">E</i></span>
+					<span><i></i></span>
+				</div>
+				[#else]
+				<div class="fs-m1">
+					<span><i></i></span>
+					<span><i class="yes" style="width: ${myPersonalityMap.onevalue!}%;">I</i></span>
+					
+				</div>
+				[/#if]
+				
+				[#if myPersonalityMap.two?? && myPersonalityMap.two=="N"]
+				<div class="fs-m2">
+					<span><i></i></span>
+					<span><i class="yes" style="width: ${myPersonalityMap.twovalue!}%;">N</i></span>
+				</div>
+				[#else]
+				<div class="fs-m2">
+					<span><i class="yes" style="width: ${myPersonalityMap.twovalue!}%;">S</i></span>
+					<span><i></i></span>
+				</div>
+				[/#if]
+				
+				[#if myPersonalityMap.three?? && myPersonalityMap.three=="F"]
+				<div class="fs-m3">
+					<span><i></i></span>
+					<span><i class="yes" style="width: ${myPersonalityMap.threevalue!}%;">F</i></span>
+				</div>
+				[#else]
+					<div class="fs-m3">
+					<span><i class="yes" style="width: ${myPersonalityMap.threevalue!}%;">T</i></span>
+					<span><i></i></span>
+				</div>
+				[/#if]
+				
+				[#if  myPersonalityMap.four??&& myPersonalityMap.four=="J"]
+				<div class="fs-m4">
+					<span><i class="yes" style="width: ${myPersonalityMap.fourvalue!}%;">J</i></span>
+					<span><i></i></span>
+				</div>
+				[#else]
+				<div class="fs-m4">
+					<span><i></i></span>
+					<span><i class="yes" style="width: ${myPersonalityMap.fourvalue!}%;">P</i></span>
+					
+				</div>
+				[/#if]
+					
+				
+				<ol class="fs-bottom gps">
+					<li>强</li><li>明显</li><li>中等</li>
+					<li>轻微</li>
+					<li>中等</li><li>明显</li><li>强</li>
+				</ol>
+			</div>
+			<h3><mark>${qstResult.rst_B!}</mark>人格分析</h3>
+			<div class="f1">${qstB.rgfx!}</div>
+			<div class="secth-nav gps">人格优势</div>
+			<ul>
+				<li>${qstB.rgys!}</li>
+				<!-- <li>• ENFP人对别人的情绪敏感，能理解、体会别人的心情，善于安慰、鼓励别人</li>
+				<li>• ENFP人对文字、语言敏感</li>
+				<li>• ENFP人善于分析、总结，擅长从整体上把握事物</li>
+				<li>• ENFP人能善于理解复杂的理论概念，将事物概念化，从中推理演绎，分析事物间的联系</li>
+				<li>• ENFP人擅长策略性思维</li> -->
+			</ul>
+			<div class="secth-nav gps">潜在盲点</div>
+			<ul>
+				<li>${qstB.qzmd!}</li>
+				<!-- <li>• ENFP人有时表现出仅仅凭个人的好恶或价值观来决定事情，并希望别人也以同样的角度或标准来处理问题的倾向</li>
+				<li>• ENFP人有时容易将别人或事情理想化，做出不切实际的判断或决策</li>
+				<li>• ENFP人尽管常常自我批评，却不善于管束和批评他人，他们总为了和睦而牺牲自己的意见或利益</li>
+				<li>• ENFP人有时展现出情绪化的倾向，情绪波动较大</li> -->
+			</ul>
+			<div class="secth-nav gps">工作环境下的${qstResult.rst_B!}人</div>
+			<ul>
+				<li>${qstB.gzhjx!}</li>
+				<!-- <li>• ENFP人在工作环境中往往能够成为所属环境中的模范和典型，号召力和感染力强</li>
+				<li>• ENFP人总是被那些能够让他们具有成就感的环境所吸引，喜欢做领导或政治家</li>
+				<li>• ENFP人适合待在那些通过长年打拼，逐步扩大规模的企业，他们喜欢团结稳定的团队</li>
+				<li>• ENFP人也适合从事那些把想法付诸实施的工作，比如包装、宣传、市场推广</li> -->
+			</ul>
+		</section>
+		<section class="sec-f">
+			<h3>建议和总结</h3>
+			<div class="line"></div>
+			<p>在了解了自己的人格特质之后，我们应懂得发挥和运用自己的独特优势，想想怎么将他们和自己的职业规划、人生规划结合起来。同时需要注意的是，我们的人格虽然是我们身上十分稳定的特质，但也并非永远不会改变。因此，对我我们人格中的潜在盲点，我们也应该给予充分的关注，并且有意识地调节、克服它们——查漏补缺也是我们了解自己MBTI人格的重要意义之一哦！</p>
+			<a class="next" href="${base}/evaluation/sociaSupport.jspx">继续下一个测评</a>
+		</section>
+		[/#if]
+</div>
+[#if haveTianZhiyuan??&&haveTianZhiyuan=="false"]
+	<div class="mb_db_gd" id="box2">
+        <div class="mb_db_gd_zt">
+            <span>&nbsp;&nbsp; 购买VIP后可查看详细数据&nbsp;&nbsp;点击</span>
+            <a class="mb_db_gd_an" href="${base}/NewsDisplay/testSxk.jspx">购买</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    [/#if]
+	</body>
+
+</html>

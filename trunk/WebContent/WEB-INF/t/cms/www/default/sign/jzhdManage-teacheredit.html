@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>讲座活动管理</title>
+		<link rel="stylesheet" href="${base}/r/sign/jedate.css" />
+		<link rel="stylesheet" href="${base}/r/sign/jzhd-manage.css" />
+		<script src="${base}/r/sign/jquery-1.11.3.min.js"></script>
+		<script src="${base}/r/sign/city.min.js"></script>
+		<style type="text/css">
+			.con-title{text-align: left;line-height: 101%;margin: 10px 0;padding-left: 6px;padding-bottom: 10px;border-bottom: 1px solid #ccc;letter-spacing: .1em;}
+			.con-title:before{content:'';position: absolute;top: 2%;left: 0;width: 4px;height: 66%;background: #FB8227;}
+			.search-item{display: block;font-size: 15px;margin-top: 20px;}
+			.search-item label{display: inline-block;width: 75px;text-align: right;font-size: 15px;color: #000;}
+			input,.input-file{width: 354px;}
+			.mr{margin-right: 22px;}
+			.checkbox-wrap{display: inline-block;margin-right: 20px;}
+			.checkbox{margin-right: 3px;vertical-align: -2px;}
+			.search-wrap{padding-left: 35px;}
+			.btns{margin: 30px 112px;}
+			.btns button{padding: .5em 2em;}
+			.date-icon{width: 157px;}
+			.line{margin: 0 10px}
+			.mainfoot{display: block;}
+			.item-left{width:200px;}
+		</style>
+	</head>
+	<body class="iframe-body">
+		<h4 class="con-title gps">讲师基本信息	
+		</h4>
+		
+	<form action="${base}/active/updateTeacher.jspx"  method="post"  enctype="multipart/form-data">
+        <input type="hidden" name="id"  [#if activeteacher??]  value="${activeteacher.id!}"  [/#if]/>  
+        <input type="hidden" name="teacherid"  [#if activeteacher??]  value="${activeteacher.teacher_id!}"  [/#if]/>  
+            
+		<div class="search-wrap gps">
+			<div class="search-item">
+				<label>所属省市:</label>
+				<span class="select-wrap">
+					<select id="pro" name="province" [#if activeteacher??]  value="${activeteacher.province!}"  [/#if]>
+						<option  value="none">--必填项--</option>
+					</select>
+				</span>
+			</div>
+			<div class="search-item">
+				<label> 讲师姓名:</label>			
+				<input type="text"  name="name" [#if activeteacher??]  value="${activeteacher.name!}"  [/#if]   placeholder="请确保姓名正确" />				
+			</div>
+					
+			<div class="search-item">
+				<label>讲师头衔:</label>
+				<input type="text" placeholder="如:志愿无忧网资深讲师" name="introduce0" [#if activeteacher??]  value="${activeteacher.introduce0!}"  [/#if]  />
+			</div>
+		    <div class="search-item">
+				<label>讲师介绍1:</label>
+				<input type="text" placeholder="如:教育部学校规划建设发展中心研究员" name="introduce1"  [#if activeteacher??]  value="${activeteacher.introduce1!}"  [/#if]  />
+			</div>
+			<div class="search-item">
+				<label>讲师介绍2:</label>
+				<input type="text" placeholder="如:教育部学校规划建设发展中心研究员" name="introduce2"  [#if activeteacher??]  value="${activeteacher.introduce2!}"  [/#if]  />
+			</div>
+		
+		
+		    <label class="search-item">基本信息:</label>	  
+			<div class="search-item">	
+				 		
+			    <textarea  rows="10" cols="45" name="strintroduce4">${activeteacher.strintroduce4!}</textarea >			   
+			</div>
+			
+			<label class="search-item">讲师图片:</label>	
+			<div class="item-left">
+			   <img src="${activeteacher.image1!}" alt="履历" name="image1"/>
+			</div>	
+			
+			<label class="search-item">更换图片:</label>		
+			<div class="search-item">				
+				<span class="gps input-file">
+					<input id='myfile' type="file" accept="image/jpeg,image/jpg,image/png" name="file"/>
+					<span id="fileName">图片尺寸宽度750px,大小不超过50k!</span>
+				</span>
+			</div>
+					
+		<div  class="btns">  
+			<button type="submit" class="btn btn-pop-yes">保存</button>
+		</div>
+    </div>	
+		
+	</form>
+		
+		
+	</body>
+	<script src="${base}/r/sign/jquery.jedate.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			//省市地
+			function getSeectList(obj,data){
+				var html = '<option value="none">--必选项--</option>';
+				$.each(data, function(i,val) {
+					html += '<option value="'+val.id+'">'+val.value+'</option>';
+				});
+				$(obj).html(html);
+			};
+			getSeectList('#pro',prolist);
+			$('#pro').on('change',function(){
+				var pro = $(this).val();
+				if(pro=='none'){
+					alert('请选择省份，否则无法选择市区！');
+					$('#city').attr('disabled','disabled');		
+					$('#quxian').attr('disabled','disabled');
+					return false;
+				};
+				console.log(pro);
+				var cityData = [];
+				$.each(citylist, function(j,val) {
+					if(val.parentId==pro){
+						cityData.push(citylist[j]);
+					}
+				});
+				getSeectList('#city',cityData);
+				$('#city').removeAttr('disabled');
+			});
+			$('#city').on('change',function(){
+				var city = $(this).val();
+				if(city=='none'){
+					alert('请选择市区，否则无法选择区县！');
+					$('#quxian').attr('disabled','disabled');
+					return false;
+				};
+				var cityData = [];
+				$.each(quxianlist, function(j,val) {
+					if(val.parentId==city){
+						cityData.push(quxianlist[j]);
+					}
+				});
+				getSeectList('#quxian',cityData);
+				$('#quxian').removeAttr('disabled');
+			});
+			$('#quxian').on('change',function(){
+				var quxian = $(this).val();
+				if(quxian=='none'){
+					alert('请选择区县！');
+				};
+			});
+			//时间选择
+			var myDate = new Date();
+			var year=myDate.getFullYear();
+			var month=myDate.getMonth()+1;
+			var da=myDate.getDate(); 
+//			var h=myDate.getHours();  
+//			var m=myDate.getMinutes();
+			var nowTime = year+'-'+month+'-'+da+' 08:00';
+			console.log(nowTime)
+			var start = {
+			    format: 'YYYY-MM-DD hh:mm',
+				isTime:true,
+			    minDate: nowTime,
+			    okfun: function(obj){
+			        end.minDate = obj.val;
+			        $("#inpend").removeAttr("disabled");
+			        endDates();
+			    }
+			};
+			var end = {
+			    format: 'YYYY-MM-DD hh:mm',
+			};
+			function endDates() {
+			    end.trigger = false;
+			    $("#inpend").jeDate(end);
+			};
+			$('#inpstart').jeDate(start);
+			$('#inpend').jeDate(end);
+			$('.checkbox').click(function(){
+				var $next = $(this).parent('.checkbox-wrap').siblings().find('i');
+				if($(this).hasClass('bg-check-icon')){
+					$(this).removeClass('bg-check-icon');
+				}else{
+					$(this).addClass('bg-check-icon');
+					$next.removeClass('bg-check-icon');
+				}
+			});
+				//上传图片
+			var myfile = document.getElementById('myfile'); 
+			$(".input-file").on("change","#myfile",function(){
+				var size = Math.round(myfile.files[0].size / 1024);
+			    console.log('size',size)
+			    if(size>50){
+			    	alert('图片大小不超过50k');
+			    	return false 
+			    };
+			    var filePath=$(this).val();
+			    console.log(filePath)
+			    if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("png")!=-1||filePath.indexOf("jpeg")!=-1){
+			        var arr=filePath.split('\\');
+			        var fileName=arr[arr.length-1];
+			        $("#fileName").html(fileName).css('color','#000');
+			    }else{
+			        $("#fileName").html("图片尺寸宽度750px,大小不超过50k!").css('color','#757575');
+			        alert("您上传的文件类型有误！");
+			        return false 
+			    };
+			});
+		})
+	</script>
+
+	
+</html>

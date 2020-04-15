@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>评估报告</title>
+	     <link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+	<!--<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css"/>-->
+	  <link rel="stylesheet" href="${base}/r/wdedu/css/common.css"/>
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css"/>
+	<link rel="stylesheet" href="${base}/r/css/combo.select.css"/>
+	<script src="${base}/r/js/jQuery.js"></script>
+	<script src="${base}/r/js/bootstrap.min.js"></script>
+	<script src="${base}/r/js/jquery.combo.select.js"></script>
+	<script src="${base}/r/js/itemsJs/common.js"></script>
+	<script src="${base}/r/cms/front.js"></script>
+	<style>
+	.mb_db_gd{height: 45px;}
+    .mb_db_gd span{height: 45px;line-height: 45px;    font-size: 18px;}
+    .mb_db_gd_an{width: 130px;height: 30px;line-height: 30px; font-size: 15px;}
+</style>
+</head>
+<body >
+[#include "../wdedu/include/header_address.html"/]
+[#include "../wdedu/include/header_hyzx.html"/]
+
+		<div class="mbxdh_bg"  style="background-color: #f0f0f0;">
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">个人中心</a>&nbsp;&gt; &nbsp; <a href="#">我的志愿表</a>
+		</div>
+	</div>
+<!--主体-->
+<!--startprint-->
+<div class="con">
+<div class="zt_mc">
+<p>志愿填报总体规则</p>
+</div>
+<div class="zt_1">
+<div class="yhxi"><span><i>友情提示：</i>报考有风险，报考也技巧，合理利用考分，最大限度满足考生所去向的地区</span></div>
+[#if applicationsInfo??]
+<div class="yhxi_sf">
+<span>方案名称：<i style="overflow:hidden;width: 135px;"title="${applicationsInfo.applicationName!}">${applicationsInfo.applicationName!}</i></span><span>省份：<i>[#if provinceMap??]${provinceMap['${applicationsInfo.provinceId!"0"}']}[/#if]</i></span><span>科别：<i>${applicationsInfo.majorTypeId?replace(1,'文科')?replace(2,'理科')?replace(3,'综合改革')}</i></span><span>成绩：<i>${applicationsInfo.score!}分</i></span><span>排名：<i>${applicationsInfo.rank!}</i></span><span>选科：<i>${(applicationsInfo.subjects!"")?replace('1','物理')?replace('2','化学')?replace('3','生物')?replace('4','政治')?replace('5','历史')?replace('6','地理')?replace('7','技术')}
+                                                                                                                                                                                                                                                                                                                                                                                								${(applicationsInfo.subjectsLevel!"")?replace('1','A+')?replace('2','A')?replace('3','B+')?replace('4','B')?replace('5','C')?replace('6','D')}</i></span><div class="clearfix"></div>
+</div>
+[/#if]
+<div class="pc">
+[#if batchNumList??]
+[#list batchNumList as b]
+[#if b_index%2==0]
+<div class="pc_zt"><span class="pc_mc fl">${b.batch_name!}</span><span class="pc_nr fr">${b.remark!}</span><div class="clearfix"></div></div>
+[#else]
+<div class="pc_zt"><span class="pc_mcl fl">${b.batch_name!}</span><span class="pc_nr fr">${b.remark!}</span><div class="clearfix"></div></div>
+[/#if]
+[/#list]
+[/#if]
+</div>
+<div class="pc_yuan">
+<div class="pc_yuan_1 fl">
+      <span>方案完整度</span>
+      <div class="pc_yuan_1_hx"></div>
+      <div class="pc_yuan_wz">各报考批次的填写，请参照各省考试院要求填写完整的院校志愿和专业志愿，完整的填写有助于更优的录取</div>
+      </div>
+      <div class="pc_yuan_2 fl">
+      <span>志愿合理度</span>
+      <div class="pc_yuan_2_hx"></div>
+      <div class="pc_yuan_wz2">志愿结构合理性应遵循“稳中求胜，冷热搭配”，最重要的是填志愿的时候一定要用心、细心、耐心。</div>
+      </div>
+   <div class="pc_yuan_3 fl">
+   <span>志愿梯度性</span>
+   <div class="pc_yuan_1_hx"></div>
+   <div class="pc_yuan_wz3">平行志愿填报的口诀“冲一冲，稳一稳，保一保”，设置合理的志愿梯度，确保升入理想的大学和专业。</div>
+   </div>
+   <div class="clearfix"></div>
+</div>
+</div>
+<!--
+<div class="pg_zysx">
+    <div class="pg_zysx_tit">
+        <p>志愿筛选</p>
+    </div>
+    <div class="pg_zysx_con">
+        <ul>
+            <li>
+                <p>
+                    批次
+                </p>
+                <i></i>
+                <span>
+                  [#if conditionList??]
+                  [#list conditionList as c]
+                  ${c.batch_name!}&nbsp;|&nbsp;
+                  [/#list]
+                  [/#if]
+                </span>
+            </li>
+            <li>
+                <p>
+                    地区选择意向
+                </p>
+                <i></i>
+                <span>
+                    [#if conditionList??]
+                     [#list conditionList as c]
+                     ${c.intent_province_name!}&nbsp;|&nbsp;
+                     [/#list]
+                     [/#if]
+                </span>
+            </li>
+            <li>
+                <p>
+                    院校意向选择
+                </p>
+                <i></i>
+                <span>
+                  [#if conditionList??]
+                   [#list conditionList as c]
+                   ${c.intent_univ_type!}&nbsp;|&nbsp;
+                   [/#list]
+                   [/#if]
+                </span>
+            </li>
+            <li>
+                <p>
+                    专业意向选择
+                </p>
+                <i></i>
+                <span>
+                    [#if conditionList??]
+                     [#list conditionList as c]
+       <!--              略&nbsp;|&nbsp;
+                     <!-- ${c.intent_major!}-->
+                     [/#list]
+                     [/#if]
+   <!--             </span>
+            </li>
+            <li>
+                <p>
+                    冲、稳、保
+                </p>
+                <i></i>
+                <span>
+                	[#if conditionList??]
+                    [#list conditionList as c]
+                    冲：${c.advanced_univ_num!}稳：${c.stable_univ_num!}保:${c.backward_univ_num!}<br>
+                    [/#list]
+                    [/#if]
+                </span>
+            </li>
+            <div class="clearfix"></div>
+        </ul>
+    </div>
+</div>-->
+<div class="pg_pctb">
+<div class="pg_pctb_top"></div>
+<div class="pg_pctb_bg">
+<!--批次循环-->
+[#if batchNumList??]
+[#list batchNumList as pc]
+    <div class="pg_pctb_nr" id="yc1kz_${pc.batch_id}">
+        <div class="pg_pctb_nr_tit">
+            <p>${pc.batch_name!}</p>
+        </div>
+        <div class="pg_pctb_nr_nr">
+             <div class="pg_pctb_nr_nr_con">
+                <div class="pg_pctb_nr_nr_con_tit">
+                    <i></i>
+                    <p>完整度检查<span><u>【概要】</u>根据您的成绩和排名，具备填报批次的资格</span></p>
+
+                    <div class="clearfix"></div>
+                 </div>
+                 <div class="pg_pctb_nr_nr_con_nr">
+                   <table width="100%" border="0" cellspacing="1" cellpadding="0" style="background:#ccc;" id="yc1_${pc.batch_id}">
+                     <tr>
+                       <th align="center" bgcolor="#f0f0f0" scope="col">志愿名称</th>
+                       <th align="center" bgcolor="#f0f0f0" scope="col">院校名称</th>
+                       <th align="center" bgcolor="#f0f0f0" scope="col">志愿可选专业/已选专业数量</th>
+                       <th align="center" bgcolor="#f0f0f0" scope="col">调剂</th>
+                       <th align="center" bgcolor="#f0f0f0" scope="col">检查结果</th>
+                       <th align="center" bgcolor="#f0f0f0" scope="col">${enrollYear1!}</th>
+                       <th align="center" bgcolor="#f0f0f0" scope="col">${enrollYear2!}</th>
+                       <th align="center" bgcolor="#f0f0f0" scope="col">${enrollYear3!}</th>
+                       <th align="center" bgcolor="#f0f0f0" scope="col">风险提示</th>
+                     </tr>
+                     	[#if volAssList??]
+                     	[#list volAssList as v]
+                     	[#if v.batch_id == pc.batch_id]
+                     <tr>
+                       <td align="center" bgcolor="#FFFFFF"> 平行志愿</td>
+                       <td align="center" bgcolor="#FFFFFF"> ${v.univ_name!}</td>
+                       <td align="center" bgcolor="#FFFFFF"> [#if batchNumList??]
+                                                             							[#list batchNumList as c]
+                                                             							[#if c.batch_id == v.batch_id]
+                                                             							${c.major_num!}
+                                                             							[/#if]
+                                                             							[/#list]
+                                                             							[/#if]
+                                                             							/${v.majornum!}</td>
+                       <td align="center" bgcolor="#FFFFFF"> 服从</td>
+                       <td align="center" bgcolor="#FFFFFF"> [#if batchNumList??]
+                                                             		[#list batchNumList as c]
+                                                             		[#if c.batch_id == v.batch_id]
+                                                             		[#if v.majornum?? && c.major_num!??]
+                                                             		[#if c.major_num == 0]
+                                                             		志愿未填写，请按顺序填写
+                                                             		[#elseif c.major_num > v.majornum  ]
+                                                             		<span style="color:red;">可报${c.major_num!}个专业志愿，专业志愿不完整</span>
+                                                             		[#else]
+                                                             		专业志愿设置完整
+                                                             		[/#if]
+                                                             		[/#if]
+                                                             		[/#if]
+                                                             		[/#list]
+                                                             							[/#if]</td>
+                       <td align="center" bgcolor="#FFFFFF" onmousemove="info(this)"> ${v.low_score1!}/${v.low_score_rank1!}</td>
+                       <td align="center" bgcolor="#FFFFFF" onmousemove="info(this)"> ${v.low_score2!}/${v.low_score_rank2!}</td>
+                       <td align="center" bgcolor="#FFFFFF" onmousemove="info(this)"> ${v.low_score3!}/${v.low_score_rank3!}</td>
+                       <td align="center" bgcolor="#FFFFFF" > ${v.psk_set!}</td>
+                     </tr>
+					[/#if]
+					[/#list]
+					[/#if]
+                   </table>
+                 </div>
+             </div>
+             <div class="pg_pctb_nr_nr_con">
+                             <div class="pg_pctb_nr_nr_con_tit" style="margin-bottom: 20px;">
+                                 <i></i>
+                                 <p>院校录取数据解读</p>
+                                 <div class="clearfix"></div>
+                              </div>
+                              <div id="chartjs-line-chart${(pc.batch_id)!}"style="width:100%;height:450px;">
+
+                              </div>
+
+               </div>
+        </div>
+    </div>
+    <div class="pg_pctb_nr" id="yc2kz_${pc.batch_id}">
+    				[#if volAssList??]
+    				[#list volAssList as d]
+    				[#if d.batch_id == pc.batch_id]
+            <div class="pg_pctb_nr_tit">
+                <p>[#if batchNumList??]
+                                           [#list batchNumList as c]
+                                           [#if c.batch_id == d.batch_id]
+                   						${c.batch_name}志愿评估
+                   						 [/#if]
+                   						 [/#list]
+                   						 [/#if]</p>
+            </div>
+            <div class="pg_pctb_nr_nr">
+                <div class="pg_pctb_nr_nr_bg">
+                    <div class="pg_pctb_nr_nr_bg_bq">
+                        <span>${d.univ_name!}</span>
+                    </div>
+                 <div class="pg_pctb_nr_nr_con">
+                    <div class="pg_pctb_nr_nr_con_tit">
+                        <i></i>
+                        <p>相应专业数据</p>
+
+                        <div class="clearfix"></div>
+                     </div>
+                     <div class="pg_pctb_nr_nr_con_nr">
+                       <table width="100%;" border="0" cellspacing="1" cellpadding="0" style="background:#ccc;">
+                         <tr>
+                               <th class="bg"width="70px;">专业代码</th>
+								<th class="bg"width="840px;">专业名称</th>
+								<th class="bg" width="80px;">${enrollYear1!}</th>
+								<th class="bg"width="80px;">${enrollYear2!}</th>
+								<th class="bg"width="80px;">${enrollYear3!}</th>
+                         </tr>
+                         [#if volAssList2??]
+                         [#list volAssList2 as v2]
+                         [#if v2.union_id == d.union_id]
+                         <tr>
+                         	<td align="center" bgcolor="#FFFFFF" width="70px;">【${v2.univOrMajor_code!}】</td>
+                         	<td align="center" bgcolor="#FFFFFF" width="840px;" onmousemove="infoname(this)" style="overflow: hidden;text-overflow:ellipsis;word-break: break-all">
+                         		${v2.univOrMajor_name!}
+                         	</td>
+                         	<td align="center" bgcolor="#FFFFFF" width="80px;" onmousemove="info(this)">
+                         		${v2.low_score1!}/${v2.low_score_rank1!}
+                         	</td>
+                         	<td align="center" bgcolor="#FFFFFF" width="80px;" onmousemove="info(this)">
+                         		${v2.low_score2!}/${v2.low_score_rank2!}
+                         	</td>
+                         	<td align="center" bgcolor="#FFFFFF" width="80px;" onmousemove="info(this)">
+                         		${v2.low_score3!}/${v2.low_score_rank3!}
+                         	</td>
+                         </tr>
+							[/#if]
+							[/#list]
+							[/#if]
+                       </table>
+                     </div>
+                        <div class="pg_pctb_nr_nr_con_tit" style="margin-bottom: 20px;">
+                                <i></i>
+                                <p>专业录取数据解读</p>
+                                <div class="clearfix"></div>
+                             </div>
+                      <div id="myEchartMajor${(d.union_id)!}"style="width:100%;height:450px;">
+
+                      </div>
+                    <div class="pg_pctb_nr_nr_con_tit">
+                        <i></i>
+                        <p>院校介绍</p>
+                        <div class="clearfix"></div>
+                     </div>
+                   <div class="pg_pctb_nr_nr_con_nr [#if d.descr??&&d.descr!=''] xsgd [/#if]" id="js_${d.union_id!}">
+					[#if d.descr??&&d.descr!=""]
+					${(d.descr)!}
+					  [#else]
+					  暂无数据
+					  [/#if]
+                   </div>
+                   	[#if d.descr??&&d.descr!=""]
+                   	<span  class="gd" onclick="qh(this,'js_${d.union_id!}')">展开</span>
+                   	[/#if]
+                   <div class="pg_pctb_nr_nr_con_tit">
+                       <i></i>
+                       <p>大学实力与重点实验室</p>
+                       <div class="clearfix"></div>
+                    </div>
+                  <div class="pg_pctb_nr_nr_con_nr [#if d.kyjg??&&d.kyjg!=''] xsgd [/#if]" id="dxsys_${d.union_id!}">
+					[#if d.kyjg??&&d.kyjg!=""]
+					${(d.kyjg)!}>
+					[#else]
+					 暂无数据
+					[/#if]
+                  </div>
+                  [#if d.kyjg??&&d.kyjg!=""]
+                  <span class="gd" onclick="qh(this,'dxsys_${d.union_id!}')">展开</span>
+                  [/#if]
+                  <div class="pg_pctb_nr_nr_con_tit">
+                      <i></i>
+                      <p>招生章程要点解析</p>
+                      <div class="clearfix"></div>
+                   </div>
+                    <div class="pg_pctb_nr_nr_con_nr [#if d.zszc_yd??&&d.zszc_yd!=''] xsgd [/#if]" id="jx_${d.union_id!}">
+				[#if d.zszc_yd??&&d.zszc_yd!=""]
+					${(d.zszc_yd)!}
+					[#else]
+                  暂无数据
+                   [/#if]
+                    </div>
+                  [#if d.zszc_yd??&&d.zszc_yd!=""]
+                  	<span class="gd" onclick="qh(this,'jx_${d.union_id!}')">展开</span>
+                  [/#if]
+                 </div>
+                 </div>
+            </div>
+
+
+            [/#if]
+            [/#list]
+            [/#if]
+        </div>
+[/#list]
+[/#if]
+<!--<div class="pg_pctb_nr">
+    <div class="pg_pctb_nr_nr">
+
+<div class="pg_pctb_nr_nr_con_tit">
+    <i></i>
+    <p>沃得教育专家总结</p>
+    <div class="clearfix"></div>
+ </div>
+       <div class="pg_pctb_nr_nr_con_nr">
+ [#if volAssList??]
+ 		[#list volAssList as v]
+ 		[#if v.remark??]
+ 		${v.remark!}
+ 		[/#if]
+ 		[/#list]
+[/#if]
+ </div>
+</div>
+</div>-->
+</div>
+</div>
+</div>
+<!--endprint-->
+<!--底部-->
+<!--底部-->
+<div class="mb_db_gd" id="box2">
+    <div class="mb_db_gd_zt">
+        <span>&nbsp;&nbsp;点击按钮&nbsp;&nbsp;</span>
+        <a class="mb_db_gd_an" href="#" onclick="doPrint()" >下载PDF</a>
+    </div>
+    <div class="clearfix"></div>
+</div>
+[#include "../wdedu/include/footer_new.html"/]
+<!--js弧线图-->
+<script src="${base}/r/js/jquery-1.8.3.min.js"></script>
+<script src="${base}/r/js/jspdf.js"></script>
+<script src="${base}/r/wdedu/js/echarts.min.js"></script>
+<script>
+window.onload =function () {
+    var pc=${batchNumListJson!};
+    for(var p=0;p<pc.length;p++){
+     var id=pc[p].batch_id;
+     var ids1= "yc1_"+id;
+       var pd1=document.getElementById(ids1).rows.length;
+  if (pd1==1){
+      var idsKz1="yc1kz_"+id;
+       var idsKz2="yc2kz_"+id;
+      var newMask = document.getElementById(idsKz1);
+       var newMask2 = document.getElementById(idsKz2);
+newMask.parentElement.removeChild(newMask);
+newMask2.parentElement.removeChild(newMask2);
+  }
+    }
+ };
+function qh(th,name) {
+  var names="#"+name;
+if ($(names).hasClass('xsgd')){
+$(names).removeClass();
+$(th).text("折叠")
+}else {
+$(names).addClass('xsgd');
+$(th).text("展开")
+}
+
+}
+	function beforePrint(){
+		$('.indexNav').hide(); //隐藏头部
+		$('.route').hide(); //隐藏面包屑 $('#block-region-side-pre').hide(); //隐藏左侧导航栏
+	}
+
+	function afterPrint(){
+		$('.indexNav').show();
+		$('.route').show();
+	}
+	function infoname($this){
+
+		var title=$this.innerText;;
+
+		$($this).attr("title",title);
+
+	}
+	function info($this){
+
+		var title="分数/排名";
+
+		$($this).attr("title",title);
+
+	}
+	function cst(value) {
+		if (value.length > 5) {
+			return value.substring(0, 10) + "..";
+		} else {
+			return value; }
+			}
+var pc=${batchNumListJson!}
+var d3=${volAssListJson!}
+var v2=${volAssList2Json!}
+var ms="chartjs-line-chart";
+var ms2="myEchartMajor";
+var xname=[];
+var nf=[];var nfs=[];
+var low_score_rank1=[];
+var low_score_rank2=[];
+var low_score_rank3=[];
+var low_score_rank1s=[];
+var low_score_rank2s=[];
+var low_score_rank3s=[];
+var rankJson=${(rankJson)!}
+var rank=[];var ranks=[];
+var d2=${volAssListJson!}
+var univOrMajor_name=[];
+        for(var j = 0; j <d2.length ; j++) {
+            for(var k = 0; k <v2.length ; k++) {
+                    if (v2[k].union_id == d2[j].union_id){
+                         univOrMajor_name.push(cst(v2[k].univOrMajor_name));
+                        nfs.push(d2[j].enroll_year1);
+                        nfs.push(d2[j].enroll_year2);
+                        nfs.push(d2[j].enroll_year3);
+                        if (v2[k].low_score_rank1==null||v2[k].low_score_rank1=="" ){
+                        v2[k].low_score_rank1=0;
+                        }
+                         low_score_rank1s.push(v2[k].low_score_rank1);
+                           if (v2[k].low_score_rank2==null||v2[k].low_score_rank2=="" ){
+                             v2[k].low_score_rank2=0;
+                           } low_score_rank2s.push(v2[k].low_score_rank2);
+                            if (v2[k].low_score_rank3==null||v2[k].low_score_rank3==""){
+                                v2[k].low_score_rank3=0;
+                            }low_score_rank3s.push(v2[k].low_score_rank3);
+                          ranks.push(rankJson);
+                    }
+                    }
+             zy(ms2+d2[j].union_id,univOrMajor_name,nfs,low_score_rank1s,low_score_rank2s,low_score_rank3s,ranks);
+             univOrMajor_name.length=0;nfs.length=0;low_score_rank1s.length=0;low_score_rank2s.length=0;low_score_rank3s.length=0;ranks.length=0;
+            }
+            var newsMc="";
+for(var i = 0; i <pc.length ; i++) {
+      for(var j = 0; j <d3.length;j++) {
+              xname.push(cst(d3[j].univ_name));
+              nf.push(d3[j].enroll_year1);
+              nf.push(d3[j].enroll_year2);
+              nf.push(d3[j].enroll_year3);
+              if (d3[j].low_score_rank1==null||d3[j].low_score_rank1==""){
+        d3[j].low_score_rank1=0;
+              }
+              low_score_rank1.push(d3[j].low_score_rank1);
+              if (d3[j].low_score_rank2==null||d3[j].low_score_rank2==""){
+             d3[j].low_score_rank2=0;
+              }
+              low_score_rank2.push(d3[j].low_score_rank2);
+   if (d3[j].low_score_rank3==null||d3[j].low_score_rank3==""){
+       d3[j].low_score_rank3=0;
+   }
+     low_score_rank3.push(d3[j].low_score_rank3);
+                rank.push(rankJson);
+                newsMc=ms+d3[j].batch_id;
+                     }
+  zj(newsMc,xname,nf,low_score_rank1,low_score_rank2,low_score_rank3,rank);
+      newsMc="";
+
+
+
+   xname.length=0;nf.length=0;low_score_rank1.length=0;low_score_rank2.length=0;low_score_rank3.length=0;rank.length=0;
+
+}
+function zy(id,univOrMajor_name,nfs,low_score_rank1,low_score_rank2,low_score_rank3,ranks){
+    var nf1=nfs[0].toString(); var nf2=nfs[1].toString();var nf3=nfs[2].toString();
+        var sz=0;
+        if (univOrMajor_name.length>4){
+            sz=40
+        }
+    	option = {
+            title: {
+                text: '各年录取最低排名' , textStyle:{
+                                                    color:'#666',        //颜色
+                                                    fontStyle:'normal',     //风格
+                                                    fontWeight:'normal',    //粗细
+                                                    fontSize:14,     //大小
+                                                    align:'center'   //水平对齐
+                                                }
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: [nf1,nf2,nf3,'我的排名'],icon: "rect",   //  这个字段控制形状  类型包括 circle，rect ，roundRect，triangle，diamond，pin，arrow，none
+                                           itemWidth: 50,  // 设置宽度
+                                           itemHeight: 15, // 设置高度
+                                           itemGap: 40 // 设置间距
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,  axisLabel: {
+                 interval:0,  //设置这里
+                  rotate:sz, onZero:false
+               },
+                data: univOrMajor_name
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name: nf1,
+                    type: 'line',
+                    stack: '总量',smooth:true,
+                    data: low_score_rank1s,
+                    lineStyle:{
+                            normal:{
+                             width:3,
+                            }
+                    }
+                },
+                {
+                    name: nf2,
+                    type: 'line',
+                    stack: '总量',smooth:true,
+                    data:low_score_rank2s,
+                   lineStyle:{
+                           normal:{
+                            width:3,
+                           }
+                   }
+                },
+                {
+                    name: nf3,
+                    type: 'line',
+                    stack: '总量',smooth:true,
+                    data:low_score_rank3s,
+                 lineStyle:{
+                            normal:{
+                                width:3,
+                            }
+                    }
+                },
+                {
+                    name: '我的排名',
+                    type: 'line',
+                    stack: '总量',
+                    data: ranks,smooth:true,
+                    lineStyle:{
+                               normal:{
+                                   width:3,
+                               }
+                       }
+                }
+            ]
+        };
+//获取dom容器
+	var myCharts = echarts.init(document.getElementById(id));
+	// 使用刚指定的配置项和数据显示图表。
+    myCharts.setOption(option);
+}
+function zj(id,xname,nf,low_score_rank1,low_score_rank2,low_score_rank3,rank){
+    var nf1=nf[0];
+    var nf2=nf[1];
+    var nf3=nf[2];
+    // var nf1=nf[0].toString();
+    // var nf2=nf[1].toString();
+    // var nf3=nf[2].toString();
+    var sz=0;
+    if (xname.length>4){
+        sz=40
+    }
+    	option = {
+            title: {
+                text: '院校录取数据排名',textStyle:{
+          color:'#666',        //颜色
+          fontStyle:'normal',     //风格
+          fontWeight:'normal',    //粗细
+          fontSize:14,     //大小
+          align:'center'   //水平对齐
+      }
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: [nf1,nf2,nf3,'我的排名'],
+                icon: "rect",   //  这个字段控制形状  类型包括 circle，rect ，roundRect，triangle，diamond，pin，arrow，none
+                itemWidth: 50,  // 设置宽度
+                itemHeight: 15, // 设置高度
+                itemGap: 40 // 设置间距
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,  axisLabel: {
+                 interval:0,  //设置这里
+                  onZero:false   ,rotate:sz,
+               },
+                data: xname
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name: nf1,
+                    type: 'line',
+                    stack: '总量',
+                    data: low_score_rank1,smooth:true,
+                     lineStyle:{
+                              normal:{
+                                width:3,
+                              }
+                      }
+                },
+                {
+                    name: nf2,
+                    type: 'line',
+                    stack: '总量',
+                    data:low_score_rank2,smooth:true,
+                     lineStyle:{
+                                normal:{
+                               width:3,
+                                }
+                        }
+                },
+                {
+                    name: nf3,
+                    type: 'line',
+                    stack: '总量',
+                    data:low_score_rank3,smooth:true,
+                     lineStyle:{
+                                normal:{
+                         width:3,
+                                }
+                        }
+                },
+                {
+                    name: '我的排名',
+                    type: 'line',
+                    stack: '总量',smooth:true,
+                    data: rank,
+                   lineStyle:{
+                              normal:{
+                 width:3,
+                              }
+                      }
+                }
+            ]
+        };
+//获取dom容器
+	var myChart = echarts.init(document.getElementById(id));
+	// 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+}
+function doPrint() {
+print.portrait = false ;//横向打印
+bdhtml=window.document.body.innerHTML;
+sprnstr="<!--startprint-->";
+eprnstr="<!--endprint-->";
+prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+17);
+prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));
+window.document.body.innerHTML=prnhtml;
+window.print();location.reload()
+ }
+</script>
+</body>
+</html>

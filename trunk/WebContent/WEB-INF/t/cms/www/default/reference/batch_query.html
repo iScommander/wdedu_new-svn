@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>批次查询</title>
+				<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+        		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+	<link rel="stylesheet" href="${base}/r/wdedu/css/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+				<script src="${base}/r/wdedu/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+		<script src="${base}/r/cms/front.js"></script>
+		<style>
+
+		        .txtshow{
+                width: auto;
+                height: auto;
+                }
+</style>
+	</head>
+
+[#include "../wdedu/include/header_address.html"/]
+
+
+[#include "../wdedu/include/header_zytb.html"/]
+
+		<!--路径-->
+		<div class="mbxdh_bg">
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">志愿填报</a>&nbsp;&gt; &nbsp; <a href="#">大数据</a>
+		</div>
+	</div>
+	<div class="con">
+    	<div class="kjy_zydq_z f_l">
+                	<div class="kjy_bt">大数据查询</div>
+                	<div class="kjy_list">
+                    	<ul>
+                       <li><a href="${base}/bkck/one_segment_query.jspx"><p >一分一段表</p> <span >&gt;</span><div class="clearfix"></div></a></li>
+                        <li><a href="${base}/bkck/batch_query.jspx"><p style="color:#ff8d00;">批次查询</p> <span style="color:#ff8d00;">&gt;</span><div class="clearfix"></div></a></li>
+                        <li><a href="${base}/bcdsj/universityTeam.jspx"><p>中外合作办学</p> <span>&gt;</span><div class="clearfix"></div></a></li>
+                        <li style="border-bottom: 0px;"><a href="${base}/bcdsj/professionAndLab.jspx"><p>重点学科实验室</p> <span>&gt;</span><div class="clearfix"></div></a></li>
+                        </ul>
+                    </div>
+                </div>
+		<main class=" minheight800 fr" style="width: 990px;">
+			<!--搜索-->
+			<form id="tableForm" class="fillReferenceList" action="batch_query.jspx" method="post" style="margin: 30px 0 0px">
+				<div class="flex-container2">
+					<div class="comboBox">
+						<select id="year" name="year" class="particularYear">
+							<option value="" disabled selected hidden>选择年份</option>
+
+						</select>
+					</div>
+					<div class="comboBox">
+						<select name="province" class="provincewenli" id="province">
+							<option value="" disabled selected hidden>选择省份</option>
+							[#if provinceList?? ]
+							[#list provinceList as p]
+							[#if p.provinceName!="未知"]
+							<option [#if (province?? && p.provinceId==province) ] selected [/#if] value="${p.provinceId!}">${p.provinceName!}</option>
+							[/#if]
+							[/#list]
+							[/#if]
+						</select>
+					</div>
+					<div class="comboBox">
+						<select id="majorType" name="majorType" class="arts-science">
+							<option value="" disabled selected hidden>选择文理科</option>
+							[#if province??]
+							[#if province == 16 || province == 18]
+							<option value="3" [#if majorType?? && majorType=3 ] selected [/#if]>综合改制</option>
+							[#else]
+
+							<option value="1" [#if majorType?? && majorType=1 ] selected [/#if]>文科</option>
+							<option value="2" [#if majorType?? && majorType=2 ] selected [/#if]>理科</option>
+
+							[/#if]
+							[/#if]
+						</select>
+					</div>
+						<button class="btn3 btnColorGreen" style="margin-top: 0px">搜索</button>
+					</div>
+
+				<input type="hidden" id="pageNo" name="pageNo"/>
+			</form>
+			<!--表格   显示20条-->
+			<div>
+				<table class="table deeptable">
+					<tr>
+						<th>序列</th>
+						<th>年份</th>
+						<th>省份</th>
+						<th>文理科</th>
+						<th>名称</th>
+						<th>批次线</th>
+					</tr>
+
+					[#if pagination?? ]
+					[#list pagination.list as a ]
+					[#if a.provinceId != 0]
+					<tr>
+						<td>${a.id!}</td>
+						<td>${a.year!}</td>
+						[#if provinceList??]
+						[#list provinceList as b]
+						[#if a.provinceId==b.provinceId]
+						<td>${b.provinceName!}</td>
+						[/#if]
+						[/#list]
+						[/#if]
+						<td>[#if a.majorTypeId==1 ]文科[#elseif a.majorTypeId==2]理科[#elseif a.majorTypeId==3]综合改制[#else]未设置[/#if]</td>
+						<td>${a.batchName!}</td>
+						<td>${a.score!}</td>
+					</tr>
+					[/#if]
+					[/#list]
+					[/#if]
+				</table>
+			</div>
+
+			<div class="textC paging">
+				<tr>
+					<td colspan="8" style="padding:20px 0;">
+						<table width="100%" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td align="center" class="pn-sp">
+									共 ${pagination.totalCount} 条&nbsp;
+									每页 ${pagination.pageSize} 条&nbsp;
+									当前 ${pagination.pageNo}/${pagination.totalPage} 页 &nbsp;转到第<input type="text" id="_goPs" onfocus="this.select();" onkeypress="if(event.keyCode==13){$('#_goPage').click();return false;}" style="width:50px; border:1px solid #e7e7e7;"/>页
+									<input id="_goPage" type="button" value="转" onclick="_gotoPage($('#_goPs').val());"[#if pagination.totalPage==1] disabled="disabled"[/#if] />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="button" value="首 页" onclick="_gotoPage('1');"[#if pagination.firstPage] disabled="disabled"[/#if]/>
+									<input type="button" value="上一页" onclick="_gotoPage('${pagination.prePage}');"[#if pagination.firstPage] disabled="disabled"[/#if]/>
+									<input type="button" value="下一页" onclick="_gotoPage('${pagination.nextPage}');"[#if pagination.lastPage] disabled="disabled"[/#if]/>
+									<input type="button" value="尾 页" onclick="_gotoPage('${pagination.totalPage}');"[#if pagination.lastPage] disabled="disabled"[/#if]/>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</div>
+
+		</main>
+
+		<div class="clearfix"></div>
+		</div>
+		<!--底部-->
+
+		[#include "../wdedu/include/footer_new.html"/]
+		<!--<footer class="foot">-->
+			<!--<iframe MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no src="../include/footer.html" height="540px" width="100%"></iframe>-->
+		<!--</footer>-->
+
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/jquery.combo.select.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+		<script src="${base}/r/js/myPage.js"></script>
+		<script>
+			//下拉弹出框
+			$(function() {
+				$('select').comboSelect();
+				$(".combo-input").attr("readonly","readonly").css("cursor","pointer")
+			});
+
+            $("#province").change(function () {
+                var province_id = $("#province").val();
+                $("#majorType").empty();
+                $("#majorType").prepend('<option value="" disabled selected hidden>选择文理科</option>')
+                if (province_id == "16" || province_id == "18") {
+                    $("#majorType").append('<option value="3">综合改制</option>')
+                }else {
+                    $("#majorType").append('<option value="1">文科</option>')
+                    $("#majorType").append('<option value="2">理科</option>')
+                }
+                $("#majorType").comboSelect();
+            });
+
+            window.onload=function(){
+                //设置年份的选择
+                var myDate= new Date();
+                var startYear=myDate.getFullYear()-4;//起始年份
+                var endYear=myDate.getFullYear()-1;//结束年份
+                var obj=document.getElementById('year')
+                for (var i=endYear;i>=startYear;i--) {
+                    obj.options.add(new Option(i,i));
+                }
+                $("#year").val(${year!});
+            }
+
+            function _gotoPage(pageNo) {
+                try{
+                    var tableForm = document.getElementById("tableForm");
+                    $('#pageNo').val(pageNo)
+                    tableForm.action="batch_query.jspx";
+                    tableForm.submit();
+                } catch(e) {
+                    alert('_gotoPage(pageNo)方法出错');
+                }
+            }
+		</script>
+	</body>
+</html>

@@ -1,0 +1,940 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>岗位职责</title>
+<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+<script src="http://www.jq22.com/jquery/1.9.1/jquery.min.js"></script>
+<script language="javascript" src="${base}/r/wdedu/js/common.js"></script>
+<script src="${base}/r/wdedu/js/progressBar.js"></script>
+<link  type="text/css" rel="stylesheet" href="${base}/r/wdedu/css/style.css" />
+    <style>
+.zyjs_xzbgz_new{
+margin-top: 130px;
+    width: 360px;
+text-align:right;
+}
+.zyjs_xzbgz_new p{
+    height: 80px;
+    line-height: 80px;
+    font-size:70px;
+    font-weight: bold;
+    color: #ff8d00;
+}
+.zyjs_xzbgz_new span{ font-size: 18px; line-height: 40px; height: 40px; padding-right: 50px;}
+.gwzz_bt_new a{ display: block; width: 208px;float: left;line-height: 30px; padding: 10px;font-size: 16px; color: #666;
+margin-left: 10px;  text-align: center;
+}
+.gwzz_bt_new a:hover{color: #ff8d00; transition:all 0.5s;}
+.gwzz_bt_new{  border-bottom: 1px solid #e2e2e2; }
+    </style>
+</head>
+<body oncopy="alert('对不起，禁止复制！');return false;">
+
+  [#include "../include/header_address.html"/]
+
+	
+	<script type='text/javascript' src='${base}/r/wdedu/js/dropdown.js'></script>
+            <script src="${base}/r/wdedu/js/jquery-1.11.1.min.js" type="text/javascript" ></script>
+    		<script  type="text/javascript">
+    		window.isMoused=false;
+    		function qz(obj){
+    			var text = $(obj).text();
+    			document.getElementById("text").innerText =text;
+    			gb();
+
+    		}
+    		function gb(){
+    			document.getElementById('city_nav').className='city_nav';document.getElementById('city_link').className='city_link';window.isMoused =false;return !1;
+    		}
+    			function dk(){
+    				if(window.isMoused){
+    					 gb()
+    					window.isMoused = false;
+    				   }else{
+    					   document.getElementById('city_link').className='city_link city_hovers'
+    					   window.isMoused =true;
+    				   }
+    			}
+
+            function f() {
+                var a="#fcaa44";
+                var b="#ececec";
+                var w="200px";
+                var h="15px";
+                var div=$(".div");//进度条要插入的地方
+                var barb=function(){
+                    div.each(function(){
+                        var width=$(this).attr('w');
+                        var barbox='<dl class="barbox"><dd class="barline"><div w="'+width+'" class="charts" style="width:0px"><d></d></div></dd></dl>';
+                        $(this).append(barbox);
+                    })
+                }
+
+                var amimeat=function(){
+                    $(".charts").each(function(i,item){
+                        var wi=parseInt($(this).attr("w"));
+                        $(item).animate({width: wi+"%"},1000,function(){//一天内走完
+                            $(this).children('d').html(wi+"%");
+                        });
+                    });
+                }
+                var barbCss=function(a,b){
+                    $(".barbox").css({
+                        "height":h,
+                        "line-height":h,
+                        "text-align":"center",
+                        "color":"#fff",
+                    })
+                    $(".barbox>dd").css({
+                        "float":"left"
+                    })
+                    $(".barline").css({
+                        "width":w,
+                        "background":b,
+                        "height":h,
+                        "overflow":"hidden",
+                        "display":"inline",
+                        "position":"relative",
+                        "border-radius":"8px",
+                    })
+                    $(".barline>d").css({
+                        "position":"absolute",
+                        "top":"0px",
+                    })
+                    $(".charts").css({
+                        "background":a,
+                        "height":h,
+                        "width":"0px",
+                        "overflow":"hidden",
+                        "border-radius":"8px"
+                    })
+                }
+                barb();
+                amimeat();
+                barbCss(a,b);
+            }
+
+
+
+
+    		function stationDetail(id,name) {
+
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: "${base}/searchUnivAndMajor/getStation.jspx",
+                    data:{
+                        "id": id,
+                        "name": name},
+                    success:function (data){
+
+                        var averageSalary = data.salaryCareer.averageSalary;
+                        var oneYearSalary= data.salaryCareer.oneYearSalary;
+                        var threeYearSalary= data.salaryCareer.threeYearSalary;
+                        var fiveYearSalary= data.salaryCareer.fiveYearSalary;
+                        var tenYearSalary =data.salaryCareer.tenYearSalary;
+                        var moretenYearSalary= data.salaryCareer.moretenYearSalary;
+                        var percentList = data.percentList;
+                        var salaryList = data.salaryList;
+                        var educationList = data.educationList;
+                        var regionList = data.regionList;
+                        var professionList = data.professionList;
+
+                        $("#salary").html("")
+                        $(salaryList).each(
+                            function (i, obj1) {
+
+                                var a =' <span>'+obj1.itemName+':</span>\n' +
+                                    '<div style="margin: 28px;text-align: center; width: 200px;font-size: 16px;">'+obj1.itemValue+'</div> <div class="clearfix"></div>';
+                                $("#salary").append(a);
+                            })
+                        $("#salary").append('<div class="clearfix"></div>');
+
+
+                        $("#percent").html("");
+                        $(percentList).each(function (i, obj2) {
+
+                            var b =' <span>'+obj2.itemName+'</span>\n' +
+                                '<div class="div" w="'+obj2.itemValue+'"></div> <div class="clearfix"></div>';
+                            $("#percent").append(b);
+                        })
+                        $("#percent").append('<div class="clearfix"></div>');
+
+                        $("#education").html("");
+                        $(educationList).each(function (i,obj3) {
+                            var c ='  <span>'+obj3.itemName+'</span>\n' +
+                                '<div class="div" w="'+obj3.itemValue+'"></div>';
+                            $("#education").append(c);
+                        })
+                        $("#education").append('<div class="clearfix"></div>');
+
+                        $("#average").html("");
+                        $("#average").append('<p>￥'+averageSalary+'</p>\n' +
+                            '<span>该数据为平均值</span>\n');
+
+                        $("#biao").html("");
+                        $("#biao").append('<div id="gwzz_tb7" style="width:800px;height:335px;"></div>');
+
+                        $("#profession").html("")
+                        $(professionList).each(function (i,obj4) {
+                            var j=i+1;
+                            var d ='<li><div class="zyjs_sz zyjs_sz_bj1 f_l">'+j+'</div><span>'+obj4.careerCatelogName+'</span>\n' +
+                                '<i><b>'+obj4.careerSample+'</b>份样本</i><div class="zyjs_bfz fr">￥'+obj4.careerSalary+'</div>\n' +
+                                '<div class="clearfix"></div></li>';
+                            $("#profession").append(d);
+                        })
+
+                        $("#region").html("")
+                        $(regionList).each(function (i,obj5) {
+                            var j=i+1;
+                            var e = '<li><div class="zyjs_sz zyjs_sz_bj1 f_l">'+j+'</div><span>'+obj5.regionName+'</span>\n' +
+                                '<i>(<b>'+obj5.regionSample+'</b>份样本)</i><div class="zyjs_bfz fr">￥ '+obj5.regionSalary+'</div>\n' +
+                                '<div class="clearfix"></div></li>';
+                            $("#region").append(e);
+                        })
+
+                        f();
+
+                        var myChart = echarts.init(document.getElementById('gwzz_tb7'));
+                        var option={
+                            xAxis: {
+                                type: 'category',
+                                data: ['应届生', '1-3年', '3-5年', '5-10年', '10年以上']
+                            },
+                            yAxis: {
+                                type: 'value',
+                                axisLabel: {
+                                    formatter: function(value,index){
+                                        var value;
+                                        if (value >=1000) {
+                                            value = value/1000+'k';
+                                        }else if(value <1000){
+                                            value = value;
+                                        }
+                                        return value
+                                    }
+
+                                },
+                            },tooltip : {
+                                          trigger: 'axis',
+                                          axisPointer: {
+                                            type: 'cross',
+                                            label: {
+                                              backgroundColor: '#6a7985'
+                                            }
+                                          }
+                                        },
+                            series: [{
+                                data: [oneYearSalary, threeYearSalary, fiveYearSalary, tenYearSalary, moretenYearSalary ],
+                                type: 'line'
+                            }]
+                        };
+                        myChart.setOption(option);
+
+
+
+
+                      /*  $("#detail").append('<div class="zyjs_zyfx_list_kcsgw">\n' +
+                            '<div class="clearfix"></div>\n' +
+                            '</div>\n' +
+                            '<div class="gwzz_jyfx_zt1">\n' +
+                            '<div class="zyjs_zyfx_list_yrdwtj" style="border-top: 1px solid #e2e2e2;">\n' +
+                            '<div class="zzsc f_l">\n' +
+                            '<div class="zzsc_bt">工资情况</div>\n' +
+                            '<div class="zzsc_my" style="margin-left:10px;">')
+
+                        $(salaryList).each(
+                            function (i, obj1) {
+
+                                var a =' <span>'+obj1.itemName+':</span>\n' +
+                                    '<div style="margin: 28px;text-align: center; width: 200px;font-size: 16px;">'+obj1.itemValue+'</div>';
+                                $("#detail").append(a);
+
+                            })
+
+                        $("#detail").append('<div class="clearfix"></div></div></div>\n' +
+                            '<div class="zzsc f_l">\n' +
+                            '<div class="zzsc_bt">工资占比</div>\n' +
+                            '<div class="zzsc_my">');
+
+                        $(percentList).each(function (i, obj2) {
+                            var b =' <span>'+obj2.itemName+'</span>\n' +
+                                '<div class="div" w="obj2.itemValue"></div>';
+                            $("#detail").append(b);
+                        })
+
+                        $("#detail").append(' <div class="clearfix"></div></div></div>\n' +
+                            '<div class="zzsc f_r" style=" border-right:none;">\n' +
+                            '<div class="zzsc_bt">学历要求</div>\n' +
+                            '<div class="zzsc_my">');
+
+                        $(educationList).each(function (i,obj3) {
+                            var c ='  <span>'+obj3.itemName+'</span>\n' +
+                                '<div class="div" w="obj3.itemValue"></div>';
+                            $("#detail").append(c);
+                        })
+
+                        $("#detail").append('<div class="clearfix"></div></div></div>\n' +
+                            '<div class="clearfix"></div>\n' +
+                            '</div>\n' +
+                            '</div>\n' +
+                            '<div class="clearfix"></div>\n' +
+                            '<div class="zyjs_cxtj">\n' +
+                            '<div class="zyjs_zyfx_list_bt">薪酬统计<span>&nbsp;&nbsp;(依该岗位的相关职位薪酬进行统计)</span></div>\n' +
+                            '<div class="zyjs_xzbg">\n' +
+                            '<div class="zyjs_xzbgz_new f_l">\n' +
+                            '<p>￥averageSalary</p>\n' +
+                            '<span>该数据为平均值</span></div>\n' +
+                            '<div class="gwzz_gzjy f_r" style="border: none; width: 800px;height: 335px;">\n' +
+                            '<div id="gwzz_tb5" style="width:800px;height:335px;"></div></div> </div>\n' +
+                            '<div class="clearfix"></div></div>\n' +
+                            ' <div class="gwzz_ts"></div> \n' +
+                            ' <div class="zyjs_jyfb">\n' +
+                            '<div class="zyjs_jyfb_hy f_l">\n' +
+                            '<div class="zyjs_jyfb_hy_bt"><span>行业竞争力分析</span></div>\n' +
+                            '<div class="zyjs_jyfb_hy_list">\n' +
+                            '<ul>');
+
+                        $(professionList).each(function (i,obj4) {
+                            var j=i+1;
+                            var d ='<li><div class="zyjs_sz zyjs_sz_bj1 f_l">'+j+'</div><span>'+obj4.careerCatelogName+'</span>\n' +
+                                '<i><b>'+obj4.careerSample+'</b>份样本</i><div class="zyjs_bfz fr">￥'+obj4.careerSalary+'</div>\n' +
+                                '<div class="clearfix"></div></li>';
+                            $("#detail").append(d);
+                        })
+
+                        $("#detail").append('</ul></div></div>\n' +
+                            '<div class="zyjs_jyfb_dq f_r">\n' +
+                            '<div class="zyjs_jyfb_dq_bt"><span>地区竞争力分析</span></div>\n' +
+                            '<div class="zyjs_jyfb_dq_list">\n' +
+                            '<ul>');
+
+                        $(regionList).each(function (i,obj5) {
+                            var j=i+1;
+                            var e = '<li><div class="zyjs_sz zyjs_sz_bj1 f_l">'+j+'</div><span>'+obj5.regionName+'</span>\n' +
+                                '<i>(<b>'+obj5.regionSample+'</b>份样本)</i><div class="zyjs_bfz fr">￥ '+obj5.regionSalary+'</div>\n' +
+                                '<div class="clearfix"></div></li>';
+                            $("#detail").append(e);
+                        })
+
+                        $("#detail").append('</ul>\n' +
+                            '</div>\n' +
+                            '</div>\n' +
+                            '<div class="clearfix"></div>\n' +
+                            '</div>');*/
+                    }
+                })
+            }
+
+    	</script>
+    
+    [#include "../include/header_zytb.html"/]
+	<div class="mbxdh_bg">
+
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="${base}/zytb/project.jspx">志愿填报</a>&nbsp;&gt; &nbsp; <a href="${base}/searchUnivAndMajor/searchMajor.jspx">看就业</a>
+		</div>  
+	</div>   
+	<div class="zyjs_s">
+    <div class="zyjs_s_n">
+        <div class="yxjs_img_js f_l">
+                <img src="${base}/r/wdedu/images/jiuye.png"/>
+            </div>
+    <div class="zyjs_zt_mc f_l">
+    		<div class="zyjs_s_ys" style="margin-top: 52px;">
+            		<span class="zyjs_s_ys_mc">${careerEntity.careerOnlevelName!}</span>
+                   
+            </div>
+           
+            <!--<div class="zyjs_s_ys_tx">
+            		<span class="zyjs_s_ys_tx1">在所有专业中，就业排名第168</span>
+           			 <span class="zyjs_s_ys_tx1">在工学类中，就业排名第23</span>
+                     
+            </div>-->
+    </div>
+    		
+            <!--<div class="zyjs_dz f_r">
+            		<div class="zyjs_dz_z1 f_l">
+            		<div class="zyjs_dz_z"><img src="${base}/r/wdedu/images/czy_1.png"/></div>
+                    <p>111看好</p>
+                    </div>
+                    <div class="zyjs_dz_z2 f_r">
+            		<div class="zyjs_dz_y"><img src="${base}/r/wdedu/images/czy_2.png"/></div>
+                    <p>111不看好</p>
+                    
+                    </div>
+                    <div class="clearfix"></div> 
+            </div>-->
+            
+            <div class="clearfix"></div>
+  </div>
+  	<div class="gwzz_table">
+	<div class="gwzz_table_title">
+    <div class="on4">职业介绍</div>
+   <!--<div class="gw">岗位职责</div>-->
+    <!--<div class="xgzy_1">相关专业</div>-->
+    <div class="zyhyfx">职业就业分析</div>
+ 	</div>
+	<div class="clearfix"></div>
+  <div class="gwzz_table_con">
+       <div class="gwzz_table_list">
+       <div class="zyjs_table_list_z f_l"> 
+				<div class="zyjs_table_bt"></div>
+            	<div class="zyjs_table_ne">
+                <div class="zyjs_bt3">${careerEntity.careerOnlevelName!}：</div>
+                <span>${careerEntity.careerIntroduce!}</span>
+                </div>
+
+            	<!--<div class="zyjs_table_ne1">
+                <p>
+                <b>专业代码：</b>
+                <i>020100</i>
+                </p>
+                 <p>
+                <b>修业年限：</b>
+                <i>四年</i>
+                </p>
+                <p>
+                <b>授予学位：</b>
+                <i>理学或工学学士</i>
+                </p>
+                                <p>
+                <b>授予学位：</b>
+                <i>理学或工学学士</i>
+                </p>
+                                <p>
+                <b>培养目标：</b>
+                <i>本专业培养具备通信技术、通信系统和通信网等方面的知识,能在通信领域中从事研究、设计、制造、运营以及在国民经济各部门]和国防
+工业中从事开发、应用通信技术与设备工作的高级工程技术人才。</i>
+                </p>
+                <p>
+                <b>培养要求：</b>
+                <i>本专业学生主要学习通信工程的基本理论和技术,受到科学实验与科学思维的训练,具有本学科及跨学科的应用研究与技术开发的基本能力。</i>
+                </p>
+            	</div>-->
+    </div>
+        <div class="zyjs_table_list_s_y_s f_r">
+            	<ul>
+                <span>你可能感兴趣的职业</span>
+                    [#if sameCareer??]
+                    [#list sameCareer as s]
+                <li><a href="${base}/searchUnivAndMajor/careerDatail.jspx?id=${s.careerOnlevelId!}">${s.careerOnlevelName!}</a><div class="f_r"><div class="arrow4"></div></div><div class="clearfix"></div></li>
+                    [/#list]
+                    [/#if]
+                </ul>
+            </div>
+       <div class="clearfix"></div>
+       </div>
+               
+          <!--<div class="gwzz_table_list">
+          	<div  class="gwzz_zwyq">
+            	<div class="gwzz_table_bt">项目经理-职位要求</div>
+            	<div class="gwzz_zwyq_list">
+                	<p>1.范围管理:着眼于“大画面的事务,例如项目的生命周期、工作分工结构的开发、管理流程变动的实施等等。</p>
+                    <p>2.时间管理:要求培养规划技巧。有效的项目管理人员应该知道当项目出现偏离规划时,如何让它重新规划。</p>
+
+					<p>3.成本管理:要求项目管理人员培养经营技巧,处理诸如成本估计、计划预算、成本控制。</p>
+
+				<p>4.人力资源管理:着重于对组内人员的管理,包括冲突的处理、对职员工作动力的促进、高效率的组织结构规划、团队工作和团队形成以及人际关系技巧。</p>
+
+				<p>5.风险管理:该课题检测管理人员在信息不完备的情况下做决定的过程。风险管理模式通常由三个步骤组成:风险确定、风险冲击分析以及风险应对计划。</p>
+
+				<p>6.质量管理:要求项目管理人员熟悉基本的质量管理技术,例如制作和署名质量控制图,经理达到零缺陷等。</p>
+
+				<p>7.合同管理:项目管理人员要求掌握较强的合同管理技巧,例如应能理解定价合同相对于“成本附加’'合同所隐含的风险。他们应了解签约中关键的法律原则。</p>
+
+				<p>8.交流管理:要求项目管理人员能与他们的经理、客户、厂商及属下进行有效的交流。</p>
+
+				<p>9.集成管理:在最终分析中,项目管理人员必须把上述8中能力综合起来并加以协调。</p>
+                
+                </div>
+                <div class="gwzz_table_bt">项目经理-工作内容</div>
+            <div class="gwzz_zwyq_list">
+                	<p>1.范围管理:着眼于“大画面的事务,例如项目的生命周期、工作分工结构的开发、管理流程变动的实施等等。</p>
+                    <p>2.时间管理:要求培养规划技巧。有效的项目管理人员应该知道当项目出现偏离规划时,如何让它重新规划。</p>
+
+					<p>3.成本管理:要求项目管理人员培养经营技巧,处理诸如成本估计、计划预算、成本控制。</p>
+
+				<p>4.人力资源管理:着重于对组内人员的管理,包括冲突的处理、对职员工作动力的促进、高效率的组织结构规划、团队工作和团队形成以及人际关系技巧。</p>
+
+				<p>5.风险管理:该课题检测管理人员在信息不完备的情况下做决定的过程。风险管理模式通常由三个步骤组成:风险确定、风险冲击分析以及风险应对计划。</p>
+
+				<p>6.质量管理:要求项目管理人员熟悉基本的质量管理技术,例如制作和署名质量控制图,经理达到零缺陷等。</p>
+
+				<p>7.合同管理:项目管理人员要求掌握较强的合同管理技巧,例如应能理解定价合同相对于“成本附加’'合同所隐含的风险。他们应了解签约中关键的法律原则。</p>
+
+				<p>8.交流管理:要求项目管理人员能与他们的经理、客户、厂商及属下进行有效的交流。</p>
+
+				<p>9.集成管理:在最终分析中,项目管理人员必须把上述8中能力综合起来并加以协调。</p>
+                
+                </div>
+            
+            </div>
+          
+          
+          
+          </div> -->
+           <!--<div class="gwzz_table_list">
+
+           <div class="gwzz_zyfx_list">
+                                <div class="gwzz_zyfx_list_bt">相关专业</div>
+                         <div class="zyjs_zyfx_list_kcsgw">
+
+                             [#if listMajor??]
+                             [#list listMajor as c]
+                             <a href="#">${c.majorName!}</a>
+                             [/#list]
+                             [/#if]
+
+                             <div class="clearfix"></div>
+                         </div>
+
+                         </div>
+           </div>-->
+          <div class="gwzz_table_list">
+
+
+         			<div class="gwzz_zyfx_sc">
+                        <div class="gwzz_zyfx_list_bt">相关岗位</div>
+                        <div class="gwzz_bt_new">
+                            [#if sataionList??]
+                            [#list sataionList as c]
+                            <a onclick="stationDetail('${c.careerOnlevelId!}','${c.careerName!}')" >${c.careerName!}</a>
+                            [/#list]
+                            [/#if]
+                            <div class="clearfix"></div>
+                        </div>
+                        <!--整体-->
+                        <div id="detail" class="gwzz_zt">
+                        <div class="zyjs_zyfx_list_kcsgw">
+                            <div class="clearfix"></div>
+                        </div>
+                     <div class="gwzz_jyfx_zt1">
+                   <!-- <p>深圳项目经理就业形势分析：招聘待遇，工资20000-29999占比最多，达37%。经验要求，3-5年工作经验要求占比最多，达35%；学历要求，本科学历要求的占比最多，达46%。
+					该数据仅供参考。</p>-->
+                    <div class="zyjs_zyfx_list_yrdwtj" style="border-top: 1px solid #e2e2e2;">
+                            <div class="zzsc f_l">
+                            <div class="zzsc_bt">工资情况</div>
+                            <div id="salary" class="zzsc_my" style="margin-left:10px;">
+                            [#if salaryList??]
+                            [#list salaryList as sl]
+                            <span>${sl.itemName!}:</span>
+                            <div style="margin: 28px;text-align: center; width: 200px;font-size: 16px;">${sl.itemValue!}</div>
+                            [/#list]
+                            [/#if]
+							<!--<div class="div" w="50"></div>
+							<span>2999-20000</span>
+							<div class="div" w="60"></div>
+							<span>4999-20000</span>
+							<div class="div" w="70"></div>
+							<span>6000-7999</span>
+							<div class="div" w="80"></div>
+							<span>3000-4499</span>
+							<div class="div" w="90"></div>-->
+                            <div class="clearfix"></div>
+							</div>
+							</div>
+                            <div class="zzsc f_l">
+                            <div class="zzsc_bt">工资占比</div>
+                            <div id="percent" class="zzsc_my">
+                            [#if salaryPercent??]
+                            [#list salaryPercent as sp]
+                            <span>${sp.itemName!}</span>
+							<div class="div" w="${sp.itemValue!}"></div>
+                            [/#list]
+                            [/#if]
+                            <div class="clearfix"></div>
+							</div>
+							</div>
+                            <div class="zzsc f_r" style=" border-right:none;">
+                            <div class="zzsc_bt">学历要求</div>
+                            <div id="education" class="zzsc_my">
+                            [#if educationList??]
+                            [#list educationList as e]
+                            <span>${e.itemName!}</span>
+							<div class="div" w="${e.itemValue!}"></div>
+                            [/#list]
+                            [/#if]
+                            <div class="clearfix"></div>
+							</div>
+							</div>
+                            <div class="clearfix"></div>
+                            </div>
+                    </div>
+                    <!--<div class="gwzz_zyfx_xql">
+                    <div class="gwzz_zyfx_xql_phb f_l">
+                    	<div class="gwzz_zyfx_xql_bt">招聘需求量地区排行<span>&nbsp;&nbsp;Top10</span></div>
+                                    <div class="gwzz_jyfb_hy_list">
+                                    <ul>
+                                    [#if regionNums??]
+                                    [#list regionNums as r]
+                                    <li><div class="gwzz_sz gwzz_sz_bj1 f_l">${r_index+1}</div><span>${r.regionName!}</span><i><b>${r.regionSample!}</b>个职位</i><div class="clearfix"></div></li>
+									[/#list]
+                                    [/#if]
+                                    </ul>
+                                    </div>
+                              
+                    </div>
+                     <div class="gwzz_zyfx_cxdy_phb f_r">
+                    	<div class="gwzz_zyfx_xql_bt">招聘薪酬待遇地区排行<span>&nbsp;&nbsp;Top10</span></div>
+                        <div class="gwzz_jyfb_hy_list">
+                                    <ul>
+                                        [#if regions??]
+                                        [#list regions as r]
+                                        <li><div class="gwzz_sz gwzz_sz_bj1 f_l">${r_index+1}</div><span>${r.regionName!}</span><i><b>${r.regionSalary!}</b></i><div class="clearfix"></div></li>
+                                        [/#list]
+                                        [/#if]
+                                    </ul>
+                                    </ul>
+                                    </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    </div>
+                    -->
+                    <!--<div class="gwzz_sjtj">
+                    	<div class="gwzz_jyfx_list_bt ">数据统计</div>
+                    	<div class="gwzz_jyfx_sjtj_tb">
+                        <div class="gwzz_jyfx_sjtj_tb1">
+                         <div id="gwzz_tb1" class="f_l" style="width:645px;height:290px;"></div>
+                         <div class="fgx f_l"></div>
+                          <div class="gwzz_jyfx_sjtj_jb f_r">
+                                <div class="gwzz_xzbgz">
+                                		<p>￥5620</p>
+                                        <span>近1年28224份样本/可信度：高</span>
+                                        <b>你觉得该统计数据准确吗？</b>
+                                        <div class="gwzz_pd1 fl">
+                                        <a class="gwzz_pd_a"><div class="gwzz_p f_l">偏低</div><div class="gwzz_img f_r"><img src="${base}/r/wdedu/images/tb_1.png" /></div><div class="clearfix"></div></a>
+                                        <span>611票（78%）</span>
+                                        </div>
+
+                                         <div class="gwzz_pd2 f_l">
+                                        <a class="gwzz_pd_kp"><div class="gwzz_p f_l">靠谱</div><div class="gwzz_img2 f_r"><img src="${base}/r/wdedu/images/tb_2.png" /></div><div class="clearfix"></div></a>
+                                        <span>611票（78%）</span>
+                                        </div>
+
+                                         <div class="gwzz_pd3 f_r">
+                                        <a class="gwzz_pd_pg"><div class="gwzz_p f_l">偏高</div><div class="gwzz_img2 f_r"><img src="${base}/r/wdedu/images/tb_2.png" /></div><div class="clearfix"></div></a>
+                                        <span>611票（78%）</span>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        </div>
+
+
+                        </div>
+
+
+                    </div>-->
+                   <!-- <div class="gwzz_gzjy f_l">
+                    <div class="gwzz_gzjy_bt3">按工作经验统计</div>
+                    
+                    <div id="gwzz_tb2" style="width:580px;height:290px;"></div>
+                    </div>
+                     <div class="gwzz_gzjy f_r">
+                    <div class="gwzz_gzjy_bt4">历年工资变化趋势</div>
+                    
+                    <div id="gwzz_tb3" style="width:580px;height:290px;"></div>
+                    </div>-->
+                    
+                    <div class="clearfix"></div>
+
+                        <div class="zyjs_cxtj">
+                            <div class="zyjs_zyfx_list_bt">薪酬统计<span>&nbsp;&nbsp;(依该岗位的相关职位薪酬进行统计)</span></div>
+                            <div class="zyjs_xzbg">
+
+                                <div id="average" class="zyjs_xzbgz_new f_l">
+                                    <p>￥${sataionSalary.averageSalary!}</p>
+                                    <span>该数据为平均值</span>
+                                    <!-- <a href="#">查看分析报告</a>-->
+
+                                </div>
+
+                                <div id="biao" class="gwzz_gzjy f_r" style="border: none; width: 800px;height: 335px;">
+
+
+                                    <div id="gwzz_tb3" style="width:800px;height:335px;"></div>
+                                </div>
+
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+
+
+                              <div class="gwzz_ts">
+
+          </div>
+          
+          <div class="zyjs_jyfb">
+                         		<div class="zyjs_jyfb_hy f_l">
+                                	<div class="zyjs_jyfb_hy_bt"><span>行业竞争力分析</span></div>
+                                    <div class="zyjs_jyfb_hy_list">
+                                    <ul id="profession">
+                                    [#if professionList??]
+                                    [#list professionList as p]
+                                    <li><div class="zyjs_sz zyjs_sz_bj1 f_l">${p_index+1}</div><span>${p.careerCatelogName!}</span><i><b>${p.careerSample!}</b>份样本</i><div class="zyjs_bfz fr">￥${p.careerSalary!}</div><div class="clearfix"></div></li>
+                                    [/#list]
+                                    [/#if]
+                                    </ul>
+                                    </div>
+                                </div>
+								<div class="zyjs_jyfb_dq f_r">
+                                	<div class="zyjs_jyfb_dq_bt"><span>地区竞争力分析</span></div>
+                                    <div class="zyjs_jyfb_dq_list">
+                                    <ul id="region">
+                                    [#if regions??]
+                                    [#list regions as r]
+                                    <li><div class="zyjs_sz zyjs_sz_bj1 f_l">${r_index+1}</div><span>${r.regionName!}</span><i>(<b>${r.regionSample!}</b>份样本)</i><div class="zyjs_bfz fr">￥${r.regionSalary!}</div><div class="clearfix"></div></li>
+                                    [/#list]
+                                    [/#if]
+                                    </ul>
+                                    </div>
+                                </div>
+                         <div class="clearfix"></div>
+                         </div>
+            </div>
+
+        <!--  <div class="gwzz_ts">
+          <b>重要提示：</b>
+          <p>本行业竞争力数据仅代表深圳项目经理情况，并非全国数据。数据显示：深圳项目经理在“保险”行业工资最高，为￥12500；在“北京”地区工资最高，为￥15060</p>
+          </div> -->
+         <!-- <div class="gwzz_jyfx_list_bt">投票</div>
+          	<div class="gwzz_tp_z f_l">
+            	<b>加班情况调查：161人参加投票</b>
+            	<div class="gwzz_tp_z_an">
+                		<div class="gwzz_tp_z_an1 f_l">
+                        		<a href="#">经常加班</a>
+                                <span>611票(78%)</span>
+                        </div>
+                        <div class="gwzz_tp_z_an2 f_r">
+                        <a href="#">不用或偶尔加班</a>
+                        <span>611票(78%)</span>
+                        </div>
+                	<div class="clearfix"></div>
+                </div>
+                
+            </div>-->
+            <!--<div class="gwzz_tp_y f_r">
+            	            	<b>职业信心调查：继续从事本岗位</b>
+            	<div class="gwzz_tp_z_an">
+                		<div class="gwzz_tp_z_an1 f_l">
+                        		<a href="#">嗯，有信息</a>
+                                <span>611票(78%)</span>
+                        </div>
+                        <div class="gwzz_tp_z_an2 f_r">
+                        <a href="#">准备转行</a>
+                        <span>611票(78%)</span>
+                        </div>
+                	<div class="clearfix"></div>
+                </div>
+            
+            </div>-->
+          <!--  <div class="clearfix"></div>
+             				<div class="gwzz_jyfx_list_bt">相似岗位工资收入</div>
+                <div class="gwzz_xsgw_bg4">
+                <div id="gwzz_tb4" style="width:1200px;height:400px;"></div>
+                
+                </div>-->
+           </div>
+
+
+          </div>
+  </div>
+  
+  
+    </div>	
+    		
+    </div>
+[#include "../include/footer_new.html"/]
+    
+    <script src="${base}/r/wdedu/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="${base}/r/wdedu/js/jquery-tab.js"></script>
+<script type="text/javascript">
+	$(function(){
+		// Calling the plugin
+		$('.tab-group').tabify();
+	})
+	
+
+</script>
+<script src="${base}/r/wdedu/js/echarts.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('gwzz_tb1'));
+        var option={
+    title : {
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },    legend: {
+        orient: 'vertical',
+        left: 'left',
+        data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+    },
+    series : [
+        {
+            name: '访问来源',
+            type: 'pie',
+            radius : '55%',
+            center: ['50%', '60%'],
+            data:[
+                {value:335, name:'直接访问'},
+                {value:310, name:'邮件营销'},
+                {value:234, name:'联盟广告'},
+                {value:135, name:'视频广告'},
+                {value:1548, name:'搜索引擎'}
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+
+		        myChart.setOption(option);
+    </script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('gwzz_tb2'));
+        var option={
+    xAxis: {
+        type: 'category',
+        data: ['应届生', '1-3年', '3-5年', '5-10年', '10年以上']
+    },
+    yAxis: {
+     type: 'value',
+	 axisLabel: {
+               formatter: function(value,index){
+        		var value;
+        		if (value >=1000) {
+        			value = value/1000+'k';
+        		}else if(value <1000){
+        			value = value;
+        		}
+        		return value
+        	}
+
+            },
+    },
+    series: [{
+        data: [5000, 6000, 9000, 11000, 12000 ],
+        type: 'line'
+    }]
+};
+		        myChart.setOption(option);
+    </script>
+        <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('gwzz_tb3'));
+        var option={
+    xAxis: {
+        type: 'category',
+        data: ['应届生', '1-3年', '3-5年', '5-10年', '10年以上']
+    },
+    yAxis: {
+     type: 'value',
+	 axisLabel: {
+               formatter: function(value,index){
+        		var value;
+        		if (value >=1000) {
+        			value = value/1000+'k';
+        		}else if(value <1000){
+        			value = value;
+        		}
+        		return value
+        	}
+
+            },
+    },tooltip : {
+                  trigger: 'axis',
+                  axisPointer: {
+                    type: 'cross',
+                    label: {
+                      backgroundColor: '#6a7985'
+                    }
+                  }
+                },
+    series: [{
+        data: [${sataionSalary.oneYearSalary!}, ${sataionSalary.threeYearSalary!}, ${sataionSalary.fiveYearSalary!}, ${sataionSalary.tenYearSalary!}, ${sataionSalary.moretenYearSalary!} ],
+        type: 'line'
+    }]
+};
+		        myChart.setOption(option);
+    </script>
+        <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('gwzz_tb4'));
+       var option = {
+    dataset: {
+        source: [
+            ['score', 'amount', 'product'],
+            [89.3, 58212, '工程项目经理（深圳）1'],
+            [57.1, 78254, '工程项目经理（深圳）2'],
+            [74.4, 41032, '工程项目经理（深圳）5'],
+            [50.1, 12755, '工程项目经理（深圳）4'],
+            [89.7, 20145, '工程项目经理（深圳）3'],
+            [68.1, 79146, '工程项目经理（深圳）6'],
+            [19.6, 91852, '工程项目经理（深圳）7'],
+            [10.6, 101852, '工程项目经理（深圳）8'],
+            [32.7, 20112, '工程项目经理（深圳）9']
+        ]
+    },
+    grid: {containLabel: true},
+    xAxis: {name: 'amount'},
+    yAxis: {type: 'category'},
+    visualMap: {
+        orient: 'horizontal',
+        left: 'center',
+        min: 10,
+        max: 100,
+        text: ['High Score', 'Low Score'],
+        // Map the score column to color
+        dimension: 0,
+        inRange: {
+            color: ['#fcaa44','#fcaa44',]
+        }
+    },
+    series: [
+        {	
+            type: 'bar'
+			,barWidth : 9,
+			
+            encode: {
+                // Map the "amount" column to X axis.
+                x: 'amount',
+                // Map the "product" column to Y axis
+                y: 'product'
+				
+            },itemStyle: {   
+                //通常情况下
+                normal:{  
+　　　　　　　　　　　　//每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+                    color: function (params){
+                       var colorList = ['rgb(252,170,68)','rgb(252,170,68)','rgb(252,170,68)','rgb(252,170,68)'];
+                        return colorList[params.dataIndex];
+                    }
+                },
+                //鼠标悬停时：
+                emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            },
+        },
+    ]
+};
+
+	myChart.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>填报说明</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css"/>
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css"/>
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css"/>
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css"/>
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/jquery.combo.select.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+		<script src="${base}/r/js/itemsJs/filtrate.js"></script>
+		<script src="${base}/r/js/Sortable.js"></script>
+		<script src="${base}/r/cms/front.js"></script>
+	</head>
+	<style>
+		.evaluationMain .shuoming_xiao img{
+            margin: 0 auto;
+            display: block;
+		}
+		.evaluationMain .explanatory_shuoming{
+			width: 1200px;
+			 margin: 0 auto;
+            display: block;
+			border: 1px solid #f0f0f0;
+		}
+		.evaluationMain .explanatory_shuoming span{
+			text-align: left;
+            display: block;
+			font-size: 16px;
+			text-indent: 2em;
+			padding: 20px 20px 0 20px;
+		}
+		.evaluationMain .explanatory_shuoming button{
+			width: 255px;
+			height: 65px;
+			margin: 0;
+			padding: 0;
+			background: #ff7619;
+			outline: none; 
+			font-size: 28px;
+			color: #fff;
+			border-radius: 50px;
+			margin: 75px auto;
+			display: block;
+		}
+		.biaoti{
+			text-align: center;
+		}
+		.biaoti p{
+			text-align: center;
+			font-family: "方正粗倩_GBK";
+			font-size: 44px;
+			color: #05b8c3;
+			padding: 55px 0 55px 0;
+		}
+		.big_five{
+			width: 1200px;
+			 margin: 0 auto;
+            display: block;
+            display: flex;
+            justify-content: flex-start
+		}
+		.xiao_one{
+			border: 1px solid #f0f0f0;
+			width: 240px;	
+			margin-right: 6px;
+		}
+		.xiao_one img{
+			margin: 8px auto;
+			display: block;
+		}
+		.xiao_one p{
+			display: block;
+			text-align: center;
+			font-family: "Adobe 黑体 Std";
+			color: #333333;
+			font-weight: bold;
+			font-size: 20px;
+			padding-bottom: 20px;
+		}
+		.xiao_one span{
+			display: block;
+			text-align: center;
+			font-size: 16px;
+			color: #87878a;
+			line-height: 38px;
+			padding: 0 2% 0 2%;
+		}
+	</style>
+	<body>
+		[#include "../include/header_kstb.html"/]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container1 width1200">
+				<div><a href="${base}/index.jhtml">首页 </a> &lt;&lt;志愿管理 &lt;&lt;填报说明</div>
+			</div>
+		</div>
+		<!--主体-->
+		<main class="evaluationMain">
+			<div class="shuoming_xiao">
+				<img src="../../img/tupian/xiao_banner.png" alt="" />
+			</div>
+			<div class="explanatory_shuoming">
+				<p>沃得生涯”志愿智能填报”根据往年高校录取情况，
+					结合当年高考录取政策、考生考试情况，
+					为考生推荐各批次志愿学校和专业，供考生和家长参考。
+					考生在正式进行网上志愿填报时，应向相关高校进一步咨询确认，以完善志愿表；</p>
+				[#if isKsConfirm?? && isKsConfirm=='1']
+				<button style="display: block">已同意</button>
+				[#else]
+				<button onclick="javascript:window.location.href='CompleteExplain.jspx?&is_ks_confirm=2'">同意</button>
+				[/#if]
+
+			</div>
+			<div class="biaoti">
+				<p>沃得生涯“智能志愿填报” 特权说明</p>
+			</div>
+			<div class="big_five">
+				<div class="xiao_one">
+					<img src="../../img/tupian/xiao_one.png" alt="" />
+					<p>志愿模拟填报</p>
+					<span>基于真实计划与录取的填报</span>
+					<span>基于排名的智能推荐</span>
+					<span>多条件智能检索</span>
+					<span>风险提示与警告</span>
+					<span>精准的章程解读与匹配</span>
+				</div>
+				<div class="xiao_one">
+					<img src="../../img/tupian/xiao_two.png" alt="" />
+					<p>个性化测试</p>
+					<span>兴趣专业测评</span>
+					<span>文理科选择测评</span>
+					<span>目标院校定位</span>
+					<span>志愿方案评估</span>
+				</div>
+				<div class="xiao_one">
+					<img src="../../img/tupian/xiao_three.png" alt="" />
+					<p>阿里云计算</p>
+					<span>基于真实计划与录取的填报</span>
+					<span>基于排名的智能推荐</span>
+					<span>多条件智能检索</span>
+					<span>风险提示与警告</span>
+					<span>精准的章程解读与匹配</span>
+				</div>
+				<div class="xiao_one">
+					<img src="../../img/tupian/xiao_four.png" alt="" />
+					<p>大数据支撑</p>
+					<span>基于真实计划与录取的填报</span>
+					<span>基于排名的智能推荐</span>
+					<span>多条件智能检索</span>
+					<span>风险提示与警告</span>
+					<span>精准的章程解读与匹配</span>
+				</div>
+				<div class="xiao_one">
+					<img src="../../img/tupian/xiao_five.png" alt="" />
+					<p>全国覆盖支撑</p>
+					<span>基于真实计划与录取的填报</span>
+					<span>基于排名的智能推荐</span>
+					<span>多条件智能检索</span>
+					<span>风险提示与警告</span>
+					<span>精准的章程解读与匹配</span>
+				</div>
+			</div>
+			
+		</main>
+		<!--底部-->
+		<!--<iframe MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no src="../../footer.html" height="360px" width="100%"></iframe>-->
+
+		[#include "../include/footer.html"/]
+	</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>职业大全</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<script src="${base}/r/cms/front.js"></script>
+		<style>
+			.floatTop20{
+				clear:both;
+				padding-top:20px;
+			}
+			.point{
+				cursor:pointer;
+			}
+			#professionList ul.crosswise li.active{
+				color:#fac73c;
+			}
+		</style>
+	</head>
+	<body>
+		[#if kstype?? && kstype=='1']
+		[#include "../include/header_kstb.html"/]
+		[#else]
+		[#include "../include/header_zy.html"/]
+		[/#if]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container1 width1200">
+				<div><a href="../../index.html">首页 </a> &lt;&lt;报考大数据 &lt;&lt;职业大全</div>
+			</div>
+		</div>
+		<!--主体-->
+		<main class="professionBooksMain width1200">
+			<div class="professionBooksMain-menu">
+				<div class="tab-content">
+					<div class="tab-pane in active" id="professionList">
+						<p>职业大全</p>
+						<ul class="nav nav-tabs menu-list">
+							[#if resultMap??]
+							[#list resultMap?keys as item]
+							<li class="point">
+								<a onclick="showClass('${item}')" data-toggle="tab">${item}</a>
+							</li>
+							[/#list]
+							[/#if]
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="professionBooksMain-content">
+				<div class="tab-content">
+					<div class="tab-pane in active" id="professionList_1">
+						<ul></ul>
+					</div>
+				</div>
+				<div class="floatTop20" id="summary"></div>
+			</div>
+		</main>
+		<!--底部-->
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/jquery.combo.select.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+		<script type="text/javascript">
+            function showClass(key) {
+                $.ajax({
+                    url:"professionalBooks.jspx",
+                    type:'post', //GET
+                    async:true,
+					dataType : 'json',
+                    data:{
+                        class1 : key
+                    },
+                    success : function (data) {
+                        var self = $("#professionList_1 ul");
+                        //清空ul
+                        self.empty();
+                        //添加li
+                        for(var c1 in data){
+                            var html = "";
+                            html += "<li><div class='subtitle'><span></span><p>" + c1 + "</p></div>";
+                            html +="<div><ul class='crosswise'>";
+                            var data_c1 = data[c1];
+                            for (var i = 0; i < data_c1.length; i++) {
+                                html += "<li class='point' onclick='get_career("+data_c1[i]['id']+")'>"+ data_c1[i]['career'] +"</li>";
+                            }
+                            html += "</ul></div></li>";
+                            self.append(html);
+						}
+                    }
+                });
+            }
+
+            function get_career(id) {
+                $.ajax({
+                    url: "professionalBooks.jspx",
+                    type: 'post', //GET
+                    async: true,
+                    dataType: 'json',
+                    data: {
+                        id: id
+                    },
+					success : function (data) {
+                        $("#summary").empty();
+                        var summary = data['summary'] || "";
+                        $("#summary").append(summary);
+                    }
+                });
+            }
+		</script>
+	</body>
+</html>

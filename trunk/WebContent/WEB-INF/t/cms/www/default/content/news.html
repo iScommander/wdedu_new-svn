@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>${title} - ${site.name} - Powered by JEECMS</title>
+<meta content="${content.tagStr!}" http-equiv="keywords" />
+<meta content="${content.description!}" http-equiv="description" />
+
+<script src="${resSys}/jquery.js" type="text/javascript"></script>
+<script src="${resSys}/front.js" type="text/javascript"></script>
+
+<link type="text/css" rel="stylesheet" href="/${res}/css/index.css" />
+
+<!--[if lt IE 9]> 
+<script src="/${res}/js/html5shiv.min.js"></script>
+<script src="/${res}/js/respond.min.js"></script>
+<![endif]-->
+
+<script type="text/javascript">
+$(function() {
+Cms.checkPerm("${base}","${content.id}");
+Cms.collectCsi("${base}","collectCsiDiv","collect_csi","${content.id}");
+Cms.attachment("${base}","${content.id}","${content.attachments?size}","attach");
+Cms.viewCount("${base}","${content.id}");
+Cms.siteFlow("${base}", location.href, document.referrer,"${site.config.flowSwitch?string}");
+});
+</script>
+
+<script type="text/javascript"> 
+jQuery(document).ready(function($){ 
+$('.content-comment').click(function(){
+	$('html,body').animate({scrollTop:$('#comments-text').offset().top}, 1000)
+	$('#comments-text').focus();
+	});  
+});
+
+$(function(){
+	//设置一个定时器，为BUTTON点击事件用
+	var timer=null;
+	var number1=0;
+
+	//文本输入时改变
+	$('#comments-text').keyup(function(){
+		if(!$(this).val()==''){
+			$('.submit-on').attr("class", "submit-out");
+		}else{
+			$(".submit-out").attr("class", "submit-on");
+		}
+	});
+	
+	//处理输入的内容是文字还是字母的函数
+	function getLength(str){
+		return String(str).replace(/[^\x00-\xff]/g,'aa').length;
+	};
+	
+});
+</script>
+
+<head>
+<body>
+[#include "../include/top.html"/]
+[#include "../include/header.html"/]
+<div class="main container clearfix">
+  <div class="news-content flex-item" style="width:70%;float:left">
+    <section class="">
+      <h1 class="center">${content.title}</h1>
+      <div class="content-inf center">发布时间：${content.releaseDate}&nbsp;&nbsp;作者：${content.author!'本站编辑'}&nbsp;&nbsp;来源：${content.origin!'本站原创'}&nbsp;&nbsp;浏览次数：<span id="views"></span>
+        </span>
+      </div>
+      <div class="center">
+        [#if channel.allowShare]
+          [#include "inc_share.html"/]
+        [/#if]
+      </div>
+      <div class="content-txt">
+        ${txt!}
+      </div>
+    </section>
+  </div>
+  <div class="flex-item SearchForHot" style="width:15%;float:left">
+    <p>
+      <img src="${base}/r/img/huo.png" alt="" />
+      <span>相关链接</span>
+    </p>
+    <ul>
+      [@cms_content_list typeId='1' count=10  channelId='${channel.id!}' dateFormat='yyyy-MM-dd']
+      [#list tag_list as a]
+      <li>
+        <img src="${base}/r/img/reddot.png" alt=""/>
+        <a href="${a.url}" target="_blank">[@text_cut s=a.title len=8 append='..'/]</a>
+      </li>
+      [/#list]
+      [/@cms_content_list]
+    </ul>
+  </div>
+</div>
+</body>
+<style>
+  .nav {
+    padding-top: 0px;!important;
+  }
+  .flex-item1 {
+    margin: 0 9px;!important;
+  }
+  .news-content {
+    background-color: #eee;
+  }
+  .news-content section {
+    width: 95%;
+    margin: 20px auto 50px;
+    background-color: white;
+    padding: 10px 20px;
+    box-sizing: border-box;
+  }
+  .SearchForHot {
+    margin-left: 10%;
+    width: 15%;
+    height: 400px;
+    background: #eef2f5;
+    padding: 10px;
+  }
+  .SearchForHot ul li {
+    margin: 17px 0;
+  }
+  .container {
+    width: 82%;
+  }
+  .center{
+    text-align: center;
+  }
+  .width1200 {
+    width: 1360px !important;
+  }
+</style>
+</html>

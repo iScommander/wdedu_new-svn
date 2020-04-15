@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>讲座活动管理</title>
+		<link rel="stylesheet" href="${base}/r/sign/jedate.css" />
+		<link rel="stylesheet" href="${base}/r/sign/jzhd-manage.css" />
+		<script src="${base}/r/sign/jquery-1.11.3.min.js"></script>
+		<script src="${base}/r/sign/city.min.js"></script>
+		<style type="text/css">
+			.btn-search{right: 370px;}
+		</style>
+	</head>
+	<body class="iframe-body">
+		<h4 class="con-title">讲座活动列表</h4>
+		
+	  <form action="${base}/active/activeList.jspx?type=ckjz" id="form"   method="post">	
+	   <input type="hidden"  name="pageNo">	
+		<div class="search-wrap gps">
+			<div class="search-item">
+				<label>讲座时间:</label>
+				<span><input type="text" class="date-icon" id="inpstart"  name="active_start_time"  placeholder="开始日期" readonly="readonly"></span>
+				<span class="line">--</span>
+				<span><input type="text" class="date-icon" id="inpend"  name="active_end_time"  placeholder="结束日期" readonly="readonly" ></span>
+			</div>
+			<div class="search-item">
+				<label>选择省份:</label>
+				<span class="select-wrap">
+					<select id="pro" name="province" >
+						<option value="none">--请选择--</option>
+					</select>
+				</span>
+			</div>
+			<div class="search-item">
+				<label>选择市区:</label>
+				<span class="select-wrap">
+					<select id="city" name="city"  disabled>
+						<option value="none">--请选择--</option>
+					</select>
+				</span>
+				
+			</div>
+			<button type="submit" class="btn-search">查询</button>			
+		</div>
+		
+		<table>
+			<thead>
+				<tr>
+					<th>勾选</th>
+					<th>序号</th>
+					<th>省份</th>
+					<th>市区</th>
+					<th>讲座序号</th>
+					<th>讲座主题</th>
+					<th>主讲老师</th>
+					<th>时间</th>
+					<th>地点</th>
+					<th>状态</th>
+					<th>收费</th>
+					
+					<th>操作</th>
+				</tr>
+			 </thead>
+			<tbody>
+			[#if pagination??]
+			[#list pagination.list as list]
+				<tr>
+					<td><i class="checkbox" onclick="delectids('${list.id!}')"></i></td>
+				    <td>${list.id!}</td>
+					<td>${list.province!}</td>
+					<td>${list.city!}</td>
+					<td>${list.active_Id!}</td>
+					<td>${list.theme!}</td>
+					<td>${list.lecturer1!}</td>
+					<td>${list.active_time!}</td>
+					<td>${list.address!}</td>
+					<td>已开启</td>
+					<td>${list.free!}</td>
+				
+					<td>
+						<!--<button type="button" onclick="showFilter('#release',this)">发布</button>-->
+						<a href="${base}/active/updateActiveIndex.jspx?activeid=${list.id!}">发布</a>  						
+						<!--<button type="button">结束</button>-->
+						<a href="${base}/active/updateActiveIndex.jspx?activeid=${list.id!}">编辑</a>  
+						<a href="${base}/active/copyActive.jspx?activeid=${list.id!}">复制</a>  
+						  
+						<button type="button" onclick="showFilter('#delate','${list.id!}',this)">删除</button>
+					</td>
+				</tr>
+				[/#list]
+				[/#if]
+			</tbody>
+		</table>
+		<div class="gps">	
+			<button type="button" onclick="showFilter2('#delate',this)" class="btn-delates"><i class="bg-del-icon"></i>批量删除</button>
+		</div>
+		<ol class="paging">
+				<div class="paging" >
+						<button type="button"  onclick="_gotoPage('1');">首页</button>
+						<button type="button"  onclick="_gotoPage('${pagination.prePage}');">上一页</button>
+						<button type="button"  onclick="_gotoPage('${pagination.nextPage}');">下一页</button>
+						<button type="button"  onclick="_gotoPage('${pagination.totalPage}');">尾页</button>		
+						<button type="button"  value="${pagination.pageNo}">当前页:${pagination.pageNo}</button>																				
+						<button type="button"  value="${pagination.totalPage}">总页数:${pagination.totalPage}</button>														
+			</div>	
+		</ol>
+		</form>
+		<div class="fixed-fliter">
+			<div class="pop-wrap" id="release">
+				<h4 class="pop-title">发布讲座活动</h4>
+				<div class="pop-text">确定发布该讲座活动？</div>
+				<div class="table-center">
+					<button type="button" class="btn btn-pop-yes">确定</button>
+					<button type="button" class="btn btn-pop-no" onclick="hideFilter()">取消</button>
+				</div>
+			</div>
+
+			<div class="pop-wrap" id="delate">
+				<h4 class="pop-title">删除讲座活动</h4>
+				<div class="pop-text">确定删除该讲座活动？</div>
+				<div class="table-center">
+				   <form  action="${base}/active/deletehtml.jspx"   method="post">	
+				   <input type="hidden" name="activeid" value="">
+					<input  type="submit" value="确定"  class="btn btn-pop-yes" >				
+					<button type="button" class="btn btn-pop-no" onclick="hideFilter()">取消</button>
+				   </form>
+				</div>
+			</div>
+
+		</div>
+	</body>
+	<script src="${base}/r/sign/jquery.jedate.min.js"></script>
+	<script type="text/javascript">
+	//分页
+	 function _gotoPage(pageNo) {
+			try{
+				$("input[name='pageNo']").val(pageNo);
+				$('#form').submit();
+			} catch(e) {
+				alert('_gotoPage(pageNo)方法出错');
+			}
+		};
+		$(function() {
+			//省市
+			function getSeectList(obj,data){
+				var html = '<option value="none">--请选择--</option>';
+				$.each(data, function(i,val) {
+					html += '<option value="'+val.id+'">'+val.value+'</option>';
+				});
+				$(obj).html(html);
+			};
+			getSeectList('#pro',prolist);
+			$('#pro').on('change',function(){
+				var pro = $(this).val();
+				if(pro=='none'){
+					alert('请选择省份，否则无法选择市区！');
+					$('#city').attr('disabled','disabled');		
+					$('#quxian').attr('disabled','disabled');
+					return false;
+				};
+				console.log(pro);
+				var cityData = [];
+				$.each(citylist, function(j,val) {
+					if(val.parentId==pro){
+						cityData.push(citylist[j]);
+					}
+				});
+				getSeectList('#city',cityData);
+				$('#city').removeAttr('disabled');
+			});
+			$('#city').on('change',function(){
+				var city = $(this).val();
+				if(city=='none'){
+					alert('请选择市区！');
+					return false;
+				};
+			});
+			//时间选择
+			var start = {
+			    format: 'YYYY-MM-DD',
+			    onClose: false, 
+			    minDate: $.nowDate({DD:0}),
+			    okfun: function(obj){
+			        end.minDate = obj.val;
+			        $("#inpend").removeAttr("disabled");
+			        endDates();
+			    }
+			};
+			var end = {
+			    format: 'YYYY-MM-DD',
+			    onClose: false,
+			    minDate: $.nowDate({DD:0}),
+			};
+			function endDates() {
+			    end.trigger = false;
+			    $("#inpend").jeDate(end);
+			};
+			$('#inpstart').jeDate(start);
+			$('#inpend').jeDate(end);
+			//勾选事件
+			$('.checkbox').click(function(){
+				if($(this).hasClass('bg-check-icon')){
+					$(this).removeClass('bg-check-icon');
+				}else{
+					$(this).addClass('bg-check-icon');
+				}
+			});
+		})
+		function showFilter(id,activeid){
+		
+			$("input[name='activeid']").val(activeid);
+			$(".fixed-fliter").fadeIn();
+			$(id).show();
+		};
+		function hideFilter(id){
+			$(".fixed-fliter").fadeOut();
+			$('.pop-wrap').hide();
+		};
+		
+
+	</script>
+</html>

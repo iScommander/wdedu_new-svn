@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<title>社会支持因素测评</title>
+		<link rel="stylesheet" href="${resSys}/res/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="${resSys}/res/css/amazeui.css" />
+		<link rel="stylesheet" href="${resSys}/res/css/head-footer.css" />
+		<link rel="stylesheet" href="${resSys}/res/css/cs.css" />
+		<script src="${resSys}/res/js/jquery-1.11.3.min.js"></script>
+		<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+       [#include "../wdedu/include/header_address.html"/]
+		[#include "../wdedu/include/header_xgkxk.html"/]
+		<section class="gps ">
+			<img src="${resSys}/res/img/dlsy/shzc-banner.jpg" />
+		</section>
+		<section class="center-block">
+		<form action="sociaSupportReport.jspx" id="sociaSupportReport" method="post">
+			<input type="hidden" id="ajaxData" name="ajaxData" value="">
+			<input type="hidden" id="A" name="A" >
+			<input type="hidden" id="B" name="B" >
+			<input type="hidden" id="C" name="C" >
+			<p class="cs-p"> 这套题目将考察你未来在某一个专业领域可能面临的社会支持或阻碍。在回答这套题目之前，请你根据自己的愿望，在下面的空格中写下一个未来想要学习的专业。如果你还没有想到什么想要从事的专业，或许你可以先阅读一下前两个量表的结果报告，从中得到一些灵感哦！如果你已经有了心仪的专业，不妨先继续下面的测试，最后再一起查看结果也不迟！
+我未来想要学习的专业是<input type="text" name="majorname" id="majorName" placeholder="例：心理学" />
+</p>
+</form>
+			<div class="bbx-ks-wrap gps box-shadow">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">开始测试</button>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+					<ul>
+					[#list onelist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id="${'1_'+(list_index+1)}" typeid="${list.value1}" typecode="A" />
+								<label for="${'1_'+(list_index+1)}">${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'11_'+(list_index+1)}" typeid="${list.value2!}" typecode="A" />
+								<label for="${'11_'+(list_index+1)}">${list.option2!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'111_'+(list_index+1)}" typeid="${list.value3!}" typecode="A" />
+								<label for="${'111_'+(list_index+1)}">${list.option3!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'1111_'+(list_index+1)}" typeid="${list.value4!}" typecode="A" />
+								<label for="${'1111_'+(list_index+1)}">${list.option4!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'1111_'+(list_index+1)}" typeid="${list.value5!}" typecode="A" />
+								<label for="${'1111_'+(list_index+1)}">${list.option5!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${onelist?size!}</span>第一部分
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(onelist?size!100)}%"></div>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">第二部分</button>
+				</div>
+			</div>
+			<!-- <p>第二部分</p>
+			<li>社会人脉资源</li> -->
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<ul>
+					[#list twolist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id="${'2_'+(list_index+1)}" typeid="${list.value1}" typecode="B" />
+								<label for="${'2_'+(list_index+1)}">${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'22_'+(list_index+1)}" typeid="${list.value2!}" typecode="B" />
+								<label for="${'22_'+(list_index+1)}">${list.option2!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'222_'+(list_index+1)}" typeid="${list.value3!}" typecode="B" />
+								<label for="${'222_'+(list_index+1)}">${list.option3!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'2222_'+(list_index+1)}" typeid="${list.value4!}" typecode="B" />
+								<label for="${'2222_'+(list_index+1)}">${list.option4!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'22222_'+(list_index+1)}" typeid="${list.value5!}" typecode="B" />
+								<label for="${'22222_'+(list_index+1)}">${list.option5!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${twolist?size!}</span>第二部分
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(twolist?size!100)}%"></div>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">第三部分</button>
+				</div>
+			</div>
+			<!-- <p>第三部分</p>
+			<li>经济宽限程度</li> -->
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<ul>
+					[#list threelist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id="${'3_'+(list_index+1)}" typeid="${list.value1}" typecode="C" />
+								<label for="${'3_'+(list_index+1)}">${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'33_'+(list_index+1)}" typeid="${list.value2!}" typecode="C" />
+								<label for="${'33_'+(list_index+1)}">${list.option2!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'333_'+(list_index+1)}" typeid="${list.value3!}" typecode="C" />
+								<label for="${'333_'+(list_index+1)}">${list.option3!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'3333_'+(list_index+1)}" typeid="${list.value4!}" typecode="C" />
+								<label for="${'3333_'+(list_index+1)}">${list.option4!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'33333_'+(list_index+1)}" typeid="${list.value5!}" typecode="C" />
+								<label for="${'33333_'+(list_index+1)}">${list.option5!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${threelist?size!}</span>第三部分
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(threelist?size!100)}%"></div>
+				</div>
+			</div>
+			<!--提交-->
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" id="tj"  onclick="tj(this)" class="am-btn bg-green abs-center">提交测试</button>
+				</div>
+			</div>
+		
+		</section>
+		[#include "../wdedu/include/footer_new.html"/]
+	</body>
+	<script type="text/javascript" src="${resSys}/res/js/head.js"></script>
+	<script type="text/javascript">
+		var localStatus = {
+			"id":1,
+			"subId":0
+		};
+		statusActive(localStatus);
+		var index=1,count=2;
+		function showContent(obj){
+			index = 1;
+			count = 2;
+			$(obj).parents(".bbx-ks-wrap").addClass("am-hide");
+			$(obj).parents(".bbx-ks-wrap").next().removeClass("am-hide");
+			$(obj).parents(".bbx-ks-wrap").next().find("ul").children("li:first-child").removeClass("am-hide");
+		};
+		var A=0,B=0,C=0;
+		function radioClick(obj){
+			var typeid = $(obj).attr("typeid");
+			var typecode = $(obj).attr("typecode"); 
+			if(typecode=='A'){
+				A=A+Number(typeid);
+			};
+			if(typecode=='B'){
+				B=B+Number(typeid);
+			};
+			if(typecode=='C'){
+				C=C+Number(typeid);
+			};
+			var indexCounts = parseInt($(obj).parents("ul").next().find(".bbx-counts").text());
+			console.log('indexCounts',indexCounts)
+			var widths='';
+			setTimeout(function(){
+				widths =count * (100/indexCounts)+"%";
+				$(obj).parents("li").addClass("am-hide");
+				if(index < indexCounts){
+					$(obj).parents("li").next().removeClass("am-hide");
+					$(obj).parents("ul").next().find(".bbx-index").text(index+1);
+					$(obj).parents(".bbx-xgcs-ks").next().find(".am-progress-bar").css("width",widths);
+					index+=1;
+					count+=1;
+				}else{
+					index==1;
+					$(obj).parents(".bbx-ks-wrap").addClass("am-hide");
+					$(obj).parents(".bbx-ks-wrap").next().removeClass("am-hide");;
+				};
+			},300);
+			console.log('A',A,'B',B,'C',C)
+		};
+		$('input[type="radio"]').on('click',function(event){
+			event.stopPropagation();
+			radioClick(this);
+			$(this).unbind('click');
+		});
+		function tj(obj){
+			var majorName=document.getElementById("majorName").value; 
+			if( majorName== "" || majorName == null || majorName == undefined){
+				alert("请输入你未来想要学习的专业!")
+			}else{
+				$("input[name='A']").val(A);
+				$("input[name='B']").val(B);
+				$("input[name='C']").val(C);
+				$('#sociaSupportReport').submit();
+			}
+			
+		}
+	</script>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>公益讲座</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link href="${base}/r/wdedu/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css"/>
+    <script src="${base}/r/wdedu/css//bootstrap.min.js"></script>
+    <script type='text/javascript' src='${base}/r/wdedu/js/fudong.js'></script>
+    <link rel="stylesheet" href="${base}/r/wdedu/css/cui.css"/>
+    <script src="${base}/r/js/jQuery.js"></script>
+    <script src="${base}/r/js/bootstrap.min.js"></script>
+    <script src="${base}/r/js/jquery.combo.select.js"></script>
+    <script src="${base}/r/js/itemsJs/common.js"></script>
+    <style>
+        .nice-select {
+
+            width: 245px;
+            padding: 0 10px;
+            height: 44px;
+            line-height: 44px;
+            border: 1px solid #cacaca;
+            border-radius: 5px 5px 5px 5px;
+            position: relative;
+            margin-left: 20px;
+            margin-top: 14px;
+            background: #fff url(../images/xzk_3.png) no-repeat 200px center;
+
+        }
+
+        .nice-select input {
+            display: block;
+            width: 100%;
+            height: 44px;
+            line-height: 44px;
+            border: 0;
+            outline: 0;
+            background: none;
+            padding-left: 15px;
+        }
+
+        .nice-select ul {
+
+            width: 100%;
+            display: none;
+            position: absolute;
+            left: 0px;
+            top: 42px;
+            overflow: hidden;
+            background-color: #fff;
+            max-height: 150px;
+            overflow-y: auto;
+            border-top: 0;
+            -moz-box-shadow: 0 0 5px #879094;
+            -webkit-box-shadow: 0 0 5px #879094;
+            box-shadow: 0 0 5px #879094;
+            z-index: 9999;
+        }
+
+        .nice-select ul li {
+            height: 38px;
+            line-height: 38px;
+            overflow: hidden;
+            margin: 0 20px 0 0;
+            cursor: pointer;
+            color: #999;
+            font-size: 14px;
+            display: block;
+        }
+
+        .nice-select ul li.on {
+            background-color: #e0e0e0;
+        }
+
+    </style>
+</head>
+<body>
+[#include "../wdedu/include/header_address.html"/]
+[#include "../wdedu/include/header_msdjt.html"/]
+
+<div class="mbxdh_bg">
+    <div class="mbxdh">
+        <a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">名师大讲堂</a>&nbsp;&gt; &nbsp; <a href="#">公益讲座</a>
+    </div>
+</div>
+<div class="con">
+    <div class="gyjz_ss" style="border:1px solid #e2e2e2;caret-color: transparent">
+        <form action="queryJiang.jspx" method="POST">
+            <ul>
+                <li>
+                    <div class="gyjz_ss_z f_l">
+                        <h4>讲座地点&gt;</h4>
+                    </div>
+                    <div class="gyjz_ss_y f_l">
+                        [#if tBaseProvinceList??]
+                        [#list tBaseProvinceList as ts]
+                             <div class="gyjz_suo_an f_l">
+                                 <input id="checkbox_dq_${ts_index!}" value="${ts!}" style="height: 24px"
+                                        name="citys" type="checkbox" hidden
+                                        [#if cityss?? && cityss?contains('${ts!}')]
+                                 checked [/#if]>
+                                 <label for="checkbox_dq_${ts_index!}" style="height: 24px">${ts!}</label>
+                           </div>
+                        [/#list]
+                        [/#if]
+                        <div class="clearfix">
+                            <input id="citys" name="citys" type="hidden" >
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+                <li style="line-height:51px;">
+                    <div class="gyjz_ss_z2 f_l">
+                        <h4 >讲座类型&gt;</h4>
+                    </div>
+                    <div class="gyjz_ss_y f_l">
+                        [#if tScActiveDetailList1??]
+                        [#list tScActiveDetailList1 as tsc]
+                            <div class="gyjz_suo_an f_l">
+                             <input id="checkbox_lx_${tsc_index!}" style="height: 24px"
+                                    name="types" type="radio" hidden value="${tsc!}"
+                                    [#if typess?? && typess?contains('${tsc!}')]
+                             checked [/#if]>
+                             <label for="checkbox_lx_${tsc_index!}" style="height: 24px">${tsc!}</label>
+                       </div>
+                        [/#list]
+                        [/#if]
+                    </div>
+                    <div class="clearfix">
+                        <input id="types" name="types" type="hidden">
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+                <li>
+                    <div class="gyjz_ss_y3 f_l">
+                        <h4>讲座时间&gt;</h4>
+                    </div>
+                    <div class="gyjz_ss_y3_lj f_l">
+
+                        <div class="nice-select f_l" name="nice-select">
+                            <input type="text" value="最近一周" readonly style="cursor: pointer;"/>
+                            <ul>
+                                <li data-value="1">最近一周</li>
+                                <li data-value="2">最近一月</li>
+                            </ul>
+                        </div>
+                        <div class="gyjz_ss_y4 f_l">
+                            <div class="gyjz_ss_y4_kk f_l">
+                            </div>
+                            <span class="f_l">我对沃得教育讲座感兴趣，有最新的讲座随时通知我</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </li>
+
+            </ul>
+            <div class="clearfix"></div>
+            <div class="gyjz_ss_y5">
+                <button type="button" id="btn_clear_form" class="gyjz_ss_y4_qc" style="line-height:normal;">全部清除
+                </button>
+                <button id="submit" class="gyjz_ss_y5_qc btn btnColorYellow" style="line-height:normal;border-radius: 5px;">立即搜索</button>
+            </div>
+        </form>
+    </div>
+    <div class="expertLecturesMainTable" style="margin-top: 30px;border-left: 1px solid #e2e2e2;border-right: 1px solid #e2e2e2;border-bottom: 1px solid #e2e2e2; ">
+        <table class="table deeptable">
+            <tr>
+                <th>省市</th>
+                <th>讲座类型</th>
+                <th>讲座主题</th>
+                <th>时间/建议参与对象</th>
+                <th>报名</th>
+            </tr>
+            [#if activeList??]
+            [#list activeList as list]
+            <tr>
+                <td>${list.city!}</td>
+                <td>${list.active_type!}</td>
+                <td>
+                    <p class="beyondHidden35">${list.theme!}</p>
+                </td>
+                <td>${list.active_time!}/高一、高二家长</td>
+                <td>
+                    [#if list.active_start_time??]
+                    [#if list.active_start_time gt .now]
+                    <button class="btn btnColorGreen" style=" 	background: #52c0d3;" onclick="baoming('${list.active_id!}',${list.id}!)">立即报名</button>
+                    [#else]
+                    <button class="btn">活动已结束</button>
+                    [/#if]
+                    [/#if]
+                </td>
+            </tr>
+            [/#list]
+            [/#if]
+        </table>
+    </div>
+
+</div>
+<div class="mb_db_gd" id="box2">
+    <div class="mb_db_gd_zt">
+        <span>"天南海北"&nbsp;&nbsp;挑大学</span>
+        <a class="mb_db_gd_an">立即报名</a>
+    </div>
+    <div class="clearfix"></div>
+</div>
+</div>
+
+<p>&nbsp;</p>
+[#include "../wdedu/include/footer_new.html"/]
+
+<script>
+    $(document).ready(function () {
+        $(".checkbox_1").click(function () {
+            if ($(this).hasClass('checked')) {
+                $(this).removeClass('checked');
+                $(this).parent().find("span").removeAttr("style");
+                $(this).parent().find("span").css('color', '#333333')
+                var cityss = $("#citys").val();
+                var city = $(this).next().text();
+                var str = "," + city;
+                var test = cityss.replace(str, "");
+                $("#citys").val(test);
+
+            } else {
+                $(this).addClass('checked');
+                $(this).parent().find("span").css('color', '#ff8d00')
+                var cityss = $("#citys").val();
+                var city = $(this).next().text();
+                var test = cityss + "," + city;
+                $("#citys").val(test);
+            }
+        })
+
+        $(".checkbox_2").click(function () {
+            if ($(this).hasClass('checked')) {
+                $(this).removeClass('checked');
+                $(this).parent().find("span").removeAttr("style");
+                $(this).parent().find("span").css('color', '#333333')
+                var typess = $("#types").val();
+                var type = $(this).next().text();
+                var str = "," + type;
+                var test = typess.replace(str, "");
+                $("#types").val(test);
+
+            } else {
+                $(this).addClass('checked');
+                $(this).parent().find("span").css('color', '#ff8d00')
+                var typess = $("#types").val();
+                var type = $(this).next().text();
+                var test = typess + "," + type;
+                $("#types").val(test);
+            }
+            // var aaa  = $(".aaaa").text();
+            // alert(aaa);
+        })
+
+        $(".gyjz_ss_y4_kk").click(function () {
+            if ($(this).hasClass('fxk')) {
+                $(this).removeClass('fxk');
+            } else {
+                $(this).addClass('fxk');
+            }
+        })
+    });
+</script>
+
+<script>
+    $('[name="nice-select"]').click(function (e) {
+        if ($(this).find('ul').is(':hidden')) {
+            $('[name="nice-select"]').find('ul').hide();
+            $(this).find('ul').show();
+            e.stopPropagation();
+        } else {
+            $(this).find('ul').hide();
+            e.stopPropagation();
+        }
+    });
+
+    $('[name="nice-select"] li').hover(function (e) {
+        $(this).toggleClass('on');
+        e.stopPropagation();
+    });
+
+    $('[name="nice-select"] li').click(function (e) {
+        var val = $(this).text();
+        $(this).parents('[name="nice-select"]').find('input').val(val);
+        $('[name="nice-select"] ul').hide();
+        e.stopPropagation();
+    });
+
+    $(document).click(function () {
+        $('[name="nice-select"] ul').hide();
+    });
+</script>
+<script>
+    //全部清理
+    $("#btn_clear_form").click(function () {
+            var citys = document.getElementsByName("citys");
+            for(i=0;i<citys.length;i++){
+                citys[i].checked = false;
+            }
+            var types = document.getElementsByName("types");
+            for(i=0;i<types.length;i++){
+                types[i].checked = false;
+            }
+    })
+    $('select').comboSelect();
+
+    function baoming(activeid, id) {
+        window.location.href = "${base}/sign/activedetail.jspx?activeid=" + activeid + "&&id=" + id ;
+    }
+
+</script>
+</body>
+</html>

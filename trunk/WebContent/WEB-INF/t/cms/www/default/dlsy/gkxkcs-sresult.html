@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<title>高考选科测评报告--社会支持因素</title>
+		<link rel="stylesheet" href="${resSys}/res/css/head-footer.css" />
+		<link rel="stylesheet" href="${resSys}/res/css/cs.css" />
+		<style type="text/css">
+			mark{background: none;}
+			.num-year{left: 568px;top: 5px;font-size: 25px;}
+			.num-name,.num-date{color: #fff;font-size: 20px;}
+			.num-name{left: 545px;bottom: 36%;}.num-date{left: 492px;bottom: 27%;}
+			.title{position: absolute;top: 100px;left: 450px;color: #fff;font-size: 30px;letter-spacing: 4px;}
+			.title mark{color: #8bc145;position: relative;}
+			.mark{position: absolute;top: 140px;left: 444px;background: rgba(144,144,145,0.6);color: #fff;font-size: 18px;letter-spacing: 2px;padding: 4px 8px;}
+			.dec{position: absolute;left: 468px;width: 305px;height: 2px;background: rgba(255,191,36,0.6);}
+			.dec1{top: 86px;}.dec2{top: 186px;}
+			.dec:before,.dec:after{position: absolute;content: '';width: 2px;height: 8px;background: rgba(255,191,36,0.6);}
+			.dec:before{left: 0;}.dec:after{right: 0;}
+			.dec1:before,.dec1:after{top: 0;}.dec2:before,.dec2:after{bottom: 0;}
+			.sec-one{padding-top: 70px;padding-bottom: 40px;background-image: url(${resSys}/res/img/dlsy/gkxkcs-s1.jpg);background-size: 100% 100%;}
+			.one-in{width: 770px;margin-left: 110px;background: #fff;padding-bottom: 35px;}
+			.left-icon{width: 30px;height: 30px;border-radius: 50%;background: rgba(255,180,21,0.8);-webkit-transform: rotate(15deg);-moz-transform: rotate(15deg);-ms-transform: rotate(15deg);transform: rotate(15deg);}
+			.left-icon:after{position: absolute;content: '';width: 20px;height: 20px;background: #c5c7cd;border-radius: 50%;top: 10px;right: -10px;}
+			.one-in .left-icon{position: absolute;top: -15px;left: -15px;}
+			.one-in h3{display: table;margin: -30px auto 20px;line-height: 30px;background: #fcc041;color: #fff;padding: 0 1em;}
+			.one-in p{text-indent: 2em;padding: 15px 50px 0;text-align: justify;font-size: 16px;line-height: 1.3em;color: #666;}
+			.one-in p mark{color: #fcc041;font-weight: 600;}
+			.sec-two{background: #7b94ab;}
+			.sj1{width: 0;height:0;margin: 0 auto;border-top: 25px solid #efefef;border-left: 25px solid transparent;border-right: 25px solid transparent;}
+			.sj2{width: 0;height:0;margin: 0 auto;border-bottom: 25px solid #efefef;border-left: 25px solid transparent;border-right: 25px solid transparent;margin-top: 50px;}
+			.sec-two h4{text-align: center;font-size: 18px;color: #fff;padding: 35px 0 30px;}
+			.two-in{width: 1000px;margin: 0 auto;font-size: 16px;}
+			.two-nav{position: relative;display: table;margin-left: 50px;padding: 0 1em;line-height: 30px;color: #fff;font-size: 17px;margin-bottom: 20px;}
+			.nav1{background: #92c638;}.nav2{background: #ffb316;}.nav3{background: #21bdea;}
+			.two-nav i{position: absolute;width: 46px;height: 54px;top: -10px;left: -55px;}
+			.two-nav span{padding-left: 1.5em;}
+			.nav1 i{background: url(${resSys}/res/img/dlsy/gkxkcs-i1.png);}
+			.nav2 i{background: url(${resSys}/res/img/dlsy/gkxkcs-i2.png);}
+			.nav3 i{background: url(${resSys}/res/img/dlsy/gkxkcs-i3.png);}
+			.two-p{position: relative;border-top:2px solid #fff;border-bottom:2px solid #fff;padding: 10px 15px;margin-bottom: 40px;}
+			.two-p:before,.two-p:after,.two-p p:after,.two-p p:before{position: absolute;content: '';width: 2px;height: 20px;background: #fff;}
+			.two-p:before{left: 0;top: 0;}.two-p:after{right: 0;top: 0;}
+			.two-p p{background: #fff;padding: 10px 15px;text-align: justify;position: relative;line-height: 1.4em;}
+			.two-p p:after,.two-p p:before{bottom: -10px;}
+			.two-p p:before{left: -15px;}.two-p p:after{right: -15px;}
+			.sec-end{padding: 45px 0;background-image: url(${resSys}/res/img/dlsy/gkxkcs-s2.jpg);background-size: 100% 100%;}
+			.end-in{position: relative;z-index: 10;}
+			.end-in,.end-abs{width: 1000px;background: #fff;margin: 0 auto;padding: 15px;}
+			.end-in div{width: 960px;margin: 0 auto;border:2px solid #dcdcdc;padding: 20px 30px 40px;}
+			.end-in h4{display: table;margin: 0 auto;padding: 10px;font-size: 16px;}
+			.end-in h4 i{position: absolute;top: 0;left: -40px;}
+			.end-in p{text-align: justify;text-indent: 2em;font-size: 16px;line-height: 1.4em;padding-top: 15px;}
+			.end-abs{position: absolute;width: 990px;height: 274px;transform: rotate(2deg);left: 120px;top: 47px;z-index: 1;}
+			.two-l,.two-r{position: absolute;width: 42px;height: 232px;}
+			.two-l{background: url(${resSys}/res/img/dlsy/gkxkcs-sl.png);left: -2px;bottom: -1px;}
+			.two-r{background: url(${resSys}/res/img/dlsy/gkxkcs-sr.png);top: -1px;right: -2px;}
+			.btn{display: table;background: #2fceb3;margin: 20px auto;padding: .55em 1em;font-size: 15px;}
+			.mb_db_gd_zt {
+                text-align: center;
+                caret-color: transparent;
+            }.mb_db_gd {
+                 height: 64px;
+             }
+             .mb_db_gd {
+                 height: 95px;
+                 background-color: #5e6b9b;
+                 opacity: 0.9;
+                 position: fixed;
+                 z-index: 1;
+                 bottom: 0;
+                 padding-left: 15px;
+                 width: 100%;
+             }.mb_db_gd span {
+                  color: #FFF;
+                  font-size: 28px;
+                  text-align: center;
+                  line-height: 95px;
+              }.mb_db_gd_an {
+                   width: 200px;
+                   height: 48px;
+                   line-height: 48px;
+               }
+               .mb_db_gd_an {
+                   display: inline-block;
+                   background-color: #ff8d00;
+                   width: 244px;
+                   height: 60px;
+                   font-size: 24px;
+                   color: #FFFFFF;
+                   border-radius: 5px;
+                   line-height: 60px;
+                   text-align: center;
+                   margin-left: 20px;
+                   cursor: pointer;
+               }
+			</style>
+		<script src="${resSys}/res/js/jquery-1.11.3.min.js"></script>
+	</head>
+	<body >
+	<div class="center-block">
+		<section class="gps">
+			<img src="${resSys}/res/img/dlsy/gkxkcs-s.jpg" alt="" />
+			<section class="center-block abs-center" style="height: 100%;">
+				<h1 class="title">社会支持因素量表报告</h1>
+				<mark class="mark">Social support factor scale Report</mark>
+				<h1 class="num-year">${date?substring(0,4)}</h1>
+				<h2 class="num-name">姓名：${qstResult.userName!}</h2>
+				<h2 class="num-date">日期：${date!}</h2>
+				<div class="dec dec1"></div>
+				<div class="dec dec2"></div>
+			</section>
+		</section>
+			[#if haveTianZhiyuan??&&haveTianZhiyuan=="true"]
+		<section class="sec-one">
+			<div class="one-in gps box-shadow">
+				<div class="left-icon"></div>
+				<h3>社会支持因素测量</h3>
+				<p>本报告将帮助你解读测评中的最后一个量表——社会支持因素量表的结果。在近年来的国内外的研究中，越来越多的研究结果表明一些社会环境因素对于个人专业和职业发展的影响并不低于兴趣、人格这些个人因素，甚至有时影响还更强烈。在我们的测验中，我们和你一起探索了将会影响你专业发展的最重要的三种社会环境因素，在考虑你将来的专业选择和职业发展方向时，请务必不要忽略它们！</p>
+				<p>还记得你在测试时所写下的未来想要进入的专业吗？你未来想要进入的专业是：<mark>${majorname!}</mark>。这份报告是对你在进入<mark>${majorname!}</mark>专业学习和发展之后将会面临的社会支持和阻碍的预测和解读。</p>
+			</div>
+		</section>
+		<section class="sec-two gps">
+			<div class="two-l"></div>
+			<div class="two-r"></div>
+			<div class="sj1"></div>
+			<h4>测试结果如下</h4>
+			<div class="two-in">
+				<h3 class="two-nav nav1"><i></i>社会情感支持<span>${reportMap.A!} (${qstResult.rstC_1!})</span></h3>
+				<div class="two-p">
+					<p>${reportMap.Aavlue!}</p>
+				</div>
+				<h3 class="two-nav nav2"><i></i>社会人脉资源<span>${reportMap.B!} (${qstResult.rstC_2!})</span></h3>
+				<div class="two-p">
+					<p>${reportMap.Bavlue!}</p>
+				</div>
+				<h3 class="two-nav nav3"><i></i>经济宽限程度<span>${reportMap.C!} (${qstResult.rstC_3!})</span></h3>
+				<div class="two-p">
+					<p>${reportMap.Cavlue!} </p>
+				</div>
+			</div>
+			<div class="sj2"></div>
+		</section>
+		<section class="sec-end gps">
+			<div class="end-in box-shadow">
+				<div>
+					<h4 class="gps"><i class="left-icon"></i>结语</h4>
+					<p>通过这份报告，你已经深入地探索了自己的职业兴趣和人格、以及未来在专业中可能会遇到的支持或阻碍，相信你对于将要学习什么专业、以及未来的职业方向，已经有了一些自己的想法了吧。</p>
+				<p>职业选择和规划并没有一个固定的模式，它是一个动态的过程，并不是单一的一个因素或几个因素就可以决定的。因此，在摸索自己的职业发展方向的过程中，我们应该不断加深对自己的认识——反省自身的优势和弱点、了解自身的兴趣和风格，并且不断探索我们周围环境中可触碰到的资源和可获得的支持。只有这样，我们才能将自己的发展规划做到最优！</p>
+				</div>
+			</div>
+			<div class="end-abs box-shadow"></div>
+			[#if is.isallbg?? && is.isallbg='yes' ]  <a href="${base}/evaluation/allcs.jspx" class="btn" target="_blank" >查看合并测试报告</a> [/#if]
+		</section>
+		[/#if]
+		</div>
+		[#if haveTianZhiyuan??&&haveTianZhiyuan=="false"]
+		<div class="mb_db_gd" id="box2">
+            <div class="mb_db_gd_zt">
+                <span>&nbsp;&nbsp; 购买VIP后可查看详细数据&nbsp;&nbsp;点击</span>
+                <a class="mb_db_gd_an" href="${base}/NewsDisplay/testSxk.jspx">购买</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        [/#if]
+	</body>
+</html>

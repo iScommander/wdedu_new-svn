@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<title>高考选科测评报告</title>
+		<link rel="stylesheet" href="${resSys}/res/css/head-footer.css" />
+        <link rel="stylesheet" href="${resSys}/res/css/cs.css" />
+        <link rel="stylesheet" href="${resSys}/res/css/allresult.css" />
+		<script src="${resSys}/res/js/jquery-1.11.3.min.js"></script>
+        <script src="${resSys}/res/js/echarts.min.js"></script>
+        <style>
+        .mb_db_gd_zt {
+            text-align: center;
+            caret-color: transparent;
+        }.mb_db_gd {
+             height: 64px;
+         }
+         .mb_db_gd {
+             height: 95px;
+             background-color: #5e6b9b;
+             opacity: 0.9;
+             position: fixed;
+             z-index: 1;
+             bottom: 0;
+             padding-left: 15px;
+             width: 100%;
+         }.mb_db_gd span {
+              color: #FFF;
+              font-size: 28px;
+              text-align: center;
+              line-height: 95px;
+          }.mb_db_gd_an {
+               width: 200px;
+               height: 48px;
+               line-height: 48px;
+           }
+           .mb_db_gd_an {
+               display: inline-block;
+               background-color: #ff8d00;
+               width: 244px;
+               height: 60px;
+               font-size: 24px;
+               color: #FFFFFF;
+               border-radius: 5px;
+               line-height: 60px;
+               text-align: center;
+               margin-left: 20px;
+               cursor: pointer;
+           }
+
+</style>
+	</head>
+	<body >
+	<div class="center-block">
+    <section class="gps" id="banner">
+        <img src="${resSys}/res/img/dlsy/all-banner.png" alt="" />
+        <h1>${date?substring(0,4)}</h1>
+    </section>
+    <div id="holad">
+		<section class="gps wrap-top">
+			<img src="${resSys}/res/img/dlsy/gkxkcs-result.png" alt="" />
+			<section class="center-block abs-center" style="height: 100%;">
+				<h1 class="title"><mark>Holland职业兴趣</mark>测评报告</h1>
+				<mark class="mark">Holland professional interest assessment report</mark>
+				<h1 class="num-year">${date?substring(0,4)}</h1>
+				<h2 class="num-name">姓名：${qstResult.user_name!}</h2>
+				<h2 class="num-date">日期：${date!}</h2>
+			</section>
+		</section>
+		<section class="gps sec-one">
+			<div class="sec-title">
+				<i class="shape"></i>
+				<span class="gps">Holland职业兴趣测量</span>
+			</div>
+			<p class="info"><mark>Holland职业兴趣测量</mark>是在职业心理学界以及职业咨询实践中运用的最为广泛的心理测验。在国内外的大量研究中，该测验对于个人职业生涯发展的预测性一再得到证实。这份报告将基于Holland职业兴趣测量理论分析和探讨你的职业兴趣和风格，并且进一步帮助你了解可能会适合你学习的专业。</p>
+			<p class="info"> 现在，请你花一点时间从头到尾仔细地阅读这份报告。通过这份测验报告，你将对你自己专业选择和职业发展的可能性拥有更加深刻的认识。Holland职业兴趣测评报告主要包含三方面的内容：</p>
+			<div class="list"><i></i>对你职业兴趣的探讨和分析</div>
+			<div class="list"><i></i>不同大学专业和你职业兴趣的匹配程度</div>
+			<div class="list"><i></i>对你专业选择的建议</div>
+			<div class="secone-right"></div>
+			<div class="qy">前言</div>
+			<div class="qy-en">Perface</div>
+			<div class="qy-line"></div>
+		</section>
+		[#if haveTianZhiyuan??&&haveTianZhiyuan=="true"]
+		<section class="gps">
+			<div class="sec-title">
+				<i class="shape"></i>
+				<span class="gps">我的职业风格</span>
+			</div>
+			<div class="sectwo-wrap gps">
+				<div class="sectwo"></div>
+				<div class="bar-wrap">
+					<div class="sectwo-bar bar1">
+						<div class="bar-r" style="width: ${txmap.R!}%;">${txmap.R!}%</div>
+					</div>
+					<div class="sectwo-bar bar2">
+						<div class="bar-i" style="width: ${txmap.I!}%;">${txmap.I!}%</div>
+					</div>
+					<div class="sectwo-bar bar3">
+						<div class="bar-a" style="width: ${txmap.A!}%;">${txmap.A!}%</div>
+					</div>
+					<div class="sectwo-bar bar4">
+						<div class="bar-s" style="width: ${txmap.S!}%;">${txmap.S!}%</div>
+					</div>
+					<div class="sectwo-bar bar5">
+						<div class="bar-e" style="width: ${txmap.E!}%;">${txmap.E!}%</div>
+					</div>
+					<div class="sectwo-bar bar6">
+						<div class="bar-c" style="width: ${txmap.C!}%;">${txmap.C!}%</div>
+					</div>
+				</div>
+				<div class="sectwo-right box-shadow">
+					<ol>
+						<li><i class="bar-r"></i><mark>实践型(R)</mark>realistic</li>
+						<li><i class="bar-i"></i><mark>研究型(I)</mark>investigative</li>
+						<li><i class="bar-a"></i><mark>艺术型(A)</mark>artistic</li>
+						<li><i class="bar-s"></i><mark>社会型(S)</mark>social</li>
+						<li><i class="bar-e"></i><mark>企业型(E)</mark>enterprise</li>
+						<li><i class="bar-c"></i><mark>常规型(C)</mark>conventional</li>
+					</ol>
+				</div>
+				<div class="sectwo-sjr"></div>
+			</div>
+			<div class="sectwo-sjl1"></div>
+			<div class="sectwo-sjl2"></div>
+			<div class="sectwo-line"></div>
+		</section>
+		<section class="zyxq-chart">
+			<h2>如下图,您的职业兴趣倾向是<span>${qstResult.rst_A!}</span></h2>
+			<div id="Echart" class="chart-xqcs"></div>
+			<section class="center">
+				<div class="sec-three gps">
+					<div class="sec-three-nav">结果分析</div>
+					<p class="sec-result">职业风格并不是仅仅由一种单一的职业兴趣构成的。相反的，不同种类型的职业风格往往同时存在于一个人身上，只是各有强弱。 通过测验结果，我们总结出了你身上相对明显的三种职业兴趣类型，它们分别是：<mark>实践型(R)、研究型(I)、企业型(E)</mark>。这三种职业兴趣特质将在你今后的职业发展道路中起主导作用。</p>
+					<div class="result-item gps">
+						<div class="result-item-nav">${one.what!}</div>
+						<p>${one.describe!}</p>
+					</div>
+					<div class="result-item gps">
+						<div class="result-item-nav">${twp.what!}</div>
+						<p>${twp.describe!}</p>
+					</div>
+					<div class="result-item gps">
+						<div class="result-item-nav">${three.what!}</div>
+						<p>${three.describe!}</p>
+					</div>
+				</div>
+				<div class="pd">
+					<h4>我的专业匹配表</h4>
+					<div class="h-line"></div>
+					<p class="sec-result">通过专业的Holland职业兴趣匹配方法，我们将你的职业兴趣和现有的大学专业进行了系统的匹配。下表罗列出了各个专业和你的职业兴趣的具体匹配程度。匹配程度按照高低被分为三类：<mark>高度匹配、中度匹配、低度匹配</mark></p>
+					<ol class="pp">
+						<li><i class="bar-r"></i><mark>高度匹配</mark></li>
+						<p>表示从职业兴趣的角度来看，这个专业非常适合你。你具备这个专业所要求的学习风格和能力，如果进入这个专业学习，你将能很好地适应。</p>
+						<li><i class="bar-i"></i><mark>中度匹配</mark></li>
+						<p>表示你对这个专业有一定的兴趣，但还并不很高。如果进入这个专业学习，你可能需要花一些时间来调整你自己学习和做事风格，以适应这个专业的环境和要求。</p>
+						<li><i class="bar-a"></i><mark>低度匹配</mark></li>
+						<p>表示你对这个专业的兴趣很低，也不具备这个专业所要求的学习和做事风格。如果坚持在这个专业发展下去，你也许最终会感到迷茫和痛苦。</p>
+					</ol>
+					<div class="table-nav">&nbsp;匹配程度结果(不同匹配程度可用不同颜色表示)</div>
+					<table class="table-a">
+						<thead>
+							<tr>
+								<th>学科门类</th>
+								<th>专业类别</th>
+								<th>匹配分数</th>
+								<th>匹配程度</th>
+							</tr>
+						</thead>
+						<tbody>
+							[#if majorMatchingList??]
+								[#list majorMatchingList as items]
+									[#if items.list??]
+										[#list items.list as item]
+										<tr>
+											[#if item.aid??]
+												<td rowspan="${item.arow!}" class="table-row">${item.aname!}</td>
+											[/#if]
+											[#if item.bid?? && item.degree=="高度匹配"]
+												<td class="first [#if item_index == item.last]tr-gap[/#if]">${item.bname!}</td>
+												<td class="first [#if item_index == item.last]tr-gap[/#if]">${item.fraction!}</td>
+												<td class="first [#if item_index == item.last]tr-gap[/#if]">${item.degree!}</td>
+											[/#if]
+											[#if item.bid?? && item.degree=="中度匹配"]
+												<td [#if item_index == item.last]class="tr-gap"[/#if]>${item.bname!}</td>
+												<td [#if item_index == item.last]class="tr-gap"[/#if]>${item.fraction!}</td>
+												<td [#if item_index == item.last]class="tr-gap"[/#if]>${item.degree!}</td>
+											[/#if]
+											[#if item.bid?? && item.degree=="低度匹配"]
+												<td class="last [#if item_index == item.last]tr-gap[/#if]">${item.bname!}</td>
+												<td class="last [#if item_index == item.last]tr-gap[/#if]">${item.fraction!}</td>
+												<td class="last [#if item_index == item.last]tr-gap[/#if]">${item.degree!}</td>
+											[/#if]
+										</tr>
+										[/#list]
+									[/#if]
+								[/#list]
+							[/#if]
+						</tbody>
+					</table>
+					<div class="table-nav">&nbsp;建议和结语</div>
+					<p class="jy">现在，你已经了解了你的职业兴趣风格，并且知道了从职业兴趣的角度来看，哪些专业适合你，而哪些不适合你。为了让你有一个更加直观的了解，我们罗列出了和你最为匹配的前十个专业：</p>
+					<table class="table-b">
+						<thead>
+							<tr>
+								<th>匹配排名</th>
+								<th>专业类别</th>
+								<th>匹配分数</th>
+								<th>匹配程度</th>
+							</tr>
+						</thead>
+						<tbody>
+							[#list tenList as list]
+							<tr>
+								<td>${list_index+1!}</td>
+								<td>${list.bname!}</td>
+								<td>${list.fraction!}</td>
+								<td>${list.degree!}</td>
+							</tr>
+						[/#list]
+						</tbody>
+					</table>
+					<p class="warn">注意：职业兴趣只是在个人专业选择和职业规划过程中所需要参考的其中一个方面，并不是全部的依据标准哦</p>
+				</div>
+			</section>
+			<input type="hidden" id="report_A" name="report_A" value="${qstResult.retA_A!}">
+			<input type="hidden" id="report_C" name="report_C" value="${qstResult.retA_C!}">
+			<input type="hidden" id="report_E" name="report_E" value="${qstResult.retA_E!}">
+			<input type="hidden" id="report_I" name="report_I" value="${qstResult.retA_I!}">
+			<input type="hidden" id="report_S" name="report_S" value="${qstResult.retA_S!}">
+			<input type="hidden" id="report_R" name="report_R" value="${qstResult.retA_R!}">
+        </section>
+        [/#if]
+    </div>
+    [#if haveTianZhiyuan??&&haveTianZhiyuan=="true"]
+    <div id="mbti">
+        <section class="gps">
+            <img src="${resSys}/res/img/dlsy/gkxkcs-m.jpg" alt="" />
+            <section class="center-block abs-center" style="height: 100%;">
+                <h1 class="title"><mark>MBTI</mark>人格测评报告</h1>
+                <mark class="mark">MBTI personality assessment report</mark>
+                <h1 class="num-year">${date?substring(0,4)}</h1>
+                <h2 class="num-name">姓名：${qstResult.user_name!}</h2>
+                <h2 class="num-date">日期：${date!}</h2>
+                <div class="head-desc">
+                    <i></i><span>自我认知</span>
+                    <i></i><span>评估性格类型</span>
+                    <i></i><span>建立自信</span>
+                </div>
+            </section>
+        </section>
+        <section class="sec-one">
+            <h3><span>前言  /</span> Perface</h3>
+            <p>这篇报告将帮助你理解自己的人格特质。和Holland职业兴趣不同的是，MBTI人格不仅仅反映你在工作情境中的风格和喜好，它是你在各种不同的活动和情境中所展现出的一贯、稳定的特质，这些活动和情境包括了人际沟通、学习知识、团队合作等等。本报告将深入地分析你的人格特质，帮助你认识你的优势和盲点，以及你的人格特质在工作环境中将会如何展现。</p>
+        </section>
+        <section class="sec-two">
+            <div class="sec-two-in gps">
+                <div class="sectwo-cont">
+					<h2>我的MBTI人格： <mark>${myPersonalityMap.title!}</mark></h2>
+					<div class="f1">MBTI人格测验测试了你在四组对立且对等的处事风格中所表现出的倾向。<br />在这四组风格中，你的倾向表现为：<mark>${myPersonalityMap.details!}</mark></div>
+					[#if myPersonalityMap.one?? && myPersonalityMap.one=="E"]
+					<div class="f2"><span class="c1">01</span>你发挥和补充自我能量的方式?<i>--</i><mark class="chos">外倾(E)</mark>VS<mark>内倾(I)</mark></div>
+					<div class="f3">
+						<p class="chos">外倾：外倾型人倾向于将他们自身的能量发挥向外部世界，并且通过和他人的交互来得到自我的能量的补充。</p>
+						<p>内倾：内倾型人倾向于将他们自身的能量引导向自我的内心世界，并且通过反省、探索自己的内在想法和经验来得到自我能量的补充。</p>
+					</div>
+					[#else]
+					<div class="f2"><span class="c1">01</span>你发挥和补充自我能量的方式?<i>--</i><mark>外倾(E)</mark>VS<mark class="chos">内倾(I)</mark></div>
+					<div class="f3">
+						<p>外倾：外倾型人倾向于将他们自身的能量发挥向外部世界，并且通过和他人的交互来得到自我的能量的补充。</p>
+						<p class="chos">>内倾：内倾型人倾向于将他们自身的能量引导向自我的内心世界，并且通过反省、探索自己的内在想法和经验来得到自我能量的补充。</p>
+					</div>
+					[/#if]
+					[#if myPersonalityMap.two?? && myPersonalityMap.two=="N"]
+					<div class="f2"><span class="c2">02</span>你接收信息的方式?<i>--</i><mark>感觉(S)</mark>VS<mark class="chos">直觉(N)</mark></div>
+					<div class="f3">
+						<p>感觉：感觉型人喜欢接收具体、实在的信息，他们倾向于信赖五官所能听到、看到、闻到、感觉到、尝到的有形有据、实实在在的信息。</p>
+						<p class="chos">直觉：直觉型人倾向于从宏观的角度把握信息。比起那些具体琐碎的信息，他们更关注事物之间的关联、因果、变化趋势等。</p>
+					</div>
+					[#else]
+					<div class="f2"><span class="c2">02</span>你接收信息的方式?<i>--</i><mark class="chos">感觉(S)</mark>VS<mark >直觉(N)</mark></div>
+					<div class="f3">
+						<p class="chos">感觉：感觉型人喜欢接收具体、实在的信息，他们倾向于信赖五官所能听到、看到、闻到、感觉到、尝到的有形有据、实实在在的信息。</p>
+						<p >直觉：直觉型人倾向于从宏观的角度把握信息。比起那些具体琐碎的信息，他们更关注事物之间的关联、因果、变化趋势等。</p>
+					</div>
+					[/#if]
+					[#if myPersonalityMap.three?? && myPersonalityMap.three=="F"]
+					<div class="f2"><span class="c3">03</span>你做决策或为事物下结论的方式?<i>--</i><mark>思维(T)</mark>VS<mark class="chos">情感(F)</mark></div>
+					<div class="f3">
+						<p>思维：思维型人倾向于基于脉络清晰的逻辑分析来做决策或下结论，他们的决策或结论客观、精准且不容变通。</p>
+						<p class="chos">情感：情感型人倾向于从自我和社会的价值观念的出发，从情感的角度理解事态，变通地得出自己认为对的决策或结论 。</p>
+					</div>
+					[#else]
+					<div class="f2"><span class="c3">03</span>你做决策或为事物下结论的方式?<i>--</i><mark  class="chos">思维(T)</mark>VS<mark>情感(F)</mark></div>
+					<div class="f3">
+						<p class="chos">思维：思维型人倾向于基于脉络清晰的逻辑分析来做决策或下结论，他们的决策或结论客观、精准且不容变通。</p>
+						<p >情感：情感型人倾向于从自我和社会的价值观念的出发，从情感的角度理解事态，变通地得出自己认为对的决策或结论 。</p>
+					</div>
+					[/#if]
+					[#if myPersonalityMap.four?? && myPersonalityMap.four=="P"]
+					<div class="f2"><span class="c4">04</span>你做决策或为事物下结论的方式?<i>--</i><mark>判断(J)</mark>VS<mark class="chos">直觉(P)</mark></div>
+					<div class="f3">
+						<p>判断：判断型人通常很快对事物下结论，且希望快速进入到下一任务。他们喜欢有组织、有计划地进行任务。</p>
+						<p class="chos">直觉：直觉型人倾向于慢一些下结论，希望在下结论之前收集更多的信息。他们喜欢有弹性的、随心所欲的任务方式。</p>
+					</div>
+					[#else]
+					<div class="f2"><span class="c4">04</span>你做决策或为事物下结论的方式?<i>--</i><mark class="chos">判断(J)</mark>VS<mark >直觉(P)</mark></div>
+					<div class="f3">
+						<p class="chos">判断：判断型人通常很快对事物下结论，且希望快速进入到下一任务。他们喜欢有组织、有计划地进行任务。</p>
+						<p>直觉：直觉型人倾向于慢一些下结论，希望在下结论之前收集更多的信息。他们喜欢有弹性的、随心所欲的任务方式。</p>
+					</div>
+					[/#if]
+				</div>
+            </div>
+        </section>
+        <section class="sec-three">
+            <div class="f1">当然，就算是表现出同一种MBTI人格类型的人，他们在这一人格上的强度和稳定性也是不尽相同的。你可以从下图中看出你在<mark>外倾、直觉、情感、知觉</mark>这四种特质上所呈现的稳定性和强度。你在某一种特质上所得分数越高，说明你在不同情境中所表现出来这种特质的可能性越大，强度越高。</div>
+            <h2>我的MBTI人格分数表</h2>
+            <div class="fs-wrap gps">
+                <ol class="fs-top gps">
+                    <li>30</li><li>25</li><li>20</li><li>15</li><li>10</li><li>5</li>
+                    <li>0</li>
+                    <li>5</li><li>10</li><li>15</li><li>20</li><li>25</li>
+                </ol>
+                [#if myPersonalityMap.one?? && myPersonalityMap.one=="E"]
+				<div class="fs-m1">
+					<span><i class="yes" style="width: ${myPersonalityMap.onevalue!}%;">E</i></span>
+					<span><i></i></span>
+				</div>
+				[#else]
+				<div class="fs-m1">
+					<span><i></i></span>
+					<span><i class="yes" style="width: ${myPersonalityMap.onevalue!}%;">I</i></span>
+					
+				</div>
+				[/#if]
+				[#if myPersonalityMap.two?? && myPersonalityMap.two=="N"]
+				<div class="fs-m2">
+					<span><i></i></span>
+					<span><i class="yes" style="width: ${myPersonalityMap.twovalue!}%;">N</i></span>
+				</div>
+				[#else]
+				<div class="fs-m2">
+					<span><i class="yes" style="width: ${myPersonalityMap.twovalue!}%;">S</i></span>
+					<span><i></i></span>
+				</div>
+				[/#if]
+				[#if myPersonalityMap.three?? && myPersonalityMap.three=="F"]
+				<div class="fs-m3">
+					<span><i></i></span>
+					<span><i class="yes" style="width: ${myPersonalityMap.threevalue!}%;">F</i></span>
+				</div>
+				[#else]
+					<div class="fs-m3">
+					<span><i class="yes" style="width: ${myPersonalityMap.threevalue!}%;">T</i></span>
+					<span><i></i></span>
+				</div>
+				[/#if]
+				[#if  myPersonalityMap.four??&& myPersonalityMap.four=="J"]
+				<div class="fs-m4">
+					<span><i class="yes" style="width: ${myPersonalityMap.fourvalue!}%;">J</i></span>
+					<span><i></i></span>
+				</div>
+				[#else]
+				<div class="fs-m4">
+					<span><i></i></span>
+					<span><i class="yes" style="width: ${myPersonalityMap.fourvalue!}%;">P</i></span>
+					
+				</div>
+				[/#if]
+                <ol class="fs-bottom gps">
+                    <li>强</li><li>明显</li><li>中等</li>
+                    <li>轻微</li>
+                    <li>中等</li><li>明显</li><li>强</li>
+                </ol>
+            </div>
+            <h3><mark>${qstResult.rst_B!}</mark>人格分析</h3>
+            <div class="f1">${qstB.rgfx!}</div>
+			<div class="secth-nav gps">人格优势</div>
+			<ul>
+				<li>${qstB.rgys!}</li>
+			</ul>
+			<div class="secth-nav gps">潜在盲点</div>
+			<ul>
+				<li>${qstB.qzmd!}</li>
+			</ul>
+			<div class="secth-nav gps">工作环境下的${qstResult.rst_B!}人</div>
+			<ul>
+				<li>${qstB.gzhjx!}</li>
+			</ul>
+        </section>
+        <section class="sec-f">
+            <h3>建议和总结</h3>
+            <div class="line"></div>
+            <p>在了解了自己的人格特质之后，我们应懂得发挥和运用自己的独特优势，想想怎么将他们和自己的职业规划、人生规划结合起来。同时需要注意的是，我们的人格虽然是我们身上十分稳定的特质，但也并非永远不会改变。因此，对我我们人格中的潜在盲点，我们也应该给予充分的关注，并且有意识地调节、克服它们——查漏补缺也是我们了解自己MBTI人格的重要意义之一哦！</p>
+        </section>
+    </div>
+    <div id="social">
+        <section class="gps">
+            <img src="${resSys}/res/img/dlsy/gkxkcs-s.jpg" alt="" />
+            <section class="center-block abs-center" style="height: 100%;">
+                <h1 class="title">社会支持因素量表报告</h1>
+                <mark class="mark">Social support factor scale Report</mark>
+                <h1 class="num-year">${date?substring(0,4)}</h1>
+                <h2 class="num-name">姓名：${qstResult.user_name!}</h2>
+                <h2 class="num-date">日期：${date!}</h2>
+                <div class="dec dec1"></div>
+                <div class="dec dec2"></div>
+            </section>
+        </section>
+        <section class="sec-one">
+            <div class="one-in gps box-shadow">
+                <div class="left-icon"></div>
+                <h3>社会支持因素测量</h3>
+                <p>本报告将帮助你解读测评中的最后一个量表——社会支持因素量表的结果。在近年来的国内外的研究中，越来越多的研究结果表明一些社会环境因素对于个人专业和职业发展的影响并不低于兴趣、人格这些个人因素，甚至有时影响还更强烈。在我们的测验中，我们和你一起探索了将会影响你专业发展的最重要的三种社会环境因素，在考虑你将来的专业选择和职业发展方向时，请务必不要忽略它们！</p>
+                <p>还记得你在测试时所写下的未来想要进入的专业吗？你未来想要进入的专业是：<mark>${majorname!}</mark>。这份报告是对你在进入<mark>${majorname!}</mark>专业学习和发展之后将会面临的社会支持和阻碍的预测和解读。</p>
+            </div>
+        </section>
+        <section class="sec-two gps">
+            <div class="two-l"></div>
+            <div class="two-r"></div>
+            <div class="sj1"></div>
+            <h4>测试结果如下</h4>
+            <div class="two-in">
+                <h3 class="two-nav nav1"><i></i>社会情感支持<span>${reportMap.A!} (${qstResult.rstC_1!})</span></h3>
+				<div class="two-p">
+					<p>${reportMap.Aavlue!}</p>
+				</div>
+				<h3 class="two-nav nav2"><i></i>社会人脉资源<span>${reportMap.B!} (${qstResult.rstC_2!})</span></h3>
+				<div class="two-p">
+					<p>${reportMap.Bavlue!}</p>
+				</div>
+				<h3 class="two-nav nav3"><i></i>经济宽限程度<span>${reportMap.C!} (${qstResult.rstC_3!})</span></h3>
+				<div class="two-p">
+					<p>${reportMap.Cavlue!} </p>
+				</div>
+            </div>
+            <div class="sj2"></div>
+        </section>
+        <section class="sec-end gps">
+            <div class="end-in box-shadow">
+                <div>
+                    <h4 class="gps"><i class="left-icon"></i>结语</h4>
+                    <p>通过这三份报告，你已经深入地探索了自己的职业兴趣和人格、以及未来在专业中可能会遇到的支持或阻碍，相信你对于将要学习什么专业、以及未来的职业方向，已经有了一些自己的想法了吧。</p>
+                <p>职业选择和规划并没有一个固定的模式，它是一个动态的过程，并不是单一的一个因素或几个因素就可以决定的。因此，在摸索自己的职业发展方向的过程中，我们应该不断加深对自己的认识——反省自身的优势和弱点、了解自身的兴趣和风格，并且不断探索我们周围环境中可触碰到的资源和可获得的支持。只有这样，我们才能将自己的发展规划做到最优！</p>
+                </div>
+            </div>
+            <div class="end-abs box-shadow"></div>
+        </section>
+    </div>
+    [/#if]
+    </div>
+
+    [#if haveTianZhiyuan??&&haveTianZhiyuan=="false"]
+    	<div class="mb_db_gd" id="box2">
+            <div class="mb_db_gd_zt">
+                <span>&nbsp;&nbsp; 购买VIP后可查看详细数据&nbsp;&nbsp;点击</span>
+                <a class="mb_db_gd_an" href="${base}/NewsDisplay/testSxk.jspx">购买</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        [/#if]
+	</body>
+	<script type="text/javascript">
+	var A=document.getElementById("report_A").value; 
+	var C=document.getElementById("report_C").value; 
+	var E=document.getElementById("report_E").value; 
+	var I=document.getElementById("report_I").value; 
+	var S=document.getElementById("report_S").value; 
+	var R=document.getElementById("report_R").value; 
+	var mda =[A, I, R, C, E, S];
+	var myChart = echarts.init(document.getElementById('Echart'));
+	myChart.setOption({
+//		tooltip:{
+//				trigger:'item',
+//				padding:[5,20,5,8],
+//				formatter: function(params){
+//					var data = params.data.value;
+//					var html = "测评结果:<br/>";
+//					html += 'A艺术型： '+data[0]+'<br/>';
+//					html += 'I 研究型：  '+data[1]+'<br/>';
+//					html += 'R实际型： '+data[2]+'<br/>';
+//					html += 'C传统型： '+data[3]+'<br/>';
+//					html += 'E企业型： '+data[4]+'<br/>';
+//					html += 'S社会型： '+data[5]+'<br/>';
+//					return html;
+//				}
+//			},
+		radar: {
+			indicator: [{
+					name: 'A',
+					max: 18,
+				},
+				{
+					name: 'I',
+					max: 18
+				},
+				{
+					name: 'R',
+					max: 18
+				},
+				{
+					name: 'C',
+					max: 18
+				},
+				{
+					name: 'E',
+					max: 18
+				},
+				{
+					name: 'S',
+					max: 18
+				}
+			],
+			center: ['50%', '50%'],
+			radius: 200,
+			name: {
+				formatter: function(value) {
+					return '{' + value + '|}\n';
+				},
+				rich: {
+					value: {
+						color: 'transparent',
+					},
+					A: {
+						height: 76,
+						backgroundColor: {
+							image: "${resSys}/res/img/sygj/xq-a.png"
+						}
+					},
+					I: {
+						height: 36,
+						backgroundColor: {
+							image: "${resSys}/res/img/sygj/xq-i.png"
+						}
+					},
+					R: {
+						height: 36,
+						verticalAlign:"bottom",
+						lineHeight:66,
+						backgroundColor: {
+							image: "${resSys}/res/img/sygj/xq-r.png"
+						}
+					},
+					C: {
+						height: 78,
+						backgroundColor: {
+							image: "${resSys}/res/img/sygj/xq-c.png"
+						}
+					},
+					E: {
+						height: 36,
+						verticalAlign:"bottom",
+						lineHeight:66,
+						backgroundColor: {
+							image: "${resSys}/res/img/sygj/xq-e.png"
+						}
+					},
+					S: {
+						height: 36,
+						backgroundColor: {
+							image: "${resSys}/res/img/sygj/xq-s.png"
+						}
+					}
+				},
+			},
+			shape: "polygon",
+			nameGap: -20,
+			splitArea: {
+				show: true,
+				areaStyle: {
+					 color:['#e3e2e2', '#89c3ff', '#f6dd68', '#ffb539', '#78d8d6']
+				}
+			},
+//			axisLabel:{
+//				show:true
+//			},
+			axisLine: {
+				lineStyle: {
+					color: 'rgba(70,99,106,.6)',
+					width: 2,
+				}
+			},
+			splitLine: {
+				lineStyle: {
+					color: 'rgb(217,233,246)',
+					width: 2
+				}
+			}
+		},
+		series: [{
+			name: "测评结果",
+			type: 'radar',
+			symbol: "circle",
+			symbolSize: 10,
+			label: {
+				normal: {
+					show: true,
+					color: '#fff',
+					fontSize: 20,
+					distance: 0,
+					verticalAlign: 'top',
+					offset: [12, -5],
+					fontWeight: 500,
+					fontFamily: "Helvetica  Arial"
+				}
+			},
+			itemStyle: {
+				normal: {
+					color: 'rgba(245,110,29,.8)'
+				}
+			},
+			lineStyle: {
+				normal: {
+					color: 'rgba(0,0,0,0)'
+				}
+			},
+			areaStyle: {
+				normal: {
+					color: "rgba(204,0,255,.75)"
+				}
+			},
+			silent:true,
+			data: [{
+//				value: [3, 3, 5, 8, 2, 4]
+				value: mda
+			}]
+		}],
+	});
+	</script>
+</html>

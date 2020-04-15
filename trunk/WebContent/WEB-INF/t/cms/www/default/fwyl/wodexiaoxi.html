@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>我的消息</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+	</head>
+
+	<body>
+		<!--顶部-->
+		<header class="indexHeader">
+			<div class="flex-container width1200">
+				<div>学涯云教育集团旗下升学服务站</div>
+				<div class="textR">
+					<span>
+						<a href="${base}/FwYl/swithtype.jspx">管理中心</a>
+					</span>
+					<span>咨询热线：400-0985-200</span>
+					<span>微信小程序</span>
+				</div>
+			</div>
+		</header>
+		<!--tab切换  导航-->
+		<nav class="indexNav">
+			<div class="flex-container1 width1200">
+				<div class="flex-item1">
+					<a href="${base}/login.jspx"><img src="${base}/u/cms/www/logo/logo.png" alt=""/></a>
+					<a href="${base}"><img src="${base}/u/cms/www/logo/name.png" alt=""/></a>
+				</div>
+				<div class="flex-item1">
+					<ul class="nav nav-pills">
+						<li role="presentation">
+							<a href="${base}">首页</a>
+						</li>
+						<li role="presentation">
+							<a href="${base}/gkxk/to_choose.jspx">高考选科</a>
+						</li>
+						<li role="presentation">
+							<a href="${base}/FwYl/BackgroundAscension.jspx">背景提升</a>
+						</li>
+						<li role="presentation" class="dropdown">
+							<a href="####" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								志愿填报
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="${base}/zytb/project.jspx">志愿填报</a></li>
+								<li><a href="${base}/zytb/toCollegeService.jspx">志愿填报服务</a></li>
+								<li><a href="${base}/FindUniv/findUnivList.jspx">找大学</a></li>
+								<li><a href="${base}/FindUniv/findMajor.jspx">查专业</a></li>
+								<!--<li><a href="${base}/zytb/batchLine.jspx">批次线</a></li>-->
+							</ul>
+						</li>
+						<li role="presentation">
+							<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">自主&综评</a>
+							<ul class="dropdown-menu">
+								<li><a href="${base}/FwYl/member/fwyl.jspx">自主&综评</a></li>
+								<li><a href="${base}/FwYl/zpfw.jspx">自招综评服务</a></li>
+								<li><a href="${base}/FwYl/zczx.jspx">章程&资讯</a></li>
+							</ul>
+						</li>
+						<li role="presentation">
+							<a href="${base}/sign/findActive.jspx">专家讲座</a>
+						</li>
+						<li role="presentation">
+							<a href="####">沃得研究院</a>
+						</li>
+					</ul>
+
+				</div>
+				<div id="loginCsiDiv" style="float:left;" class="flex-item1 logRegister"></div>
+				<script type="text/javascript">
+                    $(function(){
+                        [#if site.config.ssoEnable]
+                        Cms.loginSSO('${base!}');
+                        [/#if]
+                            Cms.loginCsi("${base}","loginCsiDiv",{"returnUrl":"${location}"});
+                    });
+				</script>
+			</div>
+		</nav>
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container width1200">
+				<div><a href="${base}">首页</a> &lt;&lt; 自主&综评 &lt;&lt; 自主&综评</div>
+				<div></div>
+			</div>
+		</div>
+		<!--跳转头-->
+		<div class="switchoverService width1200 flex-container1">
+			<p style="width: 25%;"></p>
+			<p>特殊类型招生服务 | 普通自主招生</p>
+			<div>
+				<a href="${base}/FwYl/swithtype.jspx">切换到其他服务类型</a>
+			</div>
+		</div>
+		<!--主体-->
+		<main class="width1200 zizhuJudgedBy1_pages_list">
+			<div class="zizhuJudgedBy1_pages_list25">
+				<div id="treeview" class=""></div>
+			</div>
+			<div class="zizhuJudgedBy1_pages_list73">
+				<table class="table deeptable">
+					<tr>
+						<th>消息类型</th>
+						<th>主要内容</th>
+						<th>更新时间</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+					<tr>
+						<td>自荐信审核</td>
+						<td>1、需要在1月10之前提供提供阳光高考账号</td>
+						<td>2018-3-25</td>
+						<td>已处理</td>
+						<td>
+							<a href="">查看</a>
+						</td>
+					</tr>
+					<tr>
+						<td>自荐信审核</td>
+						<td>1、需要在1月10之前提供提供阳光高考账号</td>
+						<td>2018-3-25</td>
+						<td>已处理</td>
+						<td>
+							<a href="">查看</a>
+						</td>
+					</tr>
+					<tr>
+						<td>自荐信审核</td>
+						<td>1、需要在1月10之前提供提供阳光高考账号</td>
+						<td>2018-3-25</td>
+						<td>已处理</td>
+						<td>
+							<a href="">查看</a>
+						</td>
+					</tr>
+					<tr>
+						<td>自荐信审核</td>
+						<td>1、需要在1月10之前提供提供阳光高考账号</td>
+						<td>2018-3-25</td>
+						<td>已处理</td>
+						<td>
+							<a href="">查看</a>
+						</td>
+					</tr>
+					<tr>
+						<td>自荐信审核</td>
+						<td>1、需要在1月10之前提供提供阳光高考账号</td>
+						<td>2018-3-25</td>
+						<td>已处理</td>
+						<td>
+							<a href="">查看</a>
+						</td>
+					</tr>
+					<tr>
+						<td>自荐信审核</td>
+						<td>1、需要在1月10之前提供提供阳光高考账号</td>
+						<td>2018-3-25</td>
+						<td>已处理</td>
+						<td>
+							<a href="">查看</a>
+						</td>
+					</tr>
+					<tr>
+						<td>自荐信审核</td>
+						<td>1、需要在1月10之前提供提供阳光高考账号</td>
+						<td>2018-3-25</td>
+						<td>已处理</td>
+						<td>
+							<a href="">查看</a>
+						</td>
+					</tr>
+					<tr>
+						<td>自荐信审核</td>
+						<td>1、需要在1月10之前提供提供阳光高考账号</td>
+						<td>2018-3-25</td>
+						<td>已处理</td>
+						<td>
+							<a href="">查看</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</main>
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/bootstrap-treeview.min.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+		<script>
+            //树
+            var defaultData = [{
+                text: '服务须知',
+                href: '${base}/FwYl/fuwuxuzhi.jspx',
+                tags: ['0']
+            }, {
+                text: '我的消息',
+                href: '${base}/FwYl/wodexiaoxi.jspx',
+                tags: ['0']
+            },
+                {
+                    text: '院校章程一览',
+                    href: '${base}/FwYl/yuanxiaozhangcheng.jspx',
+                    tags: ['0']
+                },
+                {
+                    text: '报考进度管理',
+                    href: '${base}/FwYl/baokaojindu.jspx',
+                    tags: ['0'],
+                    nodes: [{
+                        text: '北京大学',
+                        href: '${base}/FwYl/bjdx.jspx',
+                        tags: ['0']
+                    }, {
+                        text: '清华大学',
+                        href: '',
+                        tags: ['0']
+                    }, {
+                        text: '电子科技大学',
+                        href: '',
+                        tags: ['0']
+                    }]
+                },
+                {
+                    text: '服务一览表',
+                    href: '${base}/FwYl/member/orderList.jspx',
+                    tags: ['0'],
+                    nodes: [{
+                        text: '主要负责人',
+                        href: '${base}/FwYl/member/orderList.jspx#contactWay',
+                        tags: ['0']
+                    }, {
+                        text: '订单详情表',
+                        href: '${base}/FwYl/member/orderList.jspx#orderDetails',
+                        tags: ['0']
+                    }, {
+                        text: '学生背景分析',
+                        href: '${base}/FwYl/member/orderList.jspx#studentsBackground',
+                        tags: ['0']
+                    }, {
+                        text: '专业性格测评',
+                        href: '${base}/FwYl/member/orderList.jspx#personalityAssessment',
+                        tags: ['0']
+                    }, {
+                        text: '背景提升服务',
+                        href: '${base}/FwYl/member/orderList.jspx#backgroundAscension',
+                        tags: ['0']
+                    }, {
+                        text: '个人陈述定制',
+                        href: '${base}/FwYl/member/orderList.jspx#statementCustomization',
+                        tags: ['0']
+                    }]
+                }, {
+                    text: '服务评价与反馈',
+                    href: '${base}/FwYl/fuwupingjia.jspx',
+                    tags: ['0']
+                }
+            ];
+            $('#treeview').treeview({
+                color: "#333",
+                expandIcon: 'glyphicon glyphicon-chevron-right',
+                collapseIcon: 'glyphicon glyphicon-chevron-down',
+//			nodeIcon: 'glyphicon glyphicon-bookmark',
+                data: defaultData
+            });
+            $('#treeview').on('nodeSelected', function (event, data) {
+                // clickNode(event, data)
+                console.log(JSON.stringify(data));
+                console.log(data.text);
+                console.log(data.href);
+                console.log(data.nodeId);
+                if (data.tags != 0) {
+                    return;
+                }
+                window.location.href = data.href;
+            });
+		</script>
+	</body>
+
+</html>

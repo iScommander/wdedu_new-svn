@@ -1,0 +1,25 @@
+  <div class="navbox">
+		<div class="navbox_bg">
+			<div class="nav_l fl">
+				<div id="nav">
+				<ul id="navMenu">
+				<li><a href='${base}/'>首页</a></li>
+				<li><a  href='${base}/zytb/project.jspx' rel='dropmenu1'>填志愿</a></li>
+				<li><a href='${base}/searchUnivAndMajor/searchUnivList.jspx' rel='dropmenu2'>找大学</a></li>
+				<li><a href='${base}/searchUnivAndMajor/searchMajor.jspx' rel='dropmenu3' >查专业</a></li>
+				<li><a href='${base}/searchUnivAndMajor/searchClass1.jspx' rel='dropmenu4'>看就业</a></li>
+				<li><a href='${base}/evaluation/index.jspx?ksType=2' rel='dropmenu5' >测专业</a></li>
+				<li><a href='${base}/bcdsj/universityRank.jspx' rel='dropmenu6' >排行榜</a></li>
+                <li><a href='${base}/bkck/one_segment_query.jspx' rel='dropmenu7'>大数据</a></li>
+				</ul>
+				</div>
+
+			</div>
+			[#if user??]
+			<div class="nav_r fr">
+				<a href="${base}/admissonSvcAct/findbaseInfo.jspx">尊敬的[@text_cut s=user.username?substring(0,5) len=3 append='..'/]</a>
+			</div>
+			[/#if]
+		<div class="clearfix"></div>
+		</div>
+	</div>

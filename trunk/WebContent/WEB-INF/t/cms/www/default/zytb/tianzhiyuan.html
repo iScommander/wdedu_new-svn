@@ -1,0 +1,1560 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>填志愿</title>
+
+
+<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="${base}/r/wdedu/css/index.css" />
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="${base}/r/wdedu/js/js/web.js"></script>
+      <script src="${base}/r/wdedu/js/jquery-1.11.1.min.js" type="text/javascript" ></script>
+<link rel="stylesheet" href="${base}/r/wdedu/css/pignose.tab.min.css" />
+<style type="text/css">
+	#wrapper {
+		padding-bottom: 40px;
+	}
+	.article {
+		margin: 0 auto;
+		text-align: center;
+	}
+	.article h3 {
+		margin-bottom: 40px;
+	}
+	.article table {
+		font-size: 115%;
+		text-align: left;
+	}
+	.article pre {
+		font-size: 115%;
+	}
+	.nav.tab { width: auto; max-width: 100%; margin: 0; border: 0; padding: 0; border-bottom: 1px solid #ddd; }
+	.pignose-sub-tab { border: 0; margin: 0; padding: 0;
+	.table { width: 100%; table-layout: fixed; }
+	.table .subject { text-align: left; padding-left: 5%; }
+	.table .date { text-align: right; padding-right: 5%; }
+</style>
+</head>
+<body>
+
+
+    <div class="index_top_bg">
+		<div class="index_top">
+			<div class="index_top_l fl">
+				<p>欢迎光临沃得生涯教育集团！</p>
+				<span>免费热线：<i>400-9288-985</i></span>
+				<div class="clearfix"></div>
+			</div>
+			<div class="index_top_r fr">
+				<p><a href="">新手教程</a></p>
+				<p><a href="">官方微信</a></p>
+				<i><a href="${base}/admissonSvcAct/findbaseInfo.jspx">会员中心</a></i>
+				<span><a href="">快速登录</a></span><span><a href="">/&nbsp;注册</a></span>
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>	
+    <div class="index_logo">
+		<div class="index_logo_l fl">
+			<a href=""><img src="${base}/r/wdedu/images/index_3.png"></a>
+		</div>
+		<div class="index_logo_city fl">
+            <div class="city">
+                <div class="city_now" onclick="dk()">
+                    <span class="fl" id="text" >北京</span>
+                    <div class="fl">
+                        <span class="city_nav" id="city_nav" ><img src="${base}/r/wdedu/images/city_2.png"></span>
+                    </div>
+                </div>
+                <div id="city_link" class="city_link">
+                    <div class="city_show">
+                        <span class="f_red f_r" href="javascript:;" title="关闭窗口" onclick="gb()">[关闭]</span>
+                    </div>
+					<a class="city_links" href="#" onclick="qz(this)" >南京</a>
+                    <a class="city_links" href="#" onclick="qz(this)" >上海</a>
+                    <a class="city_links" href="#" onclick="qz(this)" >河南</a>
+                    <a class="city_links" href="#" onclick="qz(this)" >深圳</a>
+                </div>
+            </div>
+        </div>
+  
+		<div class="index_logo_c fl">
+			<form id="form1" name="form1" method="post" action="">
+				<input type="text" name="textfield" id="textfield" class="qgt_ssnr" placeholder="查大学 / 查专业 / 搜文章" />
+				<input type="image" name="button" id="button" value="提交" src="${base}/r/wdedu/images/tzy_7.png" class="qgt_ssan" />
+			</form>
+		</div>
+		<div class="index_logo_r fr">
+			<p><a href="${base}/NewsDisplay/EntranceCard.jspx">开通VIP</a></p><span><a href="">高考小助手</a></span><div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	
+	<script type='text/javascript' src='${base}/r/wdedu/js/dropdown.js'></script>
+    
+    
+    <div class="navbox">
+		<div class="navbox_bg">
+			<div class="nav_l fl">
+				<div id="nav">
+				<ul id="navMenu">
+				<li><a href='../index.html'>首页</a></li>
+				<li><a class="current" href='' rel='dropmenu1'>填志愿</a></li>
+				<li><a  href='' rel='dropmenu2'>找大学</a></li>
+				<li><a  href='' rel='dropmenu3'>查专业</a></li>
+				<li><a href='' rel='dropmenu4'>看就业</a></li>
+				<li><a href='' rel='dropmenu5'>测专业</a></li>
+				<li><a href='' rel='dropmenu6'>排行榜</a></li>
+				<li><a href='' rel='dropmenu7'>大数据</a></li>
+				<li><a href='' rel='dropmenu8'>社会实践</a></li>
+				</ul>
+				</div>
+			</div>
+		<div class="nav_r fr">
+		  <a href="">189****8843</a>
+		</div>
+		<div class="clearfix"></div>
+	  </div>
+</div>
+	<div class="mbxdh_bg">
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">志愿填报</a>&nbsp;&gt; &nbsp; <a href="#">填志愿</a>
+		</div>  
+	</div>   
+	<div class="con">
+    <div class="product_xznr fl">
+	<div class="product_sort ">
+	<div class="hd">院校筛选</div>
+	<div class="bd">
+		<div class="item">
+			<div class="title one"><a href="#"><i></i>志愿批次切换</a></div>
+			<div class="arrow">&gt;</div>
+			<div class="line"></div>
+			<div class="subitem">
+				<div class="inner">
+					<div class="tit tit1">
+						<table border="0" cellpadding="1" cellspacing="0" class="tzy_table" style="background-color:#ececec;" >
+                        		<tr>
+                                	<td width="0" height="60" align="center" valign="middle" bgcolor="#FFFFFF" style="border-left:0px;">选择批次</td>
+                                	<td width="0" height="60" align="center" valign="middle" bgcolor="#FFFFFF">批次名称</td>
+                                	<td width="0" height="60" align="center" valign="middle" bgcolor="#FFFFFF">本批次投档线</td>
+                                    <td width="0" height="60" align="center" valign="middle" bgcolor="#FFFFFF">可填志愿数量</td>
+                                    <td width="0" height="60" align="center" valign="middle" bgcolor="#FFFFFF">投档开始时间</td>
+                                    <td width="0" height="60" align="center" valign="middle" bgcolor="#FFFFFF">录取顺序</td>
+      </tr>
+                                <tr>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td"><div class=				"tzy_table_td_xz"></div></td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td2">本科提前批</td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td3">500</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td4"> 8个院校志愿，每个院校可填6个专业</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td5">2018-8-5</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td6">内容</td>
+          </tr>
+                                    <tr>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td"><div class=				"tzy_table_td_xz"></div></td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">本科提前批</td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">500</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">8个院校志愿，每个院校可填6个专业</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">2018-8-5</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">内容</td>
+          </tr>
+                                    <tr>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td"><div class=				"tzy_table_td_xz"></div></td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">本科提前批</td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">500</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF"> 8个院校志愿，每个院校可填6个专业</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">2018-8-5</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">内容</td>
+          </tr>
+                                    <tr>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td"><div class=				"tzy_table_td_xz"></div></td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">本科提前批</td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">500</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF"> 8个院校志愿，每个院校可填6个专业</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">2018-8-5</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">内容</td>
+          </tr>
+                                    <tr>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td"><div class=				"tzy_table_td_xz"></div></td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">本科提前批</td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">500</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF"> 8个院校志愿，每个院校可填6个专业</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">2018-8-5</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">内容</td>
+          </tr>
+                                    <tr>
+                                	<td align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td"><div class="tzy_table_td_xz"></div></td>
+                                	<td align="center" valign="middle" bgcolor="#FFFFFF">本科提前批</td>
+                                	<td align="center" valign="middle" bgcolor="#FFFFFF">500</td>
+                                    <td align="center" valign="middle" bgcolor="#FFFFFF"> 8个院校志愿，每个院校可填6个专业</td>
+                                    <td align="center" valign="middle" bgcolor="#FFFFFF">2018-8-5</td>
+                                    <td align="center" valign="middle" bgcolor="#FFFFFF">内容</td>
+                                </tr>
+</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item">
+		  <div class="title two"><a href="#"><i></i>院校所在地筛选</a></div>
+
+			<div class="arrow">&gt;</div>
+			<div class="line"></div>
+			<div class="subitem">
+				<div class="inner">
+					<div class="tit tit1">
+						<div class="name">泰国</div>
+						<ul>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+						</ul>
+					</div>
+					<div class="tit">
+						<div class="name">印度尼西亚</div>
+						<ul>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item">
+			<div class="title three"><a href="#"><i></i>院校类型筛选</a></div>
+
+			<div class="arrow">&gt;</div>
+			<div class="line"></div>
+			<div class="subitem">
+				<div class="inner">
+					<div class="tit tit1">
+						<div class="name">泰国</div>
+						<ul>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+						</ul>
+					</div>
+					<div class="tit">
+						<div class="name">印度尼西亚</div>
+						<ul>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item">
+			<div class="title four"><a href="#"><i></i>院校分类筛选</a></div>
+			<div class="arrow">&gt;</div>
+			<div class="line"></div>
+			<div class="subitem">
+				<div class="inner">
+					<div class="tit tit1">
+						<div class="name">泰国</div>
+						<ul>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+						</ul>
+					</div>
+					<div class="tit">
+						<div class="name">印度尼西亚</div>
+						<ul>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item">
+			<div class="title five"><a href="#"><i></i>考研容易程度</a></div>
+
+			<div class="arrow">&gt;</div>
+			<div class="line"></div>
+			<div class="subitem">
+				<div class="inner">
+					<div class="tit tit1">
+						<div class="name">泰国</div>
+						<ul>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+						</ul>
+					</div>
+					<div class="tit">
+						<div class="name">印度尼西亚</div>
+						<ul>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+			
+		<div class="product_sort">
+	<div class="hd">专业筛选</div>
+	<div class="bd">
+		<div class="item">
+			<div class="title one"><a href="#"><i></i>志愿批次切换</a></div>
+			<div class="arrow">&gt;</div>
+			<div class="line"></div>
+			<div class="subitem">
+				<div class="inner">
+					<div class="tit tit1">
+						<table border="0" cellpadding="1" cellspacing="0" class="tzy_table" style="background-color:#ececec;" >
+                        		<tr>
+                                	<td width="0" height="60" align="center" valign="middle" bgcolor="#FFFFFF" style="border-left:0px;">选择批次</td>
+                                	<td width="0" height="60" align="center" valign="middle" bgcolor="#FFFFFF">批次名称</td>
+                                	<td width="0" height="60" align="center" valign="middle" bgcolor="#FFFFFF">本批次投档线</td>
+                                    <td width="0" height="60" align="center" valign="middle" bgcolor="#FFFFFF">可填志愿数量</td>
+                                    <td width="0" height="60" align="center" valign="middle" bgcolor="#FFFFFF">投档开始时间</td>
+                                    <td width="0" height="60" align="center" valign="middle" bgcolor="#FFFFFF">录取顺序</td>
+      </tr>
+                                <tr>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td"><div class=				"tzy_table_td_xz"></div></td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td2">本科提前批</td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td3">500</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td4"> 8个院校志愿，每个院校可填6个专业</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td5">2018-8-5</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td6">内容</td>
+          </tr>
+                                    <tr>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td"><div class=				"tzy_table_td_xz"></div></td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">本科提前批</td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">500</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">8个院校志愿，每个院校可填6个专业</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">2018-8-5</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">内容</td>
+          </tr>
+                                    <tr>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td"><div class=				"tzy_table_td_xz"></div></td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">本科提前批</td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">500</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF"> 8个院校志愿，每个院校可填6个专业</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">2018-8-5</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">内容</td>
+          </tr>
+                                    <tr>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td"><div class=				"tzy_table_td_xz"></div></td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">本科提前批</td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">500</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF"> 8个院校志愿，每个院校可填6个专业</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">2018-8-5</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">内容</td>
+          </tr>
+                                    <tr>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td"><div class=				"tzy_table_td_xz"></div></td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">本科提前批</td>
+                                	<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">500</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF"> 8个院校志愿，每个院校可填6个专业</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">2018-8-5</td>
+                                    <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">内容</td>
+          </tr>
+                                    <tr>
+                                	<td align="center" valign="middle" bgcolor="#FFFFFF" class="tzy_table_td"><div class="tzy_table_td_xz"></div></td>
+                                	<td align="center" valign="middle" bgcolor="#FFFFFF">本科提前批</td>
+                                	<td align="center" valign="middle" bgcolor="#FFFFFF">500</td>
+                                    <td align="center" valign="middle" bgcolor="#FFFFFF"> 8个院校志愿，每个院校可填6个专业</td>
+                                    <td align="center" valign="middle" bgcolor="#FFFFFF">2018-8-5</td>
+                                    <td align="center" valign="middle" bgcolor="#FFFFFF">内容</td>
+                                </tr>
+</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item">
+		  <div class="title two"><a href="#"><i></i>院校所在地筛选</a></div>
+
+			<div class="arrow">&gt;</div>
+			<div class="line"></div>
+			<div class="subitem">
+				<div class="inner">
+					<div class="tit tit1">
+						<div class="name">泰国</div>
+						<ul>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+						</ul>
+					</div>
+					<div class="tit">
+						<div class="name">印度尼西亚</div>
+						<ul>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item">
+			<div class="title three"><a href="#"><i></i>院校类型筛选</a></div>
+
+			<div class="arrow">&gt;</div>
+			<div class="line"></div>
+			<div class="subitem">
+				<div class="inner">
+					<div class="tit tit1">
+						<div class="name">泰国</div>
+						<ul>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+						</ul>
+					</div>
+					<div class="tit">
+						<div class="name">印度尼西亚</div>
+						<ul>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">新加坡</a></li>
+							<li><a href="#">菲律宾</a></li>
+							<li><a href="#">沙巴</a></li>
+							<li><a href="#">文莱</a></li>
+							<li><a href="#">蓝梦岛</a></li>
+							<li><a href="#">吉隆坡</a></li>
+							<li><a href="#">塞班岛</a></li>
+							<li><a href="#">柬埔寨</a></li>
+							<li><a href="#">马来西亚</a></li>
+							<li><a href="#">越南</a></li>
+							<li><a href="#">下龙湾</a></li>
+							<li><a href="#">吴哥</a></li>
+							<li><a href="#">芽庄</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+
+<div class="tzy_y fr">
+		<div class="tzy_y_t">
+        	<span>为您推荐院校和专业（更换条件可重新推荐）：</span>
+        </div>
+        
+    <div class="tzy_y_bk">
+        <div id="wrapper">
+	
+	
+	<div class="article">
+		<div class="tab">
+			<ul>
+				<li>
+					<a href="#" style=" font-size:20px; font-weight:300;caret-color: transparent" class="tzy_yx stylediv" id="tzy_yx">按院校填报(88所)</a>
+					<div>
+						<div class="tab">
+							
+                          <div class="tzy_tb_zl">
+                                		<div class="tzy_tb_zl_1 f_l "><span class="tzy_yxpm1">院校排名</span></div>
+										<div class="tzy_tb_zl_1 f_l"><span  class="tzy_yxpm2">录取概率</span></div>
+                            <div class="tzy_tb_zl_2 f_l"><a href="#" class="tzy_yxpm3">综合满意度</a></div>
+                            <div class="tzy_tb_zl_2 f_l"><a href="#" class="tzy_yxpm4">就业酬薪</a></div>
+                           	<div class="tzy_tb_zl_3 f_l" style="border-right:0px;">
+                                        <input type="text"   class="tzy_tb_zl_3_su" placeholder="输入院校名称或者专业进行筛选" />
+                                        <input type="image" class="tzy_tb_zl_3_an" value="提交" src="${base}/r/wdedu/images/index_5.png"/>
+                                        </div> 
+                          </div>
+                          <div class="tzy_tb_zl2">
+            					<div class="choosePwd f_l xz" style="border-left:0px;">
+        						<div class="checkbox" ></div><span>冲稳保</span>
+    		</div>
+             <div class="choosePwd f_l xz">
+        		<div class="checkbox"></div><span>冲一冲</span>
+               
+    		</div>
+             <div class="choosePwd f_l xz">
+        		<div class="checkbox"></div><span>稳一稳</span>
+           
+    		</div>
+             <div class="choosePwd f_l xz">
+        		<div class="checkbox"></div><span >保一保</span>
+                
+    		</div>
+                <div class="choosePwd f_l xz">
+        		<div class="checkbox"></div><span >已选择</span>
+           
+    		</div>
+                     <div class="choosePwd f_l xz">
+        		<div class="checkbox"></div><span >未选择</span>
+             
+    		</div>
+                    <div class="choosePwd f_l xz">
+        		<div class="checkbox"></div><span>有资格</span>
+           
+    		</div>
+                                <div class="choosePwd f_l xz" style="border-right:0px;">
+        		<div class="checkbox"></div><span>无资格</span>
+              
+    		</div>
+            <div class="clearfix"></div>
+				<div class="tzy_table_div">
+            <table  border="0" cellpadding="0" cellspacing="1" style="background-color:#e2e2e2;">
+	  	<tr>
+	    <th rowspan="2" bgcolor="#FFFFFF" scope="col" width="105px;" height="103px;">综合参数</th>
+	    <th rowspan="2" bgcolor="#FFFFFF" scope="col" width="265px;" height="103px;">院校列表<span>(点击院校可查看录取详情)</span></th>
+	   
+	    <th rowspan="2" bgcolor="#FFFFFF" scope="col" width="80px;" height="103px;">院校分类</th>
+	    <th rowspan="2" bgcolor="#FFFFFF" scope="col" width="73px;" height="103px;">计划 </th>
+	    <th colspan="3" bgcolor="#FFFFFF" scope="col" width="302px;" height="63px;">院校历年录取人数、录取低分、低分排名<br/><span>(依次顺序是录取人数、录取低分、低分排名)</span></th>
+	    <th rowspan="2" bgcolor="#FFFFFF" scope="col" width="96px;" height="103px;">填报 </th>
+      </tr>
+	  <tr>
+	    <td bgcolor="#FFFFFF" width="103px;" height="38px" style=" background-color:#f0f0f0;">2019</td>
+	    <td bgcolor="#FFFFFF" width="103px;" height="38px" style=" background-color:#f0f0f0;">2018</td>
+	    <td bgcolor="#FFFFFF" width="103px;" height="38px" style=" background-color:#f0f0f0;">2017</td>
+      </tr>
+	  <tr>
+	    <td bgcolor="#FFFFFF">排名：1 <br/>概率：36%<br/>风险：冲</td>
+	    <td bgcolor="#FFFFFF" class="tzy_table_div_dx">
+        	<div class="tzy_dx_mc">中国科技大学</div>
+            <img src="${base}/r/wdedu/images/tzy_6.png" class="f_l"/>
+        	<div class="dx f_l">
+            		<div class="dx_985 f_l">985</div>
+            		<div class="dx_211 f_l">211</div>
+                    <div class="dx_syl f_l">双一流</div>
+            </div>
+            <div class="dx_dq f_l"><span>北京市&nbsp;&nbsp;东城区</span></div>
+            <div class="clearfix"></div>
+        </td>
+	   
+	    <td bgcolor="#FFFFFF">综合类</td>
+	    <td bgcolor="#FFFFFF">144</td>
+	    <td bgcolor="#FFFFFF">2<br/>468<br/>56<br/></td>
+	    <td bgcolor="#FFFFFF">2<br/>468<br/>56<br/></td>
+	    <td bgcolor="#FFFFFF">2<br/>468<br/>56<br/></td>
+	    <td bgcolor="#FFFFFF">
+        <div class="tzy_an_mc">
+      	       <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'" id="btn">设置志愿</a>
+               <!--此处id后加学校i态d动-->
+        <div id="light" class="white_content"> 
+		<a href = "javascript:void(0)" class="tzy_an_mc_gb f_r" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">[关闭]</a>
+        <div class="zty_an_hj">
+        <div class="anz_zt f_l">
+        		<a href = "javascript:void(0)" onclick = "document.getElementById('light2').style.display='block';document.getElementById('fade2').style.display='block';">志愿A</a>
+                <div id="light2" class="white_content2"> 
+                <a href = "javascript:void(0)"  class="tzy_an_mc_gb2" onclick = "document.getElementById('light').style.display='none';document.getElementById('light2').style.display='none';
+                document.getElementById('fade').style.display='none'">[关闭]</a>
+                <table width="100%" border="1" cellspacing="0" class="tzy_3_table">
+				  <tr>
+				    <th width="60px;">代码</th>
+				    <th width="202px;">专业名称</th>
+				    <th width="60px;">学制</th>
+				    <th width="94px;">学费</th>
+				    <th width="78px;">2019计划</th>
+				    <th width="125px;">2019录取</th>
+				    <th width="108px;">2018录取</th>
+				    <th width="108px;">2017录取</th>
+				    <th width="96px;">操作</th>
+			      </tr>
+				  <tr>
+				    <td >01</td>
+				    <td>基础医学(八年制)基础)</td>
+				    <td>4</td>
+				    <td >120000</td>
+				    <td >1</td>
+				    <td>100<br/>387<br/>12000<br/></td>
+				    <td>100<br/>387<br/>12000<br/></td>
+				    <td>100<br/>387<br/>12000<br/></td>
+				    <td class="tbzy_zy_xz"><a>选择专业</a></td>
+			      </tr>
+				  <tr>
+				    <td >01</td>
+				    <td>基础医学(八年制)基础)</td>
+				    <td>4</td>
+				    <td >120000</td>
+				    <td >1</td>
+				    <td>100<br/>387<br/>12000<br/></td>
+				    <td>100<br/>387<br/>12000<br/></td>
+				    <td>100<br/>387<br/>12000<br/></td>
+				    <td class="tbzy_zy_xz"><a>选择专业</a></td>
+			      </tr>
+				  <tr>
+				    <td >01</td>
+				    <td>基础医学(八年制)基础)</td>
+				    <td>4</td>
+				    <td >120000</td>
+				    <td >1</td>
+				    <td>100<br/>387<br/>12000<br/></td>
+				    <td>100<br/>387<br/>12000<br/></td>
+				    <td>100<br/>387<br/>12000<br/></td>
+				    <td class="tbzy_zy_xz"><a>选择专业</a></td>
+			      </tr>
+				  <tr>
+				    <td >01</td>
+				    <td>基础医学(八年制)基础)</td>
+				    <td>4</td>
+				    <td >120000</td>
+				    <td >1</td>
+				    <td>100<br/>387<br/>12000<br/></td>
+				    <td>100<br/>387<br/>12000<br/></td>
+				    <td>100<br/>387<br/>12000<br/></td>
+				    <td class="tbzy_zy_xz"><a>选择专业</a></td>
+			      </tr>
+		  </table>
+                </div>
+                <a>志愿B</a><a>志愿C</a><a>志愿D</a><a>志愿E</a>
+        </div>
+        <div class="anz_zt f_l">
+        		<a href="#">志愿F</a><a>志愿G</a><a>志愿H</a><a>志愿I</a><a>志愿J</a>
+        </div>
+           <div class="anz_zt f_l">
+        		<a href="#">备选一</a><a>备选二</a><a>志愿三</a>
+        </div>
+        </div> 
+        </div>
+        </div>
+        <div class="clearfix"></div>
+        </td>
+      </tr>
+	  <tr>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+      </tr>
+	  <tr>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+      </tr>
+	  <tr>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+      </tr>
+	  <tr>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+      </tr>
+	  <tr>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+	    <td bgcolor="#FFFFFF">&nbsp;</td>
+      </tr>
+</table>
+            </div>
+        </div>
+                          <div class="clearfix"></div>  
+					  </div>
+					</div>
+				</li>
+				<li>
+					<a href="#" style=" font-size:20px;font-weight:300" class="tbzy_2">按专业志愿(88个)</a>
+					<div>
+						<div class="tab">
+							<ul>
+								<li>
+									<a href="#">SUBTAB 2-1</a>
+									<div>
+										<div class="tab">
+											<ul>
+												<li>
+													<a href="#">SUBTAB 2-1-1</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 2-1-1-1</a>
+																	<div>
+																		Content 2-1-1-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-1-1-2</a>
+																	<div>
+																		Content 2-1-1-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-1-1-3</a>
+																	<div>
+																		Content 2-1-1-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+												<li>
+													<a href="#">SUBTAB 2-1-2</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 2-1-2-1</a>
+																	<div>
+																		Content 2-1-2-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-1-2-2</a>
+																	<div>
+																		Content 2-1-2-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-1-2-3</a>
+																	<div>
+																		Content 2-1-2-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+												<li>
+													<a href="#">SUBTAB 2-1-3</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 2-1-3-1</a>
+																	<div>
+																		Content 2-1-3-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-1-3-2</a>
+																	<div>
+																		Content 2-1-3-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-1-3-3</a>
+																	<div>
+																		Content 2-1-3-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</li>
+								<li>
+									<a href="#">SUBTAB 2-2</a>
+									<div>
+										<div class="tab">
+											<ul>
+												<li>
+													<a href="#">SUBTAB 2-2-1</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 2-2-1-1</a>
+																	<div>
+																		Content 2-2-1-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-2-1-2</a>
+																	<div>
+																		Content 2-2-1-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-2-1-3</a>
+																	<div>
+																		Content 2-2-1-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+												<li>
+													<a href="#">SUBTAB 2-2-2</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 2-2-2-1</a>
+																	<div>
+																		Content 2-2-2-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-2-2-2</a>
+																	<div>
+																		Content 2-2-2-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-2-2-3</a>
+																	<div>
+																		Content 2-2-2-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+												<li>
+													<a href="#">SUBTAB 2-2-3</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 2-2-3-1</a>
+																	<div>
+																		Content 2-2-3-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-2-3-2</a>
+																	<div>
+																		Content 2-2-3-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-2-3-3</a>
+																	<div>
+																		Content 2-2-3-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</li>
+								<li>
+									<a href="#">SUBTAB 2-3</a>
+									<div>
+										<div class="tab">
+											<ul>
+												<li>
+													<a href="#">SUBTAB 2-3-1</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 2-3-1-1</a>
+																	<div>
+																		Content 2-3-1-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-3-1-2</a>
+																	<div>
+																		Content 2-3-1-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-3-1-3</a>
+																	<div>
+																		Content 2-3-1-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+												<li>
+													<a href="#">SUBTAB 2-3-2</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 2-3-2-1</a>
+																	<div>
+																		Content 2-3-2-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-3-2-2</a>
+																	<div>
+																		Content 2-3-2-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-3-2-3</a>
+																	<div>
+																		Content 2-3-2-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+												<li>
+													<a href="#">SUBTAB 2-3-3</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 2-3-3-1</a>
+																	<div>
+																		Content 2-3-3-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-3-3-2</a>
+																	<div>
+																		Content 2-3-3-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 2-3-3-3</a>
+																	<div>
+																		Content 2-3-3-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href="#" style=" font-size:20px; font-weight:300;" class="tbzy_3">智能志愿填报</a>
+					<div>
+						<div class="tab">
+							<ul>
+								<li>
+									<a href="#">SUBTAB 3-1</a>
+									<div>
+										<div class="tab">
+											<ul>
+												<li>
+													<a href="#">SUBTAB 3-1-1</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 3-1-1-1</a>
+																	<div>
+																		Content 3-1-1-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-1-1-2</a>
+																	<div>
+																		Content 3-1-1-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-1-1-3</a>
+																	<div>
+																		Content 3-1-1-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+												<li>
+													<a href="#">SUBTAB 3-1-2</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 3-1-2-1</a>
+																	<div>
+																		Content 3-1-2-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-1-2-2</a>
+																	<div>
+																		Content 3-1-2-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-1-2-3</a>
+																	<div>
+																		Content 3-1-2-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+												<li>
+													<a href="#">SUBTAB 3-1-3</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 3-1-3-1</a>
+																	<div>
+																		Content 3-1-3-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-1-3-2</a>
+																	<div>
+																		Content 3-1-3-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-1-3-3</a>
+																	<div>
+																		Content 3-1-3-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</li>
+								<li>
+									<a href="#">SUBTAB 3-2</a>
+									<div>
+										<div class="tab">
+											<ul>
+												<li>
+													<a href="#">SUBTAB 3-2-1</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 3-2-1-1</a>
+																	<div>
+																		Content 3-2-1-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-2-1-2</a>
+																	<div>
+																		Content 3-2-1-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-2-1-3</a>
+																	<div>
+																		Content 3-2-1-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+												<li>
+													<a href="#">SUBTAB 3-2-2</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 3-2-2-1</a>
+																	<div>
+																		Content 3-2-2-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-2-2-2</a>
+																	<div>
+																		Content 3-2-2-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-2-2-3</a>
+																	<div>
+																		Content 3-2-2-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+												<li>
+													<a href="#">SUBTAB 3-2-3</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 3-2-3-1</a>
+																	<div>
+																		Content 3-2-3-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-2-3-2</a>
+																	<div>
+																		Content 3-2-3-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-2-3-3</a>
+																	<div>
+																		Content 3-2-3-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</li>
+								<li>
+									<a href="#">SUBTAB 3-3</a>
+									<div>
+										<div class="tab">
+											<ul>
+												<li>
+													<a href="#">SUBTAB 3-3-1</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 3-3-1-1</a>
+																	<div>
+																		Content 3-3-1-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-3-1-2</a>
+																	<div>
+																		Content 3-3-1-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-3-1-3</a>
+																	<div>
+																		Content 3-3-1-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+												<li>
+													<a href="#">SUBTAB 3-3-2</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 3-3-2-1</a>
+																	<div>
+																		Content 3-3-2-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-3-2-2</a>
+																	<div>
+																		Content 3-3-2-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-3-2-3</a>
+																	<div>
+																		Content 3-3-2-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+												<li>
+													<a href="#">SUBTAB 3-3-3</a>
+													<div>
+														<div class="tab">
+															<ul>
+																<li>
+																	<a href="#">SUBTAB 3-3-3-1</a>
+																	<div>
+																		Content 3-3-3-1
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-3-3-2</a>
+																	<div>
+																		Content 3-3-3-2
+																	</div>
+																</li>
+																<li>
+																	<a href="#">SUBTAB 3-3-3-3</a>
+																	<div>
+																		Content 3-3-3-3
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+        </div>
+</div>
+<div class="clearfix"></div>
+	</div>	
+    	<div id="fade" class="black_overlay"></div> 	
+	<div class="index_footer_bg">
+		<div class="index_footer"> 
+			<div class="index_footer_l fl">
+				<img src="${base}/r/wdedu/images/index_35.png">
+			</div>
+			<div class="index_footer_c fl">
+				<i><a href="">沃得生涯服务</a><a href="">新高考选科 </a><a href="">综合素质提升</a><a href="">自招综评</a><a href="">志愿填报</a><div class="clearfix"></div></i>
+				<i><a href="">关于沃得生涯</a><a href="">了解沃得 </a><a href="">沃得声明 </a><a href="">加入沃得</a><a href="">合作加盟</a><a href="">联系沃得</a><div class="clearfix"></div></i>
+			</div>
+			<div class="index_footer_r fr">
+				<p><img src="${base}/r/wdedu/images/index_36.png"></p>
+				<span>【 扫码进入沃得公众号 】</span>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<div class="index_last_bg">
+		<div class="index_last">
+			<p>备案号：苏ICP备18041837号-2</p><span>沃得生涯教育咨询有限公司</span><div class="clearfix"></div>
+		</div>
+	</div>
+    <script type="text/javascript" src="${base}/r/wdedu/js/pignose.tab.min.js"></script>
+    <script type="text/javascript">
+//首页旅游产品分类
+$(".product_sort .bd .item").hover(function(){
+	$(this).addClass("layer");
+},function(){
+	$(this).removeClass("layer");
+});
+    $( document).ready(function() {
+			$(".tzy_table_td_xz").click(function(){
+				if($(this).hasClass('fxk')){
+					$(this).removeClass('fxk');
+					}else{
+						$(this).addClass('fxk');
+						}
+				})			
+    });
+	
+	$(function() {
+	$('.tab').pignoseTab({
+		animation: true,
+		children: '.tab'
+	});
+});
+</script>
+    <script>
+			
+			$(".tzy_yxpm1").click( function(){
+			$(this).addClass("bjtp");
+			$(".tzy_yxpm2").removeClass("bjtp");  
+			$(".tzy_yxpm3").removeClass("bjtp3");;  
+			$(".tzy_yxpm4").removeClass("bjtp4");  
+			})
+			$(".tzy_yxpm2").click( function(){
+			$(this).addClass("bjtp");  
+			$(".tzy_yxpm1").removeClass("bjtp");  
+			$(".tzy_yxpm3").removeClass("bjtp3");;  
+			$(".tzy_yxpm4").removeClass("bjtp4");
+			})
+			$(".tzy_yxpm3").click( function(){
+			$(this).addClass("bjtp3");
+			$(".tzy_yxpm2").removeClass("bjtp");  
+			$(".tzy_yxpm1").removeClass("bjtp");;  
+			$(".tzy_yxpm4").removeClass("bjtp4");  
+			})
+			$(".tzy_yxpm4").click( function(){
+			$(this).addClass("bjtp4");
+			$(".tzy_yxpm2").removeClass("bjtp");  
+			$(".tzy_yxpm3").removeClass("bjtp3");;  
+			$(".tzy_yxpm1").removeClass("bjtp1"); 
+			})
+    $( document).ready(function() {
+        $(".checkbox").click( function(){
+			if($(this).hasClass('checked')){
+				$(this).removeClass('checked');
+				$(this).parent().find("span").removeAttr("style");
+			$(this).parent().find("span").css('color','#333333')
+				}else{
+					$(this).addClass('checked');
+				$(this).parent().find("span").css('color','#ff8d00')
+					
+					}
+
+			})
+			
+			$(".gyjz_ss_y4_kk").click(function(){
+				if($(this).hasClass('fxk')){
+					$(this).removeClass('fxk');
+
+					}else{
+						$(this).addClass('fxk');
+						}
+				
+				})
+			
+				
+    });
+    </script>
+</body>
+</html>

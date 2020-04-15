@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<title>模考成绩</title>
+<link href="${base}/r/css/head_footer.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="${base}/r/css/ydyfw.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="${base}/r/js/jquery-1.8.3.min.js" language="javascript"></script>
+<!--[if lte IE 9]>
+<script src="${base}/r/js/html5shiv.js" language="javascript"></script>
+<script src="${base}/r/js/respond.min.js" language="javascript"></script>
+<![endif]-->
+<style>
+.xxtb_left_nav{
+	width:18%;
+    margin: 10px 2% 30px 0;
+}
+.xxtb_right_nav{
+	width:80%;
+}
+.cjxx-table{
+	width:96%;
+	font-size:14px;
+	border:1px solid #EEE;
+	color:#333;
+	margin:0 2% 20px 2%;
+}
+.cjxx-table th{
+	height:50px;
+	background:#EEE;
+	text-align:left;
+}
+.cjxx-table td{
+	height:40px;
+	text-align:left;
+	border-bottom:1px solid #EEE;
+}
+.style-other{
+	padding:0 0 0 30px;
+}
+.bt_a{
+	display:inline-block;
+	width:20%;
+	height:34px;
+	line-height:34px;
+	text-align:center;
+	font-size:18px;
+	letter-spacing:4px;
+	background-color:#3399FF;
+	color:#FFF;
+	margin:5px 14px 20px 0;
+}
+</style>
+</head>
+<body>
+	<div class="z_body" style="background-color:#F2F2F2;">111
+		[#include "../wdedu/include/header_address.html"/]
+		[#include "../wdedu/include/header_dylq.html"/]
+		<div class="z_width_out">
+			<div class="on_line">
+				<div class="bzy_where">
+					&nbsp;您当前位置：<a href="${base}"><span class="">主页&nbsp;</span></a>><a href="${base}/ydyfw/queryOrder.jspx"><span class="">我的一对一服务清单&nbsp;</span></a>><a href="${base}/mnwb/jbxx.jspx?orderId=${order.orderId}"><span class="">&nbsp;填报个人信息&nbsp;</span></a>><span class="">&nbsp;模考成绩</span>
+				</div>
+			</div>
+		</div>
+		<div class="z_width_out">
+			<div class="on_line">
+				<div class="xxtb_left_nav">
+					[#include "./left_menu.html"/]
+				</div>
+				<div class="xxtb_right_nav">
+					<div class="ydy_title">
+						<span class="ydytit_img bg_img"><img src="${base}/second_image/ydy_img/ydy_img09.png"/></span>
+						<span class="ydytit_say">
+							考生个人信息详细填写
+							[#if order.serviceType == 'zytb']
+							（志愿填报一对一）
+							[#elseif order.serviceType =='zzzs']
+							（自主招生一对一）
+							[#elseif order.serviceType =='xdzy']
+							（学大志愿一对一）
+							[#elseif order.serviceType =='bjts']
+							（背景提升项目）
+							[#else]
+							（港澳台一对一）
+							[/#if]
+						</span>
+						<span class="ddh">订单号：${order.orderId}</span>
+					</div>
+					<div class="mes_left_top">
+						<div class="ydy_shuoming">填写基本信息、中学信息、成绩信息，模考成绩、单科成绩等</div>
+					</div>
+					<ul class="mes_left_ul">
+						<li><a href="jbxx.jspx?orderId=${order.orderId}">基本信息</a></li>
+						<li><a href="grzp.jspx?orderId=${order.orderId}" id="grzp">个人照片</a></li>
+						<li><a href="zxxx.jspx?orderId=${order.orderId}" id="zxxx">中学信息</a></li>
+						<li><a href="cjxx.jspx?orderId=${order.orderId}" id="cjxx">成绩信息</a></li>
+						<li><a href="zhxx.jspx?orderId=${order.orderId}">综合信息</a></li>
+						<li class="checked-style"><a href="mkcj.jspx?orderId=${order.orderId}" id="mkcj">模考成绩</a></li>
+						<li><a href="dkpm.jspx?orderId=${order.orderId}" id="dkpm">单科排名</a></li>
+						<li><a href="tjrxx.jspx?orderId=${order.orderId}" id="tjrxx">推荐人信息</a></li>
+						<li><a href="yjxx.jspx?menuId=yjxx&orderId=${order.orderId}" id="yjxx">邮寄信息</a></li>
+					</ul>
+					<div class="mes_left_bottom">
+						<table class="cjxx-table">
+							<tr>
+								<th style="width:24%;" class="style-other">科目\学期</th>
+								<th style="width:23%;">高三第一次模考<br /> 成绩/满分</th>
+								<th style="width:23%;">高三第二次模考<br /> 成绩/满分</th>
+								<th style="width:20%;">高三第三次模考<br /> 成绩/满分</th>
+							</tr>
+							<tr>
+								<td class="style-other">语文</td> 
+								[#list list as a ]
+								<td>${a.chinese!}/${a.chineseTotal!}</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td class="style-other">数学</td> 
+								[#list list as a ]
+								<td>${a.math!}/${a.mathTotal!}</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td class="style-other">外语</td> 
+								[#list list as a ]
+								<td>${a.english!}/${a.englishTotal!}</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td class="style-other">政治</td> 
+								[#list list as a ]
+								<td>${a.politics!}/${a.politicsTotal!}</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td class="style-other">历史</td> 
+								[#list list as a ]
+								<td>${a.history!}/${a.historyTotal!}</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td class="style-other">地理</td> 
+								[#list list as a ]
+								<td>${a.geography!}/${a.geographyTotal!}</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td class="style-other">物理</td> 
+								[#list list as a ]
+								<td>${a.physical!}/${a.physicalTotal!}</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td class="style-other">化学</td> 
+								[#list list as a ]
+								<td>${a.chemistry!}/${a.chemistryTotal!}</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td class="style-other">生物</td> 
+								[#list list as a ]
+								<td>${a.biology!}/${a.biologyTotal!}</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td class="style-other">美术</td> 
+								[#list list as a ]
+								<td>${a.painting!}/${a.paintingTotal!}</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td class="style-other">体育</td> 
+								[#list list as a ]
+								<td>${a.sports!}/${a.sportsTotal!}</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td class="style-other">音乐</td> 
+								[#list list as a ]
+								<td>${a.music!}/${a.musicTotal!}</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td class="style-other">信息技术</td> 
+								[#list list as a ]
+								<td>${a.technology!}/${a.technologyTotal!}</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td class="style-other">文科综合</td> 
+								[#list list as a ]
+								<td>${a.liberalarts!}/${a.liberalartsTotal!}</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td class="style-other">理科综合</td> 
+								[#list list as a ]
+								<td>${a.science!}/${a.scienceTotal!}</td>
+								[/#list]
+							</tr>
+
+							<tr>
+								<td class="style-other">总分</td> 
+								[#list list as a ]
+								<td>${a.courseScore!}/${a.total!}</td>
+								[/#list]
+							</tr>
+							<tr>
+								<td class="style-other">年级排名</td> 
+								[#list list as a ]
+								<td>${a.rank!}</td> [/#list]
+							</tr>
+							<tr>
+								<td class="style-other">年级人数</td> 
+								[#list list as a ]
+								<td>${a.studentCount!}</td>
+								[/#list]
+							</tr>
+						</table>
+						<div style="width:100%;text-align:right;">
+							<a class="bt_a" href="mkcj.jspx?modify=modify&orderId=${order.orderId}">修改</a>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<!-- 底部栏目 -->
+		[#include "../wdedu/include/footer_new.html"/]
+	</div>
+	<script>
+
+		$(function(){
+			$("#tbgrxx").addClass("checked-style02");
+		});
+	</script>
+</body>
+</html>

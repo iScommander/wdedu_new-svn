@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>用户中心</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<script src="${base}/r/cms/front.js"></script>
+		<script type="text/javascript">
+			var time_now_server,time_now_client,time_end,time_server_client;
+
+			time_end=new Date("2019/06/07");//结束的时间
+			time_end=time_end.getTime();//获取的是毫秒
+
+			time_now_server=new Date();//开始的时间
+			time_now_server=time_now_server.getTime();
+			setTimeout("show_time()",100);
+
+			function show_time()
+			{
+				var timer = document.getElementById("timer");
+				var timer1 = document.getElementById("timer1");
+				var timer2 = document.getElementById("timer2");
+				var timer3 = document.getElementById("timer3");
+				var hourid = document.getElementById("hour");
+				if(!timer){
+					return ;
+				}
+				timer.innerHTML =time_now_server;
+
+				var time_now,time_distance,str_time;
+				var int_day,int_hour,int_minute,int_second;
+				var time_now=new Date();
+				time_now=time_now.getTime();
+				time_distance=time_end-time_now;
+				if(time_distance>0)
+				{
+					int_day=Math.floor(time_distance/86400000)
+					time_distance-=int_day*86400000;
+					int_hour=Math.floor(time_distance/3600000)
+					time_distance-=int_hour*3600000;
+					int_minute=Math.floor(time_distance/60000)
+					time_distance-=int_minute*60000;
+					int_second=Math.floor(time_distance/1000)
+
+					if(int_hour < 10)
+						int_hour="0"+int_hour;
+					if(int_minute<10)
+						int_minute="0"+int_minute;
+					if(int_second<10)
+						int_second="0"+int_second;
+					// str_time=int_day+"天"+int_hour+"小时"+int_minute+"分钟"+int_second+"秒";
+
+					str_time=int_day;
+
+					if(int_day >= 100)
+					{
+						timer1.innerHTML=parseInt(int_day/100)%10;
+					}
+					else
+					{
+						timer1.innerHTML=0;
+					}
+
+					if(int_day >= 10)
+					{
+						timer2.innerHTML=parseInt(int_day/10)%10;
+					}
+					else
+					{
+						timer2.innerHTML=0;
+					}
+
+					timer3.innerHTML=int_day%10;
+
+					timer.innerHTML=str_time;
+					setTimeout("show_time()",1000);
+				}
+				else
+				{
+					timer.innerHTML =0;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<!--顶部线条-->
+		[#if kstype?? && kstype=='1']
+		[#include "../include/header_kstb.html"/]
+		[#else]
+		[#include "../include/header_zy.html"/]
+		[/#if]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container1 width1200">
+				<div><a href="${base}/index.jhtml">首页 </a> &lt;&lt;志愿填报 &lt;&lt;用户中心</div>
+			</div>
+		</div>
+		<!--主体-->
+		<main class="userCenterMain">
+			<!--会员设置-->
+			<div class="width1200">
+				<!--个人信息  倒计时-->
+				<div class="flex-container2">
+					<div class="flex-item1 userMessage">
+						<!--个人信息展示-->
+						<div class="headPortrait">
+							[#if img??]
+							<p class="userHeadPortrait">
+								<img src="${img}" alt=""/>
+							</p>
+							[#else]
+							<p class="userHeadPortrait">
+								<img src="${base}/r/img/nvnv.png" alt=""/>
+							</p>
+							[/#if]
+							[#if name??]
+							<p class="userName">${name}</p>
+							[/#if]
+						</div>
+						<div class="flex-container order-set">
+							<div class="flex-item textC">
+								<img src="${base}/r/img/order.png" alt="" />
+								<p class="marginT20"><button class="btn2 btnColorYellow" onclick="window.location.href='${base}/alipay/fuwuzhongxin.jspx'">服务中心</button></p>
+							</div>
+							<div class="flex-item textC">
+								<img src="${base}/r/img/set.png" alt="" />
+								<p class="marginT20"><button class="btn2 btnColorGreen" onclick="window.location.href='${base}/ActivityAct/huiyuanshezhi.jspx'">个人设置</button></p>
+							</div>
+						</div>
+						<!--名人名句-->
+						<div class="rhesis">
+							<p class="textL">十载寒窗，勤学苦练，何人健步登金榜</p>
+							<p class="textR">满腔热血，万丈豪情，我辈英才夺桂冠</p>
+							<p class="textR">-------苏轼</p>
+						</div>
+					</div>
+					<input type="hidden" id="timer">
+					<!--倒计时-->
+					<div class="flex-item1 countDown">
+						<img src="${base}/r/img/countdown.png" alt="" class="width100" />
+						<p>
+						<span id="timer1" class="CountdownNumber"></span>
+						<span id="timer2" class="CountdownNumber"></span>
+						<span id="timer3" class="CountdownNumber"></span>
+						<!--<span class="CountdownNumber">122</span>-->
+						<!--<span class="CountdownNumber">1</span>-->
+						<!--<span class="CountdownNumber">1</span>-->
+						</p>
+					</div>
+				</div>
+				<!--预约-->
+				<div class="subscribe">
+					<!--服务中心-->
+					<div class="subscribe1">
+						<p><a href="">服务中心 &gt;&gt;</a></p>
+						<table class="table deeptable">
+							<tr>
+								<th>服务类型</th>
+								<th>服务名称</th>
+								<th>服务内容简介</th>
+								<th>报名</th>
+							</tr>
+							[#if tBaseServicesList??]
+							[#list tBaseServicesList as t]
+							<tr>
+								<td>${t.type!}</td>
+								<td>${t.name!}</td>
+								<td>
+									<p class="beyondHidden5">${t.introduce!}</p>
+								</td>
+								<td><button class="btn btnColorGreen">进入服务</button></td>
+							</tr>
+							[/#list]
+							[/#if]
+						</table>
+					</div>
+					<!--讲座预约-->
+					<div class="subscribe2">
+						<p><a href="${base}/ActiveDetailAct/expertLectures.jspx">讲座预约 &gt;&gt;</a></p>
+						<div class="flex-container1">
+							<div style="width: 80%;">
+								<table class="table deeptable" border="1">
+									<tr>
+										<th>时间</th>
+										<th>地点</th>
+										<th>讲座主题</th>
+										<th>报名</th>
+									</tr>
+									[#if activeList??]
+									[#list activeList as list]
+									<tr>
+										<td>
+											<p class="timeQuantum">${list.active_time!}</p>
+										</td>
+										<td>${list.address!}</td>
+										<td>
+											<p class="beyondHidden35">${list.theme!}</p>
+										</td>
+										<td>
+											[#if list.active_start_time gt .now]
+											<button class="btnMin btnMinYellow">分享</button>
+											<button class="btnMin btnMinGreen" onclick="baoming('${list.active_id}',${list.id})">报名</button>
+											[#else]<button class="btn">活动已结束</button>[/#if]
+										</td>
+									</tr>
+									[/#list]
+									[/#if]
+								</table>
+							</div>
+							<div class="friendlyReminder textC" style="width: 20%;margin-left: 10px;">
+								<p>友情提示：在线预约服务</p>
+								<div>
+									<p>志愿填报服务</p>
+									<p>自主招生服务</p>
+									<p>沃得留学服务</p>
+									<p>背景提升服务</p>
+									<p><button class="btn btnColorGreen">立即预约</button></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--活动中心     目前不开放-->
+					<!--<div class="activityCenter">
+						<p>活动中心</p>
+						<table class="table deeptable">
+							<tr>
+								<th>活动内容</th>
+								<th>活动时间</th>
+								<th>分享</th>
+								<th>操作</th>
+							</tr>
+							<tr>
+								<td>
+									<p class="beyondHidden6">高考即将临近，你获得一张关于高考作文辅导的教材，请尽快领用，详细请你获得一张关于高考作文辅导的教材，请尽快领用，详细请</p>
+								</td>
+								<td>2018-11-30</td>
+								<td>分享给我的好友</td>
+								<td>领取优惠券</td>
+							</tr>
+							<tr class="overdue">
+								<td>
+									<p class="beyondHidden6">高考即将临近，你获得一张关于高考作文辅导的教材，请尽快领用，详细请你获得一张关于高考作文辅导的教材，请尽快领用，详细请</p>
+								</td>
+								<td>2018-11-30</td>
+								<td>分享给我的好友</td>
+								<td>已过期</td>
+							</tr>
+						</table>
+					</div>-->
+				</div>
+			</div>
+		</main>
+		<!--底部-->
+		[#include "../include/footer.html"/]
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+	<script>
+		function baoming(activeid,id) {
+			window.location.href="${base}/sign/activedetail.jspx?activeid="+activeid+"&&id="+id
+        }
+	</script>
+	</body>
+
+
+</html>

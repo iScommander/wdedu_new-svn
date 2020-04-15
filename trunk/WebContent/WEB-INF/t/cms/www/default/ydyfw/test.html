@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <title>模拟网报-基本信息查询</title>
+    <link href="${base}/r/css/head_footer.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="${base}/r/css/zywy_xdxt_net.css" rel="stylesheet" type="text/css" media="screen" />
+    <script src="${base}/r/js/jquery-1.8.3.min.js" language="javascript"></script>
+    <script src="${base}/thirdparty/My97DatePicker/WdatePicker.js" language="javascript"></script>
+    <script src="${base}/assets/js/jquery.autocompleter.js"></script>
+    <script src="${base}/assets/js/jquery-labelauty.js"></script>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body{
+
+        }
+        .box{
+            /*width: 100%;*/
+            height: 2000px;
+            overflow: hidden;
+            box-sizing: border-box;
+            background-color:#eee;
+
+        }
+        .main{
+            width: 800px;
+            height: 1800px;
+            border: 1px solid #eee;
+            min-width: 1200px;
+            background-color: #fff;
+            margin: 10px 50px;
+            padding: 10px;
+        }
+        .mainxx{
+            height:1500px;
+            margin: 20px;
+
+            border: 1px solid #ccc;
+
+        }
+        .likeyuanxiao{
+            width: 100%;
+            height: 50px;
+            /*border: 1px solid #ccc;*/
+            border-bottom: 1px solid #ccc;
+        }
+
+        .likeyuanxiao >ul {
+            padding: 0 15px;
+            display: flex;
+        }
+        .likeyuanxiao >ul >li{
+            /*padding:0 20px;*/
+            line-height: 50px;
+            /*border-right: 1px solid #ccc;*/
+            /*text-align: center;*/
+            width:220px;
+        }
+        .likeyuanxiao >ul >li >input{
+            /*border: 0;*/
+
+            height: 30px;
+            /*border: 1px solid #ccc;*/
+            border-radius: 5px;
+            outline: none;
+            padding-left: 5px;
+            box-sizing: border-box;
+        }
+
+        /* 意向专业样式*/
+        .likezhuanye{
+            width: 100%;
+            height: 50px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .likezhuanye >ul {
+            padding:0 15px;
+            display: flex;
+        }
+
+        .likezhuanye >ul >li{
+            /*padding:0 20px;*/
+            line-height: 50px;
+            /*border-right: 1px solid #ccc;*/
+            text-align: center;
+            width:220px;
+        }
+
+        .likezhuanye >ul >li >input{
+            /*padding:0 20px;*/
+            height: 30px;
+            width: 100px;
+            /*border: 1px solid #ccc;*/
+            border-radius: 5px;
+            outline: none;
+            padding-left: 5px;
+            box-sizing: border-box;
+        }
+
+
+        /*避让专业样式*/
+        .nozhuanye{
+            width: 100%;
+            height: 50px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .nozhuanye >ul {
+            padding:0 15px;
+            display: flex;
+        }
+
+        .nozhuanye >ul >li{
+            /*padding:0 20px;*/
+            line-height: 50px;
+            /*border-right: 1px solid #ccc;*/
+            text-align: center;
+            width:220px;
+        }
+
+        .nozhuanye >ul >li >input{
+            padding:0 20px;
+            height: 30px;
+            width: 100px;
+            /*border: 1px solid #ccc;*/
+            border-radius: 5px;
+            outline: none;
+            padding-left: 5px;
+            box-sizing: border-box;
+        }
+
+
+
+        .yuanxiaoNumber{
+
+        }
+        .yuanxiaoNumber ul{
+            display: flex;
+            width: 100%;
+            height: 50px;
+            padding: 0 15px;
+            /*border: 1px solid #ccc;*/
+
+            border-bottom: 1px solid #ccc;
+        }
+        .yuanxiaoNumber ul >li{
+            /*margin-right: 20px;*/
+            padding:0 20px;
+            line-height: 50px;
+            width: 220px;
+            border-right: 1px solid #ccc;
+        }
+        .yuanxiaoNumber ul >li h3{
+            text-align: center;
+        }
+        .mtop20{
+            margin-top: 20px;
+        }
+        .yuanxiaoNumber ul >li span{
+            margin-right: 10px;
+            color: #333;
+        }
+        .yuanxiaoNumber ul >li input{
+            height: 25px;
+            border-radius: 5px;
+        }
+        .youxianji{
+            border-bottom: 1px solid #ccc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+            display: flex;
+            position: relative;
+
+        }
+        .youxianji .firstul{
+            display: flex;
+
+            width: 100%;
+            /*height: 50px;*/
+            padding: 0 15px;
+            /*border: 1px solid #ccc;*/
+
+
+        }
+        .youxianji >.firstul li:first-child{
+            width: 220px;
+            border-right: 1px solid #ccc;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+        }
+        .youxianji .firstul li{
+            padding:0 20px;
+            line-height: 50px;
+            /*width: 220px;*/
+            /*border-right: 1px solid #ccc;*/
+        }
+        .youxianji .firstul li input{
+            background-color: #67c23a;
+            border-color: #67c23a;
+            color: #fff;
+            display: inline-block;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            -webkit-appearance: none;
+            text-align: center;
+            box-sizing: border-box;
+            outline: none;
+            margin: 0;
+            transition: .1s;
+            font-weight: 500;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            padding: 5px 5px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+        .youxianji .xuanze{
+            /*line-height: 0;*/
+            margin: 0;
+            padding: 0;
+            width: 250px;
+            height: 30px;
+            border: 1px solid #333;
+            margin-top: 10px;
+            position: absolute;
+            left: 52%;
+            /*transform: translate(-30%,0);*/
+        }
+        .tijian{
+            /*margin: 0 20px;*/
+        }
+        .tijianHeader{
+            width: 100%;
+            height: 50px;
+            background-color:#C0C4CC;
+            display: flex;
+        }
+        .tijianHeader span:first-child{
+            border-right: 1px solid #333;
+        }
+        .tijianHeader span{
+            width: 50%;
+            line-height: 50px;
+            text-align: center;
+            color: #fff;
+        }
+        .tijianmain ul li span{
+            display: inline-block;
+            width: 500px;
+            line-height: 37px;
+            /*margin-bottom: 15px;*/
+
+        }
+        .tijianmain ul li input{
+            margin:0 10px;
+        }
+        .tijianmain {
+            display: flex;
+        }
+        .tijianmain ul{
+            width: 50%;
+        }
+        .tijianmain li{
+            height: 37px;
+            text-align: center;
+        }
+        .footer{
+            border-right: 1px solid #ccc;
+        }
+        .tijianmain ul li{
+            border-bottom: 1px solid #ccc;
+        }
+        .score{
+            overflow: hidden;
+            border-bottom: 1px solid #333;
+        }
+        .score-left{
+            /*width: 100px;*/
+            float: left;
+            width: 235px;
+            height: 100%;
+            border-right: 1px solid #ccc;
+            text-align: center;
+            line-height: 101px;
+
+        }
+        .score-right{
+
+        }
+        .score-right ul{
+            margin: 15px;
+            overflow: hidden;
+        }
+        .score-right li{
+            float: left;
+            margin:5px 10px;
+        }
+        .score-right li input{
+            width: 60px;
+            height: 25px;
+            margin-left: 10px;
+            border-radius: 5px;
+        }
+        .beizhu{
+            text-align: center;
+        }
+        .btn{
+            text-align: center;
+        }
+        .btn button{
+            background-color: #409eff;
+            border-color: #409eff;
+            display: inline-block;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            border: 1px solid #dcdfe6;
+            color: #606266;
+            -webkit-appearance: none;
+            text-align: center;
+            box-sizing: border-box;
+            outline: none;
+            margin: 0;
+            transition: .1s;
+            font-weight: 500;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            padding: 12px 80px;
+            font-size: 14px;
+            border-radius: 4px;
+            color: #fff;
+        }
+        .xuanze .jibie{
+            margin: 0;
+            padding: 0;
+            /*width: 65px;*/
+            padding: 0 5px;
+            height: 20px;
+            background: #39f;
+            font-size: 12px;
+            -webkit-tap-highlight-color: transparent;
+            color: #fff;
+            margin-top: 5px;
+            margin-left: 10px;
+            float: left;
+            text-align: center;
+        }
+        .xuanze ul li{
+            float: left;
+
+        }
+        .xuanze ul li input{
+            border: 0;
+            background-color:#39f ;
+            color: #fff;
+            outline: none;
+
+        }
+        .btn2{
+
+            position: absolute;
+            right: 250px;
+            top: 10px;
+            color: #fff;
+            background-color: #909399;
+            border-color: #909399;
+            display: inline-block;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            border-radius: 5px;
+            -webkit-appearance: none;
+            text-align: center;
+            box-sizing: border-box;
+            outline: none;
+            margin: 0;
+            transition: .1s;
+            font-weight: 500;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            padding: 9px 10px;
+            font-size: 12px;
+        }
+        .li{
+            padding:0 20px;
+            line-height: 50px;
+        }
+    </style>
+</head>
+<body>
+[#include "header_xd.html"/]
+<div class="box">
+    <!--头部标题区域开始-->
+    <div class="main">
+        <div class="mainxx">
+            <from acticio="" method="post">
+
+                <!--偏爱院校开始-->
+                <div class="likeyuanxiao">
+                    <ul>
+                        <li class="li"><h3>请输入偏爱的院校:</h3></li>
+                        <li><input type="text"  class="likeyuanxiaoinput" placeholder="请输入偏爱院校1" id="yuanxiao1"></li>
+                        <li><input type="text"  class="likeyuanxiaoinput"  placeholder="请输入偏爱院校2" id="yuanxiao2"></li>
+                        <li><input type="text"  class="likeyuanxiaoinput" placeholder="请输入偏爱院校3" id="yuanxiao3"></li>
+                    </ul>
+                </div>
+                <!--偏爱院校结束-->
+
+                <!--  意向专业开始-->
+                <div class="likezhuanye">
+                    <ul>
+                        <li class="li"><h3>请输入意向专业:</h3></li>
+                        <li><input type="text" placeholder="意向专业1" id="Yzhuanye1"></li>
+                        <li><input type="text" placeholder="意向专业2" id="Yzhuanye2"></li>
+                        <li><input type="text" placeholder="意向专业3" id="Yzhuanye3"></li>
+                        <li><input type="text" placeholder="意向专业4" id="Yzhuanye4"></li>
+                        <li><input type="text" placeholder="意向专业5" id="Yzhuanye5"></li>
+
+                    </ul>
+                </div>
+                <!--意向专业结束-->
+
+                <!-- 避让专业开始-->
+                <div class="nozhuanye">
+                    <ul>
+                        <li class="li"><h3>请输入避让专业:</h3></li>
+                        <li><input type="text" placeholder="避让专业1" id="Nzhuanye1"></li>
+                        <li><input type="text" placeholder="避让专业2" id="Nzhuanye2"></li>
+                        <li><input type="text" placeholder="避让专业3" id="Nzhuanye3"></li>
+                        <li><input type="text" placeholder="避让专业4" id="Nzhuanye4"></li>
+                        <li><input type="text" placeholder="避让专业5" id="Nzhuanye5"></li>
+
+                    </ul>
+                </div>
+                <!--避让专业结束-->
+
+                <!--院校数量开始-->
+                <div class="yuanxiaoNumber ">
+                    <ul>
+                        <li><h3>请选择</h3></li>
+                        <li><span>冲-院校数量:</span><input id="chon" type="number" min="0" max="5" name="yuanxiaoNumber" onkeydown="return false" value="0"></li>
+                        <li><span>稳-院校数量:</span><input id="wen" type="number" min="0" max="5" name="yuanxiaoNumber" onkeydown="return false" value="0"></li>
+                        <li><span>保-院校数量:</span><input id="bao" type="number" min="0" max="5" name="yuanxiaoNumber" onkeydown="return false" value="0"></li>
+                    </ul>
+                </div>
+                <!--院校数量结束-->
+                <!--优先级开始-->
+                <div class="youxianji">
+                    <ul class="firstul">
+                        <li>请选择优先级:</li>
+                        <li data-id="1"><input type="button" value="分数优先" ></li>
+                        <li data-id="2"><input type="button" value="专业优先" ></li>
+                        <li data-id="3"><input type="button" value="专业级差优先" ></li>
+                    </ul>
+                    <div class="xuanze" style=" border-radius: 5px;">
+                        <ul>
+                            <!--<li class="jibie">分数优先</li>-->
+                        </ul>
+                    </div>
+                    <button class="btn2">重置</button>
+                </div>
+                <!--优先级结束-->
+                <!--成绩开始-->
+                <div class="score">
+                    <div class="score-left">单科成绩(高考分)</div>
+                    <div class="score-right">
+                        <ul>
+                            <li><span>语文</span><input type="number" id="yuwen" min="0" max="150" value="0"></li>
+                            <li><span>数学</span><input type="number"id="shuxue" min="0" max="150" value="0"></li>
+                            <li><span>外语</span><input type="number" id="waiyu" min="0" max="150" value="0"></li>
+                            <li><span>物理</span><input type="number" id="wuli" min="0" max="150" value="0"></li>
+                            <li><span>化学</span><input type="number" id="huaxue" min="0" max="150" value="0"></li>
+                            <li><span>生物</span><input type="number" id="shengwu" min="0" max="150" value="0"></li>
+                            <li><span>历史</span><input type="number" id="lishi" min="0" max="150" value="0"></li>
+                            <li><span>政治</span><input type="number" id="zhenzhi" min="0" max="150" value="0"></li>
+                            <li><span>地理</span><input type="number" id="dili" min="0" max="150" value="0"></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <!--成绩结束-->
+
+                <!--体检开始-->
+                <div class="tijian">
+                    <div class="tijianHeader"><span>体检测试项目</span> <span>测试结果</span></div>
+                    <div class="tijianmain">
+                        <ul class="footer">
+                            <li><span>有无既往病史</span></li>
+                            <li> <span>眼科检查（视力、色弱、色盲、眼病）</span></li>
+                            <li><span>内科检查</span></li>
+                            <li><span>口腔科</span></li>
+                            <li>  <span>外科检查</span></li>
+                            <li>  <span>耳鼻喉科</span></li>
+                            <li> <span>胸部透视</span></li>
+                            <li><span>肝功能化验</span></li>
+                            <li> <span>医院总体意见</span></li>
+                        </ul>
+
+                        <ul >
+                            <li>
+
+                                <input type="radio" value="0" name="binshi" checked>合格</input>
+                                <input type="radio" value="1" name="binshi">不合格</input>
+                                <input type="radio" value="2" name="binshi">专业受限</input>
+                            </li>
+                            <li>
+
+                                <input type="radio" value="0" name="yanke" checked>合格</input>
+                                <input type="radio" value="1" name="yanke">不合格</input>
+                                <input type="radio" value="2" name="yanke">专业受限</input>
+                            </li>
+                            <li>
+
+                                <input type="radio" value="0" name="neike" checked>合格</input>
+                                <input type="radio" value="1" name="neike">不合格</input>
+                                <input type="radio" value="2" name="neike">专业受限</input>
+                            </li>
+                            <li>
+
+                                <input type="radio" value="0" name="kouqiang" checked>合格</input>
+                                <input type="radio" value="1" name="kouqiang">不合格</input>
+                                <input type="radio" value="2" name="kouqiang">专业受限</input>
+                            </li>
+                            <li>
+
+                                <input type="radio"value="0" name="waike" checked>合格</input>
+                                <input type="radio" value="1" name="waike">不合格</input>
+                                <input type="radio" value="2" name="waike">专业受限</input>
+                            </li>
+                            <li>
+
+                                <input type="radio" value="0" name="erbi" checked>合格</input>
+                                <input type="radio" value="1" name="erbi">不合格</input>
+                                <input type="radio" value="2" name="erbi">专业受限</input>
+                            </li>
+                            <li>
+
+                                <input type="radio" value="0" name="xiongbu" checked>合格</input>
+                                <input type="radio" value="1" name="xiongbu">不合格</input>
+                                <input type="radio" value="2" name="xiongbu">专业受限</input>
+                            </li>
+                            <li>
+
+                                <input type="radio" value="0" name="gangongneng" checked>合格</input>
+                                <input type="radio" value="1" name="gangongneng">不合格</input>
+                                <input type="radio" value="2" name="gangongneng">专业受限</input>
+                            </li>
+                            <li>
+
+                                <input type="radio" value="0" name="yijian" checked>合格</input>
+                                <input type="radio" value="1" name="yijian">不合格</input>
+                                <input type="radio" value="2" name="yijian">专业受限</input>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+                <!--体检结束-->
+
+                <!--备注开始-->
+                <div class="beizhu mtop20" >
+                    <textarea name="" id="" cols="30" rows="10" style="width: 1000px;height: 228px;resize: none" placeholder="备注"></textarea>
+                </div>
+                <!--备注结束-->
+
+                <div class="btn">
+                    <button>保存</button>
+                </div>
+
+
+            </from>
+        </div>
+
+        <!--头部标题区域结束-->
+    </div>
+
+
+
+</div>
+
+
+<script>
+    $(function () {
+        //    偏爱院校值默认key
+        var yuanxiao = "null|null|null";//不存在即null
+        //意向专业值默认key
+        var  Yzhuanye="null|null|null|null|null";//不存在即null
+        //避让专业默认key值
+        var  Nzhuanye="null|null|null|null|null";
+        //    院校数量key
+        var yuanxiaoNumber = {chon:0,wen:0,bao:0};//默认问0
+        //优先级key
+        var yuxianji = "123"//默认为123
+        //    各科成绩key
+        var scores = {yuwen:0,shuxue:0,waiyu:0,wuli:0,huaxue:0,shengwu:0,lishi:0,zhenzhi:0,dili:0};//默认都为0
+        //    体检情况key
+        var tijian = {binshi:0,yanke:0,neike:0,kouqiang:0,waike:0,erbi:0,xiongbu:0,gangongneng:0,yijian:0}//默认为0合格
+        //    备注key
+        var beizhu = ""//默认为空
+
+        //    为每一个偏爱院校框注册oninput事件
+        $(".likeyuanxiaoinput").on("input",function(){
+            var yuanxiao1 = $("#yuanxiao1 ").val()?$("#yuanxiao1 ").val():null;
+            var yuanxiao2 = $("#yuanxiao2 ").val()?$("#yuanxiao2 ").val():null;
+            var yuanxiao3 = $("#yuanxiao3 ").val()?$("#yuanxiao3 ").val():null;
+            yuanxiao = yuanxiao1+"|"+yuanxiao2+"|"+yuanxiao3;
+            console.log(yuanxiao)
+        })
+
+        //为每一个意向专业添加一下oninput事件
+        $(".likezhuanye>ul>li>input").on("input",function () {
+
+            var Yzhuanye1=  $("#Yzhuanye1").val()?$("#Yzhuanye1").val():null;
+            // console.log(Yzhuanye1)
+            var Yzhuanye2=  $("#Yzhuanye2").val()?$("#Yzhuanye2").val():null;
+            var Yzhuanye3=  $("#Yzhuanye3").val()?$("#Yzhuanye3").val():null;
+            var Yzhuanye4=  $("#Yzhuanye4").val()?$("#Yzhuanye4").val():null;
+            var Yzhuanye5=  $("#Yzhuanye5").val()?$("#Yzhuanye5").val():null;
+            Yzhuanye=Yzhuanye1+"|"+Yzhuanye2+"|"+Yzhuanye3+"|"+Yzhuanye4+"|"+Yzhuanye5;
+            console.log(Yzhuanye)
+        })
+
+        //为每一个避让专业添加一个oninput事件
+        $(".nozhuanye>ul>li>input").on("input",function () {
+            var Nzhuanye1=  $("#Nzhuanye1").val()?$("#Nzhuanye1").val():null;
+            var Nzhuanye2=  $("#Nzhuanye2").val()?$("#Nzhuanye2").val():null;
+            var Nzhuanye3=  $("#Nzhuanye3").val()?$("#Nzhuanye3").val():null;
+            var Nzhuanye4=  $("#Nzhuanye4").val()?$("#Nzhuanye4").val():null;
+            var Nzhuanye5=  $("#Nzhuanye5").val()?$("#Nzhuanye5").val():null;
+            Nzhuanye=Nzhuanye1+"|"+Nzhuanye2+"|"+Nzhuanye3+"|"+Nzhuanye4+"|"+Nzhuanye5;
+            console.log(Nzhuanye);
+        })
+
+
+
+        //为院校数量下面的所有input注册onput事件并赋值给yuanxiaoNumber
+        $(".yuanxiaoNumber input").on("input",function () {
+            yuanxiaoNumber.chon = $("#chon").val();
+            yuanxiaoNumber.wen = $("#wen").val();
+            yuanxiaoNumber.bao = $("#bao").val();
+            // console.log(yuanxiaoNumber)
+        })
+
+        // 为每个优先级按钮注册点击事件
+        $(".firstul li >input").on("click",function () {
+            // console.log(this.value);
+            var newxuanze = $(this).parent();
+            var lis = newxuanze.clone(false).addClass("jibie");
+            // console.log(lis);
+            $(".xuanze ul").append(lis)
+            $(this).attr("disabled",true)
+            $(this).css({"color": "#fff",
+                "background-color": "#f56c6c",
+                "border-color": "#f56c6c"})
+        })
+
+        //    重置按钮注册事件
+        $(".btn2").on("click",function () {
+            $(".xuanze ul").empty();
+            $(".firstul input").attr("disabled",false)
+            $(".firstul input").css({
+                "color": "#fff",
+                "background-color": "#67c23a",
+                "border-color": "#67c23a"
+            })
+        })
+        //    为成绩中的input注册input事件;
+        $(".score-right input").on("input",function () {
+            scores.yuwen = $("#yuwen").val();
+            scores.shuxue = $("#shuxue").val();
+            scores.waiyu = $("#waiyu").val();
+            scores.wuli = $("#wuli").val();
+            scores.huaxue = $("#huaxue").val();
+            scores.shengwu = $("#shengwu").val();
+            scores.lishi = $("#lishi").val();
+            scores.zhenzhi = $("#zhenzhi").val();
+            scores.dili = $("#dili").val();
+            // console.log(scores)
+        })
+
+        //为保存按钮添加点击事件
+        $(".btn").on("click",function () {
+        // <li data-id="1"><input type="button" value="分数优先" ></li>
+        // <li data-id="2"><input type="button" value="专业优先" ></li>
+        // <li data-id="3"><input type="button" value="专业级差优先" ></li>
+            //    获取优先级框内的值
+            if($(".xuanze ul li").length===3){
+                var one = $(".xuanze ul li:eq(0)").data("id").toString();
+                var two = $(".xuanze ul li:eq(1)").data("id");
+                var tree = $(".xuanze ul li:eq(2)").data("id");
+                yuxianji = one + two +tree
+                // console.log(yuxianji )
+            }else {
+                alert("请选择完整的优先级")
+                return;
+            }
+
+            //    获取体检选择结果
+            //     var tijian = {binshi:0,yanke:0,neike:0,kouqiang:0,waike:0,erbi:0,xiongbu:0,gangongneng:0,yijian:0}//默认为0合格
+            tijian.binshi = $("input:radio[name='binshi'][checked]").val();
+            tijian.yanke = $("input:radio[name='yanke'][checked]").val()
+            tijian.neike = $("input:radio[name='neike'][checked]").val()
+            tijian.kouqiang = $("input:radio[name='kouqiang'][checked]").val()
+            tijian.waike = $("input:radio[name='waike'][checked]").val()
+            tijian.erbi = $("input:radio[name='erbi'][checked]").val()
+            tijian.xiongbu = $("input:radio[name='xiongbu'][checked]").val()
+            tijian.gangongneng = $("input:radio[name='gangongneng'][checked]").val()
+            tijian.yijian = $("input:radio[name='yijian'][checked]").val()
+            console.log(tijian)
+            //    获取备注内的值
+            beizhu = $(".beizhu textarea").val();
+            // console.log(beizhu)
+            // console.log({ yuanxiao:yuanxiao,
+            //     yuanxiaoNumber:yuanxiaoNumber,
+            //     yuxianji:yuxianji,
+            //     scores:scores,
+            //     tijian:tijian,
+            //     beizhu:beizhu})
+            //     var tijian = {binshi:0,yanke:0,neike:0,kouqiang:0,waike:0,erbi:0,xiongbu:0,gangongneng:0,yijian:0}//默认为0合格
+            // console.log(typeof (JSON.stringify(tijian)) )
+            $.ajax({
+                type:"post",
+                url:"${base}/order/saveOrUpdateTkstbBase2.jspx",
+                datatype:"json",
+                data:{
+                    favoriteUnivNames:yuanxiao,
+                    chooseOrder:yuxianji,
+                    avoidMajorId:Nzhuanye,
+                    intentMajorId:Yzhuanye,
+                    yuanxiaoNumber:JSON.stringify(yuanxiaoNumber),
+                    score:JSON.stringify(scores),
+                    physicalExamination:JSON.stringify(tijian),
+                    reamrk:beizhu
+                },
+            })
+        })
+
+    })
+</script>
+</body>
+
+</html>

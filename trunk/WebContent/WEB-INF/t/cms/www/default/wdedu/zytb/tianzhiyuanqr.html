@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>填志愿</title>
+
+<link rel="stylesheet" type="text/css" href="${base}/r/wdedu/css/index.css" />
+<script src="${base}/r/wdedu/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="${base}/r/wdedu/js/js/web.js"></script>
+    <script src="${base}/r/css/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="${base}/r/css/sweetalert.css">
+<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+
+	#wrapper {
+		padding-bottom: 40px;
+	}
+	.article {
+		margin: 0 auto;
+		text-align: center;
+	}
+	.article h3 {
+		margin-bottom: 40px;
+	}
+	.article table {
+		font-size: 115%;
+		text-align: left;
+	}
+	.article pre {
+		font-size: 115%;
+	}
+	.nav.tab { width: auto; max-width: 100%; margin: 0; border: 0; padding: 0; border-bottom: 1px solid #ddd; }
+	.pignose-sub-tab { border: 0; margin: 0; padding: 0;
+	.table { width: 100%; table-layout: fixed; }
+	.table .subject { text-align: left; padding-left: 5%; }
+	.table .date { text-align: right; padding-right: 5%; }
+</style>
+</head>
+<body>
+
+
+[#include "../include/header_address.html"/]
+    
+    
+   [#include "../include/header_zytb.html"/]
+	<div class="mbxdh_bg">
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">志愿填报</a>&nbsp;&gt; &nbsp; <a href="#">填志愿</a>
+		</div>  
+	</div>   
+		<div class="con">
+		<div class="zntb">智能填报是根据你的成绩、专业及地区等倾向智能生成志愿表的功能，请先确认以下信息:</div>
+        <div class="tzy_yxz">
+
+                  <div class="tzy_yxz_2">
+                    <div class="tzy_yxz_1">
+                    	你的基本信息？
+                    </div>
+                  <div class="tzy_yxz_2_a">
+                  <div class="zdx_suo6 jbxxxs">
+
+                     <span>方案名称：${tCeeApplications.applicationName!}</span>   <span>成绩：${tCeeApplications.score!}分</span><span>文理科：[#if tCeeApplications.majorTypeId == 1] 文科 [#elseif tCeeApplications.majorTypeId == 2] 理科 [#elseif tCeeApplications.majorTypeId == 3] 综合改革 [/#if]</span> <span>批次：${tCeeBatch.batchName!}</span>
+
+        			<div class="clearfix"></div>
+                   </div>
+                  </div>
+
+                  </div>
+
+        	<div class="tzy_yxz_1">
+            	你选择的院校属性是？
+            </div>
+            <div class="tzy_yxz_1_a">
+         		 <div class="zdx_suo5">
+                						<div class="zdx_suo_an5 hg f_l">
+                                        <input id="radio_yuanxiao_0" value="0" name="property"  type="checkbox"  hidden >
+                                        <label for="radio_yuanxiao_0">不限</label>
+                                    	</div>
+               		    				<div class="zdx_suo_an5 f_l">
+                                        <input id="radio_yuanxiao_1" value="1" name="property"  type="checkbox"hidden [#if is985??&&is985==1]checked[/#if]>
+                                        <label for="radio_yuanxiao_1">985院校</label>
+                                    	</div>
+									<div class="zdx_suo_an5 f_l">
+                                        <input id="radio_yuanxiao_2" value="2" name="property"  type="checkbox"hidden [#if is211??&&is211==1]checked[/#if]>
+                                        <label for="radio_yuanxiao_2">211院校</label>
+                                    </div>
+									<div class="zdx_suo_an5 f_l">
+                                        <input id="radio_yuanxiao_3" value="3" name="property"  type="checkbox"hidden [#if isFirstRate??&&isFirstRate==2]checked[/#if]>
+                                        <label for="radio_yuanxiao_3">一流院校</label>
+                                    </div>
+									<div class="zdx_suo_an5 f_l">
+                                        <input id="radio_yuanxiao_4" value="4" name="property"  type="checkbox"hidden [#if isFirstRate??&&(isFirstRate==1 || isFirstRate==2)]checked[/#if]>
+                                        <label for="radio_yuanxiao_4">一流学科</label>
+                                    </div>          
+			<div class="clearfix"></div>
+               </div>
+            </div>
+            
+            
+          <div class="tzy_yxz_2">
+            <div class="tzy_yxz_1">
+            	你选择的院校分类是？
+            </div>
+          <div class="tzy_yxz_2_a">
+          <div class="zdx_suo6">
+          [#if universityType??]
+            [#list universityType as ut]
+                      <div class="zdx_suo_an6 hg f_l">
+                          <input id="radio_classify_${ut.id!}" value="${ut.typeName!}" name="universityType"  type="checkbox" hidden
+                           [#if univTypesStr?? && univTypesStr?contains('${ut.typeName!}')] checked [/#if]>
+                          <label for="radio_classify_${ut.id!}">${ut.typeName!}</label>
+                      	</div>
+            [/#list]
+          [/#if]
+			<div class="clearfix"></div>
+               </div>
+          </div>
+          
+          </div>
+              <div class="tzy_yxz_2">
+            <div class="tzy_yxz_1">
+            	你选择的意向地区是？
+            </div>
+            <div class="tzy_yxz_3_a">
+            <div class="zdx_suo7">
+                [#if tBaseProvinces??]
+                [#list tBaseProvinces as tp]
+                [#if tp.provinceName !='未知']
+                <div class="zdx_suo_an7 f_l">
+                    <input id="radio_region_${tp.provinceId!}" value="${tp.provinceId!}" name="tBaseProvinces"  type="checkbox"hidden
+                     [#if univProvinceStrs?? && univProvinceStrs?contains('${tp.provinceName!}')] checked [/#if]>
+                    <label for="radio_region_${tp.provinceId!}">${tp.provinceName!}</label>
+                </div>
+                [/#if]
+                [/#list]
+                [/#if]
+                   <div class="clearfix"></div>
+            </div>
+
+            </div>
+
+            </div>
+
+                          <div class="tzy_yxz_2">
+                        <div class="tzy_yxz_1">
+                        	你选择的避让院校是？
+                        </div>
+                        <div class="tzy_yxz_3_a">
+                        <div class="zdx_suo7">
+                            [#if tCeeEnrollUnivLists??]
+                            [#list tCeeEnrollUnivLists as tl]
+                            <div class="zdx_suo_an7 f_l" style="width: 124px;margin-right: 10px;">
+                            <div class="qr_yuanxiao" style="width: auto;overflow: hidden;">${tl.univName!}</div>
+                            </div>
+                            [/#list]
+                             [#else]
+                          您还未选择避让院校是否<a href="#"  class="bryx" onclick="javascript:window.history.back();">重新选择</a>避让院校
+                            [/#if]
+                            <div class="clearfix"></div>
+                        </div>
+
+                        </div>
+
+                        </div>
+                          <div class="tzy_yxz_2">
+                        <div class="tzy_yxz_1">
+                        	你选择的已选意向院校及意向专业是？
+                        </div>
+                        <div class="tzy_yxz_3_a">
+                        <div class="zdx_suo7">
+
+
+                            <ul class="qr_zy">
+                              [#if tCeeEnrollMajorLists??]
+                              [#list tCeeEnrollMajorLists as tm]
+                            <li >
+                            ${tm.univName!}:${tm.majorName!}
+                            </li>
+                             [/#list]
+
+                             [/#if]
+                             <div class="clearfix"></div>
+                            </ul>
+
+
+                        </div>
+
+                        </div>
+
+                        </div>
+            <div class="tzy_yxz_2">
+            <div class="tzy_yxz_1">
+            	你冲稳保设置是？<i class="tzy_yxz_i">冲稳保数量总和必须是等于規定院校数！当前规定院校为8所院校,请合理分配院校数量。</i>
+            </div>
+            <div class="tzy_yxz_4_a">
+            	<div class="chong_zs f_l">
+                
+                <span>冲一冲院校数量设置：</span><input type="text" id="c_num" value="${advancedUnivNum!}" oninput = "value=value.replace(/[^\d]/g,'')" />
+               <div class="clearfix"></div>
+                </div>
+                <div class="chong_zs f_l">
+                
+                <span>稳一稳院校数量设置：</span><input type="text" id="w_num" value="${stableUnivNum!}" oninput = "value=value.replace(/[^\d]/g,'')"/>
+               <div class="clearfix"></div>
+                </div>
+               <div class="chong_zs f_l">
+                
+                <span>保一保院校数量设置：</span><input type="text" id="b_num" value="${backwardUnivNum!}" oninput = "value=value.replace(/[^\d]/g,'')"/>
+               <div class="clearfix"></div>
+                </div>
+               <div class="chong_nn f_l">
+                <button type="button" onclick="updateCWB(${tCeeApplicationsRequire.id!})">保存设置</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            </div>
+        </div>
+        </div>
+    	
+  [#if haveZhiNengZhiYuanTianBao??&&haveZhiNengZhiYuanTianBao=="false"]
+  <div class="mb_db_gd" id="box2">
+      <div class="mb_db_gd_zt">
+          <span>&nbsp;&nbsp; 购买VIP后可查看智能填报模拟填报表&nbsp;&nbsp;点击</span>
+          <a class="mb_db_gd_an" href="${base}/NewsDisplay/testSxk.jspx">购买</a>
+      </div>
+      <div class="clearfix"></div>
+  </div>
+  [#else]
+ <div class="mb_db_gd" id="box2">
+<div class="mb_db_gd_zt">
+<span>下一步</span>
+<a class="mb_db_gd_an" onclick="op('${applicationId!}','${batchId!}')" >进入生成志愿表序列</a>
+</div>
+<div class="clearfix"></div>
+</div>
+  [/#if]
+[#include "../include/footer_new.html"/]
+    <script type="text/javascript" src="${base}/r/wdedu/js/pignose.tab.min.js"></script>
+    <script type="text/javascript" src="${base}/r/wdedu/js/tzy.js"></script>
+    <script type="text/javascript">
+  function op(aid,apid){
+      aa();
+      window.location.href="${base}/fastZytb/getAutoZhiyuanSolution.jspx?applicationId="+aid+"&batchId="+apid;
+  }
+     function aa(){
+         swal(
+             {
+                 title:"正在生成志愿方案，请不要关闭或者刷新页面...",
+                 text:"可能需要几分钟，但这是值得的！",
+                 showConfirmButton:false,
+                 imageUrl: "${base}/r/img/timg.gif",
+             }
+         );
+      }
+        //全部清理
+        $("#radio_yuanxiao_0").click(function () {
+                var citys = document.getElementsByName("property");
+                for(i=1;i<citys.length;i++){
+                    citys[i].checked = false;
+                }
+        })
+
+    // //取数据
+    // function qsj(){
+    //    /* 取院校分类  universityTypes  */
+    //     var universityType = document.getElementsByName("universityType");
+    //     var universityTypes = new Array();
+    //     for (var i = 0; i < universityType.length; i++) {
+    //         if (universityType[i].checked == true) {
+    //             //这个是获取多选框中的值
+    //             universityTypes.push(universityType[i].value);
+    //         }
+    //     }
+    //     /*取院校地区  tBaseProvincess   */
+    //     var tBaseProvinces = document.getElementsByName("tBaseProvinces");
+    //     //然后我们去得到这个多选框的长度
+    //     var tBaseProvincess = new Array();
+    //     for (var i = 0; i < tBaseProvinces.length; i++) {
+    //         if (tBaseProvinces[i].checked == true) {
+    //             //这个是获取多选框中的值
+    //             tBaseProvincess.push(tBaseProvinces[i].value);
+    //         }
+    //     }
+    //     /*取院校属性  propertys   */
+    //     var property = document.getElementsByName("property");
+    //     //然后我们去得到这个多选框的长度
+    //     var propertys = new Array();
+    //     for (var i = 0; i < property.length; i++) {
+    //         if (property[i].checked == true) {
+    //             //这个是获取多选框中的值
+    //             propertys.push(property[i].value);
+    //         }
+    //     }
+    //
+    // }
+
+
+    // 冲稳保数量保存
+    function updateCWB(require_id){
+
+
+      var CNum = $('#c_num').val();
+      var WNum = $('#w_num').val();
+      var BNum = $('#b_num').val();
+
+        $.ajax({
+            url:"${base}/zytb/updateCWB.jspx",
+            type:'post', //GET
+            async:true,    //或false,是否异步
+            dataType:'json',
+            contentType:"application/x-www-form-urlencoded; charset=utf-8",
+            traditional: true,
+            data:{
+                requireId : require_id,
+                cNum	:	CNum,
+                wNum	:	WNum,
+                bNum	:	BNum
+            },
+            // complete:function () {
+            // 	window.location.reload();
+            // }
+            complete:function () {
+                alert("修改成功");
+                window.location.reload();
+            }
+        })
+
+  }
+
+
+//首页旅游产品分类
+$(".product_sort .bd .item").hover(function(){
+	$(this).addClass("layer");
+},function(){
+	$(this).removeClass("layer");
+});
+    $( document).ready(function() {
+			$(".tzy_table_td_xz").click(function(){
+				if($(this).hasClass('fxk')){
+					$(this).removeClass('fxk');
+					}else{
+						$(this).addClass('fxk');
+						}
+				})			
+    });
+	
+	$(function() {
+	$('.tab').pignoseTab({
+		animation: true,
+		children: '.tab'
+	});
+});
+</script>
+
+</body>
+</html>

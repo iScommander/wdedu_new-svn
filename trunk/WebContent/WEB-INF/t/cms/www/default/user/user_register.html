@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>注册</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<style>
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="dlzcjhbg">
+			<div class="registerContent">
+				<p>欢迎使用沃得教育生涯规划系统</p>
+				<div class="flex-container">
+					<!--左-->
+					<div class="registerContentLeft flex-item10 textC">
+						<p class="logoziImg"><img src="${base}/u/cms/www/logo/logozi.png" alt="" /></p>
+						<p><img src="${base}/r/img/erweima.png" alt="" /></p>
+					</div>
+					<!--右-->
+					<div class="registerContentRight flex-item10">
+						<form id="jvForm">
+							<div>
+								<span><img src="${base}/r/img/shouji.png" alt="" /></span>
+								<input id="username" name="username" class="f-origin" type="text" placeholder="输入11位数字手机号码" />
+							</div>
+							<div>
+								<input name="captcha" class="f-origin verificationCode" type="text" placeholder="请输入验证码" style="width: 190px;"/>
+								<input type="button" class="obtain generate_code" value=" 获取验证码" onclick="getCaptcha(this);">
+							</div>
+							<div>
+								<span><img src="${base}/r/img/mima.png" alt="" /></span>
+								<input name="password" class="f-origin" type="text" placeholder="请设置登录密码" />
+							</div>
+							<div class="registerBtn">
+								<button type="button" class="btn10 btnColorGreen" onclick="_submit()">注册</button>
+								<button type="button" onclick="_rtnBtn()" class="btn9">暂不注册</button>
+							</div>
+							<div class="ljdl">
+								<a href="${base}/login.jspx">我有账号，立即登录</a>
+							</div>
+							<div class="">我的高中生涯，沃得教育规划</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+		<script>
+			//input选中变色
+			window.onload = function() {
+				var aInput = document.getElementsByTagName('input');
+				for(var i = 0; i < aInput.length; i++) {
+					aInput[i].onfocus = function() {
+						this.className = 'f-text';
+					}
+					aInput[i].onblur = function() {
+						this.className = 'f-origin';
+					}
+				}
+			};
+
+
+			// 获取验证码
+			function getCaptcha(val) {
+                var phone = /^1(3|4|5|7|8)\d{9}$/;
+                if(!phone.test($("#username").val())){
+                    alert("手机号输入有误!");
+                    return;
+                }
+
+                var count = 60;
+                var resend = setInterval(function(){
+                    count--;
+                    if (count > 0){
+                        val.value = "重新发送(" + count + ")";
+                    }else {
+                        val.removeAttribute("disabled");
+						val.value = "获取验证码";
+                        clearInterval(resend);
+                    }
+                }, 1000);
+
+                val.setAttribute("disabled", true);
+
+                $.ajax({
+                    url : 'get_captcha.jspx',
+                    data:{
+                        phone:$("#username").val()
+                    },
+                    type : "POST",
+                    async:false,
+                    success : function(data) {
+                    }
+                });
+            }
+
+            function _submit(){
+                $.ajax({
+                    url : 'user_submit.jspx',
+                    data:$("#jvForm").serialize(),
+                    type : "POST",
+                    async:false,
+                    error : function(data) {
+                        alert("注册失败！\r\n"+data);
+                    },
+                    success : function(data) {
+                        var res = eval('(' + data + ')');
+                        if(res && res.success == true){
+                            alert("操作成功！");
+                            event.returnValue=false;
+                            parent.location.href="${base}/admissonSvcAct/findbaseInfo.jspx"
+                        }else{
+                            alert("注册失败\r\n"+res.msg);
+                        }
+                    }
+                });
+			}
+
+            function _rtnBtn() {
+                location.href='${base}/';
+            }
+		</script>
+	</body>
+</html>

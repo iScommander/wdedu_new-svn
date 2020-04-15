@@ -1,0 +1,776 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>专业介绍</title>
+    <link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css"/>
+    <script src="${base}/r/wdedu/js/jquery-1.9.1.min.js"></script>
+    <script language="javascript" src="${base}/r/wdedu/js/common.js"></script>
+    <script src="${base}/r/wdedu/js/progressBar.js"></script>
+    <link type="text/css" rel="stylesheet" href="${base}/r/wdedu/css/style.css"/>
+     <script src="${base}/r/wdedu/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            window.isMoused = false;
+
+            function qz(obj) {
+                var text = $(obj).text();
+                document.getElementById("text").innerText = text;
+                gb();
+
+            }
+
+            function gb() {
+                document.getElementById('city_nav').className = 'city_nav';
+                document.getElementById('city_link').className = 'city_link';
+                window.isMoused = false;
+                return !1;
+            }
+
+            function dk() {
+                if (window.isMoused) {
+                    gb()
+                    window.isMoused = false;
+                } else {
+                    document.getElementById('city_link').className = 'city_link city_hovers'
+                    window.isMoused = true;
+                }
+            }
+
+            //分页上一页
+            function _gotoPageUp(univMajorId) {
+
+                var pageNo = $("#pageNo").val();
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: "${base}/searchUnivAndMajor/searchPageUp.jspx",
+                    data: {
+                        "pageNo": pageNo,
+                        "univMajorId": univMajorId
+                    },
+
+                    success: function (data) {
+                        var mo = $("#pageNo").val(data.pageNo);
+
+                        $("#major").html("");
+                        var univ = data.list;
+                        $(univ).each(function (i, obj) {
+
+                            var a = '<li><div class="da_img f_l">';
+                            var m = '';
+                            if(obj.logoUrl!=null&&obj.logoUrl!=""){
+                                m= '<img src="'+ obj.logoUrl +'" />';
+                            }else {
+                                m='<img src="${base}/r/img/index/noschool.png"/>';
+                            }
+
+
+                            var n ='</div>\n' +
+                                '<div class="zdx_yx_xx f_l">\n' +
+                                '<div class="da_ch">\n' +
+                                '<div class="da_m f_l"><a href="${base}/searchUnivAndMajor/univDetail.jspx?id=' + obj.universityBaseId + '">' + obj.univName + '</a></div>'
+                            /*  $("#major").append(a);*/
+
+                            /*  $("#major").append('<div class="clearfix"></div></div><div class="da_ls">');*/
+                            var b = '<div class="clearfix"></div></div><div class="da_ls">'
+
+                            var c = '';
+                            if (obj.univBelong != null && obj.univBelong != "") {
+                                /* $("#major").append('<div class="flex-item8 f_l">隶属：<span>'+obj.univBelong+'</span></div>');*/
+                                c = '<div class="flex-item8 f_l">隶属：<span>' + obj.univBelong + '</span></div>';
+                            } else {
+                                /* $("#major").append('<div class="flex-item8 f_l">隶属：<span></span></div>');*/
+                                c = '<div class="flex-item8 f_l">隶属：<span></span></div>';
+                            }
+
+                            var d = '';
+                            if (obj.eduType != null && obj.eduType != "") {
+                                /*   $("#major").append('<div class="flex-item8 f_l">性质：<span>'+obj.eduType+'</span></div>');*/
+                                d = '<div class="flex-item8 f_l">性质：<span>' + obj.eduType + '</span></div>';
+                            } else {
+                                /*$("#major").append('<div class="flex-item8 f_l">性质：<span></span></div>');*/
+                                d = '<div class="flex-item8 f_l">性质：<span></span></div>';
+                            }
+
+                            var e = '';
+                            if (obj.location != null && obj.location != "") {
+                                /*  $("#major").append('<div class="flex-item8 f_l">所在地：<span>'+obj.location+'</span></div>');*/
+                                e = '<div class="flex-item8 f_l">所在地：<span>' + obj.location + '</span></div>';
+                            } else {
+                                /* $("#major").append('<div class="flex-item8 f_l">所在地：<span></span></div>');*/
+                                e = '<div class="flex-item8 f_l">所在地：<span></span></div>'
+                            }
+                            var f = '<div class="clearfix"></div></div><div class="da_pz">';
+
+                            var g = '';
+                            if (obj.is211 != null && obj.is211 == 1) {
+                                /*$("#major").append('<div class="da_211 f_l">211</div>');*/
+                                g = '<div class="da_211 f_l">211</div>';
+                            }
+                            var h = '';
+                            if (obj.is985 != null && obj.is985 == 1) {
+                                /*$("#major").append('<div class="da_985 f_l">985</div>');*/
+                                h = '<div class="da_985 f_l">985</div>';
+                            }
+                            var x = '';
+                            if (obj.isFirstRateUniv != null && obj.isFirstRateUniv == 1) {
+                                x = '<div class="da_985 f_l">双一流</div>';
+                            }
+                            var y = '';
+                            if (obj.isFirstRateUniv != null && obj.isFirstRateUniv == 2) {
+                                y = '<div class="da_985 f_l">一流专业</div>';
+                            }
+
+                          /*  var i = '';
+                            if (obj.isIndependence != null && obj.isIndependence == 1) {
+
+                                i = '<div class="da_z f_l">自</div>';
+                            }
+                            var j = '';
+                            if (obj.isKeylab != null && obj.isKeylab == 1) {
+
+                                j = '<div class="da_z f_l">研</div>';
+                            }
+                            var k = '';
+                            if (obj.isDefence != null && obj.isDefence == 1) {
+
+                                k = '<div class="da_z f_l">国</div>';
+                            }*/
+                            /*  $("#major").append('<div class="clearfix"></div></div><div class="da_pz">');*/
+
+                            /*  var l='';
+                              if(obj.coreSubjectNum!=null&&obj.coreSubjectNum!=""&&obj.coreSubjectNum!=undefined){
+                                  /!*  $("#major").append('<div class="flex-item8 f_l">重点学科数：<span>'+obj.coreSubjectNum+'</span></div>');*!/
+                                  l='<div class="flex-item8 f_l">重点学科数：<span>'+obj.coreSubjectNum+'</span></div>';
+                              }else {
+                                  /!*$("#major").append('<div class="flex-item8 f_l">重点学科数：<span></span></div>');*!/
+                                  l='<div class="flex-item8 f_l">重点学科数：<span></span></div>';
+                              }
+
+                              var m='';
+                              if(obj.masterNum!=null&&obj.masterNum!=""){
+                                  /!* $("#major").append('<div class="flex-item8 f_l">硕士点数：<span>'+obj.masterNum+'</span></div>');*!/
+                                  m='<div class="flex-item8 f_l">硕士点数：<span>'+obj.masterNum+'</span></div>';
+                              }else {
+                                  /!* $("#major").append('<div class="flex-item8 f_l">硕士点数：<span></span></div>');*!/
+                                  m='<div class="flex-item8 f_l">硕士点数：<span></span></div>';
+                              }
+
+                              var n='';
+                              if(obj.doctorNum!=null&&obj.doctorNum!=""){
+                                  /!* $("#major").append('<div class="flex-item8 f_l">博士点数：<span>'+obj.doctorNum+'</span></div>');*!/
+                                  n='<div class="flex-item8 f_l">博士点数：<span>'+obj.doctorNum+'</span></div>';
+                              }else {
+                                  /!* $("#major").append('<div class="flex-item8 f_l">博士点数：<span></span></div>');*!/
+                                  n='<div class="flex-item8 f_l">博士点数：<span></span></div>';
+                              }*/
+                            var o = '<div class="clearfix"></div></div></div><div class="joinComparison f_r">\n' +
+                                '<input type="hidden" value="" />\n' +
+                                '<button class="zdx_db"><a href="${base}/searchUnivAndMajor/univDetail.jspx?id=' + obj.universityBaseId + '">查看详情</a></button>\n' +
+                                '</div><div class="clearfix"></div><div class="zdx_suo_an_dw"></div></li>';
+                            /*$("#major").append('<div class="clearfix"></div></div></div><div class="clearfix"></div><div class="zdx_suo_an_dw"></div></li>');*/
+                            $("#major").append(a + m + n + b + c + d + e + f + g + h + x + y + o);
+
+
+                        })
+                    }
+                })
+            }
+
+            //分页下一页
+            function _gotoPage(univMajorId) {
+
+                var pageNo = $("#pageNo").val();
+
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: "${base}/searchUnivAndMajor/searchPage.jspx",
+                    data: {
+                        "pageNo": pageNo,
+                        "univMajorId": univMajorId
+                    },
+
+                    success: function (data) {
+                        var mo = $("#pageNo").val(data.pageNo);
+
+                        $("#major").html("");
+                        var univ = data.list;
+                        $(univ).each(function (i, obj) {
+
+                            var a = '<li><div class="da_img f_l">';
+                            var m = '';
+                            if(obj.logoUrl!=null&&obj.logoUrl!=""){
+                                m= '<img src="'+ obj.logoUrl +'" />';
+                            }else {
+                                m='<img src="${base}/r/img/index/noschool.png"/>';
+                            }
+
+
+                            var n ='</div>\n' +
+                                '<div class="zdx_yx_xx f_l">\n' +
+                                '<div class="da_ch">\n' +
+                                '<div class="da_m f_l"><a href="${base}/searchUnivAndMajor/univDetail.jspx?id=' + obj.universityBaseId + '">' + obj.univName + '</a></div>'
+
+                            var b = '<div class="clearfix"></div></div><div class="da_ls">'
+
+                            var c = '';
+                            if (obj.univBelong != null && obj.univBelong != "") {
+                                c = '<div class="flex-item8 f_l">隶属：<span>' + obj.univBelong + '</span></div>';
+                            } else {
+                                c = '<div class="flex-item8 f_l">隶属：<span></span></div>';
+                            }
+
+                            var d = '';
+                            if (obj.eduType != null && obj.eduType != "") {
+                                d = '<div class="flex-item8 f_l">性质：<span>' + obj.eduType + '</span></div>';
+                            } else {
+                                d = '<div class="flex-item8 f_l">性质：<span></span></div>';
+                            }
+
+                            var e = '';
+                            if (obj.location != null && obj.location != "") {
+                                e = '<div class="flex-item8 f_l">所在地：<span>' + obj.location + '</span></div>';
+                            } else {
+                                e = '<div class="flex-item8 f_l">所在地：<span></span></div>'
+                            }
+                            var f = '<div class="clearfix"></div></div><div class="da_pz">';
+
+                            var g = '';
+                            if (obj.is211 != null && obj.is211 == 1) {
+                                g = '<div class="da_211 f_l">211</div>';
+                            }
+                            var h = '';
+                            if (obj.is985 != null && obj.is985 == 1) {
+                                h = '<div class="da_985 f_l">985</div>';
+                            }
+                            var x = '';
+                            if (obj.isFirstRateUniv != null && obj.isFirstRateUniv == 1) {
+                                x = '<div class="da_985 f_l">双一流</div>';
+                            }
+                            var y = '';
+                            if (obj.isFirstRateUniv != null && obj.isFirstRateUniv == 2) {
+                                y = '<div class="da_985 f_l">一流专业</div>';
+                            }
+                           /* var i = '';
+                            if (obj.isIndependence != null && obj.isIndependence == 1) {
+                                i = '<div class="da_z f_l">自</div>';
+                            }
+                            var j = '';
+                            if (obj.isKeylab != null && obj.isKeylab == 1) {
+                                j = '<div class="da_z f_l">研</div>';
+                            }
+                            var k = '';
+                            if (obj.isDefence != null && obj.isDefence == 1) {
+                                k = '<div class="da_z f_l">国</div>';
+                            }*/
+
+                            var o = '<div class="clearfix"></div></div></div><div class="joinComparison f_r">\n' +
+                                '<input type="hidden" value="" />\n' +
+                                '<button class="zdx_db"><a href="${base}/searchUnivAndMajor/univDetail.jspx?id=' + obj.universityBaseId + '">查看详情</a></button>\n' +
+                                '</div><div class="clearfix"></div><div class="zdx_suo_an_dw"></div></li>';
+                            $("#major").append(a + m + n + b + c + d + e + f + g + h + x + y + o);
+
+                        })
+                    }
+                })
+            }
+
+        </script>
+</head>
+<body oncopy="alert('对不起，禁止复制！');return false;">
+
+
+
+<script type='text/javascript' src='${base}/r/wdedu/js/dropdown.js'></script>
+
+[#include "../include/header_address.html"/]
+[#include "../include/header_zytb.html"/]
+<div class="mbxdh_bg">
+
+    <div class="mbxdh">
+        <a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="${base}/zytb/project.jspx">志愿填报</a>&nbsp;&gt; &nbsp; <a
+            href="${base}/searchUnivAndMajor/searchMajor.jspx">查专业</a>
+    </div>
+</div>
+<div class="zyjs_s">
+    <div class="zyjs_s_n">
+        <div class="yxjs_img_js f_l">
+            <img src="${base}/r/wdedu/images/tup.png"/>
+        </div>
+        <div class="zyjs_zt_mc f_l">
+            <div class="zyjs_s_ys">
+                <span class="zyjs_s_ys_mc">${FindXiang['majorName']!}</span>
+
+            </div>
+
+            <div class="zyjs_s_ys_tx">
+                <!--<span class="zyjs_s_ys_tx1">在所有专业中，就业排名第168</span>-->
+                <span class="zyjs_s_ys_tx1">专业门类中排名：${majorRank!}</span>
+
+            </div>
+        </div>
+
+        <!--<div class="zyjs_dz f_r">
+                <div class="zyjs_dz_z1 f_l">
+                <div class="zyjs_dz_z"><img src="${base}/r/wdedu/images/czy_1.png"/></div>
+                <p>111看好</p>
+                </div>
+                <div class="zyjs_dz_z2 f_r">
+                <div class="zyjs_dz_y"><img src="${base}/r/wdedu/images/czy_2.png"/></div>
+                <p>111不看好</p>
+
+                </div>
+                <div class="clearfix"></div>
+        </div>-->
+
+        <div class="clearfix"></div>
+    </div>
+    <div class="zyjs_table">
+        <div class="zyjs_table_title">
+            <div class="on3">专业介绍</div>
+            <div class="ks">开设院校</div>
+            <div class="zyjs_1">就职要求</div>
+            <div class="jy">就业分析</div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="zyjs_table_con">
+            <div class="zyjs_table_list">
+                <div class="zyjs_table_list_z f_l">
+                    <div class="zyjs_table_bt">专业课程</div>
+                    <div class="zyjs_table_ne">
+                        <div class="zyjs_bt3">主要课程：</div>
+                        <span>${FindXiang['course']!}</span>
+                    </div>
+                    <div class="zyjs_table_bt1">专业概况</div>
+                    <div class="zyjs_table_ne1">
+                        <p>
+                            <b>专业代码：</b>
+                            <i>${FindXiang['neiId']!}</i>
+                        </p>
+                        <p>
+                            <b>修业年限：</b>
+                            <i>${FindXiang['year']!}年</i>
+                        </p>
+                        <p>
+                            <b>授予学位：</b>
+                            <i>${FindXiang['career']!}</i>
+                        </p>
+                        <p>
+                            <b>培养目标：</b>
+                            <i>${FindXiang['target']!}</i>
+                        </p>
+                        <p>
+                            <b>培养要求：</b>
+                            <i>${FindXiang['knowledge']!}</i>
+                        </p>
+                    </div>
+
+
+                </div>
+
+
+                <div class="zyjs_table_list_s_y_s f_r">
+                    <ul>
+                        <span>你可能感兴趣的专业</span>
+                        [#if listSame??]
+                        [#list listSame as s]
+                        <li>
+                            <a href="${base}/searchUnivAndMajor/majorDetail.jspx?majorId=${s.majorId!}">${s.majorName!}</a>
+                            <div class="f_r">
+                                <div class="arrow4"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+                        [/#list]
+                        [/#if]
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="zyjs_table_list">
+                <div class="zyjs_ksyx_list">
+                    <div class="zdx_z_yxlb">
+                        <ul id="major">
+
+                            [#if pagination.list?size>0]
+                            [#list pagination.list as pag]
+                            <li>
+
+                                <div class="da_img f_l">
+                                    <!--<img src="${pag.logoUrl!}"/>-->
+                                    [#if pag??&&pag.logoUrl??]
+                                    <img src="${pag.logoUrl!}" />
+                                    [#else]
+                                    <img src="${base}/r/img/index/noschool.png"/>
+                                    [/#if]
+                                </div>
+
+                                <div class="zdx_yx_xx f_l">
+                                    <div class="da_ch">
+                                        <div class="da_m f_l"><a
+                                                href="${base}/searchUnivAndMajor/univDetail.jspx?id=${pag.universityBaseId!}">${pag.univName!}</a>
+                                        </div>
+
+
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                    <div class="da_ls">
+                                        <div class="flex-item8 f_l">隶属：<span>${pag.univBelong!}</span></div>
+                                        <div class="flex-item8 f_l">性质：<span>${pag.eduType!}</span></div>
+                                        <div class="flex-item8 f_l">所在地：<span>${pag.location!}</span></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="da_pz">
+                                        [#if pag.is211 ?? && pag.is211==1]
+                                        <div class="da_985 f_l">211</div>
+                                        [/#if]
+                                        [#if pag.is985 ?? && pag.is985==1]
+                                        <div class="da_211 f_l">985</div>
+                                        [/#if]
+                                        [#if pag.isFirstRateUniv ?? && pag.isFirstRateUniv==1]
+                                        <div class="da_211 f_l">双一流</div>
+                                        [/#if]
+                                        [#if pag.isFirstRateUniv ?? && pag.isFirstRateUniv==2]
+                                        <div class="da_211 f_l">一流专业</div>
+                                        [/#if]
+                                       <!-- [#if pag.isIndependence ?? && pag.isIndependence==1]
+                                        <div class="da_z f_l">自</div>
+                                        [/#if]
+                                        [#if pag.isKeylab ?? && pag.isKeylab==1]
+                                        <div class="da_y f_l">研</div>
+                                        [/#if]
+                                        [#if pag.isDefence ?? && pag.isDefence==1]
+                                        <div class="da_g f_l">国</div>
+                                        [/#if]-->
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="joinComparison f_r">
+                                    <input type="hidden" value=''/>
+                                    <button class="zdx_db"><a
+                                            href="${base}/searchUnivAndMajor/univDetail.jspx?id=${pag.universityBaseId!}">查看详情</a>
+                                    </button>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="zdx_suo_an_dw"></div>
+                            </li>
+                            [/#list]
+                            [#else]
+                            <li>
+                                <div class="weizhi"><img src="${base}/r/wdedu/images/nodataBig.jpg"></div>
+                            </li>
+                            [/#if]
+
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="zdx_fy">
+                    <input type="hidden" id="pageNo" value="${pageNo!}"/>
+                    <input type="button" value="上一页" class="zdx_fy_sz" onclick="_gotoPageUp('${univMajorId}');" [#if
+                           pagination.lastPage] disabled="disabled" [/#if]/>
+                    <input type="button" value="下一页" class="zdx_fy_sz" onclick="_gotoPage('${univMajorId}');" [#if
+                           pagination.lastPage] disabled="disabled" [/#if]/>
+                    <!-- <input type="button" value="上一页" class="zdx_fy_s" onclick="_gotoPage('1');" disabled="disabled"/>
+                    <input type="button" value="上一页" class="zdx_fy_sz" onclick="_gotoPage('${pagination.prePage}');" [#if
+                           pagination.firstPage] disabled="disabled" [/#if]/>
+                    <input type="button" value="下一页" class="zdx_fy_sz" onclick="_gotoPage('${pagination.nextPage}','${majorName}');" [#if
+                           pagination.lastPage] disabled="disabled" [/#if]/>
+                   <input type="button" value="下一页" class="zdx_fy_x" onclick="_gotoPage('2');"/>-->
+
+                </div>
+
+
+            </div>
+            <div class="zyjs_table_list">
+                <div class="zyjs_zyfx_list">
+
+                    <!-- <div class="zyjs_zyfx_list_bt">可从事岗位</div>
+                      <div class="zyjs_zyfx_list_kcsgw">
+
+                                 [#if listCareer??]
+                                 [#list listCareer as c]
+                                 <a href="#">${c.jobName!}</a>
+                                 [/#list]
+                                 [/#if]
+                      <div class="clearfix"></div>
+                      </div>-->
+                    <div class="zyjs_zyfx_list_yrdwtj">
+                        <div class="zyjs_zyfx_list_bt">用人单位统计</div>
+                        <div class="zzsc f_l">
+                            <div class="zzsc_bt">工资情况</div>
+                            <div class="zzsc_my">
+                                [#if salayList??]
+                                [#list salayList as s]
+                                <span>${s.itemName!}</span>
+                                <div class="div" w="${s.itemPercent!}"></div>
+                                [/#list]
+                                [#else]
+                                <span><img src="${base}/r/wdedu/images/nodata.jpg"></span>
+                                [/#if]
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="zzsc f_l">
+                            <div class="zzsc_bt">经验要求</div>
+                            <div class="zzsc_my">
+                                [#if experienceList??]
+                                [#list experienceList as e]
+                                <span>${e.itemName!}</span>
+                                <div class="div" w="${e.itemPercent!}"></div>
+                                [/#list]
+                                [#else]
+                                <span><img src="${base}/r/wdedu/images/nodata.jpg"></span>
+                                [/#if]
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="zzsc f_r" style=" border-right:none;">
+                            <div class="zzsc_bt">学历要求</div>
+                            <div class="zzsc_my">
+                                [#if educationList??]
+                                [#list educationList as e]
+                                <span>${e.itemName!}</span>
+                                <div class="div" w="${e.itemPercent!}"></div>
+                                [/#list]
+                                [#else]
+                                <span><img src="${base}/r/wdedu/images/nodata.jpg"></span>
+                                [/#if]
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="zyjs_table_list">
+                <div class="zyjs_jyfx">
+                    <div class="zyjs_zyfx_list_bt">就业概况<span><!--&nbsp;&nbsp;(依据近30天12155份样本进行统计)--></span></div>
+                    <div class="zyjs_jyfx_jygk_zt">
+                        <div class="zyjs_jyfx_jygk1 f_l">
+
+                            <p>${salary.salaryOnelevelRank!}</p>
+                            <i></i>
+                            <span>${salary.salaryOnelevelRankRemark!}</span>
+
+                        </div>
+                        <div class="zyjs_jyfx_jygk2 f_l">
+
+                            <p>${salary.salaryRegion!}</p>
+                            <i></i>
+                            <span>${salary.salaryRegionRemark!}</span>
+
+                        </div>
+                        <div class="zyjs_jyfx_jygk3 f_l">
+
+                            <p>${salary.salaryCareer!}</p>
+                            <i></i>
+                            <span>${salary.salaryCareerRemark!}</span>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!--<div class="zyjs_jyfb">
+                            <div class="zyjs_jyfb_hy f_l">
+                               <div class="zyjs_jyfb_hy_bt"><span>就业行业分布</span></div>
+                               <div class="zyjs_jyfb_hy_list">
+                               <ul>
+                               <li><div class="zyjs_sz zyjs_sz_bj1 f_l">01</div><span>通信/电信/网络设备</span><i>(<b>3051</b>份样本)</i><div class="zyjs_bfz fr">52%</div><div class="clearfix"></div></li>
+
+                               <li><div class="zyjs_sz zyjs_sz_bj1 f_l">02</div><span>通信/电信/网络设备</span><i>(<b>3051</b>份样本)</i><div class="zyjs_bfz fr">52%</div><div class="clearfix"></div></li>
+                               <li><div class="zyjs_sz zyjs_sz_bj1 f_l">03</div><span>通信/电信/网络设备</span><i>(<b>3051</b>份样本)</i><div class="zyjs_bfz fr">52%</div><div class="clearfix"></div></li>
+                               <li><div class="zyjs_sz zyjs_sz_bj2 f_l">04</div><span>通信/电信/网络设备</span><i>(<b>3051</b>份样本)</i><div class="zyjs_bfz fr">52%</div><div class="clearfix"></div></li>
+                               <li><div class="zyjs_sz zyjs_sz_bj2 f_l">05</div><span>通信/电信/网络设备</span><i>(<b>3051</b>份样本)</i><div class="zyjs_bfz fr">52%</div><div class="clearfix"></div></li>
+                               <li><div class="zyjs_sz zyjs_sz_bj2 f_l">06</div><span>通信/电信/网络设备</span><i>(<b>3051</b>份样本)</i><div class="zyjs_bfz fr">52%</div><div class="clearfix"></div></li>
+                               <li><div class="zyjs_sz zyjs_sz_bj2 f_l">07</div><span>通信/电信/网络设备</span><i>(<b>3051</b>份样本)</i><div class="zyjs_bfz fr">52%</div><div class="clearfix"></div></li>
+                               </ul>
+                               </div>
+                           </div>
+                           <div class="zyjs_jyfb_dq f_r">
+                               <div class="zyjs_jyfb_dq_bt"><span>就业地区分布</span></div>
+                               <div class="zyjs_jyfb_dq_list">
+                               <ul>
+                               <li><div class="zyjs_sz zyjs_sz_bj1 f_l">01</div><span>通信/电信/网络设备</span><i>(<b>3051</b>份样本)</i><div class="zyjs_bfz fr">52%</div><div class="clearfix"></div></li>
+
+                               <li><div class="zyjs_sz zyjs_sz_bj1 f_l">02</div><span>通信/电信/网络设备</span><i>(<b>3051</b>份样本)</i><div class="zyjs_bfz fr">52%</div><div class="clearfix"></div></li>
+                               <li><div class="zyjs_sz zyjs_sz_bj1 f_l">03</div><span>通信/电信/网络设备</span><i>(<b>3051</b>份样本)</i><div class="zyjs_bfz fr">52%</div><div class="clearfix"></div></li>
+                               <li><div class="zyjs_sz zyjs_sz_bj2 f_l">04</div><span>通信/电信/网络设备</span><i>(<b>3051</b>份样本)</i><div class="zyjs_bfz fr">52%</div><div class="clearfix"></div></li>
+                               <li><div class="zyjs_sz zyjs_sz_bj2 f_l">05</div><span>通信/电信/网络设备</span><i>(<b>3051</b>份样本)</i><div class="zyjs_bfz fr">52%</div><div class="clearfix"></div></li>
+                               <li><div class="zyjs_sz zyjs_sz_bj2 f_l">06</div><span>通信/电信/网络设备</span><i>(<b>3051</b>份样本)</i><div class="zyjs_bfz fr">52%</div><div class="clearfix"></div></li>
+                               <li><div class="zyjs_sz zyjs_sz_bj2 f_l">07</div><span>通信/电信/网络设备</span><i>(<b>3051</b>份样本)</i><div class="zyjs_bfz fr">52%</div><div class="clearfix"></div></li>
+                               </ul>
+                               </div>
+                           </div>
+                    <div class="clearfix"></div>
+                    </div>-->
+                    <!--<div class="zyjs_yrdw">
+
+                    <div class="zyjs_zyfx_list_yrdwtj">
+                        <div class="zyjs_zyfx_list_bt">用人单位统计</div>
+                       <div class="zzsc f_l">
+                       <div class="zzsc_bt">工资情况</div>
+                       <div class="zzsc_my">
+                       <span>面议</span>
+                       <div class="div" w="50"></div>
+                       <span>2999-20000</span>
+                       <div class="div" w="60"></div>
+                       <span>4999-20000</span>
+                       <div class="div" w="70"></div>
+                       <span>6000-7999</span>
+                       <div class="div" w="80"></div>
+                       <span>3000-4499</span>
+                       <div class="div" w="90"></div>
+                       <div class="clearfix"></div>
+                       </div>
+                       </div>
+                       <div class="zzsc f_l">
+                       <div class="zzsc_bt">经验要求</div>
+                       <div class="zzsc_my">
+                       <span>不限经验</span>
+                       <div class="div" w="50"></div>
+                       <span>1-3年</span>
+                       <div class="div" w="60"></div>
+                       <span>3-5年</span>
+                       <div class="div" w="70"></div>
+                       <span>应届毕业生</span>
+                       <div class="div" w="80"></div>
+                       <span>5-10年</span>
+                       <div class="div" w="90"></div>
+                       <div class="clearfix"></div>
+                       </div>
+                       </div>
+                       <div class="zzsc f_r" style=" border-right:none;">
+                       <div class="zzsc_bt">学历要求</div>
+                       <div class="zzsc_my">
+                       <span>本科</span>
+                       <div class="div" w="50"></div>
+                       <span>大专</span>
+                       <div class="div" w="60"></div>
+                       <span>不限学历</span>
+                       <div class="div" w="70"></div>
+                       <span>初中</span>
+                       <div class="div" w="80"></div>
+                       <span>中专</span>
+                       <div class="div" w="90"></div>
+                       <div class="clearfix"></div>
+                       </div>
+                       </div>
+                       <div class="clearfix"></div>
+                       </div>
+                    </div>-->
+                    <div class="zyjs_cxtj">
+                        <div class="zyjs_zyfx_list_bt">薪酬统计<span>&nbsp;&nbsp;(依该专业的相关职位薪酬进行统计)</span></div>
+                        <div class="zyjs_xzbg">
+                            <div class="zyjs_xzbgz f_l">
+
+                                <p>￥${salary.aveSalary!}</p>
+                                <span>该数据为平均值</span>
+
+                                <!-- <a href="#">查看分析报告</a>-->
+
+                            </div>
+
+                            <div class="zyjs_xzbgy f_r">
+
+                                <div id="main" style="width:800px;height:290px;"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="zyjs_jypm">
+                        <div class="zyjs_zyfx_list_bt">${maJorLv.majorName!}-就业排名<span>&nbsp;&nbsp;(按相关职位量排名)</span>
+                        </div>
+                        <div class="zyjs_jypm_list">
+                            <table width="100%" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <th scope="col">排名</th>
+                                    <th scope="col">专业名称</th>
+                                    <th scope="col">门类</th>
+                                    <th scope="col">就业指数</th>
+                                </tr>
+                                [#if catelogRankList??]
+                                [#list catelogRankList as c]
+                                <tr>
+                                    <td>
+                                        <div class="zyjs_jypm_sz zyjs_jypm_sz1">${c_index+1}</div>
+                                    </td>
+                                    <td>${c.majorName!}</td>
+                                    <td>${parMajor!}</td>
+                                    <td>${c.itemIndex!}</td>
+                                </tr>
+                                [/#list]
+                                [#else]
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="weizhi"><img src="${base}/r/wdedu/images/nodataBig.jpg"></div>
+                                    </td>
+
+                                </tr>
+                                [/#if]
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+[#include "../include/footer_new.html"/]
+
+<script src="${base}/r/wdedu/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="${base}/r/wdedu/js/jquery-tab.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // Calling the plugin
+        $('.tab-group').tabify();
+    })
+
+
+</script>
+<script src="${base}/r/wdedu/js/echarts.js"></script>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    var option = {
+        xAxis: {
+            type: 'category',
+            data: ['应届生', '1-3年', '3-5年', '5-10年', '10年以上']
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: function (value, index) {
+                    var value;
+                    if (value >= 1000) {
+                        value = value / 1000 + 'k';
+                    } else if (value < 1000) {
+                        value = value;
+                    }
+                    return value
+                }
+
+            },
+        },
+        series: [{
+            data: [${salary.zeroYearSalry!}, ${salary.onethreeYearSalary!}, ${salary.threefiveYearSalary!}, ${salary.fivetenYearSalary!}, ${salary.tenafterYearSalary!}],
+            type: 'line'
+        }]
+    };
+    myChart.setOption(option);
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>修改中学信息</title>
+    <link href="${base}/r/css/new_zywy/reset.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="${base}/r/css/new_zywy/bootstrap.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="${base}/r/css/new_zywy/publicStyle.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="${base}/r/css/new_zywy/newMain.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="${base}/r/css/head_footer.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script type="text/javascript" src="${base}/r/js/new_js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="${base}/r/js/new_js/bootstrap.js"></script>
+    <script type="text/javascript" src="${base}/r/js/new_js/jquery-validate.js"></script>
+    <script type="text/javascript" src="${base}/r/js/new_js/messages_zh.js"></script>
+	<script src="${base}/thirdparty/My97DatePicker/WdatePicker.js" language="javascript"></script>
+	<!--[if lte IE 9]>
+	<script src="${base}/r/js/new_js/html5shiv.js" language="javascript"></script>
+	<script src="${base}/r/js/new_js/respond.min.js" language="javascript"></script>
+	<![endif]-->
+</head>
+<body>
+    <div class="z-outer" style="background:#F5F5F5">
+		[#include "../wdedu/include/header_address.html"/]
+		[#include "../wdedu/include/header_dylq.html"/]
+        <div class="container">
+            <div class="row clearfix navigation-style">
+                <div class="col-md-12 column">
+                    <div class="navigation"><span>当前位置：</span><a href="${base}">主页</a><span>&lt;</span><a href="${base}/ydyfw/queryOrder.jspx">我的一对一服务清单</a><span>&lt;</span><a>填报个人信息</a><span>&lt;</span><a>新增中学信息</a></div>
+                </div>
+            </div>
+	        <div class="row clearfix ydy_content">
+	            <div class="col-md-3 column zjf-choose-left">
+					[#include "./left_menu.html"/]
+	            </div>
+	            <div class="col-md-9 column zjf-choose-right">
+			        <div class="row clearfix ydy_title">
+			            <div class="col-md-9 column">
+							<span class="ydy_title_span">
+								考生个人信息详细填写
+								[#if order.serviceType == 'zytb']
+								（志愿填报一对一）
+								[#elseif order.serviceType =='zzzs']
+								（自主招生一对一）
+								[#elseif order.serviceType =='xdzy']
+								（学大志愿一对一）
+								[#elseif order.serviceType =='bjts']
+								（背景提升项目）
+								[#else]
+								（港澳台一对一）
+								[/#if]
+							</span>
+			            </div>
+			            <div class="col-md-3 column">
+							<span>订单号：${order.orderId}</span>
+			            </div>
+			        </div>
+			        <div class="row clearfix">
+			            <div class="col-md-12 column">
+							<div class="mes_left_top">
+								<div class="ydy_shuoming">填写基本信息、中学信息、成绩信息，模考成绩、单科成绩等</div>
+							</div>
+							<ul class="mes_left_ul">
+								<li><a href="jbxx.jspx?orderId=${order.orderId}">基本信息</a></li>
+								<li><a href="grzp.jspx?orderId=${order.orderId}" id="grzp">个人照片</a></li>
+								<li class="checked-style"><a href="zxxx.jspx?orderId=${order.orderId}" id="zxxx">中学信息</a></li>
+								<li><a href="cjxx.jspx?orderId=${order.orderId}" id="cjxx">成绩信息</a></li>
+								<li><a href="zhxx.jspx?orderId=${order.orderId}">综合信息</a></li>
+								<li><a href="mkcj.jspx?orderId=${order.orderId}" id="mkcj">模考成绩</a></li>
+								<li><a href="dkpm.jspx?orderId=${order.orderId}" id="dkpm">单科排名</a></li>
+								<li><a href="tjrxx.jspx?menuId=tjrxx&orderId=${order.orderId}" id="tjrxx">推荐人信息</a></li>
+								<li><a href="yjxx.jspx?menuId=yjxx&orderId=${order.orderId}" id="yjxx">邮寄信息</a></li>
+							</ul>
+							<div class="mes_left_bottom">
+								<form action="saveSchool.jspx" method="post" id="zxxxForm" class="addsubmittip">
+                  					<input type="hidden" name="orderId" value="${order.orderId}">
+									<table class="zydy-table">
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>学籍所在中学：</strong></td>
+											<td class="ydy-td4">
+									            <input type="hidden" id="rollProvince" name="rollProvince" value="${school.rollProvince!}"/>
+									            <input type="hidden" id="rollCity" name="rollCity" value="${school.rollCity!}"/>
+									            <input type="hidden" id="rollRegion" name="rollRegion" value="${school.rollRegion!}"/>
+					                    		<input type="hidden" id="rollSchool" name="rollSchool" value="${school.rollSchool!}"/>
+												[@p.select name="rollProvinceName" id="rollProvinceName" class="text-input5" value=school.rollProvince list=proList listKey="pro_code" listValue="pro_name" onchange="selectProvince('rollProvinceName','rollCityName','rollRegionName','rollSchoolName')" headerKey="" headerValue="请选择"/]
+								                <select class="text-input5" id="rollCityName" name="rollCityName" value="${school.rollCity!}" onchange="selectCity('rollProvinceName','rollCityName','rollRegionName','rollSchoolName')">
+								                </select>
+								                <select class="text-input5" id="rollRegionName" name="rollRegionName" value="${school.rollRegion!}" onchange="selectRegion('rollProvinceName','rollCityName','rollRegionName','rollSchoolName')">
+								                	<option>${school.rollRegion!}</option>
+								                </select> 
+								                <select class="text-input1" id="rollSchoolName" name="rollSchoolName" value="${school.rollSchool!}" onchange="selectSchool('rollSchoolName')"> 
+							                   		<option>${school.rollSchool!}</option>
+							                    </select>
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>当前就读中学：</strong></td>
+											<td class="ydy-td4">
+									            <input type="hidden" id="province" name="province" value="${school.province!}"/>
+								                <input type="hidden" id="city" name="city" value="${school.city!}"/>
+								                <input type="hidden" id="region" name="region"  value="${school.region!}"/>
+							                    <input type="hidden" id="school" name="school" value="${school.school!}"/>
+								                 [@p.select name="provinceName" id="provinceName" class="text-input5" value=school.province list=proList listKey="pro_code" listValue="pro_name" onchange="selectProvince('provinceName','cityName','regionName','schoolName')" headerKey="" headerValue="请选择"/]
+								                <select class="text-input5" id="cityName" name="cityName" value="${school.city!}" onchange="selectCity('provinceName','cityName','regionName','schoolName')">
+								                </select>
+								                <select class="text-input5" id="regionName" name="regionName" value="${school.region!}" onchange="selectRegion('provinceName','cityName','regionName','schoolName')">
+								                	<option>${school.region!}</option>
+								                </select>
+								                <select class="text-input1" id="schoolName" name="schoolName" value="${school.school!}" onchange="selectSchool('schoolName')">
+							                    	<option>${school.school!}</option>
+							                    </select>
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>中学级别：</strong></td>
+											<td class="ydy-td4">
+												[@p.select name="schoolLevel" id="schoolLevel" class="text-input1" value=school.schoolLevel list=schoolLevelList listKey="code" listValue="name" /]
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>所在班级：</strong></td>
+											<td class="ydy-td4">
+							            		<input class="text-input1" name="grade" id="grade" type="text" maxlength="16" value="${school.grade!}"/>
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>担任职务：</strong></td>
+											<td class="ydy-td4">
+						                		<input class="text-input1" name="classLeader" id="classLeader" type="text" maxlength="16" value="${school.classLeader!}"/>
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>班主任姓名：</strong></td>
+											<td class="ydy-td4">
+						                		<input class="text-input1" name="headTeacher" id="headTeacher" type="text" maxlength="16" value="${school.headTeacher!}" />
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>班主任电话：</strong></td>
+											<td class="ydy-td4">
+												<input class="text-input1" name="headTeacherPhone" id="headTeacherPhone" type="text" maxlength="16" value="${school.headTeacherPhone!}" />
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>中学详细地址：</strong></td>
+											<td class="ydy-td4">
+												<input class="input-style05" name="schoolAddress" id="schoolAddress" type="text" value="${school.schoolAddress!}" maxlength="128" class="ui-input"/>
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>中学邮政编码：</strong></td>
+											<td class="ydy-td4">
+						                		<input class="text-input1" name="schoolPostcode" id="schoolPostcode" type="text" value="${school.schoolPostcode!}" maxlength="6" class="ui-input"/>
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>主管教学领导姓名：</strong></td>
+											<td class="ydy-td4">
+						                		<input class="text-input1" name="gradeLeader" id="gradeLeader" type="text" value="${school.gradeLeader!}" maxlength="16" />
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>主管教学领导电话：</strong></td>
+											<td class="ydy-td4">
+						                		<input class="text-input1" name="gradeLeaderPhone" id="gradeLeaderPhone" type="text" value="${school.gradeLeaderPhone!}" maxlength="16" />
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td3"><span class="must">*</span><strong>教育经历：</strong></td>
+											<td>
+								        		[#list educationList as e]
+								            	<input type="hidden" id="grade${e_index+1}" name="grade${e_index+1}" value="${e.grade!}"/>
+												<table class="zydy-table-inner table-locate">
+													<tr>
+														<th colspan="2">
+														[#if e.grade=='1']
+					                                	高中一年级
+					                                	[#elseif  e.grade=='2']
+					                                	高中二年级
+					                                	[#elseif  e.grade=='3']
+					                                	高中三年级
+					                                	[/#if]
+														</th>
+													</tr>
+													<tr>
+														<td align="right">时间：</td>
+														<td class="ydy-td5">
+															<span class="ydy-td4"><input class="input-style07" name="startDate${e_index+1}" id="startDate${e_index+1}" type="text" maxlength="10" value="${e.startDate!}" readonly onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"/></span>
+															&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;
+															<span class="ydy-td4"><input class="input-style07" name="endDate${e_index+1}" id="endDate${e_index+1}" type="text"  maxlength="10" value="${e.endDate!}" readonly onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"/></span>
+														</td>
+													</tr>
+													<tr>
+														<td align="right">就读于：</td>
+														<td class="ydy-td4">
+															<input type="hidden" id="province${e_index+1}" name="province${e_index+1}" value="${e.province!}"/>
+						                                	<input type="hidden" id="city${e_index+1}" name="city${e_index+1}" value="${e.city!}"/>
+				                                    		<input type="hidden" id="region${e_index+1}" name="region${e_index+1}" value="${e.region!}"/>
+					                    					<input type="hidden" id="school${e_index+1}" name="school${e_index+1}" value="${e.school!}"/>
+						                                    [@p.select name="province${e_index+1}Name" id="province${e_index+1}Name" class="text-input5" value=e.province list=proList listKey="pro_code" listValue="pro_name" onchange="selectProvince('province${e_index+1}Name','city${e_index+1}Name','region${e_index+1}Name','school${e_index+1}Name')" headerKey="" headerValue="请选择"/]
+						                                    <select class="text-input5" id="city${e_index+1}Name" name="city${e_index+1}Name" value="${e.city!}" onchange="selectCity('province${e_index+1}Name','city${e_index+1}Name','region${e_index+1}Name','school${e_index+1}Name')">	
+						                                    </select>
+						                                    <select class="text-input5" id="region${e_index+1}Name" name="region${e_index+1}Name" value="${e.region!}"  onchange="selectRegion('province${e_index+1}Name','city${e_index+1}Name','region${e_index+1}Name','school${e_index+1}Name')">
+						                                    	<option>${e.region!}</option>
+						                                    </select>
+					                                		<select class="text-input1" id="school${e_index+1}Name" name="school${e_index+1}Name" value="${e.school!}" onchange="selectSchool('school${e_index+1}Name')"> 
+					                                			<option>${e.school!}</option>
+					                                		</select>
+														</td>
+													</tr>
+													<tr>
+														<td align="right">证明人：</td>
+														<td class="ydy-td4">
+															<input class="text-input1" name="proveMan${e_index+1}" id="proveMan${e_index+1}" type="text" value="${e.proveMan!}" maxlength="16" class="ui-input" />
+															<input type="hidden" id="id${e_index+1}" name="id${e_index+1}" value="${e.id!}"/>
+														</td>
+													</tr>
+												</table>
+								        		[/#list]
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td3"><strong>备选教育经历：</strong></td>
+											<td>
+								        		[#list supEducationList as s]
+												<table class="zydy-table-inner table-locate">
+													<tr>
+														<th colspan="2">
+															<select class="text-input1" id="supGrade${s_index+1}" name="supGrade${s_index+1}">
+						                                        <option value="">请选择</option>
+						                                        <option value='1' [#if s.grade?? && s.grade=='1'] selected [/#if]>高中一年级</option>
+						                                        <option value='2' [#if s.grade?? && s.grade=='2'] selected [/#if]>高中二年级</option>
+						                                        <option value='3' [#if s.grade?? && s.grade=='3'] selected [/#if]>高中三年级</option>
+							                                </select>
+						                                </th>
+						                            </tr>    
+													<tr>
+														<td align="right">时间：</td>
+														<td>
+															<input class="text-input1" name="supStartDate${s_index+1}" id="supStartDate${s_index+1}" type="text" maxlength="10" readonly value="${s.startDate!}" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" />
+															&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;
+															<input class="text-input1" name="supEndDate${s_index+1}" id="supEndDate${s_index+1}" type="text"  maxlength="10" readonly value="${s.endDate!}" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" />
+														</td>
+													</tr>
+													<tr>
+														<td align="right">就读于：</td>
+														<td>
+						                                	<input type="hidden" id="supProvince${s_index+1}" name="supProvince${s_index+1}" value="${s.province!}"/>
+						                                    <input type="hidden" id="supCity${s_index+1}" name="supCity${s_index+1}" value="${s.city!}"/>
+						                                    <input type="hidden" id="supRegion${s_index+1}" name="supRegion${s_index+1}" value="${s.region!}"/>
+							                    			<input type="hidden" id="supSchool${s_index+1}" name="supSchool${s_index+1}" value="${s.school!}"/>
+								                			[@p.select name="supProvince${s_index+1}Name" id="supProvince${s_index+1}Name" class="text-input5" value=s.province list=proList listKey="pro_code" listValue="pro_name" onchange="selectProvince('supProvince${s_index+1}Name','supCity${s_index+1}Name','supRegion${s_index+1}Name','supSchool${s_index+1}Name')" headerKey="" headerValue="请选择"/]
+						                                    <select class="text-input5" id="supCity${s_index+1}Name" name="supCity${s_index+1}Name"  value="${s.city!}" onchange="selectCity('supProvince${s_index+1}Name','supCity${s_index+1}Name','supRegion${s_index+1}Name','supSchool${s_index+1}Name')">
+						                                    	
+						                                    </select>
+						                                    <select class="text-input5" id="supRegion${s_index+1}Name" name="supRegion${s_index+1}Name" value="${s.region!}" onchange="selectRegion('supProvince${s_index+1}Name','supCity${s_index+1}Name','supRegion${s_index+1}Name','supSchool${s_index+1}Name')">
+						                                    	<option>${s.region!}</option>
+						                                    </select>
+					                                		<select class="text-input1" id="supSchool${s_index+1}Name" name="supSchool${s_index+1}Name" value="${s.school!}" onchange="selectSchool('supSchool${s_index+1}Name')"> 
+					                                			<option>${s.school!}</option>
+					                                		</select>
+														</td>
+													</tr>
+													<tr>
+														<td align="right">证明人：</td>
+														<td>
+										                    <input type="hidden" id="supId${s_index+1}" name="supId${s_index+1}" value="${s.id!}" maxlength="16"/>
+															<input type="text" class="text-input1" name="supProveMan${s_index+1}" id="supProveMan${s_index+1}" value="${s.proveMan!}" maxlength="30"/>
+														</td>
+													</tr>
+												</table>
+								        		[/#list]
+											</td>
+										</tr>
+									</table>
+							        <div class="row clearfix up-down">
+							            <div class="col-md-12 column">
+											<a class="zjf-bt pull-right" onclick="javascript:history.go(-1);" style="background:red;margin-right: 20px;">取消</a>
+							            	<button type="submit" class="zjf-bt pull-right" style="margin-right: 20px;">保存</button>
+							            </div>
+							        </div>
+								</form>
+							</div>
+			            </div>
+			        </div>
+	            </div>
+	        </div>
+        </div>
+		[#include "../wdedu/include/footer_new.html"/]
+    </div>
+<script type="text/javascript" src="${base}/r/js/new_js/zyydyfw.js"></script>
+<script>
+    $(function(){
+		$("#tbgrxx").addClass("zjf-active");
+	});
+    function selectProvince(provinceId,cityId,regionId,schoolId){
+		var province = provinceId.replace('Name',"");
+
+		var provinceValue = $("#"+provinceId).find("option:selected").val();
+		if (provinceValue == "") {
+			var city = cityId.replace('Name',"");
+			$("#"+city).val("");
+			var region = regionId.replace('Name',"");
+			$("#"+region).val("");
+			var school = schoolId.replace('Name',"");
+			$("#"+school).val("");
+		}
+
+		$("#"+province).val($("#"+provinceId).find("option:selected").val());
+		$("#"+cityId).empty();
+		$("#"+regionId).empty();
+		$("#"+schoolId).empty();
+		getCity(provinceId,cityId); 	    
+	}
+
+	function selectCity(provinceId,cityId,regionId,schoolId, regionName){
+		var city = cityId.replace('Name',"");
+		var cityValue = $("#"+cityId).find("option:selected").val();
+		if (cityValue == "") {
+			var region = regionId.replace('Name',"");
+			$("#"+region).val("");
+			var school = schoolId.replace('Name',"");
+			$("#"+school).val("");
+		}
+		$("#"+city).val(cityValue);
+		$("#"+regionId).empty();
+		$("#"+schoolId).empty();
+	    var province=$("#"+provinceId).val();
+	    var city=$("#"+cityId).val();
+	    if(city!=''){
+	    	 $.ajax({
+				　　url : '${base}/mnwb/getBorough.jspx',
+				   data:{pro_code:province,city_code:city},
+				　　type : "POST",
+				   async:false,
+				   error:function(request) {
+		              alert("提交出现异常啦。。。。");
+		          },
+				　　success : function(data){
+					     　var res = eval('(' + data + ')');	
+					   var option2 = $("<option>").val("").text("请选择");
+					   $("#"+regionId).append(option2);
+					   for(var o in res){
+					    	var option = $("<option>").val(res[o].quxian_code).text(res[o].quxian_name);
+					    	if (regionName == res[o].quxian_code) {
+					    		option.attr("selected",'true');
+					    	}
+					    	$("#"+regionId).append(option);					    									   
+					    }				
+				   }
+			 		 
+			}); 
+	    	
+		} 	    
+	}
+	
+	function selectRegion(provinceId,cityId,regionId,schoolId, schoolName){
+		var region = regionId.replace('Name',"");
+		var regionValue = $("#"+regionId).find("option:selected").val();
+		if (regionValue == "") {
+			var school = schoolId.replace('Name',"");
+			$("#"+school).val("");
+		}
+		$("#"+region).val($("#"+regionId).find("option:selected").val());
+		$("#"+schoolId).empty();
+	    var province=$("#"+provinceId).val();
+	    var city=$("#"+cityId).val();
+	    var borough=$("#"+regionId).val();
+	    if(borough!=''){
+	    	 $.ajax({
+				　　url : '${base}/mnwb/getSchool.jspx',
+				   data:{pro_code:province,city_code:city,quxian_code:borough},
+				　　type : "POST",
+				   async:false,
+				   error:function(request) {
+		              alert("提交出现异常啦。。。。");
+		          },
+				　　success : function(data){		
+					     　var res = eval('(' + data + ')');	
+					   var option2 = $("<option>").val("").text("请选择");
+					   $("#"+schoolId).append(option2);
+					    for(var o in res){
+				    		var option = $("<option>").val(res[o].school_code).text(res[o].school_name);
+					    	if (schoolName == res[o].school_code) {
+					    		option.attr("selected",'true');
+					    	}
+				    		$("#"+schoolId).append(option);					    									   
+				    	}				
+				   }
+			}); 
+		} 	    
+	}
+	
+	function getCity(provinceId,cityId){
+	 	var province=$("#"+provinceId).val();
+	    if(province!=''){
+	    	 $.ajax({
+				　　url : '${base}/mnwb/getCity.jspx',
+				   data:{pro_code:province},
+				　　type : "POST",
+				   async:false,
+				   error:function(request) {
+		              alert("提交出现异常啦。。。。");
+		          },
+				　　success : function(data){
+			     　　	   var res = eval('(' + data + ')');
+					   var option2 = $("<option>").val("").text("请选择");
+					   $("#"+cityId).append(option2);
+					    for(var o in res){
+					    	var addFlag = false;
+				    		var option = $("<option>").val(res[o].city_code).text(res[o].city_name);
+					    	if ('rollCityName' == cityId && '${school.rollCity!}' == res[o].city_code) {
+					    		option.attr("selected",'true');
+					    		$("#"+cityId).append(option);
+					    		addFlag = true;
+					    		selectCity('rollProvinceName','rollCityName','rollRegionName','rollSchoolName', '${school.rollRegion!}');
+					    		selectRegion('rollProvinceName','rollCityName','rollRegionName','rollSchoolName', '${school.rollSchool!}');
+					    	} else if ('cityName' == cityId && '${school.city!}' == res[o].city_code) {
+					    		option.attr("selected",'true');
+					    		$("#"+cityId).append(option);
+					    		addFlag = true;
+					    		selectCity('provinceName','cityName','regionName','schoolName', '${school.region!}');
+					    		selectRegion('provinceName','cityName','regionName','schoolName', '${school.school!}');
+					    	} else if ('city1Name' == cityId) {
+					    		[#list educationList as e]
+					    		    [#if e.grade=='1']
+					    		        if ('${e.city!}' == res[o].city_code) {
+						    				option.attr("selected",'true');
+								    		$("#"+cityId).append(option);
+								    		addFlag = true;
+								    		selectCity('province1Name','city1Name','region1Name','school1Name', '${e.region!}');
+								    		selectRegion('province1Name','city1Name','region1Name','school1Name', '${e.school!}');
+					    		        }
+					    			[/#if]
+					    		[/#list]
+					    	} else if ('city2Name' == cityId) {
+					    		[#list educationList as e]
+					    		    [#if e.grade=='2']
+					    		        if ('${e.city!}' == res[o].city_code) {
+						    				option.attr("selected",'true');
+								    		$("#"+cityId).append(option);	
+								    		addFlag = true;
+								    		selectCity('province2Name','city2Name','region2Name','school2Name', '${e.region!}');
+								    		selectRegion('province2Name','city2Name','region2Name','school2Name', '${e.school!}');
+					    		        }
+					    			[/#if]
+				    			[/#list]
+				    		} else if ('city3Name' == cityId) {
+						    	[#list educationList as e]
+					    		    [#if e.grade=='3']
+					    		        if ('${e.city!}' == res[o].city_code) {
+						    				option.attr("selected",'true');
+								    		$("#"+cityId).append(option);	
+								    		addFlag = true;
+								    		selectCity('province3Name','city3Name','region3Name','school3Name', '${e.region!}');
+								    		selectRegion('province3Name','city3Name','region3Name','school3Name', '${e.school!}');
+					    		        }
+					    			[/#if]
+				    			[/#list]
+				    		} else if ('supCity1Name' == cityId) {
+				    			[#list supEducationList as s]
+					    		    [#if '${s_index+1}'=='1']
+					    		        if ('${s.city!}' == res[o].city_code) {
+						    				option.attr("selected",'true');
+								    		$("#"+cityId).append(option);	
+								    		addFlag = true;
+								    		selectCity('supProvince1Name','supCity1Name','supRegion1Name','supSchool1Name', '${s.region!}');
+								    		selectRegion('supProvince1Name','supCity1Name','supRegion1Name','supSchool1Name', '${s.school!}');
+					    		        }
+					    			[/#if]
+				    			[/#list]
+				    		} else if ('supCity2Name' == cityId) {
+				    			[#list supEducationList as s]
+					    		    [#if '${s_index+1}'=='2']
+					    		        if ('${s.city!}' == res[o].city_code) {
+						    				option.attr("selected",'true');
+								    		$("#"+cityId).append(option);	
+								    		addFlag = true;
+								    		selectCity('supProvince2Name','supCity2Name','supRegion2Name','supSchool2Name', '${s.region!}');
+								    		selectRegion('supProvince2Name','supCity2Name','supRegion2Name','supSchool2Name', '${s.school!}');
+					    		        }
+					    			[/#if]
+				    			[/#list]
+				    		}
+					    	if (!addFlag) {
+					    		$("#"+cityId).append(option);	
+				    		}
+				    	}
+				   }
+			}); 
+		} 	 
+	}
+	
+	function selectSchool(schoolId){
+		var school = schoolId.replace('Name',"");
+		$("#"+school).val($("#"+schoolId).find("option:selected").val());
+	}
+	function init(){	
+		getCity('rollProvinceName','rollCityName'); 
+		getCity('provinceName','cityName');
+		getCity('province1Name','city1Name');
+		getCity('province2Name','city2Name');
+		getCity('province3Name','city3Name');
+		getCity('supProvince1Name','supCity1Name');
+		getCity('supProvince2Name','supCity2Name');
+	}
+	init();
+</script>
+</body>
+</html>

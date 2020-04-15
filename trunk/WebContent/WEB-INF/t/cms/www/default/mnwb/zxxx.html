@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>中学信息</title>
+    <link href="${base}/r/css/new_zywy/reset.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="${base}/r/css/new_zywy/bootstrap.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="${base}/r/css/new_zywy/publicStyle.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="${base}/r/css/new_zywy/newMain.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="${base}/r/css/head_footer.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script type="text/javascript" src="${base}/r/js/new_js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="${base}/r/js/new_js/bootstrap.js"></script>
+	<!--[if lte IE 9]>
+	<script src="${base}/r/js/new_js/html5shiv.js" language="javascript"></script>
+	<script src="${base}/r/js/new_js/respond.min.js" language="javascript"></script>
+	<![endif]-->
+</head>
+<body>
+    <div class="z-outer" style="background:#F5F5F5">
+		[#include "../wdedu/include/header_address.html"/]
+		[#include "../wdedu/include/header_dylq.html"/]
+        <div class="container">
+            <div class="row clearfix navigation-style">
+                <div class="col-md-12 column">
+                    <div class="navigation"><span>当前位置：</span><a href="${base}">主页</a><span>&lt;</span><a href="${base}/ydyfw/queryOrder.jspx">我的一对一服务清单</a><span>&lt;</span><a href="ase}/mnwb/jbxx.jspx?orderId=${order.orderId}">填报个人信息</a><span>&lt;</span><a>新增中学信息</a></div>
+                </div>
+            </div>
+	        <div class="row clearfix ydy_content">
+	            <div class="col-md-3 column zjf-choose-left">
+					[#include "./left_menu.html"/]
+	            </div>
+	            <div class="col-md-9 column zjf-choose-right">
+			        <div class="row clearfix ydy_title">
+			            <div class="col-md-9 column">
+							<span class="ydy_title_span">
+								考生个人信息详细填写
+								[#if order.serviceType == 'zytb']
+								（志愿填报一对一）
+								[#elseif order.serviceType =='zzzs']
+								（自主招生一对一）
+								[#elseif order.serviceType =='xdzy']
+								（学大志愿一对一）
+								[#elseif order.serviceType =='bjts']
+								（背景提升项目）
+								[#else]
+								（港澳台一对一）
+								[/#if]
+							</span>
+			            </div>
+			            <div class="col-md-3 column">
+							<span>订单号：${order.orderId}</span>
+			            </div>
+			        </div>
+			        <div class="row clearfix">
+			            <div class="col-md-12 column">
+							<div class="mes_left_top">
+								<div class="ydy_shuoming">填写基本信息、中学信息、成绩信息，模考成绩、单科成绩等</div>
+							</div>
+							<ul class="mes_left_ul">
+								<li><a href="jbxx.jspx?orderId=${order.orderId}">基本信息</a></li>
+								<li><a href="grzp.jspx?orderId=${order.orderId}" id="grzp">个人照片</a></li>
+								<li class="checked-style"><a href="zxxx.jspx?orderId=${order.orderId}" id="zxxx">中学信息</a></li>
+								<li><a href="cjxx.jspx?orderId=${order.orderId}" id="cjxx">成绩信息</a></li>
+								<li><a href="zhxx.jspx?orderId=${order.orderId}">综合信息</a></li>
+								<li><a href="mkcj.jspx?orderId=${order.orderId}" id="mkcj">模考成绩</a></li>
+								<li><a href="dkpm.jspx?orderId=${order.orderId}" id="dkpm">单科排名</a></li>
+								<li><a href="tjrxx.jspx?menuId=tjrxx&orderId=${order.orderId}" id="tjrxx">推荐人信息</a></li>
+								<li><a href="yjxx.jspx?menuId=yjxx&orderId=${order.orderId}" id="yjxx">邮寄信息</a></li>
+							</ul>
+							<div class="mes_left_bottom">
+								<table class="zydy-table">
+									<tr>
+										<td class="ydy-td1"><strong>学籍所在中学：</strong></td>
+										<td>
+											<span>${school.rollProvince}</span>&nbsp;&nbsp;&nbsp;
+											<span>${school.rollCity}</span>&nbsp;&nbsp;&nbsp;
+											<span>${school.rollRegion}</span>&nbsp;&nbsp;&nbsp;
+											<span>${school.rollSchool}</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>当前就读中学：</strong></td>
+										<td>
+							               	<span>${school.province}</span>&nbsp;&nbsp;&nbsp;
+											<span>${school.city}</span>&nbsp;&nbsp;&nbsp;
+											<span>${school.region}</span>&nbsp;&nbsp;&nbsp;
+											<span>${school.school}</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>中学级别：</strong></td>
+										<td>${school.schoolLevel}</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>所在班级：</strong></td>
+										<td>${school.grade}</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>担任职务：</strong></td>
+										<td>${school.classLeader}</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>班主任姓名：</strong></td>
+										<td>${school.headTeacher!}</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>班主任电话：</strong></td>
+										<td>${school.headTeacherPhone!}</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>中学详细地址：</strong></td>
+										<td>${school.schoolAddress!}</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>中学邮政编码：</strong></td>
+										<td>${school.schoolPostcode!}</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>主管教学领导姓名：</strong></td>
+										<td>${school.gradeLeader!}</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>主管教学领导电话：</strong></td>
+										<td>${school.gradeLeaderPhone!}</td>
+									</tr>
+									<tr>
+										<td class="ydy-td3"><strong>教育经历：</strong></td>
+										<td>
+									        [#list educationList as e]
+											<table class="zydy-table-inner table-locate">
+												<tr>
+													<th colspan="2">
+														[#if e.grade=='1']
+					                                	高中一年级
+					                                	[#elseif  e.grade=='2']
+					                                	高中二年级
+					                                	[#elseif  e.grade=='3']
+					                                	高中三年级
+					                                	[/#if]
+													</th>
+												</tr>
+												<tr>
+													<td align="right" width="25%">时间：</td>
+													<td><span>${e.startDate!}</span>&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;<span>${e.endDate!}</span></td>
+												</tr>
+												<tr>
+													<td align="right">就读于：</td>
+													<td>
+					                                	<span>${e.province!}</span>&nbsp;&nbsp;
+														<span>${e.city!}</span>&nbsp;&nbsp;
+														<span>${e.region!}</span>&nbsp;&nbsp;
+														<span>${e.school!}</span>
+													</td>
+												</tr>
+												<tr>
+													<td align="right">证明人：</td>
+													<td>
+														${e.proveMan!}
+													</td>
+												</tr>
+											</table>
+							        		[/#list]
+										</td>
+									</tr>
+									<tr>
+										<td class="ydy-td3"><strong>备选教育经历：</strong></td>
+										<td>
+							        		[#list supEducationList as s]
+							        		[#if s_index+1 = 1]
+											<table class="zydy-table-inner">
+											[#else]
+											<table class="zydy-table-inner table-locate">
+											[/#if]
+												<tr>
+													<th colspan="2">
+														[#if s.grade?? && s.grade=='1']
+					                                	高中一年级
+					                                	[#elseif s.grade?? && s.grade=='2']
+					                                	高中二年级
+					                                	[#elseif s.grade?? && s.grade=='3']
+					                                	高中三年级
+					                                	[/#if]
+													</th>
+												</tr>
+												<tr>
+													<td align="right" width="25%">时间：</td>
+													<td><span>${s.startDate!}</span>&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;<span>${s.endDate!}</span></td>
+												</tr>
+												<tr>
+													<td align="right">就读于：</td>
+													<td>
+														<span>${s.province!}</span>&nbsp;&nbsp;
+														<span>${s.city!}</span>&nbsp;&nbsp;
+														<span>${s.region!}</span>&nbsp;&nbsp;
+														<span>${s.school!}</span>
+													</td>
+												</tr>
+												<tr>
+													<td align="right">证明人：</td>
+													<td>${s.proveMan!}</td>
+												</tr>
+											</table>
+							        		[/#list]
+										</td>
+									</tr>
+								</table>
+						        <div class="row clearfix up-down">
+						            <div class="col-md-12 column">
+						            	<button type="button" class="zjf-bt pull-right" style="margin-right: 20px;" onclick="_update()">修改</button>
+						            </div>
+						        </div>
+							</div>
+			            </div>
+			        </div>
+	            </div>
+	        </div>
+        </div>
+		[#include "../wdedu/include/footer_new.html"/]
+    </div>
+<script>
+    $(function(){
+		$("#tbgrxx").addClass("zjf-active");
+	});
+	function _update(){
+		location.href = "${base}/mnwb/zxxxUpdate.jspx?userAccount=${school.userAccount}&orderId=${order.orderId}";
+	}
+</script>
+</body>
+</html>

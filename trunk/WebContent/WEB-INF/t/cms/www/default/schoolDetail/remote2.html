@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="${base}/r/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css"/>
+    <style>
+        header {
+            background: #d7f5f9;
+            height: 73px;
+            line-height: 73px;
+            text-align: center;
+        }
+
+        header > div {
+            color: #51412a;
+            font-size: 24px;
+        }
+
+        .collegePlansMain .flex-container1 li {
+            background: url(${base}/r/img/tabBg.png) no-repeat;
+            width: 157px;
+            height: 47px;
+            position: relative;
+            left: 0;
+        }
+
+        .collegePlansMain .flex-container1 li:nth-child(2) {
+            left: -10px;
+        }
+
+        .collegePlansMain .flex-container1 li:nth-child(3) {
+            left: -20px;
+        }
+
+        .collegePlansMain .flex-container1 li:nth-child(4) {
+            left: -30px;
+        }
+
+        .collegePlansMain .flex-container1 li:nth-child(5) {
+            left: -40px;
+        }
+
+        .collegePlansMain .flex-container1 li:nth-child(6) {
+            left: -50px;
+        }
+
+        .collegePlansMain .flex-container1 li.active {
+            background: url(${base}/r/img/tabBg1.png) no-repeat;
+            width: 157px;
+            z-index: 99;
+        }
+
+        .collegePlansMain .flex-container1 li a p {
+            color: #fff;
+            height: 47px;
+            line-height: 47px;
+            margin-left: 38px;
+        }
+
+        .collegePlansMain .flex-container1 li.jihua-4 a p {
+            margin-left: 20px;
+        }
+
+        .collegePlansMain .collegePlansMainTab-content div.shuoming {
+            margin: 15px 0;
+        }
+
+        .collegePlansMain .collegePlansMainTab-content div.shuoming > p {
+            color: #e84c3d;
+            margin: 8px 0;
+        }
+
+        .collegePlansMain > p {
+            text-align: center;
+            font-size: 18px;
+            color: #51412a;
+            margin: 25px 0 40px;
+        }
+
+        .collegePlansMain .collegePlansMainTab-content .collegePlansBtn {
+            text-align: center;
+        }
+
+        .collegePlansMain .collegePlansMainTab-content .collegePlansBtn button {
+            width: 153px;
+            height: 45px;
+            margin: 70px 10px 50px;
+        }
+
+        .collegePlansMain .collegePlansMainTab-content table tr {
+            font-size: 14px;
+        }
+
+        .collegePlansMain .collegePlansMainTab-content table tr td > a {
+            color: #2bbdc7;
+        }
+
+        .collegePlansMain .collegePlansMainTab-content #jihuaList_6 > table {
+            margin: 20px 0;
+        }
+
+        .collegePlansMain .collegePlansMainTab-content #jihuaList_6 > div > p {
+            color: #e84c3d;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        #jihuaList_2 table {
+            margin: 20px 0 40px;
+        }
+
+        ul.liList li {
+            float: left;
+            border: 1px solid #000;
+            border-bottom: 0;
+            border-left: 0;
+            border-top: 0;
+            width: 60px;
+        }
+
+        table.tablePadding tr td,
+        table.tablePadding tr th {
+            padding: 8px 0;
+        }
+
+        tbody.tbody tr:first-child{
+            background-color: #ffffff !important;
+            color: #333;
+        }
+
+        table tr:nth-child(even) {
+            background-color: rgb(204, 204, 204);
+        }
+
+        table tr:first-child(odd) {
+            background-color: #ffffff !important;
+            color: #333;
+        }
+
+        table tbody {
+            display: block;
+            overflow-y: auto;
+        }
+
+
+        table thead, tbody tr {
+            display: table;
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        #tb2 tr:nth-child(even){
+            background-color: rgb(204, 204, 204);
+        }
+
+        #tb2 tr:nth-child(odd){
+
+            background-color: #ffffff !important;
+            color: #333;
+        }
+    </style>
+
+    <script type="text/javascript">
+        // function xlh() {
+        //     var tbl = document.getElementById("tbl");
+        //     var rows = tbl.rows.length;
+        //     for (var i = 1; i < rows; i++) {
+        //         if (i % 2 == 0) {
+        //             tbl.rows[i].style.backgroundColor = "#cccccc";
+        //         }
+        //     }
+        // }
+    </script>
+</head>
+
+<body onload="xlh()">
+<div class="modal-body">
+    <p>查看本年度各批次线</p>
+    <table class="table table-bordered deeptable tablePadding" style="width: 99%">
+        <tr>
+            <th>年份</th>
+            <th>原批次</th>
+            <th>计划</th>
+            <th>录取比例</th>
+            <th>平均分</th>
+            <th>投档比例</th>
+            <th>录取分数范围</th>
+            <th>录取排名范围</th>
+
+        </tr>
+        [#if tCeeEnrollHistorys ??]
+        [#list tCeeEnrollHistorys as history]
+        <tr>
+            <td>${history.year!}</td>
+            <td>${history.oldBatchName!}</td>
+            <td>${history.historyPlaned!}</td>
+            <td>${history.enrollRate!}</td>
+            <td>${history.averageScore!}</td>
+            <td>${history.submitPercent!}</td>
+            <td>${history.lowScore!}-${history.highScore!}</td>
+            <td>${history.rankLowScore}-${history.rankHighScore!}</td>
+        </tr>
+        [/#list]
+        [/#if]
+    </table>
+    <table id="tbl" class="table table-bordered deeptable tablePadding" border="1" style="margin-bottom: 0;table-layout: fixed;">
+        <thead>
+        <tr>
+            <th width="164">专业名称</th>
+            <th width="165">计划</th>
+            <th width="165">实录</th>
+            <th width="165">最低分</th>
+            <th width="165">最低分排名</th>
+            <th width="165">平均分</th>
+            <th width="165">平均分排名</th>
+        </tr>
+
+        [#if tCeeEnrollHistoryList2??]
+        [#list tCeeEnrollHistoryList2 as tcee]
+        <tr>
+            <td>分数段</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        [/#list]
+        [/#if]
+        [#if tCeeEnrollHistoryList3??]
+        [#list tCeeEnrollHistoryList3 as tcee]
+        <tr>
+            <td>当年市排名</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        [/#list]
+        [/#if]
+        [#if tCeeEnrollHistoryList??]
+        [#list tCeeEnrollHistoryList as tcee]
+        <tr>
+            <td title="${tcee.univName!}" style="overflow: hidden; text-overflow:ellipsis;white-space:nowrap;">${tcee.univName!}</td>
+            <td>${tcee.historyPlaned!}</td>
+            <td>${tcee.historyEnrolled!}</td>
+            <td>${tcee.lowScore!}</td>
+            <td>${tcee.rankLowScore!}</td>
+            <td>${tcee.averageScore!}</td>
+            <td>${tcee.rankAverageScore!}</td>
+        </tr>
+        [/#list]
+        [/#if]
+        </thead>
+    </table>
+
+    <div style="max-height: 400px;height:400px;overflow:auto;">
+        <table id="tb2" class="table table-bordered deeptable tablePadding" border="1" style="margin-bottom: 0;table-layout: fixed;">
+        [#if tCeeEnrollHistoryList1??]
+        [#list tCeeEnrollHistoryList1 as tcee]
+        <tr>
+            <td width="167" title="${tcee.majorName!}" style="overflow: hidden; text-overflow:ellipsis;white-space:nowrap;">${tcee.majorName!}</td>
+            <td width="167">${tcee.historyPlaned!}</td>
+            <td width="167">${tcee.historyEnrolled!}</td>
+            <td width="168">${tcee.lowScore!}</td>
+            <td width="167">${tcee.rankLowScore!}</td>
+            <td width="167">${tcee.averageScore!}</td>
+            <td width="167">${tcee.rankAverageScore!}</td>
+        </tr>
+        [/#list]
+        [/#if]
+        </table>
+    </div>
+</div>
+</div>
+</body>
+<script src="${base}/r/js/jQuery.js"></script>
+<script src="${base}/r/js/bootstrap.min.js"></script>
+<script src="${base}/r/js/itemsJs/filtrate.js"></script>
+<script src="${base}/r/js/itemsJs/common.js"></script>
+<script src="${base}/r/js/Sortable.js"></script>
+<script>
+    //拖动插件渲染
+    Sortable.create(volunteer_show);
+
+    var max_volunteer_count = ${majorNum!0};
+    $(".volunteer_list input[type=checkbox]").on("click", function () {
+        var current_count = $(".volunteer_list input[type=checkbox]:checked").length;
+        if (current_count > max_volunteer_count) {
+            alert("最多选择" + max_volunteer_count + "个专业");
+            return false;
+        }
+        var value = $(this).val();
+        var text = $(this).parents("tr").find("td").eq(1).text()
+        var selected_show_id = "show_" + this.id;
+        var selected_show = $("#" + selected_show_id);
+        if (!selected_show[0]) {
+            $(".volunteer_show").append('<div id="' + selected_show_id + '" data-value="' + value + '"  class="volunteer_select" title="' + text + '"><span>' + text + '</span></div>');
+        } else {
+            selected_show.remove()
+        }
+    });
+
+
+    function saveDetail() {
+        var isSelect = "";
+        for (let index = 0; index < $(".volunteer_show div").length; index++) {
+            isSelect += $($(".volunteer_show div")[index]).attr("data-value") + ",";
+        }
+        isSelect = isSelect.substring(0, isSelect.lastIndexOf(','));
+
+        $.ajax({
+            url: 'isReportMajor.jspx',
+            data: {
+                planId: $("#planId").val(),
+                batchId: $("#batchId").val(),
+                isSelect: isSelect,
+                replaceCode: $("#replaceCode").val(),
+                isFormal: $("#isFormal").val(),
+                univCodes: $("#univCodes").val(),
+                order: $("#order").val()
+            },
+            type: "POST",
+            async: false,
+            error: function (data) {
+                alert("提交失败！\r\n" + data);
+            },
+            success: function (data) {
+                var res = eval('(' + data + ')');
+                if (res && res.success == true) {
+                    event.returnValue = false;
+                    location.href = res.msg;
+                    parent._hideIframe();
+                } else {
+                    alert(res.msg);
+                }
+            }
+        });
+    }
+</script>
+
+</html>
+

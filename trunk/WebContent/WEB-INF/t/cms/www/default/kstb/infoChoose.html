@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>批次填报</title>
+    <link rel="stylesheet" href="${base}/r/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css"/>
+    <style>
+        a {
+            color:red;
+        }
+        a:hover {
+            background:#8bc145;
+            color:#000;
+        }
+        header {
+            background: #d7f5f9;
+            height: 73px;
+            line-height: 73px;
+            text-align: center;
+        }
+
+        header>div {
+            color: #51412a;
+            font-size: 24px;
+        }
+
+        .hugeSearch {
+            margin-bottom: 0;
+        }
+
+        .selectNumberScreen .screenBox dl dd a {
+            margin: 0;
+            margin-top: 16px;
+            padding: 0;
+        }
+
+        .selectNumberScreen .screenBox dl dd a:hover {
+            background: none;
+            color: #05b8c3;
+        }
+
+        .selectNumberScreen dl dd.rankingFiltration .radio_base_group label {
+            padding: 15px 30px 15px 30px;
+        }
+
+        .selectNumberScreen dl dd.rankingFiltration a {
+            display: inline-block;
+            margin: 13px;
+            padding: 0;
+            text-align: center;
+            background: #b5b5b5;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        .selectNumberScreen dl dd.rankingFiltration a:hover {
+            background: #b5b5b5;
+            color: #fff;
+        }
+
+        .selectNumberScreen dl dd.rankingFiltration a.chong {
+            margin-right: 0;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .selectNumberScreen dl dd.rankingFiltration label {
+            margin: 0;
+        }
+
+        .selectNumberScreen dl dd.rankingFiltration .radio_base_group input[type='radio']:checked+label {
+            /*height: 100%;
+        width: 100%;*/
+            border-radius: 0;
+            padding: 15px 30px 15px 30px;
+            overflow: initial;
+        }
+
+        .rankingFiltration .upAndDown {
+            display: inline-block;
+        }
+
+        .rankingFiltration .upAndDown>span {
+            position: relative;
+            top: -22.6px;
+            left: -7px;
+            background: #FFF;
+            border: 1px solid #ddd;
+            padding: 4.9px;
+            font-size: 14px;
+        }
+
+        .rankingFiltration .upAndDown>span input {
+            width: 35px;
+            height: 25px;
+            border-radius: 0;
+            position: relative;
+            top: -2px;
+        }
+
+        .select-show div {
+            border: 1px solid #05b8c3;
+            padding: 10px;
+            margin-bottom: 5px;
+            float: left;
+            clear: both;
+        }
+
+        .select-show span {
+            line-height: 32px;
+        }
+
+        .select-show ul {
+            float: right;
+            clear: both;
+        }
+
+        .select-show ul li {
+            float: left;
+            position: relative;
+            display: block;
+            white-space: nowrap;
+            background: #fff;
+            float: left;
+            height: 30px;
+            border: 1px solid #05b8c3;
+            padding: 2px 18px 0 3px;
+            margin: 2px 5px;
+        }
+
+        .select-show ul li i {
+            background: url(${base}/r/img/x.png) no-repeat;
+            cursor: pointer;
+            display: block;
+            height: 19px;
+            overflow: hidden;
+            position: absolute;
+            right: 0px;
+            top: 4px;
+            width: 19px;
+        }
+        table.table tr th,table.table tr td{
+            font-size: 14px;
+            padding: 8px 0;
+        }
+        div.textC button{
+            margin: 20px;
+        }
+        .nav-tabs {
+             border-bottom: none!important;
+        }
+        .flex-item6{
+            margin: 0 !important;
+        }
+            /*表格里的tab切换*/
+        .ChooseToOption_tabs li input {
+            display: none;
+        }
+
+        .ChooseToOption_tabs li {
+            margin-top: 2px;
+            margin-right: 5px;
+        }
+
+        .ChooseToOption_tabs li label {
+            background: #b5b5b5;
+            color: #fff;
+            width: 115px;
+            height: 48px;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .nav-tabs>li.active>label,
+        .nav-tabs>li.active>label:focus,
+        .nav-tabs>li.active>label:hover {
+            color: #fff;
+            background-color: #fac73c;
+            border: none;
+        }
+
+        .nav>li>label:focus,
+        .nav>li>label:hover {
+            background-color: #b5b5b5;
+        }
+
+        .ChooseToOption_tabs {
+            border-bottom: 0;
+        }
+
+        .ChooseToOption_tabs li label {
+            height: 44px;
+            line-height: 44px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .selectNumberScreen dl dd.rankingFiltration a {
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+            text-align: center;
+            background: #b5b5b5;
+            color: #fff;
+            border-radius: 5px;
+            padding-top: 4px;
+        }
+
+        .selectNumberScreen dl dd.rankingFiltration a.chong {
+            margin-right: 0;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .rankingFiltration .upAndDown {
+            display: inline-block;
+        }
+
+        .rankingFiltration .upAndDown>span {
+            position: relative;
+            top: -17.5px;
+            left: -7px;
+            background: #FFF;
+            border: 1px solid #ddd;
+            padding: 5.1px;
+            font-size: 14px;
+        }
+
+        .rankingFiltration .upAndDown>span input {
+            width: 35px;
+            height: 25px;
+            border-radius: 0;
+            position: relative;
+            top: -2px;
+        }
+
+        .benginFillInMain .BatchFill>div .eachBatch {
+            background: #d7f5f9;
+            font-size: 18px;
+            color: #666;
+            width: 1060px;
+            height: 55px;
+            line-height: 55px;
+            padding-left: 25px;
+        }
+
+        .benginFillInMain .BatchFill>div table tr td ul.specialtyList li {
+            border-bottom: 1px solid #eef2f5;
+            padding: 15px 0;
+        }
+
+        .benginFillInMain .BatchFill>div table tr td ul.specialtyList div.yo-yo b {
+            color: #05b8c3;
+            font-weight: normal;
+        }
+
+        .benginFillInMain .BatchFill>div table tr td ul.WhetherObey li {
+            padding: 11.5px 0;
+            /*border-bottom: 1px solid #eef2f5;*/
+        }
+
+        .benginFillInMain .BatchFill>div table tr td ul.WhetherObey li button {
+            width: 60px;
+            height: 30px;
+            line-height: 30px;
+            background: #b5b5b5;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        ul.yearTab_tabs li a {
+            margin-top: 0;
+        }
+
+        .modal-body {
+            position: relative;
+            padding: 15px 0;
+        }
+
+        .volunteer_show {
+            margin-top: 5px;
+            color: #fff;
+            min-height: 100px;
+            background: #05b8c3;
+            overflow: auto;
+        }
+
+        .volunteer_select {
+            float: left;
+            background-color: #fac73c;
+            padding: 5px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px 10px;
+        }
+
+        .checkbox_base label {
+            position: relative;
+            padding: 0;
+            left: 12px;
+            top: 0;
+            height: 20px;
+            line-height: 20px;
+        }
+
+        td.fenshu>span {
+            display: inline-block;
+            width: 105px;
+            /*border-right: 1px solid #000;*/
+            padding: 0;
+            margin: 0;
+            font-size: 15px;
+        }
+        td.fenshu>span:last-child{
+            border: none;
+        }
+        .table>tbody>tr>td.fenshu{
+            padding:0;
+        }
+        .btn4:hover {
+            cursor: pointer;
+        }
+        .myProfile.flex-container1>div{
+            margin-right: 25px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function xlh() {
+            var tbl = document.getElementById("tbl");
+            var rows = tbl.rows.length;
+            for (var i = 1; i < rows; i++) {
+                if (i % 2 == 0) {
+                    tbl.rows[i].style.backgroundColor = "#cccccc";
+                }
+            }
+        }
+    </script>
+</head>
+
+<body onload="xlh()">
+<!--顶部线条-->
+<div class="topLine"></div>
+<!--tab切换  导航-->
+[#include "../include/header_zy.html"/]
+<!--路径-->
+<div class="route">
+    <div class="flex-container width1200">
+        <div>
+            <a href="${base}">首页 </a> &lt;&lt;志愿填报 &lt;&lt;批次填报
+        </div>
+        <div></div>
+    </div>
+</div>
+<!--主体-->
+<main class="benginFillInMain">
+<form id="comSearch" action="beginFillIn.jspx" method="post">
+
+        <div class="width1200">
+            <!--标题-->
+            <div class="reportedTitle">
+                <p>2019年志愿模拟填报表</p>
+                <p>Voluntary simulation report form 2019</p>
+            </div>
+            <!--搜索-->
+            <div >
+                <!--搜索框-->
+                <div class="flex-container">
+                    <div class="flex-item hugeSearch">
+                        <input name="univ" type="text" placeholder="输入院校名称，点击开始搜索" value="${univ!}"/>
+                        <input name="major" type="text" placeholder="输入专业名称，点击开始搜索" value="${major!}"/>
+                    </div>
+                    <div class="flex-item">
+                        <butto n type="button" onclick="_comSearch()" class="btn6 btnColorYellow">搜索院校或专业</button>
+                        <button type="button" class="btn6 btnColorGreen advancedSearch">高级搜索</button>
+                    </div>
+                </div>
+                <!--筛选条件-->
+                <div>
+                <div class="selectNumberScreen defaultHide">
+                    <div class="hasBeenSelected">
+                        <dl>
+                            <dt>选择筛选条件：</dt>
+                            <dd class="clearDd">
+                                <!--<div class="clearList select-show">-->
+                                <!--</div>-->
+                                <div class="eliminateCriteria">
+                                    <!--清除筛选条件-->
+                                    <button type="submit" class="btn3 btnColorGreen advancedSearch" style="position: absolute;right: -85px;bottom: 0;top: 0;margin: auto;">搜索</button>
+                                    <!--<button type="button" id="btn_clear_form" class="btn3 btnColorGreen advancedSearch" style="position: absolute;right: -85px;bottom: 0;top: 0;margin: auto;">全部清理</button>-->
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div id="selectList"  class="screenBox screenBackground">
+                        <dl class="listIndex" >
+                            <dt>热门城市 &gt;</dt>
+                            <dd class="checkbox_base_group">
+                                <a href="javascript:void(0)">
+                                    <input id="checkbox_chengshi_1" value="北京市" name="city" type="checkbox" [#if requestMap.city?? && requestMap.city?contains('北京市')] checked="checked" [/#if]>
+                                    <label for="checkbox_chengshi_1">北京</label>
+                                </a>
+                                <a href="javascript:void(0)">
+                                    <input id="checkbox_chengshi_2" value="上海市" name="city" type="checkbox" [#if requestMap.city?? && requestMap.city?contains('上海市')] checked="checked" [/#if]>
+                                    <label for="checkbox_chengshi_2">上海</label>
+                                </a>
+                                <a href="javascript:void(0)">
+                                    <input id="checkbox_chengshi_3" value="广州市" name="city" type="checkbox" [#if requestMap.city?? && requestMap.city?contains('广州市')] checked="checked" [/#if]>
+                                    <label for="checkbox_chengshi_3">广州</label>
+                                </a>
+                                <a href="javascript:void(0)">
+                                    <input id="checkbox_chengshi_4" value="深圳市" name="city" type="checkbox" [#if requestMap.city?? && requestMap.city?contains('深圳市')] checked="checked" [/#if]>
+                                    <label for="checkbox_chengshi_4">深圳</label>
+                                </a>
+                                <a href="javascript:void(0)">
+                                    <input id="checkbox_chengshi_5" value="南京市" name="city" type="checkbox" [#if requestMap.city?? && requestMap.city?contains('南京市')] checked="checked" [/#if]>
+                                    <label for="checkbox_chengshi_5">南京</label>
+                                </a>
+                                <a href="javascript:void(0)">
+                                    <input id="checkbox_chengshi_6" value="杭州市" name="city" type="checkbox" [#if requestMap.city?? && requestMap.city?contains('杭州市')] checked="checked" [/#if]>
+                                    <label for="checkbox_chengshi_6">杭州</label>
+                                </a>
+                                <a href="javascript:void(0)">
+                                    <input id="checkbox_chengshi_7" value="武汉市" name="city" type="checkbox" [#if requestMap.city?? && requestMap.city?contains('武汉市')] checked="checked" [/#if]>
+                                    <label for="checkbox_chengshi_7">武汉</label>
+                                </a>
+                                <a href="javascript:void(0)">
+                                    <input id="checkbox_chengshi_8" value="成都市" name="city" type="checkbox" [#if requestMap.city?? && requestMap.city?contains('成都市')] checked="checked" [/#if]>
+                                    <label for="checkbox_chengshi_8">成都</label>
+                                </a>
+                                <a href="javascript:void(0)">
+                                    <input id="checkbox_chengshi_9" value="重庆市" name="city" type="checkbox" [#if requestMap.city?? && requestMap.city?contains('重庆市')] checked="checked" [/#if]>
+                                    <label for="checkbox_chengshi_9">重庆</label>
+                                </a>
+                            </dd>
+                        </dl>
+                        <dl class="listIndex">
+                            <dt>所在省份 &gt;</dt>
+                            <dd class="checkbox_base_group">
+                                [#if provinceList?? ]
+                                [#list provinceList as p]
+                                [#if p.provinceName != "未知"]
+                                <a href="javascript:void(0)">
+                                    <input id="checkbox_shengfen_${p.provinceId!}" value="${p.provinceId!}" name="univProvince" type="checkbox" [#if proName?? && proName?contains('${p.provinceName!}')] checked="checked" [/#if]>
+                                    <label for="checkbox_shengfen_${p.provinceId!}">${p.provinceName!}</label>
+                                </a>
+                                [/#if]
+                                [/#list]
+                                [/#if]
+                                <span class="more"><label>更多</label><em class="open"></em></span>
+                            </dd>
+                        </dl>
+                        <dl class="listIndex" attr="">
+                            <dt>院校分类 &gt;</dt>
+                            <dd class="checkbox_base_group">
+                                [#if universityType?? ]
+                                [#list universityType as u]
+                                <a href="javascript:void(0)" >
+                                    <input id="univ_type_${u.id!}" value="${u.typeName!}" name="univSchoolType" type="checkbox" [#if requestMap.univSchoolType?? && requestMap.univSchoolType?contains("${u.typeName!}")] checked="checked" [/#if]>
+                                    <label for="univ_type_${u.id!}">${u.typeName!}</label>
+                                </a>
+                                [/#list]
+                                [/#if]
+                                <span class="more"><label>更多</label><em class="open"></em></span>
+                            </dd>
+                        </dl>
+                        <dl class="" attr="">
+                                <dt>院校类型 &gt;</dt>
+                            <dd class="checkbox_base_group">
+                                <a href="javascript:void(0)">
+                                    <input id="checkbox_yuanxiao_0" value="1" name="univType" type="checkbox" [#if requestMap.univType?? && requestMap.univType?contains('1')] checked="checked" [/#if]>
+                                    <label for="checkbox_yuanxiao_0">985高校</label>
+                                </a>
+                                <a href="javascript:void(0)">
+                                    <input id="checkbox_yuanxiao_1" value="2" name="univType" type="checkbox" [#if requestMap.univType?? && requestMap.univType?contains('2')] checked="checked" [/#if]>
+                                    <label for="checkbox_yuanxiao_1">211高校</label>
+                                </a>
+                                <a href="javascript:void(0)">
+                                    <input id="checkbox_yuanxiao_4" value="3" name="univType" type="checkbox" [#if requestMap.univType?? && requestMap.univType?contains('3')] checked="checked" [/#if]>
+                                    <label for="checkbox_yuanxiao_4">国防生</label>
+                                </a>
+                                <a href="javascript:void(0)">
+                                    <input id="checkbox_yuanxiao_5" value="4" name="univType" type="checkbox" [#if requestMap.univType?? && requestMap.univType?contains('4')] checked="checked" [/#if]>
+                                    <label for="checkbox_yuanxiao_5">卓越计划</label>
+                                </a>
+                                <a href="javascript:void(0)">
+                                    <input id="checkbox_yuanxiao_6" value="5" name="univType" type="checkbox" [#if requestMap.univType?? && requestMap.univType?contains('5')] checked="checked" [/#if]>
+                                    <label for="checkbox_yuanxiao_6">自主招生</label>
+                                </a>
+                                <a href="javascript:void(0)">
+                                    <input id="checkbox_yuanxiao_7" value="6" name="univType" type="checkbox" [#if requestMap.univType?? && requestMap.univType?contains('6')] checked="checked" [/#if]>
+                                    <label for="checkbox_yuanxiao_7">一流大学</label>
+                                </a>
+                                <a href="javascript:void(0)">
+                                    <input id="checkbox_yuanxiao_3" value="7" name="univType" type="checkbox" [#if requestMap.univType?? && requestMap.univType?contains('7')] checked="checked" [/#if]>
+                                    <label for="checkbox_yuanxiao_3">一流专业</label>
+                                </a>
+                            </dd>
+                        </dl>
+                        <dl class="" attr="">
+                            <dt>专业分类 &gt;</dt>
+                            <dd >
+                                [#if majorList??]
+                                [#list majorList as major]
+                                <a href="javascript:void(0)">
+                                    <input id="radio_yuanxiao_${major_index}" value="${major.majorId}" name="fenlei" type="radio" [#if requestMap.fenlei?? && requestMap.fenlei==major.majorId] class="selected"[/#if]>
+                                    <label for="radio_yuanxiao_${major_index}">${major.majorName}</label>
+                                </a>
+                                [/#list]
+                                [/#if]
+                            </dd>
+                        </dl>
+                        <!--<dl class="listIndex" attr="">-->
+                            <!--<dt>热门专业 &gt;</dt>-->
+                            <!--<dd>-->
+                                <!--<a href="javascript:void(0)" value="">机械设计制造及自动化</a>-->
+                            <!--</dd>-->
+                        <!--</dl>-->
+                        <dl class="listIndex" attr="">
+                            <dt>排名过滤 &gt;</dt>
+                            <dd class="rankingFiltration inputList">
+                                <a href="javascript:void(0)">
+                                    <input id="radio_ty_20" value="1" name="type"  type="radio">
+                                    <label for="radio_ty_20">稳</label>
+                                </a>
+                                <a href="javascript:void(0)">
+                                    <input id="radio_ty_21" value="2" name="type"  type="radio">
+                                    <label for="radio_ty_21">冲</label>
+                                </a>
+                                <a href="javascript:void(0)">
+                                    <input id="radio_ty_22" value="3" name="type"  type="radio">
+                                    <label for="radio_ty_22">保</label>
+                                </a>
+                                <div class="upAndDown">
+										<span>
+											上下调整<input name="sc" type="text" />分
+										</span>
+                                </div>
+                            </dd>
+                            <div class="filtrateConditionSearch">
+                                <button type="button" onclick="_comSearch()" class="btn btnColorYellow">搜索</button>
+                            </div>
+                        </dl>
+
+                    </div>
+
+                </div>
+                </div>
+            </div>
+
+
+            <!--默认隐藏域  点击切换批次填报出现-->
+            <div class="switchoverBatchFill defaultHide">
+                <div class="BatchFill">
+                    <!--本科提前批-->
+                    [#if univNumMap??]
+                    [#if batchList??]
+                    [#list batchList as batch]
+                    <div>
+                        <div class="flex-container2">
+                            <div class="eachBatch">
+                                报考批次：<span>${batch.batchName!}</span>；
+                                批次线：<span>${batch.score!}分</span>；
+                                可报志愿：<span>${batch.univNum!}(${univNumMap['${batch.batchId!}']!"0"})个</span>；
+                                报考结束时间：<span>${batch.fillDate!}</span>；
+                            </div>
+                            <div>
+                                <button type="button" onclick="batch_taggle('${batch.batchId}','${batch.batchName}')" class="btn8 btnColorYellow">批次填报</button>
+                            </div>
+                        </div>
+                        <table class="table table-striped deeptable">
+                            <tr>
+                                <th>志愿顺序</th>
+                                <th>院校名称</th>
+                                <th>选报专业</th>
+                                <th>服从调剂</th>
+                            </tr>
+                            [#if batchMap['${batch.batchId!}']??]
+                            [#assign univList=batchMap['${batch.batchId!}']/]
+                            [#assign univMap=appMap['${batch.batchId!}']/]
+                            [#list univList as univ]
+                            <tr>
+                                [#if batch.ceePre == '顺序志愿']
+                                [#if univ.isFormal == '0']
+                               <td> 顺序志愿${univ_index?replace(0,'一')?replace(1,'二')?replace(2,'三')?replace(3,'四')?replace(4,'五')}</td>
+                                [#else]
+                                <td>备选志愿</td>
+                                [/#if]
+                                [#else]
+                                [#if univ.isFormal == '0']
+                                <td>平行志愿${univ_index?replace(24,'Y')?replace(23,'X')?replace(22,'W')?replace(21,'V')?replace(20,'U')?replace('19','T')?replace('18','S')?replace('17','R')?replace('16','Q')?replace('15','P')?replace('14','O')?replace('13','N')?replace('12','M')?replace('11','L')?replace('10','K')?replace('9','J')?replace('8','I')?replace('7','H')?replace('6','G')?replace('5','F')?replace('4','E')?replace('3','D')?replace('2','C')?replace('1','B')?replace('0','A')}</td>
+                                [#else]
+                                <td>备选志愿</td>
+                                [/#if]
+                                [/#if]
+                                <td>${univ.univName!?replace('null','')}</td>
+                                <td>${univMap[univ.univCode]?size}</td>
+                                <td>[#if univ.isObey=='1']服从[#else]不服从[/#if]</td>
+                            </tr>
+                            [/#list]
+                            [/#if]
+                            [#if batchMaps['${batch.batchId!}']??]
+                            [#assign univList=batchMaps['${batch.batchId!}']/]
+                            [#assign univMap=appMaps['${batch.batchId!}']/]
+                            [#list univList as univ]
+                            <tr>
+                                [#if univ.isFormal == '1']
+                                <td>备选志愿${univ_index?replace(0,'一')?replace(1,'二')?replace(2,'三')?replace(3,'四')?replace(4,'五')}</td>
+                                [/#if]
+                                <td>${univ.univName!?replace('null','')}</td>
+                                <td></td>
+                                <td>[#if univ.isObey=='1']服从[#else]不服从[/#if]</td>
+                            </tr>
+                            [/#list]
+                            [/#if]
+                        </table>
+                    </div>
+                    [/#list]
+                    [/#if]
+                    [/#if]
+                </div>
+            </div>
+
+            <div class="myProfileOption">
+                <!--我的资料 -->
+                <div class="myProfile flex-container1">
+                    <div>我的资料 &gt;&gt;</div>
+                    <div>
+                        姓名：<span>${userName!}</span>
+                    </div>
+                    <div>
+                        地区：
+                        [#if provinceList?? ]
+                        [#list provinceList as p]
+                        [#if p.provinceName!="未知"]
+                        [#if provinceId?? && p.provinceId==provinceId]
+                        <span>${p.provinceName!}</span>
+                        [/#if]
+                        [/#if]
+                        [/#list]
+                        [/#if]
+                    </div>
+                    <div>
+                        文理科：<span>[#if majorType == 1]文科[#elseif majorType == 2]理科[#else]综合改革[/#if]</span>
+                    </div>
+                    <div>
+                        成绩：<span>${score!}</span>
+                    </div>
+                    <div>
+                        排名：<span>${rank!}</span>
+                    </div>
+                    [#if provinceId?? && 17==provinceId || 18 ==provinceId || 16 ==provinceId]
+                        <div>
+                            选科：<span>${(subjects!)?replace('1','物理')?replace('2','化学')?replace('3','生物')?replace('4','政治')?replace('5','历史')?replace('6','地理')?replace('7','技术')}
+                                    ${(subjectsLevel!)?replace('1','A+')?replace('2','A')?replace('3','B+')?replace('4','B')?replace('5','C')?replace('6','D')}</span>
+                        </div>
+                    [/#if]
+                </div>
+                <!--选报选项-->
+                <div class="ChooseToOption flex-container2">
+                    <div class="flex-item6">选报选项 &gt;&gt;</div>
+                    <div>
+                        <ul id="myTab" class="nav nav-tabs ChooseToOption_tabs">
+                            <li onclick="_comSearch()" [#if tabs?? && tabs==1] class="active" [/#if]>
+                                <input id="radio_ty_30" value="1" name="tabs" type="radio" [#if tabs?? && tabs==1] checked [/#if] >
+                                <label for="radio_ty_30">全部</label>
+                            </li>
+                            <li onclick="_comSearch()" [#if tabs?? && tabs==2] class="active" [/#if]>
+                                <input id="radio_ty_31" value="2" name="tabs" type="radio" [#if tabs?? && tabs==2] checked [/#if]>
+                                <label for="radio_ty_31">已选</label>
+                            </li>
+                            <li onclick="_comSearch()" [#if tabs?? && tabs==3] class="active" [/#if]>
+                                <input id="radio_ty_32" value="3" name="tabs" type="radio" [#if tabs?? && tabs==3] checked [/#if]>
+                                <label for="radio_ty_32">未选</label>
+                            </li>
+                            [#if provinceId?? && 17==provinceId]
+                            <li onclick="_comSearch()" [#if tabs?? && tabs==4] class="active" [/#if]>
+                                <input id="radio_ty_33" value="4" name="tabs" type="radio" [#if tabs?? && tabs==4] checked [/#if]>
+                                <label for="radio_ty_33">有资格</label>
+                            </li>
+                            <li onclick="_comSearch()" [#if tabs?? && tabs==5] class="active" [/#if]>
+                                <input id="radio_ty_34" value="5" name="tabs" type="radio" [#if tabs?? && tabs==5] checked [/#if]>
+                                <label for="radio_ty_34">无资格</label>
+                            </li>
+                            [/#if]
+                        </ul>
+                    </div>
+                    <div>
+                        当前报考批次：
+                        <span>
+                        [#if batchList?? ]
+                        [#list batchList as b]
+                        [#if batchId?? && b.batchId==batchId]
+                        <span id="batch_name">${b.batchName!}</span>
+                        [/#if]
+                        [/#list]
+                        [/#if]
+                        </span>
+                        <button type="button" class="btn3 btnColorYellow switchoverbBatchBtn">切换批次招考</button>
+                    </div>
+                </div>
+            </div>
+            <!--筛选列表-->
+            <div class="FiltrateList">
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane in active" id="tabs1">
+                        <!--全部-->
+                        <table id="tbl" class="table deeptable letterSpacing0" border="10px;" style="font-size: 15px;">
+                            <tr>
+                                <th width="53">排名对比</th>
+                                <th>
+                                    <p style="margin: 10px 0;">院校列表</p>
+                                    <p>(点击院校可查看录取详情)</p>
+                                </th>
+                                <!--<th>地区</th>-->
+                                <!--<th>学校名片</th>-->
+                                <th>院校分类</th>
+                                <th>计划</th>
+                                <th width="344" style="padding:8px 0 0 0;">
+                                    <p style="margin: 10px 0;">院校历年录取低分与排名</p>
+                                    <p class="eachYear">
+                                        <span>2018</span>
+                                        <span>2017</span>
+                                        <span>2016</span>
+                                    </p>
+                                </th>
+                                <th>填报</th>
+                            </tr>
+
+                            [#if pagination?? ]
+                            [#list pagination.list as a ]
+                            [#if a.provinceId != 0]
+                            <tr>
+                                [#if a.univRank ?? ]
+                                <td style="font-size: 15px">${a.univRank!}</td>
+                                [#else]
+                                <td>---</td>
+                                [/#if]
+                                <td style="text-align: left;">
+                                [#if batchList?? ]
+                                [#list batchList as b]
+                                [#if batchId?? && b.batchId==batchId]
+                                        <a onclick="univQuery('${a.univId}','${majorType}','${b.batchId}','${a.provinceId}','${a.univCode}','${a.year}')">[${a.univCode!}]${a.univName!}[#if a.univTestLevel??](${(a.univTestLevel!)?replace('1','A+')?replace('2','A')?replace('3','B+')?replace('4','B')?replace('5','C')?replace('6','D')})[/#if]  </a>
+                                [/#if]
+                                [/#list]
+                                [/#if]
+
+                                <span style="width: 65px;font-size: 15px">
+                                    ([#if a.univProvince?? && a.univProvince==1]北京
+                                    [#elseif a.univProvince?? && a.univProvince==2]天津
+                                    [#elseif a.univProvince?? && a.univProvince==3]辽宁
+                                    [#elseif a.univProvince?? && a.univProvince==4]河北
+                                    [#elseif a.univProvince?? && a.univProvince==5]河南
+                                    [#elseif a.univProvince?? && a.univProvince==6]吉林
+                                    [#elseif a.univProvince?? && a.univProvince==7]黑龙江
+                                    [#elseif a.univProvince?? && a.univProvince==8]内蒙古
+                                    [#elseif a.univProvince?? && a.univProvince==9]山东
+                                    [#elseif a.univProvince?? && a.univProvince==10]山西
+                                    [#elseif a.univProvince?? && a.univProvince==11]陕西
+                                    [#elseif a.univProvince?? && a.univProvince==12]甘肃
+                                    [#elseif a.univProvince?? && a.univProvince==13]宁夏
+                                    [#elseif a.univProvince?? && a.univProvince==14]青海
+                                    [#elseif a.univProvince?? && a.univProvince==15]新疆
+                                    [#elseif a.univProvince?? && a.univProvince==16]上海
+                                    [#elseif a.univProvince?? && a.univProvince==17]江苏
+                                    [#elseif a.univProvince?? && a.univProvince==18]浙江
+                                    [#elseif a.univProvince?? && a.univProvince==19]安徽
+                                    [#elseif a.univProvince?? && a.univProvince==20]广东
+                                    [#elseif a.univProvince?? && a.univProvince==21]海南
+                                    [#elseif a.univProvince?? && a.univProvince==22]广西
+                                    [#elseif a.univProvince?? && a.univProvince==23]云南
+                                    [#elseif a.univProvince?? && a.univProvince==24]贵州
+                                    [#elseif a.univProvince?? && a.univProvince==25]四川
+                                    [#elseif a.univProvince?? && a.univProvince==26]重庆
+                                    [#elseif a.univProvince?? && a.univProvince==27]西藏
+                                    [#elseif a.univProvince?? && a.univProvince==28]香港
+                                    [#elseif a.univProvince?? && a.univProvince==30]福建
+                                    [#elseif a.univProvince?? && a.univProvince==31]江西
+                                    [#elseif a.univProvince?? && a.univProvince==32]湖南
+                                    [#elseif a.univProvince?? && a.univProvince==33]湖北
+                                    [/#if]${a.univCity!})</span>
+                                <span class="schoolCardColor" style="text-align: left;width: 140px;">
+                                    [#if a.univIs211 ?? && a.univIs211==1]
+                                    <span class="er11">211</span>
+                                    [/#if]
+                                    [#if a.univIs985 ?? && a.univIs985==1]
+                                    <span class="jiu85">985</span>
+                                    [/#if]
+                                    [#if a.univIsIndependence ?? && a.univIsIndependence==1]
+                                    <span class="zi">自</span>
+                                    [/#if]
+                                    [#if a.univIsKeylab ?? && a.univIsKeylab==1]
+                                    <span class="zhong">重</span>
+                                    [/#if]
+                                    [#if a.univIsExcellent ?? && a.univIsExcellent==1]
+                                    <span class="zhuo">卓</span>
+                                    [/#if]
+                                    [#if a.univIsFirstRateUniv?? && a.univIsFirstRateUniv==1]
+                                        <span class="shuang">双一流</span>
+                                    [#elseif a.univIsFirstRateMajor?? && a.univIsFirstRateMajor==1]
+                                        <span class="yiliu">一流学科</span>
+                                    [/#if]
+                                </span>
+                                </td>
+                                <td style="font-size: 15px">${a.univType!}</td>
+                                [#if a.changePlanNum?? && a.enrolledNum2??]
+                                <td style="font-size: 15px">${a.changePlanNum!}(<font color="red">${a.changePlanNum - a.enrolledNum2}</font>)</td>
+                                [#else]
+                                <td style="font-size: 15px">${a.changePlanNum!}(<font color="red">0</font>)</td>
+                                [/#if]
+
+                                <td class="fenshu" style="font-size: 18px">
+                                    <span style="display: inline-block;width: 30%;"><font  title="人数">${a.enrolledNum1!'-'}</font><br><font  color="red" title="分数">${a.scoreLow1!'-'}</font><br><font color="blue" title="最低分排名">${a.rankScoreLow1!'-'}</font></span>
+                                    |
+                                    <span style="display: inline-block;width: 30%;"><font title="人数">${a.enrolledNum2!'-'}</font><br><font  color="red" title="分数">${a.scoreLow2!'-'}</font><br><font color="blue" title="最低分排名">${a.rankScoreLow2!'-'}</font></span>
+                                    |
+                                    <span style="display: inline-block;width: 30%;"><font  title="人数">${a.enrolledNum3!'-'}</font><br><font color="red" title="分数">${a.scoreLow3!'-'}</font><br><font color="blue" title="最低分排名">${a.rankScoreLow3!'-'}</font></span>
+                                </td>
+                                <td style="width: 100px;position: relative;">
+
+                                    [#if univDetailList??]
+                                        [#if provinceId?? && 17==provinceId]
+                                            [#if a.univTestLevel lt level]
+                                                <a class="greenFont btn4 btnColorOrange">无资格</a>
+                                            [#elseif univDetailList?seq_contains("${a.univId!}")]
+                                                <a onclick="_resetMod(${a.id!},${a.univCode!})" class="greenFont btn4 btnMinGreen">更改专业</a>
+                                            [#else]
+                                                <a class="btn4 dropdown-toggle greenFont btnColorBlue" type="button" id="dropdown_${a.id}" data-toggle="dropdown" aria-haspopup="true"
+                                                   aria-expanded="false">
+                                                    志愿填报
+                                                </a>
+                                                <ul class="dropdown-menu zhiyuan_list" aria-labelledby="dropdown_${a.id}" style="height: 340px;overflow: auto;margin-left:0">
+                                                    [#list batchMap['${batchId}']! as b]
+                                                    <li>
+                                                        <a onclick="_myModal(${a.id!},${b.univOrder!},${b.isFormal!})" data-toggle="modal" >
+                                                            [#if b.isFormal == '0']
+                                                            平行志愿${b_index?replace(24,'Y')?replace(23,'X')?replace(22,'W')?replace(21,'V')?replace(20,'U')?replace('19','T')?replace('18','S')?replace('17','R')?replace('16','Q')?replace('15','P')?replace('14','O')?replace('13','N')?replace('12','M')?replace('11','L')?replace('10','K')?replace('9','J')?replace('8','I')?replace('7','H')?replace('6','G')?replace('5','F')?replace('4','E')?replace('3','D')?replace('2','C')?replace('1','B')?replace('0','A')}（${b.univName!?replace('null','')}）
+                                                            [/#if]
+                                                        </a></li>
+                                                    [/#list]
+                                                    [#list batchMaps['${batchId}']! as b]
+                                                    <li><a onclick="_myModal(${a.id!},${b.univOrder!},${b.isFormal!})" data-toggle="modal" >
+                                                        [#if b.isFormal == '1']
+                                                        备选志愿${b_index?replace(24,'二十四')?replace(23,'二十三')?replace(22,'二十二')?replace(21,'二十一')?replace(20,'二十')?replace('19','十九')?replace('18','S')?replace('17','十八')?replace('16','十七')?replace('15','十六')?replace('14','十五')?replace('13','十四')?replace('12','十三')?replace('11','十二')?replace('10','十一')?replace('9','十')?replace('8','九')?replace('7','八')?replace('6','七')?replace('5','六')?replace('4','五')?replace('3','四')?replace('2','三')?replace('1','二')?replace('0','一')}（${b.univName!?replace('null','')}）
+                                                        [/#if]</a></li>
+                                                    [/#list]
+                                                    <!--<a onclick="_modal(${a.id!})" class="greenFont btn4 btnColorBlue">志愿填报</a>-->
+                                                </ul>
+
+                                            [/#if]
+
+                                        [#elseif provinceId?? && 18==provinceId]
+                                            [#if univDetailList?seq_contains("${a.univId!}")]
+                                                <a onclick="_resetModSP(${a.id!},${a.univCode!})" class="greenFont btn4 btnMinGreen">更改专业</a>
+                                            [#else]
+                                                 <a class="btn4 dropdown-toggle greenFont btnColorBlue" type="button" id="dropdown_${a.id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    志愿填报
+                                                 </a>
+                                                 <ul class="dropdown-menu zhiyuan_list" aria-labelledby="dropdown_${a.id}" style="height: 340px;overflow: auto;margin-left:0">
+                                                     [#list batchMap['${batchId}']! as b]
+                                                     <li>
+                                                         <a onclick="_myModalSP(${a.id!},${b.univOrder!},${b.isFormal!})" data-toggle="modal" >
+                                                             [#if b.isFormal == '0']
+                                                             平行志愿${b_index?replace(24,'Y')?replace(23,'X')?replace(22,'W')?replace(21,'V')?replace(20,'U')?replace('19','T')?replace('18','S')?replace('17','R')?replace('16','Q')?replace('15','P')?replace('14','O')?replace('13','N')?replace('12','M')?replace('11','L')?replace('10','K')?replace('9','J')?replace('8','I')?replace('7','H')?replace('6','G')?replace('5','F')?replace('4','E')?replace('3','D')?replace('2','C')?replace('1','B')?replace('0','A')}（${b.univName!?replace('null','')}）
+                                                             [/#if]
+                                                         </a></li>
+                                                     [/#list]
+                                                     [#list batchMaps['${batchId}']! as b]
+                                                     <li><a onclick="_myModalSP(${a.id!},${b.univOrder!},${b.isFormal!})" data-toggle="modal" >
+                                                         [#if b.isFormal == '1']
+                                                         备选志愿${b_index?replace(24,'二十四')?replace(23,'二十三')?replace(22,'二十二')?replace(21,'二十一')?replace(20,'二十')?replace('19','十九')?replace('18','S')?replace('17','十八')?replace('16','十七')?replace('15','十六')?replace('14','十五')?replace('13','十四')?replace('12','十三')?replace('11','十二')?replace('10','十一')?replace('9','十')?replace('8','九')?replace('7','八')?replace('6','七')?replace('5','六')?replace('4','五')?replace('3','四')?replace('2','三')?replace('1','二')?replace('0','一')}（${b.univName!?replace('null','')}）
+                                                         [/#if]</a></li>
+                                                     [/#list]
+                                                     <!--<a onclick="_modal(${a.id!})" class="greenFont btn4 btnColorBlue">志愿填报</a>-->
+                                                 </ul>
+
+                                            [/#if]
+
+                                        [#else]
+                                            [#if univDetailList?seq_contains("${a.univId!}")]
+                                                <a onclick="_resetMod(${a.id!},${a.univCode!})" class="greenFont btn4 btnMinGreen">更改专业</a>
+                                            [#else]
+                                                <!--<a onclick="_myModal(${a.id!})" class="greenFont btn4 btnColorBlue">志愿填报</a>-->
+                                                <ul class="dropdown-menu zhiyuan_list" aria-labelledby="dropdown_${a.id}" style="height: 340px;overflow: auto;margin-left:0">
+                                                    [#list batchMap['${batchId}']! as b]
+                                                    <li><a onclick="_myModal(${a.id!},${b.univOrder!},${b.isFormal!})" data-toggle="modal" >
+                                                        [#if b.isFormal == '0']
+                                                        平行志愿${b_index?replace(24,'Y')?replace(23,'X')?replace(22,'W')?replace(21,'V')?replace(20,'U')?replace('19','T')?replace('18','S')?replace('17','R')?replace('16','Q')?replace('15','P')?replace('14','O')?replace('13','N')?replace('12','M')?replace('11','L')?replace('10','K')?replace('9','J')?replace('8','I')?replace('7','H')?replace('6','G')?replace('5','F')?replace('4','E')?replace('3','D')?replace('2','C')?replace('1','B')?replace('0','A')}（${b.univName!?replace('null','')}）
+                                                        [/#if]</a></li>
+                                                    [/#list]
+                                                    [#list batchMaps['${batchId}']! as b]
+                                                    <li><a onclick="_myModal(${a.id!},${b.univOrder!},${b.isFormal!})" data-toggle="modal" >
+                                                        [#if b.isFormal == '1']
+                                                        备选志愿${b_index?replace(24,'二十四')?replace(23,'二十三')?replace(22,'二十二')?replace(21,'二十一')?replace(20,'二十')?replace('19','十九')?replace('18','S')?replace('17','十八')?replace('16','十七')?replace('15','十六')?replace('14','十五')?replace('13','十四')?replace('12','十三')?replace('11','十二')?replace('10','十一')?replace('9','十')?replace('8','九')?replace('7','八')?replace('6','七')?replace('5','六')?replace('4','五')?replace('3','四')?replace('2','三')?replace('1','二')?replace('0','一')}（${b.univName!?replace('null','')}）
+                                                        [/#if]</a></li>
+                                                    [/#list]
+
+                                                </ul>
+                                                <a class="btn4 dropdown-toggle greenFont btnColorBlue" type="button" id="dropdown_${a.id}" data-toggle="dropdown" aria-haspopup="true"
+                                                   aria-expanded="false">
+                                                    志愿填报
+                                                </a>
+                                            [/#if]
+                                        [/#if]
+                                    [#else]
+                                        <!--<a onclick="_myModal(${a.id!})" class="greenFont">志愿填报</a>-->
+                                        <a class="btn4 dropdown-toggle greenFont btnColorBlue" type="button" id="dropdown_${a.id}" data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false">
+                                            志愿填报
+                                        </a>
+                                        <ul class="dropdown-menu zhiyuan_list" aria-labelledby="dropdown_${a.id}" style="height: 340px;overflow: auto;margin-left:0">
+                                            [#list batchMap['${batchId}']! as b]
+                                            <li><a onclick="_myModal(${a.id!},${b.univOrder!},${b.isFormal!})" data-toggle="modal" >
+                                                [#if b.isFormal == '0']
+                                                平行志愿${b_index?replace(24,'Y')?replace(23,'X')?replace(22,'W')?replace(21,'V')?replace(20,'U')?replace('19','T')?replace('18','S')?replace('17','R')?replace('16','Q')?replace('15','P')?replace('14','O')?replace('13','N')?replace('12','M')?replace('11','L')?replace('10','K')?replace('9','J')?replace('8','I')?replace('7','H')?replace('6','G')?replace('5','F')?replace('4','E')?replace('3','D')?replace('2','C')?replace('1','B')?replace('0','A')}（${b.univName!?replace('null','')}）
+                                                [/#if]</a></li>
+                                            [/#list]
+                                            [#list batchMaps['${batchId}']! as b]
+                                            <li><a onclick="_myModal(${a.id!},${b.univOrder!},${b.isFormal!})" data-toggle="modal" >
+                                                [#if b.isFormal == '1']
+                                                备选志愿${b_index?replace(24,'二十四')?replace(23,'二十三')?replace(22,'二十二')?replace(21,'二十一')?replace(20,'二十')?replace('19','十九')?replace('18','S')?replace('17','十八')?replace('16','十七')?replace('15','十六')?replace('14','十五')?replace('13','十四')?replace('12','十三')?replace('11','十二')?replace('10','十一')?replace('9','十')?replace('8','九')?replace('7','八')?replace('6','七')?replace('5','六')?replace('4','五')?replace('3','四')?replace('2','三')?replace('1','二')?replace('0','一')}（${b.univName!?replace('null','')}）
+                                                [/#if]</a></li>
+                                            [/#list]
+
+                                        </ul>
+                                    [/#if]
+                                </td>
+                            </tr>
+                            [/#if]
+                            [/#list]
+                            [/#if]
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="tabs2">
+                        <!--已选-->
+                    </div>
+                    <div class="tab-pane" id="tabs3">
+                        <!--未选-->
+                    </div>
+                    <div class="tab-pane" id="tabs4">
+                        <!--有资格-->
+                    </div>
+                    <div class="tab-pane" id="tabs5">
+                        <!--无资格-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="textC paging">
+            <tr>
+                <td colspan="8" style="padding:20px 0;">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td align="center" class="pn-sp">
+                                共 ${pagination.totalCount} 条&nbsp; 每页 ${pagination.pageSize} 条&nbsp; 当前 ${pagination.pageNo}/${pagination.totalPage} 页 &nbsp;转到第<input type="text" id="_goPs" onfocus="this.select();" onkeypress="if(event.keyCode==13){$('#_goPage').click();return false;}" style="width:50px; border:1px solid #e7e7e7;" />页
+                                <input id="_goPage" type="button" value="转" onclick="_gotoPage($('#_goPs').val());" [#if pagination.totalPage==1] disabled="disabled" [/#if] />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="button" value="首 页" onclick="_gotoPage('1');" [#if pagination.firstPage] disabled="disabled" [/#if]/>
+                                <input type="button" value="上一页" onclick="_gotoPage('${pagination.prePage}');" [#if pagination.firstPage] disabled="disabled" [/#if]/>
+                                <input type="button" value="下一页" onclick="_gotoPage('${pagination.nextPage}');" [#if pagination.lastPage] disabled="disabled" [/#if]/>
+                                <input type="button" value="尾 页" onclick="_gotoPage('${pagination.totalPage}');" [#if pagination.lastPage] disabled="disabled" [/#if]/>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </div>
+
+    </main>
+    <input type="hidden" id="pageNo" name="pageNo"/>
+    <input type="hidden" name="planId" value="${planId!}"/>
+    <input type="hidden" name="batchId" value="${batchId!}"/>
+</form>
+<!--4个大按钮-->
+<div class="volunteerButton">
+    <div class="flex-container2 width1200" style="margin: 0 auto;height: 100px;">
+        <div class="flex-item7">
+            <button class="btn6 btnColorOrange" onclick="window.location.href='${base}/zytb/project.jspx'">返回填报</button>
+        </div>
+        <div class="flex-item7">
+            <button class="btn6 btnColorOrange" onclick="window.location.href='${base}/zytb/voluntary.jspx?applicationId=${planId!}'">进入志愿表</button>
+        </div>
+        <div class="flex-item7">
+            <button class="btn6 btnColorOrange" onclick="window.location.href='${base}/FindUniv/findUnivList.jspx'">院校对比</button>
+        </div>
+        <div class="flex-item7">
+            <button class="btn6 btnColorOrange" onclick="window.location.href='${base}/zytb/project.jspx'">方案中心</button>
+        </div>
+    </div>
+</div>
+
+[#include "../include/footer.html"/]
+
+<!--点击设置志愿    弹出窗-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" style="width:100%">
+        <div class="modal-content" style="min-height: 600px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title">
+                    <button onclick="_savePlanDetail()" type="button" class="btn btn-primary">保存并关闭</button>
+                    <span id="myModalLabel" style="margin-left: 15%;color: red;"></span>
+                </h3>
+            </div>
+            <div class="modal-body flex-container2" style="padding:0px">
+                <iframe id="iframe" name="iframe" style="height: 650px; min-width: 100%"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="Modal_fenlei" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 0;">
+            <style>
+                .fenlei-model-body {
+                    padding: 0;
+                }
+
+                .fenlei-model-body dl {
+                    margin-bottom: 5px;
+                }
+
+                .fenlei-model-body dt {
+                    height: 50px;
+                    line-height: 50px;
+                    background: #05b8c3;
+                    color: #FFF;
+                    padding: 0 20px;
+                    clear: both;
+                }
+
+                .fenlei-model-body dd {
+                    display: inline-block;
+                    padding: 10px 20px;
+                }
+
+                .fenlei-model-body dd a {
+                    display: inline-block;
+                    margin: 10px 10px 10px 0;
+                }
+            </style>
+            <div id="Modal_fenlei_body" class="modal-body fenlei-model-body"></div>
+        </div>
+    </div>
+</div>
+
+<!--js-->
+<script src="${base}/r/js/jQuery.js"></script>
+<script src="${base}/r/js/bootstrap.min.js"></script>
+<script src="${base}/r/js/itemsJs/filtrate.js"></script>
+<script src="${base}/r/js/itemsJs/common.js"></script>
+
+<script>
+    //点击高级搜索弹出隐藏层
+    $('.advancedSearch').click(function () {
+        $('.selectNumberScreen').toggle();
+    })
+
+
+    //点击切换批次招考
+    $('.switchoverbBatchBtn').click(function () {
+        $('.switchoverBatchFill').toggle();
+    })
+
+    //分页
+    function _gotoPage(pageNo) {
+        try {
+            var comSearch = document.getElementById("comSearch");
+            $('#pageNo').val(pageNo)
+            comSearch.submit();
+
+        } catch (e) {
+            alert('_gotoPage(pageNo)方法出错');
+        }
+    }
+
+    //加载模态框数据
+    function _myModal(univListId, univOrder,isFormal) {
+        $.ajax({
+            url : 'isReportUniv.jspx',
+            data:{planId:'${planId!}',
+                  batchId:'${batchId!}',
+                  univListId:univListId,
+                  replaceCode:univOrder,
+                    isFormal:isFormal
+            },
+            type : "POST",
+            async:false,
+            error : function(data) {
+                alert("提交失败！\r\n"+data);
+            },
+            success : function(data) {
+                var res = eval('(' + data + ')');
+                if(res && res.success == true){
+                    event.returnValue=false;
+                    $($("#iframe")[0].contentWindow.document.body).remove();
+                    $('#iframe').attr('src', res.msg);
+                    var html = "【"+res.univInfo.univName+"】" + res.univInfo.year + "年【" + res.univInfo.batchName + "】在【" + res.univInfo.provinceName + "】的招生计划";
+                    $("#myModalLabel").html(html);
+                    $('#myModal').modal('show');
+                    // window.location.reload();
+                }else{
+                    alert(res.msg);
+                }
+            }
+        });
+    }
+    function _modal(univListId,order) {
+        $.ajax({
+            url : 'getbatch.jspx',
+            data:{planId:'${planId!}',
+                batchId:'${batchId!}',
+                univListId:univListId,
+                order:order
+            },
+            type : "POST",
+            async:false,
+            error : function(data) {
+                alert("提交失败！\r\n"+data);
+            },
+            success : function(data) {
+                var res = eval('(' + data + ')');
+                if(res && res.success == true){
+                    event.returnValue=false;
+                    $($("#iframe")[0].contentWindow.document.body).remove();
+                    $('#iframe').attr('src', res.msg);
+                    var html = "【"+res.univInfo.univName+"】" + res.univInfo.year + "年【" + res.univInfo.batchName + "】在【" + res.univInfo.provinceName + "】的招生计划";
+                    $("#myModalLabel").html(html);
+                    $('#myModal').modal('show');
+                    // window.location.reload();
+                }else{
+                    alert(res.msg);
+                }
+            }
+        });
+    }
+
+    //加载模态框数据
+    function _resetMod(univListId,replaceCode) {
+        $.ajax({
+            url : 'isReportUpd.jspx',
+            data:{planId:'${planId!}',
+                batchId:'${batchId!}',
+                univListId:univListId,
+                replaceCode:replaceCode,
+            },
+            type : "POST",
+            async:false,
+            error : function(data) {
+                alert("提交失败！\r\n"+data);
+            },
+            success : function(data) {
+                var res = eval('(' + data + ')');
+                if(res && res.success == true){
+                    event.returnValue=false;
+                    $($("#iframe")[0].contentWindow.document.body).remove();
+                    $('#iframe').attr('src', res.msg);
+                    var html = "【"+res.univInfo.univName+"】" + res.univInfo.year + "年【" + res.univInfo.batchName + "】在【" + res.univInfo.provinceName + "】的招生计划";
+                    $("#myModalLabel").html(html);
+                    $('#myModal').modal('show');
+                    // window.location.reload();
+                }else{
+                    alert(res.msg);
+                }
+            }
+        });
+    }
+
+
+    //浙江选报数量限制校验
+    function _myModalSP(univListId, univOrder,isFormal) {
+        $.ajax({
+            url : 'isReportUMSP.jspx',
+            data:{planId:'${planId!}',
+                batchId:'${batchId!}',
+                univListId:univListId,
+                replaceCode:univOrder,
+                isFormal:isFormal
+            },
+            type : "POST",
+            async:false,
+            error : function(data) {
+                alert("提交失败！\r\n"+data);
+            },
+            success : function(data) {
+                var res = eval('(' + data + ')');
+                if(res && res.success == true){
+                    event.returnValue=false;
+                    $($("#iframe")[0].contentWindow.document.body).remove();
+                    $('#iframe').attr('src', res.msg);
+                    var html = "【"+res.univInfo.univName+"】" + res.univInfo.year + "年【" + res.univInfo.batchName + "】在【" + res.univInfo.provinceName + "】的招生计划";
+                    $("#myModalLabel").html(html);
+                    $('#myModal').modal('show');
+                    // window.location.reload();
+                }else{
+                    alert(res.msg);
+                }
+            }
+        });
+    }
+
+    //浙江选报数量限制校验
+    function _resetModSP(univListId,replaceCode) {
+        $.ajax({
+            url : 'isReportUMSP.jspx',
+            data:{planId:'${planId!}',
+                batchId:'${batchId!}',
+                univListId:univListId,
+                replaceCode:replaceCode,
+            },
+            type : "POST",
+            async:false,
+            error : function(data) {
+                alert("提交失败！\r\n"+data);
+            },
+            success : function(data) {
+                var res = eval('(' + data + ')');
+                if(res && res.success == true){
+                    event.returnValue=false;
+                    $($("#iframe")[0].contentWindow.document.body).remove();
+                    $('#iframe').attr('src', res.msg);
+                    var html = "【"+res.univInfo.univName+"】" + res.univInfo.year + "年【" + res.univInfo.batchName + "】在【" + res.univInfo.provinceName + "】的招生计划";
+                    $("#myModalLabel").html(html);
+                    $('#myModal').modal('show');
+
+                    // window.location.reload();
+                }else{
+                    alert(res.msg);
+                }
+            }
+        });
+    }
+
+    //保存专业数据
+    function _savePlanDetail() {
+        // window.location.reload();
+        iframe.window.saveDetail();
+        // chongxinjiazai();
+        // parent.location.reload();
+        // parent.location.href=parent.location.href;
+    }
+    // function chongxinjiazai(){
+    //     window.location.reload();
+    // }
+
+    //关闭模态框
+    function _hideIframe() {
+        $('#myModal').modal('hide');
+        // window.location.reload();
+    }
+    $('#myModal').on('hidden.bs.modal',function () {
+        window.location.reload();
+    });
+    // 普通搜索
+    function _comSearch() {
+        $('#comSearch').submit();
+    }
+
+    //初始化院校分类
+    function _initialize() {
+        $("input[name=is985]").removeAttr("checked");
+        $("input[name=is211]").removeAttr("checked");
+        $("input[name=isDefence]").removeAttr("checked");
+        $("input[name=isExcel]").removeAttr("checked");
+        $("input[name=isIndepen]").removeAttr("checked");
+        $("input[name=isFirstUniv]").removeAttr("checked");
+        $("input[name=isFirstMajor]").removeAttr("checked");
+    }
+
+    //专业分类点击
+    $("input[name=fenlei]").click(function () {
+        var major_id = $(this).val();
+        $.ajax({
+            url:"major.jspx",
+            type:'post', //GET
+            async:true,    //或false,是否异步
+            dataType:'json',
+            contentType:"application/x-www-form-urlencoded; charset=utf-8",
+            traditional: true,
+            data:{
+                majorId : major_id
+            },
+            success: function (data) {
+                // var fenlei_list = data;
+                $("#Modal_fenlei").modal('show');
+                var key = major_id;
+                var this_fenlei = data;
+                var fenlei_checked_list = $(".fenlei_checked_show");
+                var fenlei_html = "";
+
+                for (let index = 0; index < this_fenlei.length; index++) {
+                    const fenlei = this_fenlei[index];
+                    const fenlei_key = fenlei.key;
+                    const fenlei_title = fenlei.title;
+                    const fenlei_list = fenlei.list;
+
+                    fenlei_html += "<dl class='listIndex'>"
+                    fenlei_html += "<dt>" + fenlei_title + "</dt>"
+                    fenlei_html += "<dd class='inputList'>"
+                    for (let list_index = 0; list_index < fenlei_list.length; list_index++) {
+                        const fenlei_list_info = fenlei_list[list_index];
+                        const fenlei_id = "radio_fenlei_" + key + "_" + fenlei_key + "_" + list_index;
+                        const fenlei_name = "radio_fenlei_" + key + "_" + fenlei_key;
+                        fenlei_html += '<a href="javascript:void(0)" value="">'
+                        fenlei_html += '<input id="' + fenlei_id + '" name="'+ fenlei_name + '"' +
+                            ' type="checkbox"  onclick="fenlei_checked(this)" value="' + fenlei_list_info.majorId + '" >'
+                        fenlei_html += '<label for="' + fenlei_id + '">' + fenlei_list_info.majorName + '</label>'
+                        fenlei_html += '</a>'
+                    }
+                    fenlei_html += "</dd>"
+                    fenlei_html += "</dl>"
+                }
+                $("#Modal_fenlei_body").html(fenlei_html);
+                for (let index = 0; index < fenlei_checked_list.length; index++) {
+                    const element = fenlei_checked_list[index];
+                    var fenlei_checkbox_id = $(element).attr("data-checked-id");
+                    $("#" + fenlei_checkbox_id).attr("checked", true);
+                }
+            }
+        })
+    });
+
+    //选择专业分类
+    function fenlei_checked(obj) {
+        var current_key = $("input[name='fenlei']:checked")[0].value
+        var fenlei_show_id = "fenlei_show_" + obj.id;
+        var fenlei_show_name = $(obj).next("label").html();
+
+        if (!obj.checked) {
+            $("#" + fenlei_show_id).remove();
+            return;
+        } else {
+            var fenlei_checked_show = $(".fenlei_checked_show");
+            for (let index = 0; index < fenlei_checked_show.length; index++) {
+                const element = fenlei_checked_show[index];
+                var key = $(fenlei_checked_show).attr("data-checked-type");
+                if (current_key != key) {
+                    $(".fenlei_checked_show").remove();
+                }
+            }
+            $("#radio_yuanxiao_" + current_key).parent().parent().find("a").removeClass("selected");
+            $("#radio_yuanxiao_" + current_key).parent().addClass("selected");
+            var show = $("#Modal_fenlei_body input[type=checkbox]:checked").length;
+            if (show > 0) {
+                $(".clearDd").show();
+                $(".eliminateCriteria").show();
+            }
+
+            var html = '<div id="' + fenlei_show_id + '" data-checked-id="' + obj.id + '" data-checked-type=' + current_key +
+                ' class="selectedInfor selectedShow fenlei_checked_show"><span>专业分类 &gt;</span><label>' +
+                fenlei_show_name + '</label><em onclick="fenlei_checked_clear(this)"></em><input type="hidden" name="majorName" value="'+fenlei_show_name+'"/></div>';
+            $(".hasBeenSelected .clearList").append(html);
+        }
+    }
+    function fenlei_checked_clear(obj) {
+        $(obj).parent().remove();
+    }
+    function univQuery(univId,majorType,batchId,province_id,univCode,year) {
+        window.location.href="${base}/enrollmentPlan.jspx?univId="+univId+"&&majorTypeId="+majorType+"&&batchId="+batchId+"&&provinceId="+province_id+"&&univCode="+univCode+"&&year="+year;
+    }
+
+    //批次切换
+    function batch_taggle(id, name) {
+        $("input[name='batchId']").val(id);
+        $("#batch_name").html(name);
+        $('.switchoverBatchFill').hide();
+        $("#comSearch").submit();
+    }
+
+</script>
+
+</body>
+
+</html>

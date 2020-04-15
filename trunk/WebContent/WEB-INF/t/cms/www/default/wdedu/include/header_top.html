@@ -1,0 +1,73 @@
+	<div class="index_top_bg">
+		<div class="index_top">
+			<div class="index_top_l fl">
+				<p>欢迎光临沃得生涯教育集团！</p>
+				<span>免费热线：<i>400-9288-985</i></span>
+				<div class="clearfix"></div>
+			</div>
+			<div class="index_top_r fr">
+				<p><a href="">新手教程</a></p>
+				<p><a href="">官方微信</a></p>
+				<i><a href="${base}/admissonSvcAct/findbaseInfo.jspx">会员中心</a></i>
+				<span><a href="">快速登录</a></span><span><a href="">/&nbsp;注册</a></span>
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<div class="index_logo">
+		<div class="index_logo_l fl">
+			<a href=""><img src="${base}/r/wdedu/images/index_3.png"></a>
+		</div>
+		<div class="index_logo_city fl">
+            <div class="city">
+                <div class="city_now" onclick="dk()">
+                    <span class="fl" id="text" >北京</span>
+                    <div class="fl">
+                        <span class="city_nav" id="city_nav" ><img src="${base}/r/wdedu/images/city_2.png"></span>
+                    </div>
+                </div>
+                <div id="city_link" class="city_link">
+                    <div class="city_show">
+                        <span class="f_red f_r" href="javascript:;" title="关闭窗口" onclick="gb()">[关闭]</span>
+                    </div>
+					<a class="city_links" href="#" onclick="qz(this)" >南京</a>
+                    <a class="city_links" href="#" onclick="qz(this)" >上海</a>
+                    <a class="city_links" href="#" onclick="qz(this)" >河南</a>
+                    <a class="city_links" href="#" onclick="qz(this)" >深圳</a>
+                </div>
+            </div>
+        </div>
+		<script  type="text/javascript">
+		window.isMoused=false;
+		function qz(obj){
+			var text = $(obj).text();
+			document.getElementById("text").innerText =text;
+			gb();
+
+		}
+		function gb(){
+			document.getElementById('city_nav').className='city_nav';document.getElementById('city_link').className='city_link';window.isMoused =false;return !1;
+		}
+			function dk(){
+				if(window.isMoused){
+					 gb()
+					window.isMoused = false;
+				   }else{
+					   document.getElementById('city_link').className='city_link city_hovers'
+					   window.isMoused =true;
+				   }
+			}
+
+	</script>
+		<div class="index_logo_c fl">
+			<form id="form1" name="form1" method="post" action="">
+				<input type="text" name="textfield" id="textfield" class="qgt_ssnr" placeholder="查大学 / 查专业 / 搜文章" />
+				<input type="image" name="button" id="button" value="提交" src="${base}/r/wdedu/images/index_5.png" class="qgt_ssan" />
+			</form>
+		</div>
+		<div class="index_logo_r fr">
+			<p><a href="${base}/NewsDisplay/EntranceCard.jspx">开通VIP</a></p><span><a href="">高考小助手</a></span><div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+	</div>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>讲座活动管理</title>
+		<link rel="stylesheet" href="${base}/r/sign/jedate.css" />
+		<link rel="stylesheet" href="${base}/r/sign/jzhd-manage.css" />
+		<script src="${base}/r/sign/jquery-1.11.3.min.js"></script>
+		<script src="${base}/r/sign/city.min.js"></script>
+		<style type="text/css">
+			.btn-search{right: 390px;}
+		</style>
+	</head>
+	<body class="iframe-body">
+		<h4 class="con-title">讲座活动二维码</h4>
+		<form action="${base}/active/activeList.jspx?type=xzewm"  id="form"  method="post">	
+		<input type="hidden"  name="pageNo">
+		<div class="search-wrap gps">
+			<div class="search-item">
+				<label>讲座时间:</label>
+				<span><input type="text" class="date-icon" id="inpstart" placeholder="开始日期" readonly="readonly"></span>
+				<span class="line">--</span>
+				<span><input type="text" class="date-icon" id="inpend" placeholder="结束日期" readonly="" disabled="disabled"></span>
+			</div>
+			<div class="search-item">
+				<label>选择省份:</label>
+				<span class="select-wrap">
+					<select id="pro" name="province">
+						<option value="none">--请选择--</option>
+					</select>
+				</span>
+			</div>
+			<div class="search-item">
+				<label>选择市区:</label>
+				<span class="select-wrap">
+					<select id="city" name="city" disabled>
+						<option value="none">--请选择--</option>
+					</select>
+				</span>
+			</div>
+			<button type="submit" class="btn-search">查询</button>
+		</div>
+		<table>
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>省份</th>
+					<th>市区</th>
+					<th>讲座序号</th>
+					<th>讲座主题</th>
+					<th>主讲老师</th>
+					<th>时间</th>
+					<th>地点</th>
+					<th>报名二维码</th>
+					<th>签到二维码</th>
+					<th>押金二维码</th>
+				</tr>
+			</thead>
+			<tbody>
+			   	[#if pagination??]
+			    [#list pagination.list as list]
+				<tr>
+					<td>${list.id!}</td>
+					<td>${list.province!}</td>
+					<td>${list.city!}</td>
+					<td>${list.active_Id!}</td>
+					<td>${list.theme!}</td>
+					<td>${list.lecturer1!}</td>
+					<td>${list.active_start_time!}</td>
+					<td>${list.address!}</td>
+					<td>
+						<button type="button" onclick="showFilter('#bm','${list.active_Id}',this)">下载</button>
+					</td>
+					<td>
+						<button type="button" onclick="showFilter('#qd','${list.active_Id}',this)">下载</button>
+					</td>
+					<td>
+						<button type="button" onclick="showFilter('#yj',this)">下载</button>
+					</td>
+				</tr>
+				[/#list]
+				[/#if]
+			</tbody>
+		</table>
+		<ol class="paging">
+			<div class="paging" >
+							<button type="button"  onclick="_gotoPage('1');">首页</button>
+							<button type="button"  onclick="_gotoPage('${pagination.prePage}');">上一页</button>
+							<button type="button"  onclick="_gotoPage('${pagination.nextPage}');">下一页</button>
+							<button type="button"  onclick="_gotoPage('${pagination.totalPage}');">尾页</button>	
+						    <button type="button"  value="${pagination.pageNo}">当前页:${pagination.pageNo}</button>	
+							<button type="button"  >总页数:${pagination.totalPage}</button>																											
+			</div>	
+		</ol>
+		</form>
+		<div class="fixed-fliter">
+			<div class="pop-wrap" id="bm">
+				<h4 class="pop-title">设置报名二维码</h4>
+				<form action="${base}/active/xzewm.jspx?type=bm"  method="post">								
+				<!--<div class="pop-item">
+					<label>上传Logo：</label>
+					<span class="gps input-file">
+						<input id='myfile' type="file" accept="image/jpeg,image/jpg,image/png" name="file"/>
+						<span id="fileName">图片大小不超过10k</span>
+					</span>					
+				</div>-->
+				<div class="pop-item">
+					<label>二维码名称：</label>
+					<input type="text" name="str" value="" placeholder="例如:xx讲座报名二维码"/>
+				</div>
+				<div class="table-center">
+					<input type="hidden" name="activeid" value="">	
+					<button type="submit" class="btn btn-pop-yes">下载</button>
+					<button type="button" class="btn btn-pop-no" onclick="hideFilter()">取消</button>
+				</div>
+				</form>
+			</div>
+			<div class="pop-wrap" id="qd">
+				<h4 class="pop-title">设置签到二维码</h4>
+				<form  action="${base}/active/xzewm.jspx?type=qd" method="post">
+				<!--<div class="pop-item">
+					<label>上传Logo：</label>
+					<span class="gps input-file">
+						<input id='myfile' type="file" accept="image/jpeg,image/jpg,image/png" name="file"/>
+						<span id="fileName">图片大小不超过10k</span>
+					</span>
+					
+				</div>-->
+				<div class="pop-item">
+					<label>二维码名称：</label>
+					<input type="text" name="str"  value="" placeholder="例如:xx讲座签到二维码"/>
+				</div>
+				<div class="table-center">
+					<input type="hidden" name="activeid" value="">					
+					<button type="submit" class="btn btn-pop-yes">下载</button>
+					<button type="button" class="btn btn-pop-no" onclick="hideFilter()">取消</button>
+				</div>
+				</form>
+			</div>
+				<div class="pop-wrap" id="yj">
+				<h4 class="pop-title">设置押金二维码</h4>
+				<!--<div class="pop-item">
+					<label>上传Logo：</label>
+					<span class="gps input-file">
+						<input id='myfile' type="file" accept="image/jpeg,image/jpg,image/png" name="file"/>
+						<span id="fileName">图片大小不超过10k</span>
+					</span>
+					
+				</div>-->
+				<div class="pop-item">
+					<label>二维码名称：</label>
+					<input type="text"  placeholder="例如:xx讲座押金二维码"/>
+				</div>
+				<div class="table-center">
+					<button type="submit" class="btn btn-pop-yes">下载</button>
+					<button type="button" class="btn btn-pop-no" onclick="hideFilter()">取消</button>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="${base}/r/sign/jquery.jedate.min.js"></script>
+	<script type="text/javascript">
+
+	 function _gotoPage(pageNo) {
+			try{
+				$("input[name='pageNo']").val(pageNo);
+				$('#form').submit();
+			} catch(e) {
+				alert('_gotoPage(pageNo)方法出错');
+			}
+		};
+		$(function() {
+			//省市
+			function getSeectList(obj,data){
+				var html = '<option value="none">--请选择--</option>';
+				$.each(data, function(i,val) {
+					html += '<option value="'+val.id+'">'+val.value+'</option>';
+				});
+				$(obj).html(html);
+			};
+			getSeectList('#pro',prolist);
+			$('#pro').on('change',function(){
+				var pro = $(this).val();
+				if(pro=='none'){
+					alert('请选择省份，否则无法选择市区！');
+					$('#city').attr('disabled','disabled');		
+					$('#quxian').attr('disabled','disabled');
+					return false;
+				};
+				console.log(pro);
+				var cityData = [];
+				$.each(citylist, function(j,val) {
+					if(val.parentId==pro){
+						cityData.push(citylist[j]);
+					}
+				});
+				getSeectList('#city',cityData);
+				$('#city').removeAttr('disabled');
+			});
+			$('#city').on('change',function(){
+				var city = $(this).val();
+				if(city=='none'){
+					alert('请选择市区！');
+					return false;
+				};
+			});
+			//时间选择
+			var start = {
+			    format: 'YYYY-MM-DD',
+			    onClose: false, 
+			    minDate: $.nowDate({DD:0}),
+			    okfun: function(obj){
+			        end.minDate = obj.val;
+			        $("#inpend").removeAttr("disabled");
+			        endDates();
+			    }
+			};
+			var end = {
+			    format: 'YYYY-MM-DD',
+			    onClose: false,
+			    minDate: $.nowDate({DD:0}),
+			};
+			function endDates() {
+			    end.trigger = false;
+			    $("#inpend").jeDate(end);
+			};
+			$('#inpstart').jeDate(start);
+			$('#inpend').jeDate(end);
+			//上传图片
+//			var myfile = document.getElementById('myfile'); 
+//			$(".input-file").on("change","#myfile",function(){
+//				var size = Math.round(myfile.files[0].size / 1024);
+//			    console.log('size',size)
+//			    if(size>10){
+//			    	alert('图片大小不超过10k');
+//			    	 return false 
+//			    };
+//			    var filePath=$(this).val();
+//			    console.log(filePath)
+//			    if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("png")!=-1||filePath.indexOf("jpeg")!=-1){
+//			        var arr=filePath.split('\\');
+//			        var fileName=arr[arr.length-1];
+//			        $("#fileName").html(fileName).css('color','#000');
+//			    }else{
+//			        $("#fileName").html("图片大小不超过10k").css('color','#757575');
+//			        alert("您上传的文件类型有误！");
+//			        return false 
+//			    };
+//			});
+		})
+		function showFilter(id,activeid){
+			
+			$("input[name='activeid']").val(activeid);
+			$(".fixed-fliter").fadeIn();
+			$(id).show();
+		};
+		function hideFilter(id){
+			$(".fixed-fliter").fadeOut();
+			$('.pop-wrap').hide();
+			$('#myfile').val('');
+		};
+	</script>
+</html>

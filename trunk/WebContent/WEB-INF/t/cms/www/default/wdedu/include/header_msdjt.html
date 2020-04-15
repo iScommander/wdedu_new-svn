@@ -1,0 +1,23 @@
+ <div class="navbox">
+		<div class="navbox_bg">
+			<div class="nav_l fl">
+				<div id="nav">
+				<ul id="navMenu">
+				<li><a href='${base}/'>首页</a></li>
+				<!--class="current" -->
+					<li><a href="${base}/ActiveDetailAct/expertLectures.jspx">公益讲座</a></li>
+					<!--<li><a href="${base}/NewsDisplay/AdmissionsOfficeLectureHall.jspx">招办讲堂</a></li>-->
+					<!--<li><a href="${base}/NewsDisplay/WodecareerELesson.jspx">沃得e课</a></li>-->
+					<!--<li><a href="${base}/NewsDisplay/MediaInterviews.jspx">媒体访谈</a></li>-->
+				<!--	<li><a href="${base}/NewsDisplay/TheNationalTour.jspx">全国巡讲</a></li>-->
+				</ul>
+				</div>
+			</div>
+			[#if user??]
+			<div class="nav_r fr">
+				<a href="${base}/admissonSvcAct/findbaseInfo.jspx">尊敬的[@text_cut s=user.username?substring(0,5) len=3 append='..'/]</a>
+			</div>
+			[/#if]
+		<div class="clearfix"></div>
+		</div>
+	</div>

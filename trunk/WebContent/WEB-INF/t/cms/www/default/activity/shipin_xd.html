@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>讲座视频</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+	</head>
+
+	<body>
+		<!--顶部-->
+		[#include "../include/header.html"/]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container width1200">
+				<div><a href="${base}">首页</a> &lt;&lt; 沃得研究院&lt;&lt; 学大视频</div>
+				<div></div>
+			</div>
+		</div>
+		<!--主体-->
+		<main class="width1200 shipinMain">
+			[#if admin==1]
+			<div class="flex-container3">
+				<div class="flex-item25-4">
+					<video src="/wdedu/u/cms/www/201902/志愿填报2.mp4"  controls="controls" controlslist="nodownload" class="shipinwenjian">您的浏览器不支持 video 标签。</video>
+					<p>志愿填报/志愿填报技巧</p>
+				</div>
+				<div class="flex-item25-4">
+					<video src="/wdedu/u/cms/www/201902/专业测评大数据.mov" controls="controls" controlslist="nodownload" class="shipinwenjian">您的浏览器不支持 video 标签。</video>
+					<p>专业测评大数据</p>
+				</div>
+			</div>
+			[#elseif major_type_id == 1]
+			<div class="flex-container3">
+				<div class="flex-item25-4">
+					<video src="/wdedu/u/cms/www/201902/志愿填报2.mp4"  controls="controls" controlslist="nodownload" class="shipinwenjian">您的浏览器不支持 video 标签。</video>
+					<p>志愿填报/志愿填报技巧(文科)</p>
+				</div>
+			</div>
+			[#elseif major_type_id == 2]
+			<div class="flex-container3">
+				<div class="flex-item25-4">
+					<video src="/wdedu/u/cms/www/201902/专业测评大数据.mov" controls="controls" controlslist="nodownload" class="shipinwenjian">您的浏览器不支持 video 标签。</video>
+					<p>专业测评大数据(理科)</p>
+				</div>
+			</div>
+			[/#if]
+			<!--分页-->
+			<div class="textC paging">
+				<tr>
+					<td colspan="8" style="padding:20px 0;">
+						<input type="hidden" name="pageNo" />
+						<table width="100%" border="0" cellpadding="0" cellspacing="0">
+						</table>
+					</td>
+				</tr>
+			</div>
+
+		</main>
+		<!--底部-->
+		[#include "../include/footer.html"/]
+		<!--<iframe MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no src="../../footer.html" height="360px" width="100%"></iframe>-->
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/bootstrap-treeview.min.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+	</body>
+
+</html>

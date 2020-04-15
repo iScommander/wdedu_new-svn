@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>背景提升</title>
+    <link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css"/>
+<script src="${base}/r/wdedu/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+</head>
+<body>
+
+
+[#include "../include/header_address.html"/]
+
+
+[#include "../include/header_zhszts.html"/]
+<div class="mbxdh_bg">
+    <div class="mbxdh">
+        <a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">综合素质提升</a>&nbsp;&gt; &nbsp; <a href="#">背景提升</a>
+    </div>
+</div>
+<div class="con">
+    <div class="con_l fl">
+        <div class="con_l_tit">
+
+            [@cms_content_list typeId='1' channelId='153' dateFormat='yyyy-MM-dd']
+            [#list tag_list as a]
+            [#if a.id=newContentId  ]
+            <h4>
+                ${a.title!}
+            </h4>
+            <div class="con_l_tit_con">
+                <span>发布时间：${(a.releaseDate?string('yyyy-MM-dd'))!}</span><span>编辑:${a.author!'本站编辑'}</span><span>来源:${a.origin!'来源网络侵删'}</span>
+            </div>
+            [/#if]
+            [/#list]
+            [/@cms_content_list]
+        </div>
+        <div class="con_l_con">
+            <p>
+                [@cms_content_list typeId='1' channelId='153' dateFormat='yyyy-MM-dd']
+                [#list tag_list as a]
+                [#if a.id=newContentId]
+                ${a.txt!}
+                [/#if]
+                [/#list]
+                [/@cms_content_list]
+            </p>
+        </div>
+    </div>
+    <div class="con_r fr">
+        <div class="con_r_tit">
+            热门文章
+        </div>
+        <div class="con_r_con">
+            <ul>
+                [@cms_content_list typeId='1' channelId='153' dateFormat='yyyy-MM-dd']
+                [#list tag_list as a]
+                [#if a_index <3]
+                <li><a href="${base}/NewsDisplay/BackgroundAscension.jspx?contentId=${a.id!}">
+                    <span class="c-index  c-gap-icon-right-small c-index-hot1 "    style="color:#FFF">${a_index+1}</span>
+                    ${a.title!}</a>
+                </li>
+                [#else]
+                <li><a href="${base}/NewsDisplay/BackgroundAscension.jspx?contentId=${a.id!}">
+                    <span class="c-index  c-gap-icon-right-small  "    style="color:#FFF">${a_index+1}</span>
+                    ${a.title!}</a>
+                </li>
+                [/#if]
+                [/#list]
+                [/@cms_content_list]
+            </ul>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+[#include "../include/footer_new.html"/]
+</body>
+</html>

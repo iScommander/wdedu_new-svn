@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<title>添加推荐专家</title>
+<link href="${base}/r/css/head_footer.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="${base}/r/css/ydyfw.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="${base}/r/js/jquery-1.8.3.min.js" language="javascript"></script>
+<script src="${base}/thirdparty/My97DatePicker/WdatePicker.js" language="javascript"></script>
+<!--[if lte IE 9]>
+<script src="${base}/r/js/html5shiv.js" language="javascript"></script>
+<script src="${base}/r/js/respond.min.js" language="javascript"></script>
+<![endif]-->
+<style>
+html,body{
+	height:100%;
+}
+	.add_shhd_div{
+	    border: 1px dashed #DDD;
+	    height: 70px;
+	    width: 98%;
+	    font-size: 15px;
+	    text-align: center;
+	    background-color: #fAFAFA;
+	    margin: 10px 1% 10px 1%;
+	    padding-top:13px;
+	}
+	.add_shhd_tableOut{
+	    margin: 10px 1% 10px 1%;
+	    //border: 1px dashed red;
+	    padding:10px 0 20px 0;
+	}
+	.add_shhd_table{
+		width:100%;
+	}
+	.add_shhd_table tr{
+		height:65px;
+	}
+	.input-style01{
+		width:300px; 
+		height:30px;
+		line-height:30px;
+		outline:none;
+		border:1px solid #BBBBBB;
+		text-indent:14px;
+		font-size:16px;
+	}
+	.input-style02{
+		width:187px; 
+		height:30px;
+		line-height:30px;
+		outline:none;
+		border:1px solid #BBBBBB;
+		text-indent:14px;
+		font-size:16px;
+	}
+	
+	.bt-div-out{
+		width:100%;
+		text-align:right;
+	}
+	.bt_a{
+	display:inline-block;
+	width:15%;
+	height:34px;
+	line-height:34px;
+	text-align:center;
+	font-size:18px;
+	letter-spacing:4px;
+	background-color:#3399FF;
+	color:#FFF;
+	margin:30px 14px 30px 0;
+	border:none;
+}
+.bt_a2{
+	display:inline-block;
+	width:15%;
+	height:34px;
+	line-height:34px;
+	text-align:center;
+	font-size:18px;
+	letter-spacing:4px;
+	background-color:#FF4141;
+	color:#FFF;
+	margin:30px 34px 30px 0;
+	border:none;
+}
+</style>
+</head>
+<body>
+	<div class="z_body" style="background-color:#F2F2F2;">
+		[#include "../wdedu/include/header_address.html"/]
+		[#include "../wdedu/include/header_dylq.html"/]
+		<div class="z_width_out">
+			<div class="on_line">
+				<div class="bzy_where">
+					&nbsp;您当前位置：<a href="${base}"><span class="">主页&nbsp;</span></a>><a href="${base}/ydyfw/queryOrder.jspx"><span class="">我的一对一服务清单&nbsp;</span></a>><a href="${base}/mnwb/jbxx.jspx?orderId=${order.orderId}"><span class="">&nbsp;填报个人信息&nbsp;</span></a>><span class="">&nbsp;添加推荐专家</span>
+				</div>
+			</div>
+		</div>
+		<div class="z_width_out">
+			<div class="on_line" style="overflow:hidden;">
+				<div style="background:#FFF;overflow:hidden;padding:10px 0 30px 0;margin:15px 0 30px 0 ;">
+					<div class="add_shhd_div">
+						<font color="red">注意：</font>本页面对于证明材料的删除，上传操作，均在点击“新增”或“保存”按钮之后才会生效。
+						<br>（<font color="red">* </font>为必填项）
+					</div>
+					<div class="add_shhd_tableOut">
+						<form id="form1" name="form1" action="inserttjzj.jspx" method="post">
+							<input type="hidden" name="zid" value="" id="form_step_zid" />
+							<input type="hidden" name="data.type" value="EXPERT" id="form_step_data_type" /> 
+							<input type="hidden" name="data.id" value="" id="form_step_data_id" />
+							<input type="hidden" name="orderId" value="${order.orderId}"/>
+							<table class="add_shhd_table">
+								<tr>
+									<td style="width:14%;" align="right"><font color="red">*&nbsp;&nbsp;</font>推荐人姓名：</td>
+									<td style="width:86%;">
+										<input class="input-style01" type="text" name="refereeName" maxlength="64" id="refereeName" value="" />
+										<font color="red">&nbsp;&nbsp;&nbsp;添加后将不允许修改</font>
+									</td>
+								</tr>
+								<tr>
+									<td align="right"><font color="red">*&nbsp;&nbsp;</font>所在地：</td>
+									<td>
+									[@p.select name="provinceId" id="provinceId" class="input-style02" value='' list=proList listKey="pro_code" listValue="pro_name" onchange="selectProvince()"/]
+										<select class="input-style02" id="cityId" name="cityId" onChange="selectCity()">
+										</select> 
+										<select class="input-style02" id="regionId" name="regionId" onChange="saveCity()">
+										</select>
+										<input type="hidden" name="province" id="province" value="110000">
+										<input type="hidden" name="city" id="city" value="">
+										<input type="hidden" name="region" id="region" value="">
+									</td>
+								</tr>
+								<tr>
+									<td align="right"><font color="red">*&nbsp;&nbsp;</font>所在单位：</td>
+									<td>
+										<input class="input-style01" type="text" name="unit" maxlength="100" id="unit" value="" />
+										<font color="red">&nbsp;&nbsp;&nbsp;添加后将不允许修改</font>
+									</td>
+								</tr>
+								<tr>
+									<td align="right"><font color="red">*&nbsp;&nbsp;</font>职称：</td>
+									<td>
+										<input class="input-style01" type="text" name="positionalTitles" maxlength="22" id="positionalTitles" value="" />
+									</td>
+								</tr>
+								<tr>
+									<td align="right"><font color="red">*&nbsp;&nbsp;</font>职务：</td>
+									<td>
+										<input class="input-style01" type="text" name="duties" maxlength="22" id="duties" value="" />
+									</td>
+								</tr>
+								<tr>
+									<td align="right"><font color="red">*&nbsp;&nbsp;</font>手机号码：</td>
+									<td>
+										<input class="input-style01" type="text" name="telephone" maxlength="16" id="telephone" value="" />
+										<font color="red">&nbsp;&nbsp;&nbsp;确认志愿后该手机号将会收到一条提醒填写推荐信的短信</font>
+									</td>
+								</tr>
+								<tr>
+									<td align="right"><font color="red">*&nbsp;&nbsp;</font>邮箱：</td>
+									<td>
+										 <input class="input-style01" type="text" name="email" maxlength="32" id="email" value="" />
+										<font color="red">&nbsp;&nbsp;&nbsp;确认志愿后该邮箱将会收到一封提醒填写推荐信的邮件</font>
+									</td>
+								</tr>
+							</table>
+							<div class="bt-div-out">
+								<input class="bt_a" type="button"  value="保存" onclick="check()">
+								<input class="bt_a2" type="button" value='取消' onclick='javascript:history.go(-1);' />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 底部栏目 -->
+		[#include "../wdedu/include/footer_new.html"/]
+	</div>
+<script type="text/javascript">
+
+function check(){
+	var isPhone = /^1(3|4|5|7|8)\d{9}$/;
+	if($("#refereeName").val()==""){
+		alert("请输入推荐人姓名!");
+		return;
+	}
+
+	if($("#province").val()=="" || $("#city").val()=="" || $("#region").val()==""){
+		alert("请选择好所在地!");
+		return;
+	}
+	if($("input[name=unit]").val()==""){
+		alert("请输入所在单位!");
+		return;
+	}
+	if($("#positionalTitles").val()==""){
+		alert("请输入职称!");
+		return;
+	}
+	if($("#duties").val()==""){
+		alert("请输入职务!");
+		return;
+	}
+	if($("#telephone").val()==""){
+		alert("请输入手机号码!");
+		return;
+	}
+	
+	if(!isPhone.test($("#telephone").val())){
+		alert("手机号码输入有误,请重新输入!");
+		return;
+	}
+	
+	if($("#email").val()==""){
+		alert("请输入邮箱!");
+		return;
+	}
+	$("#form1").submit();
+}
+	
+function selectProvince(){
+	$("#cityId").empty();
+	$("#regionId").empty();
+    var province=$("#provinceId").val();
+    if(province!='')
+	{
+    	 $.ajax({
+			　　url : '${base}/mnwb/getCity.jspx',
+			   data:{pro_code:province},
+			　　type : "POST",
+			   async:false,
+			   error:function(request) {
+	              alert("提交出现异常啦。。。。");
+	          },
+			　　success : function(data) 
+			   {		
+				     　　var res = eval('(' + data + ')');	
+				   var option2 = $("<option>").val("-1").text("请选择");
+				   $("#cityId").append(option2);
+				    for(var o in res)
+				    	{
+				    		var option = $("<option>").val(res[o].city_code).text(res[o].city_name);
+				    		$("#cityId").append(option);					    									   
+				    	}				
+			   }
+		 		 
+		}); 
+    	$('#province').val($("#provinceId").find("option:selected").val());
+    	$('#city').val("");
+    	$('#region').val("");
+	} 	    
+}
+
+
+
+function selectCity(){
+	$("#regionId").empty();
+    var province=$("#provinceId").val();
+    var city=$("#cityId").val();
+    if(city!='')
+	{
+    	 $.ajax({
+			　　url : '${base}/mnwb/getBorough.jspx',
+			   data:{pro_code:province,city_code:city},
+			　　type : "POST",
+			   async:false,
+			   error:function(request) {
+	              alert("提交出现异常啦。。。。");
+	          },
+			　　success : function(data) 
+			   {		
+				     　var res = eval('(' + data + ')');	
+				   var option2 = $("<option>").val("-1").text("请选择");
+				   $("#regionId").append(option2);
+				   for(var o in res)
+				    {
+				    	var option = $("<option>").val(res[o].quxian_code).text(res[o].quxian_name);
+				    	$("#regionId").append(option);					    									   
+				    }				
+			   }
+		});
+    	$('#city').val($("#cityId").find("option:selected").val());
+    	$('#region').val("");
+	} 	    
+}
+
+function saveCity(){
+	$('#region').val($("#regionId").find("option:selected").val());
+}
+
+function init(){
+	$("#province").empty();
+	$("#city").empty();
+	$("#region").empty();
+    var province='110000';
+    if(province!=''){
+    	 $.ajax({
+		　　url : '${base}/mnwb/getCity.jspx',
+		   data:{pro_code:province},
+		　　type : "POST",
+		   async:false,
+		   error:function(request) {
+              alert("请选择市。。");
+          },
+		　　success : function(data){		
+	     　　	   var res = eval('(' + data + ')');	
+			   var opt1 = $("<option>").val("").text("请选择");
+			   $("#cityId").append(opt1);
+			    for(var o in res){
+		    		var option1 = $("<option>").val(res[o].city_code).text(res[o].city_name);
+				   	$("#cityId").append(option1);
+		    	}				
+		   }
+		}); 
+	} 
+}
+init();
+</script>
+</body>
+</html>

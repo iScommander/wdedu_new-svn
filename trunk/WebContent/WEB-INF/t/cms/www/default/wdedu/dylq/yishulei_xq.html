@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>艺术类详情</title>
+    <link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css"/>
+<script src="${base}/r/wdedu/js/jquery-1.10.2.js"></script>
+</head>
+<body>
+
+
+[#include "../include/header_address.html"/]
+[#include "../include/header_dylq.html"/]
+<div class="mbxdh_bg">
+    <div class="mbxdh">
+        <a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="${base}/NewsDisplay/Arts.jspx">艺术类</a>
+    </div>
+</div>
+<div class="con">
+    <div class="con_l fl">
+        <div class="con_l_tit">
+
+            [@cms_content_list typeId='1' channelId='179,180,283' dateFormat='yyyy-MM-dd']
+            [#list tag_list as a]
+            [#if a.id= newContentId ]
+            <h4>
+                ${a.title!}
+            </h4>
+            <div class="con_l_tit_con">
+                <span>发布时间：${a.releaseDate!}</span><span>编辑:${a.author!'本站编辑'}</span><span>来源:${a.origin!'来源网络侵删'}</span>
+            </div>
+            [/#if]
+            [/#list]
+            [/@cms_content_list]
+        </div>
+        <div class="con_l_con">
+            <p>
+                [@cms_content_list typeId='1' channelId='179,180,283' dateFormat='yyyy-MM-dd']
+                [#list tag_list as a]
+                [#if a.id=newContentId]
+                ${a.txt!}
+                [/#if]
+                [/#list]
+                [/@cms_content_list]
+            </p>
+        </div>
+    </div>
+    <div class="con_r_new fr" style="width: 283px;">
+        <div class="con_r">
+            <div class="con_r_tit">
+                招生章程   <a href="${base}/NewsDisplay/Arts.jspx">更多章程+</a>
+            </div>
+            <div class="con_r_con">
+                <ul>
+                    [@cms_content_list typeId='1' count='10' channelId='283' dateFormat='yyyy-MM-dd']
+                    [#list tag_list as a]
+                    [#if a_index <3]
+                    <li><a href="${base}/NewsDisplay/ArtsDetail.jspx?contentId=${a.id!}">
+                        <span class="c-index  c-gap-icon-right-small c-index-hot1 "    style="color:#FFF">${a_index+1}</span>
+                        ${a.title!}</a>
+                    </li>
+                    [#else]
+                    <li><a href="${base}/NewsDisplay/ArtsDetail.jspx?contentId=${a.id!}">
+                        <span class="c-index  c-gap-icon-right-small  "    style="color:#FFF">${a_index+1}</span>
+                        ${a.title!}</a>
+                    </li>
+                    [/#if]
+
+                    [/#list]
+                    [/@cms_content_list]
+                </ul>
+            </div>
+        </div>
+        <div class="con_r">
+            [@cms_content_list typeId='1' count='1' channelId='279' dateFormat='yyyy-MM-dd']
+            [#list tag_list as a]
+            <a href="${a.url!}"><img  src="${a.titleImg!}"/></a>
+            [/#list]
+            [/@cms_content_list]
+        </div>
+        <div class="con_r">
+            <div class="con_r_tit">
+                政策解读
+            </div>
+            <div class="con_r_con">
+                <ul>
+                    [@cms_content_list typeId='1' count='20' channelId='179' dateFormat='yyyy-MM-dd']
+                    [#list tag_list as a]
+                    [#if a_index <3]
+                    <li><a href="${base}/NewsDisplay/ArtsDetail.jspx?contentId=${a.id!}">
+                        <span class="c-index  c-gap-icon-right-small c-index-hot1 "    style="color:#FFF">${a_index+1}</span>
+                        ${a.title!}</a>
+                    </li>
+                    [#else]
+                    <li><a href="${base}/NewsDisplay/ArtsDetail.jspx?contentId=${a.id!}">
+                        <span class="c-index  c-gap-icon-right-small  "    style="color:#FFF">${a_index+1}</span>
+                        ${a.title!}</a>
+                    </li>
+                    [/#if]
+
+                    [/#list]
+                    [/@cms_content_list]
+                </ul>
+            </div>
+        </div>
+        <div class="con_r">
+            [@cms_content_list typeId='1' count='1' channelId='280' dateFormat='yyyy-MM-dd']
+            [#list tag_list as a]
+            <a href="${a.url!}"><img  src="${a.titleImg!}"/></a>
+            [/#list]
+            [/@cms_content_list]
+        </div>
+        <div class="con_r">
+            <div class="con_r_tit">
+                申请指南
+            </div>
+            <div class="con_r_con">
+                <ul>
+                    [@cms_content_list typeId='1' count='20' channelId='180' dateFormat='yyyy-MM-dd']
+                    [#list tag_list as a]
+                    [#if a_index <3]
+                    <li><a href="${base}/NewsDisplay/ArtsDetail.jspx?contentId=${a.id!}">
+                        <span class="c-index  c-gap-icon-right-small c-index-hot1 "    style="color:#FFF">${a_index+1}</span>
+                        ${a.title!}</a>
+                    </li>
+                    [#else]
+                    <li><a href="${base}/NewsDisplay/ArtsDetail.jspx?contentId=${a.id!}">
+                        <span class="c-index  c-gap-icon-right-small  "    style="color:#FFF">${a_index+1}</span>
+                        ${a.title!}</a>
+                    </li>
+                    [/#if]
+
+                    [/#list]
+                    [/@cms_content_list]
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+[#include "../include/footer_new.html"/]
+</body>
+</html>

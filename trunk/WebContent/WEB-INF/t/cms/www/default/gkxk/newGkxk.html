@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<title>新高考选科意向心理测评</title>
+		<link rel="stylesheet" href="${resSys}/res/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="${base}/r/wdedu/css/amazeui.css" />
+		<link rel="stylesheet" href="${base}/r/wdedu/css/head-footer.css" />
+		<link rel="stylesheet" href="${resSys}/res/css/cs.css" />
+		<script src="${resSys}/res/js/jquery-1.11.3.min.js"></script>
+		<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css"/>
+
+	</head>
+	<body>
+	      [#include "../wdedu/include/header_address.html"/]
+    	[#include "../wdedu/include/header_xgkxk.html"/]
+	<div class="mbxdh_bg">
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">新高考选课</a>&nbsp;&gt; &nbsp; <a href="#">选科测评</a>
+		</div>
+	</div>
+	<section class="banner_xkcp" style="padding-top:0px;">
+
+            		</section>
+
+		<section class="center-block">
+			<p class="cs-p">这份量表可以帮助你更清楚地认识自己的选科意向所在。如果你能够认真按照指示，逐页填完本表，你将会觉得这是一个很有意思的经历。<br />完成本量表大概需要40分钟的时间。</p>
+			<div class="bbx-ks-wrap gps box-shadow">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">开始测试</button>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<p class="cs-warn">下面的呈现每一句话都描述一种人们喜欢的做事方式。请根据你的实际情况，选择一个符合你的选项。</p>
+					<ul>
+					[#list onelist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id="${'1_'+(list_index+1)}" typeid="${list.value1!}" typecode="${list.D_type!}" />
+								<label for="${'1_'+(list_index+1)}">${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'11_'+(list_index+1)}" typeid="${list.value2!}" typecode="${list.D_type!}" />
+								<label for="${'11_'+(list_index+1)}">${list.option2!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'111_'+(list_index+1)}" typeid="${list.value3!}" typecode="${list.D_type!}" />
+								<label for="${'111_'+(list_index+1)}">${list.option3!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'1111_'+(list_index+1)}" typeid="${list.value4!}" typecode="${list.D_type!}" />
+								<label for="${'1111_'+(list_index+1)}">${list.option4!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'11111_'+(list_index+1)}" typeid="${list.value5!}" typecode="${list.D_type!}" />
+								<label for="${'11111_'+(list_index+1)}">${list.option5!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'111111_'+(list_index+1)}" typeid="${list.value6!}" typecode="${list.D_type!}" />
+								<label for="${'111111_'+(list_index+1)}">${list.option6!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'1111111_'+(list_index+1)}" typeid="${list.value7!}" typecode="${list.D_type!}" />
+								<label for="${'1111111_'+(list_index+1)}">${list.option7!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${onelist?size!}</span>第一部分
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(onelist?size!100)}%"></div>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">第二部分</button>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<p class="cs-warn">请根据下列语句描述的能力，对你自己的各项能力进行评估。评估时，你可以参考你周围的同伴，想想自己处于同伴中的什么水平，从而作出判断。</p>
+				<ul>	
+					[#list twolist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id="${'2_'+(list_index+1)}" typeid="${list.value1}" typecode="${list.D_type!}" />
+								<label for="${'2_'+(list_index+1)}">${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'22_'+(list_index+1)}" typeid="${list.value2!}" typecode="${list.D_type!}" />
+								<label for="${'22_'+(list_index+1)}">${list.option2!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="{'222_'+(list_index+1)}" typeid="${list.value3!}" typecode="${list.D_type!}" />
+								<label for="${'222_'+(list_index+1)}">${list.option3!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'2222_'+(list_index+1)}" typeid="${list.value4!}" typecode="${list.D_type!}" />
+								<label for="${'2222_'+(list_index+1)}">${list.option4!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'22222_'+(list_index+1)}" typeid="${list.value5!}" typecode="${list.D_type!}" />
+								<label for="${'22222_'+(list_index+1)}">${list.option5!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'222222_'+(list_index+1)}" typeid="${list.value6!}" typecode="${list.D_type!}" />
+								<label for="${'222222_'+(list_index+1)}">${list.option6!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'2222222_'+(list_index+1)}" typeid="${list.value7!}" typecode="${list.D_type!}" />
+								<label for="${'2222222_'+(list_index+1)}">${list.option7!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${twolist?size!}</span>第二部分
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(twolist?size!100)}%"></div>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">第三部分</button>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<p class="cs-warn">请仔细阅读下面的语句，并评价你有多大的信心做到语句中描述的内容。请根据语句内容对你将面临选择的六门科目分别作出评估，选择吻合你信心程度的那个选项。</p>
+				<h3>物理</h3>	
+				<ul>
+					[#list threelist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id="${'w10_'+(list_index+1)}"  typeid="${list.value1!}" typecode="物理" />
+								<label for="${'w10_'+(list_index+1)}">${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'w11_'+(list_index+1)}" typeid="${list.value2!}" typecode="物理" />
+								<label for="${'w11_'+(list_index+1)}">${list.option2!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'w12_'+(list_index+1)}" typeid="${list.value3!}" typecode="物理" />
+								<label for="${'w12_'+(list_index+1)}">${list.option3!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'w13_'+(list_index+1)}" typeid="${list.value4!}" typecode="物理" />
+								<label for="${'w13_'+(list_index+1)}">${list.option4!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'w14_'+(list_index+1)}" typeid="${list.value5!}" typecode="物理" />
+								<label for="${'w14_'+(list_index+1)}">${list.option5!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'w15_'+(list_index+1)}" typeid="${list.value6!}" typecode="物理" />
+								<label for="${'w15_'+(list_index+1)}">${list.option6!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'w16_'+(list_index+1)}" typeid="${list.value7!}" typecode="物理" />
+								<label for="${'w16_'+(list_index+1)}">${list.option7!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${threelist?size!}</span>物理
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(twolist?size!100)}%"></div>
+				</div>
+				</div>
+				<div class="bbx-ks-wrap gps box-shadow am-hide">
+					<div class="bbx-xgcs-ks gps">
+						<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">历史</button>
+					</div>
+				</div>
+				<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<h3>历史</h3>	
+				<ul>
+					[#list threelist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id="${'l10_'+(list_index+1)}" typeid="${list.value1!}" typecode="历史" />
+								<label for="${'l10_'+(list_index+1)}">${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'l11_'+(list_index+1)}" typeid="${list.value2!}" typecode="历史" />
+								<label for="${'l11_'+(list_index+1)}">${list.option2!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'l12_'+(list_index+1)}" typeid="${list.value3!}" typecode="历史" />
+								<label for="${'l12_'+(list_index+1)}">${list.option3!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'l13_'+(list_index+1)}" typeid="${list.value4!}" typecode="历史" />
+								<label for="${'l13_'+(list_index+1)}">${list.option4!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'l14_'+(list_index+1)}" typeid="${list.value5!}" typecode="历史" />
+								<label for="${'l14_'+(list_index+1)}">${list.option5!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'l15_'+(list_index+1)}" typeid="${list.value6!}" typecode="历史" />
+								<label for="${'l15_'+(list_index+1)}">${list.option6!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'l16_'+(list_index+1)}" typeid="${list.value7!}" typecode="历史" />
+								<label for="${'l16_'+(list_index+1)}">${list.option7!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${threelist?size!}</span>历史
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(threelist?size!100)}%"></div>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">地理</button>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<h3>地理</h3>	
+				<ul>
+					[#list threelist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id="${'d10_'+(list_index+1)}" typeid="${list.value1!}" typecode="地理" />
+								<label for="${'d10_'+(list_index+1)}">${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'d11_'+(list_index+1)}" typeid="${list.value2!}" typecode="地理" />
+								<label for="${'d11_'+(list_index+1)}">${list.option2!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'d12_'+(list_index+1)}" typeid="${list.value3!}" typecode="地理" />
+								<label for="${'d12_'+(list_index+1)}">${list.option3!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'d13_'+(list_index+1)}" typeid="${list.value4!}" typecode="地理" />
+								<label for="${'d13_'+(list_index+1)}">${list.option4!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'d14_'+(list_index+1)}" typeid="${list.value5!}" typecode="地理" />
+								<label for="${'d14_'+(list_index+1)}">${list.option5!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'d15_'+(list_index+1)}" typeid="${list.value6!}" typecode="地理" />
+								<label for="${'d15_'+(list_index+1)}">${list.option6!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'d16_'+(list_index+1)}" typeid="${list.value7!}" typecode="地理" />
+								<label for="${'d16_'+(list_index+1)}">${list.option7!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${threelist?size!}</span>地理
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(threelist?size!100)}%"></div>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">生物</button>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<h3>生物</h3>	
+				<ul>
+					[#list threelist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id="${'s10_'+(list_index+1)}" typeid="${list.value1!}" typecode="生物" />
+								<label for="${'s10_'+(list_index+1)}">${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'s11_'+(list_index+1)}" typeid="${list.value2!}" typecode="生物" />
+								<label for="${'s11_'+(list_index+1)}">${list.option2!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'s12_'+(list_index+1)}" typeid="${list.value3!}" typecode="生物" />
+								<label for="${'s12_'+(list_index+1)}">${list.option3!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'s13_'+(list_index+1)}" typeid="${list.value4!}" typecode="生物" />
+								<label for="${'s13_'+(list_index+1)}">${list.option4!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'s14_'+(list_index+1)}" typeid="${list.value5!}" typecode="生物" />
+								<label for="${'s14_'+(list_index+1)}">${list.option5!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'s15_'+(list_index+1)}" typeid="${list.value6!}" typecode="生物" />
+								<label for="${'s15_'+(list_index+1)}">${list.option6!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'s16_'+(list_index+1)}" typeid="${list.value7!}" typecode="生物" />
+								<label for="${'s16_'+(list_index+1)}">${list.option7!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${threelist?size!}</span>生物
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(threelist?size!100)}%"></div>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">政治</button>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<h3>政治</h3>	
+				<ul>
+					[#list threelist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id="${'z10_'+(list_index+1)}" typeid="${list.value1!}" typecode="政治" />
+								<label for="${'z10_'+(list_index+1)}">${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'z11_'+(list_index+1)}" typeid="${list.value2!}" typecode="政治" />
+								<label for="${'z11_'+(list_index+1)}">${list.option2!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'z12_'+(list_index+1)}" typeid="${list.value3!}" typecode="政治" />
+								<label for="${'z12_'+(list_index+1)}">${list.option3!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'z13_'+(list_index+1)}" typeid="${list.value4!}" typecode="政治" />
+								<label for="${'z13_'+(list_index+1)}">${list.option4!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'z14_'+(list_index+1)}" typeid="${list.value5!}" typecode="政治" />
+								<label for="${'z14_'+(list_index+1)}">${list.option5!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'z15_'+(list_index+1)}" typeid="${list.value6!}" typecode="政治" />
+								<label for="${'z15_'+(list_index+1)}">${list.option6!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'z16_'+(list_index+1)}" typeid="${list.value7!}" typecode="政治" />
+								<label for="${'z16_'+(list_index+1)}">${list.option7!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${threelist?size!}</span>政治
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(threelist?size!100)}%"></div>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">化学</button>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<h3>化学</h3>	
+				<ul>
+					[#list threelist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id="${'h10_'+(list_index+1)}" typeid="${list.value1!}" typecode="化学" />
+								<label for="${'h10_'+(list_index+1)}">${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'h11_'+(list_index+1)}" typeid="${list.value2!}" typecode="化学" />
+								<label for="${'h11_'+(list_index+1)}">${list.option2!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'h12_'+(list_index+1)}" typeid="${list.value3!}" typecode="化学" />
+								<label for="${'h12_'+(list_index+1)}">${list.option3!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'h13_'+(list_index+1)}" typeid="${list.value4!}" typecode="化学" />
+								<label for="${'h13_'+(list_index+1)}">${list.option4!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'h14_'+(list_index+1)}" typeid="${list.value5!}" typecode="化学" />
+								<label for="${'h14_'+(list_index+1)}">${list.option5!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'h15_'+(list_index+1)}" typeid="${list.value6!}" typecode="化学" />
+								<label for="${'h15_'+(list_index+1)}">${list.option6!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'h16_'+(list_index+1)}" typeid="${list.value7!}" typecode="化学" />
+								<label for="${'h16_'+(list_index+1)}">${list.option7!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${threelist?size!}</span>化学
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(threelist?size!100)}%"></div>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">第四部分</button>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<p class="cs-warn">请仔细阅读下面的陈述， 并评价该陈述是否符合你的实际情况。请基于六门科目分别作出评价，选择符合你的那个选项。</p>
+				<h3>物理</h3>	
+				<ul>
+					[#list fourlist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id="${'w20_'+(list_index+1)}" typeid="${list.value1!}" typecode="物理1" />
+								<label for="${'w20_'+(list_index+1)}">${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'w21_'+(list_index+1)}" typeid="${list.value2!}" typecode="物理1" />
+								<label for="${'w21_'+(list_index+1)}">${list.option2!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'w22_'+(list_index+1)}" typeid="${list.value3!}" typecode="物理1" />
+								<label for="${'w22_'+(list_index+1)}">${list.option3!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'w23_'+(list_index+1)}" typeid="${list.value4!}" typecode="物理1" />
+								<label for="${'w23_'+(list_index+1)}">${list.option4!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'w24_'+(list_index+1)}" typeid="${list.value5!}" typecode="物理1" />
+								<label for="${'w24_'+(list_index+1)}">${list.option5!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'w25_'+(list_index+1)}" typeid="${list.value6!}" typecode="物理1" />
+								<label for="${'w25_'+(list_index+1)}">${list.option6!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'w26_'+(list_index+1)}" typeid="${list.value7!}" typecode="物理1" />
+								<label for="${'w26_'+(list_index+1)}">${list.option7!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${fourlist?size!}</span>物理
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(fourlist?size!100)}%"></div>
+				</div>
+				</div>
+				<div class="bbx-ks-wrap gps box-shadow am-hide">
+					<div class="bbx-xgcs-ks gps">
+						<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">历史</button>
+					</div>
+				</div>
+				<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<h3>历史</h3>	
+				<ul>
+					[#list fourlist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id="${'l20_'+(list_index+1)}" typeid="${list.value1!}" typecode="历史1" />
+								<label for="${'l20_'+(list_index+1)}">${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'l21_'+(list_index+1)}" typeid="${list.value2!}" typecode="历史1" />
+								<label for="${'l21_'+(list_index+1)}">${list.option2!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'l22_'+(list_index+1)}" typeid="${list.value3!}"  typecode="历史1" />
+								<label for="${'l22_'+(list_index+1)}">${list.option3!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'l23_'+(list_index+1)}" typeid="${list.value4!}" typecode="历史1" />
+								<label for="${'l23_'+(list_index+1)}">${list.option4!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'l24_'+(list_index+1)}" typeid="${list.value5!}" typecode="历史1" />
+								<label for="${'l24_'+(list_index+1)}">${list.option5!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'l25_'+(list_index+1)}" typeid="${list.value6!}" typecode="历史1" />
+								<label for="${'l25_'+(list_index+1)}">${list.option6!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'l26_'+(list_index+1)}" typeid="${list.value7!}" typecode="历史1" />
+								<label for="${'l26_'+(list_index+1)}">${list.option7!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${fourlist?size!}</span>历史
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(fourlist?size!100)}%"></div>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">地理</button>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<h3>地理</h3>	
+				<ul>
+					[#list fourlist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id="${'d20_'+(list_index+1)}" typeid="${list.value1!}" typecode="地理1" />
+								<label for="${'d20_'+(list_index+1)}">${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'d21_'+(list_index+1)}" typeid="${list.value2!}" typecode="地理1" />
+								<label for="${'d21_'+(list_index+1)}">${list.option2!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'d22_'+(list_index+1)}" typeid="${list.value3!}" typecode="地理1" />
+								<label for="${'d22_'+(list_index+1)}">${list.option3!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'d23_'+(list_index+1)}" typeid="${list.value4!}" typecode="地理1" />
+								<label for="${'d23_'+(list_index+1)}">${list.option4!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'d24_'+(list_index+1)}" typeid="${list.value5!}" typecode="地理1" />
+								<label for="${'d24_'+(list_index+1)}">${list.option5!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'d25_'+(list_index+1)}" typeid="${list.value6!}" typecode="地理1" />
+								<label for="${'d25_'+(list_index+1)}">${list.option6!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'d26_'+(list_index+1)}" typeid="${list.value7!}" typecode="地理1" />
+								<label for="${'d26_'+(list_index+1)}">${list.option7!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${fourlist?size!}</span>地理
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(fourlist?size!100)}%"></div>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">生物</button>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<h3>生物</h3>	
+				<ul>
+					[#list fourlist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id="${'s20_'+(list_index+1)}" typeid="${list.value1!}" typecode="生物1" />
+								<label for="${'s20_'+(list_index+1)}">${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'s21_'+(list_index+1)}" typeid="${list.value2!}" typecode="生物1" />
+								<label for="${'s21_'+(list_index+1)}">${list.option2!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'s22_'+(list_index+1)}" typeid="${list.value3!}" typecode="生物1" />
+								<label for="${'s22_'+(list_index+1)}">${list.option3!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'s23_'+(list_index+1)}" typeid="${list.value4!}" typecode="生物1" />
+								<label for="${'s23_'+(list_index+1)}">${list.option4!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'s24_'+(list_index+1)}" typeid="${list.value5!}" typecode="生物1" />
+								<label for="${'s24_'+(list_index+1)}">${list.option5!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'s25_'+(list_index+1)}" typeid="${list.value6!}" typecode="生物1" />
+								<label for="${'s25_'+(list_index+1)}">${list.option6!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'s26_'+(list_index+1)}" typeid="${list.value7!}" typecode="生物1" />
+								<label for="${'s26_'+(list_index+1)}">${list.option7!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${fourlist?size!}</span>生物
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(fourlist?size!100)}%"></div>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">政治</button>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<h3>政治</h3>	
+				<ul>
+					[#list fourlist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id="${'z20_'+(list_index+1)}" typeid="${list.value1!}" typecode="政治1" />
+								<label for="${'z20_'+(list_index+1)}">${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'z21_'+(list_index+1)}" typeid="${list.value2!}" typecode="政治1" />
+								<label for="${'z21_'+(list_index+1)}">${list.option2!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'z22_'+(list_index+1)}" typeid="${list.value3!}" typecode="政治1" />
+								<label for="${'z22_'+(list_index+1)}">${list.option3!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'z23_'+(list_index+1)}" typeid="${list.value4!}" typecode="政治1" />
+								<label for="${'z23_'+(list_index+1)}">${list.option4!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'z24_'+(list_index+1)}" typeid="${list.value5!}" typecode="政治1" />
+								<label for="${'z24_'+(list_index+1)}">${list.option5!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'z25_'+(list_index+1)}" typeid="${list.value6!}" typecode="政治1" />
+								<label for="${'z25_'+(list_index+1)}">${list.option6!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'z26_'+(list_index+1)}" typeid="${list.value7!}" typecode="政治1" />
+								<label for="${'z26_'+(list_index+1)}">${list.option7!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${fourlist?size!}</span>政治
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(fourlist?size!100)}%"></div>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">化学</button>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<h3>化学</h3>	
+				<ul>
+					[#list fourlist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id="${'h20_'+(list_index+1)}" typeid="${list.value1!}" typecode="化学1" />
+								<label for="${'h20_'+(list_index+1)}">${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'h21_'+(list_index+1)}" typeid="${list.value2!}" typecode="化学1" />
+								<label for="${'h21_'+(list_index+1)}">${list.option2!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'h22_'+(list_index+1)}" typeid="${list.value3!}" typecode="化学1" />
+								<label for="${'h22_'+(list_index+1)}">${list.option3!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'h23_'+(list_index+1)}" typeid="${list.value4!}" typecode="化学1" />
+								<label for="${'h23_'+(list_index+1)}">${list.option4!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'h24_'+(list_index+1)}" typeid="${list.value5!}" typecode="化学1" />
+								<label for="${'h24_'+(list_index+1)}">${list.option5!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'h25_'+(list_index+1)}" typeid="${list.value6!}" typecode="化学1" />
+								<label for="${'h25_'+(list_index+1)}">${list.option6!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id="${'h26_'+(list_index+1)}" typeid="${list.value7!}" typecode="化学1" />
+								<label for="${'h26_'+(list_index+1)}">${list.option7!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${fourlist?size!}</span>化学
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(fourlist?size!100)}%"></div>
+				</div>
+			</div>
+			<!--提交-->
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" id="tj"  onclick="tj(this)" class="am-btn bg-green abs-center">提交测试</button>
+				</div>
+			</div>
+	
+			<form action="newGKXKReport.jspx" id="newGKXKReport" method="post">
+				<input type="hidden" id="report_A" name="report_A" >
+				<input type="hidden" id="report_C" name="report_C" >
+				<input type="hidden" id="report_E" name="report_E" >
+				<input type="hidden" id="report_I" name="report_I" >
+				<input type="hidden" id="report_S" name="report_S" >
+				<input type="hidden" id="report_R" name="report_R" >
+				
+				<input type="hidden" id="thirdWL" name="thirdWL" >
+				<input type="hidden" id="thirdLS" name="thirdLS" >
+				<input type="hidden" id="thirdDL" name="thirdDL" >
+				<input type="hidden" id="thirdSW" name="thirdSW" >
+				<input type="hidden" id="thirdZZ" name="thirdZZ" >
+				<input type="hidden" id="thirdHX" name="thirdHX" >
+				
+				<input type="hidden" id="fourthWL" name="fourthWL" >
+				<input type="hidden" id="fourthLS" name="fourthLS" >
+				<input type="hidden" id="fourthDL" name="fourthDL" >
+				<input type="hidden" id="fourthSW" name="fourthSW" >
+				<input type="hidden" id="fourthZZ" name="fourthZZ" >
+				<input type="hidden" id="fourthHX" name="fourthHX" >
+			</form>
+		</section>
+	[#include "../wdedu/include/footer_new.html"/]
+	</body>
+	<script type="text/javascript" src="${resSys}/res/js/head.js"></script>
+	<script type="text/javascript">
+		var localStatus = {
+			"id":1,
+			"subId":0
+		};
+		statusActive(localStatus);
+		var index=1,count=2;
+		var A=0,C=0,E=0,I=0,R=0,S=0,
+		thirdWL=0,thirdLS=0,thirdDL=0,thirdSW=0,thirdZZ=0,thirdHX=0,
+		fourthWL=0,fourthLS=0,fourthDL=0,fourthSW=0,fourthZZ=0,fourthHX=0;
+		function showContent(obj){
+			index = 1;
+			count = 2;
+			$(obj).parents(".bbx-ks-wrap").addClass("am-hide");
+			$(obj).parents(".bbx-ks-wrap").next().removeClass("am-hide");
+			$(obj).parents(".bbx-ks-wrap").next().find("ul").children("li:first-child").removeClass("am-hide");
+		};
+		var count1=0,count2=0,count3=0,count4=0,count5=0,count6=0;
+		function radioClick(obj){
+			var typeid = Number($(obj).attr("typeid"));
+			var typecode = $(obj).attr("typecode");
+			if(typecode=='A'){
+				A=A+typeid;
+			};
+			if(typecode=='C'){
+				C=C+typeid;
+			};
+			if(typecode=='E'){
+				E=E+typeid;
+			};
+			if(typecode=='I'){
+				I=I+typeid;
+			};
+			if(typecode=='R'){
+				R=R+typeid;
+			};
+			if(typecode=='S'){
+				S=S+typeid;
+			};
+			if(typecode=='物理'){
+				thirdWL=thirdWL+typeid;
+			};
+			if(typecode=='历史'){
+				thirdLS=thirdLS+typeid;
+			};
+			if(typecode=='地理'){
+				thirdDL=thirdDL+typeid;
+			};
+			if(typecode=='生物'){
+				thirdSW=thirdSW+typeid;
+			};
+			if(typecode=='政治'){
+				thirdZZ=thirdZZ+typeid;
+			};
+			if(typecode=='化学'){
+				thirdHX=thirdHX+typeid;
+			};
+			if(typecode=='物理1'){
+				count1++;
+				if(count1<=6){
+					fourthWL=fourthWL+typeid;
+				}
+			};
+			if(typecode=='历史1'){
+				count2++;
+				if(count2<=6){
+					fourthLS=fourthLS+typeid;
+				}
+			};
+			if(typecode=='地理1'){
+				count3++;
+				if(count3<=6){
+					fourthDL=fourthDL+typeid;
+				}
+			};
+			if(typecode=='生物1'){
+				count4++;
+				if(count4<=6){
+					fourthSW=fourthSW+typeid;
+				}
+			};
+			if(typecode=='政治1'){
+				count5++;
+				if(count5<=6){
+					fourthZZ=fourthZZ+typeid;
+				}
+			};
+			if(typecode=='化学1'){
+				count6++;
+				if(count6<=6){
+					fourthHX=fourthHX+typeid;
+				}
+			};
+			var indexCounts = parseInt($(obj).parents("ul").next().find(".bbx-counts").text());
+			/* console.log('indexCounts',indexCounts) */
+			var widths='';
+			setTimeout(function(){
+				widths =count * (100/indexCounts)+"%";
+				$(obj).parents("li").addClass("am-hide");
+				if(index < indexCounts){
+					$(obj).parents("li").next().removeClass("am-hide");
+					$(obj).parents("ul").next().find(".bbx-index").text(index+1);
+					$(obj).parents(".bbx-xgcs-ks").next().find(".am-progress-bar").css("width",widths);
+					index+=1;
+					count+=1;
+				}else{
+					index==1;
+					$(obj).parents(".bbx-ks-wrap").addClass("am-hide");
+					$(obj).parents(".bbx-ks-wrap").next().removeClass("am-hide");;
+				};
+			},300);
+			/* console.log('A',A,'C',C,'E',E,'I',I,'S',S,'R',R); */
+/* console.log('物理',thirdWL,'历史',thirdLS,'地理',thirdDL,'生物',thirdSW,'政治',thirdZZ,'化学',thirdHX)
+console.log('物理1',fourthWL,'历史1',fourthLS,'地理1',fourthDL,'生物1',fourthSW,'政治1',fourthZZ,'化学1',fourthHX) */
+		};
+		$('input[type="radio"]').on('click',function(event){
+			event.stopPropagation();
+			radioClick(this);
+			$(this).unbind('click');
+		});
+		function tj(obj){
+			/* $.ajax({
+				url:'${base}/zhjx/newGKXKReport.jspx',
+				data:{
+					"report_A":A,
+					"report_C":C,
+					"report_E":E,
+					"report_I":I,
+					"report_S":S,
+					"report_R":R,
+					"thirdWL":thirdWL,
+					"thirdLS":thirdLS,
+					"thirdDL":thirdDL,
+					"thirdSW":thirdSW,
+					"thirdZZ":thirdZZ,
+					"thirdHX":thirdHX,
+					"fourthWL":fourthWL,
+					"fourthLS":fourthLS,
+					"fourthDL":fourthDL,
+					"fourthSW":fourthSW,
+					"fourthZZ":fourthZZ,
+					"fourthHX":fourthHX
+				},
+				dataType:'json',
+				type:'post',
+				success:function(data){
+					console.log(data)
+				}
+			}); */
+			$("input[name='report_A']").val(A);
+			$("input[name='report_C']").val(C);
+			$("input[name='report_E']").val(E);
+			$("input[name='report_I']").val(I);
+			$("input[name='report_S']").val(S);
+			$("input[name='report_R']").val(R);
+			
+			$("input[name='thirdWL']").val(thirdWL);
+			$("input[name='thirdLS']").val(thirdLS);
+			$("input[name='thirdDL']").val(thirdDL);
+			$("input[name='thirdSW']").val(thirdSW);
+			$("input[name='thirdZZ']").val(thirdZZ);
+			$("input[name='thirdHX']").val(thirdHX);
+			
+			$("input[name='fourthWL']").val(fourthWL);
+			$("input[name='fourthLS']").val(fourthLS);
+			$("input[name='fourthDL']").val(fourthDL);
+			$("input[name='fourthSW']").val(fourthSW);
+			$("input[name='fourthZZ']").val(fourthZZ);
+			$("input[name='fourthHX']").val(fourthHX);
+			$('#newGKXKReport').submit();
+		}
+	</script>
+</html>

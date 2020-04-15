@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>志愿填报</title>
+     <script src="${base}/r/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="${base}/r/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${base}/r/css/combo.select.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/r/css/xcConfirm.css"/>
+    <script src="${base}/r/js/jQuery.js"></script>
+    <script src="${base}/r/js/jquery.combo.select.js"></script>
+    <script src="${base}/r/js/itemsJs/common.js"></script>
+    <script src="${base}/r/js/itemsJs/filtrate.js"></script>
+    <script src="${base}/r/js/Sortable.js"></script>
+    <link rel="stylesheet" href="${resSys}/res/css/head-footer.css" />
+    <script src="${resSys}/res/js/jquery-1.11.3.min.js"></script>
+    <script src="${base}/r/cms/front.js"></script>
+    <link rel="stylesheet" href="${base}/r/js/jquery.mloading.css">
+        <script src="${base}/r/css/sweetalert-dev.js"></script>
+        <link rel="stylesheet" href="${base}/r/css/sweetalert.css">
+    <style>
+        .combo-select {
+            width: 170px !important;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .combo-select select {
+            width: 0 !important;
+        }
+
+        .radio_base label {
+            font-weight: normal;
+        }
+
+        .fillIn form div.flex-container1 > ul > li > div {
+            margin: 20px 15px;
+        }
+
+        .fillIn form div.flex-container1 > ul > li.projectInstruction > span {
+            display: block;
+            font-size: 20px;
+            color: #ff0000;
+            margin: 30px 0;
+        }
+
+        .fillIn form div.flex-container1 > ul > li.projectInstruction > p {
+            margin: 15px 0;
+        }
+
+        .fillIn form div.textC button {
+            margin: 32px;
+        }
+
+        .fillIn form div.textC button.chakan {
+            background: #fff;
+            color: #05b8c3;
+            border: 1px solid #05b8c3;
+        }
+
+        .black_overlay{
+            display: none;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index:1001;
+            -moz-opacity: 0.8;
+            opacity:.80;
+            filter: alpha(opacity=88);
+        }
+        .white_content {
+            display: none;
+
+
+            left: 100px;
+            width: 380px;
+            height: 50px;
+
+            border: 5px solid orange;
+            background-color: white;
+
+        }
+                #bkdw {
+                    border: solid 2px azure;
+                    background: #fcfaff;
+                    border-bottom-width: 0px;
+                     -webkit-border-radius: 25px;
+                    border-radius: 25px;
+                }
+             #bkdw1 {
+                 border: solid 2px azure;
+                 border-top-width: 0px;
+                 background: #fcfaff;
+                 -webkit-border-radius: 25px;
+                 border-radius: 25px;
+             }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            var province_id = $("#province").val();
+            if (province_id == "17") { //江苏
+                $("#major_type_1").show();
+                $("#major_type_2").show();
+                $("#major_type_3").hide();
+            } else if (province_id == "18" || province_id == "16") { //浙江、上海
+                $("#major_type_1").hide();
+                $("#major_type_2").hide();
+                $("#major_type_3").show();
+            } else { //其他
+                $("#major_type_1").show();
+                $("#major_type_2").show();
+                $("#major_type_3").hide();
+                $("#subjects_type").hide();
+            }
+        })
+
+        //    限制选中数量
+        function checkZJDate() {
+            var checkNum = 0;
+
+            for (var i = 0; i < sForm.subjects.length; i++) {
+                if(sForm.subjects[i].checked)
+                {
+                    checkNum ++;
+                }
+            }
+
+            if (checkNum > 3) {
+                alert("请选择三门科目！");
+                return false;
+                // $(":checkbox").css(disabled, "disabled");
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        var time = new Date();
+        var nowYear = time.getFullYear();
+    </script>
+</head>
+
+<body>
+<!--顶部线条-->
+<!--tab切换  导航-->
+[#include "../include/header_kstb.html"/]
+<!--路径-->
+<div class="route">
+    <div class="flex-container1 width1200">
+        <div><a href="${base}/index.jhtml">首页 </a> &lt;&lt;模拟填报</div>
+    </div>
+</div>
+<!--主体-->
+<main class="width1200">
+    <!--模拟填报表-->
+    <div class="simulationTable">
+        <p>2019年志愿模拟填报表</p>
+        <span>Voluntary simulation report form 2019</span>
+        <div class="fillIn">
+            <form id="sForm" action="saveksProject.jspx" method="post">
+                <div class="flex-container1">
+                    <ul style="width: 55%;">
+                        [#if userInfo ??]
+                        [#if userInfo.isSuper]
+                        [#if roledId??]
+                        [#if roledId=='3']
+                        <!--省份选择-->
+                        <li class="flex-container1">
+                            <div class="width150 paddingTop6">
+                                <span class="paddingLeft10 paddingLeft30">省份选择</span>
+                            </div>
+                            <div>
+                                <select name="provinceId" id="province" class="provincewenli">
+                                    <option value="" disabled selected hidden>选择省份</option>
+                                    [#if provinceList?? ]
+                                    [#list provinceList as p]
+                                    [#if p.provinceName!="未知"]
+                                    <option [#if (provinceId?? && provinceId !="" &&
+                                            p.provinceId?number=provinceId?number ) ] selected [/#if] value="${p.provinceId!}">${p.provinceName!}</option>
+                                    [/#if]
+                                    [/#list]
+                                    [/#if]
+                                </select>
+                            </div>
+                        </li>
+                        <!--文理科选择-->
+                        <li class="flex-container1">
+                            <div class="width150 paddingTop6">
+                                <span class="paddingLeft10 paddingLeft30">文理科选择</span>
+                            </div>
+                            <div id="major_type" class="paddingTop6">
+                                <div class="radio_base" id="major_type_1">
+                                    <input id="radio_base1" class="styled indexRadio" type="radio" name="majorTypeId"
+                                           [#if (majorTypeId?? && majorTypeId !="" ) && majorTypeId="1" ] checked [/#if]
+                                    value="1">
+                                    <label for="radio_base1" class="font-bolder">文科</label>
+                                </div>
+                                <div class="radio_base" id="major_type_2">
+                                    <input id="radio_base2" class="styled indexRadio" type="radio" name="majorTypeId"
+                                           [#if (majorTypeId?? && majorTypeId !="" ) && majorTypeId="2" ] checked [/#if]
+                                    value="2">
+                                    <label for="radio_base2" class="font-bolder">理科</label>
+                                </div>
+                                <div class="radio_base" id="major_type_3" [#if (majorTypeId?? && majorTypeId !="" ) && majorTypeId!="3" ] style="display: none" [/#if]>
+                                    <input id="radio_base3" class="styled indexRadio" type="radio" name="majorTypeId"
+                                           [#if (majorTypeId?? && majorTypeId !="" ) && majorTypeId="3" ] checked [/#if]
+                                    value="3">
+                                    <label for="radio_base3" class="font-bolder">综合改革</label>
+                                </div>
+                            </div>
+                        </li>
+                        [/#if]
+                        [/#if]
+                        [#else]
+                        <input type="hidden" name="provinceId" value="${provinceId!}" id="proIds">
+                        <input type="hidden" name="majorTypeId" value="${majorTypeId!}" id="majorIds">
+                        [/#if]
+                        [/#if]
+                        <!--方案名称-->
+                        <li class="flex-container1">
+                            <div class="width150 paddingTop6">
+                                <img src="${base}/r/img/designation.png" alt=""/>
+                                <span class="paddingLeft10">方案名称</span>
+                            </div>
+                            <div>
+                                <input type="text" name="applicationName" placeholder="输入汉字，数字等"/>
+                            </div>
+                        </li>
+                        <span style="color: red">*批次查分/高考总分&nbsp;&nbsp;二选一</span>
+                        <!--输入批次查分-->
+                        <li class="flex-container1" id="bkdw">
+                            <div class="width150 paddingTop6">
+                                <div class="radio_base">
+                                    <input id="radio1" class="styled indexRadio" type="radio" name="radio" value="1">
+                                    <label for="radio1" class="font-bolder">输入批次查分</label>
+                                </div>
+                            </div>
+                            <div class="flex-item10-20 comboBox">
+                                <select id="batch" name="batch" class="batch">
+                                    <option value="" disabled selected hidden>选择批次</option>
+                                    [#if batchInfo??]
+                                    [#list batchInfo as item]
+                                    <option value="${item[0]!}">${item[1]!}</option>
+                                    [/#list]
+                                    [/#if]
+                                </select>
+                            </div>
+                            <div>
+                                <input type="text" id="gap" name="gap" placeholder="输入分差值(例如：10)" readonly="readonly"/>
+                            </div>
+                            <!--<div>注意：根据开始成绩和批次线换算高考成绩</div>-->
+                        </li>
+                        <!--输入高考总分-->
+                        <li class="flex-container1" id="bkdw1">
+                            <!--<div>-->
+                            <div class="width150 paddingTop6">
+                                <div class="radio_base">
+                                    <input id="radio2" class="styled indexRadio" type="radio" name="radio" value="2" checked>
+                                    <label for="radio2" class="font-bolder">输入高考总分</label>
+                                </div>
+                            </div>
+                            <div>
+                                <input type="text" id="score" name="score" placeholder="" onchange="get_rank_by_score()"
+                                       />
+                            </div>
+                            <!--</div>-->
+                        </li>
+                        <!--本省排名-->
+                        <li class="flex-container1">
+                            <!--<div>-->
+                            <div class="width150 paddingTop6 paddingLeft30">本省排名</div>
+                            <div>
+                                <input type="text" id="rank" name="rank" readonly="readonly" placeholder=""
+                                       onchange="get_score_by_rank()"/>
+                            </div>
+                            <div style="padding-top: 5px;margin: 25px 10px;">
+                                <div class="checkbox_base">
+                                    <input id="input_rank" type="checkbox"/>
+                                    <label for="input_rank"
+                                           style="font-size: 12px;color: #ff0000;">输入准确排名/已知准确排名</label>
+                                </div>
+                            </div>
+                            <!--</div>-->
+                        </li>
+                    </ul>
+                    <!--浙江-->
+                    <ul style="width: 45%;">
+                        <!--模拟志愿方案说明：-->
+                        <li class="projectInstruction">
+                            <span>模拟志愿方案说明：</span>
+                            <p>1，选择“输入批次查分“，使用模考成绩模拟填报志愿</p>
+                            <p>2，或选”输入高考总分“，使用高考成绩模拟填报志愿</p>
+                            <p>3，高考出分后，只能输入一次高考成绩，生成一次志愿方案</p>
+                            <p>4，保存成绩创建志愿方案，根据成绩和排名，填写志愿方案</p>
+                            <p>5，查看院校计划与历史数据，查看我省招生录取详细数据</p>
+                        </li>
+                        <!--选择高考选考科目-->
+                        <li id="subjects_type" style="border-bottom: none;">
+                            <p class="" style="font-size: 20px;color: #81c6ed;margin-top:35px;">选择高考选考科目</p>
+                            <div id="subjects_type_1" class="flex-container2 examinationSubject">
+                                <div>
+                                    <div class="checkbox_base">
+                                        <input id="test" type="checkbox" value="1" name="subjects" onclick="return checkZJDate()"/>
+                                        <label for="test">物理</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="checkbox_base">
+                                        <input id="test1" type="checkbox" value="2" name="subjects" onclick="return checkZJDate()"/>
+                                        <label for="test1">化学</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="checkbox_base">
+                                        <input id="test2" type="checkbox" value="3" name="subjects" onclick="return checkZJDate()"/>
+                                        <label for="test2">生物</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="checkbox_base">
+                                        <input id="test3" type="checkbox" value="4" name="subjects" onclick="return checkZJDate()"/>
+                                        <label for="test3">政治</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="checkbox_base">
+                                        <input id="test4" type="checkbox" value="5" name="subjects" onclick="return checkZJDate()"/>
+                                        <label for="test4">历史</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="checkbox_base">
+                                        <input id="test5" type="checkbox" value="6" name="subjects" onclick="return checkZJDate()"/>
+                                        <label for="test5">地理</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="checkbox_base">
+                                        <input id="test6" type="checkbox" value="7" name="subjects" onclick="return checkZJDate()"/>
+                                        <label for="test6">技术</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--江苏文科-->
+
+                            <div id="subjects_type_2">
+                                <div class="flex-container1">
+                                    <div class="width150 paddingTop6">选测科目一</div>
+                                    <div class="comboBox flex-item1">
+                                        <select name="subjects" class="batch" id="bx">
+                                            <option value="" disabled selected hidden>请选择</option>
+                                            <option value="5">历史</option>
+                                        </select>
+                                    </div>
+                                    <div class="comboBox flex-item1">
+                                        <select name="subjectsLevel" class="batch" id="bx1">
+                                            <option value="" disabled selected hidden>请选择</option>
+                                            <option value="1">A+</option>
+                                            <option value="2">A</option>
+                                            <option value="3">B+</option>
+                                            <option value="4">B</option>
+                                            <option value="5">C</option>
+                                            <option value="6">D</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="flex-container1">
+                                    <div class="width150 paddingTop6">选测科目二</div>
+                                    <div class="comboBox flex-item1">
+                                        <select name="subjects" class="batch" id="bx2">
+                                            <option value="" disabled selected hidden>请选择</option>
+                                            <option value="2">化学</option>
+                                            <option value="3">生物</option>
+                                            <option value="4">政治</option>
+                                            <option value="6">地理</option>
+                                        </select>
+                                    </div>
+                                    <div class="comboBox flex-item1">
+                                        <select name="subjectsLevel" class="batch" id="bx3">
+                                            <option value="" disabled selected hidden>请选择</option>
+                                            <option value="1">A+</option>
+                                            <option value="2">A</option>
+                                            <option value="3">B+</option>
+                                            <option value="4">B</option>
+                                            <option value="5">C</option>
+                                            <option value="6">D</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--江苏理科-->
+
+                            <div id="subjects_type_3">
+                                <div class="flex-container1">
+                                    <div class="width150 paddingTop6">选测科目一</div>
+                                    <div class="comboBox flex-item1">
+                                        <select name="subjects" class="batch" id="bx4">
+                                            <option value="" disabled selected hidden>请选择</option>
+                                            <option value="1">物理</option>
+                                        </select>
+                                    </div>
+                                    <div class="comboBox flex-item1">
+                                        <select name="subjectsLevel" class="batch" id="bx5">
+                                            <option value="" disabled selected hidden>请选择</option>
+                                            <option value="1">A+</option>
+                                            <option value="2">A</option>
+                                            <option value="3">B+</option>
+                                            <option value="4">B</option>
+                                            <option value="5">C</option>
+                                            <option value="6">D</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="flex-container1">
+                                    <div class="width150 paddingTop6">选测科目二</div>
+                                    <div class="comboBox flex-item1">
+                                        <select name="subjects" class="batch" id="bx6">
+                                            <option value="" disabled selected hidden>请选择</option>
+                                            <option value="2">化学</option>
+                                            <option value="3">生物</option>
+                                            <option value="4">政治</option>
+                                            <option value="6">地理</option>
+                                        </select>
+                                    </div>
+                                    <div class="comboBox flex-item1">
+                                        <select name="subjectsLevel" class="batch" id="bx7">
+                                            <option value="" disabled selected hidden>请选择</option>
+                                            <option value="1">A+</option>
+                                            <option value="2">A</option>
+                                            <option value="3">B+</option>
+                                            <option value="4">B</option>
+                                            <option value="5">C</option>
+                                            <option value="6">D</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="textC">
+                    <button class="btn5 btnColorGreen" onclick="save()" type="button">保存成绩并创建志愿方案</button>
+                    <button class="btn5 chakan" onclick="queryNB()" type="button">查看高校计划与历史数据</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--查找志愿方案-->
+    <div class="findfangan">
+        <!--搜索-->
+        <form id="tableForm" action="volunteerFlexible.jspx" method="post">
+            <div class="hugeSearch">
+                <input type="text" name="applicationName" placeholder="输入方案名称，点击搜索方案或者创建志愿方案，点击“方案名称” 可修改"/>
+                <button id="search_project" class="btn1 btnColorGreen" type="submit">查找志愿方案</button>
+            </div>
+            <input type="hidden" id="pageNo" name="pageNo"/>
+        </form>
+        <!--列表-->
+        <div>
+            <table class="table table-striped deeptable">
+                <tr>
+                    <th>方案名称</th>
+                    <th>填报</th>
+                    <th>省份</th>
+                    <th>届别</th>
+                    <th>文理科</th>
+                    <th>选考科目</th>
+                    <th>成绩</th>
+                    <th>排名</th>
+                    <th>操作</th>
+                </tr>
+                [#if pagination?? ]
+                [#list pagination.list as a ]
+                <tr>
+                    <td>${a.applicationName!}</td>
+                    <td>
+                        <a href="${base}/fastZytb/gkzytb.jspx?applicationId=${a.id!}" class="ToFillIn">开始填报</a>
+                    </td>
+                    [#if provinceMap??]
+                    <td>${provinceMap['${a.provinceId!"0"}']}</td>
+                    [/#if]
+                    <td>2019届</td>
+                    <td>${(a.majorTypeId!"-")?replace(1,'文科')?replace(2,'理科')?replace(3,'综合改革')?replace(0,'-')}</td>
+                    <td>
+                        ${(a.subjects!"-")?replace('1','物理')?replace('2','化学')?replace('3','生物')?replace('4','政治')?replace('5','历史')?replace('6','地理')?replace('7','技术')?replace(0,'-')}
+                        ${(a.subjectsLevel!"-")?replace('1','A+')?replace('2','A')?replace('3','B+')?replace('4','B')?replace('5','C')?replace('6','D')?replace(0,'-')}
+                    </td>
+                    <td>${a.score!}</td>
+                    <td>${a.rank!}</td>
+                    <td>
+                        <button type="button"
+                                onclick="javascript:window.location.href='../zytb/voluntary.jspx?applicationId=${a.id!}'"
+                                class="btn4 btnColorGreen">查看
+                        </button>
+                        <button class="btn4 btnColorGreen"
+                                onclick="javascript:window.location.href='../zytb/excelExport.jspx?applicationId=${a.id!}'">导出
+                        </button>
+                        <button class="btn4 btnColorGreen"  onclick="op('${a.id!}','${a.provinceId!}')">评估</button>
+                    </td>
+                </tr>
+                [/#list]
+                [/#if]
+            </table>
+        </div>
+    </div>
+    <!--分页-->
+    <div class="textC paging">
+        <tr>
+            <td colspan="8" style="padding:20px 0;">
+                <input type="hidden" name="pageNo"/>
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td align="center" class="pn-sp">
+                            共 ${pagination.totalCount} 条&nbsp; 每页 ${pagination.pageSize} 条&nbsp; 当前
+                            ${pagination.pageNo}/${pagination.totalPage} 页 &nbsp;转到第<input type="text" id="_goPs"
+                                                                                           onfocus="this.select();"
+                                                                                           onkeypress="if(event.keyCode==13){$('#_goPage').click();return false;}"
+                                                                                           style="width:50px; border:1px solid #e7e7e7;"/>页
+                            <input id="_goPage" type="button" value="转" onclick="_gotoPage($('#_goPs').val());" [#if
+                                   pagination.totalPage==1] disabled="disabled" [/#if] />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" value="首 页" onclick="_gotoPage('1');" [#if pagination.firstPage]
+                                   disabled="disabled" [/#if]/>
+                            <input type="button" value="上一页" onclick="_gotoPage('${pagination.prePage}');" [#if
+                                   pagination.firstPage] disabled="disabled" [/#if]/>
+                            <input type="button" value="下一页" onclick="_gotoPage('${pagination.nextPage}');" [#if
+                                   pagination.lastPage] disabled="disabled" [/#if]/>
+                            <input type="button" value="尾 页" onclick="_gotoPage('${pagination.totalPage}');" [#if
+                                   pagination.lastPage] disabled="disabled" [/#if]/>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </div>
+    <div>
+    <div id="light" class="white_content"   >
+        <input type="hidden" name="appHidden" id="appHidden">
+        <input type="text" name="fs_username" id="fsUsername">
+        <a href = "javascript:void(0)" onclick = "closeDialog()">发送</a>
+        <!--<input type="button" onclick="closeDialog()">发送-->
+    </div>
+    </div>
+</main>
+<!--底部-->
+[#include "../include/footer.html"/]
+
+<!--js-->
+<script src="${base}/r/js/jQuery.js"></script>
+<script src="${base}/r/js/bootstrap.min.js"></script>
+<script src="${base}/r/js/jquery.combo.select.js"></script>
+<script src="${base}/r/js/itemsJs/common.js"></script>
+<script src="${base}/r/js/jquery.mloading.js"></script>
+<script>
+function op(aid,apid){
+    window.location.href="${base}/pdf/createPdf.jspx?applicationId="+aid+"&provinceId="+apid;
+    $("body").mLoading({
+      text:"选择比努力更重要,评估报告生成中..."
+        });
+}
+    function save() {
+    //判断用户选择江苏是否选择科目start
+                var province = $('#province').val();
+                var majorid= $('input[name="majorTypeId"]:checked').val();
+                if (province == '17'){
+                    if (majorid == 1){
+                        var bx=$('#bx').val();var bx1=$('#bx1').val();var bx2=$('#bx2').val();var bx3=$('#bx3').val();
+                                if ( bx == null|| bx1 == null || bx2 == null || bx3 == null){
+                                  swal(
+                                  {
+                                      title:"错误提示",
+                                      text:"高考选考科目为必选项",
+                                      type:"info",
+                                      }
+                                      );
+                                return;
+                                   }
+                    } else if (majorid == 2){
+                        var bx4=$('#bx4').val();var bx5=$('#bx5').val();var bx6=$('#bx6').val();var bx7=$('#bx7').val();
+                                if (  bx4 == null || bx5 == null || bx6 == null ||bx7 == null){
+                                  swal(
+                                       {
+                                           title:"错误提示",
+                                           text:"高考选考科目为必选项",
+                                           type:"info",
+                                           }
+                                           );
+                                 return;
+                                    }
+                    }
+                }
+       //end
+        var val = $('input:radio[name="radio"]:checked').val();
+        if (val == "1") {
+            var batch = $("#batch").val();
+            var gap = $("#gap").val();
+            if (batch == null || batch == "" || batch == undefined) {
+                alert("请选择批次！");
+                return;
+            }
+            if (gap == null || gap == "" || gap == undefined) {
+                alert("请输入分差值！");
+                return;
+            }
+        } else if (val == "2") {
+            var score = $("#score").val();
+            var rank = $("#rank").val();
+            if (score == null || score == "" || score == undefined) {
+                alert("请输入高考总分！");
+                return;
+            }
+            if (rank == null || rank == "" || rank == undefined) {
+                alert("请输入本省排名！");
+                return;
+            }
+        } else {
+            alert("请选择批次查分或者高考总分！");
+            return;
+        }
+
+        try {
+            var tableForm = document.getElementById("sForm");
+            tableForm.action = "saveksProject.jspx?appType=1";
+            tableForm.submit();
+        } catch (e) {
+            alert('保存方法出错');
+        }
+
+    }
+    function queryNB() {
+        var provinceId = $("#province").val();
+        var majorTypeId = $('input[name="majorTypeId"]:checked').val();
+        var proIds = $("#proIds").val();
+        var majorIds = $("#majorIds").val();
+
+        if (provinceId == null && proIds == null) {
+            alert("请选择省份")
+            return;
+        }
+        if (majorTypeId == undefined && majorIds == undefined) {
+            alert("请选择文理科")
+            return;
+        }
+        // window.location.href = "${base}/univList.jspx";
+        if (provinceId == null || majorTypeId == undefined) {
+            window.location.href = "${base}/univList.jspx?provinceId=" + proIds + "&majorTypeId=" + majorIds;
+        } else {
+            window.location.href = "${base}/univList.jspx?provinceId=" + provinceId + "&majorTypeId=" + majorTypeId;
+        }
+    }
+    function bangding_order(application_id,orderId){
+
+        var orderId=prompt("请输入需要绑定的订单ID","")
+        if (orderId == null || orderId ==""){
+            alert("请输入订单ID")
+            return;
+        }
+        alert(orderId)
+        window.location.href="${base}/zytb/bangDingOrder.jspx?application_id="+application_id+"&orderId="+orderId;
+    }
+    //下拉弹出框
+    $(function () {
+        $('select').comboSelect();
+        $(".combo-input").attr("readonly", "readonly").css("cursor", "pointer")
+        //初始化
+        var provinceId = $("#provinceId").val();
+        var majorTypeId = $("#majorTypeId").val();
+        if (provinceId == "18" || provinceId == "16" || ${provinceId!}=="18" || ${provinceId!}=="16") {
+            $("#subjects_type").show();
+            $("#subjects_type_1").show();
+            $("#subjects_type_2").hide();
+            $("#subjects_type_3").hide();
+        } else if (provinceId == "17" && majorTypeId == "1" ) {
+            $("#subjects_type").show();
+            $("#subjects_type_1").hide();
+            $("#subjects_type_2").show();
+            $("#subjects_type_3").hide();
+        }else if ( ${provinceId!}=="17" && ${majorTypeId!}=="1" ){
+            $("#subjects_type").show();
+            $("#subjects_type_1").hide();
+            $("#subjects_type_2").show();
+            $("#subjects_type_3").hide();
+        } else if (provinceId == "17" && majorTypeId == "2") {
+            $("#subjects_type").show();
+            $("#subjects_type_1").hide();
+            $("#subjects_type_2").hide();
+            $("#subjects_type_3").show();
+        } else if ( ${provinceId!}=="17" && ${majorTypeId!}=="2") {
+            $("#subjects_type").show();
+            $("#subjects_type_1").hide();
+            $("#subjects_type_2").hide();
+            $("#subjects_type_3").show();
+        }else {
+            $("#subjects_type_1").hide();
+            $("#subjects_type_2").hide();
+            $("#major_type_3").hide();
+            $("#subjects_type").hide();
+        }
+        $("#input_rank").change(function () {
+            var isChecked = $(this).prop("checked");
+            if (isChecked) {
+                $("#rank").prop("readonly", false);
+            } else {
+                $("#rank").prop("readonly", true);
+            }
+        });
+        init_batch();
+    });
+    $("#province").change(function () {
+        var province_id = $("#province").val();
+        clearSelection();
+        if (province_id == "17") { //江苏
+            $("#major_type_1").show();
+            $("#major_type_2").show();
+            $("#major_type_3").hide();
+            $("#subjects_type").hide();
+        } else if (province_id == "18" || province_id == "16") { //浙江、上海
+            $("#major_type_1").hide();
+            $("#major_type_2").hide();
+            $("#major_type_3").show();
+            $("#subjects_type").hide();
+        } else { //其他
+            $("#major_type_1").show();
+            $("#major_type_2").show();
+            $("#major_type_3").hide();
+            $("#subjects_type").hide();
+        }
+    })
+    $("#major_type input[type='radio']").change(function () {
+        //先清除已选选测科目
+        $("#subjects_type select").each(function () {
+            $(this).val("");
+            $(this).comboSelect();
+        })
+        var major_val = $("#major_type input[type='radio']:checked").val();
+        var province_id = $("#province").val();
+        if (major_val == "1") { //文科
+            if (province_id != "17") { //浙江
+                $("#subjects_type").hide();
+            } else {
+                $("#subjects_type").show();
+                $("#subjects_type_1").hide();
+                $("#subjects_type_2").show();
+                $("#subjects_type_3").hide();
+            }
+        } else if (major_val == "2") { //理科
+            if (province_id != "17") { //浙江
+                $("#subjects_type").hide();
+            } else {
+                $("#subjects_type").show();
+                $("#subjects_type_1").hide();
+                $("#subjects_type_2").hide();
+                $("#subjects_type_3").show();
+            }
+        } else if (major_val == "3") { //综合
+            $("#subjects_type").show();
+            $("#subjects_type_1").show();
+            $("#subjects_type_2").hide();
+            $("#subjects_type_3").hide();
+        }
+        get_score_rank();
+    });
+    function clearSelection() {
+        //清除所有选项选中状态
+        $("#major_type input[type='radio']:checked").prop("checked", false);
+        $("#batch").val("");
+         $("#score").val("");
+         $("#rank").val("");
+         $("#radio2").prop("checked",true);
+         $("#input_rank").prop("checked",false);
+         $("#gap").val("");
+        $("#batch").each(function () {
+            $(this).val("");
+            $(this).comboSelect();
+        })
+        $("#subjects_type input:checked").each(function () {
+            $(this).prop("checked", false);
+        })
+        $("#subjects_type select").each(function () {
+            $(this).val("");
+            $(this).comboSelect();
+        })
+    }
+    //初始化批次信息
+    function init_batch() {
+        $("#gap").change(function () {
+            get_score_rank();
+        });
+    }
+    //根据批次查询
+    function get_score_rank() {
+        var info = {
+            batchId: $("#batch option:selected").val(),
+            provinceId: $("#province").val(),
+            majorTypeId: $("#major_type input[type='radio']:checked").val(),
+            gap: $("#gap").val()
+        }
+        $.ajax({
+            url: "../zytb/batch.jspx",
+            type: 'post', //GET++
+            async: true,    //或false,是否异步
+            data: {
+                batchId: $("#batch option:selected").val(),
+                provinceId: $("#province").val(),
+                majorTypeId: $("#major_type input[type='radio']:checked").val(),
+                gap: $("#gap").val()
+            },
+            dataType: 'json',
+            success: function (data) {
+                var batchId = $("#batch option:selected").val();
+                if (batchId == null || batchId == "") {
+                    $("#batch").empty();
+                    $("#batch").prepend('<option value="" disabled selected hidden>选择批次</option>')
+                    for (var i = 0; i < data.length; i++) {
+                        $("#batch").append('<option value="' + data[i][0] + '">' + data[i][1] + '</option>')
+                    }
+                    $("#batch").comboSelect();
+                } else {
+                    $("#score").val(data[0][2]);
+                    $("#rank").val(data[0][3]);
+                }
+            }
+        });
+    }
+    //分页查询
+    function _gotoPage(pageNo) {
+        try {
+            var tableForm = document.getElementById("tableForm");
+            $('#pageNo').val(pageNo)
+            tableForm.action = "volunteerFlexible.jspx";
+            tableForm.submit();
+        } catch (e) {
+            alert('_gotoPage(pageNo)方法出错');
+        }
+    }
+
+    //根据分数查排名
+    function get_rank_by_score() {
+        $.ajax({
+            url: "${base}/zytb/rank.jspx",
+            type: 'post', //GET
+            async: true,    //或false,是否异步
+            dataType: 'json',
+            data: {
+                provinceId: $("#province").val(),
+                majorTypeId: $("#major_type input[type='radio']:checked").val(),
+                score: $("#score").val()
+            },
+            success: function (data) {
+                $("#rank").val(data.rank || "");
+            }
+        });
+    }
+
+    //根据分数查排名
+    function get_score_by_rank() {
+        $.ajax({
+            url: "${base}/zytb/rank.jspx",
+            type: 'post', //GET
+            async: true,    //或false,是否异步
+            dataType: 'json',
+            data: {
+                provinceId: $("#province").val(),
+                majorTypeId: $("#major_type input[type='radio']:checked").val(),
+                rank: $("#rank").val()
+            },
+            success: function (data) {
+                $("#score").val(data.score || "");
+            }
+        });
+    }
+
+    $("#radio1").click(function () {
+        $("#gap").prop("readOnly", false);
+        $("#score").prop("readOnly", true);
+    });
+    $("#radio2").click(function () {
+        $("#score").prop("readOnly", false);
+        $("#gap").prop("readOnly", true);
+    });
+</script>
+</body>
+
+</html>

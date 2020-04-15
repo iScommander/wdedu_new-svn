@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<title>推荐人信息</title>
+<link href="${base}/r/css/head_footer.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="${base}/r/css/ydyfw.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="${base}/r/js/jquery-1.8.3.min.js" language="javascript"></script>
+<!--[if lte IE 9]>
+<script src="${base}/r/js/html5shiv.js" language="javascript"></script>
+<script src="${base}/r/js/respond.min.js" language="javascript"></script>
+<![endif]-->
+<style>
+	.zjtj-div01{
+		border: 1px dashed #DDD;
+		height:50px ;
+		line-height:50px ;
+		width:98%;
+		font-size:15px;
+		text-align:center;
+		background-color:#fAFAFA;
+		margin:0 1% 10px 1%;
+	}
+	.tjr{
+		color:#3399ff;
+	}
+	.zjtj-div02{
+		width:98%;
+		font-size:15px;
+		margin:0 1% 10px 1%;
+	}
+	.zjtj_table01{
+		border: 1px dashed #DDD;
+		width:100%;
+	}
+	.zjtj-td01{
+		font-size:16px;
+		height:40px;
+		padding:5px 0  5px 5px;
+	}
+	.zjtj-td02{
+		height:40px;
+		width:88%;
+		padding:5px 0  5px 15px;
+	}
+	.zjtj-td03{
+		width:12%;
+		height:40px;
+		text-algin:center;
+		padding:5px 0  5px 0;
+	}
+	.zjtj-td03 a{
+		color:#3399FF;
+	}
+</style>
+</head>
+<body>
+	<div class="z_body" style="background-color:#F2F2F2;">
+		[#include "../wdedu/include/header_address.html"/]
+		[#include "../wdedu/include/header_dylq.html"/]
+		<div class="z_width_out">
+			<div class="on_line">
+				<div class="bzy_where">
+					&nbsp;您当前位置：<a href="${base}"><span class="">主页&nbsp;</span></a>><a href="${base}/ydyfw/queryOrder.jspx"><span class="">我的一对一服务清单&nbsp;</span></a>><a href="${base}/mnwb/jbxx.jspx?orderId=${order.orderId}"><span class="">&nbsp;填报个人信息&nbsp;</span></a>><span class="">&nbsp;推荐人信息</span>
+				</div>
+			</div>
+		</div>
+		<div class="z_width_out">
+			<div class="on_line">
+				<div class="xxtb_left_nav">
+					[#include "./left_menu.html"/]
+				</div>
+				<div class="xxtb_right_nav">
+					<div class="ydy_title">
+						<span class="ydytit_img bg_img"><img src="${base}/second_image/ydy_img/ydy_img09.png"/></span>
+						<span class="ydytit_say">
+							考生个人信息详细填写
+							[#if order.serviceType == 'zytb']
+							（志愿填报一对一）
+							[#elseif order.serviceType =='zzzs']
+							（自主招生一对一）
+							[#elseif order.serviceType =='xdzy']
+							（学大志愿一对一）
+							[#elseif order.serviceType =='bjts']
+							（背景提升项目）
+							[#else]
+							（港澳台一对一）
+							[/#if]
+						</span>
+						<span class="ddh">订单号：${order.orderId}</span>
+					</div>
+					<div class="mes_left_top">
+						<div class="ydy_shuoming">填写基本信息、中学信息、成绩信息，模考成绩、单科成绩等</div>
+					</div>
+					<ul class="mes_left_ul">
+						<li><a href="jbxx.jspx?orderId=${order.orderId}">基本信息</a></li>
+						<li><a href="grzp.jspx?orderId=${order.orderId}" id="grzp">个人照片</a></li>
+						<li><a href="zxxx.jspx?orderId=${order.orderId}" id="zxxx">中学信息</a></li>
+						<li><a href="cjxx.jspx?orderId=${order.orderId}" id="cjxx">成绩信息</a></li>
+						<li><a href="zhxx.jspx?orderId=${order.orderId}">综合信息</a></li>
+						<li><a href="mkcj.jspx?orderId=${order.orderId}" id="mkcj">模考成绩</a></li>
+						<li><a href="dkpm.jspx?orderId=${order.orderId}" id="dkpm">单科排名</a></li>
+						<li class="checked-style"><a href="tjrxx.jspx?orderId=${order.orderId}" id="tjrxx">推荐人信息</a></li>
+						<li><a href="yjxx.jspx?menuId=yjxx&orderId=${order.orderId}" id="yjxx">邮寄信息</a></li>
+					</ul>
+					<div class="mes_left_bottom">
+						<div class="zjtj-div01">
+							<a href="tztjzj.jspx?orderId=${order.orderId}" class="tjr" for="tjr">+ 添加推荐专家</a>&nbsp;&nbsp;&nbsp;或者&nbsp;&nbsp;&nbsp;
+							<a href="tztjzx.jspx?orderId=${order.orderId}" class="tjr" for="tjdw">+ 添加推荐中学</a>
+							&nbsp;&nbsp;&nbsp;或者&nbsp;&nbsp;&nbsp; <a href="tzshtt.jspx?orderId=${order.orderId}" class="tjr" for="tjdw">+添加推荐社会团体</a>
+						</div>
+						<div class="zjtj-div02">
+							<table class="zjtj_table01">
+								<tr>
+									<td class="zjtj-td01" colspan="2">推荐专家：</td>
+								</tr>
+								[#list list as a] 
+									[#if a.refereeType=="1"]
+									<tr>
+										<td class="zjtj-td02">
+											${a.refereeName!} | ${a.province!} ${a.city!} ${a.region!} | ${a.unit!} | ${a.positionalTitles!} | ${a.duties!} | ${a.telephone!} | ${a.email!}
+										</td>
+										<td class="zjtj-td03"> 
+											<a href="bjtjzj.jspx?id=${a.id}&orderId=${order.orderId}" class="f14">编辑</a>&nbsp;&nbsp; 
+											<a href="deletetjzj.jspx?id=${a.id!}&orderId=${order.orderId}" target="_parent" class="f14 delete">删除</a>
+										</td>
+									</tr>
+									[/#if] 
+								[/#list]
+							</table>
+						</div>
+						<div class="zjtj-div02">
+							<table class="zjtj_table01">
+								<tr>
+									<td class="zjtj-td01" colspan="2">推荐中学：</td>
+								</tr>
+								[#list list as a] 
+									[#if a.refereeType=="2"]
+									<tr>
+										<td class="zjtj-td02">
+											${a.refereeName!} | ${a.province!} ${a.city!} ${a.region!} | ${a.linkMan!} | ${a.telephone!} | ${a.email!}
+										</td>
+										<td class="zjtj-td03">
+										 	<a href="bjtjzx.jspx?id=${a.id}&orderId=${order.orderId}" class="f14">编辑</a>&nbsp;&nbsp;
+										 	<a href="deletetjzx.jspx?id=${a.id!}&orderId=${order.orderId}"class="f14 delete">删除</a>
+										</td>
+									</tr>
+									[/#if] 
+								[/#list]
+							</table>
+						</div>
+						<div class="zjtj-div02">
+							<table class="zjtj_table01">
+								<tr>
+									<td class="zjtj-td01" colspan="2">推荐社会团体：</td>
+								</tr>
+								[#list list as a] 
+								[#if a.refereeType=="3"]
+								<tr>
+									<td class="zjtj-td02">
+										${a.refereeName!} | ${a.province!} ${a.city!} ${a.region!} | ${a.linkMan!} | ${a.telephone!} | ${a.email!}
+									</td>
+									<td class="zjtj-td03">
+										<a href="bjshtt.jspx?id=${a.id}&orderId=${order.orderId}" class="f14">编辑</a> &nbsp;&nbsp; 
+										<a href="deleteshtt.jspx?id=${a.id!}&orderId=${order.orderId}" class="f14 delete">删除</a>
+									</td>
+								</tr>
+								[/#if] 
+								[/#list]
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<!-- 底部栏目 -->
+		[#include "../wdedu/include/footer_new.html"/]
+	</div>
+	
+	<script>
+
+		$(function(){
+			$("#tbgrxx").addClass("checked-style02");
+		});
+	</script>
+</body>
+</html>
+	

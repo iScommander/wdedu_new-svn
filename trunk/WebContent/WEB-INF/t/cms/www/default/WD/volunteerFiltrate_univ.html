@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>志愿筛选</title>
+    <link rel="stylesheet" href="${base}/r/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${base}/r/css/combo.select.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css"/>
+    <script src="${base}/r/js/jQuery.js"></script>
+    <script src="${base}/r/js/bootstrap.min.js"></script>
+    <script src="${base}/r/js/jquery.combo.select.js"></script>
+    <script src="${base}/r/js/itemsJs/common.js"></script>
+    <script src="${base}/r/js/itemsJs/filtrate.js"></script>
+    <script src="${base}/r/js/Sortable.js"></script>
+    <link rel="stylesheet" href="${resSys}/res/css/head-footer.css"/>
+    <script src="${base}/r/cms/front.js"></script>
+    <link rel="stylesheet" type="text/css" href="${base}/r/css/xcConfirm.css"/>
+    <script src="${base}/r/css/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        .filtrateUl {
+            border: 1px solid #dbe9ef;
+            height: auto;
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
+            box-shadow: 2px 2px 2px #eaeaea;
+        }
+
+        .filtrateUl li {
+            width: 20%;
+            display: block;
+            float: left;
+            border-right: 1px solid #999999;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .filtrateUl li:last-child {
+            border: none;
+        }
+
+        .filtrateUl li a {
+            font-size: 20px;
+            color: #333333;
+        }
+
+        .filtrateUl li button {
+            font-size: 20px;
+            color: #333333;
+        }
+
+        .filtrateUl li.active a {
+            font-size: 25px;
+            color: #CC0001;
+        }
+
+        .tableContentOther {
+            min-height: 500px;
+            padding: 20px 0;
+        }
+
+        .filtrateContent {
+            margin-top: 20px;
+        }
+
+        .FiltrateList table p.eachYear span {
+            display: inline-block;
+            width: 32%;
+            height: 37px;
+            line-height: 37px;
+            border-radius: 5px 5px 0 0;
+            background: #05B8C3;
+        }
+
+        td.fenshu > span {
+            display: inline-block;
+            width: 105px;
+            padding: 0;
+            margin: 0;
+            font-size: 12px;
+        }
+
+        /*意向，不选*/
+
+        .yxbx span:first-child {
+            background-color: #2bbdc7;
+            font-size: 14px;
+            color: #FFFFFF;
+            padding: 7px 15px;
+            border-radius: 3px 0 0 3px;
+            cursor: pointer;
+        }
+
+        .yxbx span:last-child {
+            background-color: #b5b5b5;
+            font-size: 14px;
+            color: #FFFFFF;
+            padding: 7px 15px;
+            border-radius: 0 3px 3px 0;
+            cursor: pointer;
+        }
+
+        #saveFiltrate {
+            background-color: #ff7619;
+            border-radius: 3px;
+            color: #FFFFFF;
+            font-size: 18px;
+            padding: 5px 30px;
+            cursor: pointer;
+        }
+
+        .filtrateSearch span {
+            background-color: #fac73c;
+            border-radius: 3px;
+            color: #FFFFFF;
+            font-size: 14px;
+            padding: 8px 30px;
+            cursor: pointer;
+        }
+
+        /*志愿意向样式*/
+
+        .selectNumberScreen .screenBox dl dd {
+            position: relative;
+            padding-left: 0;
+            width: auto;
+            padding-right: 60px;
+            float: left;
+            overflow: hidden;
+            padding-top: 0
+        }
+
+        .selectNumberScreen .screenBox dl dd a:hover {
+            background: none;
+            color: #05b8c3;
+        }
+
+        .selectNumberScreen .screenBox dl dd a {
+            margin: 0;
+            padding: 0;
+        }
+
+        .selectNumberScreen .screenBox dl dt {
+            margin: 0;
+            margin-top: 7px;
+            padding: 0 20px;
+            width: auto;
+        }
+
+        .checkbox_base_group input[type='checkbox']:checked + label {
+            padding: 18px;
+        }
+
+        .checkbox_base_group label {
+            padding: 18px;
+        }
+
+        /*志愿方案*/
+
+        .volunteersActivities {
+            margin-top: 100px;
+        }
+
+        .volunteersActivities span {
+            background-color: #2bbdc7;
+            border-radius: 3px;
+            color: #FFFFFF;
+            font-size: 18px;
+            padding: 8px 30px;
+            cursor: pointer;
+        }
+
+        .filtrateSearch {
+            padding: 10px 10px 0 0;
+        }
+
+        /*专业分类*/
+
+        .selectNumberScreen .screenBox .dl1 dt {
+            text-align: right;
+            width: auto;
+            height: 22px;
+            font-weight: 600;
+            margin: 16px 0 0 10px;
+        }
+
+        .selectNumberScreen .screenBox .dl1 dd a {
+            margin: 8px;
+            padding: 8px;
+            display: inline-block;
+            color: #05b8c3;
+            overflow: hidden;
+            text-decoration: none
+        }
+
+        .selectNumberScreen .screenBox .dl1 dd a:hover {
+            background: #fac73c;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        .selectNumberScreen .screenBox .dl1 dd a.selected {
+            background: #fac73c;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        .myProfile.flex-container1>div{
+            margin-right: 15px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+<header class="indexHeader">
+    <div class="flex-container width1200">
+        <div>学涯云教育集团旗下升学服务站</div>
+        <div class="textR">
+					<span>
+					<a href="${base}/wxpay/wxpay.jspx">购卡中心</a>
+                        <!--<a href="${base}/alipay/fuwuzhongxin.jspx">购卡中心</a>-->
+				    </span>
+            <span>咨询热线：400-9288-985。售后服务群(744603708)。</span>
+        </div>
+    </div>
+</header>
+<!--tab切换  导航-->
+<nav class="indexNav">
+    <div class="flex-container1 width1200">
+        <div class="flex-item1">
+            <a href="${base}/index.jhtml"><img src="${base}/u/cms/www/logo/logo.png" alt=""/></a>
+            <a href="${base}/index.jhtml"><img src="${base}/u/cms/www/logo/name.png" alt=""/></a>
+        </div>
+        <div class="flex-item1">
+            <ul class="nav nav-pills">
+                <!--<li role="presentation">-->
+                <!--<a href="../../volunteerPage.html">志愿</a>-->
+                <!--</li>-->
+                <li role="presentation">
+                    <a href="${base}/fastZytb/volunteerFlexible.jspx" style="width: 120px">志愿填报</a>
+                </li>
+                <li role="presentation">
+                    <a href="${base}/fastZytb/volunteerVideo.jspx?ksType=1">志愿视频</a>
+                </li>
+                <li role="presentation">
+                    <a href="${base}/evaluation/index.jspx?ksType=1">专业测评</a>
+                </li>
+                <li role="presentation" class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">报考大数据</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="${base}/bkck/one_segment_query.jspx?ksType=1">一分一段表</a>
+                        </li>
+                        <li>
+                            <a href="${base}/bkck/batch_query.jspx?ksType=1">批次查询</a>
+                        </li>
+                        <li>
+                            <a href="${base}/bcdsj/universityRank.jspx?ksType=1">院校排行榜</a>
+                        </li>
+                        <li>
+                            <a href="${base}/bcdsj/professionRank.jspx?ksType=1">专业排行榜</a>
+                        </li>
+                        <li>
+                            <a href="${base}/bcdsj/universityTeam.jspx?ksType=1">中外合作办学</a>
+                        </li>
+                        <li>
+                            <a href="${base}/bcdsj/professionAndLab.jspx?ksType=1">重点学科实验室</a>
+                        </li>
+                        <li>
+                            <a href="${base}/bcdsj/professionalBooks.jspx?ksType=1">职业大全</a>
+                        </li>
+                        <li>
+                            <a href="${base}/bkck/enroll_rules.jspx?ksType=1">招生章程</a>
+                        </li>
+                    </ul>
+                </li>
+                <li role="presentation">
+                    <a href="${base}/fastZytb/CompleteExplain.jspx">填报说明</a>
+                </li>
+
+                <li role="presentation">
+                    <a href="${base}/BkyxAct/userCenter.jspx?ksType=1">用户中心</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<input type="hidden" value="${applicationId!}" name="applicationId" id="application_id">
+<!--路径-->
+<div class="route">
+    <div class="flex-container1 width1200">
+        <div>
+            <a href="${base}/index.jhtml">首页 </a> &lt;&lt;志愿填报 &lt;&lt;志愿筛选
+        </div>
+    </div>
+</div>
+<!--主体-->
+<main class="width1200 intentionMain">
+    <div class="intentionMainTab">
+        <ul class="filtrateUl">
+            <li id="zytbli">
+                <p style="font-size: 18px">志愿填报</p>
+            </li>
+            <li id="dqsxli">
+               <!-- <a href="${base}/fastZytb/dqsx.jspx?applicationId=${applicationId!}&batchId=${batchId!}&tbType=2
+                    " data-toggle="">
+                    地区筛选
+                </a>-->
+                <form action="${base}/fastZytb/dqsx.jspx" accept-charset="UTF-8" method="post">
+                    <button type="submit" style="color: #00b7ee;background-color: white">地区筛选</button>
+                    <input name="tbType" value="2" type="hidden">
+                    <input type="hidden"  value="${applicationId!}" name="applicationId" >
+                    <input type="hidden" value="${batchId!}" name="batchId" >
+                    <input type="hidden"  name="firstOrSecond" value="${firstOrSecond!}"/>
+                    <!--专业-->
+                    <input name="major_second" class="major_second" value="${intent_major_id!}" type="hidden">
+                    <!--省份-->
+                    <input name="univ_province_id" value="${intent_province_id!}" type="hidden">
+                    <!--冲稳堡-->
+                    <input name="advanced_univ_num" value="${advanced_univ_num!}" type="hidden">
+                    <input name="stable_univ_num" value="${stable_univ_num!}" type="hidden">
+                    <input name="backward_univ_num" value="${backward_univ_num!}" type="hidden">
+                </form>
+            </li>
+            <li id="yxswli" class="active">
+                <a data-toggle="">
+                    院校筛选
+                </a>
+            </li>
+            <li id="zysxli">
+                <!--<a href="${base}/fastZytb/dqsx.jspx?applicationId=${applicationId!}&batchId=${batchId!}&tbType=4
+                   " data-toggle="">
+                    专业筛选
+                </a>-->
+                <form action="${base}/fastZytb/dqsx.jspx" accept-charset="UTF-8" method="post">
+                    <button type="submit" style="color: #00b7ee;background-color: white">专业筛选</button>
+                    <input name="tbType" value="4" type="hidden">
+                    <input type="hidden"  value="${applicationId!}" name="applicationId" >
+                    <input type="hidden" value="${batchId!}" name="batchId" >
+                    <input type="hidden"  name="firstOrSecond" value="${firstOrSecond!}"/>
+                    <!--专业-->
+                    <input name="major_second" class="major_second" value="${intent_major_id!}" type="hidden">
+                    <!--省份-->
+                    <input name="univ_province_id" value="${intent_province_id!}" type="hidden">
+                    <!--冲稳堡-->
+                    <input name="advanced_univ_num" value="${advanced_univ_num!}" type="hidden">
+                    <input name="stable_univ_num" value="${stable_univ_num!}" type="hidden">
+                    <input name="backward_univ_num" value="${backward_univ_num!}" type="hidden">
+                </form>
+            </li>
+            <li id="cwbli">
+                <!--<a href="${base}/fastZytb/dqsx.jspx?applicationId=${applicationId!}&batchId=${batchId!}&tbType=5
+                   " data-toggle="">
+                    生成志愿表
+                </a>-->
+                <form action="${base}/fastZytb/dqsx.jspx" accept-charset="UTF-8" method="post">
+                    <button type="submit" style="color: #00b7ee;background-color: white">生成志愿表</button>
+                    <input name="tbType" value="5" type="hidden">
+                    <input type="hidden"  value="${applicationId!}" name="applicationId" >
+                    <input type="hidden" value="${batchId!}" name="batchId" >
+                    <input type="hidden"  name="firstOrSecond" value="${firstOrSecond!}"/>
+                    <!--专业-->
+                    <input name="major_second" class="major_second" value="${intent_major_id!}" type="hidden">
+                    <!--省份-->
+                    <input name="univ_province_id" value="${intent_province_id!}" type="hidden">
+                    <!--冲稳堡-->
+                    <input name="advanced_univ_num" value="${advanced_univ_num!}" type="hidden">
+                    <input name="stable_univ_num" value="${stable_univ_num!}" type="hidden">
+                    <input name="backward_univ_num" value="${backward_univ_num!}" type="hidden">
+                </form>
+            </li>
+        </ul>
+        <div class="intentionMainTab-content">
+            <div class="tab-content">
+                <!--院校筛选-->
+                <div id="intentionList_3">
+
+                    <form id="tableForm" action="${base}/fastZytb/dqsx.jspx" method="post">
+                        <input type="hidden" id="pageNo" name="pageNo"/>
+                        <input name="tbType" value="3" type="hidden">
+                        <input type="hidden" id="applicationId" value="${applicationId!}" name="applicationId" >
+                        <input type="hidden"id="batchId" value="${batchId!}" name="batchId" >
+                        <input type="hidden" id="firstOrSecond" name="firstOrSecond" value="${firstOrSecond!}"/>
+                       <!-- &lt;!&ndash;专业&ndash;&gt;
+                        <input name="major_second" class="major_second" value="${intent_major_id!}" type="hidden">
+                        &lt;!&ndash;省份&ndash;&gt;
+                        <input name="univ_province_id" value="${intent_province_id!}" type="hidden">
+                        &lt;!&ndash;冲稳堡&ndash;&gt;
+                        <input name="advanced_univ_num" value="${advanced_univ_num!}" type="hidden">
+                        <input name="stable_univ_num" value="${stable_univ_num!}" type="hidden">
+                        <input name="backward_univ_num" value="${backward_univ_num!}" type="hidden">-->
+
+
+                        <div class="tableContentOther">
+                            <div class="reportedTitle">
+                                <p>高考志愿填报—院校筛选</p>
+                            </div>
+                            <!--搜索框-->
+                            <div class="flex-container">
+                                <div class="flex-item hugeSearch">
+                                    <input type="text" name="yuanxiao" placeholder="输入院校名称，点击开始搜索"/>
+                                </div>
+                                <div class="flex-item">
+                                    <button class="btn6 btnColorGreen advancedSearch" type="submit">搜索</button>
+                                </div>
+
+                            </div>
+                            <div class="intentionMainTab-content">
+                                <!--筛选条件-->
+                                <div class="selectNumberScreen">
+                                    <div class="screenBox screenBackground">
+                                        <div class="filtrateSearch">
+                                            <button style="float:right;width: 70px;" class="btn-success" type="submit">
+                                                搜索
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button style="float:right;width: 70px;margin-right: 20px" class="btn-danger" onclick="clearChecked()">清空</button>
+                                        </div>
+                                        <dl>
+                                            <dt>院校属性 &gt;</dt>
+                                            <dd class="checkbox_base_group">
+                                                <a href="javascript:void(0)" value="0">
+                                                    <input id="radio_shuxing_0" value="1" name="univ_is985"
+                                                           type="checkbox" [#if is985?? && is985="1"] checked="checked" [/#if]>
+                                                    <label for="radio_shuxing_0">985院校</label>
+                                                </a>
+                                                <a href="javascript:void(0)" value="1">
+                                                    <input id="radio_shuxing_1" value="1" name="univ_is211"
+                                                           type="checkbox" [#if is211?? && is211="1"] checked="checked" [/#if]>
+                                                    <label for="radio_shuxing_1">211院校</label>
+                                                </a>
+                                                <a href="javascript:void(0)" value="2">
+                                                    <input id="radio_shuxing_2" value="vv" name="univ_isIndependence"
+                                                           type="checkbox" [#if isFirstRate?? && isFirstRate="1"] checked="checked" [/#if]>
+                                                    <label for="radio_shuxing_2">一流院校</label>
+                                                </a>
+                                                <a href="javascript:void(0)" value="3">
+                                                    <input id="radio_shuxing_3" value="nn" name="univ_isFirstRate"
+                                                           type="checkbox" [#if isFirstRate?? && isFirstRate="1"] checked="checked" [#elseif isFirstRate="2"] checked="checked" [/#if] >
+                                                    <label for="radio_shuxing_3">一流学科</label>
+                                                </a>
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>院校分类 &gt;</dt>
+                                            <dd class="checkbox_base_group">
+                                                [#if univTypeList??]
+                                                [#list univTypeList as a]
+                                                <a href="javascript:void(0)" value="0">
+                                                    <input id="radio_yxfenlei_${a.id!}" value="${a.type_name!}"
+                                                           name="univ_type" type="checkbox"
+                                                           [#if intent_univ_type?? && intent_univ_type?contains('${a.type_name}')]
+                                                            checked="checked"
+                                                           [/#if]
+                                                    >
+                                                    <label for="radio_yxfenlei_${a.id!}">${a.type_name!}</label>
+                                                </a>
+                                                [/#list]
+                                                [/#if]
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="myProfile flex-container1" style="background-color: #00C1AA;padding: 15px">
+                        <div>我的资料 &gt;&gt;</div>
+                        <div style="color: white">
+                            姓名：<span style="font-weight: 600;color: #333333">${tCeeApplications.userName!}</span>
+                        </div>
+                        <div style="color: white">
+                            地区：
+                            [#if diquList?? ]
+                            [#list diquList as p]
+                            [#if p.province_name!="未知"]
+                            [#if tCeeApplications.provinceId?? && p.province_id==tCeeApplications.provinceId]
+                            <span style="font-weight: 600;color: #333333">${p.province_name!}</span>
+                            [/#if]
+                            [/#if]
+                            [/#list]
+                            [/#if]
+
+                        </div>
+                        <div style="color: white">
+                            文理科：<span style="font-weight: 600;color: #333333">[#if tCeeApplications.majorTypeId == 1]文科[#elseif tCeeApplications.majorTypeId == 2]理科[#else]综合改革[/#if]</span>
+                        </div>
+                        <div style="color: white">
+                            成绩：<span style="font-weight: 600;color: #333333">${tCeeApplications.score}</span>
+                        </div>
+                        <div style="color: white">
+                            排名：<span style="font-weight: 600;color: #333333">${tCeeApplications.rank}</span>
+                        </div>
+                        [#if tCeeApplications.provinceId?? && 17==tCeeApplications.provinceId || 18 ==tCeeApplications.provinceId || 16 ==tCeeApplications.provinceId]
+                        <div style="color: white">
+                            选科：<span style="font-weight: 600;color: #333333">${(tCeeApplications.subjects!)?replace('1','物理')?replace('2','化学')?replace('3','生物')?replace('4','政治')?replace('5','历史')?replace('6','地理')?replace('7','技术')}
+                                    ${(tCeeApplications.subjectsLevel!)?replace('1','A+')?replace('2','A')?replace('3','B+')?replace('4','B')?replace('5','C')?replace('6','D')}</span>
+                        </div>
+                        [/#if]
+                    </div>
+
+                    <div>
+                        <!--筛选列表-->
+                        <div class="FiltrateList">
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane in active" id="tabs1">
+                                    <table id="tabUniv" class="table deeptable letterSpacing0 table-bordered">
+                                        <tr>
+                                            <th width="120">风险</th>
+                                            <th>
+                                                <p style="margin: 10px 0;">院校列表
+                                                <p style="font-size: 13px;color: #634950 ">*点击院校，查询院校信息</p>
+                                                </p>
+                                            </th>
+                                            <th width="87">${planYear!}年招生计划数</th>
+                                            <th width="344" style="padding:23px 0 0 0;">
+                                                <p style="margin: 10px 0;">院校历年录取低分与排名</p>
+                                                <p class="eachYear">
+                                                    <span>${year1!}</span>
+                                                    <span>${year2!}</span>
+                                                    <span>${year3!}</span>
+                                                </p>
+                                            </th>
+                                            <th width="140">操作</th>
+                                        </tr>
+                                        [#if list??]
+                                        [#list list as a]
+                                        <tr>
+                                        [#if a.psk_set??]
+                                            [#if a.psk_set == "冲一冲"]
+                                            <td style="color:white;background: red">${a.psk_set!}</td>
+                                            [#elseif a.psk_set == "稳一稳"]
+                                            <td style="color:white;background: green;">${a.psk_set!}</td>
+                                            [#elseif a.psk_set == "保一保"]
+                                             <td style="color:white;background: grey;">${a.psk_set!}</td>
+                                             [#else]
+                                             <td>${a.psk_set!}</td>
+                                             [/#if]
+                                          [/#if]
+                                           <td style="text-align: left;">
+                                           <span title="院校代码">(${a.univ_code!})</span>&nbsp;
+                                            <a href="${base}/enrollmentPlan.jspx?univId=${a.univ_id!}&&majorTypeId=${tCeeApplications.majorTypeId!}&&batchId=${batchId!}&&provinceId=${tCeeApplications.provinceId!}&&univCode=${a.univ_code!}&&year=${tCeeApplications.year!}">
+                                           &nbsp;${a.univ_name!}&nbsp;
+                                            </a>
+                                           <span style="color: red">(${a.province_name!})</span>&nbsp;
+                                           <span style="color: red">(${a.univ_city!})</span>&nbsp;
+                                           [#if a.subject_select_grade??]
+                                           <span title="院校等级">(${a.subject_select_grade!})</span>&nbsp;
+                                           [/#if]
+                                           <span class="schoolCardColor" style="text-align: left;width: 140px;">
+                                           [#if a.univ_is211 ?? && a.univ_is211==1]
+                                           <span class="er11">211</span>
+                                           [/#if]
+                                           [#if a.univ_is985 ?? && a.univ_is985==1]
+                                           <span class="jiu85">985</span>
+                                           [/#if]
+                                           [#if a.univ_isIndependence ?? && a.univ_isIndependence==1]
+                                           <span class="zi">自</span>
+                                           [/#if]
+                                           [#if a.univ_isKeylab ?? && a.univ_isKeylab==1]
+                                           <span class="zhong">重</span>
+                                           [/#if]
+                                           [#if a.univ_isExcellent ?? && a.univ_isExcellent==1]
+                                           <span class="zhuo">卓</span>
+                                           [/#if]
+                                           [#if a.univ_isFirstRateUniv?? && a.univ_isFirstRateUniv==1]
+                                               <span class="shuang">双一流</span>
+                                           [#elseif a.univ_isFirstRateMajor?? && a.univ_isFirstRateMajor==1]
+                                               <span class="yiliu">一流学科</span>
+                                           [/#if]
+                                       </span>
+                                           </td>
+
+                                           <td>${a.change_plan_num!}</td>
+                                           <td class="fenshu">
+                                               <span>${a.score_low_1!}(${a.rank_score_low_1!})</span>
+                                               <span>${a.score_low_2!}(${a.rank_score_low_2!})</span>
+                                               <span>${a.score_low_3!}(${a.rank_score_low_3!})</span>
+                                           </td>
+                                           <td class="" style="width: 142px">
+                                   			  [#if intentUnivs??]
+                                              [#if intentUnivs?seq_contains('${a.id!}')]
+                                            			<span id="yixiang"><button class="btn-warning" style="width: 60px;background-color: #895b8a"onclick="choose(${a.id!})">更改</button></span>
+                                                                                 [#else]
+                                                     <span id="yixiang"><button class="btn-warning" style="width: 60px"onclick="choose(${a.id!})">意向</button></span>
+                                                 [/#if]
+                                               [#else]
+                                               <span id="yixiang"><button class="btn-warning" style="width: 60px"onclick="choose(${a.id!})">意向</button></span>
+                                               [/#if]
+
+                                               [#if new_avoid_univ??]
+                                                   [#if new_avoid_univ?contains('${a.id!}')]
+                                                   <span><button class="btn-primary" style="width: 60px;background-color: #a1afc9;" onclick="changeChoose(${a.id})" >不选</button></span>
+                                                   [#else]
+                                                   <span><button class="btn-danger" style="width: 60px" onclick="noChoose(${a.id})">不选</button></span>
+                                                   [/#if]
+                                                   [#else]
+                                                   <span><button class="btn-danger" style="width: 60px" onclick="noChoose(${a.id})">不选</button></span>
+                                                   [/#if]
+                                               </td>
+                                           </tr>
+                                        [/#list]
+                                        [/#if]
+                                        <tr>
+                                            <td colspan="5">
+                                               <!-- <button class="btn-danger" style="width: 100px" onclick="saveUniv()">保存</button>-->
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--分页-->
+                    <div class="textC paging">
+                        <tr>
+                            <td colspan="8" style="padding:20px 0;">
+                                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td align="center" class="pn-sp">
+                                            共 ${pagination.totalCount} 条&nbsp; 每页 ${pagination.pageSize} 条&nbsp; 当前
+                                            ${pagination.pageNo}/${pagination.totalPage} 页 &nbsp;转到第<input type="text" id="_goPs"
+                                                                                                           onfocus="this.select();"
+                                                                                                           onkeypress="if(event.keyCode==13){$('#_goPage').click();return false;}"
+                                                                                                           style="width:50px; border:1px solid #e7e7e7;"/>页
+                                            <input id="_goPage" type="button" value="转" onclick="_gotoPage($('#_goPs').val());" [#if
+                                                   pagination.totalPage==1] disabled="disabled" [/#if] />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="button" value="首 页" onclick="_gotoPage('1');" [#if pagination.firstPage]
+                                                   disabled="disabled" [/#if]/>
+                                            <input type="button" value="上一页" onclick="_gotoPage(${pageNo-1});" [#if
+                                                   pagination.firstPage] disabled="disabled" [/#if]/>
+                                            <input type="button" value="下一页" onclick="_gotoPage(${pageNo+1});" [#if
+                                                   pagination.lastPage] disabled="disabled" [/#if]/>
+                                            <input type="button" value="尾 页" onclick="_gotoPage('${pagination.totalPage}');" [#if
+                                                   pagination.lastPage] disabled="disabled" [/#if]/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+<!--底部-->
+<!--<iframe MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no src="../../footer.html" height="360px" width="100%"></iframe>-->
+[#include "../include/footer.html"/]
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" style="width:100%">
+        <div class="modal-content" style="min-height: 600px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title">
+                    <button onclick="_savePlanDetail()" type="button" class="btn btn-primary">保存并关闭</button>
+                    <span id="myModalLabel" style="margin-left: 15%;color: red;"></span>
+                </h3>
+            </div>
+            <div class="modal-body flex-container2" style="padding:0px">
+                <iframe id="iframe" name="iframe" style="height: 650px; min-width: 100%"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="Modal_fenlei" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 0;">
+            <style>
+                .fenlei-model-body {
+                    /* padding:20px; */
+                    padding: 0;
+                }
+
+                .fenlei-model-body dl {
+                    /* height: 200px; */
+                    margin-bottom: 5px;
+                }
+
+                .fenlei-model-body dt {
+                    height: 50px;
+                    line-height: 50px;
+                    background: #05b8c3;
+                    color: #FFF;
+                    padding: 0 20px;
+                    clear: both;
+                }
+
+                .fenlei-model-body dd {
+                    display: inline-block;
+                    padding: 10px 20px;
+                }
+
+                .fenlei-model-body dd a {
+                    display: inline-block;
+                    margin: 10px 10px 10px 0;
+                }
+            </style>
+            <div id="Modal_fenlei_body" class="modal-body fenlei-model-body">
+                <dl>
+                    <dt>test1</dt>
+                    <dd>22</dd>
+                    <dd>22</dd>
+                    <dd>22</dd>
+                </dl>
+                <dl>
+                    <dt>test1</dt>
+                    <dd>22</dd>
+                    <dd>22</dd>
+                    <dd>22</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+<!--js-->
+
+<script>
+    //清楚状态
+    function clearChecked() {
+        $("input[type=checkbox]").prop("checked",false);
+        $("#tableForm").submit();
+    }
+
+    //保存
+    function saveUniv(id) {
+        var applicationId = $("#applicationId").val();
+        var batchId = $("#batchId").val();
+        var majorId = $(".major_second").val();
+        $.ajax({
+            url: 'saveOrUpdateIntentMajor.jspx',
+            type: "POST",
+            dataType: "json",
+            async:false,
+            data: {"applicationId": applicationId, "batchId": batchId, "intent_univId": id,"majorId":majorId},
+            success: function (data) {
+
+            },
+            error:function (data) {
+                var txt=  "操作成功";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+            }
+        });
+
+    }
+
+    //不选
+    function noChoose(id) {
+        var applicationId = $("#applicationId").val();
+        var batchId = $("#batchId").val();
+        console.log(applicationId);
+        $.ajax({
+            url: '../fastZytb/intentOrAvoid.jspx',
+            type: "POST",
+            dataType: "json",
+            async:false,
+            data: {"applicationId": applicationId, "batchId": batchId, "avoid_univId": id},
+            success: function (data) {
+                alert(data.msg);
+                window.location.reload();
+
+            },
+            error:function (data) {
+                var txt=  "操作成功";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+            }
+        });
+    }
+
+    function choose(id) {
+        var applicationId = $("#applicationId").val();
+        var batchId = $("#batchId").val();
+        $.ajax({
+            url: 'jump.jspx',
+            data: {univId: id,"applicationId": applicationId, "batchId": batchId},
+            type: "post",
+            async: false,
+            success: function (data) {
+                var res = eval('(' + data + ')');
+                if (res && res.success == true) {
+                    event.returnValue = false;
+                    $($("#iframe")[0].contentWindow.document.body).remove();
+                    var html = "招生计划";
+                    $("#myModalLabel").html(html);
+                    $('#iframe').attr('src', res.msg);
+                    $('#myModal').modal('show');
+                } else {
+                    alert(res.msg);
+                }
+            }
+        })
+    }
+    //已选变不选
+    function changeChoose(id) {
+        var applicationId = $("#applicationId").val();
+        var batchId = $("#batchId").val();
+        console.log(applicationId);
+        $.ajax({
+            url: '../fastZytb/changeChoose.jspx',
+            type: "POST",
+            dataType: "json",
+            async:false,
+            data: {"applicationId": applicationId, "batchId": batchId, "avoid_univId": id},
+            success: function (data) {
+                alert(data.msg);
+                window.location.reload();
+            },
+            error:function (data) {
+                alert(data.msg);
+            }
+        });
+    }
+    //保存专业数据
+    function _savePlanDetail() {
+
+        iframe.window.saveDetail();
+
+    }
+
+    //关闭模态框
+    function _hideIframe() {
+        $('#myModal').modal('hide');
+
+    }
+    $('#myModal').on('hidden.bs.modal',function () {
+        window.location.reload();
+    });
+
+    function _gotoPage(pageNo) {
+        try{
+            var tableForm = document.getElementById("tableForm");
+            $('#pageNo').val(pageNo)
+            tableForm.action="dqsx.jspx";
+            tableForm.submit();
+        } catch(e) {
+            alert('_gotoPage(pageNo)方法出错');
+        }
+    }
+</script>
+</body>
+
+</html>

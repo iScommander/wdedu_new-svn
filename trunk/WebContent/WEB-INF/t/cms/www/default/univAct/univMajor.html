@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>查专业</title>
+	<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+	<script src="${base}/r/cms/front.js"></script>
+</head>
+
+<body>
+	<!--顶部-->
+	[#include "../include/header_zy.html"/]
+	<!--路径-->
+	<div class="route">
+		<div class="flex-container width1200">
+			<div>
+				<a href="${base}">首页 </a> &lt;&lt; 志愿填报 &lt;&lt;查专业</div>
+			<div></div>
+		</div>
+	</div>
+	<!--主体-->
+	<main class="specialtyMain width1200">
+		<!--搜索-->
+		<!--<div class="flex-container">-->
+			<!--<div class="flex-item hugeSearch">-->
+				<!--<input type="text" placeholder="输入院校名称，点击右边的搜索按钮，开始搜索高等院校" />-->
+			<!--</div>-->
+			<!--<div class="flex-item">-->
+				<!--<button class="btn6 btnColorGreen">搜索</button>-->
+			<!--</div>-->
+		<!--</div>-->
+		<!--列表-->
+		<div class="specialtyMain-menu">
+			<!-- 大 tab   本科  和  专科-->
+			<ul class="nav nav-tabs menu-header">
+				<li class="active">
+					<a id="specialty-benke" href="#benke" data-toggle="tab">本科</a>
+				</li>
+				<li>
+					<a id="specialty-zhuanke" href="#zhuanke" data-toggle="tab">专科</a>
+				</li>
+			</ul>
+			<!--本科和专科列表-->
+
+			<div class="tab-content bis-tab-content">
+				<!--本科列表-->
+
+				<div class="tab-pane in active" id="benke">
+					<ul class="nav nav-tabs menu-list">
+						[#if tDataMajorList?? ]
+						[#list tDataMajorList as a ]
+						<li>
+							<a data-toggle="tab" onclick="f('${a[0]}')">${a[1]!}</a>
+						</li>
+						[/#list]
+						[/#if]
+					</ul>
+				</div>
+
+				<!--专科列表-->
+				<div class="tab-pane" id="zhuanke">
+					<ul class="nav nav-tabs menu-list">
+                        [#if tDataMajors?? ]
+                        [#list tDataMajors as t ]
+						<li>
+							<a data-toggle="tab" onclick="f('${t[0]}')">${t[1]!}</a>
+						</li>
+                        [/#list]
+                        [/#if]
+					</ul>
+				</div>
+			</div>
+
+		</div>
+		<div class="specialtyMain-content">
+			<div class="tab-content">
+				<!--右边  本科内容显示-->
+				<div class="tab-pane in active" id="benke_1">
+					<ul class="specialtyList" id="benkeneirong">
+
+						<li>
+							<ul id="nextMaj">
+
+							</ul>
+						</li>
+
+					</ul>
+					<div class="specialty_list_info" id="myself">
+						[#if FindXiang?? ]
+						<div class="tab-content">
+							<div class="tab-pane in active" id="benke_1_5201_1">
+								<!--专业名称及信息-->
+								<div class="flex-container1 specialty-designation-information">
+									<div class="flex-item9 professionalName"><span>${FindXiang['majorname']!}</span></div>
+									<p class="flex-item9">专业代码：<span>${FindXiang['neiId']!}</span></p>
+									<p class="flex-item9">授权学位：<span>${FindXiang['career']!}</span></p>
+									<p class="flex-item9">修学年限：<span>${FindXiang['year']!}</span></p>
+								</div>
+								<!--开设课程-->
+								<div class="offerCourses">
+									<p>开设课程</p>
+									${FindXiang['course']!}
+								</div>
+								<!--相似专业-->
+								<div class="similarProfessional">
+									<p>相似专业</p>
+									${FindXiang['course']!}
+								</div>
+								<!--底部  tab切换-->
+								<div class="specialtyListInfoTab">
+									<div class="specialtyListInfoTab-menu">
+										<div class="tab-content">
+											<div class="tab-pane in active" id="allKindsOfList">
+												<p>院校列表</p>
+												<ul class="nav nav-tabs menu-list">
+													<li class="active">
+														<a href="#allKindsOfList_1" data-toggle="tab">专业解读</a>
+													</li>
+													<li>
+														<a href="#allKindsOfList_2" data-toggle="tab">行业分析 </a>
+													</li>
+													<li>
+														<a href="#allKindsOfList_3" data-toggle="tab">专业要求 </a>
+													</li>
+													<li>
+														<a href="#allKindsOfList_4" data-toggle="tab">学生能力 </a>
+													</li>
+													<li>
+														<a href="#allKindsOfList_5" data-toggle="tab">就业去向 </a>
+													</li>
+													<li>
+														<a href="#allKindsOfList_6" data-toggle="tab">著名学校 </a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="specialtyListInfoTab-content">
+										<div class="tab-content">
+											<div class="tab-pane in active" id="allKindsOfList_1">
+												<div class="tableContent retractAligning">
+													${FindXiang['target']!}
+												</div>
+											</div>
+											<div class="tab-pane" id="allKindsOfList_2">
+												<div class="tableContent retractAligning">
+													${FindXiang['future']!}
+												</div>
+											</div>
+											<div class="tab-pane" id="allKindsOfList_3">
+												<div class="tableContent retractAligning">
+													${FindXiang['knowledge']!}
+												</div>
+											</div>
+											<div class="tab-pane" id="allKindsOfList_4">
+												<div class="tableContent retractAligning">
+													${FindXiang['studentCapacity']!}
+												</div>
+											</div>
+											<div class="tab-pane" id="allKindsOfList_5">
+												<div class="tableContent retractAligning">
+													${FindXiang['employmentInfo']!}
+												</div>
+											</div>
+											<div class="tab-pane" id="allKindsOfList_6">
+												<div class="tableContent retractAligning">
+													${FindXiang['famousSchools']!}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane" id="benke_1_5201_2">
+								职员勘察类5201-2
+							</div>
+							<div class="tab-pane" id="benke_1_5202_1">
+								职员勘察类5202-1
+							</div>
+							<div class="tab-pane" id="benke_1_5202_2">
+								职员勘察类5202-2
+							</div>
+						</div>
+
+						[/#if]
+					</div>
+				</div>
+
+				<!--右边  专科内容显示-->
+				<div class="tab-pane" id="zhuanke_1">
+                    <ul id="zhuankeneirong">
+                        <li><ul>
+
+                        </ul></li>
+
+                    </ul>
+				</div>
+			</div>
+		</div>
+	</main>
+	<!--底部-->
+	[#include "../include/footer.html"/]
+	<!--<footer class="foot">-->
+		<!--<iframe MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no src="${base}/r/foot.html" height="540px"-->
+		 <!--width="100%"></iframe>-->
+	<!--</footer>-->
+
+	<!--js-->
+	<script src="${base}/r/js/jQuery.js"></script>
+	<script src="${base}/r/js/bootstrap.min.js"></script>
+	<script src="${base}/r/js/itemsJs/filtrate.js"></script>
+	<script src="${base}/r/js/itemsJs/common.js"></script>
+	<script>
+		$("#specialty-benke").click(function () {
+			// $("#benke_1").click();
+			$("#zhuanke li.active").removeClass("active");
+			$("#benke a").eq(0).click();
+		})
+		$("#specialty-zhuanke").click(function () {
+
+			$("#benke li.active").removeClass("active");
+			$("#zhuanke a").eq(0).click();
+		})
+        function f(parentMajorId) {
+            $.ajax({
+                url:"findMajor.jspx",
+                type:"post",
+                async: true,
+                dataType:'json',
+                data:{
+                    parentMajorId:parentMajorId
+                },
+                success: function (data) {
+                    if(data ==''){
+						alert("请联系管理员添加数据！")
+					}
+                    var content = "";
+                    for(var i = 0 ;i<data.length;i++){
+                        content+="<li><p class='specialtyListTitle' onclick='nextMajor(\""+data[i][3]+"\",this)'>"+data[i][3] +"&nbsp;&nbsp;&nbsp;"+data[i][2]+"</p></li><li><ul></ul></li>"
+                    }
+                    $("#benkeneirong").html(content);
+                },
+                error : function(){
+                    alert("System Error!");
+                }
+            })
+        }
+        function nextMajor(parentMajorId,self){
+            $.ajax({
+                url:"findMajor.jspx",
+                type:"get",
+                async: true,
+                dataType:'json',
+                data:{
+                    parentMajorId:parentMajorId
+                },
+                success: function (data) {
+                    var content = "";
+                    for(var i = 0 ;i<data.length;i++){
+
+                        content+="<li>" +"<a onclick='xiangQ(\""+data[i][3]+"\")' data-toggle='tab'>"+data[i][2]+"</a>" +"</li>"
+                    }
+                    $(self).parent().next().find("ul").html(content);
+                    // $("#nextMaj").html(content);
+                },
+                error : function(){
+                    alert("System Error!");
+                }
+            })
+        }
+        function xiangQ(majorId){
+		    window.location.href="${base}/FindUniv/findMajor.jspx?majorId="+majorId
+            // $.ajax({
+            //     url:"/FindUniv/findMajor.jspx",
+            //     type:"get",
+            //     async: true,
+            //     dataType:'json',
+            //     data:{
+            //         majorId:majorId
+            //     },
+            //     success: function (data) {
+            //         var content = data;
+            //         $(myself).append(content);
+            //     },
+            //     error : function(){
+            //         alert("System Error!");
+            //     }
+            // })
+        }
+	</script>
+</body>
+
+</html>

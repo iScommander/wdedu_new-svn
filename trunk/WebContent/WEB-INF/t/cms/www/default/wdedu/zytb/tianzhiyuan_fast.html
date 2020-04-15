@@ -1,0 +1,2067 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>智能志愿填报</title>
+
+
+    <link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="${base}/r/wdedu/css/index.css"/>
+    <script src="${base}/r/wdedu/js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="${base}/r/wdedu/js/js/web.js"></script>
+    <script src="${base}/r/wdedu/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="${base}/r/wdedu/css/pignose.tab.min.css"/>
+    <style type="text/css">
+
+        #wrapper {
+            padding-bottom: 40px;
+        }
+.fixedThead{
+z-index: 99;
+}
+        .article {
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .article h3 {
+            margin-bottom: 40px;
+        }
+
+        .article table {
+            font-size: 115%;
+            text-align: left;
+        }
+
+        .article pre {
+            font-size: 115%;
+        }
+
+        .nav.tab {
+            width: auto;
+            max-width: 100%;
+            margin: 0;
+            border: 0;
+            padding: 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .pignose-sub-tab {
+            border: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .table {
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        .table .subject {
+            text-align: left;
+            padding-left: 5%;
+        }
+
+        .table .date {
+            text-align: right;
+            padding-right: 5%;
+        }
+    </style>
+<script>
+$(document).ready(function(){
+    su()
+         document.addEventListener('scroll', function (event) {
+         var scrollDistance = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+         if (scrollDistance >= 230) { // 触发的位置
+         document.getElementsByClassName('fixedThead')[0].style.cssText = 'position:fixed;top:0px;';
+         document.getElementsByClassName('product_xznr')[0].style.cssText = 'position:fixed;top:0px;';
+         } else {
+         document.getElementsByClassName('fixedThead')[0].style.cssText = 'position:static;';
+          document.getElementsByClassName('product_xznr')[0].style.cssText = 'position:static;';
+         }
+         });
+});
+ </script>
+    <script type="text/javascript">
+        //iframe弹出层调用
+        function ShowDiv(applicationId, batchId, univListId, majorNum) {
+              $("#box2").hide(); $("#floatTools").hide();
+               var pageNo= $("#paginationPageNo").val();var setPageNum= $("#_setPsNum").val();
+                  if (pageNo==null){
+                          pageNo=1;
+                          setPageNum=20;
+                       }
+                       var PcXs= $("#PcXs").html();
+                       setCookie("PcXs",PcXs);
+            $.webox({
+                height: 568,
+                width: 1300,
+                bgvisibel: true,
+                title: ' ',
+                iframe: '${base}/tanchuang/tianzhiyuanFast.jspx?applicationId=' + applicationId + '&batchId=' + batchId + '&univListId=' + univListId + '&majorNum=' + majorNum + '&pageNo=' + pageNo  + '&setPageNum='  + setPageNum +''
+            });
+        }
+                function setCookie(name, value) {
+                    var exp = new Date();
+                    exp.setTime(exp.getTime() + 60 * 60 * 1000);
+                    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + ";path=/";
+                }
+    </script>
+
+</head>
+<body>
+
+
+
+
+<script type='text/javascript' src='${base}/r/wdedu/js/dropdown.js'></script>
+[#include "../include/header_address.html"/]
+[#include "../include/header_zytb.html"/]
+
+
+<div class="mbxdh_bg">
+    <div class="mbxdh">
+        <a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">志愿填报</a>&nbsp;&gt; &nbsp; <a href="#">填志愿</a>
+    </div>
+</div>
+<div class="con">
+    <form id="comSearch" action="${base}/zytb/projectFast.jspx" method="post">
+        <div class="product_xznr fl">
+            <div class="product_sort ">
+                <div class="hd">院校筛选</div>
+                <div class="bd">
+                    <div class="item">
+                        <div class="title one"><a href="#"><i></i>志愿批次切换</a></div>
+                        <div class="arrow">&gt;</div>
+                        <div class="line"></div>
+                        <div class="subitem">
+                            <div class="inner">
+                                <div class="tit tit1 yyly" style="height: 300px; overflow-y:scroll;">
+                                    <table border="0" cellpadding="1" cellspacing="0" class="tzy_table"
+                                           style="background-color:#ececec;">
+                                        <tr>
+                                            <td width="0" height="60" align="center" valign="middle" bgcolor="#f0f0f0"
+                                            >选择批次
+                                            </td>
+                                            <td width="0" height="60" align="center" valign="middle" bgcolor="#f0f0f0">
+                                                批次名称
+                                            </td>
+                                            <td width="0" height="60" align="center" valign="middle" bgcolor="#f0f0f0">
+                                                本批次投档线
+                                            </td>
+                                            <td width="0" height="60" align="center" valign="middle" bgcolor="#f0f0f0">
+                                                可填志愿数量
+                                            </td>
+                                            <!--<td width="0" height="60" align="center" valign="middle" bgcolor="#f0f0f0">-->
+                                                <!--投档开始时间-->
+                                            <!--</td>-->
+                                            <!--<td width="0" height="60" align="center" valign="middle" bgcolor="#f0f0f0">-->
+                                                <!--录取顺序-->
+                                            <!--</td>-->
+                                        </tr>
+                                         <tbody id="listbg">
+                                        [#if batchInfo??]
+                                        [#list batchInfo as list]
+                                        <tr [#if requestMap.batchId?? && requestMap.batchId?contains('${list[0]}')] class="bgColorNews" [/#if]>
+                                            <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF">
+                                                <input type="radio" id="batchId${list_index!}" value="${list[0]!}" k="${list[1]!}" name="batchId" onclick="suBatch(this);" [#if tCeeApplicationsRequire.batchId?? && tCeeApplicationsRequire.batchId?contains('${list[0]}')] checked="checked" [/#if] />
+                                            </td>
+                                            <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" onclick="yxYs(${list_index!});suBatch(this)"
+                                                class="tzy_table_td2">${list[1]!}
+                                            </td>
+                                            <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" onclick="yxYs(${list_index!});suBatch(this)"
+                                                class="tzy_table_td3">${list[2]!}
+                                            </td>
+                                            <td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" onclick="yxYs(${list_index!});suBatch(this)"
+                                                class="tzy_table_td4">${list[3]!}个院校志愿，每个院校可填${list[4]!}个专业
+                                            </td>
+                                            <!--<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" onclick="yxYs(${list_index!});suBatch(this)"-->
+                                                <!--class="tzy_table_td5">${list[5]!}-->
+                                            <!--</td>-->
+                                            <!--<td width="0" height="0" align="center" valign="middle" bgcolor="#FFFFFF" onclick="yxYs(${list_index!});suBatch(this)"-->
+                                                <!--class="tzy_table_td6">${list[6]!}-->
+                                            <!--</td>-->
+                                        </tr>
+                                        [/#list]
+                                        [/#if]
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="title two"><a href="#"><i></i>院校所在地筛选</a></div>
+
+                        <div class="arrow">&gt;</div>
+                        <div class="line"></div>
+                        <div class="subitem">
+                            <div class="inner">
+                                <div class="tit tit1 yyly zytb_aflx_zy">
+                                    <span>院校地区</span>
+                                    <ul>
+                                        [#if provinceList??]
+                                        [#list provinceList as list]
+                                        [#if provinceMap?? && list.provinceId!=0]
+                                        <li>
+                                            <a href="javascript:void(0)"></a>
+                                            <input id="province_${list.provinceId!}" value="${list.provinceId!}" onclick="su()" name="univProvince" type="checkbox" [#if tCeeApplicationsRequire.intentProvinceId?? && tCeeApplicationsRequire.intentProvinceId?contains('${list.provinceId!}')] checked="checked" [/#if]>
+                                            <label for="province_${list.provinceId!}">${provinceMap['${list.provinceId!}']}</label>
+                                        </li>
+
+                                        [/#if]
+                                        [/#list]
+                                        [/#if]
+                                        <div class="clearfix"></div>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="title three"><a href="#"><i></i>院校类型筛选</a></div>
+
+                        <div class="arrow">&gt;</div>
+                        <div class="line"></div>
+                        <div class="subitem yyly">
+                            <div class="zytb_aflx_zy ">
+                                <span>院校类型</span>
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0)">
+                                            <input id="checkbox_yuanxiao_1" value="1" name="univ_is985"
+                                                   onclick="su(this)"
+                                                   type="checkbox" [#if tCeeApplicationsRequire.is985?? &&
+                                                   tCeeApplicationsRequire.is985==1] checked="checked" [/#if] >
+                                            <label for="checkbox_yuanxiao_1">985高校</label>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)">
+                                            <input id="checkbox_yuanxiao_2" value="2" name="univ_is211"
+                                                   onclick="su(this)"
+                                                   type="checkbox" [#if tCeeApplicationsRequire.is211?? &&
+                                                   tCeeApplicationsRequire.is211==2] checked="checked" [/#if]
+                                            >
+                                            <label for="checkbox_yuanxiao_2">211高校</label>
+                                        </a>
+                                    </li>
+                                <!--    <li>
+                                        <a href="javascript:void(0)">
+                                            <input id="checkbox_yuanxiao_3" value="3" name="univ_isDefence"
+                                                   onclick="su(this)"
+                                                   type="checkbox" [#if requestMap.univ_isDefence?? &&
+                                                   requestMap.univ_isDefence=='3'] checked="checked" [/#if]
+                                            >
+                                            <label for="checkbox_yuanxiao_3">国防生</label>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)">
+                                            <input id="checkbox_yuanxiao_4" value="4" name="univ_isExcellent"
+                                                   onclick="su(this)"
+                                                   type="checkbox" [#if requestMap.univ_isExcellent?? &&
+                                                   requestMap.univ_isExcellent=='4'] checked="checked" [/#if]
+                                            >
+                                            <label for="checkbox_yuanxiao_4">卓越计划</label>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)">
+                                            <input id="checkbox_yuanxiao_5" value="5" name="univ_isIndependence"
+                                                   onclick="su(this)"
+                                                   type="checkbox" [#if requestMap.univ_isIndependence?? &&
+                                                   requestMap.univ_isIndependence=='5'] checked="checked" [/#if]
+                                            >
+                                            <label for="checkbox_yuanxiao_5">自主招生</label>
+                                        </a>
+                                    </li>-->
+                                    <li>
+                                        <a href="javascript:void(0)">
+                                            <input id="checkbox_yuanxiao_6" value="6" name="univ_isFirstRateUniv"
+                                                   onclick="su(this)"
+                                                   type="checkbox" [#if tCeeApplicationsRequire.isFirstRate?? &&
+                                                   tCeeApplicationsRequire.isFirstRate==2] checked="checked" [/#if]
+                                            >
+                                            <label for="checkbox_yuanxiao_6">一流大学</label>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)">
+                                            <input id="checkbox_yuanxiao_7" value="7" name="univ_isFirstRateMajor"
+                                                   onclick="su(this)"
+                                                   type="checkbox" [#if tCeeApplicationsRequire.isFirstRate?? &&
+                                                   tCeeApplicationsRequire.isFirstRate !=0] checked="checked" [/#if]
+                                            >
+                                            <label for="checkbox_yuanxiao_7">一流专业</label>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="title four"><a href="#"><i></i>院校分类筛选</a></div>
+                        <div class="arrow">&gt;</div>
+                        <div class="line"></div>
+                        <div class="subitem yyly">
+
+                            <div class="zytb_aflx_zy ">
+                                <span>院校分类</span>
+                                <ul>
+                                    [#if universityType?? ]
+                                    [#list universityType as u]
+                                    <li>
+                                        <a href="javascript:void(0)">
+                                            <input id="univ_type_${u.id!}" value="${u.typeName!}" onclick="su(this)"
+                                                   name="univSchoolType" type="checkbox" [#if
+                                                   tCeeApplicationsRequire.intentUnivType?? &&
+                                                   tCeeApplicationsRequire.intentUnivType?contains('${u.typeName!}')]
+                                            checked="checked" [/#if]
+                                            >
+                                            <label for="univ_type_${u.id!}">${u.typeName!}</label>
+                                        </a>
+                                    </li>
+                                    [/#list]
+                                    [/#if]
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--   <div class="item">
+                                 <div class="title five"><a href="#"><i></i>考研容易程度</a></div>
+
+                                 <div class="arrow">&gt;</div>
+                                 <div class="line"></div>
+                                 <div class="subitem">
+                                     <div class="inner">
+                                         <div class="tit tit1">
+                                             <div class="name">泰国</div>
+                                             <ul>
+                                                 <li><a href="#">沙巴</a></li>
+                                                 <li><a href="#">新加坡</a></li>
+                                                 <li><a href="#">菲律宾</a></li>
+                                                 <li><a href="#">沙巴</a></li>
+                                                 <li><a href="#">文莱</a></li>
+                                                 <li><a href="#">蓝梦岛</a></li>
+                                                 <li><a href="#">吉隆坡</a></li>
+                                                 <li><a href="#">塞班岛</a></li>
+                                                 <li><a href="#">柬埔寨</a></li>
+                                                 <li><a href="#">马来西亚</a></li>
+                                                 <li><a href="#">越南</a></li>
+                                                 <li><a href="#">下龙湾</a></li>
+                                                 <li><a href="#">吴哥</a></li>
+                                                 <li><a href="#">芽庄</a></li>
+                                                 <li><a href="#">沙巴</a></li>
+                                                 <li><a href="#">新加坡</a></li>
+                                                 <li><a href="#">菲律宾</a></li>
+                                                 <li><a href="#">沙巴</a></li>
+                                                 <li><a href="#">文莱</a></li>
+                                                 <li><a href="#">蓝梦岛</a></li>
+                                                 <li><a href="#">吉隆坡</a></li>
+                                                 <li><a href="#">塞班岛</a></li>
+                                                 <li><a href="#">柬埔寨</a></li>
+                                                 <li><a href="#">马来西亚</a></li>
+                                                 <li><a href="#">越南</a></li>
+                                                 <li><a href="#">下龙湾</a></li>
+                                                 <li><a href="#">吴哥</a></li>
+                                                 <li><a href="#">芽庄</a></li>
+                                             </ul>
+                                         </div>
+                                         <div class="tit">
+                                             <div class="name">印度尼西亚</div>
+                                             <ul>
+                                                 <li><a href="#">沙巴</a></li>
+                                                 <li><a href="#">新加坡</a></li>
+                                                 <li><a href="#">菲律宾</a></li>
+                                                 <li><a href="#">沙巴</a></li>
+                                                 <li><a href="#">文莱</a></li>
+                                                 <li><a href="#">蓝梦岛</a></li>
+                                                 <li><a href="#">吉隆坡</a></li>
+                                                 <li><a href="#">塞班岛</a></li>
+                                                 <li><a href="#">柬埔寨</a></li>
+                                                 <li><a href="#">马来西亚</a></li>
+                                                 <li><a href="#">越南</a></li>
+                                                 <li><a href="#">下龙湾</a></li>
+                                                 <li><a href="#">吴哥</a></li>
+                                                 <li><a href="#">芽庄</a></li>
+                                             </ul>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+
+                             -->
+
+                </div>
+            </div>
+
+            <div class="product_sort">
+                <div class="hd">专业筛选</div>
+                <div class="bd">
+                    <div class="item">
+                        <div class="title one"><a href="#"><i></i>按分类选专业</a></div>
+                        <div class="arrow">&gt;</div>
+                        <div class="line"></div>
+                        <div class="subitem" style="top: -270px;">
+                            <div class="zytb_aflx_zy yyly" style="height: 300px; overflow-y:scroll;">
+                                [#if oneList??]
+                                [#list oneList as ol]
+                                <span>${ol.major_Name!}</span>
+                                <ul>
+                                    <!--<li>-->
+                                        <!--<a href="javascript:void(0)">-->
+                                            <!--<input id="${ol.major_id!}" value="${ol.major_id!}" name="majorList"-->
+                                                   <!--onclick="su(this)"-->
+                                                   <!--type="checkbox"-->
+                                            <!--&gt;-->
+                                            <!--<label for="${ol.major_id!}">不限</label>-->
+                                        <!--</a>-->
+                                    <!--</li>-->
+                                    [#if twoList?? ]
+                                    [#list twoList as tl]
+                                    [#if ol.major_id == tl.parent_Major_Id]
+                                    <li>
+
+                                        <a href="javascript:void(0)">
+                                            <input id="${tl.major_id!}" value="${tl.major_id!}" name="majorList"
+                                                   type="checkbox" onclick="su(this)"[#if
+                                                        tCeeApplicationsRequire.intentMajorId?? &&
+                                                        tCeeApplicationsRequire.intentMajorId?contains('${tl.major_id!}')]
+                                                      checked="checked" [/#if]
+                                            >
+                                            <label for="${tl.major_id!}">${tl.major_Name!}</label>
+                                        </a>
+
+                                    </li>
+                                    [/#if]
+                                    [/#list]
+                                    [/#if]
+                                    <div class="clearfix"></div>
+                                </ul>
+                                [/#list]
+                                [/#if]
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--&lt;!&ndash;按职业选专业&ndash;&gt;-->
+                    <!--<div class="item">-->
+                    <!--<div class="title two"><a href="#"><i></i>按职业选专业</a></div>-->
+
+                    <!--<div class="arrow">&gt;</div>-->
+                    <!--<div class="line"></div>-->
+                    <!--<div class="subitem">-->
+                    <!--<div class="zytb_zyx_zy yyly">-->
+
+                    <!--<span>硬件类</span>-->
+                    <!--<a href="javascript:void(0)" value="1">-->
+                    <!--<input id="radio_profession_3" value="3" name="profession" type="checkbox">-->
+                    <!--<label for="radio_profession_3">不限</label>-->
+                    <!--</a>-->
+                    <!--<a href="javascript:void(0)" value="1">-->
+                    <!--<input id="radio_profession_2" value="2" name="profession" type="checkbox">-->
+                    <!--<label for="radio_profession_2">机房管理</label>-->
+                    <!--</a>-->
+                    <!--<a href="javascript:void(0)" value="2">-->
+                    <!--<input id="radio_profession_1" value="1" name="profession" type="checkbox">-->
+                    <!--<label for="radio_profession_1">光纤接入</label>-->
+                    <!--</a>-->
+                    <!--<div class="clearfix"></div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                    <!--&lt;!&ndash;按就业选专业&ndash;&gt;-->
+                    <!--<div class="item">-->
+                    <!--<div class="title three"><a href="#"><i></i>按就业选专业</a></div>-->
+
+                    <!--<div class="arrow">&gt;</div>-->
+                    <!--<div class="line"></div>-->
+                    <!--<div class="subitem">-->
+                    <!--<div class="zytb_jy_zy yyly">-->
+
+                    <!--<span>硬件类</span>-->
+                    <!--<a href="javascript:void(0)" value="1">-->
+                    <!--<input id="radio_profession_3" value="3" name="profession" type="checkbox">-->
+                    <!--<label for="radio_profession_3">不限</label>-->
+                    <!--</a>-->
+                    <!--<a href="javascript:void(0)" value="1">-->
+                    <!--<input id="radio_profession_2" value="2" name="profession" type="checkbox">-->
+                    <!--<label for="radio_profession_2">机房管理</label>-->
+                    <!--</a>-->
+                    <!--<a href="javascript:void(0)" value="2">-->
+                    <!--<input id="radio_profession_1" value="1" name="profession" type="checkbox">-->
+                    <!--<label for="radio_profession_1">光纤接入</label>-->
+                    <!--</a>-->
+                    <!--<div class="clearfix"></div>-->
+
+
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="tzy_y fr">
+            <div class="mntbb_lb  information" style="margin-bottom: 20px;">
+
+                <div class="flex-item f_l">
+                    方案名称：<span>${tCeeApplications.applicationName!}</span>
+                </div>
+                <div class="  flex-item f_l">
+                    地区：<span>${provinceName!}</span>
+                </div>
+                <div class=" flex-item f_l">
+                    文理科：<span>${tCeeApplications.majorTypeId?replace(1,'文科')?replace(2,'理科')?replace(3,'综合改革')}</span>
+                </div>
+                <div class="flex-item f_l">
+                    成绩：<span>${tCeeApplications.score!}</span>
+                </div>
+                <div class=" flex-item f_l">
+                    排名：<span>${tCeeApplications.rank!}</span>
+                </div>
+                <div class="flex-item f_l">
+                    选科：<span>${(tCeeApplications.subjects!"")?replace('1','物理')?replace('2','化学')?replace('3','生物')?replace('4','政治')?replace('5','历史')?replace('6','地理')?replace('7','技术')}
+                            ${(tCeeApplications.subjectsLevel!"")?replace('1','A+')?replace('2','A')?replace('3','B+')?replace('4','B')?replace('5','C')?replace('6','D')}</span>
+                </div>
+                <div class="flex-item f_l tz" style="background:#ff8d00;"><a href="${base}/admissonSvcAct/findVoluntary.jspx">创建智能填报成绩方案</a></div>
+            </div>
+
+            <div class="tzy_y_bk">
+                <div id="wrapper">
+                    <div class="article">
+                        <div class="tab">
+                            <ul>
+                                <li>
+                                    <span class="tzybutton_span">为您推荐院校和专业（更换条件可重新推荐）：</span>
+                                    <a onclick="window.location = '${base}/zytb/project.jspx' "
+                                       href="${base}/zytb/project.jspx?applicationId=${applicationId!}" class="tzybutton"
+                                       style="cursor:pointer">按院校填报</a>
+
+                                    <a class="tzybutton"
+                                       style="border-bottom: 2px solid #ff8d00;color:#ff8d00 ;cursor:pointer">智能志愿填报</a>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        <div class="tab">
+                                           <div class="tzy_tb_zl_3 f_l" style="border-right: 1px solid #ececec">
+                                             <input type="text" class="tzy_tb_zl_3_su"
+                                                    placeholder="输入院校名称或者专业进行筛选" name="schoolOrMajorName" id="schoolOrMajorName"
+                                                    [#if requestMap.schoolOrMajorName?? && requestMap.schoolOrMajorName?contains('${schoolOrMajorName!}')] value="${schoolOrMajorName!}" [/#if] />
+                                             <input type="image" class="tzy_tb_zl_3_an" value="提交" onclick="su()"
+                                                    src="${base}/r/wdedu/images/index_5.png"/>
+                                         </div>
+                                         <div class="clearfix"></div>
+                                            <!--    <div class="tzy_tb_zl">
+                                                      <div class="tzy_tb_zl_1 f_l ">
+                                                          <input type="radio" id="yx_yxpm" class="ui-radio" name="yx_yxpm"
+                                                                 value="1"/>
+                                                          <label for="yx_yxpm">院校排名</label></div>
+                                                      <div class="tzy_tb_zl_1 f_l">
+                                                          <input type="radio" id="yx_lqgl" class="ui-radio" name="yx_yxpm" onclick="su(this)"
+                                                                 value="2"/>
+                                                          <label for="yx_lqgl">录取概率</label></div>
+                                                      <div class="tzy_tb_zl_2 f_l">
+
+                                                          <input type="radio" id="yx_myd" class="ui-radio" name="yx_yxpm" onclick="su(this)"
+                                                                 value="3"/>
+                                                          <label for="yx_myd">综合满意度</label>
+                                                      </div>
+                                                      <div class="tzy_tb_zl_2 f_l">
+
+                                                          <input type="radio" id="yx_jycx" class="ui-radio" name="yx_yxpm" onclick="su(this)"
+                                                                 value="4"/>
+                                                          <label for="yx_jycx">就业酬薪</label>
+                                                      </div>
+                                                      <div class="tzy_tb_zl_3 f_l" style="border-right:0px;">
+                                                          <input type="text" class="tzy_tb_zl_3_su"
+                                                                 placeholder="输入院校名称或者专业进行筛选" name="schoolOrMajorName" id="schoolOrMajorName"
+                                                                 [#if requestMap.schoolOrMajorName?? && requestMap.schoolOrMajorName?contains('${schoolOrMajorName!}')] value="${schoolOrMajorName!}" [/#if] />
+                                                          <input type="image" class="tzy_tb_zl_3_an" value="提交"
+                                                                 src="${base}/r/wdedu/images/index_5.png"/>
+                                                      </div>
+                                                      <div class="clearfix"></div>
+                                                  </div> -->
+                                            <div class="tzy_tb_zl2">
+                                                <!--         <div class="choosePwd f_l xz" style="border-left:0px;">
+                                                             <input type="radio" id="yx_quan" class="ui-radio" name="yx_cwb" onclick="su(this)"
+                                                                    value="0"/>
+                                                             <label for="yx_quan">全部</label>
+                                                         </div>
+                                                         <div class="choosePwd f_l xz">
+                                                             <input type="radio" id="yx_chong" class="ui-radio" name="yx_cwb" onclick="su(this)"
+                                                                    value="1"/>
+                                                             <label for="yx_chong">冲一冲</label>
+                                                         </div>
+                                                         <div class="choosePwd f_l xz">
+                                                             <input type="radio" id="yx_wen" class="ui-radio" name="yx_cwb" onclick="su(this)"
+                                                                    value="2"/>
+                                                             <label for="yx_wen">稳一稳</label>
+                                                         </div>
+                                                         <div class="choosePwd f_l xz">
+
+                                                             <input type="radio" id="yx_bao" class="ui-radio" name="yx_cwb" onclick="su(this)"
+                                                                    value="3"/>
+                                                             <label for="yx_bao">保一保</label>
+
+                                                         </div>
+                                                         <div class="choosePwd f_l xz">
+                                                             <input type="radio" id="yx_yi" class="ui-radio" name="yx_choose" onclick="su(this)"
+                                                                    value="1"/>
+                                                             <label for="yx_yi">已选择</label>
+
+                                                         </div>
+                                                         <div class="choosePwd f_l xz">
+
+                                                             <input type="radio" id="yx_wei" class="ui-radio" name="yx_choose" onclick="su(this)"
+                                                                    value="2"/>
+                                                             <label for="yx_wei">未选择</label>
+
+                                                         </div>
+                                                         <div class="choosePwd f_l xz">
+
+                                                             <input type="radio" id="yx_you" class="ui-radio" name="yx_choose" onclick="su(this)"
+                                                                    value="3"/>
+                                                             <label for="yx_you">有资格</label>
+
+                                                         </div>
+                                                         <div class="choosePwd f_l xz" style="border-right:0px;">
+                                                             <input type="radio" id="yx_wu" class="ui-radio" name="yx_choose" onclick="su(this)"
+                                                                    value="4"/>
+                                                             <label for="yx_wu">无资格</label>
+
+                                                         </div>   -->
+                                                <div class="clearfix"></div>
+                                                <div class="tzy_table_div">
+                                                    <table border="0" cellpadding="0" cellspacing="1"
+                                                           style="background-color:#e2e2e2; width:100%;">
+                                                           <thead class="fixedThead">
+                                                        <tr>
+                                                            <th rowspan="2" bgcolor="#FFFFFF" scope="col" width="105px;"
+                                                                height="60px;">综合参数
+                                                            </th>
+                                                            <th rowspan="4" bgcolor="#FFFFFF" scope="col" width="430px;"
+                                                                height="60px;">院校列表<span>(点击院校可查看录取详情)</span></th>
+
+
+                                                            <th rowspan="2" bgcolor="#FFFFFF" scope="col" width="80px;"
+                                                                height="60px;">计划
+                                                            </th>
+                                                            <th colspan="3" bgcolor="#FFFFFF" scope="col" width="270px;" title="(依次顺序是录取人数、录取低分、低分排名)"
+                                                                height="30px;">院校历年录取数据
+                                                            </th>
+                                                            <th rowspan="2" bgcolor="#FFFFFF" scope="col" width="100px;"
+                                                                height="60px;">填报
+                                                            </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td bgcolor="#FFFFFF" width="90px;" height="30px"
+                                                                style=" background-color:#f0f0f0;">${tBaseProvince.dataEnrollYear!}
+                                                            </td>
+                                                            <td bgcolor="#FFFFFF" width="90px;" height="30px"
+                                                                style=" background-color:#f0f0f0;">${tBaseProvince.dataEnrollYear-1!}
+                                                            </td>
+                                                            <td bgcolor="#FFFFFF" width="90px;" height="30px"
+                                                                style=" background-color:#f0f0f0;">${tBaseProvince.dataEnrollYear-2!}
+                                                            </td>
+                                                        </tr>
+                                                         </thead>
+                                                        <tbody id="tzy_table_tbody">
+                                                        [#if pagination?? ]
+                                                        [#list pagination.list as a ]
+                                                        <tr>
+                                                            <td bgcolor="#FFFFFF" class="tzy_gl" width="105px;" height="103px;"><i>排名：[#if a.univRank??]${a.univRank!}[#else] -[/#if] </i></td>
+                                                            <td bgcolor="#FFFFFF" class="tzy_table_div_dx" width="430px;" height="103px;">
+
+                                                                <div class="tzy_dx_mc_img fl"><img [#if a.logoUrl??]
+                                                                                                   src="${a.logoUrl!}"
+                                                                                                   [#else]
+                                                                                                   src="${base}/u/cms/www/schoolImg/schl.png"
+                                                                                                   [/#if]>
+                                                                </div>
+                                                                <div class="dx f_l">
+                                                                    <div class="tzy_dx_mc"> <span class="tzy_code">[${a.univCode!}]</span><a title="${a.univName!}"
+                                                                            href="${base}/searchUnivAndMajor/univDetail.jspx?id=${a.univId?substring(0,5)}">${a.univName!}</a>
+                                                                             <span style="color:#ff8d00;">[#if a.univTestLevel??](${(a.univTestLevel!)?replace('1','A+')?replace('2','A')?replace('3','B+')?replace('4','B')?replace('5','C')?replace('6','D')})[/#if]</span>
+
+                                                                    </div>
+                                                                    <div class="dx_lx">
+                                                                        [#if a.univIs985??]
+                                                                        [#if a.univIs985=1]
+                                                                        <div class="dx_985 f_l">985</div>
+                                                                        [/#if]
+                                                                        [/#if]
+                                                                        [#if a.univIs211??]
+                                                                        [#if a.univIs211=1]
+                                                                        <div class="dx_211 f_l">211</div>
+                                                                        [/#if]
+                                                                        [/#if]
+                                                                        [#if a.univIsFirstRateUniv??]
+                                                                        [#if a.univIsFirstRateUniv=1]
+                                                                        [#if a.univIsFirstRateMajor??]
+                                                                        [#if a.univIsFirstRateMajor=1]
+                                                                        <div class="dx_syl f_l">双一流</div>
+                                                                        [/#if]
+                                                                        [/#if]
+                                                                        [/#if]
+                                                                        [/#if]
+                                                                        <div class="clearfix"></div>
+                                                                    </div>
+                                                                    <div class="dx_dq "><span>${a.univCity!}</span>
+                                                                     <span>${a.univType!}</span>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="clearfix"></div>
+                                                            </td>
+                                                            <td bgcolor="#FFFFFF" width="80px;"height="103px;">${a.changePlanNum!}</td>
+                                                            <td bgcolor="#FFFFFF" width="90px;" height="63px;"><span title="人数">${a.enrolledNum1!}</span><br/><span class="ghbs" title="最低分">${a.scoreLow1!}</span><br/><span title="最低分排名">${a.rankScoreLow1!}</span><br/>
+                                                            </td>
+                                                            <td bgcolor="#FFFFFF" width="90px;" height="63px;"><span title="人数">${a.enrolledNum2!}</span><br/><span class="ghbs" title="最低分">${a.scoreLow2!}</span><br/><span title="最低分排名">${a.rankScoreLow2!}</span><br/>
+                                                            </td>
+                                                            <td bgcolor="#FFFFFF" width="90px;" height="63px;"><span title="人数">${a.enrolledNum3!}</span><br/><span class="ghbs" title="最低分">${a.scoreLow3!}</span><br/><span title="最低分排名">${a.rankScoreLow3!}</span><br/>
+                                                            </td>
+                                                            <td bgcolor="#FFFFFF" width="100px;"height="103px;">
+
+                                                                <div class="tzy_zn_yx">
+
+                                                                    <button type="button" class="tzy_zn_yx1"value="1"
+                                                                            onclick="ShowDiv('${applicationId!}', '${batchId!}', '${a.id!}', '${majorNum!}')"
+                                                                              [#if tCeeApplicationsRequireintentUniv?? && tCeeApplicationsRequireintentUniv?contains('${a.id!}')]
+                                                                                          style="background: #bababa;"
+                                                                              [/#if]
+                                                                            >
+                                                                        意向
+                                                                    </button>
+                                                                    <button class="tzy_zn_yx2" value="0"
+                                                                            onclick="noyx('${applicationId!}', '${batchId!}', '${a.id!}')"
+                                                                             [#if tCeeApplicationsRequireavoidUniv?? && tCeeApplicationsRequireavoidUniv?contains('${a.id!}')]
+                                                                              style="background: #bababa;"
+                                                                             [/#if]
+
+                                                                            >
+                                                                        不选
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        [/#list]
+                                                        [/#if]
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <input type="hidden" id="tCeeApplicationsRequireintentUniv" value="${tCeeApplicationsRequireintentUniv!}">
+                                                <input type="hidden" id="tCeeApplicationsRequireavoidUniv" value="${tCeeApplicationsRequireavoidUniv!}">
+                                                 [#if haveZhiNengZhiYuanTianBao??&&haveZhiNengZhiYuanTianBao=="true"]
+                                                <div class="textC paging">
+                                                    <tr>
+                                                        <td colspan="8" style="padding:20px 0;">
+
+                                                            <div class="pn-sp">
+                                                                共<sapn id="tsAjax">${pagination.totalCount}</sapn>条&nbsp;每页<input type="text"
+                                                                                                         id="_setPsNum"
+                                                                                                         value="${setPageNum!}"
+                                                                                                         onfocus="this.select();"
+                                                                                                         style="width:50px; border:1px solid #e7e7e7;"/>
+                                                                条&nbsp; <input id="_setPage" type="button" value="确定"
+                                                                               onclick="_gotoPage($('#_setPsNum').val());su();"/>
+                                                                &nbsp;|&nbsp;当前<sapn id="ysAjax">${pagination.pageNo}/${pagination.totalPage}</sapn>页&nbsp;转到第<input
+                                                                    type="text" id="_goPs" onfocus="this.select();"
+                                                                    onkeypress="if(event.keyCode==13){$('#_goPage').click();return false;}"
+                                                                    style="width:50px; border:1px solid #e7e7e7;"/>页
+                                                                    <input type="hidden" id="paginationPageNo" value="${pagination.pageNo}">
+                                                                <input id="_goPage" type="button" value="确定"
+                                                                       onclick="_gotoPage($('#_goPs').val());su()" [#if
+                                                                       pagination.totalPage==1] disabled="disabled" [/#if]
+                                                                />
+                                                            </div>
+                                                            <div>
+                                                            <input type="hidden" id="prePage" name="prePage"/>
+                                                             <input type="hidden" id="nextPage" name="nextPage"/>
+                                                              <input type="hidden" id="totalPage" name="totalPage"/>
+                                                                <input type="button" value="首 页"
+                                                                       onclick="_gotoPage('1');su()" />
+                                                                <input type="button" value="上一页"
+                                                                       onclick="_gotoPage($('#prePage').val());su()"
+                                                                       />
+                                                                <input type="button" value="下一页"
+                                                                       onclick="_gotoPage($('#nextPage').val());su()"
+                                                                       />
+                                                                <input type="button" value="尾 页"
+                                                                       onclick="_gotoPage($('#totalPage').val());su()"
+                                                                       />
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                </div>
+                                                [/#if]
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="clearfix"></div>
+        <!--弹出层时背景层DIV-->
+        <!--右侧浮动-->
+        <div id="floatTools" class="rides-cs"style="top: 150px;">
+            <div class="floatL">
+                <a id="aFloatTools_Show" class="btnOpen" title="查看" style="top:-10px;display:block"
+                   href="javascript:void(0);">展开</a>
+                <a id="aFloatTools_Hide" class="btnCtn" title="关闭" style="top:-10px;display:none"
+                   href="javascript:void(0);">收缩</a>
+            </div>
+            <div id="divFloatToolsView" class="floatR" style="display: none;">
+                <div class="cn">
+                    <ul id="J_List">
+                        <li>
+                            <div class="tzy_list_xs_a f_l">志愿</div>
+                            <div class="tzy_list_xs f_l">院校</div>
+                            <div class="clearfix"></div>
+                        </li>
+                        [#if tCeeApplicationsDetailsChoosedList??]
+                        [#list tCeeApplicationsDetailsChoosedList as tc]
+                        <li>
+                            <div class="tzy_list_xs_a f_l">
+                                ${tc.univOrder!}
+                            </div>
+                            <div class="tzy_list_xs f_l" title="${tc.univName!}">${tc.univName!}</div>
+                            <div class="clearfix"></div>
+                        </li>
+                        [/#list]
+                        [/#if]
+                        [#if tCeeApplicationsDetailsChoosedBxList??]
+                        [#list tCeeApplicationsDetailsChoosedBxList as tb]
+                        <li>
+                            <div class="tzy_list_xs_a f_l">
+                                ${tb.univOrder?replace(1,'备选一')?replace(2,'备选二')?replace(3,'备选三')?replace(4,'备选四')}
+                            </div>
+                            <div class="tzy_list_xs f_l" title="${tb.univName!}">${tb.univName!}</div>
+                            <div class="clearfix"></div>
+                        </li>
+                        [/#list]
+                        [/#if]
+                    </ul>
+                    <div class="clearfix"></div>
+                    <div class="tzy_an_yc"><a
+                            href="${base}/zytb/voluntary.jspx?applicationId=${applicationId!}">立即生成志愿表</a></div>
+
+
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+  <div id="floatToolsTwo" class="rides-cs" style="top: 350px;background: #1f2e76">
+                    <div class="floatL">
+                        <a id="aFloatTools_ShowTwo" class="yhxxImgOpen" title="查看" style="height: 175px;top:-10px;display:block"
+                           href="javascript:void(0);">展开</a>
+                        <a id="aFloatTools_HideTwo" class="yhxxImgClose" title="关闭" style="height: 175px;top:-10px;display:none"
+                           href="javascript:void(0);">收缩</a>
+                    </div>
+                    <div id="divFloatToolsViewTwo" class="floatR" style="display: none;">
+                        <div class="cn">
+                            <div class="jbxxBt">我的基本信息</div>
+                            <div class="jbxx">方案名称：<span>${tCeeApplications.applicationName!}</span></div>
+                            <div class="jbxx">地区：<span>${provinceName!}</span></div>
+                            <div class="jbxx">文理科：<span>${tCeeApplications.majorTypeId?replace(1,'文科')?replace(2,'理科')?replace(3,'综合改革')}</span></div>
+                            <div class="jbxx">成绩：<span>${tCeeApplications.score!}</span></div>
+                            <div class="jbxx">排名：<span>${tCeeApplications.rank!}</span></div>
+                            <div class="jbxx">选科：<span>${(tCeeApplications.subjects!"")?replace('1','物理')?replace('2','化学')?replace('3','生物')?replace('4','政治')?replace('5','历史')?replace('6','地理')?replace('7','技术')}
+                                                                                     ${(tCeeApplications.subjectsLevel!"")?replace('1','A+')?replace('2','A')?replace('3','B+')?replace('4','B')?replace('5','C')?replace('6','D')}</span></div>
+
+                        </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+        <input type="hidden" id="pageNo" name="pageNo" value="${pagination.pageNo}"/>
+        <input type="hidden" id="setPageNum" name="setPageNum" value="${setPageNum!}"/>
+        <input type="hidden" id="chooseType" name="chooseType" value="1"/>
+        <input type="hidden" id="changeBatch" name="changeBatch" value=""/>
+        <input type="hidden" id="applicationId" name="applicationId" value="${applicationId!}"/>
+    </form>
+</div>
+<style>
+.mb_db_gd{height: 64px;}
+.mb_db_gd span{height: 64px;line-height: 64px;    font-size: 24px;}
+.mb_db_gd_an{width: 200px;    height: 48px;line-height: 48px;}
+</style>
+<div class="mb_db_gd" id="box2">
+        <div class="mb_db_gd_zt">
+            <span>您当前选择的批次为：</span>
+            <span> <span id="PcXs">    [#if batchInfo??]
+                                                   ${batchInfo[0][1]}
+                                                    [/#if]
+                                                    </span>&nbsp;&nbsp;点击下一步</span>
+             <a class="mb_db_gd_an" onclick="tzy_tz();" >下一步</a><span>&nbsp;&nbsp;生成志愿表</span>
+        </div>
+    <div class="clearfix"></div>
+</div>
+[#include "../include/footer_new.html"/]
+
+<script type="text/javascript" src="${base}/r/wdedu/js/tzy.js"></script>
+<script type="text/javascript">
+function tzy_tz(){
+     var batchIdNew = $('input[name="batchId"]:checked').val();
+      var applicationId = document.getElementById("applicationId").value;
+    var url="${base}/zytb/cwb.jspx?applicationId="+applicationId+"&batchId="+batchIdNew+"";
+
+window.location=url;
+}
+    /*点击其他地方弹出层消失*/
+    $(function () {
+        $(document).bind("click", function (e) {
+            if ($(e.target).closest("#tzy_majors").length > 0) {
+                $("#tzy_majors").show();
+            } else {
+                $("#tzy_majors").hide();
+            }
+        });
+        $("#listbg tr").click(function(){ //给每个tr 绑定点击事件 主要锁定每个tr
+        var trs = $(this).parent().find("tr"); //获取所有tr
+        if(trs.hasClass("bgColorNews")){ //判断这些tr 有没有Class ‘on’’
+        trs.removeClass("bgColorNews");//把class on 移除
+        }
+        $(this).addClass("bgColorNews");//点击的tr 添加 on class 用于改变样式
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    function noyx(applicationId, batchId, avoid_univId) {
+        $.ajax({
+            url: "${base}/fastZytb/intentOrAvoid.jspx",    //请求的url地址
+            dataType: "json",   //返回格式为json
+            async: false,//请求是否异步，默认为异步，这也是ajax重要特性
+            data: {"applicationId": applicationId, "batchId": batchId, "avoid_univId": avoid_univId},    //参数值
+            type: "post",   //请求方式
+            success: function (data) {
+
+            }, error: function (e) {
+
+
+            }
+
+        });
+
+
+    }
+
+    function isEmpty(obj) {
+        if (typeof obj == "undefined" || obj == null || obj == "") {
+            return "";
+        } else {
+            return obj;
+        }
+    }
+
+    function gbtwo(id) {
+        var idl = "tb" + id;
+        var div = document.getElementById(idl);
+        if (div.style.display != 'block') {
+            div.style.display = 'block';
+        } else {
+            div.style.display = 'none';
+        }
+    }
+
+    function zk(id, applicationId, batchId, yx, majorNum, univNum, extraNum) {
+        var list = '${tCeeApplicationsDetailsChoosed!}';
+        list = eval(list);
+        var ListBx = '${tCeeApplicationsDetailsChoosedBx!}';
+        ListBx = eval(ListBx);
+        var character = new Array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z");
+        var character2 = new Array("备选志愿一", "备选志愿二", "备选志愿三", "备选志愿四", "备选志愿五", "备选志愿六", "备选志愿七", "备选志愿八");
+        var idFormal1 = '0';
+        var idFormal2 = '1';
+        var idl = "tb" + id;
+
+        var html = document.getElementById(idl).innerHTML = "";
+        for (var i = 0; i < list.length; i++) {
+            var xh = i + 1;
+            var univOrder = list[i].univOrder;
+            var univName = list[i].univName;
+            if (univName == "" || univName === undefined || univName == null) {
+                univName = "";
+            }
+            var html = document.getElementById(idl).innerHTML;
+              if (batchId==null||batchId==undefined){
+                                        batchId=="";
+                                    }
+            var sb = '<a href="javascript:void(0);"';
+            sb += 'onclick=" ShowDiv(' + applicationId + ',' + batchId + ',' + yx + ',' + xh + ',' + majorNum + ',' + idFormal1 + ')  ">' + character[list[i].univOrder - 1] + '志愿(' + univName + ')</a>';
+            document.getElementById(idl).innerHTML = html + sb;
+        }
+        var html = document.getElementById(idl).innerHTML;
+        for (var i = 0; i < ListBx.length; i++) {
+            var xh = i + 1;
+            var univOrder = ListBx[i].univOrder;
+            var univName = ListBx[i].univName;
+            if (univName == "" || univName === undefined || univName == null) {
+                univName = "";
+            }
+            var html = document.getElementById(idl).innerHTML;
+            var sb = '<a href="javascript:void(0);"';
+            sb += 'onclick=" ShowDiv(' + applicationId + ',' + batchId + ',' + yx + ',' + xh + ',' + majorNum + ',' + idFormal2 + ')  ">' + character2[ListBx[i].univOrder - 1] + '(' + univName + ')</a>';
+            document.getElementById(idl).innerHTML = html + sb;
+        }
+        var div = document.getElementById(idl);
+        if (div.style.display != 'block') {
+            div.style.display = 'block';
+
+        } else {
+            div.style.display = 'none';
+
+        }
+    }
+
+
+    //首页旅游产品分类
+    $(".product_sort .bd .item").hover(function () {
+        $(this).addClass("layer");
+    }, function () {
+        $(this).removeClass("layer");
+    });
+    $(document).ready(function () {
+        $(".tzy_table_td_xz").click(function () {
+            if ($(this).hasClass('fxk')) {
+                $(this).removeClass('fxk');
+            } else {
+                $(this).addClass('fxk');
+            }
+        })
+    });
+
+    // $(function () {
+    //     $('.tab').pignoseTab({
+    //         animation: true,
+    //         children: '.tab'
+    //     });
+    // });
+
+
+    //分页
+    function _gotoPage(pageNo) {
+         typeof pageNo
+        try {
+
+            $('#pageNo').val(pageNo);
+            $('#setPageNum').val($('#_setPsNum').val());
+
+
+        } catch (e) {
+            alert('_gotoPage(pageNo)方法出错');
+        }
+    }
+
+    function _setPageNum(setPageNum) {
+        try {
+            var comSearch = document.getElementById("comSearch");
+            $('#setPageNum').val(setPageNum);
+            comSearch.submit();
+        } catch (e) {
+            alert('_setPageNum(pageNum)方法出错');
+        }
+    }
+
+    //意向  不选  按钮
+    // $(".tzy_zn_yx .tzy_zn_yx1").click(function () {
+    //
+    //     var IsCheck = $(this).hasClass("tzy_zn_yx3");
+    //     $(this).parent().find("button").removeClass("tzy_zn_yx3");
+    //     if (!IsCheck) {
+    //         $(this).addClass("tzy_zn_yx3");
+    //     }
+    // })
+    // $(" .tzy_zn_yx .tzy_zn_yx2").click(function () {
+    //     var IsCheck = $(this).hasClass("tzy_zn_yx3");
+    //     $(this).parent().find("button").removeClass("tzy_zn_yx3");
+    //     if (!IsCheck) {
+    //
+    //         $(this).addClass("tzy_zn_yx3");
+    //     }
+    // })
+
+    function changeTab1() {
+        var val = document.getElementById("tab1").getAttribute("class");
+        if (val == 'pignose-tab-list active') {
+            $('#chooseType').val("1");
+        }
+    }
+
+    function changeTab2() {
+        var val = document.getElementById("tab2").getAttribute("class");
+        if (val == 'pignose-tab-list active') {
+            $('#chooseType').val("2");
+        }
+    }
+
+    function batchChange() {
+        var val = document.getElementById("batchId").getAttribute("class");
+        if (val == 'tzy_table_td_xz fxk') {
+            var q = document.getElementById("batchId").getAttribute("value");
+            var a = $('.tzy_table_td_xz fxk').val;
+            $('#changeBatch').val(a);
+        }
+    }
+
+</script>
+     <script type="text/javascript" >
+            function su() {
+                 var setPsNum=$("#_setPsNum").val();
+                    var goPs=$('#_goPs').val();
+                /*     ==========================================   按分类选专业*/
+                var date10 = document.getElementsByName("majorList");
+                //然后我们去得到这个多选框的长度
+                var thisLength10 = date10.length;
+                var majorIds = "";
+                for (var i = 0; i < thisLength10; i++) {
+                    if (date10[i].checked == true) {
+                        //这个是获取多选框中的值
+                        majorIds=majorIds+date10[i].value+","
+
+                    }
+                }
+              if (majorIds.length > 0) {
+                    majorIds = majorIds.substr(0,majorIds.length - 1);
+                }
+                // console.log(major_Id + "======按分类选专业");
+                //循环遍历在控制台输出我们所选择的值
+
+
+                var batchId = $('input[name="batchId"]:checked').val();
+                console.log(batchId + "批次");
+                var bachInfoNes= $('input[name="batchId"]:checked').attr("k");
+                        $("#PcXs").text(bachInfoNes);
+                /*  ==============================================院校类型985*/
+                var date = document.getElementsByName("univ_is985");
+                //然后我们去得到这个多选框的长度
+                var thisLength = date.length;
+                var univ_is985 = "";
+                for (var i = 0; i < thisLength; i++) {
+                    if (date[i].checked == true) {
+                        univ_is985=univ_is985+date[i].value+","
+                    }
+                }
+             if (univ_is985.length > 0) {
+                   univ_is985 = univ_is985.substr(0,univ_is985.length - 1);
+               }
+                console.log(univ_is985 + "======院校类型985");
+                //循环遍历在控制台输出我们所选择的值
+
+
+                /*  ==============================================院校类型211*/
+                var date4 = document.getElementsByName("univ_is211");
+                //然后我们去得到这个多选框的长度
+                var thisLength4 = date4.length;
+                var univ_is211 = "";
+                for (var i = 0; i < thisLength4; i++) {
+                    if (date4[i].checked == true) {
+                        univ_is211=univ_is211+date4[i].value+","
+                    }
+                }
+            if (univ_is211.length > 0) {
+                  univ_is211 = univ_is211.substr(0,univ_is211.length - 1);
+              }
+                //循环遍历在控制台输出我们所选择的值
+                console.log(univ_is211 + "======院校类型211");
+
+                /*  ==============================================院校类型univ_isDefence*/
+                var date5 = document.getElementsByName("univ_isDefence");
+                //然后我们去得到这个多选框的长度
+                var thisLength5 = date5.length;
+                var univ_isDefence = "";
+                for (var i = 0; i < thisLength5; i++) {
+                    if (date5[i].checked == true) {
+                     univ_isDefence=univ_isDefence+date5[i].value+","
+                    }
+                }
+             if (univ_isDefence.length > 0) {
+                   univ_isDefence = univ_isDefence.substr(0,univ_isDefence.length - 1);
+               }
+                console.log(univ_isDefence + "======院校类型univ_isDefence");
+                /*  ==============================================院校类型univ_isExcellent*/
+                var date6 = document.getElementsByName("univ_isExcellent");
+                //然后我们去得到这个多选框的长度
+                var thisLength6 = date6.length;
+                var univ_isExcellent = "";
+                for (var i = 0; i < thisLength6; i++) {
+                    if (date6[i].checked == true) {
+                       univ_isExcellent=univ_isExcellent+date6[i].value+","
+                    }
+                }
+               if (univ_isExcellent.length > 0) {
+                     univ_isExcellent = univ_isExcellent.substr(0,univ_isExcellent.length - 1);
+                 }
+                console.log(univ_isExcellent + "=========院校类型univ_isExcellent");
+
+
+                /*  ==============================================院校类型univ_isIndependence*/
+                var date7 = document.getElementsByName("univ_isIndependence");
+                //然后我们去得到这个多选框的长度
+                var thisLength7 = date7.length;
+                var univ_isIndependence = "";
+                for (var i = 0; i < thisLength7; i++) {
+                    if (date7[i].checked == true) {
+                        univ_isIndependence=univ_isIndependence+date7[i].value+","
+                    }
+                }
+                 if (univ_isIndependence.length > 0) {
+                       univ_isIndependence = univ_isIndependence.substr(0,univ_isIndependence.length - 1);
+                   }
+                console.log(univ_isIndependence + "=====院校类型univ_isIndependence");
+                //循环遍历在控制台输出我们所选择的值
+
+                /*  ==============================================院校类型univ_isFirstRateUniv*/
+                var date9 = document.getElementsByName("univ_isFirstRateUniv");
+                //然后我们去得到这个多选框的长度
+                var thisLength9 = date9.length;
+                var univ_isFirstRateUniv = "";
+                for (var i = 0; i < thisLength9; i++) {
+                    if (date9[i].checked == true) {
+                     univ_isFirstRateUniv=univ_isFirstRateUniv+date9[i].value+","
+                    }
+                }
+                                 if (univ_isFirstRateUniv.length > 0) {
+                                       univ_isFirstRateUniv = univ_isFirstRateUniv.substr(0,univ_isFirstRateUniv.length - 1);
+                                   }
+                //循环遍历在控制台输出我们所选择的值
+                console.log(univ_isFirstRateUniv + "院校类型");
+
+
+                /*  ==============================================院校类型univ_isFirstRateMajor*/
+                var date8 = document.getElementsByName("univ_isFirstRateMajor");
+                //然后我们去得到这个多选框的长度
+                var thisLength8 = date8.length;
+                var univ_isFirstRateMajor = "";
+                for (var i = 0; i < thisLength8; i++) {
+                    if (date8[i].checked == true) {
+                      univ_isFirstRateMajor=univ_isFirstRateMajor+date8[i].value+","
+                    }
+                }
+             if (univ_isFirstRateMajor.length > 0) {
+                   univ_isFirstRateMajor = univ_isFirstRateMajor.substr(0,univ_isFirstRateMajor.length - 1);
+               }
+                //循环遍历在控制台输出我们所选择的值
+                console.log(univ_isFirstRateMajor + "院校类型");
+
+
+                /*=================================================院校省份*/
+
+                var date2 = document.getElementsByName("univProvince");
+                //然后我们去得到这个多选框的长度
+                var thisLength2 = date2.length;
+                var provinceId ="";
+                for (var i = 0; i < thisLength2; i++) {
+                    if (date2[i].checked == true) {
+                        //这个是获取多选框中的值
+                        provinceId=provinceId+date2[i].value+","
+                    }
+                }
+             if (provinceId.length > 0) {
+                   provinceId = provinceId.substr(0,provinceId.length - 1);
+               }
+                /* =============================================univSchoolType==  院校分类*/
+                var date3 = document.getElementsByName("univSchoolType");
+                //然后我们去得到这个多选框的长度
+                var thisLength3 = date3.length;
+                var univSchoolType = "";
+                for (var i = 0; i < thisLength3; i++) {
+                    if (date3[i].checked == true) {
+                        univSchoolType=univSchoolType+date3[i].value+","
+                    }
+                }
+                 if (univSchoolType.length > 0) {
+                       univSchoolType = univSchoolType.substr(0,univSchoolType.length - 1);
+                   }
+                /*================================================================yx_yxpm院校排名录取概率综合满意就业酬薪*/
+                var yx_yxpm = $('input[name="yx_yxpm"]:checked').val();
+                console.log(yx_yxpm + "院校排名录取概率综合满意就业酬薪");
+                /*================================================================yx_cwb冲一冲稳一稳保一保*/
+                var yx_cwb = $('input[name="yx_cwb"]:checked').val();
+                console.log(yx_cwb + "冲一冲稳一稳保一保");
+                /*================================================================yx_choose已选择未选则*/
+                var yx_choose = $('input[name="yx_choose"]:checked').val();
+                console.log(yx_choose + "已选择未选则");
+                var pageNo = document.getElementById("pageNo").value;
+                var chooseType = document.getElementById("chooseType").value;
+                var setPageNum = document.getElementById("setPageNum").value;
+                var schoolOrMajorName = document.getElementById("schoolOrMajorName").value;
+                var applicationName = "";
+                var applicationId = document.getElementById("applicationId").value;
+                  var character3 = new Array("","A+", "A", "B+", "B", "C", "D");
+                $.ajax({
+                    url: "${base}/zytb/zNAjaxProject.jspx",    //请求的url地址
+                    dataType: "json",
+                    async: true,
+                    data: {
+                        "applicationName": applicationName,
+                        "applicationId": applicationId,
+                        "pageNo": pageNo,
+                        "batchId": batchId,
+                        "univProvince": provinceId,
+                        "univSchoolType": univSchoolType,
+                        "yx_cwb": yx_cwb,
+                        "yx_choose": yx_choose,
+                        "univ_is985": univ_is985,
+                        "univ_is211": univ_is211,
+                        "univ_isDefence": univ_isDefence,
+                        "univ_isExcellent": univ_isExcellent,
+                        "univ_isIndependence": univ_isIndependence,
+                        "univ_isFirstRateUniv": univ_isFirstRateUniv,
+                        "univ_isFirstRateMajor": univ_isFirstRateMajor,
+                        "chooseType": chooseType,
+                        "setPageNum": setPageNum,
+                        "schoolOrMajorName": schoolOrMajorName,
+                        "majorIds": majorIds
+                    },
+                    traditional: true,
+                    type: "POST",
+                    success: function (data) {
+                        var provinceId=data.provinceId;
+                        var level=data.tCeeApplications.subjectsLevel+"";
+                          // 用户科目名
+                      var subjectName=data.tCeeApplications.subjects+"";
+                  var tsAjax=data.pagination.totalCount;
+                          var fyPageNoAjax=data.pagination.pageNo;
+                           var fytotalPageAjax=data.pagination.totalPage;
+                             var setPageNum=data.setPageNum;
+                              $("#paginationPageNo").val(fyPageNoAjax);
+                              $("#pageNo").val(fyPageNoAjax);
+                               $("#setPageNum").val(setPageNum);
+
+                                 var prePage=data.pagination.prePage;
+                              var nextPage=data.pagination.nextPage;
+                               var totalPage=data.pagination.totalPage;
+                                  $("#prePage").val(prePage);
+                                  $("#nextPage").val(nextPage);
+                                  $("#totalPage").val(totalPage);
+                           $("#tsAjax").text(tsAjax);
+                           $("#ysAjax").text(fyPageNoAjax+"/"+fytotalPageAjax);
+                        var a = data.pagination.list;
+                        var html = document.getElementById("tzy_table_tbody").innerHTML = "";
+                        var  tCeeApplicationsRequireintentUniv= data.tCeeApplicationsRequireintentUniv;
+                        var  tCeeApplicationsRequireavoidUniv=data.tCeeApplicationsRequireavoidUniv;
+                     var   haveZhiNengZhiYuanTianBao =data.haveZhiNengZhiYuanTianBao ;
+                        var bp=true;
+                       var yx="background: white";
+                        for (var i = 0; i < a.length; i++) {
+                             var univTestLevel=a[i].univTestLevel+"";
+                             var univTestName=a[i].univTestName+"";
+                            var imgUrl = "${base}/r/img/noschool.png";
+                        if (!bp){
+                        yx="background: #fafafa";
+                        bp=true;
+                    }else{
+                        bp=false;
+                        yx="background: white";
+                    }
+                            if (isEmpty(a[i].logoUrl) != "") {
+                                imgUrl = a[i].logoUrl;
+                            }
+                                var sy1="";  var sy2="";
+                            if(tCeeApplicationsRequireintentUniv!=null && tCeeApplicationsRequireintentUniv!='') {
+                                if (tCeeApplicationsRequireintentUniv.indexOf(a[i].id) != -1) {
+                                    sy1 = "background: #bababa"
+                                }
+                            }
+                            if(tCeeApplicationsRequireavoidUniv!=null && tCeeApplicationsRequireavoidUniv!='') {
+                                if (tCeeApplicationsRequireavoidUniv.indexOf(a[i].id) != -1) {
+                                    sy2 = "background: #bababa"
+                                }
+                            }
+                             var pm="";
+                              if (isEmpty(a[i].univRank)!=''){
+                                  pm=a[i].univRank;
+                              }else {
+                                  pm="-";
+                              }
+                                 var univCode="";
+                                  if (isEmpty(a[i].univCode)!=''){
+                                       univCode=a[i].univCode;
+                                   }else {
+                                       univCode="-";
+                                   }
+
+                             // <i>概率：%</i><i>风险：</i>
+                            var sb = '<tr style="'+yx+'">';
+                            sb += '  <td class="tzy_gl"><i>排名：'+pm+'</i></td>';
+                            sb += '                                                            <td  class="tzy_table_div_dx">';
+                            sb += '';
+                            sb += '                                                                <div class="tzy_dx_mc_img fl"><img src="' + imgUrl + '"></div>';
+                            sb += '                                                                <div class="dx f_l">';
+                            sb += '                                                                <div class="tzy_dx_mc"><span class="tzy_code">['+univCode+']</span><a target="_blank" href="${base}/searchUnivAndMajor/univDetail.jspx?id='+subString(isEmpty(a[i].univId))+'" title="'+isEmpty(a[i].univName)+'">' + isEmpty(a[i].univName) + '</a>';
+                             if(provinceId!=null&&provinceId ==17){
+                            sb += '                                                            <span style="color:#ff8d00;">(' +character3[repcelist(isEmpty(a[i].univTestLevel),0,1)]+ character3[repcelist(isEmpty(a[i].univTestLevel),2,1)]+')</span>';
+                           }
+                             sb += '                                                                </div>';
+                            sb += '                                                                 <div class="dx_lx">';
+                            if (a[i].univIs985 == 1) {
+                                sb += '<div class="dx_985 f_l">985</div>';
+                            }
+                            if (a[i].univIs211 == 1) {
+                                sb += '<div class="dx_211 f_l">211</div>';
+                            }
+                            if (a[i].univIsFirstRateUniv == 1 && a[i].univIsFirstRateMajor == 1) {
+                                sb += '<div class="dx_syl f_l">双一流</div>';
+                            }
+                                sb += ' <div class="dqlb xj_kgxs f_l">' + isEmpty(a[i].univCity) + '</div>';
+                            sb += '                                                            <div class="dqlb f_l">' + isEmpty(a[i].univType) + '</div>';
+                            sb += '                                                                     <div class="clearfix"></div>';
+                            sb += '                                                                    </div>';
+
+
+                            sb += '                                                                </div>';
+                            sb += '';
+                            sb += '                                                                <div class="clearfix"></div>';
+                            sb += '                                                            </td>';
+                            sb += '';
+                            sb += '                                                            <td  width="80px;">' + isEmpty(a[i].changePlanNum) + '</td>';
+                            sb += '                                                            <td  width="90px;"><span title="人数">' + isEmpty(a[i].enrolledNum1) + '</span><br/><span class="ghbs" title="最低分">' + isEmpty(a[i].scoreLow1) + '</span><br/><span title="最低分排名" class="ghbs2">' + isEmpty(a[i].rankScoreLow1) + '</span><br/>';
+                            sb += '                                                            </td>';
+                            sb += '                                                            <td  width="90px;"><span title="人数">' + isEmpty(a[i].enrolledNum2) + '</span><br/><span class="ghbs" title="最低分">' + isEmpty(a[i].scoreLow2) + '</span><br/><span title="最低分排名"  class="ghbs2">' + isEmpty(a[i].rankScoreLow2) + '</span><br/>';
+                            sb += '                                                            </td>';
+                            sb += '                                                            <td  width="90px;" ><span title="人数">' + isEmpty(a[i].enrolledNum3) + '</span><br/><span class="ghbs" title="最低分">' + isEmpty(a[i].scoreLow3) + '</span><br/><span title="最低分排名"  class="ghbs2">' + isEmpty(a[i].rankScoreLow3) + '</span><br/>';
+                            sb += '                                                            </td>';
+                            sb += '                                                            <td  width="100px;">';
+                                        sb+='                                                                <div class="tzy_zn_yx">';
+
+                                           if (provinceId ==17&& a[i].univTestLevel!=null&&level!=null){
+                                             if ( (eval((univTestLevel.substring(0,1)) < (level.substring(0,1))) || eval( (univTestLevel.substring(1,2))< (level.substring(1,2)))) &&( eval( ((univTestLevel.substring(0,1))< (level.substring(1,2)))) || eval( (univTestLevel.substring(1,2))< (level.substring(0,1)))))
+                                                    {
+                                                      sb+='                                 <button  value="0" style="background:red;pointer-events:none;"';
+                                            sb+='                                                                         >';
+                                            sb+='                                                                        无资格';
+                                            sb+='                                                                    </button>';
+                                             }else{
+                                                  sb+='                                                                    <button type="button" class="tzy_zn_yx1"value="1"';
+                                                   sb+='                                                                            onclick="ShowDiv('+applicationId+','+batchId+', '+isEmpty(a[i].id)+','+data.majorNum+')"  style="'+sy1+'">意向';
+                                                   sb+='                                                                    </button>';
+                                                   sb+='                                                                    <button class="tzy_zn_yx2" value="0"';
+                                                   sb+='                                                                            onclick="noyx('+applicationId+','+batchId+','+isEmpty(a[i].id)+')"style="'+sy2+'">';
+                                                   sb+='                                                                        不选';
+                                                   sb+='                                                                    </button>';
+                                           }
+                                            }
+                                           // else if (provinceId ==16&&a[i].univTestLevel!=null&&a[i].univTestName!=null ){
+                                           //
+                                           //                       // 不限
+                                           //                       if(univTestLevel == 0) {
+                                           //                       }
+                                           //                       // 两门与
+                                           //                   else if(univTestLevel == 1) {
+                                           //                           if(subjectName.match(univTestName.substring(0,1)) && subjectName.match(univTestName.substring(2,3))){
+                                           //
+                                           //                           }
+                                           //                           else{
+                                           //                             sb+='                                 <button  value="0" style="background:red;pointer-events:none;"';
+                                           //                             sb+='                                                                         >';
+                                           //                             sb+='                                                                        无资格';
+                                           //                             sb+='                                                                    </button>';
+                                           //                           }
+                                           //
+                                           //                       }
+                                           //                       // 两门或
+                                           //                   else if(univTestLevel == 2) {
+                                           //                           if(subjectName.match(univTestName.substring(0,1)) || subjectName.match(univTestName.substring(2,3))){
+                                           //
+                                           //                           }
+                                           //                           else{
+                                           //                                 sb+='                                 <button  value="0" style="background:red;pointer-events:none;"';
+                                           //                              sb+='                                                                         >';
+                                           //                              sb+='                                                                        无资格';
+                                           //                              sb+='                                                                    </button>';
+                                           //                           }
+                                           //
+                                           //                       }
+                                           //                       // 一门
+                                           //                   else if(univTestLevel == 3) {
+                                           //
+                                           //                       if(subjectName.match(univTestName)){}
+                                           //                       else{
+                                           //                        sb+='                                 <button  value="0" style="background:red;pointer-events:none;"';
+                                           //                     sb+='                                                                         >';
+                                           //                     sb+='                                                                        无资格';
+                                           //                     sb+='                                                                    </button>';
+                                           //                       }
+                                           //
+                                           //                       }
+                                           //                       // 三门与
+                                           //                   else if(univTestLevel == 4) {
+                                           //
+                                           //                           if(subjectName.match(univTestName.substring(0,1)) && subjectName.match(univTestName.substring(2,3) && subjectName.match(univTestName.substring(4,5)))){}
+                                           //                           else{
+                                           //                            sb+='                                 <button  value="0" style="background:red;pointer-events:none;"';
+                                           //                         sb+='                                                                         >';
+                                           //                         sb+='                                                                        无资格';
+                                           //                         sb+='                                                                    </button>';
+                                           //                           }
+                                           //                       }
+                                           //                       // 三门或
+                                           //                   else if(univTestLevel == 5) {
+                                           //                           if(subjectName.match(univTestName.substring(0,1)) || subjectName.match(univTestName.substring(2,3) || subjectName.match(univTestName.substring(4,5)))){}
+                                           //                           else{
+                                           //                          sb+='                                 <button  value="0" style="background:red;pointer-events:none;"';
+                                           //                       sb+='                                                                         >';
+                                           //                       sb+='                                                                        无资格';
+                                           //                       sb+='                                                                    </button>';
+                                           //                           }
+                                           //                       }
+                                           //                   }
+
+
+                                           else{
+                                                   sb+='                                                                    <button type="button" class="tzy_zn_yx1"value="1"';
+                                                    sb+='                                                                            onclick="ShowDiv('+applicationId+','+batchId+', '+isEmpty(a[i].id)+','+data.majorNum+')"  style="'+sy1+'">意向';
+                                                    sb+='                                                                    </button>';
+                                                    sb+='                                                                    <button class="tzy_zn_yx2" value="0"';
+                                                    sb+='                                                                            onclick="noyx('+applicationId+','+batchId+','+isEmpty(a[i].id)+')"style="'+sy2+'">';
+                                                    sb+='                                                                        不选';
+                                                    sb+='                                                                    </button>';
+                                            }
+
+                                              sb+='                                                                </div>';
+                            sb += '';
+                            sb += '                                                            </td>';
+                            sb += '                                                        </tr>';
+                            if (haveZhiNengZhiYuanTianBao!=null&&haveZhiNengZhiYuanTianBao=="false"){
+                                    if (i==2){
+                                          sb += '<tr>';
+                                           sb += '<td colspan="7">';
+                                sb += '<div class="gmVIP">';
+                                sb += '<div class="gmVIPan">';
+                                sb += '<p>购买<span>VIP</span>后可查看详细数据</p>';
+                                sb += '<a href="${base}/NewsDisplay/testSxk.jspx" class="js-login-link">立即购买</a>';
+                                    sb += '</div>';
+                                     sb += '</div>';
+                                    sb += ' </td>';
+                                sb += '  </tr>';
+                                $("#tzy_table_tbody").append(sb);
+                                return;
+                                    }
+                                    }
+                            $("#tzy_table_tbody").append(sb);
+                        }
+                    }, error: function (e) {
+                    }
+                });
+
+            }
+
+            // 批次切换回到第一页
+            function suBatch(sx) {
+                var setPsNum=$("#_setPsNum").val();
+                var goPs=$('#_goPs').val();
+                /*     ==========================================   按分类选专业*/
+                var date10 = document.getElementsByName("majorList");
+                //然后我们去得到这个多选框的长度
+                var thisLength10 = date10.length;
+                var majorIds="";
+                for (var i = 0; i < thisLength10; i++) {
+                    if (date10[i].checked == true) {
+                        //这个是获取多选框中的值
+                        majorIds=majorIds+date10[i].value+","
+                    }
+                }
+                if (majorIds.length > 0) {
+                    majorIds = majorIds.substr(0,majorIds.length - 1);
+                }
+                setCookie("majorIds",majorIds);
+                // console.log(major_Id + "======按分类选专业");
+                //循环遍历在控制台输出我们所选择的值
+
+
+                var batchId = $('input[name="batchId"]:checked').val();
+                console.log(batchId + "批次");
+                var bachInfoNes= $('input[name="batchId"]:checked').attr("k");
+                $("#PcXs").text(bachInfoNes);
+                setCookie("batchId",batchId);
+                /*  ==============================================院校类型985*/
+                var date = document.getElementsByName("univ_is985");
+                //然后我们去得到这个多选框的长度
+                var thisLength = date.length;
+                var univ_is985 = "";
+                for (var i = 0; i < thisLength; i++) {
+                    if (date[i].checked == true) {
+                        univ_is985=univ_is985+date[i].value+","
+                    }
+                }
+                if (univ_is985.length > 0) {
+                    univ_is985 = univ_is985.substr(0,univ_is985.length - 1);
+                }
+                console.log(univ_is985 + "======院校类型985");
+                setCookie("univ_is985",univ_is985);
+                //循环遍历在控制台输出我们所选择的值
+
+
+                /*  ==============================================院校类型211*/
+                var date4 = document.getElementsByName("univ_is211");
+                //然后我们去得到这个多选框的长度
+                var thisLength4 = date4.length;
+                var univ_is211 = "";
+                for (var i = 0; i < thisLength4; i++) {
+                    if (date4[i].checked == true) {
+                        univ_is211=univ_is211+date4[i].value+","
+                    }
+                }
+                if (univ_is211.length > 0) {
+                    univ_is211 = univ_is211.substr(0,univ_is211.length - 1);
+                }
+                setCookie("univ_is211",univ_is211);
+                //循环遍历在控制台输出我们所选择的值
+                console.log(univ_is211 + "======院校类型211");
+
+                /*  ==============================================院校类型univ_isDefence*/
+                var date5 = document.getElementsByName("univ_isDefence");
+                //然后我们去得到这个多选框的长度
+                var thisLength5 = date5.length;
+                var univ_isDefence = "";
+                for (var i = 0; i < thisLength5; i++) {
+                    if (date5[i].checked == true) {
+                        univ_isDefence=univ_isDefence+date5[i].value+","
+                    }
+                }
+                if (univ_isDefence.length > 0) {
+                    univ_isDefence = univ_isDefence.substr(0,univ_isDefence.length - 1);
+                }
+                setCookie("univ_isDefence",univ_isDefence);
+                console.log(univ_isDefence + "======院校类型univ_isDefence");
+                /*  ==============================================院校类型univ_isExcellent*/
+                var date6 = document.getElementsByName("univ_isExcellent");
+                //然后我们去得到这个多选框的长度
+                var thisLength6 = date6.length;
+                var univ_isExcellent = "";
+                for (var i = 0; i < thisLength6; i++) {
+                    if (date6[i].checked == true) {
+                        univ_isExcellent=univ_isExcellent+date6[i].value+","
+                    }
+                }
+                if (univ_isExcellent.length > 0) {
+                    univ_isExcellent = univ_isExcellent.substr(0,univ_isExcellent.length - 1);
+                }
+                console.log(univ_isExcellent + "=========院校类型univ_isExcellent");
+                setCookie("univ_isExcellent",univ_isExcellent);
+
+                /*  ==============================================院校类型univ_isIndependence*/
+                var date7 = document.getElementsByName("univ_isIndependence");
+                //然后我们去得到这个多选框的长度
+                var thisLength7 = date7.length;
+                var univ_isIndependence = "";
+                for (var i = 0; i < thisLength7; i++) {
+                    if (date7[i].checked == true) {
+                        univ_isIndependence=univ_isIndependence+date7[i].value+","
+                    }
+                }
+                if (univ_isIndependence.length > 0) {
+                    univ_isIndependence = univ_isIndependence.substr(0,univ_isIndependence.length - 1);
+                }
+                setCookie("univ_isIndependence",univ_isIndependence);
+                console.log(univ_isIndependence + "=====院校类型univ_isIndependence");
+                //循环遍历在控制台输出我们所选择的值
+
+                /*  ==============================================院校类型univ_isFirstRateUniv*/
+                var date9 = document.getElementsByName("univ_isFirstRateUniv");
+                //然后我们去得到这个多选框的长度
+                var thisLength9 = date9.length;
+                var univ_isFirstRateUniv = "";
+                for (var i = 0; i < thisLength9; i++) {
+                    if (date9[i].checked == true) {
+                        univ_isFirstRateUniv=univ_isFirstRateUniv+date9[i].value+","
+                    }
+                }
+                if (univ_isFirstRateUniv.length > 0) {
+                    univ_isFirstRateUniv = univ_isFirstRateUniv.substr(0,univ_isFirstRateUniv.length - 1);
+                }
+                //循环遍历在控制台输出我们所选择的值
+                console.log(univ_isFirstRateUniv + "univ_isFirstRateUniv");
+                setCookie("univ_isFirstRateUniv",univ_isFirstRateUniv);
+
+                /*  ==============================================院校类型univ_isFirstRateMajor*/
+                var date8 = document.getElementsByName("univ_isFirstRateMajor");
+                //然后我们去得到这个多选框的长度
+                var thisLength8 = date8.length;
+                var univ_isFirstRateMajor = "";
+                for (var i = 0; i < thisLength8; i++) {
+                    if (date8[i].checked == true) {
+                        univ_isFirstRateMajor=univ_isFirstRateMajor+date8[i].value+","
+                    }
+                }
+                if (univ_isFirstRateMajor.length > 0) {
+                    univ_isFirstRateMajor = univ_isFirstRateMajor.substr(0,univ_isFirstRateMajor.length - 1);
+                }
+                //循环遍历在控制台输出我们所选择的值
+                console.log(univ_isFirstRateMajor + "院校类型");
+                setCookie("univ_isFirstRateMajor",univ_isFirstRateMajor);
+
+                /*=================================================院校省份*/
+
+                var date2 = document.getElementsByName("univProvince");
+                //然后我们去得到这个多选框的长度
+                var thisLength2 = date2.length;
+                var provinceId ="";
+                for (var i = 0; i < thisLength2; i++) {
+                    if (date2[i].checked == true) {
+
+                        provinceId=provinceId+date2[i].value+","
+                    }
+                }
+                if (provinceId.length > 0) {
+                    provinceId = provinceId.substr(0,provinceId.length - 1);
+                }
+
+                setCookie("provinceId",provinceId);
+
+                /* =============================================univSchoolType==  院校分类*/
+                var date3 = document.getElementsByName("univSchoolType");
+                //然后我们去得到这个多选框的长度
+                var thisLength3 = date3.length;
+                var univSchoolType = "";
+                for (var i = 0; i < thisLength3; i++) {
+                    if (date3[i].checked == true) {
+                        univSchoolType=univSchoolType+date3[i].value+","
+                    }
+                }
+                if (univSchoolType.length > 0) {
+                    univSchoolType = univSchoolType.substr(0,univSchoolType.length - 1);
+                }
+
+                setCookie("univSchoolType",univSchoolType);
+
+                /*================================================================yx_yxpm院校排名录取概率综合满意就业酬薪*/
+                var yx_yxpm = $('input[name="yx_yxpm"]:checked').val();
+                console.log(yx_yxpm + "院校排名录取概率综合满意就业酬薪");
+                setCookie("yx_yxpm",yx_yxpm);
+                /*================================================================yx_cwb冲一冲稳一稳保一保*/
+                var yx_cwb = $('input[name="yx_cwb"]:checked').val();
+                console.log(yx_cwb + "冲一冲稳一稳保一保");
+                setCookie("yx_cwb",yx_cwb);
+                /*================================================================yx_choose已选择未选则*/
+                var yx_choose = $('input[name="yx_choose"]:checked').val();
+                console.log(yx_choose + "已选择未选则");
+                setCookie("yx_choose",yx_choose);
+                var pageNo = document.getElementById("pageNo").value;
+                setCookie("pageNo",pageNo);
+                var chooseType = document.getElementById("chooseType").value;
+                setCookie("chooseType",chooseType);
+                var setPageNum = document.getElementById("setPageNum").value;
+                setCookie("setPageNum",setPageNum);
+                var schoolOrMajorName = document.getElementById("schoolOrMajorName").value;
+                setCookie("schoolOrMajorName",schoolOrMajorName);
+                var applicationName = "";
+                var applicationId = document.getElementById("applicationId").value;
+                setCookie("applicationId",applicationId);
+                $.ajax({
+                    url: "${base}/zytb/ajaxProject.jspx",    //请求的url地址
+                    dataType: "json",
+                    async: true,
+                    data: {
+                        "applicationName": applicationName,
+                        "applicationId": applicationId,
+                        "pageNo": 1, /*为批次切换设置特殊页数*/
+                        "batchId": batchId,
+                        "univProvince": provinceId,
+                        "univSchoolType": univSchoolType,
+                        "yx_cwb": yx_cwb,
+                        "yx_choose": yx_choose,
+                        "univ_is985": univ_is985,
+                        "univ_is211": univ_is211,
+                        "univ_isDefence": univ_isDefence,
+                        "univ_isExcellent": univ_isExcellent,
+                        "univ_isIndependence": univ_isIndependence,
+                        "univ_isFirstRateUniv": univ_isFirstRateUniv,
+                        "univ_isFirstRateMajor": univ_isFirstRateMajor,
+                        "chooseType": chooseType,
+                        "setPageNum": setPageNum,
+                        "schoolOrMajorName": schoolOrMajorName,
+                        "majorIds": majorIds
+                    },
+                    traditional: true,
+                    type: "POST",
+                    success: function (data) {
+                        var haveTianzhiyuan=data.haveTianZhiyuan;
+                        var provinceId=data.provinceId;
+                        var level=data.tCeeApplications.subjectsLevel+"";
+                        // 用户科目名
+                        var subjectName=data.tCeeApplications.subjects+"";
+                        tCeeApplicationsDetailsChoosed=data.tCeeApplicationsDetailsChoosed;
+                        tCeeApplicationsDetailsChoosedBx=data.tCeeApplicationsDetailsChoosedBx;
+                        var tsAjax=data.pagination.totalCount;
+                        var fyPageNoAjax=data.pagination.pageNo;
+                        var fytotalPageAjax=data.pagination.totalPage;
+                        var setPageNum=data.setPageNum;
+                        $("#paginationPageNo").val(fyPageNoAjax);
+                        $("#pageNo").val(fyPageNoAjax);
+                        $("#setPageNum").val(setPageNum);
+
+                        var prePage=data.pagination.prePage;
+                        var nextPage=data.pagination.nextPage;
+                        var totalPage=data.pagination.totalPage;
+                        $("#prePage").val(prePage);
+                        $("#nextPage").val(nextPage);
+                        $("#totalPage").val(totalPage);
+                        $("#tsAjax").text(tsAjax);
+                        $("#ysAjax").text(fyPageNoAjax+"/"+fytotalPageAjax);
+                        var a = data.pagination.list;
+                        var html = document.getElementById("tzy_table_tbody").innerHTML = "";
+                        var choosedUnivListSTr =data.choosedUnivListSTr;
+                        var choosedUnivListSTrBx =data.choosedUnivListSTrBx;
+                        var character3 = new Array("","A+", "A", "B+", "B", "C", "D");
+                        var xz="";
+                        var sy="";
+                        var bp=true;
+                        var yx="background: white";
+                        for (var i = 0; i < a.length; i++) {
+                            var univTestLevel=a[i].univTestLevel+"";
+                            // 院校科目
+                            var univTestName=a[i].univTestName+"";
+                            if (!bp){
+                                yx="background: #fafafa";
+                                bp=true;
+                            }else{
+                                bp=false;
+                                yx="background: white";
+                            }
+                            var imgUrl="${base}/r/img/noschool.png";
+                            xz="设置志愿";
+                            sy="background: #ff8d00";
+                            if(isEmpty(a[i].logoUrl)!=""){
+                                imgUrl=a[i].logoUrl;
+                            }
+
+                            if ((choosedUnivListSTr.includes(a[i].univName)&&choosedUnivListSTr.includes(a[i].univCode))||(choosedUnivListSTrBx.includes(a[i].univName)&&choosedUnivListSTrBx.includes(a[i].univCode))){
+                                xz="更改专业";
+                                sy="background: #afafaf"
+                            }
+                            if (provinceId ==17&& a[i].univTestLevel!=null&&level!=null){
+                                if ( (eval((univTestLevel.substring(0,1)) < (level.substring(0,1))) || eval( (univTestLevel.substring(1,2))< (level.substring(1,2)))) && (eval( ((univTestLevel.substring(0,1))< (level.substring(1,2)))) || eval( (univTestLevel.substring(1,2))< (level.substring(0,1)))))
+                                {
+                                    xz="无资格";
+                                    sy="background: red;pointer-events:none;"
+                                }
+                            }else if (provinceId ==16&&a[i].univTestLevel!=null&&a[i].univTestName!=null ){
+
+                                // 不限
+                                if(univTestLevel == 0) {
+                                }
+                                // 两门与
+                                else if(univTestLevel == 1) {
+                                    if(subjectName.match(univTestName.substring(0,1)) && subjectName.match(univTestName.substring(2,3))){}
+                                    else{
+                                        xz="无资格";
+                                        sy="background: red;pointer-events:none;"
+                                    }
+
+                                }
+                                // 两门或
+                                else if(univTestLevel == 2) {
+                                    if(subjectName.match(univTestName.substring(0,1)) || subjectName.match(univTestName.substring(2,3))){}
+                                    else{
+                                        xz="无资格";
+                                        sy="background: red;pointer-events:none;"
+                                    }
+
+                                }
+                                // 一门
+                                else if(univTestLevel == 3) {
+
+                                    if(subjectName.match(univTestName)){}
+                                    else{
+                                        xz="无资格";
+                                        sy="background: red;pointer-events:none;"
+                                    }
+
+                                }
+                                // 三门与
+                                else if(univTestLevel == 4) {
+
+                                    if(subjectName.match(univTestName.substring(0,1)) && subjectName.match(univTestName.substring(2,3) && subjectName.match(univTestName.substring(4,5)))){}
+                                    else{
+                                        xz="无资格";
+                                        sy="background: red;pointer-events:none;"
+                                    }
+                                }
+                                // 三门或
+                                else if(univTestLevel == 5) {
+                                    if(subjectName.match(univTestName.substring(0,1)) || subjectName.match(univTestName.substring(2,3) || subjectName.match(univTestName.substring(4,5)))){}
+                                    else{
+                                        xz="无资格";
+                                        sy="background: red;pointer-events:none;"
+                                    }
+                                }
+                            }
+
+                            var pm="";
+                            if (isEmpty(a[i].univRank)!=''){
+                                pm=a[i].univRank;
+                            }else {
+                                pm="-";
+                            }
+                            var univCode="";
+                            if (isEmpty(a[i].univCode)!=''){
+                                univCode=a[i].univCode;
+                            }else {
+                                univCode="-";
+                            }
+
+                            // <i>概率：%</i><i>风险：</i>
+                            var sb = '<tr style="'+yx+'">';
+                            sb += '  <td class="tzy_gl"><i>排名：'+pm+'</i></td>';
+                            sb += '                                                            <td  class="tzy_table_div_dx">';
+                            sb += '';
+                            sb += '                                                                <div class="tzy_dx_mc_img fl"><img src="'+imgUrl+'"></div>';
+                            sb += '                                                                <div class="dx f_l">';
+                            sb += '                                                                <div class="tzy_dx_mc"><span class="tzy_code">['+univCode+']</span><a target="_blank"  href="${base}/searchUnivAndMajor/univDetail.jspx?id='+subString(isEmpty(a[i].univId))+'" title="'+isEmpty(a[i].univName)+'">' + isEmpty(a[i].univName) + '</a>';
+                            if(provinceId!=null&&provinceId ==17){
+                                sb += '                                                            <span style="color:#ff8d00;">(' +character3[repcelist(isEmpty(a[i].univTestLevel),0,1)]+ character3[repcelist(isEmpty(a[i].univTestLevel),2,1)]+')</span>';
+                            }
+                            sb += '                                                                </div>';
+                            sb += '                                                                 <div class="dx_lx">';
+                            if (a[i].univIs985 == 1) {
+                                sb += '<div class="dx_985 f_l">985</div>';
+                            }
+                            if (a[i].univIs211 == 1) {
+                                sb += '<div class="dx_211 f_l">211</div>';
+                            }
+                            if ( a[i].univIsFirstRateUniv == 1 && a[i].univIsFirstRateMajor == 1) {
+                                sb += '<div class="dx_syl f_l">双一流</div>';
+                            }
+                            sb += ' <div class="dqlb xj_kgxs f_l">' +isEmpty( a[i].univCity)+ '</div>';
+                            sb += '                                                            <div class="dqlb f_l">' +isEmpty(a[i].univType) + '</div>';
+                            sb += '                                                                     <div class="clearfix"></div>';
+                            sb += '                                                                    </div>';
+
+
+                            sb += '                                                                </div>';
+                            sb += '';
+                            sb += '                                                                <div class="clearfix"></div>';
+                            sb += '                                                            </td>';
+                            sb += '';
+                            sb += '                                                            <td  width="80px;">' + isEmpty(a[i].changePlanNum) + '</td>';
+                            sb += '                                                            <td  width="90px;" ><span title="人数">' + isEmpty(a[i].enrolledNum1) + '</span><br/><span class="ghbs" title="最低分">' + isEmpty(a[i].scoreLow1) + '</span><br/><span title="最低分排名" class="ghbs2">' + isEmpty(a[i].rankScoreLow1) + '</span><br/>';
+                            sb += '                                                            </td>';
+                            sb += '                                                            <td width="90px;" "><span title="人数">' + isEmpty(a[i].enrolledNum2) + '</span><br/><span class="ghbs" title="最低分">' + isEmpty(a[i].scoreLow2) + '</span><br/> <span title="最低分排名" class="ghbs2">' + isEmpty(a[i].rankScoreLow2) + '</span><br/>';
+                            sb += '                                                            </td>';
+                            sb += '                                                            <td width="90px;"><span title="人数">' +isEmpty( a[i].enrolledNum3) + '</span><br/><span class="ghbs" title="最低分">' + isEmpty(a[i].scoreLow3) + '</span><br/><span title="最低分排名" class="ghbs2">' + isEmpty(a[i].rankScoreLow3 )+ '</span><br/>';
+                            sb += '                                                            </td>';
+                            sb += '                                                            <td  width="100px;">';
+                            sb += '                                                                <div class="fillin-select-wrap wishEightMore">';
+                            sb += '                                                                    <div class="fillin-select-title" data-pb="20"';
+                            var univNames="'"+a[i].univName+"'";
+
+                            sb += '                                                                         value="tb" style="'+sy+'" onclick="zk('+ 'this'+ ',' +univNames+ ','+ i + ',' + data.applicationId + ',' + data.batchId + ',' + a[i].id + ',' + data.majorNum + ',' + data.univNum + ',' + data.extraNum + ')">';
+
+                            sb += '  <span style="color:white">                                                                      '+xz+'</span> <i class="icon-angle-down"></i>';
+
+                            sb += '                                                                    </div>';
+                            sb += '                                                                    <div class="fillin-select-option" style="display: none;" id="tb' + i + '">';
+                            sb += '                                                                                                <!--此处为拼接志愿数量-->';
+                            sb += '                                                                    </div>';
+                            sb += '                                                                </div>';
+                            sb += '';
+                            sb += '                                                            </td>';
+                            sb += '                                                        </tr>';
+                            if (haveTianzhiyuan!=null&&haveTianzhiyuan=="false") {
+                                if (i==2){
+                                    sb += '<tr>';
+                                    sb += '<td colspan="7">';
+                                    sb += '<div class="gmVIP">';
+                                    sb += '<div class="gmVIPan">';
+                                    sb += '<p>购买<span>VIP</span>后可查看详细数据</p>';
+                                    sb += '<a href="${base}/NewsDisplay/testSxk.jspx" class="js-login-link">立即购买</a>';
+                                    sb += '</div>';
+                                    sb += '</div>';
+                                    sb += ' </td>';
+                                    sb += '  </tr>';
+                                    $("#tzy_table_tbody").append(sb);
+                                    return;
+                                }
+                            }
+                            $("#tzy_table_tbody").append(sb);
+                        }
+
+                        var htmlNew = document.getElementById("yxList").innerHTML = "";
+                        for (var i = 0; i < tCeeApplicationsDetailsChoosed.length; i++) {
+                            var xh = i + 1;
+                            var univOrder = tCeeApplicationsDetailsChoosed[i].univOrder;
+                            var univName = tCeeApplicationsDetailsChoosed[i].univName;
+                            if (univName == "" || univName === undefined || univName == null) {
+                                univName = "";
+                            }
+                            htmlNew = document.getElementById("yxList").innerHTML;
+                            var kb='                        <li>';
+                            kb+='                            <div class="tzy_list_xs_a f_l">' + character[tCeeApplicationsDetailsChoosed[i].univOrder - 1] + '</div>';
+                            kb+='                            <div class="tzy_list_xs f_l" title="'+univName+'">' + univName + '</div>';
+                            kb+='                            <div class="clearfix"></div>';
+                            kb+='                            </li>';
+                            document.getElementById("yxList").innerHTML = htmlNew + kb;
+
+                        }
+                        for (var i = 0; i < tCeeApplicationsDetailsChoosedBx.length; i++) {
+                            var xh = i + 1;
+                            var univOrder = tCeeApplicationsDetailsChoosedBx[i].univOrder;
+                            var univName = tCeeApplicationsDetailsChoosedBx[i].univName;
+                            if (univName == "" || univName === undefined || univName == null) {
+                                univName = "";
+                            }
+                            var html2 = document.getElementById("yxList").innerHTML;
+                            var kb='                        <li>';
+                            kb+='                            <div class="tzy_list_xs_a f_l">' + character2[(tCeeApplicationsDetailsChoosedBx[i].univOrder)-1] + '</div>';
+                            kb+='                            <div class="tzy_list_xs f_l" title="'+univName+'">' + univName + '</div>';
+                            kb+='                            <div class="clearfix"></div>';
+                            kb+='                            </li>';
+                            document.getElementById("yxList").innerHTML = html2 + kb;
+                        }
+                    }, error: function (e) {
+                    }
+
+                });
+
+            }
+
+
+
+                function subString(str) {
+                  if (isEmpty(str)!=""){
+                           var str1=str.toString();
+                   return  (str1.substring(0,5))
+                  }
+                }
+                function yxYs(id){
+                     var idNews="#batchId"+id;
+                     $(idNews).prop("checked", "true");
+                 }
+                    //替换字符串
+                    function repcelist(str,index,indextwo) {
+                    if (isEmpty(str)!=""){
+                    var str1=str.toString();
+                    return  (str1.substring(index,indextwo))
+                    }
+                    }
+        </script>
+<link href="${base}/r/wdedu/css/jquery-webox.css" rel="stylesheet" type="text/css">
+<script src="${base}/r/wdedu/js/jquery-webox.js"></script>
+
+</body>
+</html>

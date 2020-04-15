@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>志愿填报服务</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<script src="${base}/r/cms/front.js"></script>
+	</head>
+	<body>
+		<!--顶部-->
+		<header class="indexHeader">
+			<div class="flex-container width1200">
+				<div>学涯云教育集团旗下升学服务站</div>
+				<div class="textR">
+					<span>
+					<a href="${base}/FwYl/swithtype.jspx">管理中心</a>
+				</span>
+					<span>咨询热线：400-0985-200</span>
+					<span>微信小程序</span>
+				</div>
+			</div>
+		</header>
+		<!--tab切换  导航-->
+		[#include "../include/header_zy.html"/]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container width1200">
+				<div><a href="${base}/login.jspx">首页 </a>&lt;&lt; 志愿填报 &lt;&lt;志愿填报服务</div>
+				<div></div>
+			</div>
+		</div>
+		<!--选科系统-->
+		<div class="toChooseSystem">
+			<div class="flex-container width1200">
+				<!--左-->
+				<div class="systemleft">
+					<div style="background: url(${base}/r/img/yiduiyi.png)no-repeat;width: 740px;height: 276px;"></div>
+				</div>
+				<!--右-->
+				<div class="systemright">
+					<div><span class="diamonds"></span>志愿填报一对一</div>
+					<div>根据“职业——专业——选科”这条主线选择科目。如果不想读工学专业，物理可以不选；选考历史、地理、政治三门，是绝对不能读医学专业的。</div>
+					<div class="textC" style="margin-top: 10px;">
+						<button class="btn1">咨询专家</button>
+						<button class="btn1 btnColorYellow" onclick="javascript:location='http://www.Yuncareer.com/sygh'">开始选科</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--主体内容-->
+		<main class="toChooseMain">
+			<div class="flex-container width1200">
+				<div style="width:80%;border-right: 5px solid #e3e1e1;" class="tabPanel">
+					<ul class="toChoose-tab">
+						<li class="toChoose1 active">
+							<span>服务介绍</span>
+						</li>
+						<li class="toChoose2 ">
+							<span>服务流程</span>
+						</li>
+						<li class="toChoose3 ">
+							<span>成功案例</span>
+						</li>
+					</ul>
+					<div class="panes">
+						<div class="pane" style="display:block;">
+							[@cms_content_list typeId='1'  channelId='116' dateFormat='yyyy-MM-dd']
+							[#list tag_list as a]
+							[#if a.id=168]
+							${a.txt!}
+							[/#if]
+							[/#list]
+							[/@cms_content_list]
+						</div>
+						<div class="pane" style="display:none;">
+							[@cms_content_list typeId='1'  channelId='116' dateFormat='yyyy-MM-dd']
+							[#list tag_list as a]
+							[#if a.id=169]
+							${a.txt!}
+							[/#if]
+							[/#list]
+							[/@cms_content_list]
+						</div>
+						<div class="pane" style="display:none;">
+							[@cms_content_list typeId='1'  channelId='116' dateFormat='yyyy-MM-dd']
+							[#list tag_list as a]
+							[#if a.id=170]
+							${a.txt!}
+							[/#if]
+							[/#list]
+							[/@cms_content_list]
+						</div>
+					</div>
+				</div>
+				<div style="width:20%;">
+					 <p>其他服务</p>
+					<a href="${base}/zytb/toCollegeService.jspx"><p class="serve serve1"></p></a>
+					<a href="${base}/FwYl/zpfw.jspx"><p class="serve serve2"></p></a>
+					<a href="${base}/FwYl/BackgroundAscension.jspx"><p class="serve serve3"></p></a>
+					<a href="${base}/FwYl/zpfw.jspx"><p class="serve serve4"></p></a>
+					<a href="${base}/alipay/fuwuzhongxin.jspx"><p class="serve serve5"></p></a>
+					<a href="##"><p class="serve serve6"></p></a>
+					<a href="${base}/FwYl/zpfw.jspx"><p class="serve serve7"></p></a>
+				</div>
+			</div>
+		</main>
+		<!--底部-->
+		[#include "../include/footer.html"/]
+		
+		
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/itemsJs/filtrate.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+		<script>
+			//箭头tab切换
+			$(".toChoose-tab li").click(function(){
+				$(".toChoose-tab li").removeClass("active");
+				$(this).addClass("active");
+			});
+			$(function() {
+				$('.tabPanel ul li').click(function() {
+					$(this).addClass('hit').siblings().removeClass('hit');
+					$('.panes>div:eq(' + $(this).index() + ')').show().siblings().hide();
+				})
+			})
+		</script>
+	</body>
+</html>

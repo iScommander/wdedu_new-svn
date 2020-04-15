@@ -1,0 +1,23 @@
+    <div class="navbox">
+		<div class="navbox_bg">
+			<div class="nav_l fl">
+				<div id="nav">
+				<ul id="navMenu">
+				<li><a href='${base}/'>首页</a></li>
+				<li><a  href='${base}/NewsDisplay/TeamOfExperts.jspx' rel='dropmenu1'>专家团队</a></li>
+				<li><a  href='${base}/NewsDisplay/AllCases.jspx' rel='dropmenu2'>历年案例</a></li>
+				<li><a  href='${base}/NewsDisplay/HonorList.jspx' rel='dropmenu3'>荣誉榜单</a></li>
+				<!--<li><a href='${base}/NewsDisplay/ParentsFeedback.jspx' rel='dropmenu4'>家长反馈</a></li>-->
+
+				</ul>
+				</div>
+
+			</div>
+			[#if user??]
+			<div class="nav_r fr">
+				<a href="${base}/admissonSvcAct/findbaseInfo.jspx">尊敬的[@text_cut s=user.username?substring(0,5) len=3 append='..'/]</a>
+			</div>
+			[/#if]
+		<div class="clearfix"></div>
+		</div>
+	</div>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>服务中心</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<script src="${base}/r/cms/front.js"></script>
+		<style>
+			.route {
+			    margin-bottom: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--顶部-->
+		[#include "../include/header.html"/]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container width1200">
+				<div><a href="${base}">首页</a> &lt;&lt; 沃得研究院&lt;&lt; 服务中心</div>
+				<div></div>
+			</div>
+		</div>
+		<!--主体-->
+		<main class="WDfuwuzhongxin">
+			<!--沃得志愿填报-->
+			<div class="zhiyuantianbao">
+				<div class="flex-container2 width1200">
+					<div>
+						<img src="${base}/r/img/tianbao1.png" alt=""/>
+						<span>沃得志愿填报</span>
+					</div>
+					<div>
+						 <p>志愿服务一对一</p>
+						 <button class="btn1 btnColorGreen" onclick="window.location.href='${base}/wxpay/wxpay.jspx'">立即购买</button>
+					</div>
+				</div>
+			</div>
+			<!--新高考选科测评-->
+			<div class="ceping">
+				<div class="flex-container2 width1200">
+					<div>
+						<span>智能志愿填报</span>
+						<img src="${base}/r/img/ceping.png" alt="" />
+					</div>
+					<div>
+						<p>智能志愿填报 </p>
+						 <button class="btn1 btnColorGreen" onclick="window.location.href='${base}/wxpay/kstbPay.jspx'">立即购买</button>
+					</div>
+				</div>
+			</div>
+			<!--志愿填报服务-->
+			<div class="tianbao">
+				<div class="flex-container2 width1200">
+					<div>
+						<img src="${base}/r/img/tianbao2.png" alt="" />
+						<span>志愿填报服务</span>
+					</div>
+					<div>
+						<p>志愿填报服务</p>
+						 <button class="btn1 btnColorGreen">立即购买</button>
+					</div>
+				</div>
+			</div>
+			<!--自主招生服务-->
+			<div class="zhaosheng">
+				<div class="flex-container2 width1200">
+					<div>
+						<span>自主招生服务</span>
+						<img src="${base}/r/img/zhaosheng.png" alt="" />
+					</div>
+					<div>
+						<p>自主招生服务</p>
+						 <button class="btn1 btnColorGreen">立即购买</button>
+					</div>
+				</div>
+			</div>
+			<!--海外留学服务-->
+			<div class="liuxue">
+				<div class="flex-container2 width1200">
+					<div>
+						<img src="${base}/r/img/liuxue.png" alt="" />
+						<span>海外留学服务</span>
+					</div>
+					<div>
+						<p>海外留学服务</p>
+						 <button class="btn1 btnColorGreen">立即购买</button>
+					</div>
+				</div>
+			</div>
+			<!--北京提升服务 -->
+			<div class="tisheng">
+				<div class="flex-container2 width1200">
+					<div>
+						<span>北京提升服务</span>
+						<img src="${base}/r/img/tisheng.png" alt="" />
+					</div>
+					<div>
+						<p>北京提升服务</p>
+						<button class="btn1 btnColorGreen">立即购买</button>
+					</div>
+				</div>
+			</div> 
+		</main>
+		<!--底部-->
+		[#include "../include/footer.html"/]
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/bootstrap-treeview.min.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+	</body>
+
+</html>

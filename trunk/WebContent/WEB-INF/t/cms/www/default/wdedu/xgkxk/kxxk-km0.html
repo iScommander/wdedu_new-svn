@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>科学选科-科目</title>
+		<link rel="stylesheet" href="${resSys}/res/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="${resSys}/res/css/animate.css" />
+		<link rel="stylesheet" href="${base}/r/wdedu/css/head-footer.css" />
+		<link rel="stylesheet" href="${resSys}/res/css/dlsy.css" />
+		<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css"/>
+		<script src="${resSys}/res/js/jquery-1.11.3.min.js"></script>
+			<style>
+          .bk {
+                background-color:#d4d4d4;
+                border-color:#d4d4d4;
+                color:#fff;
+              }
+        </style>
+	</head>
+
+	<body>
+	[#include "../include/header_address.html"/]
+		[#include "../include/header_xgkxk.html"/]
+						<div class="mbxdh_bg">
+                            <div class="mbxdh">
+                                <a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">新高考选科</a>&nbsp;&gt; &nbsp; <a href="#">根据科目选专业</a>
+                            </div>
+                        </div>
+		<section class="banner_ny" style="padding-top:0px;">
+
+        		</section>
+		<section class="center-block">
+			<ul class="kxxk-menu cf">
+				<li class="active">
+					<a href="${base}/kxxk/courceToMajor.jspx">根据科目选专业</a>
+				</li>
+				<li >
+					<a href="${base}/kxxk/majorToCource.jspx">根据专业选科目</a>
+				</li>
+				<!--<li>-->
+					<!--<a href="${base}/kxxk/professionToMajor.jspx">根据职业选专业</a>-->
+				<!--</li>-->
+			</ul>
+			<div class="kxxk-list box-shadow">
+				<div class="kxxk-list-item cf">
+					<label>已选科目<i class="fa fa-chevron-right"></i></label>
+					<ul id="choosen">
+						[#if sublist??]
+							[#list sublist as sublist]
+								[#if sublist!='']
+								<li sub="${sublist}" >${sublist}<i class="fa fa-close" onclick="removeSub(this)"></i></li>
+								[/#if]
+							[/#list]
+						[/#if]
+					</ul>
+					<button type="button" id="removeAll" class="btn bg-orange btn-removeAll">全部清空</button>
+				</div>
+				<div class="kxxk-list-item cf">
+
+					<label>选择科目<i class="fa fa-chevron-right"></i></label>
+					<ul id="subject">
+						<li id="物理"  [#if  subjects?? && subjects?contains("物理")]  class="active" [/#if]  onclick="addSubject(this)">物理</li>
+                    	<li id="历史"  [#if  subjects?? && subjects?contains("历史")]  class="active" [/#if]  onclick="addSubject(this)">历史</li>
+						<li id="化学"  [#if  subjects?? && subjects?contains("化学")]  class="active" [/#if]  onclick="addSubject(this)">化学</li>
+						<li id="生物"  [#if  subjects?? && subjects?contains("生物")]  class="active" [/#if]  onclick="addSubject(this)">生物</li>
+						<li id="政治"  [#if  subjects?? && subjects?contains("政治")]  class="active" [/#if]  onclick="addSubject(this)">政治</li>
+						<li id="地理"  [#if  subjects?? && subjects?contains("地理")]  class="active" [/#if]  onclick="addSubject(this)">地理</li>
+					</ul>
+					<div style="margin-left: 20px;margin-bottom: 15px;margin-top: 15px;" id="xy">
+						可选/必选:
+						<lable>
+							<i class='input_style radio_bg'><input type="radio" name="hot1"  id="hot1" value="0" [#if andOr0?? && andOr0 =="0"] checked="checked" [/#if]></i>
+							可选
+						</lable>
+						<lable>
+							<i class='input_style radio_bg'><input type="radio" name="hot1" id="hot1" value="1" [#if andOr0?? && andOr0 =="1"] checked="checked" [/#if]></i>
+							必选
+						</lable>
+					</div>
+					<div style="margin-top: 15px">
+						是否不限:
+						<lable>
+							<i class='input_style checkbox_bg'><input type="checkbox" name="hot2" id="hot2" value="1" [#if unlimited0?? && unlimited0 =="1"]  checked="checked" [/#if]></i>
+							不限
+						</lable>
+					</div>
+					<p><span>*</span>请选择3门您最擅长的科目 （注：目前仅开放7门科目，文艺和体育暂不能选择。因各地高中新课程名称不一，政治又称思想政治或思想品德，生物又称生命科学，技术又称通用技术或信息技术或信息科技或劳动技术，文艺又称文化艺术，体育又称体育健身或健康教育）</p>
+
+				<div style="margin-top: 20px">
+					<label>请输入院校名称:<input type="text" name="univ" id="univ" value="${univ_name!}" style="border: 1px solid #e2e2e2;line-height: 30px;"></label>
+					<label>请输入专业名称:<input type="text" name="major" id="major"  value="${major_name!}" style="border: 1px solid #e2e2e2;line-height: 30px;"></label>
+				</div>
+					<form action="courceToMajor.jspx" id="kxxk" method="post">
+						<input type="hidden" name="pageNo" value="${pagination.pageNo!}" />
+						<input type="hidden" name="subjects" value="${subjects!}"  id="subs"/>
+						<input type="hidden" name="limitType" value="${limitType!}"  id="limitType"/>
+						<input type="hidden" name="andOr0" value="${andOr!}"id="andOr0"/>
+						<input type="hidden" name="unlimited0" value="${unlimited0!}" id="unlimited0"/>
+						<input type="hidden" name="univName" value="${univ_name!}"id="univName"/>
+						<input type="hidden" name="majorName" value="${major_name!}" id="majorName"/>
+						<button type="button" id="search" class="btn bg-yellow btn-search btn-search2">搜索</button>
+					</form>
+				</div>
+			</div>
+			<table class="box-shadow">
+				<thead>
+					<tr>
+						<th>学校</th>
+						<th style='width:320px;'>专业</th>
+						<th>限选数量</th>
+						<th>限选科目</th>
+                        <!--<th>限选科目(附加)</th>-->
+						<!-- <th>最低分</th>
+						<th>最低排名</th>
+						<th>职业体验</th>
+						<th>关注</th>-->
+					</tr>
+				</thead>
+				<tbody>
+					[#list pagination.list as list]
+						<tr>
+							<td>${list.university_name!}</td>
+							<td>${list.major_name!}</td>
+							<td>${list.countlimit!}</td>
+							<td>${list.subjectlimit!}</td>
+							<!--<td>${list.subjectlimit_additional!}</td>-->
+							<!-- <td>${list.score_low!}</td>
+							<td>${list.rank_score_low!}</td>
+							<td>
+								<a href="${base}/searchUnivAndMajor/majorDetail.jspx?majorId=${list.major_id!}&xk=1"  class="btn bg-blue" >体验</a>
+							</td>
+							<td>
+							[#if list.student??]
+								<button type="button" onclick="quxiaoguanzhu(${list.id!})" class="btn bg-off"><i class="fa fa-heart"></i>解除</button>
+							[#else]
+								<button type="button" onclick="guanzhu(${list.id!})" class="btn bg-orange"><i class="fa fa-heart-o"></i>关注</button>
+							[/#if]
+							</td>-->
+						</tr>
+					[/#list]
+				</tbody>
+			</table>
+			<ul class="paging">
+				<div> <h4 style="margin-bottom: 10px;text-align-last: justify;">共${pagination.totalCount!}条&nbsp;每页${pagination.pageSize!}条&nbsp;当前第${pagination.pageNo!}页</h4></div>
+				<li onclick="_gotoPage('1');">首页</li>
+				<li onclick="_gotoPage('${pagination.prePage}');">上一页</li>
+				<li onclick="_gotoPage('${pagination.nextPage}');">下一页</li>
+				<li onclick="_gotoPage('${pagination.totalPage}');">尾页</li>
+			</ul>
+		</section>
+		[#include "../include/footer_new.html"/]
+	</body>
+	<script type="text/javascript" src="${resSys}/res/js/head.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			var localStatus = {
+				"id":1,
+				"subId":2
+			};
+			statusActive(localStatus);
+			$(window).scroll(function() {
+				var scroll = $(window).scrollTop();
+				if(Number(scroll) >= 380) {
+					$(".kxxk-footer").addClass("animation").css("visibility","visible");
+				};
+			});
+			$("#removeAll").click(function(){
+			    $("#hot1").removeAttr('checked');
+				$("#choosen").html("");
+				$("#subject li").removeClass("active");
+				$("#subs").val("");
+				$("#subject li").removeClass("bk");
+			   $("#subject li").css({"pointer-events": "auto","border-color":"#44D1E5"});
+			});
+			$("#search").click(function(){
+/*			     if($("#choosen li").length == 0  ){
+                			alert("至少选择1门科目");
+                			return false;
+                		};*/
+				var subs='';
+				$("#choosen li").each(function(){
+					var sub = $(this).attr("sub");
+					subs+=sub+",";
+				});
+				if(subs.length > 0){
+					subs = subs.substring(0, subs.length-1);
+				}
+				$("#subs").val(subs);
+				var andor = $('input:radio[name="hot1"]:checked').val();
+				$("#andOr0").val(andor);
+				var unlimited =$('input:checkbox[name="hot2"]:checked').val();
+				$("#unlimited0").val(unlimited);
+				var univName =$("#univ").val();
+				var majorName =$("#major").val();
+				$("#univName").val(univName);
+				$("#majorName").val(majorName);
+				$("form").submit();
+			})
+		});
+		function addSubject(obj){
+			var sub = $(obj).attr("id");
+			var item = $(obj).text();
+						if($(obj).hasClass("active")){
+            				return false;
+            			}
+            			if($("#choosen li").length >= 3 ){
+                          alert("最多选择3门科目");
+                          return false;
+                         }
+            			$(obj).addClass("active");
+            			var subHtml ='';
+            			subHtml+='<li  sub="'+sub+'">'+item+'<i class="fa fa-close" onclick="removeSub(this)"></i></li>';
+            			$("#choosen").append(subHtml);
+		}
+		function removeSub(obj){
+			$(obj).parent().remove();
+			var addSub = $(obj).parent().attr("sub");
+			$("#subject li").each(function(){
+				var sub = $(this).attr("id");
+				if(addSub == sub){
+					$(this).removeClass("active");
+				}
+			})
+		};
+		function _gotoPage(pageNo) {
+			try{
+				$("input[name='pageNo']").val(pageNo);
+				var andor = $('input:radio[name="hot1"]:checked').val();
+				$("#andOr0").val(andor);
+				var unlimited = $('input:checkbox[name="hot2"]:checked').val();
+				$("#unlimited0").val(unlimited);
+				var univName =$("#univ").val();
+				var majorName =$("#major").val();
+				$("#univName").val(univName);
+				$("#majorName").val(majorName);
+				$('#kxxk').submit();
+			} catch(e) {
+				alert('_gotoPage(pageNo)方法出错');
+			}
+		};
+		function guanzhu(Id){
+			if(Id==''){
+				alert("请选择关注的方案！");
+			};
+			$.ajax({
+				url: '${base}/kxxk/followmajor.jspx',
+				data:{Id:Id},
+				　　type : "POST",
+				   async:false,
+				   error:function(request) {
+				         alert("提交出现异常啦。。。。");
+				   },
+				　　success : function(data) {
+					     　var res = eval('(' + data + ')');
+						if(res && res.success == true){
+							alert("关注成功！！");
+							location.reload();
+						}else{
+							alert("失败\r\n"+res.msg);
+						}
+				   }
+			});
+		};
+		function quxiaoguanzhu(Id){
+			if(Id==''){
+				alert("请选择取消关注的方案！");
+			};
+			$.ajax({
+				url: '${base}/kxxk/cancelfollowmajor.jspx',
+				data:{Id:Id},
+				　　type : "POST",
+				   async:false,
+				   error:function(request) {
+				         alert("提交出现异常啦。。。。");
+				   },
+				　　success : function(data) {
+					     　var res = eval('(' + data + ')');
+						if(res && res.success == true){
+							alert("取消成功！！");
+							location.reload();
+						}else{
+							alert("失败\r\n"+res.msg);
+						}
+				   }
+			});
+		};
+	</script>
+</html>

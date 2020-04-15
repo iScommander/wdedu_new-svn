@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>科学选科-专业</title>
+		<link rel="stylesheet" href="${resSys}/res/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="${resSys}/res/css/animate.css" />
+		<link rel="stylesheet" href="${base}/r/wdedu/css/head-footer.css" />
+		<link rel="stylesheet" href="${resSys}/res/css/dlsy.css" />
+		<script src="${resSys}/res/js/jquery-1.11.3.min.js"></script>
+	<!--	<script type="text/javascript" src="${resSys}/res/js/jquery.slimscroll.js"></script> -->
+		<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+	[#include "../include/header_address.html"/]
+		[#include "../include/header_xgkxk.html"/]
+		<div class="mbxdh_bg">
+            <div class="mbxdh">
+                <a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">新高考选科</a>&nbsp;&gt; &nbsp; <a href="#">根据专业选科目</a>
+            </div>
+        </div>
+		<section class="banner_ny" style="padding-top:0px;">
+
+		</section>
+		<section class="center-block">
+			<ul class="kxxk-menu cf">
+				<li>
+					<a href="${base}/kxxk/courceToMajor.jspx">根据科目选专业</a>
+				</li>
+				<li class="active">
+					<a href="${base}/kxxk/majorToCource.jspx">根据专业选科目</a>
+				</li>
+				<!--<li>-->
+					<!--<a href="${base}/kxxk/professionToMajor.jspx">根据职业选专业</a>-->
+				<!--</li>-->
+			</ul>
+			<div class="kxxk-list box-shadow gps">
+				<div class="kxxk-list-item cf">
+					<label>已选专业<i class="fa fa-chevron-right"></i></label>
+					<ul id="choosen">
+					[#if majorlist??]
+						[#list threeList as threeList]
+							[#list majorlist as majorlist]
+								[#if majorlist.majorid+""==threeList.major_Id+""]
+								<li mid="${threeList.major_Id}" msid="${threeList.msid!}">${threeList.major_Name}<i class="fa fa-close" onclick="removeMajor(this)"></i></li>
+								[/#if]
+							[/#list]
+						[/#list]
+					[/#if]
+					</ul>
+					<button type="button" id="removeAll" class="btn bg-orange btn-removeAll">全部清空</button>
+				</div>
+
+				<div class="kxxk-list-item cf">
+					<label>选择专业<i class="fa fa-chevron-right"></i></label>
+					<ul id="subject">
+					[#list oneList as BKList]
+						[#if majorids?? && majorids?contains(BKList.major_Id+"")]
+						<li id="${BKList.major_Id!}" class="active" onclick="showMajors(this)">${BKList.major_Name}</li>
+						[#else]
+						<li id="${BKList.major_Id!}" onclick="showMajors(this)">${BKList.major_Name}</li>
+						[/#if]
+					[/#list]	
+					</ul>
+					<p><span>*</span>所选专业不超过5个</p>
+					<div style="margin-top: 20px">
+						<label>请输入院校名称:<input type="text" name="univ" id="univ" value="${univ_name!}" style="border: 1px solid #e2e2e2;line-height: 30px;"></label>
+						<label>请输入专业名称:<input type="text" name="major" id="major"  value="${major_name!}" style="border: 1px solid #e2e2e2;line-height: 30px;"></label>
+					</div>
+					<form action="majorToCource.jspx" id="kxxk">
+						<input type="hidden" name="pageNo" " />
+						<!--<input type="hidden" name="pageNo" value="${pagination.pageNo!}" />-->
+						<input type="hidden" name="majorNames" value="${majorNames!}"  id="mids"/>
+						<input type="hidden" name="univName" value="${univ_name!}"id="univName"/>
+						<input type="hidden" name="majorName" value="${major_name!}" id="majorName"/>
+						<button type="button" id="search" class="btn bg-yellow btn-search btn-search2">搜索</button>
+					</form>
+				</div>
+				<section class="majors-lists box-shadow">
+					<section>
+					[#list oneList as oneList]
+						<div id="${'m'+oneList.major_Id}" class="major-list">
+				       <h4 class="${'m'+oneList.major_Id}" mid="${'m'+oneList.major_Id}" onclick="addbt(this)"style="margin-left: 280px;
+				       padding: 8px 20px">${oneList.major_Name}</h4><br>
+						[#list twoList as twoList]
+							[#if oneList.major_Id=twoList.parent_Major_Id]
+								<h4 class="${'m'+twoList.major_Id}" mid="${'m'+twoList.major_Id}" onclick="addbt(this)" >${twoList.major_Name}</h4>
+								<ul>
+								[#list threeList as threeList]
+									[#if twoList.major_Id=threeList.parent_Major_Id]
+										[#if majorNames?? && majorNames?contains(threeList.major_Id+"") ]
+											<li mid="${threeList.major_Id}" class="active" onclick="addMajor(this)">${threeList.major_Name}</li>
+										[#else]
+											<li mid="${threeList.major_Id}" onclick="addMajor(this)">${threeList.major_Name}</li>
+										[/#if]
+									[/#if]
+								[/#list]
+								</ul>
+							[/#if]
+						[/#list]
+						</div>	
+					[/#list]
+					</section>
+				</section>
+
+
+
+
+
+			</div>
+			<table class="box-shadow">
+				<thead>
+					<tr>
+						<th>学校</th>
+						<th style='width:320px;'>专业</th>
+						<th>限选数量</th>
+						<th>限选科目</th>
+						<th>限选科目(附加)</th>
+						<!-- <th>最低分</th>
+						<th>最低排名</th>
+						<th>职业体验</th>
+						<th>关注</th>-->
+					</tr>
+				</thead>
+				<tbody>
+				[#list pagination.list as list]
+					<tr>
+						<td>${list.university_name!}</td>
+						<td>${list.major_name!}</td>
+						<td>${list.countlimit!}</td>
+						<td>${list.subjectlimit!}</td>
+						<td>${list.subjectlimit_additional!}</td>
+						<!-- <td>${list.score_low!}</td>
+						<td>${list.rank_score_low!}</td>
+						<td>
+							<a href="${base}/searchUnivAndMajor/majorDetail.jspx?majorId=${list.major_id!}&xk=1"  class="btn bg-blue" >体验</a>
+						</td>
+						<td>
+						[#if list.student??]
+							<button type="button" onclick="quxiaoguanzhu(${list.id!})" class="btn bg-off"><i class="fa fa-heart"></i>解除</button>
+						[#else]
+							<button type="button" onclick="guanzhu(${list.id!})" class="btn bg-orange"><i class="fa fa-heart-o"></i>关注</button>
+						[/#if]
+						</td>-->
+					</tr>
+				[/#list]
+				</tbody>
+			</table>
+			<ul class="paging">
+				<div> <h4 style="margin-bottom: 10px;text-align-last: justify;">共${pagination.totalCount!}条&nbsp;每页${pagination.pageSize!}条&nbsp;当前第${pagination.pageNo!}页</h4></div>
+				<li onclick="_gotoPage('1');">首页</li>
+				<li onclick="_gotoPage('${pagination.prePage}');">上一页</li>
+				<li onclick="_gotoPage('${pagination.nextPage}');">下一页</li>
+				<li onclick="_gotoPage('${pagination.totalPage}');">尾页</li>
+			</ul>
+		</section>
+		[#include "../include/footer_new.html"/]
+	</body>
+	<script type="text/javascript" src="${resSys}/res/js/head.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			var localStatus = {
+				"id": 1,
+				"subId": 2
+			};
+						$(document).on("click", function() {
+            				$(".majors-lists").hide();
+            				$(".major-list").hide();
+            				$("#subject li").removeClass("active");
+            				for(var i=0;i<$("#choosen li").length;i++){
+            					var msid = $("#choosen li").eq(i).attr("msid");
+            					var sid = msid.substring(1, msid.length);
+            					for(var j=0;j<$("#subject li").length;j++){
+            						var iid = $("#subject li").eq(j).attr("id");
+            						if(sid == iid){
+            							$("#subject li").eq(j).addClass("active");
+            						}
+            					}
+            				};
+            			});
+			statusActive(localStatus);
+
+			$("#removeAll").click(function() {
+				$("#choosen").html("");
+				$("#subject li").removeClass("active");
+				$(".major-list li").removeClass("active");
+				$("#mids").val("");
+				$(".major-list h4").removeClass("active");
+			});
+			$("#search").click(function() {
+				// if($("#choosen li").length == 0) {
+				// 	alert("至少选择1个专业");
+				// 	return false;
+				// };
+				var mids = '';
+				$("#choosen li").each(function() {
+					var mid = $(this).attr("mid");
+					mids += mid + ",";
+				});
+				if(mids.length > 0) {
+					mids = mids.substring(0, mids.length - 1);
+				};
+				$("#mids").val(mids);
+				var univName =$("#univ").val();
+				var majorName =$("#major").val();
+				$("#univName").val(univName);
+				$("#majorName").val(majorName);
+				$("form").submit();
+			});
+			$(window).scroll(function () {
+				var scroll = $(window).scrollTop();
+				if(Number(scroll) >  200 ){
+					$(".majors-lists").addClass("fixed-top");
+				}else{
+					$(".majors-lists").removeClass("fixed-top");
+				};
+				if(Number(scroll) >  660 ){
+					$(".majors-lists").hide();
+					$("#subject li").removeClass("active");
+					for(var i=0;i<$("#choosen li").length;i++){
+						var msid = $("#choosen li").eq(i).attr("msid");
+						var sid = msid.substring(1, msid.length);
+						for(var j=0;j<$("#subject li").length;j++){
+							var iid = $("#subject li").eq(j).attr("id");
+							if(sid == iid){
+								$("#subject li").eq(j).addClass("active");
+							}
+						}
+					};
+				};
+			});
+
+		});
+
+
+		function showMajors(obj) {
+			event.stopPropagation();
+			var id = $(obj).attr("id");
+			var index = $(obj).index();
+			if($("#choosen li").length >= 5) {
+				alert("最多选择5个专业");
+				return false;
+			};
+			$(obj).addClass("active");
+			if($("#choosen li").length == 0) {
+				$(obj).addClass("active").siblings().removeClass("active");
+			}else{
+				$("#subject li").eq(index).siblings().removeClass("active");
+				for(var i=0;i<$("#choosen li").length;i++){
+					var msid = $("#choosen li").eq(i).attr("msid");
+					var sid = msid.substring(1, msid.length);
+					for(var j=0;j<$("#subject li").length;j++){
+						if(j!=index){
+							var iid = $("#subject li").eq(j).attr("id");
+							if(sid == iid){
+								var newIndex =j;
+								break;
+							}
+						}
+					}
+					$("#subject li").eq(newIndex).addClass("active");
+				}
+			};
+			$(".majors-lists").show();
+			$("#m" + id).show().siblings().hide();
+		};
+		function addbt(obj) {
+			event.stopPropagation();
+			if($(obj).hasClass("active")) {
+				return false;
+			};
+			if($("#choosen li").length >= 5) {
+				alert("最多选择5个专业");
+				return false;
+			};
+			var mid = $(obj).attr("mid");
+			var item = $(obj).text();
+			$(obj).addClass("active");
+			var msid = $(obj).parents(".major-list").attr("id");
+			var mHtml = '';
+			mHtml += '<li mid="' + mid + '" msid="' + msid + '">' + item + '<i class="fa fa-close" onclick="removebt(this)"></i></li>';
+			$("#choosen").append(mHtml);
+		};
+		function removebt(obj) {
+			event.stopPropagation();
+			var id = $(obj).parent().attr("msid");
+			var Cmid = $(obj).parent().attr("mid");
+            $("."+Cmid).removeClass("active");
+
+			$(obj).removeClass("active");
+			$(obj).parent().remove();
+			var i = 0;
+			$("#"+id+" li").each(function(){
+				if($(this).attr("mid")==Cmid){
+					$(this).removeClass("active");
+				};
+				if($(this).hasClass("active")){
+					i++;
+				};
+			});
+			if($("#choosen li").length == 0) {
+				$("#subject li").removeClass("active");
+				$(obj).removeClass("active");
+				$(".majors-lists").hide();
+				$(".major-list").hide();
+			}else if(i==0){
+				 var itemId = id.substring(1, id.length);
+				 $("#"+itemId).removeClass("active");
+				 $("#"+id).hide();
+				 $(".majors-lists").hide();
+			}
+		};
+		function addMajor(obj) {
+			event.stopPropagation();
+			if($(obj).hasClass("active")) {
+				return false;
+			};
+			if($("#choosen li").length >= 5) {
+				alert("最多选择5个专业");
+				return false;
+			};
+			var mid = $(obj).attr("mid");
+			var item = $(obj).text();
+			$(obj).addClass("active");
+			var msid = $(obj).parents(".major-list").attr("id");
+			var mHtml = '';
+			mHtml += '<li mid="' + mid + '" msid="' + msid + '">' + item + '<i class="fa fa-close" onclick="removeMajor(this)"></i></li>';
+			$("#choosen").append(mHtml);
+		};
+		function removeMajor(obj) {
+			event.stopPropagation();
+			var id = $(obj).parent().attr("msid");
+			var Cmid = $(obj).parent().attr("mid");
+			$(obj).parent().remove();
+			var i = 0;
+			$("#"+id+" li").each(function(){
+				if($(this).attr("mid")==Cmid){
+					$(this).removeClass("active");
+				};
+				if($(this).hasClass("active")){
+					i++;
+				};
+			});
+			if($("#choosen li").length == 0) {
+				$("#subject li").removeClass("active");
+				$(obj).removeClass("active");
+				$(".majors-lists").hide();
+				$(".major-list").hide();
+			}else if(i==0){
+				 var itemId = id.substring(1, id.length);
+				 $("#"+itemId).removeClass("active");
+				 $("#"+id).hide();
+				 $(".majors-lists").hide();
+			}
+		};
+
+
+
+		function _gotoPage(pageNo) {
+			try{
+				$("input[name='pageNo']").val(pageNo);
+				$('#kxxk').submit();
+			} catch(e) {
+				alert('_gotoPage(pageNo)方法出错');
+			}
+		};
+		function guanzhu(Id){
+			if(Id==''){
+				alert("请选择关注的方案！");
+				return false;
+			};
+			$.ajax({
+				url: '${base}/kxxk/followmajor.jspx',
+				data:{Id:Id},
+				　　type : "POST",
+				   async:false,
+				   error:function(request) {
+				         alert("提交出现异常啦。。。。");
+				   },
+				　　success : function(data) {			
+					     　var res = eval('(' + data + ')');
+						if(res && res.success == true){ 				
+							alert("关注成功！！");
+							location.reload();										 
+						}else{
+							alert("失败\r\n"+res.msg);
+						}
+				   }			 		 
+			}); 
+		}
+		function quxiaoguanzhu(Id){
+			if(Id==''){
+				alert("请选择取消关注的方案！");
+			};
+			$.ajax({
+				url: '${base}/kxxk/cancelfollowmajor.jspx',
+				data:{Id:Id},
+				　　type : "POST",
+				   async:false,
+				   error:function(request) {
+				         alert("提交出现异常啦。。。。");
+				   },
+				　　success : function(data) {			
+					     　var res = eval('(' + data + ')');
+						if(res && res.success == true){ 		
+							alert("取消成功！！");
+							location.reload();										 
+						}else{
+							alert("失败\r\n"+res.msg);
+						}
+				   }			 		 
+			}); 
+		}
+
+		$(".majors-lists section").slimScroll({
+			height: "auto",
+			alwaysVisible: true,
+			start:"top"
+		});
+	</script>
+</html>

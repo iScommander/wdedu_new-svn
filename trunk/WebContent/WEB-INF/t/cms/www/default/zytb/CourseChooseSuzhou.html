@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>选科意向调查</title>
+    <link rel="stylesheet" href="${base}/r/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${base}/r/css/combo.select.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css"/>
+    <link type="text/css" rel="stylesheet" href="/${res}/css/index.css"/>
+</head>
+<body>
+<!--顶部-->
+<header class="indexHeader">
+    <div class="flex-container width1200">
+        <div>学涯云教育集团旗下升学服务站</div>
+        <div class="textR">
+					<span>
+					<a href="${base}/FwYl/swithtype.jspx">管理中心</a>
+				</span>
+            <span>咨询热线：400-0985-200</span>
+            <span>微信小程序</span>
+        </div>
+    </div>
+</header>
+<!--tab切换  导航-->
+[#include "../include/header_zy.html"/]
+<!--主体-->
+<div class="main container survey clearfix">
+    <section class="survey_w840">
+        <!--<H1 style="width: 840px;">选科意向调查</H1>-->
+        <div class="survey_con">
+            <form action="choosecourseSuzhou.jspx" method="post" id="divForm" target="_blank">
+                <H1>选科意向调查</H1>
+                <h4 style="margin-bottom:10px;margin-top: 20px;margin-left: 69px;margin-right: 72px;padding-right: 4px;border-right-width: 10px;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我省即将启动“3+1+2”高考改革新方案，为促进学校教育改革的有效开展，以及学生的全面和个性发展，特对高一学生做此问卷调查，从下列7种志愿方案中选择2种：
+                </h4>
+                <!--<p style="color: red">-->
+                    <!--“3”,指语文、数学、外语三门必考科目;</br>-->
+                    <!--“1”,指物理、历史两门科目必选一门;</br>-->
+                    <!--“2”,指在政治、地理、化学、生物任选其二。</br>-->
+                <!--</p>-->
+                <div style="text-align: center;">
+                    <div class="survey_list">
+                        <div>
+                            <!--<div style="margin-bottom:20px">-->
+                                <!--<H4>请在下列其中组合中中任选两种</H4>-->
+                            <!--</div>-->
+                            <!--<div class="item">-->
+                                <!--<input id="ck11" type="radio" name="first" value="物理" onclick="clka()"/><label-->
+                                    <!--for="ck11">物理</label>-->
+                                <!--<input id="ck12" type="radio" name="first" value="历史" onclick="clkb()"/><label-->
+                                    <!--for="ck12">历史</label>-->
+                            <!--</div>-->
+                            <div id="biaoti" style="margin-bottom:20px;color: darkorange;">
+                                <H4>请在下列七种组合中选择两种</H4>
+                            </div>
+                            <div >
+                                <input id="ck6" type="checkbox" name="second" value="1物理化学生物"
+                                       onClick="return checkDatemax()"/><label for="ck6">1、物理+化学生物</label>
+                            </div>
+                            <div >
+                                <input id="ck7" type="checkbox" name="second" value="2物理化学地理"
+                                       onClick="return checkDatemax()"/><label for="ck7">2、物理+化学地理</label>
+                            </div>
+                            <div>
+                                <input id="ck8" type="checkbox" name="second" value="3物理生物地理"
+                                       onClick="return checkDatemax()"/><label for="ck8">3、物理+生物地理</label>
+                            </div>
+                            <div >
+                                <input id="ck9" type="checkbox" name="second" value="4历史政治生物"
+                                       onClick="return checkDatemax()"/><label for="ck9">4、历史+政治生物</label>
+                            </div>
+                            <div>
+                                <input id="ck10" type="checkbox" name="second" value="5历史政治地理"
+                                       onClick="return checkDatemax()"/><label for="ck10">5、历史+政治地理</label>
+                            </div>
+                            <div >
+                                <input id="ck11" type="checkbox" name="second" value="6历史生物地理"
+                                       onClick="return checkDatemax()"/><label for="ck11">6、历史+生物地理</label>
+                            </div>
+                            <div class="item">
+                                <input id="ck12" type="checkbox" name="second" value="7苏州实验中学AP国际课程"
+                                       onClick="return checkDatemax()"/><label for="ck12">7、苏州实验中学AP国际课程</label>
+                            </div>
+                            <!--<div id="divb" class="item" style="display: none">-->
+                                <!--<input id="ck1" type="checkbox" name="second" value="化学"-->
+                                       <!--onClick="return checkDatemax()"/><label for="ck1">化学</label>-->
+                                <!--<input id="ck2" type="checkbox" name="second" value="生物"-->
+                                       <!--onClick="return checkDatemax()"/><label for="ck2">生物</label>-->
+                                <!--<input id="ck3" type="checkbox" name="second" value="政治"-->
+                                       <!--onClick="return checkDatemax()"/><label for="ck3">政治</label>-->
+                                <!--<input id="ck4" type="checkbox" name="second" value="地理"-->
+                                       <!--onClick="return checkDatemax()"/><label for="ck4">地理</label>-->
+                                <!--<input id="ck5" type="checkbox" name="second" value="物理"-->
+                                       <!--onClick="return checkDatemax()"/><label for="ck5">物理</label>-->
+                            <!--</div>-->
+                            <!--<select id="s1" onchange="reset23()">-->
+                            <!--<option value="">请选择第一门科目</option>-->
+                            <!--<option value="wuli">物理</option>-->
+                            <!--<option value="lishi">历史</option>-->
+                            <!--</select>-->
+
+                            <!--<select id="s2">-->
+                            <!--<option value="">请选择第二门科目</option>-->
+                            <!--</select>-->
+                            <!--<select id="s3">-->
+                            <!--<option value="">请选择第三门科目</option>-->
+                            <!--</select>-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="survey_Btn" style="text-align: center;">
+                    <input type="submit" style="padding-bottom: 0px;padding-top: 0px;" value="提交选择" onclick="return checkDate()">
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+<!--底部-->
+[#include "../include/footer.html"/]
+<!--js-->
+<script src="${base}/r/js/jQuery.js"></script>
+<script src="${base}/r/js/bootstrap.min.js"></script>
+<script src="${base}/r/js/itemsJs/filtrate.js"></script>
+<script src="${base}/r/js/itemsJs/common.js"></script>
+
+<script type="text/javascript">
+    function clka() {
+        $("#biaoti").css("display", "block");
+        //取消复选框选中
+        $(":checkbox").prop("checked", false);
+        $("#divb").css("display", "none");
+        $("#diva").css("display", "block");
+    }
+</script>
+
+<script type="text/javascript">
+    function clkb() {
+        $("#biaoti").css("display", "block");
+
+        $(":checkbox").prop("checked", false);
+        $("#diva").css("display", "none");
+        $("#divb").css("display", "block");
+    }
+</script>
+
+<script type="text/javascript">
+    //    限制选中数量
+    function checkDatemax() {
+        var checkedCount = 0;
+        for (var i = 0; i < divForm.second.length; i++) {
+            if (divForm.second[i].checked) {
+                checkedCount++;
+            }
+        }
+        if (checkedCount > 2) {
+            alert("不可选择超过2种选项");
+            return false;
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    //    限制选中数量
+    // function checkDate() {
+    //     var checkedCountfirst = 0;
+    //     var checkedCountsecond = 0;
+    //
+    //     if (divForm.first[0].checked || divForm.first[1].checked)
+    //         checkedCountfirst = 1;
+    //
+    //     for (var i = 0; i < divForm.second.length; i++) {
+    //         if (divForm.second[i].checked) {
+    //             checkedCountsecond++;
+    //         }
+    //     }
+    //
+    //     if (checkedCountfirst + checkedCountsecond == 3) {
+    //         alert("提交成功，感谢您的配合!");
+    //         $(":checkbox").css(disabled, "disabled");
+    //
+    //     } else
+    //         alert("请选择三门科目");
+    //     return false;
+    // }
+
+    function checkDate() {
+        var checkedCountfirst = 0;
+        var checkedCountsecond = 0;
+
+        for (var i = 0; i < divForm.second.length; i++) {
+            if (divForm.second[i].checked) {
+                checkedCountsecond++;
+            }
+        }
+
+        if (checkedCountsecond == 2) {
+            alert("提交成功，感谢您的配合!");
+            $(":checkbox").css(disabled, "disabled");
+
+        } else
+            alert("请选择两种组合");
+        return false;
+    }
+</script>
+
+</body>
+</html>
+
+
+<!--<select id="s1" onchange="reset34()"><option value="">请选择1</option><option value="1">s1_1</option><option value="2">s1_2</option><option value="3">s1_3</option></select>-->
+<!--<select id="s2" onchange="reset34()"><option value="">请选择2</option><option value="1">s2_1</option><option value="2">s2_2</option><option value="3">s2_3</option></select>-->
+<!--<select id="s3"><option value="">请选择3</option></select>-->
+<!--<select id="s4"><option value="">请选择4</option></select>-->
+<!--<script>-->
+<!--var arr3={},arr4={};-->
+<!--arr3['1_1'] = [{ v: 1, t: 's3_s1_1_s2_1_1' }, { v: 2, t: 's3_s1_1_s2_1_2' }];//选择s_1_1和s_2_1对应的s3数据-->
+<!--arr3['1_2'] = [{ v: 1, t: 's3_s1_1_s2_2_1' }, { v: 2, t: 's3_s1_1_s2_2_2' }];//选择s_1_2和s_2_2对应的s3数据-->
+<!--//....其他同理-->
+<!--arr4['1_1'] = [{ v: 1, t: 's4_s1_1_s2_1_1' }, { v: 2, t: 's4_s1_1_s2_1_2' }];//选择s_1_1和s_2_1对应的s4数据-->
+<!--arr4['1_2'] = [{ v: 1, t: 's4_s1_1_s2_2_1' }, { v: 2, t: 's4_s1_1_s2_2_2' }];//选择s_1_2和s_2_2对应的s4数据-->
+<!--var s1=document.getElementById('s1'),s2=document.getElementById('s2'),s3=document.getElementById('s3'),s4=document.getElementById('s4');-->
+<!--function reset34() {-->
+<!--var arr = arr3[s1.value + '_' + s2.value];//获取s3对应的数组-->
+<!--s3.options.length = 0;-->
+<!--if (arr) for (var i = 0, j = arr.length; i < j; i++) s3.options.add(new Option(arr[i].t, arr[i].v));-->
+<!--arr = arr4[s1.value + '_' + s2.value];//获取s4对应的数组-->
+<!--s4.options.length = 0;-->
+<!--if (arr) for (var i = 0, j = arr.length; i < j; i++) s4.options.add(new Option(arr[i].t, arr[i].v));-->
+<!--}-->
+<!--</script>-->
+
+<!--<script>-->
+    <!--var arr2 = {}, arr3 = {};-->
+
+    <!--arr2['wuli'] = [{v: 'huaxue', t: '化学'}, {v: 'shengwu', t: '生物'}, {v: 'zhengzhi', t: '政治'}, {-->
+        <!--v: 'lishi',-->
+        <!--t: '历史'-->
+    <!--}, {v: 'dili', t: '地理'}];-->
+    <!--arr2['lishi'] = [{v: 'wuli', t: '物理'}, {v: 'huaxue', t: '化学'}, {v: 'shengwu', t: '生物'}, {-->
+        <!--v: 'zhengzhi',-->
+        <!--t: '政治'-->
+    <!--}, {v: 'dili', t: '地理'}];-->
+
+    <!--arr3['wuli_huaxue'] = [{v: 'shengwu', t: '生物'}, {v: 'zhengzhi', t: '政治'}, {v: 'lishi', t: '历史'}, {-->
+        <!--v: 'dili',-->
+        <!--t: '地理'-->
+    <!--}];-->
+    <!--arr3['wuli_shengwu'] = [{v: 'huaxue', t: '化学'}, {v: 'zhengzhi', t: '政治'}, {v: 'lishi', t: '历史'}, {-->
+        <!--v: 'dili',-->
+        <!--t: '地理'-->
+    <!--}];-->
+    <!--arr3['wuli_zhengzhi'] = [{v: 'huaxue', t: '化学'}, {v: 'shengwu', t: '生物'}, {v: 'lishi', t: '历史'}, {-->
+        <!--v: 'dili',-->
+        <!--t: '地理'-->
+    <!--}];-->
+    <!--arr3['wuli_lishi'] = [{v: 'huaxue', t: '化学'}, {v: 'shengwu', t: '生物'}, {v: 'zhengzhi', t: '政治'}, {-->
+        <!--v: 'dili',-->
+        <!--t: '地理'-->
+    <!--}];-->
+    <!--arr3['wuli_dili'] = [{v: 'huaxue', t: '化学'}, {v: 'shengwu', t: '生物'}, {v: 'zhengzhi', t: '政治'}, {-->
+        <!--v: 'lishi',-->
+        <!--t: '历史'-->
+    <!--}];-->
+
+    <!--arr3['lishi_huaxue'] = [{v: 'wuli', t: '物理'}, {v: 'huaxue', t: '生物'}, {v: 'lishi', t: '历史'}, {v: 'dili', t: '地理'}];-->
+    <!--arr3['lishi_shengwu'] = [{v: 'wuli', t: '物理'}, {v: 'huaxue', t: '化学'}, {v: 'lishi', t: '历史'}, {v: 'dili', t: '地理'}];-->
+    <!--arr3['lishi_zhengzhi'] = [{v: 'huaxue', t: '化学'}, {v: 'shengwu', t: '生物'}, {v: 'lishi', t: '历史'}, {-->
+        <!--v: 'dili',-->
+        <!--t: '地理'-->
+    <!--}];-->
+    <!--arr3['lishi_wuli'] = [{v: 'huaxue', t: '化学'}, {v: 'shengwu', t: '生物'}, {v: 'zhengzhi', t: '政治'}, {-->
+        <!--v: 'dili',-->
+        <!--t: '地理'-->
+    <!--}];-->
+    <!--arr3['lishi_dili'] = [{v: 'wuli', t: '物理'}, {v: 'huaxue', t: '化学'}, {v: 'shengwu', t: '生物'}, {v: 'lishi', t: '历史'}];-->
+
+    <!--var s1 = document.getElementById('s1'), s2 = document.getElementById('s2'), s3 = document.getElementById('s3');-->
+
+
+<!--function reset23() {-->
+<!--var arr = arr2[s1.value];//获取s3对应的数组-->
+<!--s2.options.length = 0;-->
+<!--if (arr) for (var i = 0, j = arr.length; i < j; i++)-->
+<!--s2.options.add(new Option(arr[i].t, arr[i].v));-->
+
+<!--arr = arr3[s1.value + '_' + s2.value];//获取s4对应的数组-->
+<!--s3.options.length = 0;-->
+<!--if (arr) for (var i = 0, j = arr.length; i < j; i++)-->
+<!--s3.options.add(new Option(arr[i].t, arr[i].v));-->
+<!--}-->
+<!--</script>-->

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<title>高考选科测评</title>
+		<link rel="stylesheet" href="${base}/r/wdedu/css/head-footer.css" />
+		<script src="${resSys}/res/js/jquery-1.11.3.min.js"></script>
+		<script src="${base}/r/cms/front.js"></script>
+		<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css"/>
+		<style type="text/css">
+			.warp-top{margin-bottom: 10px;}
+			.cs-title{display: table;margin: 10px auto;padding: 4px; border:1px solid #ff8d00;}
+			.cs-title span{display: inline-block;line-height:35px;padding: 0 20px;color: #fff;background: #ff8d00;font-size: 16px;}
+			.box-shadow{padding: 20px;margin: 20px auto;}
+			ol{padding: 10px 0px 30px 0px;}
+			ol li{float: left;position: relative;width: 30%;border:5px solid #D3D4D8;margin-right: 3%;height: 280px;}
+			ol li:last-child{margin-right: 0;}
+			ol li:before{position: absolute;content: '';top: -5px;left: 20px;width: 18px;height: 28px;background: url(${resSys}/res/img/dlsy/gkxkcs-bage.png);}
+			ol li i{display: block;margin: 12px auto;width: 70px;height: 70px;}
+			.icon1{background: url(${resSys}/res/img/dlsy/gkxkcs-h.png);}
+			.icon2{background: url(${resSys}/res/img/dlsy/gkxkcs-m.png);}
+			.icon3{background: url(${resSys}/res/img/dlsy/gkxkcs-s.png);}
+			ol li h4{text-align: center;padding: 0 0 6px;}
+			ol li span{display: block;padding: 5px 2em;text-align: justify;}
+			ol li a{display: table;background: #1c2b72;color: #fff;margin: 10px auto;padding: .55em 1.6em;border-radius: 2px;}
+			ol li a:last-child{background: #ff8d00;}
+			ol li:last-child span{padding-bottom: 20px;}
+			.btn{display: table;background: #2fceb3;margin: 20px auto;padding: .55em 1em;font-size: 15px;}
+			.yc{display:none}
+
+		</style>
+	</head>
+	<body>
+		<!--顶部线条-->
+
+
+
+<script type='text/javascript' src='${base}/r/wdedu/js/dropdown.js'></script>
+    [#include "../wdedu/include/header_address.html"/]
+		<!--tab切换  导航-->
+		[#if kstype?? && kstype=='1']
+		[#include "../include/header_kstb.html"/]
+		[#elseif kstype?? && kstype=='2']
+		[#include "../wdedu/include/header_zytb.html"/]
+		[#else]
+		[#include "../wdedu/include/header_xgkxk.html"/]
+		[/#if]
+		<div class="mbxdh_bg">
+            <div class="mbxdh">
+                <a href="${base}/">首页</a>&nbsp;&gt; &nbsp;[#if kstype?? && kstype=='2'] <a href="#">志愿填报</a>&nbsp;&gt; &nbsp; <a href="#">测专业</a> [#else] <a href="#">新高考选科</a>&nbsp;&gt; &nbsp; <a href="#">专业测评</a> [/#if]
+            </div>
+        </div>
+<section class="banner_zxxk" style="padding-top:0px;">
+<input type="hidden" value="${haveTianZhiyuan!}" name="haveTianZhiyuan"/>
+            		</section>
+
+		<section class="box-shadow center-block">
+			<h4 class="cs-title"><span>开启你的自我探索之旅</span></h4>
+			<p style="line-height: 30px;text-align: center;">亲爱的同学，你好， 欢迎进入本次测评！在测评中，你将对自己的职业兴趣、风格、以及社会环境对你未来职业发展的潜在影响进行一次全面深入的探索。本次测评一共包含三个量表，你可以任意选择一个量表进入测评。如果你是第一次进入本测评，建议你按照顺序逐一完成量表。你大概需要50分钟的时间完成所有量表。现在，请找一个没人打扰的地方，泡杯咖啡，开启你的自我探索之旅吧！</p>
+			<ol class="cf">
+				<li>
+					<i class="icon1"></i>
+					<h4>Holland职业兴趣</h4>
+					<span>美国职业指导专家霍兰德(John Holland)根据他本人大量的职业咨询经验及其职业类型理论编制的测评工具</span>
+					<a href="${base}/evaluation/careerQuiz.jspx"  [#if is.isonecs??&& is.isonecs='no' ] class="yc" [/#if]>立即测试</a>
+					<a href="${base}/evaluation/findcareerQuiz.jspx?haveTianZhiyuan=${haveTianZhiyuan!}" [#if is.isonebg??&& is.isonebg='no' ] class="yc" [/#if]>查看报告</a>
+				</li>
+				<li>
+					<i class="icon2"></i>
+					<h4>MBTI</h4>
+					<span>系统根据归纳提炼的动力、信息收集、决策方式和生活方式四个关键要素，为学生的个性特点、适合的职业，给出对应的发展建议</span>
+					<a href="${base}/evaluation/MBTI.jspx"  [#if is.istwocs??&& is.istwocs='no' ]  class="yc" [/#if]>立即测试</a>
+					<a href="${base}/evaluation/findMBTIReport.jspx?haveTianZhiyuan=${haveTianZhiyuan!}"  [#if is.istwobg??&& is.istwobg='no' ] class="yc"  [/#if]target="_blank">查看报告</a>
+				</li>
+				<li>
+					<i class="icon3"></i>
+					<h4>社会支持因素</h4>
+					<span>在我们的测验中，我们和你一起探索了将会影响你专业发展的最重要的三种社会环境因素 </span>
+					<a href="${base}/evaluation/sociaSupport.jspx"  [#if is.isthreecs?? && is.isthreecs='no' ] class="yc" [/#if]>立即测试</a>
+					<a href="${base}/evaluation/findsociaSupportReport.jspx?haveTianZhiyuan=${haveTianZhiyuan!}"  [#if is.isthreebg??&& is.isthreebg='no' ]  class="yc"  [/#if] target="_blank"> 查看报告</a>
+				</li>
+			</ol>
+			[#if is.isallbg?? && is.isallbg='yes' ]  <a href="${base}/evaluation/allcs.jspx?haveTianZhiyuan=${haveTianZhiyuan!}" class="btn" target="_blank" >查看合并测试报告</a> [/#if]
+
+		</section>
+	[#include "../wdedu/include/footer_new.html"/]
+	</body>
+	<script type="text/javascript" src="${resSys}/res/js/head.js"></script>
+	<script src="${base}/r/js/jQuery.js"></script>
+	<script src="${base}/r/js/bootstrap.min.js"></script>
+	<script src="${base}/r/js/jquery.combo.select.js"></script>
+	<script src="${base}/r/js/jqPaginator.min.js"></script>
+	<script src="${base}/r/js/itemsJs/common.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			var localStatus = {
+				"id":1,
+				"subId":0
+			};
+			statusActive(localStatus);
+		});
+	</script>
+</html>

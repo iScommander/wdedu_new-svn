@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta  charset="UTF-8">
+	<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>志愿填报</title>
+	<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+</head>
+<style>
+.zjf-choose{
+    border: 1px solid #dddddd;
+    overflow: hidden;
+    background:#FFF;
+}
+.zjf-choose>li{
+    padding: 0px 18px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    border:none;
+    position: relative;
+    cursor: pointer;
+}
+.zjf-choose>li:first-child{
+    height: 60px;
+    line-height: 60px;
+    background: #22A0B3;
+    font-size: 20px;
+    color: #FFFFFF;
+    text-align: center;
+}
+.zjf-choose>li>a{
+    vertical-align: middle;
+    margin-left: 18px;
+}
+.zjf-choose>li:hover a{
+    color: #22A0D3;
+}
+.zjf-choose>li>span{
+    display: inline-block;
+    vertical-align: middle;
+    width:18px;
+}
+.zjf-choose>li>span>img{
+    display: block;
+    max-width: 100%;
+}
+.zjf-choose>li>span>img:first-child{
+    display: block;
+}
+.zjf-choose>li>span>img:last-child{
+    display: none;
+}
+.zjf-choose>li:hover span>img:first-child{
+    display: none;
+}
+.zjf-choose>li:hover span>img:last-child{
+    display: block;
+}
+.zjf-active::before{
+    content: '>>';
+    color: #22A0D3;
+    font-size: 16px;
+    position: absolute;
+    top:0px;
+    right: 40px;
+}
+.zjf-active>a{
+    color: #22A0D3 !important;
+}
+.zjf-active>span>img:first-child{
+    display: none !important;
+}
+.zjf-active>span>img:last-child{
+    display: block !important;
+}
+</style>
+<body>
+<!--顶部线条-->
+<div class="topLine"></div>
+<!--tab切换  导航-->
+[#include "../wdedu/include/header_address.html"/]
+[#include "../wdedu/include/header_dylq.html"/]
+<!--路径-->
+<div class="route">
+	<div class="flex-container1 width1200">
+		<div>首页 &lt;&lt;志愿填报 &lt;&lt;志愿填报</div>
+	</div>
+</div>
+<ul class="zjf-choose">
+    <li onclick="window.location.href = 'mnwb.jspx?orderId=${order.orderId}'"><i>服务须知</i></li>
+	<!-- 通用 -->
+	[#if order.srvContent?index_of("填报个人信息")!=-1]
+	<li id="tbgrxx"><span><img src="${base}/new_image/ydyfw/ydy-tba.png"><img src="${base}/new_image/ydyfw/ydy-tbaa.png"></span><a href="${base}/mnwb/jbxx.jspx?orderId=${order.orderId}">填报个人信息</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("背景信息分析")!=-1]
+	<li id="bjxxfx"><span><img src="${base}/new_image/ydyfw/ydy-tbb.png"><img src="${base}/new_image/ydyfw/ydy-tbbb.png"></span><a href="javascript:void(0)" onclick="_sub('背景信息分析')">背景信息分析</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("兴趣性格测评")!=-1]
+	<li id="xqxgpc"><span><img src="${base}/new_image/ydyfw/ydy-tbc.png"><img src="${base}/new_image/ydyfw/ydy-tbcc.png"></span><a href="javascript:void(0)" onclick="_sub('兴趣性格测评')">兴趣性格测评</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("通用文案定制")!=-1]
+	<li id="tywazd"><a href="${base}/ydyfw/tywazd.jspx?orderId=${order.orderId}">通用文案定制</a></li>
+	[/#if]
+	<!-- 普通自主招生 -->
+	[#if order.srvContent?index_of("专业初步定位")!=-1]
+	<li id="zycbdw"><a href="javascript:void(0)" onclick="_sub('专业初步定位')">专业初步定位</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("背景提升策划")!=-1]
+	<li id="bjtsch"><a href="javascript:void(0)" onclick="_sub('背景提升策划')">背景提升策划</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("论文写作发表")!=-1]
+	<li id="lwxzfb"><a href="javascript:void(0)" onclick="_sub('论文写作发表')">论文写作发表</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("创新专利获取")!=-1]
+	<li id="cxzlhq"><a href="javascript:void(0)" onclick="_sub('创新专利获取')">创新专利获取</a></li>
+	[/#if]
+	<!-- 普通自主招生 -->
+	[#if order.srvContent?index_of("预报网报辅导")!=-1]
+	<li id="ycwbfd"><a href="javascript:void(0)" onclick="_sub('预报网报辅导')">预报网报辅导</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("院校专业定位")!=-1]
+	<li id="yxzydw"><a href="javascript:void(0)" onclick="_sub('院校专业定位')">院校专业定位</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("正式文案定制")!=-1]
+	<li id="zswazd"><a href="${base}/ydyfw/zswazd.jspx?orderId=${order.orderId}">正式文案定制</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("志愿填报管理")!=-1]
+	<li id="zytbgl"><a href="${base}/ydyfw/zytbgl.jspx?orderId=${order.orderId}">志愿填报管理</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("面试笔试辅导")!=-1]
+	<li id="msbsfd"><a href="javascript:void(0)" onclick="_sub('面试笔试辅导')">面试笔试辅导</a></li>
+	[/#if]
+	<!-- 港澳台 -->
+	[#if order.srvContent?index_of("显示申请材料")!=-1]
+	<li id="xssqcl"><a href="javascript:void(0)" onclick="_sub('显示申请材料')">显示申请材料</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("网上填报注册")!=-1]
+	<li id="wstbzc"><a href="javascript:void(0)" onclick="_sub('网上填报注册')">网上填报注册</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("填写高考成绩")!=-1]
+	<li id="txgkcj"><a href="javascript:void(0)" onclick="_sub('填写高考成绩')">填写高考成绩</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("面试笔试培训")!=-1]
+	<li id="msbspx"><a href="javascript:void(0)" onclick="_sub('面试笔试培训')">面试笔试培训</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("录取选择指导")!=-1]
+	<li id="lqxzzd"><a href="javascript:void(0)" onclick="_sub('录取选择指导')">录取选择指导</a></li>
+	[/#if]
+	<!-- 志愿填报 -->
+	[#if order.srvContent?index_of("报考意向管理")!=-1]
+	<li id="bkyxgl"><span><img src="${base}/new_image/ydyfw/ydy-tbd.png"><img src="${base}/new_image/ydyfw/ydy-tbdd.png"></span><a href="javascript:void(0)" onclick="_sub('报考意向管理')">报考意向管理</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("填报策略管理")!=-1]
+	<li id="tbclgl"><span><img src="${base}/new_image/ydyfw/ydy-tbe.png"><img src="${base}/new_image/ydyfw/ydy-tbee.png"></span><a href="javascript:void(0)" onclick="_sub('填报策略管理')">填报策略管理</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("考生体检情况")!=-1]
+	<li id="kstjqk"><span><img src="${base}/new_image/ydyfw/ydy-tbf.png"><img src="${base}/new_image/ydyfw/ydy-tbff.png"></span><a href="javascript:void(0)" onclick="_sub('考生体检情况')">考生体检情况</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("章程适应调查")!=-1]
+	<li id="zcsydc"><span><img src="${base}/new_image/ydyfw/ydy-tbg.png"><img src="${base}/new_image/ydyfw/ydy-tbgg.png"></span><a href="javascript:void(0)" onclick="_sub('章程适应调查')">章程适应调查</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("院校专业推荐")!=-1]
+	<li id="yxzytj"><span><img src="${base}/new_image/ydyfw/ydy-tbh.png"><img src="${base}/new_image/ydyfw/ydy-tbhh.png"></span><a href="javascript:void(0)" onclick="_sub('院校专业推荐')">院校专业推荐</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("模考院校定位")!=-1]
+	<li id="mkyxdw"><span><img src="${base}/new_image/ydyfw/ydy-tbi.png"><img src="${base}/new_image/ydyfw/ydy-tbii.png"></span><a href="javascript:void(0)" onclick="_sub('模考院校定位')">模考院校定位</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("高考估分方案")!=-1]
+	<li id="gkgffa"><span><img src="${base}/new_image/ydyfw/ydy-tbj.png"><img src="${base}/new_image/ydyfw/ydy-tbjj.png"></span><a href="javascript:void(0)" onclick="_sub('高考估分方案')">高考估分方案</a></li>
+	[/#if]
+	[#if order.srvContent?index_of("正式方案填报")!=-1]
+	<li id="zsfatb"><span><img src="${base}/new_image/ydyfw/ydy-tbk.png"><img src="${base}/new_image/ydyfw/ydy-tbkk.png"></span><a href="javascript:void(0)" onclick="_sub('正式方案填报')">正式方案填报</a></li>
+	[/#if]
+
+	[#if order.srvContent?index_of("志愿方案评估")!=-1]
+	<li id="zyfapg"><span><img src="${base}/new_image/ydyfw/ydy-tbl.png"><img src="${base}/new_image/ydyfw/ydy-tbll.png"></span><a href="javascript:void(0)" onclick="_sub('志愿方案评估')">志愿方案评估</a></li>
+	[/#if]
+	<li id="lqjgqd"><span><img src="${base}/new_image/ydyfw/ydy-tbm.png"><img src="${base}/new_image/ydyfw/ydy-tbmm.png"></span><a href="${base}/ydyfw/lqjgqd.jspx?orderId=${order.orderId}&nodeType=录取结果确定">录取结果确定</a></li>
+</ul>
+
+<form method="post" action="${base}/ydyfw/node.jspx" id="leftMenuForm">
+	<input type="hidden" value="" id="nodeType" name="nodeType">
+	<input type="hidden" name="orderId" value="${order.orderId}">
+</form>
+<script type="text/javascript">
+	function _sub(obj){
+		$('#nodeType').val(obj);
+		$('#leftMenuForm').submit();
+	}
+</script>
+</body>
+
+</html>

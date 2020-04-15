@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<title>模拟网报-基本信息查询</title>
+<link href="${base}/r/css/head_footer.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="${base}/r/css/zywy_xdxt_net.css" rel="stylesheet" type="text/css" media="screen" />
+<script src="${base}/r/js/jquery-1.8.3.min.js" language="javascript"></script>
+<!--[if lte IE 9]>
+<script src="${base}/r/js/html5shiv.js" language="javascript"></script>
+<script src="${base}/r/js/respond.min.js" language="javascript"></script>
+<![endif]-->
+<style>
+	.xdxt_zy_selSay_span01::before{
+		content:'';
+		display:block;
+		width:100%;
+		height:3px;
+		background:#86D73B;
+		position:absolute;
+		bottom:0;
+		left:0;
+	}
+	.xdxt_zy_selSay_span01{
+		color:#86D73B;
+	}
+	.style_table td{
+		border:none !important;
+	}
+</style>
+</head>
+<body>
+	<div class="z_body">
+		<div class="z_width_out">
+			<div class="on_line">
+				<div class="xdxtSY" style="margin:0 0 20px 0;">
+					<div class="xdxtSY_tit">
+		        		<span class="xdxtSY_titLt xdxtSY_bgClor03"></span>
+		        		<span class="xdxtSY_titRt">详细资料</span>
+		        	</div>
+					<div class="xd_jbxx_out">
+						<table class="xd_jbxx_tb">
+							<tr>
+								<td width="25%" class="xd_jbxx_td01">姓名：</td>
+								<td width="75%" class="xd_jbxx_td02">[#if tnUser??]${tnUser.userName!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">证件号码：</td>
+								<td class="xd_jbxx_td02">[#if tnUser??]${tnUser.identityNumber!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">手机号码：</td>
+								<td class="xd_jbxx_td02">[#if tnUser??]${tnUser.telephone!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">性别：</td>
+								<td class="xd_jbxx_td02">[#if tnUser??] [#if tnUser.sex?? && tnUser.sex=='1']男[#elseif tnUser.sex?? && tnUser.sex=='2']女[/#if] [#else]-[/#if]</td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">出生日期：</td>
+								<td class="xd_jbxx_td02">[#if tnUser??]${tnUser.birthday!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">民族：</td>
+								<td class="xd_jbxx_td02">[#if tnUser??]${tnUser.nation!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">政治面貌：</td>
+								<td class="xd_jbxx_td02">[#if tnUser??]${tnUser.politics!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">裸眼视力（左/右）：</td>
+								<td class="xd_jbxx_td02"><span>[#if tnUser??]${tnUser.leftEyesight!}[/#if]</span>&nbsp;/&nbsp;<span>[#if tnUser??]${tnUser.rightEyesight!}[/#if]</span></td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">是否色盲：</td>
+								<td class="xd_jbxx_td02">[#if tnUser??]${tnUser.colorBlind!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">身高(cm)：</td>
+								<td class="xd_jbxx_td02">[#if tnUser??]${tnUser.height!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">体重(kg)：</td>
+								<td class="xd_jbxx_td02">[#if tnUser??]${tnUser.weight!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">高考报名所在地：</td>
+								<td class="xd_jbxx_td02"><span>[#if tnUser??]${tnUser.examProvince!}[/#if]</span><span>[#if tnUser??]${tnUser.examCity!}[/#if]</span><span>[#if tnUser??]${tnUser.examRegion!}[/#if]</span></td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">高考报名号：</td>
+								<td class="xd_jbxx_td02">[#if tnUser??]${tnUser.examNumber!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">考生类型：</td>
+								<td class="xd_jbxx_td02">[#if tnUser??]${tnUser.studentType!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">外语语种：</td>
+								<td class="xd_jbxx_td02">[#if tnUser??]${tnUser.language!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">学科类型：</td>
+								<td class="xd_jbxx_td02">[#if tnUser??]${tnUser.subjectType!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">联系电话：</td>
+								<td class="xd_jbxx_td02">[#if tnUser??]${tnUser.phoneNumber!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">联系地址：</td>
+								<td class="xd_jbxx_td02">[#if tnUser??]${tnUser.mailAddress!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01">邮政编码：</td>
+								<td class="xd_jbxx_td02">[#if tnUser??]${tnUser.postcode!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="xd_jbxx_td01" valign="top">家庭信息：</td>
+								<td style="padding-top:0;padding-bottom:0;">
+									<table class="xdxt_jbxx_tbtb style_table">
+										<tr>
+											<td align="right">父亲姓名：</td><td style="width:35%;">[#if father??]${father.name!}[#else]-[/#if]</td>
+											<td align="right">联系电话：</td><td style="width:35%;">[#if father??]${father.telephone!}[#else]-[/#if]</td>
+										</tr>
+										<tr>
+											<td align="right">文化程度：</td>
+											<td>[#if father??]${father.educationLevel!}[/#if]</td>
+											<td align="right">职业：</td><td>[#if father??]${father.job!}[#else]-[/#if]</td>
+										</tr>
+										<tr>
+											<td align="right">工作单位：</td><td>[#if father??]${father.office!}[#else]-[/#if]</td>
+											<td align="right">职务：</td><td>[#if father??]${father.vote!}[#else]-[/#if]</td>
+										</tr>
+										<tr>
+											<td align="right">母亲姓名：</td><td>[#if mother??]${mother.name!}[#else]-[/#if]</td>
+											<td align="right">联系电话：</td><td>[#if mother??]${mother.telephone!}[#else]-[/#if]</td>
+										</tr>
+										<tr>
+											<td align="right">文化程度：</td>
+											<td>
+												[#if mother??]${mother.educationLevel!}[/#if]
+											</td>
+											<td align="right">职业：</td><td>[#if mother??]${mother.job!}[#else]-[/#if]</td>
+											
+										</tr>
+										<tr>
+											<td align="right">工作单位：</td><td>[#if mother??]${mother.office!}[#else]-[/#if]</td>
+											<td align="right">职务：</td><td>[#if mother??]${mother.vote!}[#else]-[/#if]</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td class="xdxt_jbxx_td5" colspan="2" align="right">
+								<a  class="xdxt_bt_a1" onclick="_goEdit();">[#if tnUser??]修改[#else]新增[/#if]</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+	<script>
+	function _goEdit(){
+		var url = "${base}/mnwb/jbxx_new.jspx?orderId=${order.orderId}";
+	    jQuery.get(url, function(result){
+	        $("#jbxx").html(result);
+	    });
+	}
+	</script>
+</body>
+</html>

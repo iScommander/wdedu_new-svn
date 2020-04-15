@@ -1,0 +1,402 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>公益讲座</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link href="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
+<script type='text/javascript' src='${base}/r/wdedu/js/fudong.js'></script>
+<link rel="stylesheet" href="${base}/r/wdedu/css/cui.css" />
+	<style>
+		.nice-select{
+
+	width: 245px;
+
+	padding: 0 10px;
+
+	height: 44px; line-height:44px;
+
+	border: 1px solid #cacaca; border-radius:5px 5px 5px 5px;
+	position: relative;
+	margin-left:20px; margin-top:24px;
+	
+
+	background: #fff url(../images/xzk_3.png) no-repeat 200px center;
+
+}
+
+.nice-select input{display: block;width: 100%;height: 44px;line-height: 44px;border: 0;outline: 0;background: none; padding-left:15px;}
+
+.nice-select ul{
+
+	width: 100%;
+
+	display: none;
+
+	position: absolute;
+
+	left: 0px;
+
+	top: 42px;
+
+	overflow: hidden;
+
+	background-color: #fff; 
+
+	max-height: 150px;
+
+	overflow-y: auto;
+
+	
+
+	border-top: 0;
+
+	-moz-box-shadow:0 0 5px #879094;-webkit-box-shadow:0 0 5px #879094;box-shadow:0 0 5px #879094;
+
+	z-index: 9999;
+
+}
+
+		.nice-select ul li{height: 38px;line-height: 38px;overflow: hidden;margin: 0 20px 0 0;cursor: pointer; color:#999; font-size:14px; display:block;}
+
+		.nice-select ul li.on{background-color: #e0e0e0;}
+
+	</style>
+</head>
+<body>
+
+[#include "../include/header_address.html"/]
+    [#include "../include/header_msdjt.html"/]
+
+		<div class="mbxdh_bg">
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">名师大讲堂</a>&nbsp;&gt; &nbsp; <a href="#">公益讲座</a>
+		</div>  
+	</div>
+<div class="con">
+		<div class="gyjz_ss" style="border:1px solid #e2e2e2;caret-color: transparent">
+        <form action="" method="get"> 
+        <ul>
+        <li>
+        <div class="gyjz_ss_z f_l">
+         <h4>讲座地点&gt;</h4> 
+        </div>
+         <div class="gyjz_ss_y f_l">
+            <div class="choosePwd f_l">
+        		<div class="checkbox"></div><span>南京市</span>
+                
+    		</div>
+             <div class="choosePwd f_l">
+        		<div class="checkbox"></div><span>徐州市</span>
+               
+    		</div>
+             <div class="choosePwd f_l">
+        		<div class="checkbox"></div><span>苏州市</span>
+           
+    		</div>
+             <div class="choosePwd f_l">
+        		<div class="checkbox"></div><span >市辖区</span>
+                
+    		</div>
+                <div class="choosePwd f_l">
+        		<div class="checkbox"></div><span >石家庄</span>
+           
+    		</div>
+                     <div class="choosePwd f_l">
+        		<div class="checkbox"></div><span >郑州市</span>
+             
+    		</div>
+                    <div class="choosePwd f_l">
+        		<div class="checkbox"></div><span>无锡市</span>
+           
+    		</div>
+                                <div class="choosePwd f_l">
+        		<div class="checkbox"></div><span>东莞市</span>
+              
+    		</div>
+                                            <div class="choosePwd f_l">
+        		<div class="checkbox"></div><span>上海</span>
+               
+    		</div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+        <div>	
+        </li>
+        <li style="line-height:51px;">
+        <div class="gyjz_ss_z2 f_l">
+         <h4 style="padding-top: 14px;">讲座地点&gt;</h4>
+        </div>
+        <div class="gyjz_ss_y2 f_l">
+        <button type="button" class="gyjz_ss_y2_an" style="line-height:normal;margin-left: 21px;">校内讲座</button> 
+        <button type="button" class="gyjz_ss_y2_an2" style="line-height:normal;">校外讲座</button> 
+        </div>
+        <div class="clearfix"></div>
+        </li>
+        <li>
+        <div class="gyjz_ss_y3 f_l">
+         <h4>讲座时间&gt;</h4>
+        </div>
+        <div class="gyjz_ss_y3_lj f_l">
+      
+         	<div class="nice-select f_l" name="nice-select">
+			<input type="text" value="最近一周" readonly style="cursor: pointer;"/>
+			<ul>
+				<li data-value="1">最近一周</li>
+
+				<li data-value="2">相关链接</li>
+
+				<li data-value="3">相关链接3</li>
+
+			</ul>
+ 			
+		</div>
+        
+        <div class="gyjz_ss_y4 f_l">
+        <div class="gyjz_ss_y4_kk f_l">
+         </div>
+         <span class="f_l">我对沃得教育讲座感兴趣，有最新的讲座随时通知我</span>
+        </div>
+
+        <div class="clearfix"></div>
+        
+        </li>
+
+        </ul>
+        <div class="clearfix"></div>
+        <div class="gyjz_ss_y5">
+        <button type="button" class="gyjz_ss_y4_qc" style="line-height:normal;">全部清除</button> 
+        <button type="button" class="gyjz_ss_y5_qc" style="line-height:normal;">立即搜索</button> 
+         </div>
+        </form>
+        </div>
+        
+       
+	<div class="clearfix">
+		<div class="con_l fl" style=" width:880px">
+			<div class="carousel slide" id="carousel-107612">
+				<ol class="carousel-indicators">
+					<li data-slide-to="0" data-target="#carousel-107612">
+					</li>
+					<li data-slide-to="1" data-target="#carousel-107612" class="active">
+					</li>
+					<li data-slide-to="2" data-target="#carousel-107612">
+					</li>
+				</ol>
+				<div class="carousel-inner">
+					<div class="item">
+						<img alt=""  src="${base}/r/wdedu/images/gxu_1.png" />
+					
+					</div>
+					<div class="item">
+						<img alt=""  src="${base}/r/wdedu/images/gxu_1.png" />
+				
+					</div>
+					<div class="item active">
+						<img alt=""  src="${base}/r/wdedu/images/gxu_1.png" />
+					
+					</div>
+				</div> <a class="left carousel-control" href="#carousel-107612" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-107612" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+			</div>
+            <div class="gxyx_bt">
+			<h4>个人收获</h4>
+            </div>
+            <div class="gxyx_bt_nr">
+			<p>
+					据了解，目前建成的海上风电场绝大多数为近海风电场，受到多重因素制约。深远海风电指水深超过50米的区域，深远海风电风速更大，风力更加稳定，受限制减少，大兆瓦机组可以大幅提高发电量，节约运维成本，是海据了解，目前建成的海上风电场绝大多数为近海风电场，受到多重因素制约。<br/>深远海风电指水深超过50米的区域，深远海风电风速更大，风力更加稳定，受限制减少，大兆瓦机组可以大幅提高发电量，节约运维成本，是海上上风电的趋势。
+			</p>
+            </div>
+             <div class="gxyx_bt">
+			<h4>具体信息</h4>
+            </div>
+            <div class="gxyx_bt_nr">
+			<ol>
+				<li>
+					课程介绍：Integer molestie lorem at massa
+				</li>
+				<li>
+					AP课程：Integer molestie lorem at massa
+				</li>
+				<li>
+					荣誉课程：Integer molestie lorem at massa
+				</li>
+				<li>
+					项目期长：Facilisis in pretium nisl aliquet
+				</li>
+				<li>
+					项目时间：Nulla volutpat aliquam velit
+				</li>
+				<li>
+					项目时长：Faucibus porta lacus fringilla vel
+				</li>
+				<li>
+					人数上限：Aenean sit amet erat nunc
+				</li>
+				<li>
+					实践费用：Eget porttitor lorem
+				</li>
+                <li>
+					费用明细：Eget porttitor lorem
+				</li>
+			</ol>
+            </div>
+             <div class="gxyx_bt">
+			<h4>开放时间</h4>
+            </div>
+            <div class="gxyx_bt_nr">
+					<p>
+				据了解，目前建成的海上风电场绝大多数为近海风电场，受到多重因素制约。深远海风电指水深超过50米的区域，深远海风电风速更大，风力更加稳定，受限制减少，大兆瓦机组可以大幅提高发电量，节约运维成本，是海据了解，目前建成的海上风电场绝大多数为近海风电场，受到多重因素制约。<br/>深远海风电指水深超过50米的区域，深远海风电风速更大，风力更加稳定，受限制减少，大兆瓦机组可以大幅提高发电量，节约运维成本，是海上上风电的趋势。
+			</p>
+
+						<p>
+				据了解，目前建成的海上风电场绝大多数为近海风电场，受到多重因素制约。深远海风电指水深超过50米的区域，深远海风电风速更大，风力更加稳定，受限制减少，大兆瓦机组可以大幅提高发电量，节约运维成本，是海据了解，目前建成的海上风电场绝大多数为近海风电场，受到多重因素制约。<br/>深远海风电指水深超过50米的区域，深远海风电风速更大，风力更加稳定，受限制减少，大兆瓦机组可以大幅提高发电量，节约运维成本，是海上上风电的趋势。
+			</p>
+            </div>
+            <div class="gxyx_bt">
+			<h4>实践评价</h4>
+            </div>
+            <div class="gxyx_bt_nr">
+            					<p>
+				据了解，目前建成的海上风电场绝大多数为近海风电场，受到多重因素制约。深远海风电指水深超过50米的区域，深远海风电风速更大，风力更加稳定，受限制减少，大兆瓦机组可以大幅提高发电量，节约运维成本，是海据了解，目前建成的海上风电场绝大多数为近海风电场，受到多重因素制约。<br/>深远海风电指水深超过50米的区域，深远海风电风速更大，风力更加稳定，受限制减少，大兆瓦机组可以大幅提高发电量，节约运维成本，是海上上风电的趋势。
+			</p>
+            </div>
+		</div>
+		<div class="con_r fl" style="margin-left:40px;">
+			<div class="con_r_tit">最新活动
+            </div>
+            <div class="clearfix"></div>
+            <div class="gxyx_r_ol">
+			<ol class="list-unstyled" id="listuns">
+				<li>
+               
+                <img alt="263x168" src="${base}/r/wdedu/images/gx_2.png"/>
+                <div class="gxyx_r_bjys" >
+                <a class="gxyx_right_bt1">亿元自助名额，竟被这两所学校获取。亿元自助名额，竟被这两所学</a>
+               	<div class="gxyx_right_an">理工科技</div><div class="gxyx_right_sj">2019-10-12</div><div class="clearfix"></div> 
+                <div>      
+				</li>
+				<li>
+                <img alt="263x168" src="${base}/r/wdedu/images/gx_2.png"/>
+                <div class="gxyx_r_bjys" >
+                <a class="gxyx_right_bt1">亿元自助名额，竟被这两所学校获取。亿元自助名额，竟被这两所学</a>
+               	<div class="gxyx_right_an">理工科技</div><div class="gxyx_right_sj">2019-10-12</div><div class="clearfix"></div> 
+                <div>
+				</li>
+				<li>
+                <img alt="263x168" src="${base}/r/wdedu/images/gx_2.png"/>
+                <div class="gxyx_r_bjys" >
+                <a class="gxyx_right_bt1">亿元自助名额，竟被这两所学校获取。亿元自助名额，竟被这两所学</a>
+               	<div class="gxyx_right_an">理工科技</div><div class="gxyx_right_sj">2019-10-12</div><div class="clearfix"></div> 
+                <div>
+				</li>
+				<li>
+                <img alt="263x168" src="${base}/r/wdedu/images/gx_2.png"/>
+                <div class="gxyx_r_bjys" >
+                <a class="gxyx_right_bt1">亿元自助名额，竟被这两所学校获取。亿元自助名额，竟被这两所学</a>
+               	<div class="gxyx_right_an">理工科技</div><div class="gxyx_right_sj">2019-10-12</div><div class="clearfix"></div> 
+                <div>
+				</li>
+				<li>
+                <img alt="263x168" src="${base}/r/wdedu/images/gx_2.png"/>
+                <div class="gxyx_r_bjys" >
+                <a class="gxyx_right_bt1">亿元自助名额，竟被这两所学校获取。亿元自助名额，竟被这两所学</a>
+               	<div class="gxyx_right_an">理工科技</div><div class="gxyx_right_sj">2019-10-12</div><div class="clearfix"></div> 
+                <div>
+				</li>
+			</ol>
+            </div>
+		</div>
+        <div class="clearfix"></div>
+        
+        
+	</div>
+</div>
+<div class="mb_db_gd" id="box2">
+<div class="mb_db_gd_zt">
+<span>"天南海北"&nbsp;&nbsp;挑大学</span>
+<a class="mb_db_gd_an">立即报名</a> 
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+	
+	<p>&nbsp;</p>
+[#include "../include/footer_new.html"/]
+    
+    <script>
+    $( document).ready(function() {
+        $(".checkbox").click( function(){
+			if($(this).hasClass('checked')){
+				$(this).removeClass('checked');
+				$(this).parent().find("span").removeAttr("style");
+			$(this).parent().find("span").css('color','#333333')
+				}else{
+					$(this).addClass('checked');
+				$(this).parent().find("span").css('color','#ff8d00')
+					
+					}
+
+			})
+			
+			$(".gyjz_ss_y4_kk").click(function(){
+				if($(this).hasClass('fxk')){
+					$(this).removeClass('fxk');
+
+					}else{
+						$(this).addClass('fxk');
+						}
+				
+				})
+			
+				
+    });
+	
+	
+    </script>
+
+	<script>
+		$('[name="nice-select"]').click(function(e){
+			 if($(this).find('ul').is(':hidden')){
+			$('[name="nice-select"]').find('ul').hide();
+		    $(this).find('ul').show();
+			e.stopPropagation();
+				 }
+			 else{
+		
+		    $(this).find('ul').hide();
+			e.stopPropagation();
+				 }
+		});
+
+		$('[name="nice-select"] li').hover(function(e){
+
+			$(this).toggleClass('on');
+
+			e.stopPropagation();
+
+		});
+
+		$('[name="nice-select"] li').click(function(e){
+
+			var val = $(this).text();
+
+			$(this).parents('[name="nice-select"]').find('input').val(val);
+
+			$('[name="nice-select"] ul').hide();
+
+			e.stopPropagation();
+
+		});
+
+		$(document).click(function(){
+
+			$('[name="nice-select"] ul').hide();
+			
+
+		});
+
+	</script>
+</body>
+</html>

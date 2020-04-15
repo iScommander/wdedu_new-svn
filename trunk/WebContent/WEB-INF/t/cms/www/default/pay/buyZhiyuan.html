@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>支付 </title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<link href="${base}/r/css/main_style.css" rel="stylesheet" type="text/css" media="screen" />
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" />
+
+		<style>
+			.weixin-out{
+				width:100%;
+				height:100%;
+				position:absolute;
+				top:0;
+				left:0;
+				z-index:1;
+				display:none;
+			}
+			.weixin-up{
+				width:100%;
+				height:100%;
+				position:absolute;
+				top:0;
+				left:0;
+				background:#000;
+				opacity: 0.46;
+				filter: progid:DXImageTransform.Microsoft.Alpha(opacity=46);
+				z-index:2;
+			}
+			.weixin-down{
+				width:700px;
+				height:500px;
+				background:#FFF;
+				position:absolute;
+				top:calc((100% - 500px)/2);
+				left:calc((100% - 700px)/2);
+				z-index:3;
+				-webkit-animation-duration:0.4s;
+				animation-duration:0.4s;
+			}
+			.weixin-tit{
+				width: 100%;
+				height: 66px;
+				background: #69ce30;
+			}
+			.weixin-tit-span1{
+				display: inline-block;
+				width: 96px;
+				height: 100%;
+				padding: 17px 28px;
+				vertical-align: middle;
+			}
+			.weixin-tit-span2{
+				display: inline-block;
+				width: 200px;
+				height: 66px;
+				line-height: 66px;
+				vertical-align: middle;
+				font-size: 19px;
+				letter-spacing: 2px;
+				color: #fff;
+			}
+			.weixin-tit-span3{
+				float:right;
+				width:66px;
+				height:66px;
+				position: relative;
+				cursor:pointer;
+			}
+			.weixin-tit-span3:after {
+				content: '';
+				display: block;
+				width: 30px;
+				height: 2px;
+				background: #FFFFFF;
+				position: absolute;
+				top: 33px;
+				left: 15px;
+				transform: rotate(45deg);
+			}
+			.weixin-tit-span3:before {
+				content: '';
+				display: block;
+				width: 30px;
+				height: 2px;
+				background: #FFFFFF;
+				position: absolute;
+				top: 33px;
+				left: 15px;
+				transform: rotate(-45deg);
+			}
+			.weixin-cont{
+				width:100%;
+				height:380px;
+				background:#f7f7f7;
+			}
+			.weixin-cont-left{
+				display:block;
+				float:left;
+				width:300px;
+				height:380px;
+				line-height:380px;
+			}
+			.weixin-cont-left img{
+				margin: 34px 0 0 30px;
+				width:70%;
+			}
+			.weixin-cont-center{
+				display:block;
+				float:left;
+				width:70px;
+				height:380px;
+				line-height:380px;
+			}
+			.weixin-cont-center img{
+				margin: 0px 0 0 26px;
+			}
+			.weixin-cont-right{
+				display:block;
+				float:left;
+				margin-top: -50px;
+				margin-right: -100px;
+				width:400px;
+				height:400px;
+
+			}
+			.weixin-cont-right img{
+				margin: 60px 50px 50px 0;
+				width: 300px;
+				height: 300px;
+			}
+			.weixin-footer{
+				background:#e6e6e6;
+				font-size: 16px;
+				letter-spacing: 2px;
+				width:100%;
+				height:54px;
+				line-height:54px;
+				text-align:right;
+				color:#949494;
+				padding-right:20px;
+			}
+			.radio_base label:after {
+			    content: '';
+			    position: absolute;
+			    left: -26px;
+			    top: 14px;
+			    width: 12px;
+			    height: 12px;
+			    border-radius: 50%;
+			    background: #fff;
+			    transition: all 0.3s ease;
+			    -webkit-transition: all 0.3s ease;
+			    -moz-transition: all 0.3s ease;
+			}
+			.radio_base label:before {
+			    content: '';
+			    position: absolute;
+			    left: -30px;
+			    top: 10px;
+			    width: 20px;
+			    height: 20px;
+			    border: 1px solid #ddd;
+			    border-radius: 50%;
+			    transition: all 0.3s ease;
+			    -webkit-transition: all 0.3s ease;
+			    -moz-transition: all 0.3s ease;
+			}
+			.paymentMain div.suozaishengfen>ul{
+				width: 570px;
+				height: 520px;
+				border: 1px solid #dadada;
+				margin-top: 30px;
+			}
+			.paymentMain div.suozaishengfen>ul li{
+				float: left;
+				width: 17%;
+				margin:15px 8px;
+				text-align: center;
+				height: 40px;
+    			line-height: 40px;
+    			cursor:pointer;
+    			font-weight: bold;
+			}
+			.paymentMain div.suozaishengfen>ul li.active{
+				background: #05b8c3;
+				color: #fff;
+				border-radius: 5px;
+			}
+			.paymentMain .zhifufangshi{
+				border-top: 1px solid #c5c8ce;
+				margin: 20px 0;
+			}
+			.paymentMain .zhifufangshi img{
+				margin: 0 20px;
+			}
+			.paymentMain .zhifufangshi>p{
+				font-size: 28px;
+				color: #05b8c3;
+				font-weight: bold;
+				margin: 20px 0;
+			}
+			.paymentMain .zhifufangshi>div{
+				margin: 50px 0 60px 20px;
+			}
+			.paymentMain .zhifufangshi>div>div{
+				margin-right: 60px;
+			}
+			.paymentMain .zhifufangshi>button{
+				width: 225px;
+				height: 65px;
+				line-height: 65px;
+				background: #ff5e4d;
+				border: none;
+				color: #fff;
+				font-size: 18px;
+				border-radius:5px;
+			}
+			.paymentMain p.jiaoyuka{
+				margin: 100px 0 0 70px;
+			}
+			#myModal .fangshijine p{
+				font-size: 42px;
+				color: #000;
+			}
+			#myModal .fangshijine>ul{
+				text-align: center;
+				margin: 40px 0;
+				line-height: 50px;
+			}
+			#myModal .fangshijine>ul li{
+				font-size: 24px;
+				color: #666;
+			}
+			#myModal .fangshijine>b{
+				font-size: 36px;
+				font-weight: bold;
+				color: #ff5e4d;
+				display: block;
+				text-align: center;
+			}
+			#myModal .zhifuerweima>p{
+				font-size: 30px;
+				font-weight: bold;
+				margin: 20px 20px 20px 40px;
+			}
+			#myModal .fangshijine>p>img{
+				margin-right: 10px;
+			}
+			#myModal .zhifuerweima>div{
+				width: 325px;
+				height: 325px;
+				border: 1px dashed #dadada;
+				margin: 50px 0 0 100px;
+			}
+			#myModal .flex-container2>div:last-child{
+				margin: 80px 100px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--顶部-->
+		[#include "../include/header_zy.html"/]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container width1200">
+				<div>
+					<a href="${base}">首页</a> &lt;&lt; 沃得研究院 &lt;&lt; 服务中心</div>
+				<div></div>
+			</div>
+		</div>
+
+		<!--主体-->
+		<main class="width1200 paymentMain">
+			<!--高考志愿填报服务           请选择考生报考所在的省份-->
+			<div class="flex-container2">
+				<!--高考志愿填报服务-->
+				<div>
+					<img src="${base}/r/img/zhifu1.png" alt="" />
+					<p class="jiaoyuka">
+						<img src="${base}/r/img/zhifuka.png" alt="" />
+					</p>
+				</div>
+				<!--所在省份-->
+				<div class="suozaishengfen">
+					<img src="${base}/r/img/zhifu2.png" alt="" />
+					<ul id="provinceList">
+						<input type="hidden" id="univ_province" name="univ_province" value="${univ_province!}"/>
+						<!--<li class="active">北京</li>-->
+						[#list pagination.list as a]
+						<li id="proLab${a.id}" onclick="selectPro('${a.id}',this)" style="width:78px;">
+							[#if provinceList?? && a.provinceId??]
+							[#list provinceList as p]
+							[#if a.provinceId == p.provinceId]
+							${p.provinceName!}
+							[/#if]
+							[/#list]
+							[/#if]
+						</li>
+						[/#list]
+					</ul>
+				</div>
+			</div>
+
+			</div>
+			<!--请选择支付方式-->
+			<div class="zhifufangshi">
+				<p>请选择支付方式</p>
+				<div>
+					<div class="radio_base">
+						<input id="radio_zhifu1" class="styled indexRadio" type="radio" name="zhifu" checked value="weixin">
+						<label for="radio_zhifu1" class="font-bolder"><img src="${base}/r/img/weixin.png" alt="" />微信支付</label>
+					</div>
+					<div class="radio_base">
+						<input id="radio_zhifu2" class="styled indexRadio" type="radio" name="zhifu" value="zhifubao">
+						<label for="radio_zhifu2" class="font-bolder"><img src="${base}/r/img/zhifubao.png" alt="" />支付宝支付</label>
+					</div>
+				</div>
+                <label>请输入电话号码</label>
+                <input type="text" name="phone" id="phonetel"/>
+				<button data-toggle="modal" data-target="#myModal" onclick="submit_invoice()">立即购买</button>
+			</div>
+		</main>
+		<!--弹出框-->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog" style="width: 1000px;">
+		        <div class="modal-content" style="height: 555px;" id="qrcode1">
+		            <div class="modal-body flex-container2">
+
+		            	<!--二维码-->
+		            	<div class="zhifuerweima">
+		            		<p>扫描支付</p>
+							<div id="qrcode"></div>
+		            	</div>
+
+		            	<!--提示支付方式  和金额-->
+		            	<div class="fangshijine">
+		            		<p><img src="img/zhifubao2.png" alt="" />扫码支付</p>
+		            		<ul>
+		            			<li>请扫描二维码</li>
+		            			<li>扫描左侧二维码</li>
+		            			<li>完成支付</li>
+		            		</ul>
+							<span class="xd-fw-feespan1">原价￥898</span>
+							[#list pagination.list as a]
+							[#if a_index == 0]
+							<a class="xd-fw-feespan2-a1">优惠价<a><a id="fee" class="xd-fw-feespan2-a2">${(a.cost-a.discountCost!0)/100!}</a>
+							[/#if]
+							[/#list]
+		            	</div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		<!--底部-->
+		[#include "../include/footer.html"/]
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+		<script src="${base}/assets/js/qrcode.js"></script>
+		<script src="${base}/assets/js/jquery-1.8.3.min.js"></script>
+		<script src="${base}/assets/js/amazeui.min.js"></script>
+		<script>
+			//选择城市点击事件
+			$('#provinceList li').click(function(){
+				$('#provinceList li').removeClass("active");
+				$(this).addClass("active");
+			})
+		</script>
+		<script>
+
+            function hidediv()
+            {
+                $('#qrcode').hide();
+            }
+
+            // 选中省Lab
+            function selectPro(id, t){
+                if ($(t).css("backgroundColor") != "rgb(51, 153, 255)") {
+                    // 清除全选按钮
+                    var childA = $('*[id^=proLab]');
+                    for (var j=0; j < childA.length; j++) {
+                        $(childA[j]).css("backgroundColor","");
+                        $(childA[j]).css("color","");
+                    }
+
+                    [#list pagination.list as a]
+                    if (${a.id} == id) {
+                        $("#fee").html("￥${(a.cost-a.discountCost!0)/100!}");
+                    }
+                    [/#list]
+
+                        // 背景色没有上色则上色
+                        $(t).css("backgroundColor","#3399FF");
+                    $(t).css("color","#FFF");
+                    // 加上选中的ID
+                    $("#univ_province").attr("value",id);
+                }
+            }
+
+            function submit_invoice(id,phonetel) {
+                var phonetel=$('#phonetel').val();
+                if (phonetel == '') {
+                    alert("请输入电话号码");
+                    return false;
+                }
+                var radios = document.getElementsByName("zhifu");
+
+                //根据 name集合长度 遍历name集合
+                for(var i=0;i<radios.length;i++)
+                {
+                    //判断那个单选按钮为选中状态
+                    if(radios[i].checked)
+                    {
+                        if (radios[i].value=="weixin") {
+                        //弹出选中单选按钮的值
+                            var openid=$('#openid').val();
+                            var proid=$('#univ_province').val();
+                            var phonetel=$('#phonetel').val();
+                            if (proid == '') {
+                                alert("请选择地区");
+                                return false;
+                            }
+
+                            $.ajax({
+                                url : '${base}/wxpay/getwx_data.jspx',
+                                data:{openid:openid,product_id:proid,phone:phonetel,channel:$('#channel').val(),remark:$('#remark').val()},
+                                type : "POST",
+                                async:false,
+                                error:function(request) {
+                                    alert("提交出现异常啦。。。。");
+                                },
+                                success : function(data)
+                                {
+                                    var r = eval('(' + data + ')');
+                                    var url = "weixin://wxpay/payurl?pr=IrbGhQm";
+                                    url=r.result;
+                                    var sp_fee1 = r.sp_fee1;
+                                    var sp_fee2 = r.sp_fee2;
+                                    //参数1表示图像大小，取值范围1-10；参数2表示质量，取值范围'L','M','Q','H'
+                                    var qr = qrcode(10, 'M');
+                                    qr.addData(url);
+                                    qr.make();
+                                    var element=document.getElementById("qrcode");
+                                    var str = '<span class="weixin-cont-right">' + qr.createImgTag() + '</span>';
+                                    element.innerHTML= str;
+                                    $('#qrcode').show();
+
+                                    if(sp_fee1 != null && sp_fee2 != null){
+                                        $("#fee").html((sp_fee1-sp_fee2)/100);
+                                    }
+                                }
+                            });
+                        }
+                        if (radios[i].value =="zhifubao"){
+                            var openid=$('#openid').val();
+                            var proid=$('#univ_province').val();
+                            var phonetel=$('#phonetel').val();
+                            if (proid == '') {
+                                alert("请选择地区");
+                                return false;
+                            }
+
+                            $.ajax({
+                                url : '${base}/alipay/toPay.jspx',
+                                data:{openid:openid,product_id:proid,phone:phonetel,channel:$('#channel').val(),remark:$('#remark').val()},
+                                type : "POST",
+                                async:false,
+                                error:function(request) {
+                                    alert("提交出现异常啦。。。。");
+                                },
+                                success : function(data)
+                                {
+									var r = eval('(' + data + ')');
+                                    // var r = data;
+                                    url=r.qr_code;
+									var sp_fee1 = r.sp_fee1;
+									var sp_fee2 = r.sp_fee2;
+                                    //参数1表示图像大小，取值范围1-10；参数2表示质量，取值范围'L','M','Q','H'
+                                    var qr_code = qrcode(10, 'M');
+                                    qr_code.addData(url);
+                                    qr_code.make();
+                                    var element=document.getElementById("qrcode");
+                                    var str = '<span class="weixin-cont-right">' + qr_code.createImgTag() + '</span>';
+
+                                    element.innerHTML= str;
+                                    $('#qrcode').show();
+
+									if(sp_fee1 != null && sp_fee2 != null){
+										$("#fee").html((sp_fee1-sp_fee2)/100);
+									}
+                                }
+                            });
+                        }
+						}
+                    }
+            }
+
+            $(document).ready(function(){
+                // 选中第一个
+                [#list pagination.list as a]
+                if (${a_index} == 0) {
+                    $("#proLab${a.id}").click();
+                }
+                [/#list]
+            });
+		</script>
+	</body>
+</html>

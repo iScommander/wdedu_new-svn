@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>全国巡讲</title>
+    <link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<script src="${base}/r/wdedu/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+[#include "../include/header_address.html"/]
+[#include "../include/header_msdjt.html"/]
+
+<div class="mbxdh_bg">
+    <div class="mbxdh">
+        <a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">名师大讲堂</a>&nbsp;&gt; &nbsp; <a href="#">全国巡讲</a>
+    </div>
+</div>
+<div class="con">
+    <div class="qgxj_list">
+        <!--
+                    <div class="quxj_one f_l">
+                    <div class="quxj_img">
+                    <img src="${base}/r/wdedu/images/gxu_1.png" />
+                    </div>
+                    <a href="${base}/NewsDisplay/TheNationalTourDetail.jspx">九中高二家长会吕晓李老师开讲</a>
+                    </div>
+        -->
+
+        [@cms_content_list typeId='1,2,3' count='5' titLen='25' channelId='296' orderBy='4' channelOption='0' dateFormat='yyyy-MM-dd']
+        [#list tag_list as a]
+        <div class="quxj_one f_l">
+            <div class="quxj_img">
+                <img src="${base}/r/wdedu/images/gxu_1.png" />
+            </div>
+            <a href="${base}/NewsDisplay/TheNationalTourDetail.jspx?contentId=${a.id!}"> [@text_cut s=a.title! len=20 append='...'/]</a>
+        </div>
+        [/#list]
+        [/@cms_content_list]
+
+
+        <!--
+
+                    <div class="quxj_one f_l">
+                    <div class="quxj_img">
+                    <img src="${base}/r/wdedu/images/gxu_1.png" />
+                    </div>
+                    <a>九中高二家长会吕晓李老师开讲</a>
+                    </div>
+                    -->
+
+        <div class="clearfix"></div>
+    </div>
+</div>
+[#include "../include/footer_new.html"/]
+
+
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>讲座活动名单</title>
+		<link rel="stylesheet" href="${base}/r/sign/jedate.css" />
+		<link rel="stylesheet" href="${base}/r/sign/jzhd-manage.css" />
+		<script src="${base}/r/sign/jquery-1.11.3.min.js"></script>
+		<script src="${base}/r/sign/city.min.js"></script>
+		<style type="text/css">
+			.btn-search{right: 200px;}
+			.btn-excel{right: 0;background: #43D5CA;}
+		</style>
+	</head>
+	<body class="iframe-body">
+		<h4 class="con-title">讲座活动名单</h4>
+		 <form action="${base}/active/UserList.jspx"  id="form"  method="post">	
+		 <input type="hidden"  name="pageNo">		 
+		 <div class="search-wrap gps">
+			<div class="search-item">
+				<label>讲座时间:</label>
+				<span><input type="text" class="date-icon" id="inpstart" placeholder="开始日期" readonly="readonly"></span>
+				<span class="line">--</span>
+				<span><input type="text" class="date-icon" id="inpend" placeholder="结束日期" readonly="" disabled="disabled"></span>
+			</div>
+			<div class="search-item">
+				<label>选择省份:</label>
+				<span class="select-wrap">
+					<select id="pro" name="province" onchange="selectProvince()" >				
+						<option value="none">--请选择--</option>
+					</select>
+				</span>
+			</div>
+			<div class="search-item">
+				<label>主讲老师:</label>
+				<span class="select-wrap" >
+					<select id="teacher"  >  
+					<option value="none">请先选省份</option>
+					                    
+					</select>
+				</span>
+			</div>
+			<div class="search-item">
+				<label>讲座序号:</label>
+				<input type="text" placeholder="1817xxx" value="${active_id!}"  name="active_id"  id="active_id" />
+			</div>							
+			<button type="submit" class="btn-search">查询</button>
+			</form>
+			 
+			<!--<button type="button" id="excelout" class="btn-search btn-excel">导出Excel</button>  -->
+			<form action="${base}/active/UserListexcel.jspx"  id="form2"  method="post">	
+			<input type="hidden"  name="activeid">	
+			<button type="button" class="btn-search btn-excel" onclick="dcexcel()">导出excel</button>
+			</form>
+		</div>		
+		<table>
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>省份</th>
+					<th>市区</th>
+					<th>讲座序号</th>
+					<th>讲座主题</th>
+					<th>主讲老师</th>
+					<th>时间</th>
+					<th>姓名</th>
+					<th>电话</th>
+					<th>学校</th>
+					<th>年级</th>
+					<th>排名</th>
+					<th>文理科</th>
+				</tr>
+			</thead>
+			<tbody>
+				[#if pagination??]
+			[#list pagination.list as list]
+				<tr>
+					<td>${list.id!}</td>
+					<td>${list.province!}</td>
+					<td>${list.city!}</td>
+					<td>${list.active_id!}</td>
+					<td>${list.theme!}</td>
+					<td>${list.lecturer1!}</td>
+					<td>${list.active_start_time!}</td>
+					<td>${list.name}</td>
+					<td>${list.telephone!}</td>
+					<td>${list.school_name!}</td>
+					<td>${list.classes!}</td>
+					<td>${list.class_rank!}</td>
+					<td>${list.major_type!}</td>
+				</tr>
+		
+				[/#list]
+				[/#if]
+			</tbody>
+		</table>
+		<ol class="paging">
+			<div class="paging" >
+						<button type="button"  onclick="_gotoPage('1');">首页</button>
+						<button type="button"  onclick="_gotoPage('${pagination.prePage}');">上一页</button>
+						<button type="button"  onclick="_gotoPage('${pagination.nextPage}');">下一页</button>
+						<button type="button"  onclick="_gotoPage('${pagination.totalPage}');">尾页</button>	
+						<button type="button"  value="${pagination.pageNo}">当前页:${pagination.pageNo}</button>	
+						<button type="button"  value="${pagination.totalPage}">总页数:${pagination.totalPage}</button>														
+			</div>	
+		</ol>
+	
+	</body>
+	<script src="${base}/r/sign/jquery.jedate.min.js"></script>
+	<script type="text/javascript">
+	//分页
+	 function _gotoPage(pageNo) {
+			try{
+				
+				$("input[name='pageNo']").val(pageNo);
+				$('#form').submit();
+			} catch(e) {
+				alert('_gotoPage(pageNo)方法出错');
+			}
+		};
+		
+		
+		 function dcexcel() {
+				try{
+					var activeid=$('#active_id').val();
+					$("input[name='activeid']").val(activeid);
+					 $('#form2').submit(); 
+				} catch(e) {
+					alert('_gotoPage(pageNo)方法出错');
+				}
+			};
+		
+	//导出excel的ajax提交
+	$('#excelout').click(function(){
+		//检测姓名		
+		var active_id = $('#active_id').val();
+		var teacher=$('#teacher').val();
+		var pro=$('#pro').val();
+		var inpstart=$('#inpstart').val();
+		var inpend=$('#inpend').val();
+		
+		//$(this).attr('disabled','disabled');
+		 $.ajax({
+			　    url: "${base}/active/UserListexcel.jspx",
+			   data:{
+				   //前面的是方法中的参数名，后面的是前端页面的参数名
+				   active_id:active_id,
+				   teacher:teacher,
+				   province:pro,
+				   active_start_time:inpstart,
+				   active_end_time:inpend	
+				},
+			　　type : "POST",
+			   error:function(request) {
+				   console.log(request);
+				  // $('#toast').html('导出出错！');
+					alert("导出出错alert");
+					return false;
+	          	},
+			　　success : function(data){
+				/* var res = eval('(' + data + ')'); */
+		      }
+		});
+	});
+	
+	
+	//ajax查找对应省份的教师
+	function selectProvince(){
+		$("#teacher").val("");
+	    var pro=$("#pro").val();
+	    console.log('pro',pro);
+	    if(pro!='')
+		{
+	    	 $.ajax({
+				　　url : '${base}/active/findteacher.jspx',
+				   data:{pro_code:pro},
+				　　type : "POST",
+				   async:false,
+				   error:function(request) {
+					   
+		              alert("提交出现异常啦。。。。");
+		          },
+				　　success : function(data) 
+				   {		
+					     　var res = eval('(' + data + ')');	
+					     console.log('res',res);
+					 
+					   var list=res.teacherList;
+					   var html = '<option value="0">请选择</option>';
+					    for(var o in res.teacherList)
+					    	{
+					    	   /*  var option = $("<option>").val(list[o].teacher_id).text(list[o].name); */
+					    	    html+='<option value="'+list[o].teacher_id+'">'+list[o].name+'</option>';					    					    									   
+					    	}
+					    $("#teacher").html(html);
+				   }
+			 		 
+			}); 
+
+		}
+	}
+	
+	
+		$(function() {
+			//省市
+			function getSeectList(obj,data){
+				var html = '<option value="none">--请选择--</option>';
+				$.each(data, function(i,val) {
+					html += '<option value="'+val.id+'">'+val.value+'</option>';
+				});
+				$(obj).html(html);
+			};
+			getSeectList('#pro',prolist);
+			$('#pro').on('change',function(){
+				var pro = $(this).val();
+				if(pro=='none'){
+					alert('请选择省份，否则无法选择市区！');
+					$('#city').attr('disabled','disabled');		
+					$('#quxian').attr('disabled','disabled');
+					return false;
+				};
+				console.log(pro);
+				var cityData = [];
+				$.each(citylist, function(j,val) {
+					if(val.parentId==pro){
+						cityData.push(citylist[j]);
+					}
+				});
+				getSeectList('#city',cityData);
+				$('#city').removeAttr('disabled');
+			});
+			$('#city').on('change',function(){
+				var city = $(this).val();
+				if(city=='none'){
+					alert('请选择市区！');
+					return false;
+				};
+			});
+			//时间选择
+			var start = {
+			    format: 'YYYY-MM-DD',
+			    onClose: false, 
+			    minDate: $.nowDate({DD:0}),
+			    okfun: function(obj){
+			        end.minDate = obj.val;
+			        $("#inpend").removeAttr("disabled");
+			        endDates();
+			    }
+			};
+			var end = {
+			    format: 'YYYY-MM-DD',
+			    onClose: false,
+			    minDate: $.nowDate({DD:0}),
+			};
+			function endDates() {
+			    end.trigger = false;
+			    $("#inpend").jeDate(end);
+			};
+			$('#inpstart').jeDate(start);
+			$('#inpend').jeDate(end);
+		})
+	</script>
+</html>

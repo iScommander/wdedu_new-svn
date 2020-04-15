@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<title>基本信息查询</title>
+<link href="${base}/r/css/head_footer.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="${base}/r/css/ydyfw.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="${base}/r/js/jquery-1.8.3.min.js" language="javascript"></script>
+<!--[if lte IE 9]>
+<script src="${base}/r/js/html5shiv.js" language="javascript"></script>
+<script src="${base}/r/js/respond.min.js" language="javascript"></script>
+<![endif]-->
+<style>
+.jbxx-td01{
+	width:22%;
+	text-align:right;
+	font-weight:600;
+	color:#333;
+}
+.jbxx-td02{
+	width:78%;
+	padding-left:10px;
+	color:#333;
+}
+.jbxx-td03{
+	font-size:14px;
+	color:#B3B3B3;
+	padding-left:48px;
+}
+
+.fm-mes{
+	width:100%;
+}
+.fm-mes td{
+	width:16.6%;
+}
+.bt_a{
+	display:block;
+	width:20%;
+	height:34px;
+	line-height:34px;
+	text-align:center;
+	font-size:18px;
+	letter-spacing:4px;
+	background-color:#3399FF;
+	color:#FFF;
+	margin:30px 30px 30px 0;
+}
+</style>
+</head>
+<body>
+	<div class="z_body" style="background-color:#F2F2F2;">
+		[#include "../wdedu/include/header_address.html"/]
+		[#include "../wdedu/include/header_dylq.html"/]
+		<div class="z_width_out">
+			<div class="on_line">
+				<div class="bzy_where">
+					&nbsp;您当前位置：<a href="${base}"><span class="">主页&nbsp;</span></a>><a href="${base}/ydyfw/queryOrder.jspx"><span class="">我的一对一服务清单&nbsp;</span></a>><a href="${base}/mnwb/yjxx.jspx?orderId=${order.orderId}"><span class="">&nbsp;填报个人信息&nbsp;</span></a>><span class="">&nbsp;基本信息</span>
+				</div>
+			</div>
+		</div>
+		<div class="z_width_out">
+			<div class="on_line">
+				<div class="xxtb_left_nav">
+					[#include "./left_menu.html"/]
+				</div>
+				<div class="xxtb_right_nav">
+					<div class="ydy_title">
+						<span class="ydytit_img bg_img"><img src="${base}/second_image/ydy_img/ydy_img09.png"/></span>
+						<span class="ydytit_say">
+							考生个人信息详细填写
+							[#if order.serviceType == 'zytb']
+							（志愿填报一对一）
+							[#elseif order.serviceType =='zzzs']
+							（自主招生一对一）
+							[#elseif order.serviceType =='xdzy']
+							（学大志愿一对一）
+							[#elseif order.serviceType =='bjts']
+							（背景提升项目）
+							[#else]
+							（港澳台一对一）
+							[/#if]
+						</span>
+						<span class="ddh">订单号：${order.orderId}</span>
+					</div>
+					<div class="mes_left_top">
+						<div class="ydy_shuoming">填写邮寄信息</div>
+					</div>
+					<ul class="mes_left_ul">
+						<li><a href="jbxx.jspx?orderId=${order.orderId}">基本信息</a></li>
+						<li><a href="grzp.jspx?orderId=${order.orderId}" id="grzp">个人照片</a></li>
+						<li><a href="zxxx.jspx?orderId=${order.orderId}" id="zxxx">中学信息</a></li>
+						<li><a href="cjxx.jspx?orderId=${order.orderId}" id="cjxx">成绩信息</a></li>
+						<li><a href="zhxx.jspx?orderId=${order.orderId}">综合信息</a></li>
+						<li><a href="mkcj.jspx?orderId=${order.orderId}" id="mkcj">模考成绩</a></li>
+						<li><a href="dkpm.jspx?orderId=${order.orderId}" id="dkpm">单科排名</a></li>
+						<li><a href="tjrxx.jspx?menuId=tjrxx&orderId=${order.orderId}" id="tjrxx">推荐人信息</a></li>
+						<li class="checked-style"><a href="yjxx.jspx?menuId=yjxx&orderId=${order.orderId}" id="yjxx">邮寄信息</a></li>
+					</ul>
+					<div class="mes_left_bottom">
+						<table class="left_bottom_jbxx">
+							<tr>
+								<td class="jbxx-td01">收件人姓名：</td>
+								<td class="jbxx-td02">[#if tnUser??]${tnUser.postName!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="jbxx-td01">收件人手机号码：</td>
+								<td class="jbxx-td02">[#if tnUser??]${tnUser.postPhone!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="jbxx-td01">邮寄地址：</td>
+								<td class="jbxx-td02">[#if tnUser??]${tnUser.postAttress!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="jbxx-td01">邮寄地址邮政编码：</td>
+								<td class="jbxx-td02">[#if tnUser??]${tnUser.postZip!}[/#if]</td>
+							</tr>
+							<tr>
+								<td class="jbxx-td03" colspan="2" align="right">
+								<a class="bt_a" href="${base}/mnwb/yjxx_new.jspx?orderId=${order.orderId}">修改</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<!-- 底部栏目 -->
+		[#include "../wdedu/include/footer_new.html"/]
+	</div>
+	<script>
+		$(function(){
+			$("#yjxx").addClass("checked-style02");
+		});
+	</script>
+</body>
+</html>

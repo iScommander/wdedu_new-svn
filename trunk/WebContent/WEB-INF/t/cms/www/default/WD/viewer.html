@@ -1,0 +1,248 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>志愿视频</title>
+    <link rel="stylesheet" href="${base}/r/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css"/>
+    <script src="${base}/u/cms/www/zytbsy/js/Chart.min.js"></script>
+    <script src="${base}/r/js/jquery-1.8.3.min.js"></script>
+    <script src="${base}/r/js/pdfobject.js"></script>
+</head>
+<style>
+    .route{
+        margin-bottom: 0px;
+    }
+    #content{
+        top:-58px;
+    }
+    .listbor{
+        min-width: 230px;
+        text-align: center;
+        display: table;
+        color: #05b8c3;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 4px 15px;
+        border: 1px solid #05b8c3;
+        border-radius: 5px;
+        margin: 10px auto;
+    }
+    .list_icon{
+        display: flex;
+        flex-direction: row;
+        padding: 20px 0;
+        margin: 20px 0;
+    }
+    .list_icon li{
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        justify-content: center;
+        border-right: 1px solid #999;
+    }
+    .list_icon li:last-child{
+        border: none;
+    }
+    .list_icon li div{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .list_icon li div img{
+        width: 35px;
+    }
+    .list_icon li div.list_iconcont{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 15px;
+    }
+    .borshaw{
+        box-shadow: 1px 1px 1px 1px #dbe9ef;
+    }
+    .col7{
+        color: #707070;
+        font-size: 14px;
+    }
+    .martop{
+        margin-top: 20px;
+    }
+    .duction{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 40px;
+    }
+    .duction .duction_bo{
+        width: 30%;
+        height: 300px;
+        overflow: hidden;
+        padding: 30px 10px;
+    }
+    .duction .duction_bo:nth-of-type(2){
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .duction .duction_bo h4{
+        background: url(${base}/u/cms/www/zytbsy/img/tupian/mark.png) left 10px center no-repeat;
+        padding: 4px 0;
+        padding-left: 45px;
+    }
+    .inform{
+        padding: 20px;
+        margin-top: 30px;
+    }
+    .inform ul li{
+        padding: 5px 0;
+        font-weight: bold;
+    }
+    .inform ul li label{
+        /*font-weight: normal;*/
+    }
+    .batch{
+        padding: 20px;
+        margin-top: 30px;
+    }
+    .batch ul li p{
+        font-weight: bold;
+        padding: 5px 0;
+    }
+    .batch ul li span{
+        font-size: 14px;
+    }
+    .screen{
+        padding-top: 20px;
+    }
+    .screen table{
+        width: 100%;
+        border: 1px solid #dadada;
+        margin-top: 20px;
+    }
+    .screen table tr{
+        border-bottom: 1px solid #dadada;
+    }
+    .screen table tr td{
+        padding: 5px 0;
+        border-right: 1px solid #dadada;
+    }
+    .screen table tr td:nth-of-type(1){
+        width: 30%;
+        background-color: #52c0d3;
+    }
+    .foldline{
+        margin-top: 40px;
+    }
+    .borleft{
+        border-left: 5px solid #52c0d3;
+        font-weight: bold;
+        padding-left: 5px;
+        margin: 10px 0;
+        margin-left: 10px;
+    }
+    .borleft span{
+        color: #FF0000;
+    }
+    .fold_p{
+        font-size: 14px;
+        font-weight: bold;
+        padding: 0 10px;
+    }
+    table.table{
+        font-size: 14px;
+    }
+    .line-font{
+        height: 400px;
+    }
+    .agricul{
+        border: 1px solid #dadada;
+        margin-top: 50px;
+    }
+    .agricul .agricul_cen{
+        text-align: center;
+        padding: 7px 0;
+        border-bottom: 1px solid #DADADA;
+    }
+    .agricul div.agricul_cen{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .agricul div.agricul_cen p:nth-of-type(2){
+        color: #0be626;
+    }
+    .bgcol{
+        background-color: #004468;
+        text-align: center;
+        color: #fff;
+    }
+    table.newtab{
+        margin-bottom: 0;
+    }
+    .newtab tr:nth-of-type(2){
+        background: #004468;
+    }
+    .newtab tr:nth-of-type(2) th.bg{
+        background-color: #05b8c3;
+        border-right: 1px solid #004468;
+        color: #fff;
+    }
+    .textcol{
+        margin-bottom: 30px;
+    }
+    .textcol .col7{
+        padding: 0 10px;
+    }
+    .lastbat{
+        padding-bottom: 100px;
+        margin-top: 30px;
+    }
+    .textcol .marborp{
+        border: 1px solid #00283F;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+</style>
+<body>
+<!--顶部线条-->
+<div class="topLine"></div>
+<!--tab切换  导航-->
+[#include "../include/header_kstb.html"/]
+<!--路径-->
+<div class="route">
+    <div class="flex-container1 width1200">
+        <div><a href="${base}/index.jhtml">首页 </a> &lt;&lt;志愿 &lt;&lt;评估报告</div>
+       <!-- <div style="color: #942a25; float: right" id="renderPdf">生成pdf</div>-->
+    </div>
+</div>
+<div id="pdf">
+ <!--<object data="${base}/r/sign/1559553282555.pdf" type="application/pdf" width="100%" height="100%">-->
+<!--<a href="${base}/r/sign/1559553282555.pdf">aaaaa</a>-->
+  <input type="hidden" id="pdfUrl" name="pdfurl" value="${(pdfurl)!}"/>
+    <!--<embed src="/u/cms/pdf/1559645483115.pdf" type="application/pdf" width="100%" height="100%">-->
+
+</div>
+
+
+
+<!--底部-->
+
+
+<script type="text/javascript">
+    /* window.onload = function (){
+         var success = new PDFObject({ url: "${base}/r/pdf/1559409155102.pdf",pdfOpenParams: { scrollbars: '0', toolbar: '0', statusbar: '0'}}).embed("example");
+     };*/
+    /*$(pdf).val("${base}/r/pdf/1559547642291.pdf");*/
+
+
+    var pdfurl=$("#pdfUrl").val();
+    PDFObject.embed(pdfurl, "#pdf");
+
+</script>
+</body>
+</html>

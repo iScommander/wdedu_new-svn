@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>底部</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<style>
+			p.gongsijianjie {
+				color: #fff;
+				margin-top: 20px;
+			}
+			
+			p.gongsijianjie span {
+				display: inline-block;
+				margin-right: 10px;
+			}
+			
+			.guanzhuwomen p {
+				margin-bottom: 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<footer style="margin-top: 50px;" class="pdfyc">
+			<div style="height:240px;background: #004065;">
+				<div class="flex-container width1200" style="margin: 0 auto;">
+					<div style="margin: 30px 100px;">
+						<img src="${base}/u/cms/www/logo/logo.png" alt="" />
+						<img src="${base}/u/cms/www/logo/name_w.png" alt="" />
+						<p class="gongsijianjie">
+							[@cms_content_list typeId='1'  channelId='125' dateFormat='yyyy-MM-dd']
+							[#list tag_list as a]
+							[#if a.id=242]
+							<span><a href="${a.url}"><font color="white">公司简介</font></a></span>
+							[/#if]
+							[/#list]
+							[/@cms_content_list]
+							<span><a href="${base}/BkyxAct/show.jspx"><font color="white">关于我们</font></a></span>
+							[@cms_content_list typeId='1'  channelId='133' dateFormat='yyyy-MM-dd']
+							[#list tag_list as a]
+							[#if a.id=244]
+							<span><a href="${a.url}"><font color="white">联系方式</font></a></span>
+							[/#if]
+							[/#list]
+							[/@cms_content_list]
+							[@cms_content_list typeId='1'  channelId='133' dateFormat='yyyy-MM-dd']
+							[#list tag_list as a]
+							[#if a.id=244]
+							<span><a href="${a.url}"><font color="white">公司地址</font></a></span>
+							[/#if]
+							[/#list]
+							[/@cms_content_list]
+						</p>
+					</div>
+					<div style="margin: 30px 100px;" class="guanzhuwomen">
+						<p style="color: #fff;">关注我们</p>
+						<p>
+							<img src="${base}/r/img/qq.png" alt="" />
+							<img src="${base}/r/img/qq.png" alt="" />
+						</p>
+						<p>
+							<img src="${base}/r/img/erweima.png" alt="" style="width: 50%;" />
+						</p>
+					</div>
+				</div>
+			</div>
+			<div style="height:70px;line-height:70px;background: #00283f;text-align: center;color: #fff;font-size: 12px;">
+				备案号&nbsp;&nbsp;&nbsp;苏ICP备18041837号-2&nbsp;&nbsp;&nbsp;沃得生涯教育咨询有限公司
+
+			</div>
+		</footer>
+	</body>
+
+</html>

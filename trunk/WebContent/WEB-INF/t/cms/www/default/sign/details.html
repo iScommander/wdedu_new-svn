@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="format-detection" content="email=no">
+		<title>讲座活动</title>
+		<link rel="stylesheet" href="${base}/r/sign/iosSelect.css" />
+		<link rel="stylesheet" href="${base}/r/sign/rem.css" />
+		<script src="${base}/r/sign/jquery-1.11.3.min.js"></script>
+		<script src="${base}/r/sign/iosSelect.js"></script>
+		<style type="text/css">
+			body{background: #F1F1F1;}
+			#main{width: 95%;margin: 1.5rem auto 6.5rem;padding: 1rem 1rem .5rem;border-radius: 4px;background: #fff;}
+			.gap,li{margin-bottom: .4rem;font-size: 1.1rem;}
+			h3{padding-bottom: .7rem;font-size: 1.25rem;}
+			.address-icon,.time-icon,a i{display: inline-block;vertical-align: -0.1rem;background-size: cover;background-repeat: no-repeat;}
+			.address-icon{width: .6667rem;height: .9167rem;background-image: url(${base}/r/sign/img/address.png);}
+			.time-icon{width: .875rem;height: .875rem;background-image: url(${base}/r/sign/img/time.png);}
+			h4{padding-top: 1rem;padding-bottom: .7rem;font-size: 1.15rem;}
+			.item-left{position: absolute;top: 0;left: 0;width: 7.5rem;height: 8rem;}
+			.item-left img{height: 100%;border-radius: 2px;}
+			.item-right{padding-left: 8rem;}
+			.item-right h3{font-size: 1.2rem;padding-bottom: .4rem;font-weight: 500;}
+			.item-right div{color: #555;margin-bottom: .2rem;}
+			.item-right p{font-size: 1rem;color: #666;text-align: justify;}
+			li{color: #444;}
+			#teachers .gap{margin-bottom: 1.5rem;min-height: 8rem;}
+			a{display:inline-block; position: fixed;z-index: 10;bottom: 0;left: 0;width: 100%;line-height: 4.8rem;text-align: center;color: #fff;background: #FF7328;font-size: 1.5rem;}
+			a i{width: 2rem;height: 2rem;background-image: url(${base}/r/sign/img/arrow.png);vertical-align: -.45rem;}
+			#price{padding-top: 0;}
+			#price span{font-size: 1.25rem;color: #FB963A;font-weight: bold;letter-spacing: 1px;}
+		</style>
+	</head>
+	<body>
+		<img src='${base}/r/sign/img/item-banner.png' alt="活动banner" />
+		<div id="main">
+			<h3>${activeDetail.theme!}</h3>
+			<div class="gap">
+				<span class="address-icon"></span>
+				<span>${activeDetail.address!}</span>
+			</div>
+			<div class="gap">
+				<span class="time-icon"></span>
+				<span>${activetime!}</span>
+			</div>
+			<h4>活动内容：</h4>
+			
+				<div>${activeDetail.details!}</div>
+		
+			<h4>主讲嘉宾：</h4>
+			<div id="teachers">
+		[#if activeTeacher1??]
+				<div class="gap gps">
+					<div class="item-left">
+						<img src="${activeTeacher1.image1!}" alt="履历" />
+					</div>
+					<div class="item-right">
+						<h3>${activeTeacher1.name!}</h3>
+						<div>${activeTeacher1.introduce1!}</div>
+						<div>${activeTeacher1.introduce2!}</div>
+						<div>${activeTeacher1.introduce3!}</div>
+						<div>${activeTeacher1.strintroduce4!}</div>
+						
+					</div>
+				</div>
+			[/#if]	
+			 
+				
+			[#if  activeTeacher2?? && activeTeacher2.teacher_id !=17000]
+			 	<div class="gap gps">
+					<div class="item-left">
+						<img src="${activeTeacher2 .image1!}" alt="履历" />
+					</div>
+					<div class="item-right">
+						<h3>${activeTeacher2.name!}</h3>
+						<div>${activeTeacher2.introduce1!}</div>
+						<div>${activeTeacher2.introduce2!}</div>
+						<div>${activeTeacher2.introduce3!}</div>
+						<div>${activeTeacher2.strintroduce4!}</div>
+					</div>
+				</div> 
+			[/#if]	
+				<h4 id="price">价格：<span>¥${free!}</span></h4>
+			</div>
+			<a href="${base}/sign/ticketindex.jspx?active_Id=${activeid}">立即报名<i></i></a>
+		</div>
+	</body>
+</html>

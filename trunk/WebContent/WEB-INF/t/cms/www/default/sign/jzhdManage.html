@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>讲座活动管理</title>
+		<link rel="stylesheet" href="${base}/r/sign/jedate.css" />
+		<link rel="stylesheet" href="${base}/r/sign/jzhd-manage.css" />
+		<script src="${base}/r/sign/jquery-1.11.3.min.js"></script>
+	</head>
+	<body>
+		<div class="main gps">
+			<header>
+				<span class="logo">
+					<img src="${base}/r/zywy/new_image/logo_main.png" />
+				</span>
+				<h3>讲座活动管理平台</h3>
+			</header>
+			<aside>
+				<ol>
+					<li class="active" src='${base}/active/activeList.jspx?type=ckjz'>
+						<i class="bg-menu_icon1"></i>讲座列表<span>></span>
+					</li>
+					<li src='${base}/active/releasehtml.jspx'>
+						<i class="bg-menu_icon2"></i>新增讲座<span>></span>
+					</li>
+					<li src='${base}/active/activeList.jspx?type=xzewm'>
+						<i class="bg-menu_icon3"></i>下载二维码<span>></span>
+					</li>
+					<li src='${base}/active/UserList.jspx'>
+						<i class="bg-menu_icon4"></i>讲座名单<span>></span>
+					</li>
+					<!--  <li src='${base}/active/activeList.jspx?type=cksy'>
+						<i class="bg-menu_icon5"></i>所有名单<span>></span>-->
+					</li>
+						<li src='${base}/active/confirmlist.jspx'>
+						<i class="bg-menu_icon5"></i>确认领取<span>></span>
+					</li>
+					</li>
+						<li src='${base}/active/teacherList.jspx'>
+						<i class="bg-menu_icon5"></i>讲师列表<span>></span>
+					</li>
+					
+					
+					
+					
+				</ol>
+			</aside>
+			 <div class="content">
+				<iframe id='iframe' src="${base}/active/activeList.jspx?type=ckjz" frameborder="0" scrolling="no" ></iframe>
+			</div>
+		</div>
+	</body>
+	<script src="${base}/r/sign/jquery.jedate.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+				$(window).scroll(function () {
+					var scroll = $(window).scrollTop();
+					if(Number(scroll) >= 82){
+						$(".main aside").css("top",'0');
+					}else{
+						var top = 82-scroll +'px';
+						$(".main aside").css("top",top);
+					}
+				});
+			var iframe = document.getElementById('iframe');
+			function setIframeHeight() {
+				var win = iframe.contentWindow||iframe.contentDocument.parentWindow, 
+				doc = win.document, 
+				html = doc.documentElement, 
+				body = doc.body; 
+				var frameHeight = Math.max( body.scrollHeight, body.offsetHeight, html.scrollHeight, html.offsetHeight); 
+			 	console.log(body.scrollHeight,html.offsetHeight)
+				iframe.setAttribute('height', frameHeight);
+			};
+			window.onresize = function () {
+				setIframeHeight();
+			}; 
+			iframe.onload = function(){ 
+				setIframeHeight();
+			};
+			$('aside li').on('click',function(){
+				$(this).addClass("active").siblings().removeClass("active");
+				var src = $(this).attr("src");
+				$("#iframe").attr("src",src);
+			})
+		})
+	</script>
+</html>

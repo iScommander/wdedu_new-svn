@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>基本信息</title>
+    <link href="${base}/r/css/new_zywy/reset.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="${base}/r/css/new_zywy/bootstrap.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="${base}/r/css/new_zywy/publicStyle.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="${base}/r/css/new_zywy/newMain.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="${base}/r/css/head_footer.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script type="text/javascript" src="${base}/r/js/new_js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="${base}/r/js/new_js/bootstrap.js"></script>
+    <script type="text/javascript" src="${base}/r/js/new_js/jquery-validate.js"></script>
+    <script type="text/javascript" src="${base}/r/js/new_js/messages_zh.js"></script>
+	<script src="${base}/thirdparty/My97DatePicker/WdatePicker.js" language="javascript"></script>
+	<!--[if lte IE 9]>
+	<script src="${base}/r/js/new_js/html5shiv.js" language="javascript"></script>
+	<script src="${base}/r/js/new_js/respond.min.js" language="javascript"></script>
+	<![endif]-->
+</head>
+<body>
+    <div class="z-outer" style="background:#F5F5F5">
+		[#include "../wdedu/include/header_address.html"/]
+		[#include "../wdedu/include/header_dylq.html"/]
+        <div class="container">
+            <div class="row clearfix navigation-style">
+                <div class="col-md-12 column">
+                    <div class="navigation"><span>当前位置：</span><a href="${base}">主页</a><span>&lt;</span><a href="${base}/ydyfw/queryOrder.jspx">我的一对一服务清单</a><span>&lt;</span><a href="ase}/mnwb/jbxx.jspx?orderId=${order.orderId}">填报个人信息</a><span>&lt;</span><a>基本信息</a></div>
+                </div>
+            </div>
+	        <div class="row clearfix ydy_content">
+	            <div class="col-md-3 column zjf-choose-left">
+					[#include "./left_menu.html"/]
+	            </div>
+	            <div class="col-md-9 column zjf-choose-right">
+			        <div class="row clearfix ydy_title">
+			            <div class="col-md-9 column">
+							<span class="ydy_title_span">
+								考生个人信息详细填写
+								[#if order.serviceType == 'zytb']
+								（志愿填报一对一）
+								[#elseif order.serviceType =='zzzs']
+								（自主招生一对一）
+								[#elseif order.serviceType =='xdzy']
+								（学大志愿一对一）
+								[#elseif order.serviceType =='bjts']
+								（背景提升项目）
+								[#else]
+								（港澳台一对一）
+								[/#if]
+							</span>
+			            </div>
+			            <div class="col-md-3 column">
+							<span>订单号：${order.orderId}</span>
+			            </div>
+			        </div>
+			        <div class="row clearfix">
+			            <div class="col-md-12 column">
+							<div class="mes_left_top">
+								<div class="ydy_shuoming">填写基本信息、中学信息、成绩信息，模考成绩、单科成绩等</div>
+							</div>
+							<ul class="mes_left_ul">
+								<li class="checked-style"><a href="jbxx.jspx?orderId=${order.orderId}">基本信息</a></li>
+								<li><a href="grzp.jspx?orderId=${order.orderId}" id="grzp">个人照片</a></li>
+								<li><a href="zxxx.jspx?orderId=${order.orderId}" id="zxxx">中学信息</a></li>
+								<li><a href="cjxx.jspx?orderId=${order.orderId}" id="cjxx">成绩信息</a></li>
+								<li><a href="zhxx.jspx?orderId=${order.orderId}">综合信息</a></li>
+								<li><a href="mkcj.jspx?orderId=${order.orderId}" id="mkcj">模考成绩</a></li>
+								<li><a href="dkpm.jspx?orderId=${order.orderId}" id="dkpm">单科排名</a></li>
+								<li><a href="tjrxx.jspx?menuId=tjrxx&orderId=${order.orderId}" id="tjrxx">推荐人信息</a></li>
+								<li><a href="yjxx.jspx?menuId=yjxx&orderId=${order.orderId}" id="yjxx">邮寄信息</a></li>
+							</ul>
+							<div class="mes_left_bottom">
+								<form action="${base}/mnwb/jbxx_save.jspx" id="tableForm" method="post">
+									<table class="zydy-table">
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>姓名：</strong></td>
+											<td class="ydy-td4"><input type="text" class="text-input1" id="userName" name="userName" [#if tnUser??] value="${tnUser.userName!}" [/#if]></td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>证件号码：</strong></td>
+											<td class="ydy-td4"><input type="text" class="text-input1" id="identityNumber" name="identityNumber" [#if tnUser??] value="${tnUser.identityNumber!}" [/#if]></td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>手机号码：</strong></td>
+											<td class="ydy-td4"><input class="text-input1" id="telephone" name="telephone" maxlength="11" type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" [#if tnUser??] value="${tnUser.telephone!}" [/#if]></td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>性别：</strong></td>
+											<td class="ydy-td4">
+												<label class="radio-inline"><input type="radio" name="sex" id="sex1" value="1" [#if tnUser?? && tnUser.sex?? && tnUser.sex=='1'] checked [/#if]>男</label>
+												<label class="radio-inline"><input type="radio" name="sex" id="sex2" value="2" [#if tnUser?? && tnUser.sex?? && tnUser.sex=='2'] checked [/#if]>女</label>
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>出生日期：</strong></td>
+											<td class="ydy-td4"><input class="text-input1" type="text" id="birthday" name="birthday" [#if tnUser??] value="${tnUser.birthday!}" [/#if] onclick="WdatePicker(({startDate:'{%y-18}-01-01'}))" [#if tnUser??] value="${tnUser.birthday!}"[/#if] class="Wdate" readonly="readonly" /></td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>民族：</strong></td>
+											<td class="ydy-td4">
+												[#if tnUser??]
+													[@p.select name="nation" id="nation" class="text-input1" value=tnUser.nation list=nationList listKey="code" listValue="name" /]
+												[#else]
+													[@p.select name="nation" id="nation" class="text-input1" value='' list=nationList listKey="code" listValue="name" /]
+												[/#if]
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>政治面貌：</strong></td>
+											<td class="ydy-td4">
+											[#if tnUser??]
+												[@p.select name="politics" id="politics" class="text-input1" value=tnUser.politics list=politicsList listKey="code" listValue="name" /]
+											[#else]
+												[@p.select name="politics" id="politics" class="text-input1" value='' list=politicsList listKey="code" listValue="name" /]
+											[/#if]
+											</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td class="ydy-td2">请查看学校招生简章，如果报考专业对视力、是否色盲、身高、体重有要求，则必须填写。</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><strong>裸眼视力（左/右）：</strong></td>
+											<td class="ydy-td4">
+												左&nbsp;&nbsp;<input type="number" min="0.1" max="5.2" step="0.1" class="text-input2" id="leftEyesight" name="leftEyesight" [#if tnUser??] value="${tnUser.leftEyesight!}" [/#if] onblur="change(this)">
+												&nbsp;&nbsp;&nbsp;右&nbsp;<input type="number" class="text-input2" id="rightEyesight" min="0.1" max="5.2" step="0.1" name="rightEyesight" [#if tnUser??] value="${tnUser.rightEyesight!}" [/#if] onblur="change(this)">
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="must">*</span><span style="color:#aaa;">视力标准为 0.1-1.5（或 4.0-5.2）</span>
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><strong>是否色盲：</strong></td>
+											<td class="ydy-td4">
+											[#if tnUser??]
+												[@p.select name="colorBlind" id="colorBlind" class="text-input3" value=tnUser.colorBlind list=colorBlindList listKey="code" listValue="name" /]
+											[#else]
+												[@p.select name="colorBlind" id="colorBlind" class="text-input3" value='' list=colorBlindList listKey="code" listValue="name" /]
+											[/#if]
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><strong>身高(cm)：</strong></td>
+											<td class="ydy-td4"><input type="text" onblur="change2(this)"  class="text-input3" id="height" name="height" [#if tnUser??] value="${tnUser.height!}" [/#if] onkeyup="this.value=this.value.replace(/\D/g,'')"></td>
+										</tr> 
+										<tr>
+											<td class="ydy-td1"><strong>体重(kg)：</strong></td>
+											<td class="ydy-td4"><input type="text" onblur="change2(this)" class="text-input3" id="weight" name="weight" [#if tnUser??] value="${tnUser.weight!}"[/#if]></td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>高考报名所在地：</strong></td>
+											<td class="ydy-td4">
+												[#if tnUser??]
+													[@p.select name="province" id="province" class="text-input1" value=tnUser.examProvince list=proList listKey="pro_code" listValue="pro_name" onchange="selectProvince()" headerKey="0" headerValue="请选择"/]
+												[#else]
+													[@p.select name="province" id="province" class="text-input1" value='' list=proList listKey="pro_code" listValue="pro_name" onchange="selectProvince()" headerKey="0" headerValue="请选择"/]
+												[/#if]
+													&nbsp;&nbsp;&nbsp;&nbsp;
+												[#if tnUser??]
+													[@p.select name="city" id="city" class="text-input1" value=tnUser.examCity list=cityList listKey="city_code" listValue="city_name" onchange="selectCity()" /]
+												[#else]
+													[@p.select name="city" id="city" class="text-input1" value='' list=cityList listKey="city_code" listValue="city_name" onchange="selectCity()" /]
+												[/#if]
+													&nbsp;&nbsp;&nbsp;&nbsp;
+												[#if tnUser??]
+													[@p.select name="region" id="region" class="text-input1" value=tnUser.examRegion list=boroughList listKey="quxian_code" listValue="quxian_name" /]
+												[#else]
+													[@p.select name="region" id="region" class="text-input1" value='' list=boroughList listKey="quxian_code" listValue="quxian_name" /]
+												[/#if]
+												<input type="hidden" name="examProvince" id="examProvince">
+												<input type="hidden" name="examCity" id="examCity">
+												<input type="hidden" name="examRegion" id="examRegion">
+												<input type="hidden" name="orderId" value="${order.orderId}">
+												<input type="hidden" name="postName" [#if tnUser??] value="${tnUser.postName!}" [/#if]>
+												<input type="hidden" name="postPhone" [#if tnUser??] value="${tnUser.postPhone!}" [/#if]>
+												<input type="hidden" name="postAttress" [#if tnUser??] value="${tnUser.postAttress!}" [/#if]>
+												<input type="hidden" name="postZip" [#if tnUser??] value="${tnUser.postZip!}" [/#if]>
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><strong>高考报名号：</strong></td>
+											<td class="ydy-td4"><input type="text" class="text-input1" onkeyup="this.value=this.value.replace(/\D/g,'')" id="examNumber" name="examNumber" [#if tnUser??] value="${tnUser.examNumber!}" [/#if]></td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>考生类型：</strong></td>
+											<td class="ydy-td4">
+												[#if tnUser??]
+													[@p.select name="studentType" class="text-input1" id="studentType" value=tnUser.studentType list=studentTypeList listKey="code" listValue="name" /]
+												[#else]
+													[@p.select name="studentType" class="text-input1" id="studentType" value='' list=studentTypeList listKey="code" listValue="name" /]
+												[/#if]
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>外语语种：</strong></td>
+											<td class="ydy-td4">
+											[#if tnUser??]
+												[@p.select name="language" id="language" class="text-input1" value=tnUser.language list=languageList listKey="code" listValue="name" /]
+											[#else]
+												[@p.select name="language" id="language" class="text-input1" value='' list=languageList listKey="code" listValue="name" /]
+											[/#if]
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>学科类型：</strong></td>
+											<td class="ydy-td4">
+											[#if tnUser??]
+												[@p.select name="subjectType" id="subjectType" class="text-input1" value=tnUser.subjectType list=subjectTypeList listKey="code" listValue="name" /]
+											[#else]
+												[@p.select name="subjectType" id="subjectType" class="text-input1" value='' list=subjectTypeList listKey="code" listValue="name" /]
+											[/#if]
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>联系电话：</strong></td>
+											<td class="ydy-td4"><input type="text" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')" class="text-input1" id="phoneNumber" name="phoneNumber" [#if tnUser??] value="${tnUser.phoneNumber!}" [/#if]></td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>联系地址：</strong></td>
+											<td class="ydy-td4">
+											[#if tnUser??]
+												[@p.select name="province2" id="province2" class="text-input1" value=tnUser.mailProvince list=proList2 listKey="pro_code" listValue="pro_name" onchange="selectProvince2()" headerKey="0" headerValue="请选择"/]
+											[#else]
+												[@p.select name="province2" id="province2" class="text-input1" value='' list=proList2 listKey="pro_code" listValue="pro_name" onchange="selectProvince2()" headerKey="0" headerValue="请选择"/]
+											[/#if]
+												&nbsp;&nbsp;&nbsp;&nbsp;
+											[#if tnUser??]
+												[@p.select name="city2" id="city2" class="text-input1" value=tnUser.mailCity list=cityList2 listKey="city_code" listValue="city_name" onchange="selectCity2()" /]
+											[#else]
+												[@p.select name="city2" id="city2" class="text-input1" value='' list=cityList2 listKey="city_code" listValue="city_name" onchange="selectCity2()" /]
+											[/#if]
+												&nbsp;&nbsp;&nbsp;&nbsp;
+											[#if tnUser??]
+												[@p.select name="region2" id="region2" class="text-input1" value=tnUser.mailRegion list=boroughList2 listKey="quxian_code" listValue="quxian_name" /]
+											[#else]
+												[@p.select name="region2" id="region2" class="text-input1" value='' list=boroughList2 listKey="quxian_code" listValue="quxian_name" /]
+											[/#if]
+												<input type="hidden" name="mailProvince" id="mailProvince">
+												<input type="hidden" name="mailCity" id="mailCity">
+												<input type="hidden" name="mailRegion" id="mailRegion">
+											</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>具体地址：</strong></td>
+											<td class="ydy-td4"><input class="text-input4" id="mailAddress" name="mailAddress" [#if tnUser??] value="${tnUser.mailAddress!}" [/#if] maxlength="50"></td>
+										</tr>
+										<tr>
+											<td class="ydy-td4"></td>
+											<td class="ydy-td2">最多可输入50个字符；地址请写明街道名称、门牌号码、楼层和房间号等信息。</td>
+										</tr>
+										<tr>
+											<td class="ydy-td1"><span class="must">*</span><strong>邮政编码：</strong></td>
+											<td class="ydy-td4"><input class="text-input1" id="postcode" name="postcode" [#if tnUser??] value="${tnUser.postcode!}" [/#if] onkeyup="this.value=this.value.replace(/\D/g,'')"  maxlength="6"></td>
+										</tr>
+										<tr>
+											<td class="ydy-td3"><span class="must">*</span><strong>家庭信息：</strong></td>
+											<td>
+												<table class="zydy-table-inner">
+													<tr>
+														<td>父亲姓名&nbsp;&nbsp;</td><td class="ydy-td4"><input class="text-input1" id="name1" name="name1" [#if father??] value="${father.name!}" [/#if]></td>
+														<td>联系电话&nbsp;&nbsp;</td><td class="ydy-td4"><input maxlength="11"  type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" class="text-input1" id="telephone1" name="telephone1" [#if father??] value="${father.telephone!}" [/#if]></td>
+													</tr>
+													<tr>
+														<td>文化程度&nbsp;&nbsp;</td>
+														<td class="ydy-td4">
+														[#if father??]
+															[@p.select name="educationLevel1" id="educationLevel1" class="text-input1" value=father.educationLevel list=educationLevelList listKey="code" listValue="name" /]
+														[#else]
+															[@p.select name="educationLevel1" id="educationLevel1" class="text-input1" value='' list=educationLevelList listKey="code" listValue="name" /]
+														[/#if]
+														</td>
+														<td>职业&nbsp;&nbsp;</td><td class="ydy-td4"><input class="text-input1" id="job1" name="job1" [#if father??] value="${father.job!}" [/#if]></td>
+													</tr>
+													<tr>
+														<td>工作单位&nbsp;&nbsp;</td><td class="ydy-td4"><input class="text-input1" id="office1" name="office1" [#if father??] value="${father.office!}" [/#if]></td>
+														<td>职务&nbsp;&nbsp;</td><td class="ydy-td4"><input class="text-input1" id="vote1" name="vote1" [#if father??] value="${father.vote!}" [/#if]></td>
+													</tr>
+													<tr>
+														<td>母亲姓名&nbsp;&nbsp;</td><td class="ydy-td4"><input class="text-input1" id="name2" name="name2" [#if mother??] value="${mother.name!}" [/#if]></td>
+														<td>联系电话&nbsp;&nbsp;</td><td class="ydy-td4"><input class="text-input1" maxlength="11"  type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" id="telephone2" name="telephone2" [#if mother??] value="${mother.telephone!}" [/#if]></td>
+													</tr>
+													<tr>
+														<td>文化程度&nbsp;&nbsp;</td>
+														<td class="ydy-td4">
+														[#if mother??]
+															[@p.select name="educationLevel2" id="educationLevel2" class="text-input1" value=mother.educationLevel list=educationLevelList listKey="code" listValue="name" /]
+														[#else]
+															[@p.select name="educationLevel2" id="educationLevel2" class="text-input1" value='' list=educationLevelList listKey="code" listValue="name" /]
+														[/#if]
+														</td>
+														<td>职业&nbsp;&nbsp;</td><td class="ydy-td4"><input class="text-input1" id="job2" name="job2" [#if mother??] value="${mother.job!}" [/#if]></td>
+													</tr>
+													<tr>
+														<td>工作单位&nbsp;&nbsp;</td><td class="ydy-td4"><input class="text-input1" id="office2" name="office2" [#if mother??] value="${mother.office!}" [/#if]></td>
+														<td>职务&nbsp;&nbsp;</td><td class="ydy-td4"><input class="text-input1" id="vote2" name="vote2" [#if mother??] value="${mother.vote!}" [/#if]></td>
+													</tr>
+												</table>
+												<input type="hidden" id="id1" name="id1" [#if father??] value="${father.id}" [/#if]/>
+												<input type="hidden" id="id2" name="id2" [#if mother??] value="${mother.id}" [/#if]/>
+											</td>
+										</tr>
+									</table>
+							        <div class="row clearfix up-down">
+							            <div class="col-md-12 column">
+							            	<button type="submit" class="zjf-bt pull-right" style="margin-right: 20px;">保存</button>
+							            </div>
+							        </div>
+								</form>
+							</div>
+			            </div>
+			        </div>
+	            </div>
+	        </div>
+        </div>
+		[#include "../wdedu/include/footer_new.html"/]
+    </div>
+<script type="text/javascript" src="${base}/r/js/new_js/zyydyfw.js"></script>
+<script>
+    $(function(){
+		$("#tbgrxx").addClass("zjf-active");
+	});
+    function selectProvince(){
+		$("#city").empty();
+		$("#region").empty();
+	    var province=$("#province").val();
+	    if(province!='')
+		{
+	    	 $.ajax({
+				　　url : '${base}/mnwb/getCity.jspx',
+				   data:{pro_code:province},
+				　　type : "POST",
+				   async:false,
+				   error:function(request) {
+		              alert("提交出现异常啦。。。。");
+		          },
+				　　success : function(data) 
+				   {		
+					     　　var res = eval('(' + data + ')');	
+					   var option2 = $("<option>").val("-1").text("请选择");
+					   $("#city").append(option2);
+					    for(var o in res)
+					    	{
+					    		var option = $("<option>").val(res[o].city_code).text(res[o].city_name);
+					    		$("#city").append(option);					    									   
+					    	}				
+				   }
+			 		 
+			}); 
+	    	
+		} 	    
+	}
+	function selectCity(){
+		$("#region").empty();
+	    var province=$("#province").val();
+	    var city=$("#city").val();
+	    if(province!='' && city!='')
+		{
+	    	 $.ajax({
+				　　url : '${base}/mnwb/getBorough.jspx',
+				   data:{pro_code:province,city_code:city},
+				　　type : "POST",
+				   async:false,
+				   error:function(request) {
+		              alert("提交出现异常啦。。。。");
+		          },
+				　　success : function(data) 
+				   {		
+					     　var res = eval('(' + data + ')');
+						   var option2 = $("<option>").val("-1").text("请选择");
+						   $("#region").append(option2);	
+					   for(var o in res)
+					    {
+					    	var option = $("<option>").val(res[o].quxian_code).text(res[o].quxian_name);
+					    	$("#region").append(option);					    									   
+					    }				
+				   }
+			 		 
+			}); 
+	    	
+		} 	    
+	}
+	function selectProvince2(){
+		$("#city2").empty();
+		$("#region2").empty();
+	    var province=$("#province2").val();
+	    if(province!='')
+		{
+	    	 $.ajax({
+				　　url : '${base}/mnwb/getCity.jspx',
+				   data:{pro_code:province},
+				　　type : "POST",
+				   async:false,
+				   error:function(request) {
+		              alert("提交出现异常啦。。。。");
+		          },
+				　　success : function(data) 
+				   {		
+					     　　var res = eval('(' + data + ')');	
+					   var option2 = $("<option>").val("-1").text("请选择");
+					   $("#city2").append(option2);
+					    for(var o in res)
+					    	{
+					    		var option = $("<option>").val(res[o].city_code).text(res[o].city_name);
+					    		$("#city2").append(option);					    									   
+					    	}				
+				   }
+			 		 
+			}); 
+	    	
+		} 	    
+	}
+	function selectCity2(){
+		$("#region2").empty();
+	    var province=$("#province2").val();
+	    var city=$("#city2").val();
+	    if(province!='' && city!='')
+		{
+	    	 $.ajax({
+				　　url : '${base}/mnwb/getBorough.jspx',
+				   data:{pro_code:province,city_code:city},
+				　　type : "POST",
+				   async:false,
+				   error:function(request) {
+		              alert("提交出现异常啦。。。。");
+		          },
+				　　success : function(data) 
+				   {		
+					     　var res = eval('(' + data + ')');
+						   var option2 = $("<option>").val("-1").text("请选择");
+						   $("#region2").append(option2);	
+					   for(var o in res)
+					    {
+					    	var option = $("<option>").val(res[o].quxian_code).text(res[o].quxian_name);
+					    	$("#region2").append(option);					    									   
+					    }				
+				   }
+			 		 
+			}); 
+	    	
+		} 	    
+	}
+	function change(obj){
+		var object = $(obj).val();
+		object=object*10;
+		object=~~object;
+		object=object/10;
+		object=object.toFixed(1);
+		$(obj).val(object);
+	}
+	
+	function change2(obj){
+		var object = $(obj).val();
+		object=object*100;
+		object=~~object;
+		object=object/100;
+		object=object.toFixed(0);
+		$(obj).val(object);
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>专家详情</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+	</head>
+
+	<body>
+		<!--顶部-->
+		[#include "../include/header.html"/]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container width1200">
+				<div>
+					<a href="${base}">首页</a> &lt;&lt; 沃得研究院 &lt;&lt; 专家团队 &lt;&lt; 专家详情</div>
+				<div></div>
+			</div>
+		</div>
+		<!--主体-->
+		<main class="width1200 zhuanjiaxiangqingMain flex-container2">
+			<!--左边-->
+			[#if tScActiveTeacherList??]
+			[#list tScActiveTeacherList as t]
+			<div class="zhuanjiaxiangqingMainLeft">
+				<!--老师简介-->
+				<div class="laoshijianjie flex-container">
+					<!--照片-->
+					<div>
+						<img src="${t.image1}" alt="" style="display: inline-block;width: 192px;height: 246px;" />
+					</div>
+					<!--简介-->
+					<div class="jianjie">
+						<p>${t.name!}老师</p>
+						<b>${t.introduce0!}</b>&nbsp;&nbsp;<b>${t.introduce1!}</b>&nbsp;&nbsp;<b>${t.introduce2!}</b>&nbsp;&nbsp;<b>${t.introduce3!}</b>
+						<div>
+							<img src="${base}/r/img/jiangbei.png" alt="" />
+							<b>擅长领域：</b>[#if introduce4??]${introduce4!}[/#if]
+						</div>
+					</div>
+				</div>
+				<!--专家介绍-->
+				<div class="zhuanjiajieshao">
+					<p>专家介绍</p>
+					<div>
+						<p>
+							${t.strintroduce4!}
+						</p>
+					</div>
+				</div>
+				<!--成功案例-->
+
+			</div>
+			[/#list]
+			[/#if]
+			<!--右边-->
+			<div class="zhuanjiaxiangqingMainRight">
+				<ul>
+					<li>
+						<img src="${base}/r/img/li1.png" alt="" />
+						<span>沃得生涯规划师-黄西洋</span>
+					</li>
+					<li>
+						<img src="${base}/r/img/li2.png" alt="" />
+						<span>沃得生涯规划师-黄西洋</span>
+					</li>
+					<li>
+						<img src="${base}/r/img/li3.png" alt="" />
+						<span>沃得生涯规划师-黄西洋</span>
+					</li>
+					<li>
+						<img src="${base}/r/img/li4.png" alt="" />
+						<span>沃得生涯规划师-黄西洋</span>
+					</li>
+					<li>
+						<img src="${base}/r/img/li5.png" alt="" />
+						<span>沃得生涯规划师-黄西洋</span>
+					</li>
+					<li>
+						<img src="${base}/r/img/li6.png" alt="" />
+						<span>沃得生涯规划师-黄西洋</span>
+					</li>
+					<li>
+						<img src="${base}/r/img/li7.png" alt="" />
+						<span>沃得生涯规划师-黄西洋</span>
+					</li>
+					<li>
+						<img src="${base}/r/img/li8.png" alt="" />
+						<span>沃得生涯规划师-黄西洋</span>
+					</li>
+					<li>
+						<img src="${base}/r/img/li9.png" alt="" />
+						<span>沃得生涯规划师-黄西洋</span>
+					</li>
+					<li>
+						<a href="zhuanjiatuandui.html">查看更多专家</a>
+					</li>
+				</ul>
+				<button class="btnColorGreen">立即预约</button>
+				<ul>
+					<li>
+						<a href="${base}/r/toCollege/toCollege.html">沃得志愿填报卡</a>
+					</li>
+					<li>
+						<a href="${base}/r/toChoose.html">新高考选科服务</a>
+					</li>
+					<li>
+						<a href="${base}/r/toCollege/toCollegeService.html">志愿填报服务</a>
+					</li>
+					<li>
+						<a href="${base}/r/toCollege/zizhuJudgedBy/zizhuJudgedBy2.html">自主招生服务</a>
+					</li>
+					<li>
+						<a href="${base}/r/BackgroundAscension.html">背景提升服务</a>
+					</li>
+					<li>
+						<a href="javascript:;">海外留学服务</a>
+					</li>
+					<li>
+						<a href="${base}/r/toCollege/researchInstitute/fuwuzhongxin.html">前往服务中心</a>
+					</li>
+				</ul>
+			</div>
+		</main>
+		<!--底部-->
+		[#include "../include/footer.html"/]
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/bootstrap-treeview.min.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+	</body>
+
+</html>

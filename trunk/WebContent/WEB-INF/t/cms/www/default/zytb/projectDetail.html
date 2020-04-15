@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>开始填报</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<style>
+			/*表格里的tab切换*/
+			.ChooseToOption_tabs li a {
+				background: #b5b5b5;
+				color: #fff;
+				font-size: 14px;
+			}
+			
+			.nav-tabs>li.active>a,
+			.nav-tabs>li.active>a:focus,
+			.nav-tabs>li.active>a:hover {
+				color: #fff;
+				background-color: #fac73c;
+				border: none;
+			}
+			
+			.nav>li>a:focus,
+			.nav>li>a:hover {
+				background-color: #b5b5b5;
+			}
+			
+			.ChooseToOption_tabs {
+				border-bottom: 0;
+			}
+			
+			.ChooseToOption_tabs li a {
+				height: 40px;
+				line-height: 40px;
+				border-bottom-right-radius: 0;
+				border-bottom-left-radius: 0;
+			}
+			.selectNumberScreen dl dd.rankingFiltration a{
+				display: inline-block;
+				width: 60px;
+				height: 30px;
+				text-align: center;
+				background: #b5b5b5;
+				color: #fff;
+				border-radius: 5px;
+				padding-top: 4px;
+			}
+			.selectNumberScreen dl dd.rankingFiltration a.chong{
+				margin-right: 0;border-top-right-radius: 0;border-bottom-right-radius: 0;
+			}
+			.rankingFiltration .upAndDown{
+				display: inline-block;
+			}
+			.rankingFiltration .upAndDown>span{
+				position: relative;top: -20.3px;left: -7px;background: #FFF;border: 1px solid #ddd;padding: 5.1px;font-size: 14px;
+			}
+			.rankingFiltration .upAndDown>span input{
+				width: 35px;height: 25px;border-radius: 0;position: relative;top: -2px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--顶部线条-->
+		<div class="topLine"></div>
+		<!--tab切换  导航-->
+		<nav class="indexNav">
+			<div class="flex-container1 width1200">
+				<div class="marginR50">
+					<img src="${base}/u/cms/www/logo/logo.png" alt="" />
+					<img src="${base}/u/cms/www/logo/name.png" alt="" />
+				</div>
+				<div>
+					<ul class="nav nav-pills">
+						<li role="presentation">
+							<a href="evaluation.html">专业测评</a>
+						</li>
+						<li role="presentation">
+							<a href="intention.html">报考意向</a>
+						</li>
+						<li role="presentation" class="active">
+							<a href="toCollege.html">志愿填报</a>
+						</li>
+						<li role="presentation" class="dropdown">
+							<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">填报参考</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="FillReference/TableByTable.html">一分一段表</a>
+								</li>
+								<li>
+									<a href="FillReference/enrollmentPlan.html">招生计划</a>
+								</li>
+								<li>
+									<a href="FillReference/admissionHistory.html">历史录取</a>
+								</li>
+								<li>
+									<a href="FillReference/batchQuery.html">批次查询</a>
+								</li>
+							</ul>
+						</li>
+						<li role="presentation" class="dropdown">
+							<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">报考大数据</a>
+							<ul class="dropdown-menu">
+						      <li><a href="bigData/academyRankingList.html">院校排行榜</a></li>
+						      <li><a href="bigData/specialtyRankingList.html">专业排行榜</a></li>
+						      <li><a href="bigData/runAschool.html">中外合作办学</a></li>
+						      <li><a href="bigData/laboratory.html">重点学科实验室</a></li>
+						      <li><a href="bigData/ProfessionalBooks.html">职业大全</a></li>
+						      <li><a href="bigData/recruitStudent.html">招生章程</a></li>
+						    </ul>
+						</li>
+						<li role="presentation">
+							<a href="userCenter.html">用户中心</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container width1200">
+				<div>
+					<a href="${base}">首页 </a> &lt;&lt;志愿填报 &lt;&lt;信息采集</div>
+				<div></div>
+			</div>
+		</div>
+		<!--主体-->
+		<main class="benginFillInMain">
+			<div class="width1200">
+				<!--标题-->
+				<div class="reportedTitle">
+					<p>2019年志愿模拟填报表</p>
+					<p>Voluntary simulation report form 2019</p>
+				</div>
+				<!--搜索-->
+				<div class="allSearch">
+					<!--搜索框-->
+					<div class="flex-container">
+						<div class="flex-item hugeSearch">
+							<input type="text" placeholder="输入院校或者专业名称，点击开始搜索" />
+						</div>
+						<div class="flex-item">
+							<button class="btn6 btnColorYellow">搜索院校或专业</button>
+							<button class="btn6 btnColorGreen advancedSearch">高级搜索</button>
+						</div>
+					</div>
+					<!--筛选条件-->
+					<div class="selectNumberScreen defaultHide">
+						<div class="hasBeenSelected">
+							<dl>
+								<dt>您已选择：</dt>
+								<div class="filtrateConditionSearch">
+									<button class="btn btnColorYellow">搜索</button>
+								</div>
+								<dd style="DISPLAY: none" class="clearDd">
+									<div class="clearList">
+										<div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div>
+										<div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div>
+										<div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div>
+									</div>
+									<div style="DISPLAY: none" class="eliminateCriteria">
+										<!--清除筛选条件-->
+										<button class="btn btnColorGreen">全部清理</button>
+									</div>
+								</dd>
+							</dl>
+						</div>
+						<div id="selectList" class="screenBox screenBackground">
+							<dl class="listIndex" attr="terminal_brand_s">
+								<dt>热门城市 &gt;</dt>
+								<dd>
+									<a href="javascript:void(0)" attrval="北京">北京</a>
+									<a href="javascript:void(0)" attrval="上海">上海</a>
+									<a href="javascript:void(0)" attrval="北京">广州</a>
+									<a href="javascript:void(0)" attrval="上海">深圳</a>
+									<a href="javascript:void(0)" attrval="北京">南京</a>
+									<a href="javascript:void(0)" attrval="上海">杭州</a>
+									<a href="javascript:void(0)" attrval="武汉">武汉</a>
+									<a href="javascript:void(0)" attrval="成都">成都</a>
+									<a href="javascript:void(0)" attrval="重庆">重庆</a>
+								</dd>
+							</dl>
+							<dl class="listIndex" attr="">
+								<dt>所在省份 &gt;</dt>
+								<dd>
+									<a href="javascript:void(0)" value="0">未知</a>
+									<a href="javascript:void(0)" value="1">北京</a>
+									<a href="javascript:void(0)" value="2">天津</a>
+									<a href="javascript:void(0)" value="3">辽宁</a>
+									<a href="javascript:void(0)" value="4">河北</a>
+									<a href="javascript:void(0)" value="5">河南</a>
+									<a href="javascript:void(0)" value="6">吉林</a>
+									<a href="javascript:void(0)" value="7">黑龙江</a>
+									<a href="javascript:void(0)" value="8">内蒙古</a>
+									<a href="javascript:void(0)" value="9">山东</a>
+									<a href="javascript:void(0)" value="10">山西</a>
+									<a href="javascript:void(0)" value="11">陕西</a>
+									<a href="javascript:void(0)" value="12">甘肃</a>
+									<a href="javascript:void(0)" value="13">宁夏</a>
+									<a href="javascript:void(0)" value="14">青海</a>
+									<a href="javascript:void(0)" value="15">新疆</a>
+									<a href="javascript:void(0)" value="16">上海</a>
+									<a href="javascript:void(0)" value="17">江苏</a>
+									<a href="javascript:void(0)" value="18">浙江</a>
+									<a href="javascript:void(0)" value="19">安徽</a>
+									<a href="javascript:void(0)" value="20">广东</a>
+									<a href="javascript:void(0)" value="21">海南</a>
+									<a href="javascript:void(0)" value="22">广西</a>
+									<a href="javascript:void(0)" value="23">云南</a>
+									<a href="javascript:void(0)" value="24">贵州</a>
+									<a href="javascript:void(0)" value="25">四川</a>
+									<a href="javascript:void(0)" value="26">重庆</a>
+									<a href="javascript:void(0)" value="27">西藏</a>
+									<a href="javascript:void(0)" value="28">香港</a>
+									<a href="javascript:void(0)" value="29">澳门</a>
+									<a href="javascript:void(0)" value="30">福建</a>
+									<a href="javascript:void(0)" value="31">江西</a>
+									<a href="javascript:void(0)" value="32">湖南</a>
+									<a href="javascript:void(0)" value="33">湖北</a>
+									<a href="javascript:void(0)" value="34">台湾</a>
+									<span class="more" ><label>更多</label><em class="open"></em></span></dd>
+								</dd>
+							</dl>
+							<dl class="listIndex" attr="">
+								<dt>院校分类 &gt;</dt>
+								<dd>
+									<a href="javascript:void(0)" value="">综合类</a>
+								</dd>
+							</dl>
+							<dl class="listIndex" attr="">
+								<dt>院校类型 &gt;</dt>
+								<dd>
+									<a href="javascript:void(0)" value="">985高校</a>
+								</dd>
+							</dl>
+							<dl class="listIndex" attr="">
+								<dt>专业分类 &gt;</dt>
+								<dd>
+									<a href="javascript:void(0)" value="">理学</a>
+								</dd>
+							</dl>
+							<dl class="listIndex" attr="">
+								<dt>热门专业 &gt;</dt>
+								<dd>
+									<a href="javascript:void(0)" value="">机械设计制造及自动化</a>
+								</dd>
+							</dl>
+							<dl class="listIndex" attr="">
+								<dt>排名过滤 &gt;</dt>
+								<dd class="rankingFiltration">
+									<a href="javascript:void(0)" value="">稳</a>
+									<a href="javascript:void(0)" value="">冲</a>
+									<a href="javascript:void(0)" value="" class="chong">保</a>
+									<div class="upAndDown">
+										<span>
+											上下调整<input type="text" />分
+										</span>
+									</div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+				</div>
+				<div class="myProfileOption">
+					<!--我的资料 -->
+					<div class="myProfile flex-container1">
+						<div class="flex-item6">我的资料 &gt;&gt;</div>
+						<div class="flex-item6">
+							姓名：<span>历史特</span>
+						</div>
+						<div class="flex-item6">
+							地区：<span>江苏</span>
+						</div>
+						<div class="flex-item6">
+							文理科：<span>理科</span>
+						</div>
+						<div class="flex-item6">
+							成绩：<span>387</span>
+						</div>
+						<div class="flex-item6">
+							排名：<span>200~30000</span>
+						</div>
+					</div>
+					<!--选报选项-->
+					<div class="ChooseToOption flex-container1">
+						<div class="flex-item6">选报选项 &gt;&gt;</div>
+						<div>
+							<ul id="myTab" class="nav nav-tabs ChooseToOption_tabs">
+								<li class="active">
+									<a href="#tabs1" data-toggle="tab">全部</a>
+								</li>
+								<li>
+									<a href="#tabs2" data-toggle="tab">已选</a>
+								</li>
+								<li>
+									<a href="#tabs3" data-toggle="tab">未选</a>
+								</li>
+								<li>
+									<a href="#tabs4" data-toggle="tab">有资格</a>
+								</li>
+								<li>
+									<a href="#tabs5" data-toggle="tab">无资格</a>
+								</li>
+							</ul>
+						</div>
+						<div style="position: relative;left: 65px;top:2px;">
+							当前报考批次：<span>本科一批</span>
+							<button class="btn3 btnColorYellow">切换批次招考</button>
+						</div>
+					</div>
+				</div>
+				<!--筛选列表-->
+				<div class="FiltrateList">
+					<div id="myTabContent" class="tab-content">
+						<div class="tab-pane in active" id="tabs1">
+							<table class="table deeptable letterSpacing0">
+								<tr>
+									<th width="53">排名对比</th>
+									<th>
+										<p style="margin: 10px 0;">院校列表</p>
+										<p>(点击院校可查看录取详情)</p>
+									</th>
+									<th>院校分类</th>
+									<th>地区</th>
+									<th>学校名片</th>
+									<th>计划</th>
+									<th width="344" style="padding:8px 0 0 0;">
+										<p style="margin: 10px 0;">院校历年录取低分与排名</p>
+										<p class="eachYear">
+											<span>2016</span>
+											<span>2017</span>
+											<span>2018</span>
+										</p>
+									</th>
+									<th>填报</th>
+								</tr>
+								<tr>
+									<td>01</td>
+									<td>【0060】哈尔滨工业大学</td>
+									<td>综合类</td>
+									<td>呼和浩特</td>
+									<td class="schoolCardColor">
+										<span class="jiu85">985</span>
+										<span class="er11">211</span>
+										<span class="zi">自</span>
+										<span class="zhong">重</span>
+										<span class="zhuo">卓</span>
+										<span class="shuang">双</span>
+									</td>
+									<td>35(-105)</td>
+									<td>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+									</td>
+									<td>
+										<a href="" class="greenFont">志愿填报</a>
+									</td>
+								</tr>
+								<tr>
+									<td>01</td>
+									<td>【0060】哈尔滨工业大学</td>
+									<td>综合类</td>
+									<td>呼和浩特</td>
+									<td class="schoolCardColor">
+										<span class="jiu85">985</span>
+										<span class="er11">211</span>
+										<span class="zi">自</span>
+										<span class="zhong">重</span>
+										<span class="zhuo">卓</span>
+										<span class="shuang">双</span>
+									</td>
+									<td>35(-105)</td>
+									<td>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+									</td>
+									<td>
+										<a href="" class="greenFont">志愿填报</a>
+									</td>
+								</tr>
+								<tr>
+									<td>01</td>
+									<td>【0060】哈尔滨工业大学</td>
+									<td>综合类</td>
+									<td>呼和浩特</td>
+									<td class="schoolCardColor">
+										<span class="jiu85">985</span>
+										<span class="er11">211</span>
+										<span class="zi">自</span>
+										<span class="zhong">重</span>
+										<span class="zhuo">卓</span>
+										<span class="shuang">双</span>
+									</td>
+									<td>35(-105)</td>
+									<td>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+									</td>
+									<td>
+										<a href="" class="greenFont">志愿填报</a>
+									</td>
+								</tr>
+								<tr>
+									<td>01</td>
+									<td>【0060】哈尔滨工业大学</td>
+									<td>综合类</td>
+									<td>呼和浩特</td>
+									<td class="schoolCardColor">
+										<span class="jiu85">985</span>
+										<span class="er11">211</span>
+										<span class="zi">自</span>
+										<span class="zhong">重</span>
+										<span class="zhuo">卓</span>
+										<span class="shuang">双</span>
+									</td>
+									<td>35(-105)</td>
+									<td>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+									</td>
+									<td>
+										<a href="" class="greenFont">志愿填报</a>
+									</td>
+								</tr>
+								<tr>
+									<td>01</td>
+									<td>【0060】哈尔滨工业大学</td>
+									<td>综合类</td>
+									<td>呼和浩特</td>
+									<td class="schoolCardColor">
+										<span class="jiu85">985</span>
+										<span class="er11">211</span>
+										<span class="zi">自</span>
+										<span class="zhong">重</span>
+										<span class="zhuo">卓</span>
+										<span class="shuang">双</span>
+									</td>
+									<td>35(-105)</td>
+									<td>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+									</td>
+									<td>
+										<a href="" class="greenFont">志愿填报</a>
+									</td>
+								</tr>
+								<tr>
+									<td>01</td>
+									<td>【0060】哈尔滨工业大学</td>
+									<td>综合类</td>
+									<td>呼和浩特</td>
+									<td class="schoolCardColor">
+										<span class="jiu85">985</span>
+										<span class="er11">211</span>
+										<span class="zi">自</span>
+										<span class="zhong">重</span>
+										<span class="zhuo">卓</span>
+										<span class="shuang">双</span>
+									</td>
+									<td>35(-105)</td>
+									<td>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+										<span style="display: inline-block;width: 30%;">401/13500</span>
+									</td>
+									<td>
+										<a href="" class="greenFont">志愿填报</a>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class="tab-pane" id="tabs2">
+							<p>已选</p>
+						</div>
+						<div class="tab-pane" id="tabs3">
+							<p>未选</p>
+						</div>
+						<div class="tab-pane" id="tabs4">
+							<p>有资格</p>
+						</div>
+						<div class="tab-pane" id="tabs5">
+							<p>无资格</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<!---->
+		<div class="volunteerButton">
+			<div class="flex-container2 width1200">
+				<div class="flex-item7">
+					<button class="btn7 btnColorOrange">保存志愿表</button>
+				</div>
+				<div class="flex-item7">
+					<button class="btn7 btnColorOrange">进入志愿表</button>
+				</div>
+				<div class="flex-item7">
+					<button class="btn7 btnColorOrange">院校对比</button>
+				</div>
+				<div class="flex-item7">
+					<button class="btn7 btnColorOrange">方案中心</button>
+				</div>
+			</div>
+		</div>
+		<!--底部-->
+		[#include "../include/footer.html"/]
+
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/itemsJs/filtrate.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+		<script>
+			//点击高级搜索弹出隐藏层
+			$('.advancedSearch').click(function(){
+				$('.selectNumberScreen').toggle();
+			})
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>讲座活动管理</title>
+		<link rel="stylesheet" href="${base}/r/sign/jedate.css" />
+		<link rel="stylesheet" href="${base}/r/sign/jzhd-manage.css" />
+		<script src="${base}/r/sign/jquery-1.11.3.min.js"></script>
+		<script src="${base}/r/sign/city.min.js"></script>
+		<style type="text/css">
+			.con-title{text-align: left;line-height: 101%;margin: 10px 0;padding-left: 6px;padding-bottom: 10px;border-bottom: 1px solid #ccc;letter-spacing: .1em;}
+			.con-title:before{content:'';position: absolute;top: 2%;left: 0;width: 4px;height: 66%;background: #FB8227;}
+			.search-item{display: block;font-size: 15px;margin-top: 20px;}
+			.search-item label{display: inline-block;width: 75px;text-align: right;font-size: 15px;color: #000;}
+			input,.input-file{width: 354px;}
+			.mr{margin-right: 22px;}
+			.checkbox-wrap{display: inline-block;margin-right: 20px;}
+			.checkbox{margin-right: 3px;vertical-align: -2px;}
+			.search-wrap{padding-left: 35px;}
+			.btns{margin: 30px 112px;}
+			.btns button{padding: .5em 2em;}
+			.date-icon{width: 157px;}
+			.line{margin: 0 10px}
+			.mainfoot{display: block;}
+		</style>
+	</head>
+	<body class="iframe-body">
+		<h4 class="con-title gps">	
+		</h4>
+	<form action="${base}/active/releasehtml.jspx"  method="post">
+ 
+		<div class="search-wrap gps">
+			<div class="search-item">
+				<label>讲座省市:</label>
+				<span class="select-wrap">
+					<select id="pro" name="province" onchange="selectProvince()">
+						<option  value="none">--请选择--</option>
+					</select>
+				</span>
+				<span class="select-wrap" >
+					<select id="city" name="city" disabled>
+						<option value="none">--请选择--</option>
+					</select>
+				</span>
+				<span class="select-wrap">
+					<select id="quxian"  name="quxian" disabled>
+						<option value="none">--请选择--</option>
+					</select>
+				</span>
+			</div>
+			<div class="search-item">
+				<label>活动地点:</label>			
+				<input type="text"  name="address"   placeholder="例如:xx学术会议大厅"/>				
+			</div>
+			<div class="search-item">
+				<label>讲座时间:</label>
+				<span><input type="text" class="date-icon" id="inpstart" name="active_start_time"  placeholder="开始时间"   readonly></span>
+				<span class="line">--</span>
+				<span><input type="text" class="date-icon" id="inpend" name="active_end_time" placeholder="结束时间"  readonly ></span>
+			</div>
+			<div class="search-item">
+				<label>讲座主题:</label>
+				<input type="text" placeholder="不超过20字" name="theme"   />
+			</div>
+			
+			<label class="search-item">讲座内容:</label>
+		    <div class="search-item">		    		   		    			        		
+			    <textarea  rows="10" cols="45" placeholder="1、xxxxxxxxxxx"  name="details"></textarea >			   
+			</div>	
+		
+			<div class="search-item">
+				<label>领取资料:</label>
+				<input type="text" placeholder="请按条例罗列" name="lqzl_content"  />
+			</div>
+			<div class="search-item">
+				<label>活动图片:</label>
+				<span class="gps input-file">
+					<input id='myfile' type="file" accept="image/jpeg,image/jpg,image/png" name="file"/>
+					<span id="fileName">图片尺寸宽度750px,大小不超过50k!</span>
+				</span>
+			</div>
+			<div class="search-item">
+				<label>主讲老师A:</label>
+				<select id="teacher"  name="lecturer1">
+				<option value="none">--请选择--</option>							
+				</select>
+				
+				<label>主讲老师B:</label>
+			    <select id="teacher1"  name="lecturer2">
+				<option value="none">--请选择--</option>							
+				</select>  
+			</div>
+			<div class="search-item" >
+				<label>是否报名:</label>
+				<span class="checkbox-wrap">
+					<i class="checkbox" ></i>是
+				</span>
+				<span class="checkbox-wrap">
+					<i class="checkbox"></i>否
+				</span>
+			</div>
+			<div class="search-item">
+				<label>报名费用:</label>
+				<input type="text" placeholder="请输入数字" name="free"   />
+			</div>
+			<div class="search-item">
+				<label>活动人数:</label>
+				<input type="text" placeholder="请输入数字" name="prople"   />
+			</div>
+			
+			<div class="search-item">
+				<label>是否签到:</label>
+				<span class="checkbox-wrap">
+					<i class="checkbox"></i>是
+				</span>
+				<span class="checkbox-wrap">
+					<i class="checkbox"></i>否
+				</span>
+			</div>
+		</div>
+		<div  class="btns">  
+			<button type="submit" class="btn btn-pop-yes">保存</button>
+		</div>
+		</form>
+		
+		
+	</body>
+	<script src="${base}/r/sign/jquery.jedate.min.js"></script>
+	<script type="text/javascript">
+	
+	//查找对应省份的讲师
+	function selectProvince(){
+		$("#teacher").val("");
+		$("#teacher1").val("");
+	    var pro=$("#pro").val();
+	    console.log('pro',pro);
+	    if(pro!='')
+		{
+	    	 $.ajax({
+				　　url : '${base}/active/findteacher.jspx',
+				   data:{pro_code:pro},
+				　　type : "POST",
+				   async:false,
+				   error:function(request) {
+					   
+		              alert("提交出现异常啦。。。。");
+		          },
+				　　success : function(data) 
+				   {		
+					     　var res = eval('(' + data + ')');	
+					     console.log('res',res);
+					 
+					   var list=res.teacherList;
+					   var html = '<option value="0">请选择</option>';
+					    for(var o in res.teacherList)
+					    	{
+					    	   /*  var option = $("<option>").val(list[o].teacher_id).text(list[o].name); */
+					    	    html+='<option value="'+list[o].teacher_id+'">'+list[o].name+'</option>';					    					    									   
+					    	}
+					    $("#teacher").html(html);
+					    $("#teacher1").html(html);
+					    
+				   }
+			 		 
+			}); 
+
+		}
+	}
+	
+	
+		$(function() {
+			//省市地
+			function getSeectList(obj,data){
+				var html = '<option value="none">--请选择--</option>';
+				$.each(data, function(i,val) {
+					html += '<option value="'+val.id+'">'+val.value+'</option>';
+				});
+				$(obj).html(html);
+			};
+			getSeectList('#pro',prolist);
+			$('#pro').on('change',function(){
+				var pro = $(this).val();
+				if(pro=='none'){
+					alert('请选择省份，否则无法选择市区！');
+					$('#city').attr('disabled','disabled');		
+					$('#quxian').attr('disabled','disabled');
+					return false;
+				};
+				console.log(pro);
+				var cityData = [];
+				$.each(citylist, function(j,val) {
+					if(val.parentId==pro){
+						cityData.push(citylist[j]);
+					}
+				});
+				getSeectList('#city',cityData);
+				$('#city').removeAttr('disabled');
+			});
+			$('#city').on('change',function(){
+				var city = $(this).val();
+				if(city=='none'){
+					alert('请选择市区，否则无法选择区县！');
+					$('#quxian').attr('disabled','disabled');
+					return false;
+				};
+				var cityData = [];
+				$.each(quxianlist, function(j,val) {
+					if(val.parentId==city){
+						cityData.push(quxianlist[j]);
+					}
+				});
+				getSeectList('#quxian',cityData);
+				$('#quxian').removeAttr('disabled');
+			});
+			$('#quxian').on('change',function(){
+				var quxian = $(this).val();
+				if(quxian=='none'){
+					alert('请选择区县！');
+				};
+			});
+			//时间选择
+			var myDate = new Date();
+			var year=myDate.getFullYear();
+			var month=myDate.getMonth()+1;
+			var da=myDate.getDate(); 
+//			var h=myDate.getHours();  
+//			var m=myDate.getMinutes();
+			var nowTime = year+'-'+month+'-'+da+' 08:00';
+			console.log(nowTime)
+			var start = {
+			    format: 'YYYY-MM-DD hh:mm',
+				isTime:true,
+			    minDate: nowTime,
+			    okfun: function(obj){
+			        end.minDate = obj.val;
+			        $("#inpend").removeAttr("disabled");
+			        endDates();
+			    }
+			};
+			var end = {
+			    format: 'YYYY-MM-DD hh:mm',
+			};
+			function endDates() {
+			    end.trigger = false;
+			    $("#inpend").jeDate(end);
+			};
+			$('#inpstart').jeDate(start);
+			$('#inpend').jeDate(end);
+			$('.checkbox').click(function(){
+				var $next = $(this).parent('.checkbox-wrap').siblings().find('i');
+				if($(this).hasClass('bg-check-icon')){
+					$(this).removeClass('bg-check-icon');
+				}else{
+					$(this).addClass('bg-check-icon');
+					$next.removeClass('bg-check-icon');
+				}
+			});
+				//上传图片
+			var myfile = document.getElementById('myfile'); 
+			$(".input-file").on("change","#myfile",function(){
+				var size = Math.round(myfile.files[0].size / 1024);
+			    console.log('size',size)
+			    if(size>50){
+			    	alert('图片大小不超过50k');
+			    	return false 
+			    };
+			    var filePath=$(this).val();
+			    console.log(filePath)
+			    if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("png")!=-1||filePath.indexOf("jpeg")!=-1){
+			        var arr=filePath.split('\\');
+			        var fileName=arr[arr.length-1];
+			        $("#fileName").html(fileName).css('color','#000');
+			    }else{
+			        $("#fileName").html("图片尺寸宽度750px,大小不超过50k!").css('color','#757575');
+			        alert("您上传的文件类型有误！");
+			        return false 
+			    };
+			});
+		})
+	</script>
+
+	
+</html>

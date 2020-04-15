@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>切换其他服务类型</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<style>
+
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="SwitchTypeHead">
+			<div class="flex-container2 width1200">
+				<p>特殊类型招生服务/背景提升服务平台</p>
+				<div>
+					[#if name??]
+					<p>欢迎：<span>${name}</span></p>
+					[/#if]
+					<div class="SwitchTypeHeadBtn">
+						<button class="btn3 btnColorYellow" onclick="yonghuzhongxin()">用户中心</button>
+						<button class="btn3" onclick="window.location.href='${base}'">退出</button>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!--主体-->
+		<main class="SwitchTypeMain width1200">
+			<div class="flex-container3">
+				<div class="flex-item15-5">
+					<img src="${base}/r/img/shu.png" alt="" />
+					<p>单独综合评价</p>
+					<button class="btn3">暂未开通</button>
+				</div>
+				<div class="flex-item15-5">
+					<img src="${base}/r/img/shu.png" alt="" />
+					<p>普通自主招生</p>
+					<button class="btn3 btnColorGreen" onclick="window.location='${base}/FwYl/member/fwyl.jspx'">进入服务</button>
+				</div>
+				<div class="flex-item15-5">
+					<img src="${base}/r/img/shu.png" alt="" />
+					<p>综合评价</p>
+					<button class="btn3 btnColorGreen" onclick="window.location='${base}/FwYl/member/fwyl.jspx'">进入服务</button>
+				</div>
+				<div class="flex-item15-5">
+					<img src="${base}/r/img/shu.png" alt="" />
+					<p>免费咨询服务</p>
+					<button class="btn3 btnColorGreen" data-toggle="modal" data-target="#myModal">进入服务</button>
+				</div>
+				<div class="flex-item15-5">
+					<img src="${base}/r/img/shu.png" alt="" />
+					<p>基础资料管理</p>
+					<button class="btn3 btnColorGreen">进入服务</button>
+				</div>
+				<div class="flex-item15-5">
+					<img src="${base}/r/img/shu.png" alt="" />
+					<p>新高考选科</p>
+					<button class="btn3 btnColorYellow">建设中...</button>
+				</div>
+				<div class="flex-item15-5">
+					<img src="${base}/r/img/shu.png" alt="" />
+					<p>研学学科营</p>
+					<button class="btn3 btnColorYellow">建设中...</button>
+				</div>
+				<div class="flex-item15-5">
+					<img src="${base}/r/img/shu.png" alt="" />
+					<p>高水平论文</p>
+					<button class="btn3 btnColorYellow">建设中...</button>
+				</div>
+				<div class="flex-item15-5">
+					<img src="${base}/r/img/shu.png" alt="" />
+					<p>科创与竞赛</p>
+					<button class="btn3 btnColorYellow">建设中...</button>
+				</div>
+				<div class="flex-item15-5">
+					<img src="${base}/r/img/shu.png" alt="" />
+					<p>留学服务</p>
+					<button class="btn3 btnColorYellow">建设中...</button>
+				</div>
+				<div class="flex-item15-5">
+					<img src="${base}/r/img/shu.png" alt="" />
+					<p>高校专项计划</p>
+					<button class="btn3 btnColorYellow">建设中...</button>
+				</div>
+				<div class="flex-item15-5">
+					<img src="${base}/r/img/shu.png" alt="" />
+					<p>港澳台申请</p>
+					<button class="btn3 btnColorYellow">建设中...</button>
+				</div>
+				<div class="flex-item15-5">
+					<img src="${base}/r/img/shu.png" alt="" />
+					<p>志愿填报服务</p>
+					<button class="btn3 btnColorYellow">建设中...</button>
+				</div>
+			</div>
+		</main>
+		<!-- 点击 免费咨询服务   弹出电话号码-->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">免费咨询服务</h4>
+					</div>
+					<div class="modal-body textC" style="height: 100px;line-height: 70px;">请拨打电话：029-123456789</div>
+				</div>
+			</div>
+		</div>
+		<!--底部-->
+		[#include "../include/footer.html"/]
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/bootstrap-treeview.min.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+	</body>
+		<script>
+            function yonghuzhongxin() {
+                window.location.href="${base}/BkyxAct/userCenter.jspx";
+            }
+		</script>
+</html>

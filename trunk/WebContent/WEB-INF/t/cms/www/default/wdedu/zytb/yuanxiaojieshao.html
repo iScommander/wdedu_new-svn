@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>院校介绍</title>
+<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+<script src="${base}/r/wdedu/js/jquery-1.9.1.min.js"></script>
+
+<script language="javascript" src="${base}/r/wdedu/js/common.js"></script>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+<link  type="text/css" rel="stylesheet" href="${base}/r/wdedu/css/style.css" />
+<style>
+th{
+text-align: center;
+}
+*{box-sizing: content-box;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;}
+</style>
+</head>
+<body oncopy="alert('对不起，禁止复制！');return false;">
+
+
+
+
+
+	<script type='text/javascript' src='${base}/r/wdedu/js/dropdown.js'></script>
+
+    [#include "../include/header_address.html"/]
+     [#include "../include/header_zytb.html"/]
+             <script src="${base}/r/wdedu/js/jquery-1.11.1.min.js" type="text/javascript" ></script>
+     		<script  type="text/javascript">
+
+                 $(document).ready(function(){
+                     $("#univWen").hide();
+                     $("#planWen").hide();
+                     $("#planZongHe").hide();
+                     var shior=  $("#shior").val();
+                     if (shior ==2){
+                      $("#univScore").prop("disabled",true);
+                      $("#majorType").prop("disabled",true);
+                       $("#year").prop("disabled",true);
+                       $("#univPlan").attr("disabled",true);
+                     }
+                      if (shior ==1){
+                      $("#univScore").prop("disabled",false);
+                      $("#majorType").prop("disabled",false);
+                       $("#year").prop("disabled",false);
+                       $("#univPlan").attr("disabled",false);
+                        searchMajorHistory();
+                     }
+
+                 });
+
+     		window.isMoused=false;
+     		function qz(obj){
+     			var text = $(obj).text();
+     			document.getElementById("text").innerText =text;
+     			gb();
+
+     		}
+     		function gb(){
+     			document.getElementById('city_nav').className='city_nav';document.getElementById('city_link').className='city_link';window.isMoused =false;return !1;
+     		}
+     			function dk(){
+     				if(window.isMoused){
+     					 gb()
+     					window.isMoused = false;
+     				   }else{
+     					   document.getElementById('city_link').className='city_link city_hovers'
+     					   window.isMoused =true;
+     				   }
+     			}
+
+             function univScore() {
+                 var laber = $("#univScore option:selected").val();
+
+                 if(laber=="文科"){
+                    $("#univLi").hide();
+                     $("#univWen").show();
+                 }
+                 if(laber=="理科"){
+                     $("#univWen").hide();
+                     $("#univLi").show();
+                 }
+             }
+
+             function univPlan() {
+                 var laber = $("#univPlan option:selected").val();
+
+                 if(laber=="文科"){
+                     $("#planLi").hide();
+                     $("#planZongHe").hide();
+                     $("#planWen").show();
+                 }
+                 if(laber=="理科"){
+                     $("#planWen").hide();
+                     $("#planZongHe").hide();
+                     $("#planLi").show();
+                 }
+                 if(laber=="综合改革"){
+                     $("#planWen").hide();
+                     $("#planLi").hide();
+                     $("#planZongHe").show();
+                 }
+             }
+
+             function searchMajorHistory() {
+                 var univ = $("#univId").val();
+                 var year = $("#year option:selected").val();
+                 var majorType = $("#majorType option:selected").val();
+
+                 var mjorTypeId = 0;
+                 if(majorType=="理科"){
+                    mjorTypeId = 2;
+                 }
+                 if(majorType=="文科"){
+                      mjorTypeId = 1;
+                 }
+                 $.ajax({
+                     url:"${base}/searchUnivAndMajor/searchMajorHistory.jspx",    //请求的url地址
+                     dataType:"json",
+                     async:true,
+                     data:{"univId":univ,
+                           "mjorTypeId":mjorTypeId,
+                           "year":year
+                         },
+                     type:"POST",
+                     success:function(data) {
+                         $("#history tr:gt(0)").remove();
+
+                         $(data).each(
+                             function (i, values) {
+                                 if(values.major_code==null||values.major_code==undefined){
+                                     values.major_code ="-";
+                                 }
+                                 if(values.major_name==null||values.major_name==undefined){
+                                     values.major_name ="-";
+                                 }
+                                 if(values.batch_name==null||values.batch_name==undefined){
+                                     values.batch_name ="-";
+                                 }
+                                 if(values.high_score==null||values.high_score==undefined){
+                                     values.high_score ="-";
+                                 }
+                                 if(values.average_score==null||values.average_score==undefined){
+                                     values.average_score ="-";
+                                 }
+                                 if(values.low_score==null||values.low_score==undefined){
+                                     values.low_score ="-";
+                                 }
+                                 if(values.rank_low_score==null||values.rank_low_score==undefined){
+                                     values.rank_low_score ="-";
+                                 }
+                                 if(values.history_enrolled==null||values.history_enrolled==undefined){
+                                     values.history_enrolled ="-";
+                                 }
+                                   if(values.univ_code==null||values.univ_code==undefined){
+                                      values.univ_code ="-";
+                                    }
+                                 var td;
+                                 td='<td>'+values.year+'</td>'+'<td>'+values.univ_name+'</td>'+'<td>'+values.univ_code+'</td>'+'<td>'+values.major_code+'</td>'+'<td>'+values.major_name+'</td>'+'<td>'+values.batch_name+'</td>'
+                                     +'<td>'+values.high_score+'</td>'+'<td>' +values.average_score+'</td>'+ '<td>'+values.low_score+'</td>'
+                                     +'<td>'+values.rank_low_score+'</td>' +'<td>'+values.history_enrolled+'</td>';
+                                 $("#history").append("<tr>"+td+"</tr>");
+                             }
+                         )
+                     }
+                 });
+             }
+
+             function getCon(id) {
+
+                 $.ajax({
+                     url: "${base}/searchUnivAndMajor/getConstitution.jspx",    //请求的url地址
+                     dataType: "json",
+                     async: true,
+                     data: {
+                         "id": id
+                     },
+                     type: "POST",
+                     success: function (data) {
+                         $("#zszc").html("");
+                         $("#zszc").append(data.univConstitutionDescr);
+                     }
+                 })
+             }
+
+     	</script>
+	<div class="mbxdh_bg">
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="${base}/zytb/project.jspx">志愿填报</a>&nbsp;&gt; &nbsp; <a href="${base}/searchUnivAndMajor/searchUnivList.jspx">找大学</a>
+		</div>
+	</div>
+    <input id="univName" value="${detail.univName!}" type="hidden">
+    <input id="univId" value="${detail.id!}" type="hidden">
+    <div class="yxjs_s">
+    <div class="yxjs_s_n">
+    <div class="yxjs_img f_l">
+    <!--<img src="${detail.logoUrl!}"/>-->
+        [#if univLogo??&&univLogo.logoUrl??&&univLogo.logoUrl!=""]
+        <img src="${univLogo.logoUrl!}" />
+        [#else]
+        <img src="${base}/r/img/index/noschool.png"/>
+        [/#if]
+    </div>
+    <div class="yxjs_img_tz f_r">
+    		<div class="yxjs_s_ys">
+            		<span class="yxjs_s_ys_mc">${detail.univName!}</span>
+           			 <span>${pro.provinceName!}</span>
+                     <span>${univ.location!}</span>
+                     <div class="clearfix"></div>
+            </div>
+
+            <div class="yxjs_s_ys_tx">
+            		<span class="yxjs_s_ys_tx1">${univ.univType!}</span>
+                [#if univ??&&univ.is985??&&univ.is985==1]
+           			 <span class="yxjs_s_ys_tx1">985</span>
+                [/#if]
+                [#if univ??&&univ.is211??&&univ.is211==1]
+                     <span class="yxjs_s_ys_tx1">211</span>
+                [/#if]
+
+                [#if univ??&&univ.isFirstRateUniv==1]
+                    <span class="yxjs_s_ys_tx1">双一流</span>
+                [/#if]
+                     <!--<span class="yxjs_s_ys_tx1">世界双一流高校</span>-->
+                     <div class="clearfix"></div>
+            </div>
+      </div>
+      <div class="clearfix"></div>
+    <div class="yxjs_table">
+
+
+	<div class="yxjs_table_title">
+    <div class="on on2">院校介绍</div>
+    <div class="zy">院系专业</div>
+    <div class="zs">招生章程</div>
+    <div class="fs">录取分数线</div>
+    <div class="jh">招生计划</div>
+ 	</div>
+	<div class="clearfix"></div>
+
+
+  <div class="yxjs_table_con">
+
+    <div class="yxjs_table_list">
+
+     <div class="yxjs_table_list_s f_l">
+       <div style="min-height: 200px;">${detail.descr!}</div>
+      <!--<div class="yxjs_table_list_img"><img src="${base}/r/wdedu/images/gxu_1.png"/></div><div class="clearfix"></div>-->
+
+     </div>
+     <div class="yxjs_table_list_s_y f_r">
+     		<div class="yxjs_table_list_s_y_s">
+            	<ul>
+                <span>学校排名</span>
+                <li><p>薪酬排名：</p><div class="f_r"><i>
+                    [#if salay??]
+                    ${salay.rank!}
+                    [/#if]
+                </i></div><div class="clearfix"></div></li>
+                <li><p>武书连排名：</p><div class="f_r"><i>[#if wsl??&&wsl.rank??]${wsl.rank!}[/#if]</i></div><div class="clearfix"></div></li>
+                <li><p>中国校友会网排名：</p><div class="f_r"><i>[#if xyh??&&xyh.rank??]${xyh.rank!}[/#if]</i></div><div class="clearfix"></div></li>
+                <li><p>US News 排名：</p><div class="f_r"><i>[#if us??&&us.rank??]${us.rank!}[/#if]</i></div><div class="clearfix"></div></li>
+                <li><p>QS 排名：</p><div class="f_r"><i>[#if qs??&&qs.rank??]${qs.rank!}[/#if]</i></div><div class="clearfix"></div></li>
+                </ul>
+            </div>
+                <div class="yxjs_table_list_s_y_t">
+            	<ul>
+                <span>同类院校推荐</span>
+                [#if listSame??]
+                [#list listSame as univ ]
+                <li>
+                <div class="yxjs_table_list_s_y_t_img f_l">
+                <img src="${univ.logoUrl!}"/>
+                </div>
+
+                <div class="yxjs_table_list_s_y_t_mc f_r">
+                <a href="${base}/searchUnivAndMajor/univDetail.jspx?id=${univ.universityBaseId!}">${univ.univName!}</a>
+                </div>
+                <div class="clearfix"></div>
+                </li>
+                [/#list]
+                [/#if]
+
+                </ul>
+               <div class="clearfix"></div>
+            </div>
+
+      <div class="clearfix"></div>
+     </div>
+  <div class="clearfix"></div>
+    </div>
+
+    <div class="yxjs_table_list">
+
+			<div class="yxjs_table_yxzy fl ">
+            		<div class="yxjs_table_yxzy_bt">院系/专业</div>
+                    <div class="yxjs_table_yxzy_bg">
+           <!-- <div>${detail.yxsz!}</div>-->
+              <table width="100%" cellspacing="0" cellpadding="0">
+			  <tr>
+			    <th scope="col" style="width:194px;">学院</th>
+			    <th scope="col">所学专业</th>
+		      </tr>
+                  [#if introduce??]
+                  [#list introduce as i]
+			  <tr>
+			    <td style="width:194px;padding-left:20px">${i.univMajorCateName!}</td>
+			    <td>
+                    [#if introduceMajor??]
+                    [#list introduceMajor as m]
+                    [#if i.univMajorCateName == m.univMajorCateName]
+                    [#if m.univMajorId??]
+                    <a href="${base}/searchUnivAndMajor/majorDetail.jspx?majorId=${m.univMajorId!}"><span style="margin: 5px">${m.univMajorName!}</span></a>
+                    [#elseif m.univMajorName??&&m.univMajorName !=""]
+                    <span style="background-color: #f1f1f1;margin: 5px">${m.univMajorName!}</span>
+                    [/#if]
+                    [/#if]
+                    [/#list]
+                    [/#if]
+                </td>
+		      </tr>
+                  [/#list]
+                  [/#if]
+              </table>
+
+           </div>
+
+           <div class="yxjs_table_yxzy">
+            		<div class="yxjs_table_yxzy_bt">重点学科、重点实验室</div>
+                    <div class="yxjs_table_yxzy_lb">
+							<!--<ul>
+                            	<li><sapn>国家实验室：</span><i>北京分子科学国家实验室</i></li>
+                                <li><sapn>国家重点实验室：</span><i>人工微结构和介观物理国家重点实验室,分子动态及稳定态结构国家重点实验室，蛋 白质与植物基因研究国家重点实验室，生物膜与膜生物工程(联合)国家重点实验室,湍流与复杂系统研究 国家重点实验室，稀土材料化学及应用国家重点实验室,区域光纤通信网与新型光通信系统(联合)国 家重点实验室,核物理与核技术国家重点实验室,天然药物及仿生药物国家重点实验室,环境模拟与污 染控制(联合)国家重点实验室,微米、纳米加工技术国家重点实验室</i></li>
+                                <li><sapn>教育部重点实验室：</span><i>地表过程分析与模拟,造山带与地壳演化,神经科学,分子心血管,生物有机分子 工程,数学及其应用,纳米器件物理与化学,水沙科学,细胞增殖与分化,恶性肿瘤发病机制及转化研 究，高分子化学与物理,视觉损伤与修复,辅助生殖,造山带与地壳演化,机器感知与智能,慢性肾脏 病防治,数量经济与数理金融,高可信软件技术,量子信息与测量,计算机语言学,重离子物理 国家工程技术研究中心:软件工程国家工程研究中心.</i></li>
+                                <li><sapn>理科基础学科培养基地:数学专业：</span><i>物理学专业,化学专业,生物学专业，地理学专业,地质学专业， 大气科学专业,力学专业,基础医学专业,基础药学专业</i></li>
+                                <li><sapn>文科基础学科培养基地：</span><i>中文学科点，历史学科点,哲学学科点</i></li>
+                                <li><sapn>外语非通用语种本科人才培养基地：</span><i>亚非语种专业</i></li>
+                                <li><sapn>国家人才培养基地：</span><i>生命科学与技术人才,经济学基础人才,集成电路人才.</i></li>
+                            </ul>-->
+                        <div>${detail.mainlab!}</div>
+                        <div>${detail.teacherInfo!}</div>
+                        <div>${detail.studentInfo!}</div>
+           			</div>
+
+
+
+            </div>
+            <div class="yxjs_table_yxzy_bt" style=" margin-top:20px;">一级学科排行榜</div>
+            <div class="yxjs_table_yxzy_xk">
+            <table width="100%%"  cellspacing="0" cellpadding="0">
+     	    <tr>
+                <th scope="col">专业排名</th>
+                <th scope="col">专业名称</th>
+                <th scope="col">学科等级</th>
+            </tr>
+               [#if tDataMajorRankList?? ]
+               [#list tDataMajorRankList as d]
+               <tr>
+
+                   <td>${d.rank!}</td>
+                   <td>${d.majorName!}</td>
+                   <td>${d.grade!}</td>
+
+               </tr>
+               [/#list]
+               [/#if]
+
+    </table>
+         </div>
+
+         <div class="yxjs_table_yxzy_bt" style=" margin-top:20px;">中外合作办学</div>
+         	<div class="yxjs_table_yxzy_zwhzbx">
+                <div>${detail.zwhzbx!}</div>
+            </div>
+
+          </div>
+
+			<!--<div class="yxjs_r f_r">
+			<div class="yxjs_r_tit">
+				专业满意度<img class="zdx_xx f_r" src="${base}/r/wdedu/images/zdxxx.png"/><div class="clearfix"></div>
+			</div>
+			<div class="yxjs_r_con">
+				<ul>
+					<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-index-hot1 c-gap-icon-right-small" style="color:#FFF">1</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+					<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-index-hot1 c-gap-icon-right-small" style="color:#FFF">2</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+					<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-index-hot1 c-gap-icon-right-small" style="color:#FFF">3</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+					<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-gap-icon-right-small">4</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+										<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index   c-gap-icon-right-small">5</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+										<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-gap-icon-right-small">6</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+										<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-gap-icon-right-small">7</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+					<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index   c-gap-icon-right-small">8</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+										<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-gap-icon-right-small">9</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+															<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-gap-icon-right-small">10</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+				</ul>
+                <div class="clearfix"></div>
+			</div>
+            <div class="yxjs_r_tit" style=" margin-top:20px;">
+				专业推荐指数<img class="zdx_xx f_r" src="${base}/r/wdedu/images/zdxxx.png"/><div class="clearfix"></div>
+			</div>
+			<div class="yxjs_r_con">
+				<ul>
+					<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-index-hot1 c-gap-icon-right-small" style="color:#FFF">1</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+					<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-index-hot1 c-gap-icon-right-small" style="color:#FFF">2</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+					<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-index-hot1 c-gap-icon-right-small" style="color:#FFF">3</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+					<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-gap-icon-right-small">4</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+										<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index   c-gap-icon-right-small">5</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+										<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-gap-icon-right-small">6</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+										<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-gap-icon-right-small">7</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+					<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index   c-gap-icon-right-small">8</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+										<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-gap-icon-right-small">9</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+															<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-gap-icon-right-small">10</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+				</ul>
+                <div class="clearfix"></div>
+			</div>
+                        <div class="yxjs_r_tit" style=" margin-top:20px;">
+				专业推荐人数<img class="zdx_xx f_r" src="${base}/r/wdedu/images/zdxxx.png"/><div class="clearfix"></div>
+			</div>
+             <div class="yxjs_r_con">
+				<ul>
+					<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-index-hot1 c-gap-icon-right-small" style="color:#FFF">1</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+					<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-index-hot1 c-gap-icon-right-small" style="color:#FFF">2</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+					<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-index-hot1 c-gap-icon-right-small" style="color:#FFF">3</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+					<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-gap-icon-right-small">4</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+										<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index   c-gap-icon-right-small">5</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+										<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-gap-icon-right-small">6</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+										<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-gap-icon-right-small">7</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+					<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index   c-gap-icon-right-small">8</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+										<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-gap-icon-right-small">9</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+															<li><a href="">
+                    <div class="yxzy_s f_l">
+                    <span class="c-index  c-gap-icon-right-small">10</span>广播电视编导</div>
+                    <div class="yxzy_s2 f_r">
+                    <i>4.8</i><b>(12人)</b>
+                    </div><div class="clearfix"></div></a>
+                    </li>
+				</ul>
+                <div class="clearfix"></div>
+			</div>
+		</div>	-->
+
+
+<div class="clearfix"></div>
+    </div>
+
+    <div class="yxjs_table_list" >
+
+    <div class="yxjs_table_list_jz f_l">
+      <div >
+          <h4>
+              招生简章
+          </h4>
+      </div>
+           <div id="zszc">${detail.zszc!}</div>
+       </div>
+
+      <div class="yxjs_table_list_s_y f_r">
+          <div class="yxjs_table_list_zsjz">
+              <ul>
+                  <span>招生简章</span>
+                  [#if conList??]
+                  [#list conList as c]
+                  <li><a onclick="getCon(${c.id})"><p><b title="${c.univConstitutionTitle!}">${c.univConstitutionTitle!}</b><i>${c.year!}</i></p></a><div class="arrow_2"></div><div class="clearfix"></div></li>
+                  [/#list]
+                  [/#if]
+              </ul>
+              <div class="clearfix"></div>
+          </div>
+
+      </div>
+      <div class="clearfix"></div>
+  </div>
+
+	<div class="yxjs_table_list" >
+	 [#if tCeeEnrollHistoryList??]
+       [#else]
+       		  <div class="yxjs_lqfs_lt">
+
+          		    <div class="yxjs_lqfs_lt_z f_l">
+                   <span>院校分数线</span>
+                       <i>招生方向：</i>
+                   </div>
+
+                     <div class="yxjs_lqfs_lt_wl_first f_r">
+                         <select id="univScore" onchange="univScore()">
+                             <option selected="selected">理科</option>
+                             <option>文科</option>
+                         </select>
+                     </div>
+                     <div class="clearfix"></div>
+
+                  <div class="yxjs_lqfs_lt_wllb" id="univLi">
+                  <input type="hidden" id="shior" value="${shior!}">
+                  <table  width="100%"  cellspacing="0" cellpadding="0">
+                   <tr>
+                     <th scope="col">年份</th>
+                     <th scope="col">招生批次 </th>
+                     <th scope="col">最高分 </th>
+                     <th scope="col">最低分</th>
+                     <th scope="col">平均分 </th>
+                     <th scope="col">线差分 </th>
+                     <th scope="col">最低位次</th>
+                   </tr>
+                   [#if shior??&& shior ==1]
+                           [#if tUnivList2??]
+                                  [#list tUnivList2 as list2]
+                               <tr>
+                                 <td>${list2.year!}</td>
+                                   <td>${list2.batch_name!}</td>
+                                 <td>${list2.high_score!}</td>
+                                 <td>${list2.low_score!}</td>
+                                 <td>${list2.average_score!}</td>
+                                  <td>
+                                   [#if list2.sub??&&(list2.sub >= 0)]
+                                   ${list2.sub!}
+                                   [/#if]
+                                   </td>
+                                 <td>${list2.rank_low_score!}</td>
+                               </tr>
+                                   [/#list]
+                           [/#if]
+                   [#elseif shior??&& shior ==2]
+                  <tr>
+                       <td colspan="7">
+                           <div class="n-sch1">
+                               <div class="m-cell">
+                                   <p>购买后可查看详细数据</p>
+                                   <a href="${base}/NewsDisplay/testSxk.jspx" class="js-login-link">立即购买</a>
+                               </div>
+                           </div>
+                       </td>
+                   </tr>
+                   [/#if]
+
+                 </table>
+                  </div>
+
+                     <div class="yxjs_lqfs_lt_wllb" id="univWen">
+                     <table  width="100%%"  cellspacing="0" cellpadding="0">
+                         <tr>
+                             <th scope="col">年份</th>
+                             <th scope="col">招生批次 </th>
+                             <th scope="col">最高分 </th>
+                             <th scope="col">最低分</th>
+                             <th scope="col">平均分 </th>
+                             <th scope="col">线差分 </th>
+                             <th scope="col">最低位次</th>
+                         </tr>
+                         [#if shior??&& shior ==1]
+                         [#if tUnivList1??]
+                         [#list tUnivList1 as list1]
+                         <tr>
+                             <td>${list1.year!}</td>
+                             <td>${list1.batch_name!}</td>
+                             <td>${list1.high_score!}</td>
+                             <td>${list1.low_score!}</td>
+                             <td>${list1.average_score!}</td>
+                             <td>
+                                 [#if list1.sub??&&(list1.sub >= 0)]
+                                 ${list1.sub!}
+                                 [/#if]
+                             </td>
+                             <td>${list1.rank_low_score!}</td>
+                         </tr>
+                         [/#list]
+                         [/#if]
+                                                    [#elseif shior??&& shior ==2]
+                                    <tr>
+                                         <td colspan="7">
+                                             <div class="n-sch1">
+                                                 <div class="m-cell">
+                                                     <p>购买后可查看详细数据</p>
+                                                     <a href="${base}/NewsDisplay/testSxk.jspx" class="js-login-link">立即购买</a>
+                                                 </div>
+                                             </div>
+                                         </td>
+                                     </tr>
+                                     [/#if]
+                     </table>
+                     </div>
+                 <div class="yxjs_ts">
+                 <b>重要提示：</b>
+                 <p>1、2012-2019年各院校录取数据。参考各省市出版的埴报指南以及各本专科院校的官网历年录取数据;</p>
+                 <p>2、我们的数据与各省考试院发布的数据一-致 ,由于各省市加分政策,院校官网对征集志愿数据的显示等原因,会与院校官网存在不一-致情况 ,建议以各省考试院发布的数据为准。</p>
+                 </div>
+                 <div class="yxjs_zyfsx">
+                   <div class="yxjs_lqfs_lt_z f_l">
+                   <span>专业分数线</span>
+                   </div>
+                    <div class="yxjs_zyfsx_znf f_r">
+                                   		<select id="year" onchange="searchMajorHistory()">
+                                           <option selected="selected">2019</option>
+                                           <option>2018</option>
+                                           <option>2017</option>
+                                           <option>2016</option>
+
+                                           </select>
+                 				</div>
+                                   <div class="yxjs_lqfs_lt_wl f_r">
+                                   		<select id="majorType" onchange="searchMajorHistory()">
+                                           <option selected="selected">理科</option>
+                                           <option>文科</option>
+                                           </select>
+                                   </div>
+                                   <div class="clearfix"></div>
+       		</div>
+
+                    <div class="clearfix"></div>
+                 </div>
+                 <div class="yxjs_table_3">
+                   <table id="history" width="100%"  cellspacing="0" cellpadding="0">
+                     <tr>
+                       <th scope="col">年份</th>
+                         <th scope="col">院校名称</th>
+                         <th scope="col">院校代码</th>
+                       <th scope="col">专业代码 </th>
+                       <th scope="col" width="310px">专业名称</th>
+                       <th scope="col">招生批次  </th>
+                       <th scope="col">最高分</th>
+                       <th scope="col">平均分</th>
+                       <th scope="col">最低分 </th>
+                       <th scope="col">最低位次 </th>
+                       <th scope="col">录取数</th>
+                     </tr>
+
+                        [#if shior??&& shior ==2]
+                                     <tr>
+                                          <td colspan="11">
+                                              <div class="n-sch1">
+                                                  <div class="m-cell">
+                                                      <p>购买后可查看详细数据</p>
+                                                      <a href="${base}/NewsDisplay/testSxk.jspx" class="js-login-link">立即购买</a>
+                                                  </div>
+                                              </div>
+                                          </td>
+                                      </tr>
+                                      [/#if]
+                   </table>
+                 </div>
+                 <div class="yxjs_ts">
+                           <b>重要提示：</b>
+                           <p>1、2012-2019年各院校录取数据。参考各省市出版的埴报指南以及各本专科院校的官网历年录取数据;</p>
+                           <p>2、我们的数据与各省考试院发布的数据一-致 ,由于各省市加分政策,院校官网对征集志愿数据的显示等原因,会与院校官网存在不一-致情况 ,建议以各省考试院发布的数据为准。</p>
+                           </div>
+      [/#if]
+                    [#if tCeeEnrollHistoryList??]
+          <div class="yxjs_zyfsx">
+                   <div class="yxjs_lqfs_lt_z f_l">
+                   <span>历年数据</span>
+                   </div>
+        <div class="clearfix"></div>
+         <div class="yxjs_table4" >
+                         <table width="100%%"  cellspacing="0" cellpadding="0">
+                          <tr>
+                      <th>年份</th>
+                      <th width="200">大学名称</th>
+                       <th>文理科</th>
+                      <th>当前批次</th>
+                      <th>计划</th>
+                      [#if qubie??]
+                      [#if qubie == 1]
+                      <th>报名数</th>
+                      <th>上线数</th>
+                      <th>录取</th>
+                      [#if provinceId == 1]
+                      [#if batchId ==2 ]
+                      <th>A-F录取人数</th>
+                      [#elseif batchId==3 ]
+                      <th>A-J录取人数</th>
+                      [#else]
+                      <th>一志</th>
+                      [/#if]
+                      [#else]
+                      <th>一志</th>
+                      [/#if]
+                      <th>一专</th>
+                      <th>征集</th>
+                      [/#if]
+                      [/#if]
+                      <th>录取比例</th>
+                      <th>录取线</th>
+                      <th>分数范围</th>
+                      <th>排名范围</th>
+                      <th>考试院数据</th>
+                       </tr>
+                           [#if shior??&& shior ==1]
+	                        [#if tCeeEnrollHistoryList??]
+							[#list tCeeEnrollHistoryList as history]
+							<tr>
+								<td>${history.year!}</td>
+								<td>${history.univ_name!}</td>
+								<td>[#if history.major_type_id??&&history.major_type_id==1]文科 [#elseif history.major_type_id??&&history.major_type_id==2]理科[/#if]</td>
+								<td>${history.batch_name!}</td>
+								<td>${history.history_planed!}</td>
+								[#if qubie??]
+								[#if qubie == 1]
+								<td>${history.sign_num!}</td>
+								<td>${history.reach_num!}</td>
+								<td>${history.history_enrolled!}</td>
+								[#if history.province_id == 1]
+								[#if history.batch_id ==2 ]
+								<th>${history.history_enrolled_AF!}</th>
+								[#elseif history.batch_id==3 ]
+								<th>${history.history_enrolled_AF!}</th>
+								[#else]
+								<th>${history.history_enrolled!}</th>
+								[/#if]
+								[#else]
+								<td>${history.history_enrolled!}</td>
+								[/#if]
+								<td>${history.first_majorNum!}</td>
+								<td>${history.add_num!}</td>
+								[/#if]
+								[/#if]
+								<td>${history.enroll_rate!}</td>
+								<td>${history.low_score!}</td>
+								<td>${history.low_score!}-${history.high_score!}</td>
+								<td>${history.rank_low_score!}-${history.rank_high_score!}</td>
+								<td>
+									<a onclick="queryUniv('${history.province_id!}','${history.major_type_id!}','${history.batch_id!}','${history.univ_id!}','${history.year!}')" data-toggle="modal" data-target="#myModal" style="color:#f70;cursor: pointer;">查看</a>
+								</td>
+							</tr>
+							[/#list]
+							[/#if]
+
+                            [#elseif shior??&& shior ==2]
+                                      <tr>
+                                           <td colspan="19">
+                                               <div class="n-sch1">
+                                                   <div class="m-cell">
+                                                       <p>购买后可查看详细数据</p>
+                                                       <a href="${base}/NewsDisplay/testSxk.jspx" class="js-login-link">立即购买</a>
+                                                   </div>
+                                               </div>
+                                           </td>
+                                       </tr>
+                                       [/#if]
+                         </table>
+                     </div>
+       		</div>
+                    [/#if]
+        </div>
+
+    <div class="yxjs_table_list" >
+     	<div class="yxjs_zyfsx">
+            <div class="yxjs_lqfs_lt_z f_l">
+            <span>招生计划</span>
+            </div>
+                            <div class="yxjs_lqfs_lt_wl f_r">
+                            		<select id="univPlan" onchange="univPlan()">
+                                    <option selected="selected">理科</option>
+                                    <option>文科</option>
+                                    <option>综合改革</option>
+                                    </select>
+                            </div>
+                            <div class="clearfix"></div>
+		</div>
+             <div class="clearfix"></div>
+             <div class="yxjs_table4" id="planLi">
+                 <table width="100%%"  cellspacing="0" cellpadding="0">
+                   <tr>
+                     <th scope="col" width="100px;">院校代码</th>
+                     <th scope="col" width="148px;">院校名称</th>
+                     <th scope="col" width="148px;">专业代码</th>
+                     <th scope="col" width="450px;">专业名称</th>
+                     <th scope="col" width="120px;">招生批次</th>
+                     <th scope="col">计划数</th>
+                     <th scope="col">学制 </th>
+                     <th scope="col">学费</th>
+                   </tr>
+                   [#if shior??&& shior ==1]
+                   [#if planSciences??]
+                   [#list planSciences as sciences]
+                     [#if sciences.univ_name != detail.univName]
+                   <tr style="background-color: #D6D6D6">
+                       <td>${sciences.univ_code!}</td>
+                     <td>${sciences.univ_name!}</td>
+                     <td>${sciences.major_code!}</td>
+                     <td>${sciences.major_name!}</td>
+                        <td>${sciences.batch_name!}</td>
+                     <td>${sciences.plan_num!}</td>
+                     <td>${sciences.major_school_length!}</td>
+                     <td>${sciences.major_fee!}</td>
+                   </tr>
+                     [#else]
+                     <tr>
+                         <td>${sciences.univ_code!}</td>
+                         <td>${sciences.univ_name!}</td>
+                         <td>${sciences.major_code!}</td>
+                         <td>${sciences.major_name!}</td>
+                         <td>${sciences.batch_name!}</td>
+                         <td>${sciences.plan_num!}</td>
+                         <td>${sciences.major_school_length!}</td>
+                         <td>${sciences.major_fee!}</td>
+                     </tr>
+                     [/#if]
+                   [/#list]
+                   [/#if]
+                                              [#elseif shior??&& shior ==2]
+                              <tr>
+                                   <td colspan="7">
+                                       <div class="n-sch1">
+                                           <div class="m-cell">
+                                               <p>购买后可查看详细数据</p>
+                                               <a href="${base}/NewsDisplay/testSxk.jspx" class="js-login-link">立即购买</a>
+                                           </div>
+                                       </div>
+                                   </td>
+                               </tr>
+                               [/#if]
+                 </table>
+             </div>
+            <div class="yxjs_table4" id="planWen">
+                   <table width="100%%"  cellspacing="0" cellpadding="0">
+                       <tr>
+                           <th scope="col" width="100px;">院校代码</th>
+                           <th scope="col" width="148px;">院校名称</th>
+                           <th scope="col" width="148px;">专业代码</th>
+                           <th scope="col" width="450px;">专业名称</th>
+                           <th scope="col" width="120px;">招生批次</th>
+                           <th scope="col">计划数</th>
+                           <th scope="col">学制 </th>
+                           <th scope="col">学费</th>
+                       </tr>
+                       [#if shior??&& shior ==1]
+                       [#if planArts??]
+                       [#list planArts as art]
+                       [#if art.univ_name != detail.univName]
+                       <tr style="background-color: #D6D6D6">
+                           <td>${art.univ_code!}</td>
+                           <td>${art.univ_name!}</td>
+                           <td>${art.major_code!}</td>
+                           <td>${art.major_name!}</td>
+                           <td>${art.batch_name!}</td>
+                           <td>${art.plan_num!}</td>
+                           <td>${art.major_school_length!}</td>
+                           <td>${art.major_fee!}</td>
+                       </tr>
+                       [#else]
+                       <tr>
+                           <td>${art.univ_code!}</td>
+                           <td>${art.univ_name!}</td>
+                           <td>${art.major_code!}</td>
+                           <td>${art.major_name!}</td>
+                           <td>${art.batch_name!}</td>
+                           <td>${art.plan_num!}</td>
+                           <td>${art.major_school_length!}</td>
+                           <td>${art.major_fee!}</td>
+                       </tr>
+                       [/#if]
+                       [/#list]
+                       [/#if]
+                             [#elseif shior??&& shior ==2]
+                        <tr>
+                             <td colspan="7">
+                                 <div class="n-sch1">
+                                     <div class="m-cell">
+                                         <p>购买后可查看详细数据</p>
+                                         <a href="${base}/NewsDisplay/testSxk.jspx" class="js-login-link">立即购买</a>
+                                     </div>
+                                 </div>
+                             </td>
+                         </tr>
+                         [/#if]
+                   </table>
+
+               </div>
+        <div class="yxjs_table4" id="planZongHe">
+            <table width="100%%"  cellspacing="0" cellpadding="0">
+                <tr>
+                    <th scope="col" width="100px;">院校代码</th>
+                    <th scope="col" width="148px;">院校名称</th>
+                    <th scope="col" width="148px;">专业代码</th>
+                    <th scope="col" width="150px;">专业名称</th>
+                    <th scope="col" width="150px;">限选科目要求</th>
+                    <th scope="col" width="120px;">招生批次</th>
+                    <th scope="col">计划数</th>
+                    <th scope="col">学制 </th>
+                    <th scope="col">学费</th>
+                </tr>
+                [#if shior??&& shior ==1]
+                [#if planZong??]
+                [#list planZong as zong]
+                [#if zong.univ_name != detail.univName]
+                <tr style="background-color: #D6D6D6">
+                    <td>${zong.univ_code!}</td>
+                    <td>${zong.univ_name!}</td>
+                    <td>${zong.major_code!}</td>
+                    <td>${zong.major_name!}</td>
+                    <td>${zong.univ_subjects_remark!}</td>
+                    <td>${zong.batch_name!}</td>
+                    <td>${zong.plan_num!}</td>
+                    <td>${zong.major_school_length!}</td>
+                    <td>${zong.major_fee!}</td>
+                </tr>
+                [#else]
+                <tr>
+                    <td>${zong.univ_code!}</td>
+                    <td>${zong.univ_name!}</td>
+                    <td>${zong.major_code!}</td>
+                    <td>${zong.major_name!}</td>
+                    <td>${zong.batch_name!}</td>
+                    <td>${zong.plan_num!}</td>
+                    <td>${zong.major_school_length!}</td>
+                    <td>${zong.major_fee!}</td>
+                </tr>
+                [/#if]
+                [/#list]
+                [/#if]
+                [#elseif shior??&& shior ==2]
+                <tr>
+                    <td colspan="7">
+                        <div class="n-sch1">
+                            <div class="m-cell">
+                                <p>购买后可查看详细数据</p>
+                                <a href="${base}/NewsDisplay/testSxk.jspx" class="js-login-link">立即购买</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                [/#if]
+            </table>
+
+        </div>
+          <div class="yxjs_ts">
+          <b>重要提示：</b>
+          <p>1、2012-2019年各院校录取数据。参考各省市出版的埴报指南以及各本专科院校的官网历年录取数据;</p>
+          <p>2、我们的数据与各省考试院发布的数据一-致 ,由于各省市加分政策,院校官网对征集志愿数据的显示等原因,会与院校官网存在不一-致情况 ,建议以各省考试院发布的数据为准。</p>
+          </div> 
+             
+             
+                    
+          </div>
+
+     </div>         
+
+    </div>
+     
+        
+  </div>
+    </div>
+    
+     <div class="clearfix"></div>
+
+		<!-- 点击历年数据  查看   查看详情 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width: 1200px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel"></h4>
+			</div>
+			<div class="modal-body">
+				<iframe id="iframe" name="iframe" style="height: 650px; min-width: 100%"></iframe>
+			</div>
+		</div>
+	</div>
+</div>
+[#include "../include/footer_new.html"/]
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/itemsJs/filtrate.js"></script>
+		<script type="text/javascript">
+         function queryUniv(provinceId,majorTypeId,batchId,univId,year){
+                                      $.ajax({
+                                          url:"${base}/queryHistoryPlanDoor.jspx",
+                                          type:"post",
+                                          async: true,
+                                          dataType:'json',
+                                          data:{
+                                              province_id:provinceId,
+                                              major_type_id:majorTypeId,
+                                              batch_id:batchId,
+                                              univ_id:univId,
+                                              year:year
+                                          },
+                                          success : function(data) {
+                                              var res = data;
+                                              if(res && res.success == true){
+                                                  event.returnValue=false;
+                                                  $($("#iframe")[0].contentWindow.document.body).remove();
+                                                  $('#iframe').attr('src',"${base}/"+ res.msg);
+                                                  $('#myModal').modal('show');
+                                                  // window.location.reload();
+                                              }else{
+                                                  alert(res.msg);
+                                              }
+                                          }
+                                      })
+                                  }
+		</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://rm-uf6lv82gx7s718k525o.mysql.rds.aliyuncs.com:3306/wodecareer</property>
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <mapping class="com.jeecms.wdedu.entity.Demo"/>
+        <mapping class="com.jeecms.wdedu.entity.TBaseHighshool"/>
+        <mapping class="com.jeecms.wdedu.entity.TBaseProducts"/>
+        <mapping class="com.jeecms.wdedu.entity.TBaseProvince"/>
+        <mapping class="com.jeecms.wdedu.entity.TBaseVrcards"/>
+        <mapping class="com.jeecms.wdedu.entity.TCeeApplications"/>
+        <mapping class="com.jeecms.wdedu.entity.TCeeApplicationsDetail"/>
+        <mapping class="com.jeecms.wdedu.entity.TCeeBatch"/>
+        <mapping class="com.jeecms.wdedu.entity.TCeeEnrollHistory"/>
+        <mapping class="com.jeecms.wdedu.entity.TCeeEnrollMajorList"/>
+        <mapping class="com.jeecms.wdedu.entity.TCeeEnrollPlan"/>
+        <mapping class="com.jeecms.wdedu.entity.TCeeEnrollUnivList"/>
+        <mapping class="com.jeecms.wdedu.entity.TCeeEnrollUnivList2"/>
+        <mapping class="com.jeecms.wdedu.entity.TCeeEnrollUnivListUser"/>
+        <mapping class="com.jeecms.wdedu.entity.TCeeEnrollUnivListChoose"/>
+        <mapping class="com.jeecms.wdedu.entity.TCeeScoreRank"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataCareer"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataEnrollHighschool"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataEnrollIndependent"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataEnrollIndependentAna"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataEnrollIndependentTotal"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataMajor"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataMajorRank"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataUniversity"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataUniversityDetail"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataUniversityInteRank"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataUniversityRank"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataUniversityRules"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataUniversityType"/>
+        <mapping class="com.jeecms.wdedu.entity.TNActivity"/>
+        <mapping class="com.jeecms.wdedu.entity.TNApplycount"/>
+        <mapping class="com.jeecms.wdedu.entity.TNAward"/>
+        <mapping class="com.jeecms.wdedu.entity.TNCall"/>
+        <mapping class="com.jeecms.wdedu.entity.TNCodeMas"/>
+        <mapping class="com.jeecms.wdedu.entity.TNCompany"/>
+        <mapping class="com.jeecms.wdedu.entity.TNContest"/>
+        <mapping class="com.jeecms.wdedu.entity.TNContractInfo"/>
+        <mapping class="com.jeecms.wdedu.entity.TNCopy"/>
+        <mapping class="com.jeecms.wdedu.entity.TNDemand"/>
+        <mapping class="com.jeecms.wdedu.entity.TNEducation"/>
+        <mapping class="com.jeecms.wdedu.entity.TNFamily"/>
+        <mapping class="com.jeecms.wdedu.entity.TNLocation"/>
+        <mapping class="com.jeecms.wdedu.entity.TNLocationUniv"/>
+        <mapping class="com.jeecms.wdedu.entity.TNLocationUnivCondition"/>
+        <mapping class="com.jeecms.wdedu.entity.TNLocationUnivDetail"/>
+        <mapping class="com.jeecms.wdedu.entity.TNLocationUnivMajor"/>
+        <mapping class="com.jeecms.wdedu.entity.TNMaterial"/>
+        <mapping class="com.jeecms.wdedu.entity.TNMessage"/>
+        <mapping class="com.jeecms.wdedu.entity.TNPatent"/>
+        <mapping class="com.jeecms.wdedu.entity.TNReferee"/>
+        <mapping class="com.jeecms.wdedu.entity.TNSchool"/>
+        <mapping class="com.jeecms.wdedu.entity.TNScore"/>
+        <mapping class="com.jeecms.wdedu.entity.TNScoreRank"/>
+        <mapping class="com.jeecms.wdedu.entity.TNServiceProgress"/>
+        <mapping class="com.jeecms.wdedu.entity.TNUser"/>
+        <mapping class="com.jeecms.wdedu.entity.TSOnlineYuding"/>
+        <mapping class="com.jeecms.wdedu.entity.TScActiveDetail"/>
+        <mapping class="com.jeecms.wdedu.entity.TScActiveSign"/>
+        <mapping class="com.jeecms.wdedu.entity.TScActiveTeacher"/>
+        <mapping class="com.jeecms.wdedu.entity.TScActiveUserInfo"/>
+        <mapping class="com.jeecms.wdedu.entity.TStuBasicInfo"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataMajorImport"/>
+        <mapping class="com.jeecms.wdedu.entity.TQstA"/>
+        <mapping class="com.jeecms.wdedu.entity.TQstB"/>
+        <mapping class="com.jeecms.wdedu.entity.TQstC"/>
+        <mapping class="com.jeecms.wdedu.entity.TQstDResult"/>
+        <mapping class="com.jeecms.wdedu.entity.TQstResult"/>
+        <mapping class="com.jeecms.wdedu.entity.TStudent"/>
+        <mapping class="com.jeecms.wdedu.entity.TTeacher"/>
+        <mapping class="com.jeecms.wdedu.entity.TestResult"/>
+        <mapping class="com.jeecms.wdedu.entity.TQst"/>
+        <mapping class="com.jeecms.wdedu.entity.TQstAMajor"/>
+        <mapping class="com.jeecms.wdedu.entity.TQstDMajor"/>
+        <mapping class="com.jeecms.wdedu.entity.TSchool"/>
+        <mapping class="com.jeecms.wdedu.entity.TDMsgMq"/>
+        <mapping class="com.jeecms.wdedu.entity.TDMsgTemplate"/>
+        <mapping class="com.jeecms.wdedu.entity.TXuejiSign"/>
+        <mapping class="com.jeecms.wdedu.entity.TBaseServices"/>
+        <mapping class="com.jeecms.wdedu.entity.TYnOnlineOrder"/>
+        <mapping class="com.jeecms.wdedu.entity.JcUserGroup"/>
+        <mapping class="com.jeecms.wdedu.entity.TMgrSrvNode"/>
+        <mapping class="com.jeecms.wdedu.entity.TMgrSrvOrder"/>
+        <mapping class="com.jeecms.wdedu.entity.TMgrUserBaseUserEntity"/>
+        <mapping class="com.jeecms.wdedu.entity.TCeeApplicationsExport"/>
+        <mapping class="com.jeecms.wdedu.entity.TCeeApplicationsExports"/>
+        <mapping class="com.jeecms.wdedu.entity.TCourseChooseEntity"/>
+        <mapping class="com.jeecms.wdedu.entity.TCeeApplicationsRequire"/>
+        <mapping class="com.wdedu.entity.TDataCareerMapMajorEntity"/>
+        <mapping class="com.jeecms.wdedu.entity.TCeeEnrollFillList"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataCareerProfession"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataCareerRegion"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataEmployCompany"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataEmployProfession"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataEmployRegion"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataOnlineSign"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataUniversityConstitution"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataUniversityMajorintroduce"/>
+
+        <mapping class="com.wdedu.entity.TDataActivityDetailEntity"/>
+        <mapping class="com.wdedu.entity.TDataOnlineSignEntity"/>
+        <mapping class="com.wdedu.entity.TDataCareerCompanyEntity"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataSalaryUniversity"/>
+
+        <mapping class="com.jeecms.wdedu.entity.TDataUniversityMajorintroduce"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataSalaryCareer"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataSalaryMajor"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataSalaryUniversity"/>
+        <mapping class="com.wdedu.entity.TDataCareerMapMajorEntity"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataEmployIndex"/>
+        <mapping class="com.wdedu.entity.TDataCareerIntroduceEntity"/>
+        <mapping class="com.jeecms.wdedu.entity.TDataCareerScale"/>
+        <mapping class="com.wdedu.entity.TDataCareerCompanyEntity"/>
+        <mapping class="com.wdedu.entity.TMajorfollowEntity"/>
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

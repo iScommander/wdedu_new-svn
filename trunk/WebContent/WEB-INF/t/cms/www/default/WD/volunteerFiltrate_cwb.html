@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>志愿筛选</title>
+    <link rel="stylesheet" href="${base}/r/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${base}/r/css/combo.select.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css"/>
+    <script src="${base}/r/js/jQuery.js"></script>
+    <script src="${base}/r/js/bootstrap.min.js"></script>
+    <script src="${base}/r/js/jquery.combo.select.js"></script>
+    <script src="${base}/r/js/itemsJs/common.js"></script>
+    <script src="${base}/r/js/itemsJs/filtrate.js"></script>
+    <script src="${base}/r/js/Sortable.js"></script>
+    <script src="${base}/r/cms/front.js"></script>
+    <script src="${base}/r/css/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="${base}/r/css/sweetalert.css">
+
+    <script type="text/javascript" src="${base}/r/easyUi/jquery.min.js"></script>
+    <!-- easyui核心库 -->
+    <script type="text/javascript" src="${base}/r/easyUi/jquery.easyui.min.js"></script>
+    <!-- easyui核心UI文件 css -->
+    <link href="${base}/r/easyUi/easyui.css" rel="stylesheet" type="text/css"/>
+    <!-- easyui图标 -->
+    <link href="${base}/r/easyUi/icon.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="${base}/r/easyUi/easyui-lang-zh_CN.js"></script>
+    <style>
+
+  progress{
+       width: 180px;
+       height: 13px;
+       color:#f00;
+       background:#EFEFF4;
+       border-radius: 0.1rem;
+   }
+   /* 表示总长度背景色 */
+   progress::-webkit-progress-bar{
+       background-color: #f2f2f2;
+       border-radius: 0.2rem;
+   }
+   /* 表示已完成进度背景色 */
+   progress::-webkit-progress-value{
+         background: #a21211;
+         border-radius: 0.2rem;
+   }
+
+        .filtrateUl {
+            border: 1px solid #dbe9ef;
+            height: auto;
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
+            box-shadow: 2px 2px 2px #eaeaea;
+        }
+
+        .filtrateUl li {
+            width: 20%;
+            display: block;
+            float: left;
+            border-right: 1px solid #999999;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .filtrateUl li:last-child {
+            border: none;
+        }
+
+        .filtrateUl li a {
+            font-size: 20px;
+            color: #333333;
+        }
+
+        .filtrateUl li button {
+            font-size: 20px;
+            color: #333333;
+        }
+
+        .filtrateUl li.active a {
+            font-size: 25px;
+            color: #CC0001;
+        }
+
+        .tableContentOther {
+            min-height: 500px;
+            padding: 20px 0;
+        }
+
+        .filtrateContent {
+            margin-top: 20px;
+        }
+
+        .FiltrateList table p.eachYear span {
+            display: inline-block;
+            width: 32%;
+            height: 37px;
+            line-height: 37px;
+            border-radius: 5px 5px 0 0;
+            background: #05B8C3;
+        }
+
+        td.fenshu > span {
+            display: inline-block;
+            width: 105px;
+            padding: 0;
+            margin: 0;
+            font-size: 12px;
+        }
+
+        /*意向，不选*/
+
+        .yxbx span:first-child {
+            background-color: #2bbdc7;
+            font-size: 14px;
+            color: #FFFFFF;
+            padding: 7px 15px;
+            border-radius: 3px 0 0 3px;
+            cursor: pointer;
+        }
+
+        .yxbx span:last-child {
+            background-color: #b5b5b5;
+            font-size: 14px;
+            color: #FFFFFF;
+            padding: 7px 15px;
+            border-radius: 0 3px 3px 0;
+            cursor: pointer;
+        }
+
+        #saveFiltrate {
+            background-color: #ff7619;
+            border-radius: 3px;
+            color: #FFFFFF;
+            font-size: 18px;
+            padding: 5px 30px;
+            cursor: pointer;
+        }
+
+        .filtrateSearch span {
+            background-color: #fac73c;
+            border-radius: 3px;
+            color: #FFFFFF;
+            font-size: 14px;
+            padding: 8px 30px;
+            cursor: pointer;
+        }
+
+        /*志愿意向样式*/
+
+        .selectNumberScreen .screenBox dl dd {
+            position: relative;
+            padding-left: 0;
+            width: auto;
+            padding-right: 60px;
+            float: left;
+
+            padding-top: 0
+        }
+
+        .selectNumberScreen .screenBox dl dd a:hover {
+            background: none;
+            color: #05b8c3;
+        }
+
+        .selectNumberScreen .screenBox dl dd a {
+            margin: 0;
+            padding: 0;
+        }
+
+        .selectNumberScreen .screenBox dl dt {
+            margin: 0;
+            margin-top: 7px;
+            padding: 0 20px;
+            width: auto;
+        }
+
+        .checkbox_base_group input[type='checkbox']:checked + label {
+            padding: 18px;
+        }
+
+        .checkbox_base_group label {
+            padding: 18px;
+        }
+
+        /*志愿方案*/
+
+        .volunteersActivities {
+            margin-top: 100px;
+        }
+
+        .volunteersActivities span {
+            background-color: #2bbdc7;
+            border-radius: 3px;
+            color: #FFFFFF;
+            font-size: 18px;
+            padding: 8px 30px;
+            cursor: pointer;
+        }
+
+        .filtrateSearch {
+            padding: 10px 10px 0 0;
+        }
+
+        /*专业分类*/
+
+        .selectNumberScreen .screenBox .dl1 dt {
+            text-align: right;
+            width: auto;
+            height: 22px;
+            font-weight: 600;
+            margin: 16px 0 0 10px;
+        }
+
+        .selectNumberScreen .screenBox .dl1 dd a {
+            margin: 8px;
+            padding: 8px;
+            display: inline-block;
+            color: #05b8c3;
+
+            text-decoration: none
+        }
+
+        .selectNumberScreen .screenBox .dl1 dd a:hover {
+            background: #fac73c;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        .selectNumberScreen .screenBox .dl1 dd a.selected {
+            background: #fac73c;
+            color: #fff;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+[#include "../include/header_kstb.html"/]
+<!--<nav class="indexNav">-->
+    <!--<div class="flex-container1 width1200">-->
+        <!--<div class="marginR50">-->
+            <!--<a href="${base}/index.jhtml"><img src="${base}/u/cms/www/logo/logo.png" alt=""/></a>-->
+            <!--<a href="${base}/index.jhtml"><img src="${base}/u/cms/www/logo/name.png" alt=""/></a>-->
+        <!--</div>-->
+        <!--<div>-->
+            <!--<ul class="nav nav-pills">-->
+                <!--&lt;!&ndash;<li role="presentation">&ndash;&gt;-->
+                <!--&lt;!&ndash;<a href="../../volunteerPage.html">志愿</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                <!--<li role="presentation">-->
+                    <!--<a href="${base}/fastZytb/volunteerFlexible.jspx" style="width: 120px">返回方案列表</a>-->
+                <!--</li>-->
+                <!--<li role="presentation">-->
+                    <!--<a href="${base}/fastZytb/volunteerVideo.jspx">志愿视频</a>-->
+                <!--</li>-->
+                <!--<li role="presentation">-->
+                    <!--<a href="${base}/evaluation/index.jspx?ksType=1">专业测评</a>-->
+                <!--</li>-->
+                <!--<li role="presentation" class="dropdown">-->
+                    <!--<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">报考大数据</a>-->
+                    <!--<ul class="dropdown-menu">-->
+                        <!--<li>-->
+                            <!--<a href="${base}/bkck/one_segment_query.jspx">一分一段表</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="${base}/bkck/batch_query.jspx">批次查询</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="${base}/bcdsj/universityRank.jspx">院校排行榜</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="${base}/bcdsj/professionRank.jspx">专业排行榜</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="${base}/bcdsj/universityTeam.jspx">中外合作办学</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="${base}/bcdsj/professionAndLab.jspx">重点学科实验室</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="${base}/bcdsj/professionalBooks.jspx">职业大全</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="${base}/bkck/enroll_rules.jspx">招生章程</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li role="presentation">-->
+                    <!--<a href="${base}/fastZytb/CompleteExplain.jspx">填报说明</a>-->
+                <!--</li>-->
+
+                <!--<li role="presentation">-->
+                    <!--<a href="${base}/BkyxAct/userCenter.jspx">用户中心</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</nav>-->
+<!--路径-->
+<div class="route">
+    <div class="flex-container1 width1200">
+        <div>
+            <a href="${base}/index.jhtml">首页 </a> &lt;&lt;志愿填报 &lt;&lt;志愿筛选
+        </div>
+    </div>
+</div>
+<!--主体-->
+<main class="width1200 intentionMain">
+    <div class="intentionMainTab">
+        <ul class="filtrateUl">
+            <li id="zytbli">
+                <p style="font-size: 18px">志愿填报</p>
+            </li>
+            <li id="dqsxli" class="">
+                <!--<a href="${base}/fastZytb/dqsx.jspx?applicationId=${applicationId!}&batchId=${batchId!}&tbType=2
+                            " data-toggle="">
+                    地区筛选
+                </a>-->
+                <form action="${base}/fastZytb/dqsx.jspx" accept-charset="UTF-8" method="post">
+                    <button type="submit" style="color: #00b7ee;background-color: white">地区筛选</button>
+                    <input type="hidden" value="${applicationId!}" name="applicationId">
+                    <input type="hidden" value="${batchId!}" name="batchId">
+                    <input name="tbType" value="2" type="hidden">
+                    <input type="hidden" name="firstOrSecond" value="${firstOrSecond!}"/>
+                    <!--院校-->
+                    <input name="univ_is985" value="${is985!}" type="hidden">
+                    <input name="univ_is211" value="${is211!}" type="hidden">
+                    <input name="univ_isIndependence" value="${isIndependence!}" type="hidden">
+                    <input name="univ_isFirstRate" value="${isFirstRate!}" type="hidden">
+                    <input name="univ_type" value="${intent_univ_type!}" type="hidden">
+                    <!--专业-->
+                    <input name="major_second" class="major_second" value="${intent_major_id!}" type="hidden">
+                    <!--省份-->
+                    <input name="univ_province_id" value="${intent_province_id!}" type="hidden">
+                </form>
+            </li>
+            <li id="yxswli" class="">
+                <!--<a href="${base}/fastZytb/dqsx.jspx?applicationId=${applicationId!}&batchId=${batchId!}&tbType=3
+                            " data-toggle="">
+                    院校筛选
+                </a>-->
+                <form action="${base}/fastZytb/dqsx.jspx" accept-charset="UTF-8" method="post">
+                    <button type="submit" style="color: #00b7ee;background-color: white">院校筛选</button>
+                    <input type="hidden" value="${applicationId!}" name="applicationId">
+                    <input type="hidden" value="${batchId!}" name="batchId">
+                    <input name="tbType" value="3" type="hidden">
+                    <input type="hidden" name="firstOrSecond" value="${firstOrSecond!}"/>
+                    <!--院校-->
+                    <input name="univ_is985" value="${is985!}" type="hidden">
+                    <input name="univ_is211" value="${is211!}" type="hidden">
+                    <input name="univ_isIndependence" value="${isFirstRate!}" type="hidden">
+                    <input name="univ_isFirstRate" value="${isFirstRate!}" type="hidden">
+                    <input name="univ_type" value="${intent_univ_type!}" type="hidden">
+                    <!--专业-->
+                    <input name="major_second" class="major_second" value="${intent_major_id!}" type="hidden">
+                    <!--省份-->
+                    <input name="univ_province_id" value="${intent_province_id!}" type="hidden">
+                </form>
+            </li>
+            <li id="zysxli">
+                <!--<a href="${base}/fastZytb/dqsx.jspx?applicationId=${applicationId!}&batchId=${batchId!}&tbType=4
+                            " data-toggle="">
+                    专业筛选
+                </a>-->
+                <form action="${base}/fastZytb/dqsx.jspx" accept-charset="UTF-8" method="post">
+                    <button type="submit" style="color: #00b7ee;background-color: white">专业筛选</button>
+                    <input type="hidden" value="${applicationId!}" name="applicationId">
+                    <input type="hidden" value="${batchId!}" name="batchId">
+                    <input name="tbType" value="4" type="hidden">
+                    <input type="hidden" name="firstOrSecond" value="${firstOrSecond!}"/>
+                    <!--院校-->
+                    <input name="univ_is985" value="${is985!}" type="hidden">
+                    <input name="univ_is211" value="${is211!}" type="hidden">
+                    <input name="univ_isIndependence" value="${isIndependence!}" type="hidden">
+                    <input name="univ_isFirstRate" value="${isFirstRate!}" type="hidden">
+                    <input name="univ_type" value="${intent_univ_type!}" type="hidden">
+                    <!--专业-->
+                    <input name="major_second" class="major_second" value="${intent_major_id!}" type="hidden">
+                    <!--省份-->
+                    <input name="univ_province_id" value="${intent_province_id!}" type="hidden">
+                </form>
+            </li>
+            <li id="cwbli" class="active">
+                <a data-toggle="">
+                    生成志愿表
+                </a>
+            </li>
+        </ul>
+        <div class="intentionMainTab-content">
+            <div class="tab-content">
+                <!--冲稳保设置-->
+                <div class="" id="intentionList_5">
+                    <div class="tableContentOther">
+                        <div class="reportedTitle">
+                            <p>高考志愿填报—生成志愿表</p>
+                        </div>
+                        <!--搜索-->
+                        <!--<form action="${base}/fastZytb/dqsx.jspx" method="post">-->
+
+                        <!--院校-->
+                        <!--<input name="univ_is985" value="${is985!}" type="hidden">
+                        <input name="univ_is211" value="${is211!}" type="hidden">
+                        <input name="univ_isIndependence" value="${isIndependence!}" type="hidden">
+                        <input name="univ_isFirstRate" value="${isFirstRate!}" type="hidden">
+                        <input name="univ_type" value="${intent_univ_type!}" type="hidden">
+                        &lt;!&ndash;专业&ndash;&gt;
+                        <input name="major_second" class="major_second" value="${intent_major_id!}" type="hidden">
+                        &lt;!&ndash;省份&ndash;&gt;
+                        <input name="univ_province_id" value="${intent_province_id!}" type="hidden">-->
+
+
+                        <!--<div class="flex-container2">
+                            <div>
+                                <input  type="text" value="${advanced_univ_num!}" placeholder="冲一冲院校数量设置" name="advanced_univ_num"  onblur="checkinput_zzjs(this.value)"/>
+                            </div>
+                            <div>
+                                <input type="text" value="${stable_univ_num!}" placeholder="稳一稳院校数量设置" name="stable_univ_num" onblur="checkinput_zzjs(this.value)"/>
+                            </div>
+                            <div>
+                                <input type="text" value="${backward_univ_num!}" placeholder="保一保院校数量设置" name="backward_univ_num" onblur="checkinput_zzjs(this.value)"/>
+                            </div>
+
+                        </div>-->
+                        <div class="container row" style="padding-top: 50px;background-color: #D3D4D3;height: 550px">
+
+
+                                <div class="col-md-6 row" style="background-color: #bbdaf3;height: 450px">
+                                    <div style="font-size: 20px;padding-left: 15px;padding-top: 20px;font-weight: bold;color: white">冲稳保设置
+                                    <span style="font-size: 14px;padding-left: 113px;color: #d3440c">请根据您的需求设置冲稳保数量</span>
+                                    </div>
+                                    <form id="formId" action="${base}/fastZytb/dqsx.jspx" onsubmit="return xxx();" method="post">
+                                        <input type="hidden" id="pageNo" name="pageNo"/>
+                                        <input type="hidden" id="applicationId" value="${applicationId!}" name="applicationId">
+                                        <input type="hidden" id="batchId" value="${batchId!}" name="batchId">
+                                        <input name="tbType" value="5" type="hidden">
+                                        <input type="hidden" id="firstOrSecond" name="firstOrSecond" value="${firstOrSecond!}"/>
+                                    <div class="row" style="padding-top: 30px">
+                                        <div class="col-md-5"><label>冲一冲院校数量设置</label></div>
+                                        <div class="col-md-4">
+                                        <input type="text" value="${advanced_univ_num!}" name="advanced_univ_num"
+                                               onblur="checkinput_zzjs()" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="padding-top: 30px">
+                                        <div class="col-md-5"><label>稳一稳院校数量设置</label></div>
+                                        <div class="col-md-4">
+                                        <input type="text" value="${stable_univ_num!}" name="stable_univ_num"
+                                               onblur="checkinput_zzjs()" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="padding-top: 30px">
+                                        <div class="col-md-5"><label>保一保院校数量设置</label></div>
+                                        <div class="col-md-4">
+                                         <input type="text" value="${backward_univ_num!}" name="backward_univ_num"
+                                             onclick="return checkinput_zzjs()" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                                        </div>
+                                    </div>
+
+                                        <div class="container" style="padding-top: 60px">
+                                            <div class="col-md-2">
+
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="submit" class="btn3 btn-warning">保存设置</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                              </div>
+
+                                <div class="col-md-6 row" style="background-color: #3bcddb;height: 450px">
+                                    <div style="font-size: 20px;padding-left: 50px;padding-top: 20px;font-weight: bold;color: white">生成志愿方案</div>
+
+                                    <div class="container" style="padding-top: 80px">
+                                        <div class="col-md-1">
+
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button id="create" onclick="autoChoose()" class="btn3 btn-success" >生成志愿方案</button>
+                                        </div>
+                                        <!--<div class="col-md-4" style="padding-left: 44px">
+                                            志愿方案生成进度：<progress max="200" value="0" id="pg"></progress>
+                                        </div>-->
+                                    </div>
+
+                                    <div class="container" style="padding-top: 20px">
+                                        <div class="col-md-1">
+
+                                        </div>
+                                        <div class="col-md-8">
+
+                                           <!-- &lt;!&ndash;<button onclick="window.location.href='{base}/fastZytb/gkzytb.jspx?applicationId=${applicationId!}'">返回志愿列表</button>&ndash;&gt;
+                                            志愿方案生成进度：<progress max="200" value="0" id="pg"></progress>-->
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="container" style="padding-top: 50px">
+                                        <div class="col-md-1">
+
+                                        </div>
+                                        <div class="col-md-2">
+
+                                            <button class="btn3 btn-danger" onclick="window.location.href='../fastZytb/gkzytb.jspx?applicationId=${applicationId!}'">返回志愿列表</button>
+                                            <!--<a style="background-color: #C35A4D;font-size: 18px;color: white;width: 140px;max-height: 40px" href="${base}/fastZytb/gkzytb.jspx?applicationId=${applicationId!}">返回批次填报
+                                            </a>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        <!--生成志愿方案-->
+
+                        <div class="row">
+                           <!-- <div class="col-md-4" style="padding-left: 44px">
+                            志愿方案生成进度：<progress max="200" value="0" id="pg"></progress>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!--底部-->
+<!--<iframe MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no src="../../footer.html" height="360px" width="100%"></iframe>-->
+[#include "../include/footer.html"/]
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" style="width:100%">
+        <div class="modal-content" style="min-height: 600px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title">
+                    <button onclick="_savePlanDetail(${applicationId!})" type="button" class="btn btn-primary">保存并关闭
+                    </button>
+                    <span id="myModalLabel" style="margin-left: 15%;color: red;"></span>
+                </h3>
+            </div>
+            <div class="modal-body flex-container2" style="padding:0px">
+                <iframe id="iframe" name="iframe" style="height: 650px; min-width: 100%"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="Modal_fenlei" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 0;">
+            <style>
+                .fenlei-model-body {
+                    /* padding:20px; */
+                    padding: 0;
+                }
+
+                .fenlei-model-body dl {
+                    /* height: 200px; */
+                    margin-bottom: 5px;
+                }
+
+                .fenlei-model-body dt {
+                    height: 50px;
+                    line-height: 50px;
+                    background: #05b8c3;
+                    color: #FFF;
+                    padding: 0 20px;
+                    clear: both;
+                }
+
+                .fenlei-model-body dd {
+                    display: inline-block;
+                    padding: 10px 20px;
+                }
+
+                .fenlei-model-body dd a {
+                    display: inline-block;
+                    margin: 10px 10px 10px 0;
+                }
+            </style>
+            <div id="Modal_fenlei_body" class="modal-body fenlei-model-body">
+                <dl>
+                    <dt>test1</dt>
+                    <dd>22</dd>
+                    <dd>22</dd>
+                    <dd>22</dd>
+                </dl>
+                <dl>
+                    <dt>test1</dt>
+                    <dd>22</dd>
+                    <dd>22</dd>
+                    <dd>22</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+<!--js-->
+
+
+<script type="text/javascript">
+   function aa(){
+       swal(
+           {
+               title:"正在生成志愿方案，请稍候...",
+               text:"可能需要几分钟，但这是值得的！",
+               showConfirmButton:false,
+               imageUrl: "${base}/r/img/timg.gif",
+           }
+       );
+    }
+
+    function checkinput_zzjs() {
+        var k =${max_univ_num!};
+        var jj = parseInt($(" input[ name='advanced_univ_num' ] ").val());
+        var jj2 = parseInt($(" input[ name='stable_univ_num' ] ").val());
+        var jj3 = parseInt($(" input[ name='backward_univ_num' ] ").val());
+        if (jj + jj2 + jj3 > k) {
+                        swal(
+                        {
+                        title:"错误提示",
+                        text:"必须是小于規定院校数！当前规定院校为" + k + "所院校,请合理分配院校数量。",
+                        type:"info",
+                        }
+                        );
+            return false;
+        }
+    }
+
+    function xxx() {
+        var k =${max_univ_num};
+        var jj = parseInt($(" input[ name='advanced_univ_num' ] ").val());
+        var jj2 = parseInt($(" input[ name='stable_univ_num' ] ").val());
+        var jj3 = parseInt($(" input[ name='backward_univ_num' ] ").val());
+        if (jj + jj2 + jj3 == k) {
+            alert("分配冲稳保院校数量成功。");
+            return true;
+        } else {
+            swal(
+             {
+                title:"错误提示",
+                text:"必须是等于規定院校数！当前规定院校为" + k + "所院校,请合理分配院校数量。",
+                type:"info",
+                }
+                );
+            return false;
+
+        }
+    }
+
+
+    function autoChoose() {
+        var application_idd = $("#applicationId").val();
+        /*var pg=document.getElementById('pg');
+        setInterval(function(e){
+            if(pg.value!=200) pg.value++;
+            else pg.value=0;
+        },200);*/
+        aa();
+        $.ajax({
+            url: "chooseZhiyuanSolution.jspx",
+            type: 'post',
+            async: true,
+            data: {
+                application_idd: application_idd
+            },
+            dataType: 'json',
+            success: function (data) {
+
+               /* var isSuccess = data.isSuccess;
+                var msg = data.msg;
+                alert(msg);*/
+                window.location="../zytb/voluntary.jspx?applicationId=${applicationId!}";
+            }
+        });
+    }
+
+    //保存
+    function saveUniv(id) {
+        var applicationId = $("#applicationId").val();
+        var batchId = $("#batchId").val();
+        var majorId = $(".major_second").val();
+        $.ajax({
+            url: '${base}/fastZytb/saveOrUpdateIntentMajor.jspx',
+            type: "POST",
+            dataType: "json",
+            async: false,
+            data: {"applicationId": applicationId, "batchId": batchId, "intent_univId": id, "majorId": majorId},
+            success: function (data) {
+                alert("操作成功");
+            }
+        });
+
+    }
+
+    //不选
+    function noChoose(id) {
+        var applicationId = $("#applicationId").val();
+        var batchId = $("#batchId").val();
+        console.log(applicationId);
+        $.ajax({
+            url: '${base}/fastZytb/intentOrAvoid.jspx',
+            type: "POST",
+            dataType: "json",
+            async: false,
+            data: {"applicationId": applicationId, "batchId": batchId, "avoid_univId": id},
+            success: function (data) {
+                alert(data.msg);
+
+            },
+            error: function (data) {
+                var txt = "操作成功";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+            }
+        });
+    }
+
+    function choose(id) {
+        var applicationId = $("#applicationId").val();
+        var batchId = $("#batchId").val();
+        $.ajax({
+            url: '${base}/fastZytb/jump.jspx',
+            data: {univId: id, "applicationId": applicationId, "batchId": batchId},
+            type: "post",
+            async: false,
+            success: function (data) {
+                var res = eval('(' + data + ')');
+                if (res && res.success == true) {
+                    event.returnValue = false;
+                    $($("#iframe")[0].contentWindow.document.body).remove();
+                    var html = "招生计划";
+                    $("#myModalLabel").html(html);
+                    $('#iframe').attr('src', res.msg);
+                    $('#myModal').modal('show');
+                } else {
+                    alert(res.msg);
+                }
+            }
+        })
+    }
+
+    //保存专业数据
+    function _savePlanDetail() {
+
+        iframe.window.saveDetail();
+
+    }
+
+    //关闭模态框
+    function _hideIframe() {
+        $('#myModal').modal('hide');
+    }
+
+    $('#myModal').on('hidden.bs.modal', function () {
+        window.location.reload();
+    });
+
+    var fenlei_list = [
+        [{
+            key: "0101",
+            title: "哲学类0101",
+            list: ["哲学类", "哲学", "逻辑学", "宗教学", "伦理学"]
+        },
+            {
+                key: "0102",
+                title: "人文科学实验班类0102",
+                list: ["人文科学试验班"]
+            },
+            {
+                key: "0103",
+                title: "社会科学实验班类0103",
+                list: ["社会科学实验班"]
+            }
+        ],
+        [{
+            key: "0201",
+            title: "经济学类0201",
+            list: ["经济学类", "经济学", "经济统计学", "国民经济管理", "资源与环境经济学", "商务经济学", "能源经济学"]
+        },
+            {
+                key: "0202",
+                title: "财政类学0202",
+                list: ["财政学类", "财政学", "税收学"]
+            }
+        ],
+        [{
+            key: "0301",
+            title: "经济学类0301",
+            list: ["经济学类", "经济学", "经济统计学", "国民经济管理", "资源与环境经济学", "商务经济学", "能源经济学"]
+        },
+            {
+                key: "0302",
+                title: "财政类学0302",
+                list: ["财政类学", "财政学", "税收学"]
+            },
+            {
+                root: "03",
+                key: "0303",
+                title: "金融学类0303",
+                list: ["金融学类", "金融学", "金融工程", "保险学", "投资学", "金融数学"]
+            }
+        ]
+    ];
+    $("input[name=fenlei]").click(function () {
+        $("#Modal_fenlei").modal('show');
+        var key = this.value;
+        var this_fenlei = fenlei_list[key];
+        var fenlei_checked_list = $(".fenlei_checked_show");
+        var fenlei_html = "";
+
+        for (let index = 0; index < this_fenlei.length; index++) {
+            const fenlei = this_fenlei[index];
+            const fenlei_key = fenlei.key;
+            const fenlei_title = fenlei.title;
+            const fenlei_list = fenlei.list;
+
+            fenlei_html += "<dl class='listIndex'>"
+            fenlei_html += "<dt>" + fenlei_title + "</dt>"
+            fenlei_html += "<dd class='inputList'>"
+            for (let list_index = 0; list_index < fenlei_list.length; list_index++) {
+                const fenlei_list_info = fenlei_list[list_index];
+                const fenlei_id = "radio_fenlei_" + key + "_" + fenlei_key + "_" + list_index;
+                const fenlei_name = "radio_fenlei_" + key + "_" + fenlei_key;
+                fenlei_html += '<a href="javascript:void(0)" value="">'
+                fenlei_html += '<input id="' + fenlei_id + '" name="' + fenlei_name + '"' +
+                    ' type="checkbox"  onclick="fenlei_checked(this)" value="' + fenlei_list_info + '" >'
+                fenlei_html += '<label for="' + fenlei_id + '">' + fenlei_list_info + '</label>'
+                fenlei_html += '</a>'
+            }
+            fenlei_html += "</dd>"
+            fenlei_html += "</dl>"
+        }
+
+        $("#Modal_fenlei_body").html(fenlei_html);
+        for (let index = 0; index < fenlei_checked_list.length; index++) {
+            const element = fenlei_checked_list[index];
+            var fenlei_checkbox_id = $(element).attr("data-checked-id");
+            $("#" + fenlei_checkbox_id).attr("checked", true);
+        }
+    });
+
+    function fenlei_checked(obj) {
+        var current_key = $("input[name='fenlei']:checked")[0].value
+        var fenlei_show_id = "fenlei_show_" + obj.id;
+
+        if (!obj.checked) {
+            $("#" + fenlei_show_id).remove();
+            return;
+        } else {
+            var fenlei_checked_show = $(".fenlei_checked_show");
+            for (let index = 0; index < fenlei_checked_show.length; index++) {
+                const element = fenlei_checked_show[index];
+                var key = $(fenlei_checked_show).attr("data-checked-type");
+                if (current_key != key) {
+                    $(".fenlei_checked_show").remove();
+                }
+            }
+            $("#radio_yuanxiao_" + current_key).parent().parent().find("a").removeClass("selected");
+            $("#radio_yuanxiao_" + current_key).parent().addClass("selected");
+            var show = $("#Modal_fenlei_body input[type=checkbox]:checked").length;
+            if (show > 0) {
+                $(".clearDd").show();
+                $(".eliminateCriteria").show();
+            }
+
+            var html = '<div id="' + fenlei_show_id + '" data-checked-id="' + obj.id + '" data-checked-type=' + current_key +
+                ' class="selectedInfor selectedShow fenlei_checked_show"><span>专业分类 &gt;</span><label>' +
+                obj.value + '</label><em onclick="fenlei_checked_clear(this)"></em></div>';
+            $(".hasBeenSelected .clearList").append(html);
+        }
+
+    }
+
+    $(".btnColorGreen").click(function () {
+        $(".fenlei_checked_show").remove();
+        $("input[name=fenlei]").eq(0).parent().parent().find("a").removeClass("selected");
+    })
+
+    function fenlei_checked_clear(obj) {
+        $(obj).parent().remove();
+    }
+</script>
+</body>
+
+</html>

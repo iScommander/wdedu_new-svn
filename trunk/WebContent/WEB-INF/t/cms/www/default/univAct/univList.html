@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>找大学</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<script src="${base}/r/cms/front.js"></script>
+		<style>
+			.universityList>ul>li>a>div.flex-container2>div>img{
+				width: 100px;
+				height: 100px;
+			}
+			.main>ul>li>img{
+				width: 100px;
+				height: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--顶部-->
+		[#include "../include/header.html"/]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container width1200">
+				<div><a href="${base}">首页 </a> &lt;&lt; 志愿填报 &lt;&lt;找大学</div>
+				<div></div>
+			</div>
+		</div>
+		<!--主体-->
+        <form action="findUnivList.jspx" method="post" id="divForm">
+		<main class="lookForUniversityMain">
+			<div class="width1200">
+				<!--搜索-->
+				<div class="allSearch">
+					<!--搜索框-->
+
+					<div class="flex-container">
+						<div class="flex-item hugeSearch">
+							<input type="text" placeholder="输入院校名称，点击右边的搜索按钮，开始搜索高等院校" name ="univName"/>
+						</div>
+						<div class="flex-item">
+							<button class="btn6 btnColorYellow">搜索高等院校</button>
+							<button class="btn6 btnColorGreen advancedSearch" type="button">高级搜索</button>
+						</div>
+					</div>
+					<!--筛选条件-->
+					<div class="selectNumberScreen defaultHide">
+						<div class="hasBeenSelected">
+							<dl>
+								<dt>您已选择：</dt>
+								<div class="filtrateConditionSearch">
+									<button class="btn btnColorYellow">搜索</button>
+								</div>
+								<dd style="DISPLAY: none" class="clearDd">
+									<div class="clearList">
+										<div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div>
+										<div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div>
+										<div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div>
+									</div>
+									<div style="DISPLAY: none" class="eliminateCriteria">
+										<!--清除筛选条件-->
+										<button class="btn btnColorGreen" type="button">全部清理</button>
+									</div>
+								</dd>
+							</dl>
+						</div>
+						<div id="selectList" class="screenBox screenBackground">
+							<dl class="listIndex" attr="">
+								<dt>院校属地 &gt;</dt>
+								<dd class="inputList">
+                                    <a href="javascript:void(0)" value="2">
+                                        <input id="radio_yuanxiao_1" value="1" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_1">北京</label>
+                                    </a>
+									<a href="javascript:void(0)" value="1">
+                                        <input id="radio_yuanxiao_2" value="2" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_2">天津</label>
+                                    </a>
+									<a href="javascript:void(0)" value="2">
+                                        <input id="radio_yuanxiao_3" value="3" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_3">辽宁</label>
+                                    </a>
+									<a href="javascript:void(0)" value="3">
+                                        <input id="radio_yuanxiao_4" value="4" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_4">河北</label>
+                                    </a>
+									<a href="javascript:void(0)" value="4">
+                                        <input id="radio_yuanxiao_5" value="5" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_5">河南</label>
+                                    </a>
+                                    <a href="javascript:void(0)" value="5">
+                                        <input id="radio_yuanxiao_6" value="6" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_6">吉林</label>
+                                    </a>
+
+									<a href="javascript:void(0)" value="6">
+                                        <input id="radio_yuanxiao_7" value="7" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_7">黑龙江</label>
+                                    </a>
+									<a href="javascript:void(0)" value="7">
+                                        <input id="radio_yuanxiao_8" value="8" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_8">内蒙古</label>
+                                    </a>
+									<a href="javascript:void(0)" value="8">
+                                        <input id="radio_yuanxiao_9" value="9" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_9">山东</label>
+                                    </a>
+									<a href="javascript:void(0)" value="9">
+                                        <input id="radio_yuanxiao_10" value="10" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_10">山西</label>
+                                    </a>
+									<a href="javascript:void(0)" value="10">
+                                        <input id="radio_yuanxiao_11" value="11" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_11">陕西</label>
+                                    </a>
+									<a href="javascript:void(0)" value="11">
+                                        <input id="radio_yuanxiao_12" value="12" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_12">甘肃</label>
+                                    </a>
+									<a href="javascript:void(0)" value="12">
+                                        <input id="radio_yuanxiao_13" value="13" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_13">宁夏</label>
+                                    </a>
+									<a href="javascript:void(0)" value="13">
+                                        <input id="radio_yuanxiao_14" value="14" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_14">青海</label>
+                                    </a>
+									<a href="javascript:void(0)" value="14">
+                                        <input id="radio_yuanxiao_15" value="15" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_15">新疆</label>
+                                    </a>
+									<a href="javascript:void(0)" value="15">
+                                        <input id="radio_yuanxiao_16" value="16" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_16">上海</label>
+                                    </a>
+									<a href="javascript:void(0)" value="16">
+                                        <input id="radio_yuanxiao_17" value="17" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_17">江苏</label>
+                                    </a>
+									<a href="javascript:void(0)" value="17">
+                                        <input id="radio_yuanxiao_18" value="18" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_18">浙江</label>
+                                    </a>
+									<a href="javascript:void(0)" value="18">
+                                        <input id="radio_yuanxiao_19" value="19" name="provinceId"  type="radio">
+                                        <label for="radio_yuanxiao_19">安徽</label>
+                                    </a>
+									<span class="more" ><label>更多</label><em class="open"></em></span></dd>
+								</dd>
+							</dl>
+							<dl class="listIndex" attr="">
+								<dt>院校分类 &gt;</dt>
+								<dd id="inputList1">
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_1" value="综合类" name="univType"  type="radio">
+                                        <label for="radio_1">综合类</label>
+                                    </a>
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_2" value="工科类" name="univType"  type="radio">
+                                        <label for="radio_2">工科类</label>
+                                    </a>
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_3" value="财经类" name="univType"  type="radio">
+                                        <label for="radio_3">财经类</label>
+                                    </a>
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_4" value="农林类" name="univType"  type="radio">
+                                        <label for="radio_4">农林类</label>
+                                    </a>
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_5" value="医药类" name="univType"  type="radio">
+                                        <label for="radio_5">医药类</label>
+                                    </a>
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_6" value="师范类" name="univType"  type="radio">
+                                        <label for="radio_6">师范类</label>
+                                    </a>
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_7" value="体育类" name="univType"  type="radio">
+                                        <label for="radio_7">体育类</label>
+                                    </a>
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_8" value="语言类" name="univType"  type="radio">
+                                        <label for="radio_8">语言类</label>
+                                    </a>
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_9" value="政法类" name="univType"  type="radio">
+                                        <label for="radio_9">政法类</label>
+                                    </a>
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_10" value="艺术类" name="univType"  type="radio">
+                                        <label for="radio_10">艺术类</label>
+                                    </a>
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_11" value="民族类" name="univType"  type="radio">
+                                        <label for="radio_11">民族类</label>
+                                    </a>
+								</dd>
+							</dl>
+							<dl class="listIndex" attr="">
+								<dt>办学性质 &gt;</dt>
+								<dd id="inputList2">
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_ban_1" value="公办" name="offOrVol"  type="radio">
+                                        <label for="radio_ban_1">公办</label>
+                                    </a>
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_ban_2" value="民办" name="offOrVol"  type="radio">
+                                        <label for="radio_ban_2">民办</label>
+                                    </a>
+								</dd>
+							</dl>
+							<dl class="listIndex" attr="">
+								<dt>学历层次 &gt;</dt>
+								<dd id="inputList4">
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_xue_1" value="本科" name="univLevel"  type="radio">
+                                        <label for="radio_xue_1">本科</label>
+                                    </a>
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_xue_2" value="专科" name="univLevel"  type="radio">
+                                        <label for="radio_xue_2">专科</label>
+                                    </a>
+								</dd>
+							</dl>
+							<dl class="listIndex" attr="">
+								<dt>院校特色 &gt;</dt>
+								<dd id="inputList3">
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_te_1" value="1" name="is985"  type="radio">
+                                        <label for="radio_te_1">985高校</label>
+                                    </a>
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_te_2" value="1" name="is211"  type="radio">
+                                        <label for="radio_te_2">211工程</label>
+                                    </a>
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_te_3" value="1" name="isIndependence"  type="radio">
+                                        <label for="radio_te_3">自主招生</label>
+                                    </a>
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_te_4" value="1" name="isKeylab"  type="radio">
+                                        <label for="radio_te_4">研究生院</label>
+                                    </a>
+									<a href="javascript:void(0)" value="">
+                                        <input id="radio_te_5" value="1" name="isDefence"  type="radio">
+                                        <label for="radio_te_5">含国防生</label>
+                                    </a>
+								</dd>
+							</dl>
+						</div>
+                    </div>
+
+                    <input type="hidden" id="pageNo" name="pageNo"/>
+                    <input type="hidden" name="provinceId" value="${provinceId!}">
+                    <input type="hidden" name="univType" value="${univType!}">
+                    <input type="hidden" name="offOrVol" value="${offOrVol!}">
+                    <input type="hidden" name="univLevel" value="${univLevel!}">
+                    <input type="hidden" name="is211" value="${is211!}">
+                    <input type="hidden" name="is985" value="${is985!}">
+                    <input type="hidden" name="isIndependence" value="${isIndependence!}">
+                    <input type="hidden" name="isKeylab" value="${isKeylab!}">
+                    <input type="hidden" name="isDefence" value="${isDefence!}">
+
+
+					<div class="universityList">
+						[#if pagination?? ]
+						[#list pagination.list as a ]
+						<ul>
+							<li>
+								<a>
+								<div class="flex-container2">
+									<div>
+										<img src="${a.logoUrl!}"/>
+									</div>
+									<div class="width75"  onclick="findSchool('${a.univName}',${a.provinceId})">
+										<ul>
+											<li class="universityName">
+												<span>${a.univName!}</span>
+												<span>[#if a.is985==1 ]<img src="${base}/r/img/985.png" alt="" />[/#if]</span>
+												<span>[#if a.is211==1 ]<img src="${base}/r/img/211.png" alt="" />[/#if]</span>
+												<span>[#if a.isKeylab==1 ]<img src="${base}/r/img/yan.png" alt="" />[/#if]</span>
+												<span>[#if a.isIndependence==1 ]<img src="${base}/r/img/zi.png" alt="" />[/#if]</span>
+												<span>[#if a.isDefence==1 ]<img src="${base}/r/img/guo.png" alt="" />[/#if]</span>
+											</li>
+											<li class="flex-container1">
+												<div class="flex-item8">隶属：<span>${a.univBelong!}</span></div>
+												<div class="flex-item8">性质：<span>${a.eduType!}</span></div>
+												<div class="flex-item8">所在地：<span>${a.location!}</span></div>
+											</li>
+											<li class="flex-container1">
+												<div class="flex-item8">重点学科数：<span>${a.coreSubjectNum!}</span></div>
+												<div class="flex-item8">硕士点数：<span>${a.masterNum!}</span></div>
+												<div class="flex-item8">博士点数：<span>${a.doctorNum !}</span></div>
+											</li>
+										</ul>
+									</div>
+									<div class="joinComparison">
+										<input type="hidden" value='{"id":${a.universityBaseId!},"name":"${a.univName!}","image_url":"${a.logoUrl!}"}' />
+										<button class="btn3 btnColorGreen btn_add_groups">加入对比</button>
+									</div>
+								</div>
+								</a></li>
+
+						</ul>
+
+						[/#list]
+                        [/#if]
+					</div>
+
+
+					<style>
+						.compare {
+							width: 1200px;
+							height: 130px;
+							background-color: #f5feff;
+							z-index: 1000;
+							display: none;
+						}
+
+						.compare>div {
+							height: 100%;
+						}
+
+						.compare .left {
+							width: 15%;
+							background: #01939c;
+							color: #FFF;
+							display: inline-block;
+							position: relative;
+						}
+
+						.compare .left span {
+							position: absolute;
+							top: 0;
+							bottom: 0;
+							left: 0;
+							right: 0;
+							margin: auto;
+							width: 72px;
+							height: 21px;
+						}
+
+						.compare .right {
+							width: 15%;
+							display: inline-block;
+							position: relative;
+						}
+
+						.compare .right div {
+							position: absolute;
+							top: 0;
+							bottom: 0;
+							left: 0;
+							right: 0;
+							margin: auto;
+							width: 180px;
+							height: 40px;
+						}
+
+						.compare .main {
+							width: 68%;
+							display: inline-block;
+						}
+
+						.compare .main ul {
+							height: 100%;
+						}
+
+						.compare .main ul li {
+							float: left;
+							margin: 0 1.5%;
+							height: 130px;
+							line-height: 130px;
+						}
+
+						header {
+							height: 100px;
+						}
+
+						.affix {
+							bottom: 10px;
+						}
+					</style>
+
+					<div data-spy="affix" class="compare">
+						<div class="left">
+							<span>院校对比</span>
+						</div>
+						<div class="main">
+							<ul id="compare_yuanxiao">
+							</ul>
+						</div>
+						<div class="right">
+							<div>
+								<button type="button" class="btn60 btnColorGreen" onclick="_contrast()">对比</button>
+								<button type="button" id="btn_compare_yuanxiao" class="btn60">清空</button>
+							</div>
+						</div>
+					</div>
+
+				</div>
+            </div>
+		</main>
+        </form>
+
+		<!--<form id="dbForm" action="${base}/FindUniv/univCompare.jspx" method="post">-->
+			<!--<input type="hidden" id="univIds" name="univIds">-->
+		<!--</form>-->
+
+        <div class="textC paging">
+            <tr>
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td align="center" class="pn-sp">
+                            共 ${pagination.totalCount} 条&nbsp;
+                            每页 ${pagination.pageSize} 条&nbsp;
+                            当前 ${pagination.pageNo}/${pagination.totalPage} 页 &nbsp;转到第<input type="text" id="_goPs" onfocus="this.select();" onkeypress="if(event.keyCode==13){$('#_goPage').click();return false;}" style="width:50px; border:1px solid #e7e7e7;"/>页
+                            <input id="_goPage" type="button" value="转" onclick="_gotoPage($('#_goPs').val());"[#if pagination.totalPage==1] disabled="disabled"[/#if] />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" value="首 页" onclick="_gotoPage('1');"[#if pagination.firstPage] disabled="disabled"[/#if]/>
+                            <input type="button" value="上一页" onclick="_gotoPage('${pagination.prePage}');"[#if pagination.firstPage] disabled="disabled"[/#if]/>
+                            <input type="button" value="下一页" onclick="_gotoPage('${pagination.nextPage}');"[#if pagination.lastPage] disabled="disabled"[/#if]/>
+                            <input type="button" value="尾 页" onclick="_gotoPage('${pagination.totalPage}');"[#if pagination.lastPage] disabled="disabled"[/#if]/>
+                        </td>
+                    </tr>
+                </table>
+                </td>
+            </tr>
+        </div>
+
+		<!--底部-->
+		[#include "../include/footer.html"/]
+
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/itemsJs/filtrate.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+		<script charset="utf-8">
+			//点击高级搜索弹出隐藏层
+			$('.advancedSearch').click(function(){
+				$('.selectNumberScreen').toggle();
+			})
+            function _gotoPage(pageNo) {
+                try{
+                    var divForm = document.getElementById("divForm");
+                    $('#pageNo').val(pageNo)
+                    divForm.action="findUnivList.jspx";
+                    divForm.submit();
+                } catch(e) {
+                    alert('_gotoPage(pageNo)方法出错');
+                }
+			}
+			function findSchool(univName,provinceId) {
+				window.location.href="${base}/FindUniv/schoolDetails.jspx?univName="+univName+"&&provinceId="+provinceId;
+            }
+
+            $(".btn_add_groups").click(function (e) {
+                e.preventDefault();
+
+                var school_info = JSON.parse($(this).prev().val());
+                var compare_yuanxiao_li = $("#compare_yuanxiao li");
+                if (compare_yuanxiao_li.length > 3) {
+                    alert("只可以添加4个学校")
+                    return;
+                };
+                var checked_school = true;
+                compare_yuanxiao_li.each(function () {
+                    var id = $(this).attr("data-id");
+                    if (school_info.id == id) {
+                        checked_school = false;
+                        alert("不能重复添加学校")
+                        return;
+                    }
+                })
+                if (!checked_school) {
+                    return;
+                }
+
+                var html = '<li value="' + school_info.id + '" data-id="' + school_info.id + '" ><img src="' + school_info.image_url + '" alt=""><span>' +
+                    school_info.name +
+                    '</span></li>';
+                $(".compare").show();
+                $("#compare_yuanxiao").append(html);
+
+                $("#compare_yuanxiao li").on("click", function () {
+                    $(this).remove();
+                    if ($("#compare_yuanxiao li").length == 0) {
+                        $(".compare").hide();
+                    }
+                });
+            })
+
+            $("#btn_compare_yuanxiao").click(function () {
+                $("#compare_yuanxiao").empty();
+                $(".compare").hide();
+            })
+
+			function _contrast() {
+
+                var ids=new Array();
+                var obj_lis = document.getElementById("compare_yuanxiao").getElementsByTagName("li");
+
+                if (obj_lis.length==1 || obj_lis.length<2) {
+                    alert("不符合对比要求");
+                    return;
+				}
+
+                for(i=0;i<obj_lis.length;i++){
+                    ids.push(obj_lis[i].value);
+                }
+                var univIds = ids.join(",");
+
+                // $('#univIds').val(univIds);
+                // $('#dbForm').submit();
+				window.location.href="univCompare.jspx?univIds="+univIds;
+            }
+
+		</script>
+
+	</body>
+</html>

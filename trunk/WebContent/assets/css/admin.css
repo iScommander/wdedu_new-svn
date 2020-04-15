@@ -1,0 +1,396 @@
+/**
+ * admin.css
+ */
+
+ul {
+  margin-top: 0;
+}
+
+.admin-icon-yellow {
+  color: #ffbe40;
+}
+
+.admin-header {
+  font-size: 1.4rem;
+  margin-bottom: 0;
+}
+
+.admin-header-list a:hover :after {
+  content: none;
+}
+
+.admin-main {
+  background: #f3f3f3;
+}
+
+.admin-sidebar {
+  width: 200px;
+  min-height: 100%;
+  float: left;
+  border-right: 1px solid #cecece;
+ 
+}
+
+.admin-sidebar-list {
+  margin-bottom: 0;
+}
+.admin-sidebar-list li {
+   background-color: #61B0E9;
+}
+
+.admin-sidebar-list li a {
+  color: #5c5c5c;
+  padding-left: 24px;
+}
+
+.admin-sidebar-list li:first-child {
+  border-top: none;
+}
+
+.admin-sidebar-sub {
+  margin-top: 0;
+  margin-bottom: 0;
+  box-shadow: 0 16px 8px -15px #e2e2e2 inset;
+  background: #ececec;
+  padding-left: 24px;
+}
+
+.admin-sidebar-sub li:first-child {
+  border-top: 1px solid #dedede;
+}
+
+.admin-sidebar-panel {
+  margin: 5px;
+}
+
+.admin-content {
+  width: auto;
+  overflow: hidden;
+  height: 100%;
+  background: #fff;
+}
+
+.admin-content-list {
+  border: 1px solid #e9ecf1;
+  margin-top: 0;
+}
+
+.admin-content-list li {
+  border: 1px solid #e9ecf1;
+  border-width: 0 1px;
+  margin-left: -1px;
+}
+
+.admin-content-list li:first-child {
+  border-left: none;
+}
+
+.admin-content-list li:last-child {
+  border-right: none;
+}
+
+.admin-content-table a {
+  color: #535353;
+}
+.admin-content-file {
+  margin-bottom: 0;
+  color: #666;
+}
+
+.admin-content-file p {
+  margin: 0 0 5px 0;
+  font-size: 1.4rem;
+}
+
+.admin-content-file li {
+  padding: 10px 0;
+}
+
+.admin-content-file li:first-child {
+  border-top: none;
+}
+
+.admin-content-file li:last-child {
+  border-bottom: none;
+}
+
+.admin-content-file li .am-progress {
+  margin-bottom: 4px;
+}
+
+.admin-content-file li .am-progress-bar {
+  line-height: 14px;
+}
+
+.admin-content-task {
+  margin-bottom: 0;
+}
+
+.admin-content-task li {
+  padding: 5px 0;
+  border-color: #eee;
+}
+
+.admin-content-task li:first-child {
+  border-top: none;
+}
+
+.admin-content-task li:last-child {
+  border-bottom: none;
+}
+
+.admin-task-meta {
+  font-size: 1.2rem;
+  color: #999;
+}
+
+.admin-task-bd {
+  font-size: 1.4rem;
+  margin-bottom: 5px;
+}
+
+.admin-content-comment {
+  margin-bottom: 0;
+}
+
+.admin-content-comment .am-comment-bd {
+  font-size: 1.4rem;
+}
+
+.admin-content-pagination {
+  margin-bottom: 0;
+}
+.admin-content-pagination li a {
+  padding: 4px 8px;
+}
+
+/*
+* user.html css
+*/
+.user-info {
+  margin-bottom: 15px;
+}
+
+.user-info .am-progress {
+  margin-bottom: 4px;
+}
+
+.user-info p {
+  margin: 5px;
+}
+
+.user-info-order {
+  font-size: 1.4rem;
+}
+
+/*
+* errorLog.html css
+*/
+
+.error-log .am-pre-scrollable {
+  max-height: 40rem;
+}
+
+/*
+* table.html css
+*/
+
+.table-main {
+  font-size: 1.4rem;
+  padding: .5rem;
+}
+
+.table-main button {
+  background: #fff;
+}
+
+.table-check {
+  width: 30px;
+}
+
+.table-id {
+  width: 50px;
+}
+
+/*
+gallery.html css
+*/
+
+.gallery-list li {
+  padding: 10px;
+}
+
+.gallery-list a {
+  color: #666;
+}
+
+.gallery-list a:hover {
+  color: #3bb4f2;
+}
+
+.gallery-title {
+  margin-top: 6px;
+  font-size: 1.4rem;
+}
+
+.gallery-desc {
+  font-size: 1.2rem;
+  margin-top: 4px;
+}
+
+/*
+ 404.html css
+*/
+
+.page-404 {
+  background: #fff;
+  border: none;
+  width: 200px;
+  margin: 0 auto;
+  
+}
+.userInfo{
+	padding-bottom:10px;	
+	padding-top:10px;	
+	
+	border-bottom: 1px solid #cecece;
+}
+.muserInfo{
+	height:50px;
+	text-align:center;
+	font-size:1.2rem;
+	margin:auto;
+	padding-bottom:10px;	
+	padding-top:10px;	
+	background-color: #4db14d;
+	border-bottom: 1px solid #cecece;
+}
+/* .userInfo{
+	 pandding:5px;
+} */
+
+.search-box
+{
+	width:1113px;
+	border-radius: 5px;
+	border: 1px solid rgba(0,0,0,0.25);
+	
+}
+.search-box ul
+{	
+	
+	list-style-type:none;
+	padding-left:3px;
+	padding-top:3px;
+}
+.search-box ul li
+{
+	margin-left: 1px;
+	height:40px;
+}
+.major_type
+{
+	margin-left: 1px;
+	height:140px;
+}
+ .majorClass
+{
+	margin-top:103px; 
+	width:800px;
+	height:300px;
+} 
+ .majorClass dl dt{ width:100px; height:80px; float:left; font-weight:bold; background:#0f7d8c; color:#fff; padding:3px; margin-top:3px; text-align:center;}
+ .majorClass dl dt a{color:#fff;}
+ .majorClass dl dd{ padding-left:50px; font-size:14px; line-height:24px;}
+ .majorClass dl dd a{color:#005966;}
+ .majorClass dl dd span{ padding:0 5px;}
+
+.searchtitle
+{
+	width:100px;
+	height:30px;
+	margin:auto auto;
+	font-size: 1.4rem;	
+}
+.searchtitle a
+{
+	 padding:4px;
+}
+.active
+{
+	color:white;
+	background: #0a6999;
+}
+.searchtitle a:hover 
+{
+	background:#0a6999;
+}
+.searchinputdiv
+{	
+	padding:3px; 	
+}
+.searchinput
+{	
+	width:200px;
+	height:25px; 
+	
+}
+.searchbutton
+{
+	width:80px;
+	height:25px;
+	magin-left:2px;
+	font-size: 1.4rem;	
+}
+.header_bar{
+	height:45px;
+}
+
+.side-search{
+	padding-top:30px;
+	
+}
+.side-search ul{
+	list-style-type:none;
+	magin:auto;
+	padding-top:3px;
+}
+.side-search ul li{
+	list-style-type:none;
+	magin:auto;
+	padding-top:3px;
+}
+.bg_red{
+  background-color: #9A2329;
+}
+.bg_green{
+  background-color: #9A2329;
+}
+.amz-toolbar-left {
+position: fixed;
+left: 1px;
+bottom: 50px;
+z-index: 999;
+}
+.amz-toolbar-right {
+position: fixed;
+right: 1px;
+bottom: 50px;
+z-index: 999;
+}
+.amz-toolbar {
+position: fixed;
+right: 10px;
+bottom: 70px;
+z-index: 999;
+}
+.am-radius-user{
+	border-radius: 5px; /* Opera 10.5+, �Լ�ʹ����IE-CSS3��IE����� */
+}
+.am-width-300{
+	width:300px;
+}
+a:active {
+    color:#0a6999;
+    text-decoration:none;
+    }

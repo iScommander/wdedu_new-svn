@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>历年案例详情</title>
+<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+<style>
+		.nice-select{
+
+	width: 245px;
+
+	padding: 0 10px;
+
+	height: 44px; line-height:44px;
+
+	border: 1px solid #cacaca; border-radius:5px 5px 5px 5px;
+	position: relative;
+margin-left:20px; margin-top:10px;
+	
+
+	background: #fff url(../images/xzk_3.png) no-repeat 200px center;
+
+}
+
+.nice-select input{display: block;width: 100%;height: 44px;line-height: 44px;border: 0;outline: 0;background: none; padding-left:15px;}
+
+.nice-select ul{
+
+	width: 100%;
+
+	display: none;
+
+	position: absolute;
+
+	left: 0px;
+
+	top: 42px;
+
+	overflow: hidden;
+
+	background-color: #fff; 
+
+	max-height: 150px;
+
+	overflow-y: auto;
+
+	
+
+	border-top: 0;
+
+	-moz-box-shadow:0 0 5px #879094;-webkit-box-shadow:0 0 5px #879094;box-shadow:0 0 5px #879094;
+
+	z-index: 9999;
+
+}
+
+		.nice-select ul li{height: 38px;line-height: 38px;overflow: hidden;margin: 0 20px 0 0;cursor: pointer; color:#999; font-size:14px; display:block;}
+
+		.nice-select ul li.on{background-color: #e0e0e0;}
+
+	</style>
+</head>
+<body>
+<script src="${base}/r/wdedu/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+    	<div class="index_top_bg">
+		<div class="index_top">
+			<div class="index_top_l fl">
+				<p>欢迎光临沃得生涯教育集团！</p>
+				<span>免费热线：<i>400-9288-985</i></span>
+				<div class="clearfix"></div>
+			</div>
+			<div class="index_top_r fr">
+				<p><a href="">新手教程</a></p>
+				<p><a href="">官方微信</a></p>
+				<i><a href="">会员中心</a></i>
+				<span><a href="">快速登录</a></span><span><a href="">/&nbsp;注册</a></span>
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>	
+    	<div class="index_logo">
+		<div class="index_logo_l fl">
+			<a href=""><img src="${base}/r/wdedu/images/index_3.png"></a>
+		</div>
+		<div class="index_logo_city fl">
+            <div class="city">
+                <div class="city_now" onclick="dk()">
+                    <span class="fl" id="text" >北京</span>
+                    <div class="fl">
+                        <span class="city_nav" id="city_nav" ><img src="${base}/r/wdedu/images/city_2.png"></span>
+                    </div>
+                </div>
+                <div id="city_link" class="city_link">
+                    <div class="city_show">
+                        <span class="f_red f_r" href="javascript:;" title="关闭窗口" onclick="gb()">[关闭]</span>
+                    </div>
+					<a class="city_links" href="#" onclick="qz(this)" >南京</a>
+                    <a class="city_links" href="#" onclick="qz(this)" >上海</a>
+                    <a class="city_links" href="#" onclick="qz(this)" >河南</a>
+                    <a class="city_links" href="#" onclick="qz(this)" >深圳</a>
+                </div>
+            </div>
+        </div>
+		<script  type="text/javascript">
+		window.isMoused=false;
+		function qz(obj){
+			var text = $(obj).text();
+			document.getElementById("text").innerText =text;
+			gb();
+			
+		}
+		function gb(){
+			document.getElementById('city_nav').className='city_nav';document.getElementById('city_link').className='city_link';window.isMoused =false;return !1;
+		}
+			function dk(){
+				if(window.isMoused){
+					 gb()
+					window.isMoused = false;	
+				   }else{
+					   document.getElementById('city_link').className='city_link city_hovers'
+					   window.isMoused =true;
+				   }  
+			}
+			
+	</script>
+		<div class="index_logo_c fl">
+			<form id="form1" name="form1" method="post" action="">
+				<input type="text" name="textfield" id="textfield" class="qgt_ssnr" placeholder="查大学 / 查专业 / 搜文章" />
+				<input type="image" name="button" id="button" value="提交" src="${base}/r/wdedu/images/index_5.png" class="qgt_ssan" />
+			</form>
+		</div>
+		<div class="index_logo_r fr">
+			<p><a href="${base}/NewsDisplay/EntranceCard.jspx">开通VIP</a></p><span><a href="">高考小助手</a></span><div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	
+	<script type='text/javascript' src='${base}/r/wdedu/js/dropdown.js'></script>
+    
+    
+   [#include "../include/header_zjtd.html"/]
+        
+		<div class="mbxdh_bg">
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">专家团队</a>&nbsp;&gt; &nbsp; <a href="#">历年案例</a>
+		</div>  
+	</div>
+	<div class="con">
+    <div class="zjtd_z f_l">
+        [@cms_content_list typeId='1,2,3' titLen='15' channelId='257,258,259,260,261' orderBy='0' channelOption='0' dateFormat='yyyy-MM-dd']
+        [#list tag_list as a]
+        [#if a.id=newContentId]
+        <div class="zjtd_z_bt">
+            <div class="zjtd_z_anxq_img f_l">
+                <img src="${a.titleImg}"/>
+            </div>
+            <div class="zjtd_z_anxq_js f_l">
+                <p>${a.title!}</p>
+                <i>${a.shortTitle!}</i>
+                <span>${a.description!}</span>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="zjtd_z_bt_xq_zt">
+            <div class="zjtd_z_anxq_xq">
+                <p>${a.txt!}</p>
+            </div>
+        </div>
+        [/#if]
+        [/#list]
+        [/@cms_content_list]
+    </div>
+    
+        <div class="wdke_y f_r">
+
+<div class="wdke_table_list_s_y_anxq">
+            	<ul>
+                <span>最新案例</span>
+                <li>
+                <div class="wdke_table_list_s_y_anxq_img f_l">
+                <img src="${base}/r/wdedu/images/index_dylq_3.png"/>
+                </div>
+                
+                <div class="wdke_table_list_s_y_anxq_mc f_r">
+                <a href="${base}/NewsDisplay/AllCasesDetail.jspx">姓名：王鹏飞</a>
+                <i>毕业高中院校：安徽界首一中</i>
+                <i>考入大学：湖南城市学院</i>
+                </div>
+                <div class="clearfix"></div>
+                </li>
+                                <li>
+                <div class="wdke_table_list_s_y_anxq_img f_l">
+                <img src="${base}/r/wdedu/images/index_dylq_3.png"/>
+                </div>
+                
+                <div class="wdke_table_list_s_y_anxq_mc f_r">
+                <a href="${base}/NewsDisplay/AllCasesDetail.jspx">姓名：王鹏飞</a>
+                <i>毕业高中院校：安徽界首一中</i>
+                <i>考入大学：湖南城市学院</i>
+                </div>
+                <div class="clearfix"></div>
+                </li>
+                                <li>
+                <div class="wdke_table_list_s_y_anxq_img f_l">
+                <img src="${base}/r/wdedu/images/index_dylq_3.png"/>
+                </div>
+                
+                <div class="wdke_table_list_s_y_anxq_mc f_r">
+                <a href="${base}/NewsDisplay/AllCasesDetail.jspx">姓名：王鹏飞</a>
+                <i>毕业高中院校：安徽界首一中</i>
+                <i>考入大学：湖南城市学院</i>
+                </div>
+                <div class="clearfix"></div>
+                </li>
+
+
+
+
+                </ul>
+               <div class="clearfix"></div>
+            </div>
+</div>
+    <div class="clearfix"></div>
+    
+    </div>
+
+
+
+
+    
+
+[#include "../include/footer_new.html"/]
+
+
+</body>
+</html>

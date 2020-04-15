@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>院校排行榜</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<script src="${base}/r/cms/front.js"></script>
+	</head>
+
+	<body>
+		[#if kstype?? && kstype=='1']
+		[#include "../include/header_kstb.html"/]
+		[#else]
+		[#include "../include/header_zy.html"/]
+		[/#if]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container1 width1200">
+				<div>
+					<a href="${base}">首页 </a> &lt;&lt;报考大数据 &lt;&lt;院校排行榜</div>
+			</div>
+		</div>
+		<!--主体-->
+		<main class="width1200 minheight800">
+			<!--搜索-->
+			<form id="tableForm" class="fillReferenceList" action="universityRank.jspx" method="post">
+				<input type="hidden" id="pageNo" name="pageNo"/>
+				<div class="flex-container2">
+					<div>
+						<input name="univName" type="text" placeholder="输入大学名称" value="${univName!}"/>
+					</div>
+					<div class="comboBox">
+						<select name="grade" class="starLevel">
+							<option value="" disabled selected hidden>选择星级</option>
+							<option value="1星级" [#if grade?? && grade="1星级"] selected [/#if]>1星级</option>
+							<option value="2星级" [#if grade?? && grade="2星级"] selected [/#if]>2星级</option>
+							<option value="3星级" [#if grade?? && grade="3星级"] selected [/#if]>3星级</option>
+							<option value="4星级" [#if grade?? && grade="4星级"] selected [/#if]>4星级</option>
+							<option value="5星级" [#if grade?? && grade="5星级"] selected [/#if]>5星级</option>
+							<option value="6星级" [#if grade?? && grade="6星级"] selected [/#if]>6星级</option>
+							<option value="7星级" [#if grade?? && grade="7星级"] selected [/#if]>7星级</option>
+							<option value="8星级" [#if grade?? && grade="8星级"] selected [/#if]>8星级</option>
+						</select>
+					</div>
+					<div class="comboBox">
+						<select name="provinceId" class="provincewenli">
+							<option value="" disabled selected hidden>选择省份</option>
+							[#if provinceList?? ]
+							[#list provinceList as p]
+							[#if p.provinceId!=0]
+							<option value="${p.provinceId!}" [#if provinceId?? && provinceId=p.provinceId] selected [/#if]>${p.provinceName!}</option>
+							[/#if]
+							[/#list]
+							[/#if]
+						</select>
+					</div>
+					<div>
+						<button class="btn3 btnColorGreen">搜索</button>
+					</div>
+				</div>
+			</form>
+			<!--表格   显示20条-->
+			<div>
+				<table class="table deeptable">
+					<tr>
+						<th>排名</th>
+						<th>大学名称</th>
+						<th>类型</th>
+						<th>地区</th>
+						<th>总分</th>
+						<th>人才培养</th>
+						<th>科学研究</th>
+						<th>社会影响</th>
+						<th>办学类型</th>
+						<th>星级排名</th>
+						<th>办学层次</th>
+					</tr>
+					[#if pagination?? ]
+					[#list pagination.list as a ]
+					<tr>
+						<td>${a.rank!}</td>
+						<td>${a.univName!}</td>
+						<td>${a.cateName!}</td>
+						<td>${a.belongName!}</td>
+						<td>${a.scoreTotal!}</td>
+						<td>${a.rcpy!}</td>
+						<td>${a.kxyj!}</td>
+						<td>${a.shkxyj!}</td>
+						<td>${a.typeCreate!}</td>
+						<td>${a.grade!}</td>
+						<td>${a.level!}</td>
+					</tr>
+					[/#list]
+					[/#if]
+				</table>
+			</div>
+			<!--分页-->
+			<div class="textC paging">
+				<tr>
+					<td colspan="8" style="padding:20px 0;">
+						<input type="hidden" name="pageNo" />
+						<table width="100%" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td align="center" class="pn-sp">
+									共 ${pagination.totalCount} 条&nbsp; 每页 ${pagination.pageSize} 条&nbsp; 当前 ${pagination.pageNo}/${pagination.totalPage} 页 &nbsp;转到第<input type="text" id="_goPs" onfocus="this.select();" onkeypress="if(event.keyCode==13){$('#_goPage').click();return false;}" style="width:50px; border:1px solid #e7e7e7;" />页
+									<input id="_goPage" type="button" value="转" onclick="_gotoPage($('#_goPs').val());" [#if pagination.totalPage==1] disabled="disabled" [/#if] />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="button" value="首 页" onclick="_gotoPage('1');" [#if pagination.firstPage] disabled="disabled" [/#if]/>
+									<input type="button" value="上一页" onclick="_gotoPage('${pagination.prePage}');" [#if pagination.firstPage] disabled="disabled" [/#if]/>
+									<input type="button" value="下一页" onclick="_gotoPage('${pagination.nextPage}');" [#if pagination.lastPage] disabled="disabled" [/#if]/>
+									<input type="button" value="尾 页" onclick="_gotoPage('${pagination.totalPage}');" [#if pagination.lastPage] disabled="disabled" [/#if]/>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</div>
+		</main>
+		<!--底部-->
+		[#include "../include/footer.html"/]
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/jquery.combo.select.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+		<script>
+			//下拉弹出框
+			$(function() {
+				$('select').comboSelect();
+				$(".combo-input").attr("readonly", "readonly").css("cursor", "pointer")
+			});
+            //分页查询
+            function _gotoPage(pageNo) {
+                try{
+                    var tableForm = document.getElementById("tableForm");
+                    $('#pageNo').val(pageNo)
+                    tableForm.action="universityRank.jspx";
+                    tableForm.submit();
+                } catch(e) {
+                    alert('_gotoPage(pageNo)方法出错');
+                }
+            }
+		</script>
+	</body>
+
+</html>

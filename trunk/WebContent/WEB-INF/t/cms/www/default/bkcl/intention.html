@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>报考意向</title>
+	<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+	<style>
+		/*志愿意向样式*/
+		.selectNumberScreen .screenBox dl dd a:hover {
+			background:none;
+			color: #05b8c3;
+		}
+		.selectNumberScreen .screenBox dl dd a {
+		     margin: 0; 
+		     padding: 0; 
+		}
+		.selectNumberScreen .screenBox dl dt {
+		    margin:0;
+		    margin-top: 7px;
+		}
+		.checkbox_base_group input[type='checkbox']:checked+label {
+		    padding: 18px;
+		}
+		
+		.checkbox_base_group label {
+		    padding: 18px;
+		}
+		/*必选院校页面样式*/
+		.selectNumberScreen .eliminateCriteria button {
+		    margin: 2px 10px;
+		    position: absolute;
+		    left: 1035px;
+		}
+		.volunteer_show {
+			margin-top: 5px;
+			color: #fff;
+			min-height: 50px;
+			overflow: auto;
+		}
+		
+		.volunteer_select {
+			float: left;
+			background-color: #fac73c;
+			padding: 5px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+			margin: 5px 10px;
+		}
+		.checkbox_base label {
+			position: relative;
+			padding: 0;
+			left: 12px;
+			top: 0;
+			height: 20px;
+			line-height: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<!--顶部线条-->
+	<div class="topLine"></div>
+	<!--tab切换  导航-->
+	[#include "../include/header.html"/]
+	<!--路径-->
+	<div class="route">
+		<div class="flex-container width1200">
+			<div>
+				<a href="${base}">首页 </a> &lt;&lt; 志愿填报 &lt;&lt;报考意向</div>
+			<div></div>
+		</div>
+	</div>
+	<!--主体-->
+	<main class="width1200 intentionMain">
+		<div class="intentionMainTab">
+			<div class="intentionMainTab-menu">
+				<div class="tab-content">
+					<div class="tab-pane in active" id="intentionList">
+						<ul class="nav nav-tabs menu-list flex-container2">
+							<li class="intention-1 active">
+								<a href="#intentionList_1" data-toggle="tab">
+									<p>志愿意向</p>
+								</a>
+							</li>
+							<li class="intention-2">
+								<a href="#intentionList_2" data-toggle="tab">
+									<p>填报策略</p>
+								</a>
+							</li>
+							<li class="intention-3">
+								<a href="#intentionList_3" data-toggle="tab">
+									<p>我的体检</p>
+								</a>
+							</li>
+							<li class="intention-4">
+								<a href="#intentionList_4" data-toggle="tab">
+									<p>章程录取</p>
+								</a>
+							</li>
+							<li class="intention-5">
+								<a href="#intentionList_5" data-toggle="tab">
+									<p>必选院校</p>
+								</a>
+							</li>
+							<li class="intention-6">
+								<a href="#intentionList_6" data-toggle="tab">
+									<p>报考成绩</p>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="intentionMainTab-content">
+				<div class="tab-content">
+					<!--志愿意向-->
+					<div class="tab-pane in active" id="intentionList_1">
+						<div class="tableContent">
+							<div>
+								<p class="littleVertical">志愿意向</p>
+								<span class="explain"><b>说明：</b>单击报考意向类目后的选项可选择/取消，其中专业意向和避让专业中，单击专业类目选项可选择此专业或选择此专业的下级学科。报考</span>
+							</div>
+							<!--筛选条件-->
+							<div class="selectNumberScreen">
+								<!--已选专业-->
+								<div class="screenBox screenBackground">
+									<dl>
+										<dt style="margin: 0px 0 20px 10px;">
+											<button id="btn_clear_form" class="btn btnColorGreen">全部清理</button>
+										</dt>
+									</dl>
+									<dl>
+										<dt>地区意向 &gt;</dt>
+										<dd class="checkbox_base_group">
+											<a href="javascript:void(0)" value="0">
+												<input id="radio_diqu_0" value="0" name="diqu" type="checkbox">
+												<label for="radio_diqu_0">北京</label>
+											</a>
+											<a href="javascript:void(0)" value="1">
+												<input id="radio_diqu_1" value="1" name="diqu" type="checkbox">
+												<label for="radio_diqu_1">上海</label>
+											</a>
+											<a href="javascript:void(0)" value="2">
+												<input id="radio_diqu_2" value="2" name="diqu" type="checkbox">
+												<label for="radio_diqu_2">广州</label>
+											</a>
+											<a href="javascript:void(0)" value="3">
+												<input id="radio_diqu_3" value="3" name="diqu" type="checkbox">
+												<label for="radio_diqu_3">深圳</label>
+											</a>
+										</dd>
+									</dl>
+									<dl>
+										<dt>避让地区 &gt;</dt>
+										<dd class="checkbox_base_group">
+											<a href="javascript:void(0)" value="0">
+												<input id="radio_birangdiqu_0" value="0" name="birangdiqu" type="checkbox">
+												<label for="radio_birangdiqu_0">北京</label>
+											</a>
+											<a href="javascript:void(0)" value="1">
+												<input id="radio_birangdiqu_1" value="1" name="birangdiqu" type="checkbox">
+												<label for="radio_birangdiqu_1">上海</label>
+											</a>
+											<a href="javascript:void(0)" value="2">
+												<input id="radio_birangdiqu_2" value="2" name="birangdiqu" type="checkbox">
+												<label for="radio_birangdiqu_2">广州</label>
+											</a>
+											<a href="javascript:void(0)" value="3">
+												<input id="radio_birangdiqu_3" value="3" name="birangdiqu" type="checkbox">
+												<label for="radio_birangdiqu_3">深圳</label>
+											</a>
+										</dd>
+									</dl>
+									<dl>
+										<dt>院校意向 &gt;</dt>
+										<dd class="checkbox_base_group">
+											<a href="javascript:void(0)" value="0">
+												<input id="radio_yuanxiaoyixiang_0" value="0" name="yuanxiaoyixiang" type="checkbox">
+												<label for="radio_yuanxiaoyixiang_0">理学类</label>
+											</a>
+											<a href="javascript:void(0)" value="1">
+												<input id="radio_yuanxiaoyixiang_1" value="1" name="yuanxiaoyixiang" type="checkbox">
+												<label for="radio_yuanxiaoyixiang_1">理工类</label>
+											</a>
+											<a href="javascript:void(0)" value="2">
+												<input id="radio_yuanxiaoyixiang_2" value="2" name="yuanxiaoyixiang" type="checkbox">
+												<label for="radio_yuanxiaoyixiang_2">农林类</label>
+											</a>
+											<a href="javascript:void(0)" value="3">
+												<input id="radio_yuanxiaoyixiang_3" value="3" name="yuanxiaoyixiang" type="checkbox">
+												<label for="radio_yuanxiaoyixiang_3">体育类</label>
+											</a>
+										</dd>
+									</dl>
+									<dl>
+										<dt>避让院校 &gt;</dt>
+										<dd class="checkbox_base_group">
+											<a href="javascript:void(0)" value="0">
+												<input id="radio_birangyuanxiao_0" value="0" name="birangyuanxiao" type="checkbox">
+												<label for="radio_birangyuanxiao_0">理学类</label>
+											</a>
+											<a href="javascript:void(0)" value="1">
+												<input id="radio_birangyuanxiao_1" value="1" name="birangyuanxiao" type="checkbox">
+												<label for="radio_birangyuanxiao_1">理工类</label>
+											</a>
+											<a href="javascript:void(0)" value="2">
+												<input id="radio_birangyuanxiao_2" value="2" name="birangyuanxiao" type="checkbox">
+												<label for="radio_birangyuanxiao_2">农林类</label>
+											</a>
+											<a href="javascript:void(0)" value="3">
+												<input id="radio_birangyuanxiao_3" value="3" name="birangyuanxiao" type="checkbox">
+												<label for="radio_birangyuanxiao_3">体育类</label>
+											</a>
+										</dd>
+									</dl>
+									<dl>
+										<dt>院校类型 &gt;</dt>
+										<dd class="radio_base_group">
+											<a href="javascript:void(0)" value="0">
+												<input id="radio_yuanxiaoleixing_0" value="0" name="yuanxiaoleixing" type="radio">
+												<label for="radio_yuanxiaoleixing_0">本科</label>
+											</a>
+											<a href="javascript:void(0)" value="1">
+												<input id="radio_yuanxiaoleixing_1" value="1" name="yuanxiaoleixing" type="radio">
+												<label for="radio_yuanxiaoleixing_1">专科</label>
+											</a>
+										</dd>
+									</dl>
+									<dl>
+										<dt>专业意向 &gt;</dt>
+										<dd class="checkbox_base_group zhuanyeyixiang">
+											<a href="javascript:void(0)" value="0">
+												<input id="radio_zhuanyeyixiang_0" value="0" name="zhuanyeyixiang" type="checkbox">
+												<label for="radio_zhuanyeyixiang_0">哲学类</label>
+											</a>
+											<a href="javascript:void(0)" value="1">
+												<input id="radio_zhuanyeyixiang_1" value="1" name="zhuanyeyixiang" type="checkbox">
+												<label for="radio_zhuanyeyixiang_1">文学类</label>
+											</a>
+											<a href="javascript:void(0)" value="2">
+												<input id="radio_zhuanyeyixiang_2" value="2" name="zhuanyeyixiang" type="checkbox">
+												<label for="radio_zhuanyeyixiang_2">理学类</label>
+											</a>
+											<a href="javascript:void(0)" value="3">
+												<input id="radio_zhuanyeyixiang_3" value="3" name="zhuanyeyixiang" type="checkbox">
+												<label for="radio_zhuanyeyixiang_3">社会学</label>
+											</a>
+										</dd>
+									</dl>
+								</div>
+								<div class="hasBeenSelected">
+									<dl>
+										<dt>已选专业：</dt>
+										<dd>
+											<div class="checkbox_base_group_show zhuanyeyixiang">
+												<div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div>
+												<div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div>
+												<div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div>
+											</div>
+											<div class="eliminateCriteria">
+												<!--清除筛选条件-->
+												<button class="btn btnColorGreen checkbox_base_group_clear zhuanyeyixiang">全部清理</button>
+											</div>
+										</dd>
+									</dl>
+								</div>
+								<!--已避让专业-->
+								<div class="screenBox screenBackground">
+									<dl>
+										<dt>避让专业 &gt;</dt>
+										<dd class="checkbox_base_group birangzhuanye">
+											<a href="javascript:void(0)" value="0">
+												<input id="radio_birangzhuanye_0" value="0" name="birangzhuanye" type="checkbox">
+												<label for="radio_birangzhuanye_0">理学类</label>
+											</a>
+											<a href="javascript:void(0)" value="1">
+												<input id="radio_birangzhuanye_1" value="1" name="birangzhuanye" type="checkbox">
+												<label for="radio_birangzhuanye_1">理工类</label>
+											</a>
+											<a href="javascript:void(0)" value="2">
+												<input id="radio_birangzhuanye_2" value="2" name="birangzhuanye" type="checkbox">
+												<label for="radio_birangzhuanye_2">农林类</label>
+											</a>
+											<a href="javascript:void(0)" value="3">
+												<input id="radio_birangzhuanye_3" value="3" name="birangzhuanye" type="checkbox">
+												<label for="radio_birangzhuanye_3">体育类</label>
+											</a>
+										</dd>
+									</dl>
+								</div>
+								<div class="hasBeenSelected">
+									<dl>
+										<dt>已避让专业：</dt>
+										<dd>
+											<div class="checkbox_base_group_show birangzhuanye">
+												<div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div>
+												<div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div>
+												<div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div>
+											</div>
+											<div class="eliminateCriteria">
+												<!--清除筛选条件-->
+												<button class="btn btnColorGreen checkbox_base_group_clear birangzhuanye">全部清理</button>
+											</div>
+										</dd>
+									</dl>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--填报策略-->
+					<div class="tab-pane" id="intentionList_2">
+						<div class="tableContent">
+							<form action="">
+								<!--填报策略管理-->
+								<div>
+									<p class="littleVertical">填报策略管理</p>
+									<span class="explain"><b>说明：</b>上述三种类型只能选择一种，如需要特殊说明，请加入到备注内容。</span>
+									<table class="table deeptable">
+										<tr>
+											<th width="400">项目</th>
+											<th>报考策略调查</th>
+										</tr>
+										<tr>
+											<td>
+												<div class="radio_base">
+													<input id="radio_base1" class="styled indexRadio" type="radio" name="radio_base">
+													<label for="radio_base1" class="font-bolder">文科</label>
+												</div>
+											</td>
+											<td>
+												注明：具有较高的冒险精神，多个院校/专业志愿具有风险（3-2-1，2-2-1，5-1）
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="radio_base">
+													<input id="radio_base2" class="styled indexRadio" type="radio" name="radio_base">
+													<label for="radio_base2" class="font-bolder">文科</label>
+												</div>
+											</td>
+											<td>
+												注明：具有较高的冒险精神，多个院校/专业志愿具有风险（3-2-1，2-2-1，5-1）
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="radio_base">
+													<input id="radio_base3" class="styled indexRadio" type="radio" name="radio_base">
+													<label for="radio_base3" class="font-bolder">文科</label>
+												</div>
+											</td>
+											<td>
+												注明：具有较高的冒险精神，多个院校/专业志愿具有风险（3-2-1，2-2-1，5-1）
+											</td>
+										</tr>
+									</table>
+								</div>
+								<!--策略说明-->
+								<div>
+									<p class="littleVertical">策略说明</p>
+									<div class="retractAligning">报考策略调查</div>
+								</div>
+								<!--备注说明-->
+								<div>
+									<p class="littleVertical">备注说明</p>
+									<textarea rows="10" placeholder="备注说明，最多200字" onkeyup="checkLen(this)"></textarea>
+									<div class="textR"><i id="count" style="color: #ff0000;">200</i>/200</div>
+								</div>
+								<div class="textC">
+									<button class="btn1 btnColorGreen">保存</button>
+								</div>
+								<form>
+						</div>
+					</div>
+					<!--我的体检-->
+					<div class="tab-pane" id="intentionList_3">
+						<div class="tableContent">
+							<form action="">
+								<!--体检项目-->
+								<div>
+									<p class="littleVertical">体检项目</p>
+									<span class="explain"><b>说明：</b>主要根据考生对章程认识的初步调查，要求参与调查的人员对这些政策性有一定的了解。</span>
+									<table class="table deeptable">
+										<tr>
+											<th>体检测试项目</th>
+											<th>报考策略调查</th>
+										</tr>
+										<tr>
+											<td>有无既往病史</td>
+											<td>
+												<div class="radio_base">
+													<input id="radio_medicalHistory" class="styled indexRadio" type="radio" name="physicalExamination">
+													<label for="radio_medicalHistory" class="font-bolder">合格</label>
+												</div>
+												<div class="radio_base">
+													<input id="radio_medicalHistory1" class="styled indexRadio" type="radio" name="physicalExamination">
+													<label for="radio_medicalHistory1" class="font-bolder">不合格</label>
+												</div>
+												<div class="radio_base">
+													<input id="radio_medicalHistory2" class="styled indexRadio" type="radio" name="physicalExamination">
+													<label for="radio_medicalHistory2" class="font-bolder">专业受限</label>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>眼科检查(视力，色弱，色盲，眼病)</td>
+											<td>
+												<div class="radio_base">
+													<input id="radio_Ophthalmology" class="styled indexRadio" type="radio" name="Ophthalmology">
+													<label for="radio_Ophthalmology" class="font-bolder">合格</label>
+												</div>
+												<div class="radio_base">
+													<input id="radio_Ophthalmology1" class="styled indexRadio" type="radio" name="Ophthalmology">
+													<label for="radio_Ophthalmology1" class="font-bolder">不合格</label>
+												</div>
+												<div class="radio_base">
+													<input id="radio_Ophthalmology2" class="styled indexRadio" type="radio" name="Ophthalmology">
+													<label for="radio_Ophthalmology2" class="font-bolder">专业受限</label>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>内科检查</td>
+											<td>
+												<div class="radio_base">
+													<input id="radio_medicine" class="styled indexRadio" type="radio" name="medicine">
+													<label for="radio_medicine" class="font-bolder">合格</label>
+												</div>
+												<div class="radio_base">
+													<input id="radio_medicine1" class="styled indexRadio" type="radio" name="medicine">
+													<label for="radio_medicine1" class="font-bolder">不合格</label>
+												</div>
+												<div class="radio_base">
+													<input id="radio_medicine2" class="styled indexRadio" type="radio" name="medicine">
+													<label for="radio_medicine2" class="font-bolder">专业受限</label>
+												</div>
+											</td>
+										</tr>
+									</table>
+								</div>
+								<!--结果说明-->
+								<div>
+									<p class="littleVertical">结果说明</p>
+									<div class="retractAligning">报考策略调查</div>
+								</div>
+								<!--备注说明-->
+								<div>
+									<p class="littleVertical">备注说明</p>
+									<textarea rows="10" placeholder="备注说明，最多200字" onkeyup="checkLen(this)"></textarea>
+									<div class="textR"><i id="count" style="color: #ff0000;">200</i>/200</div>
+								</div>
+								<div class="textC">
+									<button class="btn1 btnColorGreen">保存</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!--章程录取-->
+					<div class="tab-pane" id="intentionList_4">
+						<div class="tableContent">
+							<form action="">
+								<!--章程适应调查-->
+								<div>
+									<p class="littleVertical">章程适应调查</p>
+									<span class="explain"><b>说明：</b>主要根据考生对章程认识的初步调查，要求参与调查的人员对这些政策性有一定的了解。</span>
+									<table class="table deeptable">
+										<tr>
+											<th>章程项目</th>
+											<th width="800">选择结果</th>
+										</tr>
+										<tr>
+											<td>语种</td>
+											<td>
+												<div class="radio_base">
+													<input id="radio_language" class="styled indexRadio" type="radio" name="language">
+													<label for="radio_language" class="font-bolder">英语</label>
+												</div>
+												<div class="radio_base">
+													<input id="radio_language1" class="styled indexRadio" type="radio" name="language">
+													<label for="radio_language1" class="font-bolder">其他</label>
+												</div>
+											</td>
+										</tr>
+										<tr class="OnlyBranchGrade">
+											<td>单科成绩(高考分)</td>
+											<td class="textL">
+												<span>语文<input type="text" /></span>
+												<span>数学<input type="text" /></span>
+												<span>外语<input type="text" /></span>
+												<span>物理<input type="text" /></span>
+												<span>化学<input type="text" /></span>
+												<span>生物<input type="text" /></span>
+												<span>历史<input type="text" /></span>
+												<span>政治<input type="text" /></span>
+												<span>地理<input type="text" /></span>
+											</td>
+										</tr>
+										<tr>
+											<td>是否接受高校入学英语考试</td>
+											<td>
+												<div class="radio_base">
+													<input id="radio_ifEnglishExamination" class="styled indexRadio" type="radio" name="ifEnglishExamination">
+													<label for="radio_ifEnglishExamination" class="font-bolder">可以参加</label>
+												</div>
+												<div class="radio_base">
+													<input id="radio_ifEnglishExamination1" class="styled indexRadio" type="radio" name="ifEnglishExamination">
+													<label for="radio_ifEnglishExamination1" class="font-bolder">不参加</label>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>是否同意参加入学面试</td>
+											<td>
+												<div class="radio_base">
+													<input id="radio_ifAdmissionInterview" class="styled indexRadio" type="radio" name="ifAdmissionInterview">
+													<label for="radio_ifAdmissionInterview" class="font-bolder">可以参加</label>
+												</div>
+												<div class="radio_base">
+													<input id="radio_ifAdmissionInterview1" class="styled indexRadio" type="radio" name="ifAdmissionInterview">
+													<label for="radio_ifAdmissionInterview1" class="font-bolder">不参加</label>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>您愿意遵循哪种录取规则</td>
+											<td>
+												<div class="radio_base">
+													<input id="radio_admissionRules" class="styled indexRadio" type="radio" name="admissionRules">
+													<label for="radio_admissionRules" class="font-bolder">分数优先</label>
+												</div>
+												<div class="radio_base">
+													<input id="radio_admissionRules1" class="styled indexRadio" type="radio" name="admissionRules">
+													<label for="radio_admissionRules1" class="font-bolder">志愿优先</label>
+												</div>
+												<div class="radio_base">
+													<input id="radio_admissionRules2" class="styled indexRadio" type="radio" name="admissionRules">
+													<label for="radio_admissionRules2" class="font-bolder">志愿优先</label>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>您希望采用高校哪种录取投档认可规则</td>
+											<td>
+												<div class="radio_base">
+													<input id="radio_castArchives" class="styled indexRadio" type="radio" name="castArchives">
+													<label for="radio_castArchives" class="font-bolder">专业投档，专业录取不认可</label>
+												</div>
+												<div class="radio_base">
+													<input id="radio_castArchives1" class="styled indexRadio" type="radio" name="castArchives">
+													<label for="radio_castArchives1" class="font-bolder">投档认可，录取专业认可</label>
+												</div>
+												<div class="radio_base">
+													<input id="radio_castArchives2" class="styled indexRadio" type="radio" name="castArchives">
+													<label for="radio_castArchives2" class="font-bolder">优先录取</label>
+												</div>
+											</td>
+										</tr>
+									</table>
+								</div>
+								<!--结果说明-->
+								<div>
+									<p class="littleVertical">结果说明</p>
+									<div class="retractAligning">
+										报考策略调查
+									</div>
+								</div>
+								<!--备注说明-->
+								<div>
+									<p class="littleVertical">备注说明</p>
+									<textarea rows="10" placeholder="备注说明，最多200字" onkeyup="checkLen(this)"></textarea>
+									<div class="textR"><i id="count" style="color: #ff0000;">200</i>/200</div>
+								</div>
+								<div class="textC">
+									<button class="btn1 btnColorGreen">保存</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!--必须院校-->
+					<div class="tab-pane" id="intentionList_5">
+						<div class="tableContent">
+							<!--必选院校-->
+							<div>
+								<p class="littleVertical">必选院校</p>
+							</div>
+							<!--搜索-->
+							<div class="hugeSearch">
+								<input type="text" placeholder="请输入大学名称搜索" />
+								<button class="btn1 btnColorGreen">搜索</button>
+							</div>
+							<!--表格-->
+							<div>
+								<div class="volunteer_show"></div>
+								<p class="textColorRed" style="margin: 10px;">*仅可以选择2个院校作为志愿方案中的必选院校</p>
+								<table class="table deeptable volunteer_list">
+									<tr>
+										<th width="100">选中</th>
+										<th>文理科</th>
+										<th>批次</th>
+										<th>院校名称</th>
+										<th>2018最低分/排名</th>
+										<th>2017最低分/排名</th>
+										<th>2016最低分/排名</th>
+										<th>招生计划</th>
+									</tr>
+									<tr>
+										<td class="checkbox_base">
+											<input id="volunteer_select_01" type="checkbox" value="01">
+											<label for="volunteer_select_01">选择</label>
+										</td>
+										<td>理科1</td>
+										<td>本科一批</td>
+										<td>北京大学</td>
+										<td>340/34</td>
+										<td>340/34</td>
+										<td>340/34</td>
+										<td>05</td>
+									</tr>
+									<tr>
+										<td class="checkbox_base">
+											<input id="volunteer_select_02" type="checkbox" value="02">
+											<label for="volunteer_select_02">选择</label>
+										</td>
+										<td>理科2</td>
+										<td>本科一批</td>
+										<td>北京大学</td>
+										<td>340/34</td>
+										<td>340/34</td>
+										<td>340/34</td>
+										<td>05</td>
+									</tr>
+									<tr>
+										<td class="checkbox_base">
+											<input id="volunteer_select_03" type="checkbox" value="03">
+											<label for="volunteer_select_03">选择</label>
+										</td>
+										<td>理科3</td>
+										<td>本科一批</td>
+										<td>北京大学</td>
+										<td>340/34</td>
+										<td>340/34</td>
+										<td>340/34</td>
+										<td>05</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!--报考成绩-->
+					<div class="tab-pane" id="intentionList_6">
+						<div class="tableContent">
+							<!--报考成绩-->
+							<div>
+								<p class="littleVertical">报考成绩</p>
+								<span class="explain"><b>说明：</b>获得用户总数不超过2次的总分，校排名，一本线，二本线的数据。</span>
+							</div>
+							<div style="min-height: 500px;border:3px solid #dadada;padding: 10px;">
+								<form action="">
+									<ul>
+										<li class="flex-container1">
+											<div class="flex-item width158 paddingTop6 textC">成绩名称</div>
+											<div class="flex-item"><input type="text" placeholder="输入某次成绩名称" /></div>
+										</li>
+										<!--校排名成绩-->
+										<li>
+											<span class="explain"><b>注意：</b>以下三个选项只能选择一个进行操作</span>
+											<div class="flex-container1">
+												<div class="flex-item radio_base width158 paddingTop6">
+													<input id="radio_grade1" class="styled indexRadio" type="radio" name="radio_grade">
+													<label for="radio_grade1" class="font-bolder">校排名成绩</label>
+												</div>
+												<div class="flex-item">
+													<input type="text" placeholder="输入中学" />
+												</div>
+												<div class="flex-item">
+													<input type="text" placeholder="输入排名" />
+												</div>
+											</div>
+											<span class="explain" style="margin-top: 0;"><b>注意：</b>根据在校的历史排名，自动计算本次考试对近一年的高考成绩，未知批次线情况下使用。</span>
+										</li>
+										<!--输入考试成绩-->
+										<li>
+											<div class="flex-container1">
+												<div class="flex-item radio_base paddingTop6">
+													<input id="radio_grade2" class="styled indexRadio" type="radio" name="radio_grade">
+													<label for="radio_grade2" class="font-bolder">输入考试成绩</label>
+												</div>
+												<div class="flex-item">
+													<select class="batch">
+														<option value="" disabled selected hidden>选择批次</option>
+														<option value="1">本科一批</option>
+														<option value="2">本科二批</option>
+														<option value="3">本科三批</option>
+														<option value="4">专科批</option>
+													</select>
+												</div>
+												<div class="flex-item">
+													<input type="text" placeholder="输入分差" />
+												</div>
+											</div>
+											<span class="explain" style="margin-top: 0;"><b>注意：</b>已知本次考试成绩和本次考试的批次线，采用直接计算高考成绩</span>
+										</li>
+										<!--输入考试总分-->
+										<li>
+											<div class="flex-container1">
+												<div class="flex-item radio_base paddingTop6">
+													<input id="radio_grade3" class="styled indexRadio" type="radio" name="radio_grade">
+													<label for="radio_grade3" class="font-bolder">输入考试总分</label>
+												</div>
+												<div class="flex-item">
+													<input type="text" placeholder="输入总分" />
+													<span>（2017年高考分数）</span>
+												</div>
+											</div>
+											<div class="flex-container1">
+												<div class="flex-item width158 textR paddingTop6">本省排名</div>
+												<div class="flex-item">
+													<input type="text" placeholder="请填写" />
+													<span class="textColorRed">&nbsp;&nbsp;*输入准确排名</span>
+												</div>
+											</div>
+											<div class="flex-container1">
+												<div class="flex-item width158 textR paddingTop6">选择必测科目</div>
+												<div class="flex-item">
+													<div class="comboBox">
+														<select class="batch">
+															<option value="" disabled selected hidden>选择批次</option>
+															<option value="1">本科一批</option>
+															<option value="2">本科二批</option>
+															<option value="3">本科三批</option>
+															<option value="4">专科批</option>
+														</select>
+													</div>
+												</div>
+												<div class="flex-item">
+													<div class="comboBox">
+														<select class="batch">
+															<option value="" disabled selected hidden>选择批次</option>
+															<option value="1">本科一批</option>
+															<option value="2">本科二批</option>
+															<option value="3">本科三批</option>
+															<option value="4">专科批</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="flex-container1">
+												<div class="flex-item width158 textR paddingTop6">选择必测科目</div>
+												<div class="flex-item">
+													<div class="comboBox">
+														<select class="batch">
+															<option value="" disabled selected hidden>选择批次</option>
+															<option value="1">本科一批</option>
+															<option value="2">本科二批</option>
+															<option value="3">本科三批</option>
+															<option value="4">专科批</option>
+														</select>
+													</div>
+												</div>
+												<div class="flex-item">
+													<div class="comboBox">
+														<select class="batch">
+															<option value="" disabled selected hidden>选择批次</option>
+															<option value="1">本科一批</option>
+															<option value="2">本科二批</option>
+															<option value="3">本科三批</option>
+															<option value="4">专科批</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li class="textC">
+											<button class="btn1 btnColorGreen">保存</button>
+										</li>
+									</ul>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<!--底部-->
+	[#include "../include/footer.html"/]
+
+	<!--js-->
+	<script src="${base}/r/js/jQuery.js"></script>
+	<script src="${base}/r/js/bootstrap.min.js"></script>
+	<script src="${base}/r/js/jquery.combo.select.js"></script>
+	<script src="${base}/r/js/itemsJs/common.js"></script>
+	<script>
+		//下拉弹出框
+		$(function () {
+			$('select').comboSelect();
+			$(".combo-input").attr("readonly", "readonly").css("cursor", "pointer")
+		});
+		//备注说明  限制200字
+		function checkLen(obj) {
+			var maxChars = 200; //最多字符数 
+			if (obj.value.length > maxChars)
+				obj.value = obj.value.substring(0, maxChars);
+			var curr = maxChars - obj.value.length;
+			document.getElementById("count").innerHTML = curr.toString();
+		}
+		//必选院校
+		$(".volunteer_list input[type=checkbox]").on("click", function () {
+			var checkbox_list_checked = $(".volunteer_list input[type=checkbox]:checked");
+			if (checkbox_list_checked.length > 2) {
+				alert("提示:仅可以选择2个院校作为志愿方案中的必选院校")
+				this.checked = false;
+				return;
+			}
+			var value = $(this).val();
+			var text = $(this).parents("tr").find("td").eq(1).text()
+			var selectedShow = $(".volunteer_show");
+			var textTypeIndex = $(this).parents("tr").index();
+			var selected_show_id = this.id + "_show";
+			var selected_show = $("#" + selected_show_id);
+			if (!selected_show[0]) {
+				$(".volunteer_show").append('<div id="' + selected_show_id + '" class="volunteer_select"><span>' + text +
+					'</span><em></em></div>');
+			} else {
+				selected_show.remove()
+			}
+		});
+		
+		
+		//全部清理
+		$("#btn_clear_form").click(function () {
+			$(".checkbox_base_group input[type=checkbox]:checked").prop("checked", false);
+			$(".radio_base_group input[type=radio]:checked").prop("checked", false);
+			$(".checkbox_base_group_show").empty();
+		})
+
+		function checkbox_group(my_className) {
+			var my_className = "." + my_className;
+			$(my_className + ".checkbox_base_group input[type=checkbox]").click(function () {
+				var id_show = this.id + "_show";
+				if (this.checked) {
+					var html = '<div id="' + id_show + '" data-id="' + this.id + '" class="selectedInfor selectedShow"><span>' + $(
+							this).next().text() +
+						'</span><em></em></div>';
+					$(my_className + ".checkbox_base_group_show").append(html);
+					$("#" + id_show).click(function () {
+						var checkbox_id = $(this).attr("data-id");
+						$("#" + checkbox_id).prop("checked", false);
+						$(this).remove();
+					})
+				} else {
+					$("#" + id_show).remove();
+				}
+			})
+			$(my_className + ".checkbox_base_group_clear").click(function () {
+				var checkbox_list_checked = $(my_className + ".checkbox_base_group input[type=checkbox]:checked");
+				checkbox_list_checked.prop("checked", false);
+				$(my_className + ".checkbox_base_group_show").empty();
+			})
+		}
+		checkbox_group("zhuanyeyixiang");
+		checkbox_group("birangzhuanye");
+	</script>
+</body>
+
+</html>

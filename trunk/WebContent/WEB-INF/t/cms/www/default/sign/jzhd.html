@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="format-detection" content="email=no">
+		<title>讲座活动</title>
+		<script src="${base}/r/sign/pace.js"></script>
+		<link rel="stylesheet" href="${base}/r/sign/pace-theme-center-atom.css" />
+		<link rel="stylesheet" href="${base}/r/sign/iosSelect.css" />
+		<link rel="stylesheet" href="${base}/r/sign/rem.css" />
+		<script src="${base}/r/sign/jquery-1.11.3.min.js"></script>
+		<script src="${base}/r/sign/iosSelect.js"></script>
+		<style type="text/css">
+			body{background: #F1F1F1;}
+			.select{padding: 1.5rem 0;font-size: 1.25rem;background: #fd9323;box-shadow: 0 .2rem .5rem 0 rgba(0,0,0,.15);}
+			.select div{display: table;min-width: 60%;margin: 0 auto;height: 3rem;line-height: 3rem;font-size: 1.2rem;background: #f9f9f9;text-align: center;color: #333;border-radius: 4px;padding: 0 .3em;}
+			#main{width: 95%;margin: 1.5rem auto;}
+			.item{height: 8.5rem;margin-bottom: 1.5rem;padding: 1rem .8rem;border-radius: 4px;overflow: hidden;background: #fff;}
+			.item-left{position: absolute;top: 1rem;left: .8rem;width: 6.5rem;height: 6.5rem;}
+			.item-left img{height: 100%;border-radius: 2px;}
+			.item-right{padding-left: 7.2rem;padding-right: 1rem;}
+			.item-right h3{padding: .4rem 2em 1.2rem 0;font-size: 1.25rem;}
+			.item-right div{margin-bottom: .7rem;font-size: 1rem;color: #5F5F5F;}
+			.item-right div span{display: inline-block;margin-right: .15rem;}
+			.item-right a{position: absolute;right: .8rem;bottom: 1rem;padding: .4em .8em;font-size: 1.3rem;color: #fff;background: #FDBF46;border-radius: 3px;}
+			.status{position: absolute;top: 8.5%;right: -5.2%;width: 20%;height: 1.5rem;line-height: 1.5rem;text-align: center;font-size: 1rem;color: #fff;background: #FF7326;-webkit-transform: rotate(45deg);transform: rotate(45deg);}
+			.status.over,.item-right a.over{background: #B5B5B5;}
+			.address-icon,.time-icon{vertical-align: -0.1rem;background-size: 100% 100%;background-repeat: no-repeat;}
+			.address-icon{width: .6667rem;height: .9167rem;background-image: url(${base}/r/sign/img/address.png);}
+			.time-icon{width: .875rem;height: .875rem;background-image: url(${base}/r/sign/img/time.png);}
+			.ellipsis{overflow: hidden;text-overflow:ellipsis;white-space: nowrap;}
+			.item-right span.ellipsis{width: 73%;}
+		</style>
+	</head>
+	<body>
+	<div id="content">
+		<div class="select">
+			[#if procity??]
+				<div id="city">${procity!}</div>
+			[#else]
+				<div id="city">请选择您要参加活动的地区</div>
+			[/#if]
+		</div> 
+		<form id='form' action='${base}/sign/findActive.jspx' method='post'>
+			<input type="hidden" id='proname' name="proname" value="">
+			<input type="hidden" id='cityname' name="cityname" value="">
+			<input type="hidden" id='quxianname' name="quxianname" value="">
+		<div id="main">
+			[#list activeList as list]
+			<div class="item gps">
+				<div class="item-left">
+					<img src="${list.lecturer_picture1!}" alt="缩略图" />
+				</div>
+				<div class="item-right">
+					<h3 class="ellipsis">${list.theme!}</h3>
+					<div class="address">
+						<span class="address-icon"></span>
+						<span class="ellipsis">${list.address!}</span>
+					</div>
+					<div class="time">
+						<span class="time-icon"></span>
+						<span>${list.active_time!}</span>
+					</div>
+					<a href="${base}/sign/activedetail.jspx?activeid=${list.active_id}&id=${list.id}">报名</a>
+					<span class="status">进行中</span>
+				</div>
+			</div>
+		[/#list]	
+		</div>
+		</form>
+		<div class="fixed-filter">
+			<div class="abs-center">
+				<div class="spinner"></div>
+				<div class="spin-text">正在筛选讲座活动...</div>
+			</div>
+		</div>
+	</div>
+	</body>
+	<script src="${base}/r/sign/city.min.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			Pace.on('done',function(){
+				$('#content').show();
+			});
+		};
+		//筛选
+		var schoolData=[];
+		$('#city').on('click', function () {
+        	var oneLevelId = $('#city').attr('data-province-code');
+        	var twoLevelId = $('#city').attr('data-city-code');
+        	var threeLevelId = $('#city').attr('data-district-code');
+        	var iosSelect = new IosSelect(3, [prolist, citylist, quxianlist],
+        		{
+		           title: '选择市区',
+		           itemHeight: 35,
+		           itemShowCount: 5,
+		           relation: [1, 1],
+		           oneLevelId: oneLevelId,
+		           twoLevelId: twoLevelId,
+		           threeLevelId: threeLevelId,
+		           callback: function (selectOneObj, selectTwoObj, selectThreeObj) {
+		                $('#city').attr('data-province-code', selectOneObj.id);
+		                $('#city').attr('data-city-code', selectTwoObj.id);
+		                $('#city').attr('data-district-code', selectThreeObj.id);
+		                $('#city').html(selectOneObj.value + ' ' + selectTwoObj.value + ' ' + selectThreeObj.value);
+		       			$('#proname').val(selectOneObj.value);
+		       			$('#cityname').val(selectTwoObj.value);
+		       			$('#quxianname').val(selectThreeObj.value);
+		       			$('#form').submit();
+		           }
+        		});
+		    });
+	</script>
+</html>

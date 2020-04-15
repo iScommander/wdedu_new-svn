@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>多元录取专家服务</title>
+    <link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+    <script src="${base}/r/wdedu/js/jquery-1.9.1.min.js"></script>
+    <script language="javascript" src="${base}/r/wdedu/js/common.js"></script>
+    <link  type="text/css" rel="stylesheet" href="${base}/r/wdedu/css/style.css" />
+    <script  type="text/javascript">
+        function apply() {
+            var user = $("#user").val();
+            var type = $("#type").val();
+            var contentId =$("#contentId").val();
+
+            if(user==null||user==""){
+                 showDialog2()
+            }else {
+
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: "${base}/activeApplyAct/applyActive.jspx",
+                    data: {
+                        "activityType": type,
+                        "contentId": contentId
+                    },
+
+                    success: function (data) {
+                        alert(data.msg);
+                    }
+                })
+            }
+        }
+    </script>
+</head>
+<body>
+<script src="${base}/r/wdedu/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+[#include "../include/header_address.html"/]
+
+
+[#include "../include/header_yzsfw.html"/]
+<input id="user" value="${user!}" type="hidden">
+<input type="hidden" id="type" value="多元录取专家一对一服务">
+<div class="mbxdh_bg">
+    <div class="mbxdh" style=" margin-left:190px;">
+        <a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">一站式服务</a>&nbsp;&gt; &nbsp; <a href="#">多元录取专家服务</a>
+    </div>
+</div>
+<div class="con">
+    <div class="sxghfu_t">
+        <div class="sxghfu_t_img f_l">
+            [@cms_content_list typeId='1,2,3' count='1' titLen='15' channelId='227' orderBy='0' channelOption='0' dateFormat='yyyy-MM-dd']
+            [#list tag_list as a]
+            <li>
+                <img src="${a.titleImg!}"/>
+            </li>
+            [/#list]
+            [/@cms_content_list]
+
+        </div>
+        <div class="sxghfu_t_xxk f_r">
+            <div class="sxghfu_t_bt">多元录取专家一对一服务</div>
+
+            <a class="sxghfu_t_min sxghfu_t_min_h f_l" href="javascript:;" id="sxghfw_1">
+                <img src="${base}/r/wdedu/images/ydy_1.png"/>
+                定制服务签约
+            </a>
+
+
+
+            <a class="sxghfu_t_min sxghfu_t_min_h f_l" href="javascript:;" id="sxghfw_2">
+                <img src="${base}/r/wdedu/images/ydy_2.png"/>
+                服务计划定制
+            </a>
+
+
+
+            <a class="sxghfu_t_min sxghfu_t_min_h f_l" href="javascript:;" id="sxghfw_3">
+                <img  src="${base}/r/wdedu/images/ydy_3.png"/>
+                咨询服务执行
+            </a>
+
+
+            <a class="sxghfu_t_min sxghfu_t_min_h f_l" href="javascript:;" id="sxghfw_4">
+                <img  src="${base}/r/wdedu/images/ydy_4.png"/>
+                专家全程监控
+            </a>                <a class="sxghfu_t_min sxghfu_t_min_h f_l" href="javascript:;" id="sxghfw_5">
+            <img  src="${base}/r/wdedu/images/ydy_5.png"/>
+            心仪大学录取
+        </a>
+            <div class="clearfix"></div>
+                            <div class="sxk_nr_js">
+                                <p id="sxk_nr_js_p">
+                                    1、开通志愿卡畅享查、测、填、学、问5大核心功能。<br />
+                                    2、1000部学长学姐讲专业、500部专家讲志愿在线视频讲座，帮助考生科学填志愿。<br />
+                                    3、适用对象：普通类文理科考生、新高考选科类考生（提前批次、强基计划及艺术体育类考生暂不适用）。<br />
+                                    4、使用时效：有效期截止到用户自行选择高考年的9月1日为止（非高考年,高考期间仅提供数据查询）。<br />
+
+                                </p>
+                            </div>
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+    <div class="sxghfw_f">
+
+        <div class="sxghfw_title">
+            <div class="on6">服务介绍 </div>
+            <div>服务流程</div>
+
+            <div>典型案例</div>
+            <div>用户反馈</div>
+        </div>
+
+        <div class="sxghfw_con">
+
+            <div class="sxghfw_con_list">
+                <div class="sxghfw_p">
+
+                    [@cms_content_list typeId='1,2,3' count='1' titLen='15' channelId='206' orderBy='0' channelOption='0' dateFormat='yyyy-MM-dd']
+                    [#list tag_list as a]
+                    <li>
+                        ${a.txt!'暂无内容'}
+                    </li>
+                    [/#list]
+                    [/@cms_content_list]
+
+                </div>
+            </div>
+
+            <div class="sxghfw_con_list">
+
+                [@cms_content_list typeId='1,2,3' count='1' titLen='15' channelId='207' orderBy='0' channelOption='0' dateFormat='yyyy-MM-dd']
+                [#list tag_list as a]
+                <li>
+                    ${a.txt!'暂无内容'}
+                </li>
+                [/#list]
+                [/@cms_content_list]
+
+            </div>
+
+            <div class="sxghfw_con_list" >
+
+                [@cms_content_list typeId='1,2,3' count='10' titLen='15' channelId='208' orderBy='0' channelOption='0' dateFormat='yyyy-MM-dd']
+                [#list tag_list as a]
+                <li>
+                <div class="sxghfu">
+                                        <div class="sxghfu_imgdt f_l" >
+                                            <img src="${a.titleImg!}"/>
+                                        </div>
+                                        <div class="zjtd_lnal2_list_xq f_l">
+                                            <div class="btxg">${a.title!}
+                                                </div><div class="dylq_i">${a.description!}</div>
+                                                    <div class="dylq_span">[@text_cut s=a.txt! len=500 append='...'/]</div>
+                                                     <div class="zjtd_lnal2_list_a">
+                                                          <a href="${base}/NewsDisplay/AllCasesDetail.jspx?contentId=${a.id!}">查看详情</a>
+                                                      </div>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                </li>
+                [/#list]
+                [/@cms_content_list]
+            </div>
+            <div class="sxghfw_yhpj">
+                [@cms_content_list typeId='1,2,3' count='1' titLen='15' channelId='209' orderBy='0' channelOption='0' dateFormat='yyyy-MM-dd']
+                [#list tag_list as a]
+                <li>
+                    ${a.txt!}
+                </li>
+                [/#list]
+                [/@cms_content_list]
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+[#include "../include/footer_new.html"/]
+<script>
+
+    (function ($) {
+        /*--*20180627mark:3.去除指定的标签内的标签，保留文本 title txt- -*/
+        $(function () {
+            $(".dylq_i").each(function () {
+                var zy = escape2Html($(this).html());
+                var tex = removeHTMLTag(zy);
+                $(this).html(tex);
+            });
+            $(".dylq_span").each(function () {
+                var zy = escape2Html($(this).html());
+                var tex = removeHTMLTag(zy);
+                $(this).html(tex);
+            });
+        })
+    })(jQuery);
+
+    $(function(){
+        $('.sxghfu_t_min').click(function(){
+            $('.sxghfu_t_min_c').removeClass('sxghfu_t_min_c').addClass('.sxghfu_t_min');
+            $(this).addClass('sxghfu_t_min_c');
+            var x=$(this).attr("id");
+            switch(x) {
+                case "sxghfw_1":
+                    $('.sxghfu_t_min_c img').attr("src","${base}/r/wdedu/images/ydy_1_1.png");
+                    $('#sxghfw_2 img').attr("src","${base}/r/wdedu/images/ydy_2.png");
+                    $('#sxghfw_3 img').attr("src","${base}/r/wdedu/images/ydy_3.png");
+                    $('#sxghfw_4 img').attr("src","${base}/r/wdedu/images/ydy_4.png");
+                    $('#sxghfw_5 img').attr("src","${base}/r/wdedu/images/ydy_5.png");
+                    break;
+                case "sxghfw_2":
+                    $('.sxghfu_t_min_c img').attr("src","${base}/r/wdedu/images/ydy_2_1.png");
+                    $('#sxghfw_1 img').attr("src","${base}/r/wdedu/images/ydy_1.png");
+                    $('#sxghfw_3 img').attr("src","${base}/r/wdedu/images/ydy_3.png");
+                    $('#sxghfw_4 img').attr("src","${base}/r/wdedu/images/ydy_4.png");
+                    $('#sxghfw_5 img').attr("src","${base}/r/wdedu/images/ydy_5.png");
+                    break;
+                case "sxghfw_3":
+                    $('.sxghfu_t_min_c img').attr("src","${base}/r/wdedu/images/ydy_3_1.png");
+                    $('#sxghfw_1 img').attr("src","${base}/r/wdedu/images/ydy_1.png");
+                    $('#sxghfw_2 img').attr("src","${base}/r/wdedu/images/ydy_2.png");
+                    $('#sxghfw_4 img').attr("src","${base}/r/wdedu/images/ydy_4.png");
+                    $('#sxghfw_5 img').attr("src","${base}/r/wdedu/images/ydy_5.png");
+                    break;
+                case "sxghfw_4":
+                    $('.sxghfu_t_min_c img').attr("src","${base}/r/wdedu/images/ydy_4_1.png");
+                    $('#sxghfw_1 img').attr("src","${base}/r/wdedu/images/ydy_1.png");
+                    $('#sxghfw_2 img').attr("src","${base}/r/wdedu/images/ydy_2.png");
+                    $('#sxghfw_3 img').attr("src","${base}/r/wdedu/images/ydy_3.png");
+                    $('#sxghfw_5 img').attr("src","${base}/r/wdedu/images/ydy_5.png");
+                    break;
+                case "sxghfw_5":
+                    $('.sxghfu_t_min_c img').attr("src","${base}/r/wdedu/images/ydy_5_1.png");
+                    $('#sxghfw_1 img').attr("src","${base}/r/wdedu/images/ydy_1.png");
+                    $('#sxghfw_2 img').attr("src","${base}/r/wdedu/images/ydy_2.png");
+                    $('#sxghfw_3 img').attr("src","${base}/r/wdedu/images/ydy_3.png");
+                    $('#sxghfw_4 img').attr("src","${base}/r/wdedu/images/ydy_4.png");
+                    break;
+                default:
+            }
+
+        });
+    });
+  //转意符换成普通字符
+  function escape2Html(str) {
+      var arrEntities = {'lt': '<', 'gt': '>', 'nbsp': ' ', 'amp': '&', 'quot': '"'};
+      return str.replace(/&(lt|gt|nbsp|amp|quot);/ig, function (all, t) {
+          return arrEntities[t];
+      });
+  }    function removeHTMLTag(str) {
+           str = str.replace(/<\/?[^>]*>/g, ''); //去除HTML tag
+           str = str.replace(/[ | ]*\n/g, '\n'); //去除行尾空白
+           //str = str.replace(/\n[\s| | ]*\r/g,'\n'); //去除多余空行
+           str = str.replace(/ /ig, '');//去掉
+           return str;
+       }
+</script>
+
+<div class="mb_db_gd" id="box2">
+    <div class="mb_db_gd_zt">
+        <span>多元录取(强基计划、综合评价、生涯规划、港澳院校申请)&nbsp;&nbsp;一对一服务</span>
+        <a class="mb_db_gd_an" onclick="apply()">立即申请</a>
+    </div>
+    <div class="clearfix"></div>
+</div>
+</body>
+</html>

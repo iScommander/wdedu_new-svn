@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>个人照片</title>
+    <link href="${base}/r/css/new_zywy/reset.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="${base}/r/css/new_zywy/bootstrap.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="${base}/r/css/new_zywy/publicStyle.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="${base}/r/css/new_zywy/newMain.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="${base}/r/css/head_footer.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script type="text/javascript" src="${base}/r/js/new_js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="${base}/r/js/new_js/bootstrap.js"></script>
+    <script type="text/javascript" src="${base}/r/js/new_js/jquery-validate.js"></script>
+    <script type="text/javascript" src="${base}/r/js/new_js/messages_zh.js"></script>
+	<!--[if lte IE 9]>
+	<script src="${base}/r/js/new_js/html5shiv.js" language="javascript"></script>
+	<script src="${base}/r/js/new_js/respond.min.js" language="javascript"></script>
+	<![endif]-->
+</head>
+<body>
+    <div class="z-outer" style="background:#F5F5F5">
+		[#include "../wdedu/include/header_address.html"/]
+		[#include "../wdedu/include/header_dylq.html"/]
+        <div class="container">
+            <div class="row clearfix navigation-style">
+                <div class="col-md-12 column">
+                    <div class="navigation"><span>当前位置：</span><a href="${base}">主页</a><span>&lt;</span><a href="${base}/ydyfw/queryOrder.jspx">我的一对一服务清单</a><span>&lt;</span><a href="ase}/mnwb/jbxx.jspx?orderId=${order.orderId}">填报个人信息</a><span>&lt;</span><a>基本信息</a></div>
+                </div>
+            </div>
+	        <div class="row clearfix ydy_content">
+	            <div class="col-md-3 column zjf-choose-left">
+					[#include "./left_menu.html"/]
+	            </div>
+	            <div class="col-md-9 column zjf-choose-right">
+			        <div class="row clearfix ydy_title">
+			            <div class="col-md-9 column">
+							<span class="ydy_title_span">
+								考生个人信息详细填写
+								[#if order.serviceType == 'zytb']
+								（志愿填报一对一）
+								[#elseif order.serviceType =='zzzs']
+								（自主招生一对一）
+								[#elseif order.serviceType =='xdzy']
+								（学大志愿一对一）
+								[#elseif order.serviceType =='bjts']
+								（背景提升项目）
+								[#else]
+								（港澳台一对一）
+								[/#if]
+							</span>
+			            </div>
+			            <div class="col-md-3 column">
+							<span>订单号：${order.orderId}</span>
+			            </div>
+			        </div>
+			        <div class="row clearfix">
+			            <div class="col-md-12 column">
+							<div class="mes_left_top">
+								<div class="ydy_shuoming">填写基本信息、中学信息、成绩信息，模考成绩、单科成绩等</div>
+							</div>
+							<ul class="mes_left_ul">
+								<li><a href="jbxx.jspx?orderId=${order.orderId}">基本信息</a></li>
+								<li class="checked-style"><a href="grzp.jspx?orderId=${order.orderId}" id="grzp">个人照片</a></li>
+								<li><a href="zxxx.jspx?orderId=${order.orderId}" id="zxxx">中学信息</a></li>
+								<li><a href="cjxx.jspx?orderId=${order.orderId}" id="cjxx">成绩信息</a></li>
+								<li><a href="zhxx.jspx?orderId=${order.orderId}">综合信息</a></li>
+								<li><a href="mkcj.jspx?orderId=${order.orderId}" id="mkcj">模考成绩</a></li>
+								<li><a href="dkpm.jspx?orderId=${order.orderId}" id="dkpm">单科排名</a></li>
+								<li><a href="tjrxx.jspx?menuId=tjrxx&orderId=${order.orderId}" id="tjrxx">推荐人信息</a></li>
+								<li><a href="yjxx.jspx?menuId=yjxx&orderId=${order.orderId}" id="yjxx">邮寄信息</a></li>
+							</ul>
+							<div class="mes_left_bottom">
+								<form action="uploadPhoto.jspx" method="post" id="form1" enctype="multipart/form-data" >
+									<div class="all_img">
+										<div class="grzp_img bg_img">
+											[#if userInfo??]
+												<img id="imgPhoto" src='${userInfo.photo!}' />
+											[#else]
+												<img id="imgPhoto" src='${base}/second_image/bzy/bzy-01.png' />
+											[/#if]
+											<div style="position: relative;">
+												<input type="hidden" name="photoName" id="photoName" class="grzp_sczp_input01" readonly>
+												<input type="button" id="selPhoto" class="grzp_sczp_input02" value="选择照片" onclick="$('#myphoto').click();">
+												<input type="file" name="photo" onchange="setImagePreview();" id="myphoto" style="opacity: 0;"/>
+												<input type="hidden" name="orderId" value="${order.orderId}">
+											</div>
+										</div>
+										<div class="grzp_sczp">
+											<div class="grzp_all_say">
+												<p style="color:#AAAAAA;">必须上传本人近期一寸正面免冠彩色头像照片(参照居民身份证照片样式)</p>
+												<p>1.格式 jpg 或 jpeg，大小20K－500K</p>
+												<p>2.照片背景为单色(白色、蓝色、红色均可)，人像清晰，神态自然，无明显畸变</p>
+												<p>3.上传的照片文件名称不要包含空格等特殊字符</p>
+												<p>4.非jpg 或jpeg格式的文件修改后缀上传、图片本身因素等有可能引起图片解析失<br>&nbsp;&nbsp;&nbsp;败。可尝试使用图片编辑工具将该图另存为jpg或jpeg格式然后上传</p>
+											</div>
+										</div>
+										<div class="clear"></div>
+									</div>
+							        <div class="row clearfix up-down">
+							            <div class="col-md-12 column">
+							            	<button type="submit" class="zjf-bt pull-right" style="margin-right: 20px;">上传照片</button>
+							            </div>
+							        </div>
+								</form>
+							</div>
+			            </div>
+			        </div>
+	            </div>
+	        </div>
+        </div>
+		[#include "../wdedu/include/footer_new.html"/]
+    </div>
+<script type="text/javascript" src="${base}/r/js/new_js/zyydyfw.js"></script>
+<script>
+    $(function(){
+		$("#tbgrxx").addClass("zjf-active");
+	});
+    function setImagePreview(){
+        var docObj = document.getElementById("myphoto");;
+       // var imgObjPreview = $("#imgPhoto");
+       	var imgObjPreview = document.getElementById("imgPhoto");
+        $("#photoName").val(docObj.value);
+        if (docObj.files && docObj.files[0]) {
+            imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+        } else {
+            //IE下，使用滤镜 
+            docObj.select();
+            var imgSrc = document.selection.createRange().text;
+            var localImagId = document.getElementById("localImag");
+            //必须设置初始大小
+            //localImagId.style.width = "100px";
+            //localImagId.style.height = "70px";
+            //图片异常的捕捉，防止用户修改后缀来伪造图片 
+            try {
+            	localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+            	localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+            } catch (e) {
+            	alert("您上传的图片格式不正确，请重新选择!");
+            	return false;
+            }
+            imgObjPreview.style.display = 'none';
+            document.selection.empty();
+        }
+        return true;
+    }
+</script>
+</body>
+</html>

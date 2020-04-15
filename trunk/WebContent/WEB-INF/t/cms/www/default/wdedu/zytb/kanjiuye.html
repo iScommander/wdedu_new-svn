@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>看就业</title>
+<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+  <script src="${base}/r/wdedu/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+</head>
+<body>
+
+
+	
+	<script type='text/javascript' src='${base}/r/wdedu/js/dropdown.js'></script>
+    
+    [#include "../include/header_address.html"/]
+    [#include "../include/header_zytb.html"/]
+       <script src="${base}/r/wdedu/js/jquery-1.11.1.min.js" type="text/javascript" ></script>
+              		<script  type="text/javascript">
+              		window.isMoused=false;
+              		function qz(obj){
+              			var text = $(obj).text();
+              			document.getElementById("text").innerText =text;
+              			gb();
+
+              		}
+              		function gb(){
+              			document.getElementById('city_nav').className='city_nav';document.getElementById('city_link').className='city_link';window.isMoused =false;return !1;
+              		}
+              			function dk(){
+              				if(window.isMoused){
+              					 gb()
+              					window.isMoused = false;
+              				   }else{
+              					   document.getElementById('city_link').className='city_link city_hovers'
+              					   window.isMoused =true;
+              				   }
+              			}
+
+              			function findCareer(careerSubjeetId) {
+                              $("#sec").html("");
+                              $.ajax({
+                                  url: "${base}/searchUnivAndMajor/searchCareer.jspx",    //请求的url地址
+                                  dataType: "json",
+                                  async: true,
+                                  data: {"careerSubjeetId": careerSubjeetId},
+                                  type: "POST",
+                                  success: function (data) {
+
+              						/*var json = JSON.stringify(data);
+              						var a = eval('(' + json + ')');*/
+
+                                      var career2List = data.careerTwo;
+                                      var career3List = data.careerThr;
+
+
+                                     $(career2List).each(
+                                          function (i, obj1) {
+                                              var s = '<div class="czy_yc_bt_bg"><div class="czy_yc_bt">\n' +
+                                                  '<span class="czy_yc_bt_dm"><i>'+obj1.career_catelog_name+'</i></span>\n' +
+                                                  '</div>'
+
+                                              $("#sec").append(s);
+                                              $(career3List).each(
+                                                  function (j, obj2) {
+                                                     if(obj2.career_catelog_id == obj1.career_catelog_id){
+
+                                                          var t = '<div class="czy_yc_bt_nr">\n' +
+                                                              '<a href="${base}/searchUnivAndMajor/careerDatail.jspx?id='+obj2.career_onlevel_id+'" style="margin-left: 40px;width: 180px">'+obj2.career_onlevel_name+'</a>\n';
+
+                                                          $("#sec").append(t);
+                                                       }
+                                                  })
+                                              var a ='<div class="clearfix"></div>\n' +
+                                                  '<div class="czydw"></div>\n' +
+                                                  '</div>\n' +
+                                                  '</div>';
+                                              $("#sec").append(a);
+                                          })
+
+                                  }
+                              });
+                          }
+
+              	</script>
+	<div class="mbxdh_bg">
+
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="${base}/zytb/project.jspx">志愿填报</a>&nbsp;&gt; &nbsp; <a href="#">看就业</a>
+		</div>  
+	</div>   
+	<div class="con">
+    <div class="kjy_zydq_z f_l">
+    	<div class="kjy_bt">职业大全</div>
+    	<div class="kjy_list">
+        	<ul>
+            [#if list??]
+            [#list list as l]
+            <li><a onclick="findCareer('${l.careerSubjeetId!}')"><p>${l.careerSubjeetName!}</p> <span></span><div class="clearfix"></div></a></li>
+             [/#list]
+             [/#if]
+            </ul>
+        </div>
+    		
+    </div>
+        <div class="kjy_zyxl_z f_r">
+            <div id="sec" class="czy_yc f_r">
+				<div id="ben">
+					[#if career2List??]
+					[#list career2List as sb]
+					<div  class="czy_yc_bt_bg">
+						<div class="czy_yc_bt">
+							<span class="czy_yc_bt_dm"><i>${sb.careerCatelogName!}</i></span>
+						</div>
+						[#if career3List??]
+						[#list career3List as tb]
+						[#if tb.careerCatelogId == sb.careerCatelogId]
+						<div class="czy_yc_bt_nr">
+							<a href="${base}/searchUnivAndMajor/careerDatail.jspx?id=${tb.careerOnlevelId!}">${tb.careerOnlevelName!}</a>
+
+						</div>
+						[/#if]
+						[/#list]
+						[/#if]
+						<div class="clearfix"></div>
+						<div class="czydw"></div>
+					</div>
+					[/#list]
+					[/#if]
+				</div>
+             </div>
+    		
+    </div>
+    <div class="clearfix"></div>
+    </div>	
+    		
+
+[#include "../include/footer_new.html"/]
+    
+
+<script type="text/javascript" src="${base}/r/wdedu/js/jquery-tab.js"></script>
+<script type="text/javascript">
+	$(function(){
+		// Calling the plugin
+		$('.tab-group').tabify();
+	})
+</script>
+    
+</body>
+</html>

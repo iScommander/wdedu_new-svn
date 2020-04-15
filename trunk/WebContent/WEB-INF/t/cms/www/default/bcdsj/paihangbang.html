@@ -1,0 +1,541 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>排行榜</title>
+<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+<script src="http://www.jq22.com/jquery/1.9.1/jquery.min.js"></script>
+<script language="javascript" src="${base}/r/wdedu/js/common.js"></script>
+<link  type="text/css" rel="stylesheet" href="${base}/r/wdedu/css/style.css" />
+</head>
+<body>
+ [#include "../wdedu/include/header_address.html"/]
+ [#include "../wdedu/include/header_zytb.html"/]
+
+	<div class="mbxdh_bg">
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">志愿填报</a>&nbsp;&gt; &nbsp; <a href="#">排行榜</a>
+		</div>  
+	</div>   
+		<div class="con">
+        		<div class="phb_z f_l">
+                		<div class="phb_z_s">
+                        		<div class="phb_z_s_dh"><span>院校排行榜</span></div>
+                        		<div class="phb_z_s_dh_z"><span><a href="${base}/bcdsj/universityRank.jspx"  style="color: #ff8d00">大学名次排行榜</a><i style="color: #ff8d00">&nbsp;&gt; &nbsp;</i></span></div>
+                                <div class="phb_z_s_dh_z"><span><a href="${base}/bcdsj/universityEnrollRank.jspx">大学录取排行榜</a><i>&nbsp;&gt; &nbsp;</i></span></div>
+                                <div class="phb_z_s_dh_z"><span><a href="${base}/bcdsj/universitySalaryRank.jspx">大学薪酬排行榜</a><i>&nbsp;&gt; &nbsp;</i></span></div>
+                        </div>
+                        <div class="phb_z_x">
+                        		<div class="phb_z_s_dh"><span>专业排行榜</span></div>
+                        		<div class="phb_z_s_dh_z"><span><a href="${base}/bcdsj/professionRank.jspx">学科专业排行榜</a><i>&nbsp;&gt; &nbsp;</i></span></div>
+                              <!--  <div class="phb_z_s_dh_z"><span><a href="${base}/bcdsj/professionEnrollRank.jspx">专业录取排行榜</a><i>&nbsp;&gt; &nbsp;</i></span></div>-->
+                                <div class="phb_z_s_dh_z"><span><a href="${base}/bcdsj/professionSalaryRank.jspx">专业薪酬排行榜</a><i>&nbsp;&gt; &nbsp;</i></span></div>
+                        </div>
+                </div>
+        <div class="phb_y f_l" style="border-top: 1px solid #e5e9ff;">
+      	<div class="base-line2">
+       			<form id="comSearch" action="universityRank.jspx" method="post">
+                <label style="margin-top: 5px;">学校地区<i>&nbsp;&gt; &nbsp;</i></label>
+                 <div class="zdx_suo2">
+
+                    [#if tBaseProvinces??]
+                    [#list tBaseProvinces as ts]
+                    [#if ts.provinceId !=0]
+                            <div class="zdx_suo_an2 f_l">
+                                        <input id="radio_yuanxiao_1${ts.provinceId!}" value="${ts.provinceName!}" name="univProvinces"  type="checkbox"hidden [#if cityss?? && cityss?contains('${ts.provinceName!}')] checked [/#if]>
+                                        <label for="radio_yuanxiao_1${ts.provinceId!}"> [#if cityss?? && cityss?contains('${ts.provinceName!}')]  [/#if]${ts.provinceName!}</label>
+                            </div>
+                            [/#if]
+                    [/#list]
+                    [/#if]
+
+                    <div class="clearfix">
+                        <input type="hidden" name ="univProvinces" id="univProvinces">
+                    </div>
+                </div>
+                 <span class="dw" style="border-bottom: none"></span>
+            <div class="base-line2" style="border-bottom:1px solid #e5e9ff">
+                <label style="margin-top: 5px;">学校类型<i>&nbsp;&gt; &nbsp;</i></label>
+                <div class="zdx_suo2">
+
+                    [#if tBasecateNameList??]
+                    [#list tBasecateNameList as tsc]
+                     <div class="zdx_suo_an2 f_l">
+                      <input id="radio_lx_1${tsc_index!}" value="${tsc!}" name="univTypes"  type="checkbox"hidden [#if typess?? && typess?contains('${tsc!}')] checked [/#if]>
+                      <label for="radio_lx_1${tsc_index!}">[#if typess?? && typess?contains('${tsc!}')]  [/#if]${tsc!}</label>
+                    </div>
+                    [/#list]
+                    [/#if]
+                    <div class="clearfix">
+                        <input type="hidden" name ="univTypes" id="univTypes">
+                    </div>
+                </div>
+                <button id="submitTo" class="gyjz_ss_y5_qc btn btnColorYellow" style="line-height:normal;">立即搜索</button>
+                <div class="clearfix"></div>
+            </div>
+            <input type="hidden" id="zgxyhPaginationPageNo" name="zgxyhPaginationPageNo"/>
+            <input type="hidden" id="zgxyhPaginationSetPageNum" name="zgxyhPaginationSetPageNum"/>
+            <input type="hidden" id="wslphbPaginationPageNo" name="wslphbPaginationPageNo"/>
+            <input type="hidden" id="wslphbPaginationSetPageNum" name="wslphbPaginationSetPageNum"/>
+            <input type="hidden" id="QSphbPaginationPageNo" name="QSphbPaginationPageNo"/>
+            <input type="hidden" id="QSphbPaginationSetPageNum" name="QSphbPaginationSetPageNum"/>
+            <input type="hidden" id="USphbPaginationPageNo" name="USphbPaginationPageNo"/>
+            <input type="hidden" id="USphbPaginationSetPageNum" name="USphbPaginationSetPageNum"/>
+            <input type="hidden" id="sjxsPaginationPageNo" name="sjxsPaginationPageNo"/>
+            <input type="hidden" id="sjxsPaginationSetPageNum" name="sjxsPaginationSetPageNum"/>
+            <input type="hidden" id="present" name="present"/>
+            </form>
+            </div>
+				
+            <div class="investment_f">
+			
+  <div class="investment_title">
+    <div class="on" [#if present??&&present=="1"] id="dj"[/#if]>中国校友会</div>
+    <div [#if present??&&present=="2"] id="dj"[/#if]>武书连排行</div>
+    <div [#if present??&&present=="3"] id="dj"[/#if]>QS排行榜</div>
+    <div [#if present??&&present=="4"] id="dj"[/#if]>U.S排行榜</div>
+    <div [#if present??&&present=="5"] id="dj"[/#if]>上交学术</div>
+
+  </div>
+  <div class="clearfix"></div>
+  <div class="investment_con">
+    <div class="investment_con_list">
+      <table width="100%"  cellspacing="0" cellpadding="0" style="position: relative">
+          <tr>
+            <th scope="col" width="126px" height="44px">排名</th>
+            <th scope="col" width="226px" height="44px" style="line-height:44px; text-align:center">  
+          院校名称
+  			</th>
+            <div class="clearfix"></div>
+            <th scope="col" width="141px" height="44px">院校类型</th>
+            <th scope="col" width="136px" height="44px" style="position: relative">
+           所属部委
+            </th>
+            <th scope="col" width="202px" height="44px">总分</th>
+              <th scope="col" width="150px" height="44px">办学类型</th>
+              <th scope="col" width="150px" height="44px">星级排名</th>
+              <th scope="col"  height="44px" width="80px">办学层次</th>
+          </tr>
+          [#if zgxyhPagination?? ]
+          [#list zgxyhPagination.list as a ]
+          <tr>
+              <td>${a.rank!}</td>
+              <td>${a.univName!}</td>
+              <td>${a.cateName!}</td>
+              <td class="ccyc">${a.belongName!}</td>
+              <td>${a.scoreTotal!}</td>
+
+              <td>${a.typeCreate!}</td>
+              <td>${a.grade!}</td>
+              <td class="ccyc" width="80px">${a.level!}</td>
+          </tr>
+          [/#list]
+          [/#if]
+        </table>
+        <div class="textC paging">
+            <tr>
+                <td colspan="8" style="padding:20px 0;">
+
+                    <div class="pn-sp">
+                        共${zgxyhPagination.totalCount}条&nbsp;每页<input type="text" id="_zgxyhPaginationSetPsNum" value="${zgxyhSetPageNum!}" onfocus="this.select();" style="width:50px; border:1px solid #e7e7e7;" /> 条&nbsp; <input id="_setPage" type="button" value="确定" onclick="_setPageNum1($('#_zgxyhPaginationSetPsNum').val());" />
+                        &nbsp;|&nbsp;当前${zgxyhPagination.pageNo}/${zgxyhPagination.totalPage}页&nbsp;转到第<input type="text" id="_goPs1" onfocus="this.select();" onkeypress="if(event.keyCode==13){$('#_goPage1').click();return false;}" style="width:50px; border:1px solid #e7e7e7;" />页
+                        <input id="_goPage1" type="button" value="确定" onclick="_gotoPage1($('#_goPs1').val());" [#if zgxyhPagination.totalPage==1] disabled="disabled" [/#if] />
+                    </div>
+                    <div>
+                        <input type="button" value="首 页" onclick="_gotoPage1('1');" [#if zgxyhPagination.firstPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="上一页" onclick="_gotoPage1('${zgxyhPagination.prePage}');" [#if zgxyhPagination.firstPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="下一页" onclick="_gotoPage1('${zgxyhPagination.nextPage}');" [#if zgxyhPagination.lastPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="尾 页" onclick="_gotoPage1('${zgxyhPagination.totalPage}');" [#if zgxyhPagination.lastPage] disabled="disabled" [/#if]/>
+                    </div>
+
+                </td>
+            </tr>
+        </div>
+    </div>
+
+    <div class="investment_con_list">
+      <table width="100%"  cellspacing="0" cellpadding="0" style="position: relative">
+          <tr>
+              <th scope="col" width="126px" height="44px">排名</th>
+              <th scope="col" width="226px" height="44px" style="line-height:44px; text-align:center">
+                  院校名称
+              </th>
+              <div class="clearfix"></div>
+              <th scope="col" width="141px" height="44px">院校类型</th>
+              <th scope="col" width="136px" height="44px" style="position: relative">
+                  所属部委
+              </th>
+              <th scope="col" width="202px" height="44px">总分</th>
+              <th scope="col" width="150px" height="44px">办学类型</th>
+              <th scope="col" width="150px" height="44px">星级排名</th>
+              <th scope="col" width="150px" height="44px">办学层次</th>
+          </tr>
+
+          [#if wslphbPagination?? ]
+          [#list wslphbPagination.list as a ]
+          <tr>
+              <td>${a.rank!}</td>
+              <td>${a.univName!}</td>
+              <td>${a.cateName!}</td>
+              <td>${a.belongName!}</td>
+              <td>${a.scoreTotal!}</td>
+              <td>${a.typeCreate!}</td>
+              <td>${a.grade!}</td>
+              <td>${a.level!}</td>
+          </tr>
+          [/#list]
+          [/#if]
+        </table>
+        <div class="textC paging">
+            <tr>
+                <td colspan="8" style="padding:20px 0;">
+
+                    <div class="pn-sp">
+                        共${wslphbPagination.totalCount}条&nbsp;每页<input type="text" id="_wslphbPaginationSetPsNum" value="${wslphbSetPageNum!}" onfocus="this.select();" style="width:50px; border:1px solid #e7e7e7;" /> 条&nbsp; <input id="_setPage" type="button" value="确定" onclick="_setPageNum2($('#_wslphbPaginationSetPsNum').val());" />
+                        &nbsp;|&nbsp;当前${wslphbPagination.pageNo}/${wslphbPagination.totalPage}页&nbsp;转到第<input type="text" id="_goPs2" onfocus="this.select();" onkeypress="if(event.keyCode==13){$('#_goPage2').click();return false;}" style="width:50px; border:1px solid #e7e7e7;" />页
+                        <input id="_goPage2" type="button" value="确定" onclick="_gotoPage2($('#_goPs2').val());" [#if wslphbPagination.totalPage==1] disabled="disabled" [/#if] />
+                    </div>
+                    <div>
+                        <input type="button" value="首 页" onclick="_gotoPage2('1');" [#if wslphbPagination.firstPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="上一页" onclick="_gotoPage2('${wslphbPagination.prePage}');" [#if wslphbPagination.firstPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="下一页" onclick="_gotoPage2('${wslphbPagination.nextPage}');" [#if wslphbPagination.lastPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="尾 页" onclick="_gotoPage2('${wslphbPagination.totalPage}');" [#if wslphbPagination.lastPage] disabled="disabled" [/#if]/>
+                    </div>
+                </td>
+            </tr>
+        </div>
+    </div>
+
+    <div class="investment_con_list" >
+
+      <table width="100%"  cellspacing="0" cellpadding="0" style="position: relative">
+          <tr>
+            <th scope="col" width="126px" height="44px">排名</th>
+            <th scope="col" width="226px" height="44px" style="line-height:44px; text-align:center">
+          国家
+  			</th>
+            <div class="clearfix"></div>
+            <th scope="col" width="141px" height="44px">院校名称</th>
+          </tr>
+
+          [#if QSphbPagination?? ]
+          [#list QSphbPagination.list as a ]
+          <tr>
+              <td>${a.rank!}</td>
+              <td>${a.country!}</td>
+              <td>${a.name!}</td>
+          </tr>
+          [/#list]
+          [/#if]
+        </table>
+        <div class="textC paging">
+            <tr>
+                <td colspan="8" style="padding:20px 0;">
+
+                    <div class="pn-sp">
+                        共${QSphbPagination.totalCount}条&nbsp;每页<input type="text" id="_QSphbPaginationSetPsNum" value="${QSphbSetPageNum!}" onfocus="this.select();" style="width:50px; border:1px solid #e7e7e7;" /> 条&nbsp; <input id="_setPage" type="button" value="确定" onclick="_setPageNum3($('#_QSphbPaginationSetPsNum').val());" />
+                        &nbsp;|&nbsp;当前${QSphbPagination.pageNo}/${QSphbPagination.totalPage}页&nbsp;转到第<input type="text" id="_goPs3" onfocus="this.select();" onkeypress="if(event.keyCode==13){$('#_goPage3').click();return false;}" style="width:50px; border:1px solid #e7e7e7;" />页
+                        <input id="_goPage3" type="button" value="确定" onclick="_gotoPage3($('#_goPs3').val());" [#if QSphbPagination.totalPage==1] disabled="disabled" [/#if] />
+                    </div>
+                    <div>
+                        <input type="button" value="首 页" onclick="_gotoPage3('1');" [#if QSphbPagination.firstPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="上一页" onclick="_gotoPage3('${QSphbPagination.prePage}');" [#if QSphbPagination.firstPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="下一页" onclick="_gotoPage3('${QSphbPagination.nextPage}');" [#if QSphbPagination.lastPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="尾 页" onclick="_gotoPage3('${QSphbPagination.totalPage}');" [#if QSphbPagination.lastPage] disabled="disabled" [/#if]/>
+                    </div>
+
+                </td>
+            </tr>
+        </div>
+    </div>
+
+    <div class="investment_con_list" >
+
+      <table width="100%"  cellspacing="0" cellpadding="0" style="position: relative">
+          <tr>
+              <th scope="col" width="126px" height="44px">排名</th>
+              <th scope="col" width="226px" height="44px" style="line-height:44px; text-align:center">
+                 国家
+              </th>
+              <div class="clearfix"></div>
+              <th scope="col" width="141px" height="44px">院校名称</th>
+          </tr>
+
+          [#if USphbPagination?? ]
+          [#list USphbPagination.list as a ]
+          <tr>
+              <td>${a.rank!}</td>
+              <td>${a.country!}</td>
+              <td>${a.name!}</td>
+          </tr>
+          [/#list]
+          [/#if]
+        </table>
+        <div class="textC paging">
+            <tr>
+                <td colspan="8" style="padding:20px 0;">
+
+                    <div class="pn-sp">
+                        共${USphbPagination.totalCount}条&nbsp;每页<input type="text" id="_USphbPaginationSetPsNum" value="${USphbSetPageNum!}" onfocus="this.select();" style="width:50px; border:1px solid #e7e7e7;" /> 条&nbsp; <input id="_setPage" type="button" value="确定" onclick="_setPageNum4($('#_USphbPaginationSetPsNum').val());" />
+                        &nbsp;|&nbsp;当前${USphbPagination.pageNo}/${USphbPagination.totalPage}页&nbsp;转到第<input type="text" id="_goPs4" onfocus="this.select();" onkeypress="if(event.keyCode==13){$('#_goPage4').click();return false;}" style="width:50px; border:1px solid #e7e7e7;" />页
+                        <input id="_goPage4" type="button" value="确定" onclick="_gotoPage4($('#_goPs4').val());" [#if USphbPagination.totalPage==1] disabled="disabled" [/#if] />
+                    </div>
+                    <div>
+                        <input type="button" value="首 页" onclick="_gotoPage4('1');" [#if USphbPagination.firstPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="上一页" onclick="_gotoPage4('${QSphbPagination.prePage}');" [#if USphbPagination.firstPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="下一页" onclick="_gotoPage4('${QSphbPagination.nextPage}');" [#if USphbPagination.lastPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="尾 页" onclick="_gotoPage4('${QSphbPagination.totalPage}');" [#if USphbPagination.lastPage] disabled="disabled" [/#if]/>
+                    </div>
+
+                </td>
+            </tr>
+        </div>
+    </div>
+
+    <div class="investment_con_list" >
+
+      <table width="100%"  cellspacing="0" cellpadding="0" style="position: relative">
+          <tr>
+              <th scope="col" width="126px" height="44px">排名</th>
+              <th scope="col" width="226px" height="44px" style="line-height:44px; text-align:center">
+                  国家
+              </th>
+              <div class="clearfix"></div>
+              <th scope="col" width="141px" height="44px">院校名称</th>
+          </tr>
+
+          [#if sjxsPagination?? ]
+          [#list sjxsPagination.list as a ]
+          <tr>
+              <td>${a.rank!}</td>
+              <td>${a.country!}</td>
+              <td>${a.name!}</td>
+          </tr>
+          [/#list]
+          [/#if]
+        </table>
+        <div class="textC paging">
+            <tr>
+                <td colspan="8" style="padding:20px 0;">
+
+                    <div class="pn-sp">
+                        共${sjxsPagination.totalCount}条&nbsp;每页<input type="text" id="_sjxsPaginationSetPsNum" value="${sjxsSetPageNum!}" onfocus="this.select();" style="width:50px; border:1px solid #e7e7e7;" /> 条&nbsp; <input id="_setPage" type="button" value="确定" onclick="_setPageNum5($('#_sjxsPaginationSetPsNum').val());" />
+                        &nbsp;|&nbsp;当前${sjxsPagination.pageNo}/${sjxsPagination.totalPage}页&nbsp;转到第<input type="text" id="_goPs5" onfocus="this.select();" onkeypress="if(event.keyCode==13){$('#_goPage5').click();return false;}" style="width:50px; border:1px solid #e7e7e7;" />页
+                        <input id="_goPage5" type="button" value="确定" onclick="_gotoPage5($('#_goPs5').val());" [#if sjxsPagination.totalPage==1] disabled="disabled" [/#if] />
+                    </div>
+                    <div>
+                        <input type="button" value="首 页" onclick="_gotoPage5('1');" [#if sjxsPagination.firstPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="上一页" onclick="_gotoPage5('${sjxsPagination.prePage}');" [#if sjxsPagination.firstPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="下一页" onclick="_gotoPage5('${sjxsPagination.nextPage}');" [#if sjxsPagination.lastPage] disabled="disabled" [/#if]/>
+                        <input type="button" value="尾 页" onclick="_gotoPage5('${sjxsPagination.totalPage}');" [#if sjxsPagination.lastPage] disabled="disabled" [/#if]/>
+                    </div>
+
+                </td>
+            </tr>
+        </div>
+    </div>
+
+  </div>
+
+</div>
+        </div>
+        <div class="clearfix"></div>
+        </div>
+[#include "../wdedu/include/footer_new.html"/]
+    
+
+<script>
+   // 两秒后模拟点击
+setTimeout(function() {
+    // IE
+    if(document.all) {
+        document.getElementById("dj").click();
+    }
+    // 其它浏览器
+    else {
+        var e = document.createEvent("MouseEvents");
+        e.initEvent("click", true, true);
+        document.getElementById("dj").dispatchEvent(e);
+}
+},500);
+  $(function () {
+
+      $(".checkbox_2").click(function () {
+          if ($(this).hasClass('checked')) {
+              $(this).removeClass('checked');
+              $(this).parent().find("span").removeAttr("style");
+              $(this).parent().find("span").css('color', '#333333')
+              var typess = $("#univTypes").val();
+              var type = $(this).next().text();
+              var str = "," + type;
+              var test = typess.replace(str, "");
+              $("#univTypes").val(test);
+
+          } else {
+              $(this).addClass('checked');
+              $(this).parent().find("span").css('color', '#ff8d00')
+              var typess = $("#univTypes").val();
+              var type = $(this).next().text();
+              var test = typess + "," + type;
+              $("#univTypes").val(test);
+          }
+
+      })
+
+      $(".checkbox_1").click(function () {
+          if ($(this).hasClass('checked')) {
+              $(this).removeClass('checked');
+              $(this).parent().find("span").removeAttr("style");
+              $(this).parent().find("span").css('color', '#333333')
+              var cityss = $("#univProvinces").val();
+              var city = $(this).next().text();
+              var str = "," + city;
+              var test = cityss.replace(str, "");
+              $("#univProvinces").val(test);
+
+          } else {
+              $(this).addClass('checked');
+              $(this).parent().find("span").css('color', '#ff8d00')
+              var cityss = $("#univProvinces").val();
+              var city = $(this).next().text();
+              var test = cityss + "," + city;
+              $("#univProvinces").val(test);
+          }
+      })
+
+
+
+    $(".arrUp").on("click", function () {
+      $(this).css("border-bottom-color", "#b2b2b2");
+      $(".arrDown").css("border-top-color", "#ccc")
+    });
+    $(".arrDown").on("click", function () {
+      $(this).css("border-top-color", "#b2b2b2")
+      $(".arrUp").css("border-bottom-color", "#ccc")
+    })
+  })
+
+  //分页
+  function _gotoPage1(pageNo) {
+      try {
+          var comSearch = document.getElementById("comSearch");
+          $('#zgxyhPaginationPageNo').val(pageNo);
+          $('#zgxyhPaginationSetPageNum').val( $('#_zgxyhPaginationSetPsNum').val());
+          $('#present').val("1");
+          comSearch.submit();
+
+      } catch (e) {
+          alert('_gotoPage(pageNo)方法出错');
+      }
+  }
+  //分页
+  function _gotoPage2(pageNo) {
+      try {
+          var comSearch = document.getElementById("comSearch");
+          $('#wslphbPaginationPageNo').val(pageNo);
+          $('#wslphbPaginationSetPageNum').val( $('#_wslphbPaginationSetPsNum').val());
+          $('#present').val("2");
+          comSearch.submit();
+      } catch (e) {
+          alert('_gotoPage(pageNo)方法出错');
+      }
+  }
+  //分页
+  function _gotoPage3(pageNo) {
+      try {
+          var comSearch = document.getElementById("comSearch");
+          $('#QSphbPaginationPageNo').val(pageNo);
+          $('#QSphbPaginationSetPageNum').val( $('#_QSphbPaginationSetPsNum').val());
+          $('#present').val("3");
+          comSearch.submit();
+
+      } catch (e) {
+          alert('_gotoPage(pageNo)方法出错');
+      }
+  }
+  //分页
+  function _gotoPage4(pageNo) {
+      try {
+          var comSearch = document.getElementById("comSearch");
+          $('#USphbPaginationPageNo').val(pageNo);
+          $('#USphbPaginationSetPageNum').val( $('#_USphbPaginationSetPsNum').val());
+          $('#present').val("4");
+          comSearch.submit();
+
+      } catch (e) {
+          alert('_gotoPage(pageNo)方法出错');
+      }
+  }
+  //分页
+  function _gotoPage5(pageNo) {
+      try {
+          var comSearch = document.getElementById("comSearch");
+          $('#sjxsPaginationPageNo').val(pageNo);
+          $('#sjxsPaginationSetPageNum').val( $('#_sjxsPaginationSetPsNum').val());
+          $('#present').val("5");
+          comSearch.submit();
+
+      } catch (e) {
+          alert('_gotoPage(pageNo)方法出错');
+      }
+  }
+
+
+  function _setPageNum1(setPageNum) {
+      try {
+          var comSearch = document.getElementById("comSearch");
+          $('#zgxyhPaginationSetPageNum').val(setPageNum);
+          $('#present').val("1");
+          comSearch.submit();
+
+      } catch (e) {
+          alert('_setPageNum(pageNum)方法出错');
+      }
+  }
+  function _setPageNum2(setPageNum) {
+      try {
+          var comSearch = document.getElementById("comSearch");
+          $('#wslphbPaginationSetPageNum').val(setPageNum);
+          $('#present').val("2");
+          comSearch.submit();
+
+      } catch (e) {
+          alert('_setPageNum(pageNum)方法出错');
+      }
+  }
+  function _setPageNum3(setPageNum) {
+      try {
+          var comSearch = document.getElementById("comSearch");
+          $('#QSphbPaginationSetPageNum').val(setPageNum);
+          $('#present').val("3");
+          comSearch.submit();
+
+      } catch (e) {
+          alert('_setPageNum(pageNum)方法出错');
+      }
+  }
+  function _setPageNum4(setPageNum) {
+      try {
+          var comSearch = document.getElementById("comSearch");
+          $('#USphbPaginationSetPageNum').val(setPageNum);
+          $('#present').val("4");
+          comSearch.submit();
+
+      } catch (e) {
+          alert('_setPageNum(pageNum)方法出错');
+      }
+  }
+  function _setPageNum5(setPageNum) {
+      try {
+          var comSearch = document.getElementById("comSearch");
+          $('#sjxsPaginationSetPageNum').val(setPageNum);
+          $('#present').val("5");
+          comSearch.submit();
+
+      } catch (e) {
+          alert('_setPageNum(pageNum)方法出错');
+      }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,615 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>排行榜</title>
+<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+<script src="http://www.jq22.com/jquery/1.9.1/jquery.min.js"></script>
+<script language="javascript" src="${base}/r/wdedu/js/common.js"></script>
+<link  type="text/css" rel="stylesheet" href="${base}/r/wdedu/css/style.css" />
+</head>
+<body>
+ [#include "../include/header_address.html"/]
+    
+    
+       [#include "../include/header_zytb.html"/]
+	<div class="mbxdh_bg">
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">志愿填报</a>&nbsp;&gt; &nbsp; <a href="#">排行榜</a>
+		</div>  
+	</div>   
+		<div class="con">
+        		<div class="phb_z f_l">
+                		<div class="phb_z_s">
+                        		<div class="phb_z_s_dh"><span>院校排行榜</span></div>
+                        		<div class="phb_z_s_dh_z"><span><a href="paihangbang.html">大学名次排行榜</a><i>&nbsp;&gt; &nbsp;</i></span></div>
+                                <div class="phb_z_s_dh_z"><span><a href="paihangbang.html">大学录取排行榜</a><i>&nbsp;&gt; &nbsp;</i></span></div>
+                                <div class="phb_z_s_dh_z"><span><a href="paihangbangyxchouxin.html">大学薪酬排行榜</a><i>&nbsp;&gt; &nbsp;</i></span></div>
+                        </div>
+                        <div class="phb_z_x">
+                        		<div class="phb_z_s_dh"><span>专业排行榜</span></div>
+                        		<div class="phb_z_s_dh_z"><span><a href="paihangbangzhuanye.html">学科专业排行榜</a><i>&nbsp;&gt; &nbsp;</i></span></div>
+                                <div class="phb_z_s_dh_z"><span><a href="paihangbangzhuanye.html">专业录取排行榜</a><i>&nbsp;&gt; &nbsp;</i></span></div>
+                                <div class="phb_z_s_dh_z"><span><a href="paihangbangzhuanye.html">专业薪酬排行榜</a><i>&nbsp;&gt; &nbsp;</i></span></div>
+                        </div>
+                </div>
+        
+        <div class="phb_y f_l">
+      	<div class="base-line">
+       			<form action="#">
+                <label>学校地区<i>&nbsp;&gt; &nbsp;</i></label>
+                <div class="bd" id="province_id" type="checkbox">
+                    <span class="tag tag-hover" all="true" value="">
+                        全国
+                    </span>
+                    
+                        <span class="tag " value="340000000000">
+                            安徽
+                        </span>
+                    
+                        <span class="tag " value="110000000000">
+                            北京
+                        </span>
+                    
+                        <span class="tag " value="500000000000">
+                            重庆
+                        </span>
+                    
+                        <span class="tag " value="350000000000">
+                            福建
+                        </span>
+                    
+                        <span class="tag " value="620000000000">
+                            甘肃
+                        </span>
+                    
+                        <span class="tag " value="520000000000">
+                            贵州
+                        </span>
+                    
+                        <span class="tag " value="440000000000">
+                            广东
+                        </span>
+                    
+                        <span class="tag " value="450000000000">
+                            广西
+                        </span>
+                    
+                        <span class="tag " value="420000000000">
+                            湖北
+                        </span>
+                    
+                        <span class="tag " value="460000000000">
+                            海南
+                        </span>
+                    
+                        <span class="tag " value="230000000000">
+                            黑龙江
+                        </span>
+                    
+                        <span class="tag " value="430000000000">
+                            湖南
+                        </span>
+                    
+                        <span class="tag " value="410000000000">
+                            河南
+                        </span>
+                    
+                        <span class="tag " value="130000000000">
+                            河北
+                        </span>
+                    
+                        <span class="tag " value="220000000000">
+                            吉林
+                        </span>
+                    
+                        <span class="tag " value="360000000000">
+                            江西
+                        </span>
+                    
+                        <span class="tag " value="320000000000">
+                            江苏
+                        </span>
+                    
+                        <span class="tag " value="210000000000">
+                            辽宁
+                        </span>
+                    
+                        <span class="tag " value="640000000000">
+                            宁夏
+                        </span>
+                    
+                        <span class="tag " value="150000000000">
+                            内蒙古
+                        </span>
+                    
+                        <span class="tag " value="630000000000">
+                            青海
+                        </span>
+                    
+                        <span class="tag " value="140000000000">
+                            山西
+                        </span>
+                    
+                        <span class="tag " value="370000000000">
+                            山东
+                        </span>
+                    
+                        <span class="tag " value="610000000000">
+                            陕西
+                        </span>
+                    
+                        <span class="tag " value="510000000000">
+                            四川
+                        </span>
+                    
+                        <span class="tag " value="310000000000">
+                            上海
+                        </span>
+                    
+                        <span class="tag " value="120000000000">
+                            天津
+                        </span>
+                    
+                        <span class="tag " value="540000000000">
+                            西藏
+                        </span>
+                    
+                        <span class="tag " value="650000000000">
+                            新疆
+                        </span>
+                    
+                        <span class="tag " value="530000000000">
+                            云南
+                        </span>
+                    
+                        <span class="tag " value="330000000000">
+                            浙江
+                        </span>
+                   
+                </div>
+                 <span class="dw"></span>
+                 
+            <div class="base-line" style="border-bottom:1px solid #e5e9ff">
+                <label>学校类型<i>&nbsp;&gt; &nbsp;</i></label>
+                <div class="bd" id="sch_type_name" type="checkbox">
+                    <span class="tag tag-hover" all="true" value="">
+                        不限
+                    </span>
+                        <span class="tag " value="综合">
+                            综合
+                        </span>
+                    
+                        <span class="tag " value="语言">
+                            语言
+                        </span>
+                    
+                        <span class="tag " value="工科">
+                            工科
+                        </span>
+                    
+                        <span class="tag " value="医药">
+                            医药
+                        </span>
+                    
+                        <span class="tag " value="体育">
+                            体育
+                        </span>
+                    
+                        <span class="tag " value="财经">
+                            财经
+                        </span>
+                    
+                        <span class="tag " value="艺术">
+                            艺术
+                        </span>
+                    
+                        <span class="tag " value="民族">
+                            民族
+                        </span>
+                    
+                        <span class="tag " value="师范">
+                            师范
+                        </span>
+                    
+                        <span class="tag " value="林业">
+                            林业
+                        </span>
+                    
+                        <span class="tag " value="农业">
+                            农业
+                        </span>
+                    
+                        <span class="tag " value="政法">
+                            政法
+                        </span>
+                    
+                </div>
+                <button id="submit" style="float:right" class="phb_sutj">搜索</button>
+                <div class="clearfix"></div>
+            </div>
+            
+            </form>
+            </div>
+				
+            <div class="investment_f">
+			
+  <div class="investment_title">
+    <div class="on">中国校友会</div>
+    <div>武书连排行</div>
+    <div>QS排行榜</div>
+    <div>U.S排行榜</div>
+    <div>上交学术</div>
+  </div>
+  <div class="investment_con">
+    <div class="investment_con_list">
+      <table width="100%"  cellspacing="0" cellpadding="0" style="position: relative">
+          <tr>
+            <th scope="col" width="126px" height="44px">排名</th>
+            <th scope="col" width="226px" height="44px" style="line-height:44px; text-align:center">  
+            <div class="arr">
+    		<div class="arrUp"></div>
+   			<div class="arrDown"></div>
+  			</div>院校名称
+  			</th>
+            <div class="clearfix"></div>
+            <th scope="col" width="141px" height="44px">院校类型</th>
+            <th scope="col" width="136px" height="44px" style="position: relative">
+            <div class="arr2">
+    		<div class="arrUp"></div>
+   			<div class="arrDown"></div>
+  			</div>所在地
+            </th>
+            <th scope="col" width="202px" height="44px">院校标签</th>
+            <th scope="col" width="150px" height="44px">毕业五年薪酬</th>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+        </table>
+
+    </div>
+
+    <div class="investment_con_list">
+
+
+      <table width="100%"  cellspacing="0" cellpadding="0" style="position: relative">
+          <tr>
+            <th scope="col" width="126px" height="44px">排名</th>
+            <th scope="col" width="226px" height="44px" style="line-height:44px; text-align:center">  
+            <div class="arr">
+    		<div class="arrUp"></div>
+   			<div class="arrDown"></div>
+  			</div>院校名称
+  			</th>
+            <div class="clearfix"></div>
+            <th scope="col" width="141px" height="44px">院校类型</th>
+            <th scope="col" width="136px" height="44px" style="position: relative">
+            <div class="arr2">
+    		<div class="arrUp"></div>
+   			<div class="arrDown"></div>
+  			</div>所在地
+            </th>
+            <th scope="col" width="202px" height="44px">院校标签</th>
+            <th scope="col" width="150px" height="44px">毕业五年薪酬</th>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+        </table>
+    </div>
+    <div class="investment_con_list" >
+      <table width="100%"  cellspacing="0" cellpadding="0" style="position: relative">
+          <tr>
+            <th scope="col" width="126px" height="44px">排名</th>
+            <th scope="col" width="226px" height="44px" style="line-height:44px; text-align:center">  
+            <div class="arr">
+    		<div class="arrUp"></div>
+   			<div class="arrDown"></div>
+  			</div>院校名称
+  			</th>
+            <div class="clearfix"></div>
+            <th scope="col" width="141px" height="44px">院校类型</th>
+            <th scope="col" width="136px" height="44px" style="position: relative">
+            <div class="arr2">
+    		<div class="arrUp"></div>
+   			<div class="arrDown"></div>
+  			</div>所在地
+            </th>
+            <th scope="col" width="202px" height="44px">院校标签</th>
+            <th scope="col" width="150px" height="44px">毕业五年薪酬</th>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+        </table>
+
+    </div>
+        <div class="investment_con_list" >
+
+     
+      <table width="100%"  cellspacing="0" cellpadding="0" style="position: relative">
+          <tr>
+            <th scope="col" width="126px" height="44px">排名</th>
+            <th scope="col" width="226px" height="44px" style="line-height:44px; text-align:center">  
+            <div class="arr">
+    		<div class="arrUp"></div>
+   			<div class="arrDown"></div>
+  			</div>院校名称
+  			</th>
+            <div class="clearfix"></div>
+            <th scope="col" width="141px" height="44px">院校类型</th>
+            <th scope="col" width="136px" height="44px" style="position: relative">
+            <div class="arr2">
+    		<div class="arrUp"></div>
+   			<div class="arrDown"></div>
+  			</div>所在地
+            </th>
+            <th scope="col" width="202px" height="44px">院校标签</th>
+            <th scope="col" width="150px" height="44px">毕业五年薪酬</th>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+        </table>
+
+    </div>
+        <div class="investment_con_list" >
+
+    
+      <table width="100%"  cellspacing="0" cellpadding="0" style="position: relative">
+          <tr>
+            <th scope="col" width="126px" height="44px">排名</th>
+            <th scope="col" width="226px" height="44px" style="line-height:44px; text-align:center">  
+            <div class="arr">
+    		<div class="arrUp"></div>
+   			<div class="arrDown"></div>
+  			</div>院校名称
+  			</th>
+            <div class="clearfix"></div>
+            <th scope="col" width="141px" height="44px">院校类型</th>
+            <th scope="col" width="136px" height="44px" style="position: relative">
+            <div class="arr2">
+    		<div class="arrUp"></div>
+   			<div class="arrDown"></div>
+  			</div>所在地
+            </th>
+            <th scope="col" width="202px" height="44px">院校标签</th>
+            <th scope="col" width="150px" height="44px">毕业五年薪酬</th>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+          <tr>
+            <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+                      <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+                      <td width="126px" height="44px">1</td>
+            <td width="226px" height="44px">清华大学</td>
+            <td width="141px" height="44px">工科</td>
+            <td width="136px" height="44px">北京市</td>
+            <td width="202px" height="44px">985   211   双一流  </td>
+            <td width="150px" height="44px" style="color:#ff8d00">￥14918</td>
+          </tr>
+        </table>
+
+    </div>
+
+  </div>
+
+</div>
+        </div>
+        <div class="clearfix"></div>
+        </div>
+[#include "../include/footer_new.html"/]
+    
+
+<script>
+  $(function () {
+    $(".arrUp").on("click", function () {
+      $(this).css("border-bottom-color", "#b2b2b2");
+      $(".arrDown").css("border-top-color", "#ccc")
+    });
+    $(".arrDown").on("click", function () {
+      $(this).css("border-top-color", "#b2b2b2")
+      $(".arrUp").css("border-bottom-color", "#ccc")
+    })
+  })
+</script>
+</body>
+</html>

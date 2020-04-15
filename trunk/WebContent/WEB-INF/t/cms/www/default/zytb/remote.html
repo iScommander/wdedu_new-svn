@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="${base}/r/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css"/>
+    <style>
+        /*表格里的tab切换*/
+        .ChooseToOption_tabs li a {
+            background: #b5b5b5;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .nav-tabs > li.active > a,
+        .nav-tabs > li.active > a:focus,
+        .nav-tabs > li.active > a:hover {
+            color: #fff;
+            background-color: #fac73c;
+            border: none;
+        }
+
+        .nav > li > a:focus,
+        .nav > li > a:hover {
+            background-color: #b5b5b5;
+        }
+
+        .ChooseToOption_tabs {
+            border-bottom: 0;
+        }
+
+        .ChooseToOption_tabs li a {
+            height: 40px;
+            line-height: 40px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .selectNumberScreen dl dd.rankingFiltration a {
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+            text-align: center;
+            background: #b5b5b5;
+            color: #fff;
+            border-radius: 5px;
+            padding-top: 4px;
+        }
+
+        .selectNumberScreen dl dd.rankingFiltration a.chong {
+            margin-right: 0;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .rankingFiltration .upAndDown {
+            display: inline-block;
+        }
+
+        .rankingFiltration .upAndDown > span {
+            position: relative;
+            top: -20.3px;
+            left: -7px;
+            background: #FFF;
+            border: 1px solid #ddd;
+            padding: 5.1px;
+            font-size: 14px;
+        }
+
+        .rankingFiltration .upAndDown > span input {
+            width: 35px;
+            height: 25px;
+            border-radius: 0;
+            position: relative;
+            top: -2px;
+        }
+
+        .benginFillInMain .BatchFill > div .eachBatch {
+            background: #d7f5f9;
+            font-size: 18px;
+            color: #666;
+            width: 1060px;
+            height: 55px;
+            line-height: 55px;
+            padding-left: 25px;
+        }
+
+        .benginFillInMain .BatchFill > div table tr td ul.specialtyList li {
+            border-bottom: 1px solid #eef2f5;
+            padding: 15px 0;
+        }
+
+        .benginFillInMain .BatchFill > div table tr td ul.specialtyList div.yo-yo b {
+            color: #05b8c3;
+            font-weight: normal;
+        }
+
+        .benginFillInMain .BatchFill > div table tr td ul.WhetherObey li {
+            padding: 11.5px 0;
+            /*border-bottom: 1px solid #eef2f5;*/
+        }
+
+        .benginFillInMain .BatchFill > div table tr td ul.WhetherObey li button {
+            width: 60px;
+            height: 30px;
+            line-height: 30px;
+            background: #b5b5b5;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        ul.yearTab_tabs li a {
+            margin-top: 0;
+        }
+
+        .modal-body {
+            position: relative;
+            padding-top: 105px;
+        }
+        .volunteer_select{
+            float: left;
+            background-color: #fac73c;
+            padding: 5px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px 10px;
+
+            width: 345px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .checkbox_base label {
+           text-align: left;
+            padding: 0;
+            left: 12px;
+            top: 0;
+            height: 20px;
+            line-height: 20px;
+        }
+        .volunteer_show {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 999;
+            margin-top:0px;
+            color: #fff;
+            min-height: 100px;
+            max-height: 100px;
+            background: #05b8c3;
+            overflow: auto;
+        }
+        .major_name {
+            width: 200px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .major_name_right {
+            width: 200px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div id="volunteer_show" class="volunteer_show" >
+
+    [#if mojrDetailList??]
+    [#list mojrDetailList as detail]
+        <div id="show_volunteer_sele_${detail.majorNumId!}" data-value="${detail.majorNumId!}"  class="volunteer_select"><span>${detail.majorName!}</span></div>
+    [/#list]
+    [/#if]
+
+</div>
+<div class="modal-body flex-container2" style="max-height:640px;overflow: auto;">
+    <div style="width: 62%;">
+
+        <p style="color: #05b8c3;font-size: 14px;padding: 9px;">*数据来源教育考试院- 招生计划 ,点击填报，则选中该专业，再次点击填报按钮，则取消该专业选择</p>
+        <form id="itemForm">
+            <table class="table deeptable table-striped volunteer_list">
+                <tr>
+                    <th width="80">代码</th>
+                    <th width="200">大学/专业名称</th>
+                    <th width="100">填报</th>
+                    <th width="100">计划</th>
+                    <th>学费</th>
+                    <th width="90">学制</th>
+                    <th>备注</th>
+                </tr>
+            </table>
+            <div style="max-height:400px;overflow-y:auto;">
+                <table class="table table-striped volunteer_list">
+                <tr>
+                    <td>${univPlan.univ_code!}</td>
+                    <td>${univPlan.univ_name!}</td>
+                    <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&thinsp;&thinsp;</td>
+                    <td style="padding-left: 20px">${univPlan.plan_num!}</td>
+                    <td>${univPlan.plan_fee!}</td>
+                    <td>${univPlan.plan_school_length!}</td>
+                    <td>${univPlan.plan_remark!}</td>
+                </tr>
+                [#if planList?? ]
+                [#list planList as a ]
+                [#if majorNa??]
+                [#if  a.majorName?contains(majorNa)]
+                <tr style="background-color: #ef3838;color: white">
+                    <td>${a.majorCode!}</td>
+                    <td><div class="major_name beyondHidden500" title="${a.majorName!}">${a.majorName!}</div></td>
+                    <td class="checkbox_base" style="padding-left: 8px;">
+                        [#if mojrList??]
+                            [#if mojrList?seq_contains('${a.id!}')]
+                                <input id="volunteer_sele_${a.id!}" type="checkbox" value="${a.id!}" checked="checked">
+                                <label for="volunteer_sele_${a.id!}">填报</label>
+                            [#else]
+                                <input id="volunteer_selec_${a.id!}" type="checkbox" value="${a.id!}">
+                                <label for="volunteer_selec_${a.id!}">填报</label>
+                            [/#if]
+                        [#else]
+                            <input id="volunteer_select_${a.id!}" type="checkbox" value="${a.id!}">
+                            <label for="volunteer_select_${a.id!}">填报</label>
+                        [/#if]
+                    </td>
+                    <td style="padding-left: 20px;">${a.planNum!}</td>
+                    <td style="padding-left:80px;">${a.planFee!}</td>
+                    <td style="padding-left:80px;" class="major_name beyondHidden500" title="${a.planSchoolLength!}">${a.planSchoolLength!}</td>
+                    <td><div class="major_name beyondHidden500" title="${a.remark!}">${a.remark!}</div></td>
+                </tr>
+                    [#else]
+
+                    <tr>
+                        <td>${a.majorCode!}</td>
+                        <td><div class="major_name beyondHidden500" title="${a.majorName!}">${a.majorName!}</div></td>
+                        <td class="checkbox_base" style="padding-left: 8px;">
+                            [#if mojrList??]
+                            [#if mojrList?seq_contains('${a.id!}')]
+                            <input id="volunteer_sele_${a.id!}" type="checkbox" value="${a.id!}" checked="checked">
+                            <label for="volunteer_sele_${a.id!}">填报</label>
+                            [#else]
+                            <input id="volunteer_selec_${a.id!}" type="checkbox" value="${a.id!}">
+                            <label for="volunteer_selec_${a.id!}">填报</label>
+                            [/#if]
+                            [#else]
+                            <input id="volunteer_select_${a.id!}" type="checkbox" value="${a.id!}">
+                            <label for="volunteer_select_${a.id!}">填报</label>
+                            [/#if]
+                        </td>
+                        <td style="padding-left: 20px;">${a.planNum!}</td>
+                        <td style="padding-left:80px;">${a.planFee!}</td>
+                        <td style="padding-left:80px;" class="major_name beyondHidden500" title="${a.planSchoolLength!}">${a.planSchoolLength!}</td>
+                        <td><div class="major_name beyondHidden500" title="${a.remark!}">${a.remark!}</div></td>
+                    </tr>
+                    [/#if]
+                    [#else]
+                    <tr>
+                        <td>${a.majorCode!}</td>
+                        <td><div class="major_name beyondHidden500" title="${a.majorName!}">${a.majorName!}</div></td>
+                        <td class="checkbox_base" style="padding-left: 8px;">
+                            [#if mojrList??]
+                            [#if mojrList?seq_contains('${a.id!}')]
+                            <input id="volunteer_sele_${a.id!}" type="checkbox" value="${a.id!}" checked="checked">
+                            <label for="volunteer_sele_${a.id!}">填报</label>
+                            [#else]
+                            <input id="volunteer_selec_${a.id!}" type="checkbox" value="${a.id!}">
+                            <label for="volunteer_selec_${a.id!}">填报</label>
+                            [/#if]
+                            [#else]
+                            <input id="volunteer_select_${a.id!}" type="checkbox" value="${a.id!}">
+                            <label for="volunteer_select_${a.id!}">填报</label>
+                            [/#if]
+                        </td>
+                        <td style="padding-left: 20px;">${a.planNum!}</td>
+                        <td style="padding-left:80px;">${a.planFee!}</td>
+                        <td style="padding-left:80px;" class="major_name beyondHidden500" title="${a.planSchoolLength!}">${a.planSchoolLength!}</td>
+                        <td><div class="major_name beyondHidden500" title="${a.remark!}">${a.remark!}</div></td>
+                    </tr>
+                    [/#if]
+                [/#list]
+                [/#if]
+                </table>
+            </div>
+            <input type="hidden" id="planId" value="${planId!}"/>
+            <input type="hidden" id="batchId" value="${batchId!}"/>
+            <input type="hidden" id="replaceCode" value="${replaceCode!}"/>
+            <input type="hidden" id="majorNum" value="${majorNum!}"/>
+            <input type="hidden" id="order" value="${order!}"/>
+            <input type="hidden" id="isFormal" value="${isFormal!}" />
+            <input type="hidden" id="univCodes" value="${univCodes!}" />
+            <input type="hidden" id="provinceId" value="${provinceId!}" />
+        </form>
+    </div>
+    <div style="width: 36%;">
+        <ul id="yearTab" class="nav nav-tabs ChooseToOption_tabs yearTab_tabs">
+            <li class="active">
+                <a href="#yearTab1" data-toggle="tab">${year!}</a>
+            </li>
+            <li>
+                <a href="#yearTab2" data-toggle="tab">${year-1!}</a>
+            </li>
+            <li>
+                <a href="#yearTab3" data-toggle="tab">${year-2!}</a>
+            </li>
+        </ul>
+        <div id="yearTabContent" class="tab-content" style="max-height:480px;overflow: auto">
+            <div class="tab-pane in active" id="yearTab1">
+                <table class="table deeptable table deeptable letterSpacing0 table-striped">
+                    <tr>
+                        <th>大学/专业名称</th>
+                        <th>最低分/排名</th>
+                        <th>平均分/排名</th>
+                    </tr>
+                    <tr>
+                        <td  style="font-size: 22px;font-weight: bold">${univPlan.univ_name!}  </td>
+                        <td > <font color="black">${univDetail.scoreLow1!} </font>/<font color="blue">${univDetail.rankScoreLow1!} </font> </td>
+                    </tr>
+                    [#if yearsAgo1?? ]
+                    [#list yearsAgo1 as a ]
+                    <tr>
+                        <td><div class="major_name_right beyondHidden500" title="${a.majorName!}">${a.majorName!}</div></td>
+                        <td><font color="black">${a.histLowScore!}</font>/
+                            [#if a.histLowRank??]
+                            [#if a.histLowRank lt userRank]
+                            <font color="red">${a.histLowRank!}</font>
+                            [#else]
+                            <font color="green">${a.histLowRank!}</font>
+                            [/#if]
+                            [/#if]
+                        </td>
+                        <td><font color="black"> ${a.histAveScore!}</font>/
+                            [#if a.histAveRank??]
+                            [#if a.histAveRank lt userRank]
+                            <font color="red">${a.histAveRank!}</font>
+                            [#else]
+                            <font color="green">${a.histAveRank!}</font>
+                            [/#if]
+                            [/#if]
+                        </td>
+                    </tr>
+                    [/#list]
+                    [/#if]
+                </table>
+            </div>
+            <div class="tab-pane" id="yearTab2">
+                <table class="table deeptable table deeptable letterSpacing0">
+                    <tr>
+                        <th>大学/专业名称</th>
+                        <th>最低分/排名</th>
+                        <th>平均分/排名</th>
+                    </tr>
+                    <tr>
+                        <td  style="font-size: 22px;font-weight: bold">${univPlan.univ_name!}  </td>
+                        <td > <font color="black">${univDetail.scoreLow2!} </font>/<font color="blue">${univDetail.rankScoreLow2!} </font> </td>
+                    </tr>
+                    [#if yearsAgo2?? ]
+                    [#list yearsAgo2 as a ]
+                    <tr>
+                        <td><div class="major_name_right beyondHidden500" title="${a.majorName!}">${a.majorName!}</div></td>
+                        <td><font color="black">${a.histLowScore!}</font>/
+                            [#if a.histLowRank??]
+                            [#if a.histLowRank lt userRank]
+                            <font color="red">${a.histLowRank!}</font>
+                            [#else]
+                            <font color="green">${a.histLowRank!}</font>
+                            [/#if]
+                            [/#if]
+                        </td>
+                        <td><font color="black"> ${a.histAveScore!}</font>/
+                            [#if a.histAveRank??]
+                            [#if a.histAveRank lt userRank]
+                            <font color="red">${a.histAveRank!}</font>
+                            [#else]
+                            <font color="green">${a.histAveRank!}</font>
+                            [/#if]
+                            [/#if]
+                        </td>
+                    </tr>
+                    [/#list]
+                    [/#if]
+                </table>
+            </div>
+            <div class="tab-pane" id="yearTab3">
+                <table class="table deeptable table deeptable letterSpacing0">
+                    <tr>
+                        <th>大学/专业名称</th>
+                        <th>最低分/排名</th>
+                        <th>平均分/排名</th>
+                    </tr>
+                    <tr>
+                        <td  style="font-size: 22px;font-weight: bold">${univPlan.univ_name!}  </td>
+                        <td > <font color="black">${univDetail.scoreLow3!} </font>/<font color="blue">${univDetail.rankScoreLow3!} </font> </td>
+                    </tr>
+                    [#if yearsAgo3?? ]
+                    [#list yearsAgo3 as a ]
+                    <tr>
+                        <td><div class="major_name_right beyondHidden500" title="${a.majorName!}">${a.majorName!}</div></td>
+                        <td><font color="black">${a.histLowScore!}</font>/
+                            [#if a.histLowRank??]
+                            [#if a.histLowRank lt userRank]
+                            <font color="red">${a.histLowRank!}</font>
+                            [#else]
+                            <font color="green">${a.histLowRank!}</font>
+                            [/#if]
+                            [/#if]
+                        </td>
+                        <td><font color="black"> ${a.histAveScore!}</font>/
+                            [#if a.histAveRank??]
+                            [#if a.histAveRank lt userRank]
+                            <font color="red">${a.histAveRank!}</font>
+                            [#else]
+                            <font color="green">${a.histAveRank!}</font>
+                            [/#if]
+                            [/#if]
+                        </td>
+                    [/#list]
+                    [/#if]
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="${base}/r/js/jQuery.js"></script>
+<script src="${base}/r/js/bootstrap.min.js"></script>
+<script src="${base}/r/js/itemsJs/filtrate.js"></script>
+<script src="${base}/r/js/itemsJs/common.js"></script>
+<script src="${base}/r/js/Sortable.js"></script>
+<script>
+    //拖动插件渲染
+    Sortable.create(volunteer_show);
+
+    var max_volunteer_count = ${majorNum!0};
+    $(".volunteer_list input[type=checkbox]").on("click", function () {
+        var current_count = $(".volunteer_list input[type=checkbox]:checked").length;
+
+        if (current_count > max_volunteer_count || (current_count+${ybNumSize!0}) > max_volunteer_count) {
+            alert("最多选择" + max_volunteer_count + "个专业");
+            return false;
+        }
+        var value = $(this).val();
+        var text = $(this).parents("tr").find("td").eq(1).text()
+        var selected_show_id = "show_" + this.id;
+        var selected_show = $("#" + selected_show_id);
+        if (!selected_show[0]) {
+            $(".volunteer_show").append('<div id="' + selected_show_id + '" data-value="' + value + '"  class="volunteer_select" title="'+text+'"><span>' + text + '</span></div>');
+        } else {
+            selected_show.remove()
+        }
+    });
+
+    function saveDetail(){
+        var isSelect = "";
+        for (let index = 0; index < $(".volunteer_show div").length; index++) {
+            isSelect += $($(".volunteer_show div")[index]).attr("data-value") + ",";
+        }
+
+        isSelect = isSelect.substring(0, isSelect.lastIndexOf(','));
+
+        $.ajax({
+            url : 'isReportMajor.jspx',
+            data: {
+                planId:$("#planId").val(),
+                batchId:$("#batchId").val(),
+                isSelect:isSelect,
+                replaceCode: $("#replaceCode").val(),
+                isFormal:$("#isFormal").val(),
+                univCodes:$("#univCodes").val(),
+                order:$("#order").val()
+            },
+            type : "POST",
+            async:false,
+            error : function(data) {
+                alert("提交失败！\r\n"+data);
+            },
+            success : function(data) {
+                var res = eval('(' + data + ')');
+                if(res && res.success == true){
+                    event.returnValue=false;
+                    location.href = res.msg;
+                    parent._hideIframe();
+                }else{
+                    alert(res.msg);
+                }
+            }
+
+        });
+    }
+</script>
+
+</html>
+

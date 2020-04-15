@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>所有活动名单</title>
+		<link rel="stylesheet" href="${base}/r/sign/jedate.css" />
+		<link rel="stylesheet" href="${base}/r/sign/jzhd-manage.css" />
+		<script src="${base}/r/sign/jquery-1.11.3.min.js"></script>
+		<script src="${base}/r/sign/city.min.js"></script>
+		<style type="text/css">
+			.btn-search{right: 200px;}
+		</style>
+	</head>
+	<body class="iframe-body">
+		<h4 class="con-title">所有活动名单</h4>
+		<div class="search-wrap gps">
+			<div class="search-item">
+				<label>讲座时间:</label>
+				<span><input type="text" class="date-icon" id="inpstart" placeholder="开始日期" readonly="readonly"></span>
+				<span class="line">--</span>
+				<span><input type="text" class="date-icon" id="inpend" placeholder="结束日期" readonly="" disabled="disabled"></span>
+			</div>
+			<div class="search-item">
+				<label>选择省份:</label>
+				<span class="select-wrap">
+					<select id="pro">
+						<option value="none">--请选择--</option>
+					</select>
+				</span>
+			</div>
+			<div class="search-item">
+				<label>选择市区:</label>
+				<span class="select-wrap">
+					<select id="city" disabled>
+						<option value="none">--请选择--</option>
+					</select>
+				</span>
+			</div>
+			<div class="search-item">
+				<label>主讲老师:</label>
+				<span class="select-wrap">
+					<select id="teacher">
+						<option value="0">--请选择--</option>
+						<option value="1">A校区</option>
+						<option value="2">B校区</option>
+						<option value="3">B校区</option>
+					</select>
+				</span>
+			</div>
+			<button type="button" class="btn-search">查询</button>
+		</div>
+		<table>
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>省份</th>
+					<th>市区</th>
+					<th>姓名</th>
+					<th>电话</th>
+					<th>学校</th>
+					<th>年级</th>
+					<th>排名</th>
+					<th>文理科</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>江苏省</td>
+					<td>南京市</td>
+					<td>张三</td>
+					<td>1544535543</td>
+					<td>中华中学</td>
+					<td>高一</td>
+					<td>200</td>
+					<td>理科</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>江苏省</td>
+					<td>南京市</td>
+					<td>张三</td>
+					<td>1544535543</td>
+					<td>中华中学</td>
+					<td>高一</td>
+					<td>200</td>
+					<td>理科</td>
+				</tr>
+			</tbody>
+		</table>
+		<ol class="paging">
+			<li>首页</li>
+			<li>上一页</li>
+			<li>下一页</li>
+			<li>尾页</li>
+		</ol>
+	</body>
+	<script src="${base}/r/sign/jquery.jedate.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			//省市
+			function getSeectList(obj,data){
+				var html = '<option value="none">--请选择--</option>';
+				$.each(data, function(i,val) {
+					html += '<option value="'+val.id+'">'+val.value+'</option>';
+				});
+				$(obj).html(html);
+			};
+			getSeectList('#pro',prolist);
+			$('#pro').on('change',function(){
+				var pro = $(this).val();
+				if(pro=='none'){
+					alert('请选择省份，否则无法选择市区！');
+					$('#city').attr('disabled','disabled');		
+					$('#quxian').attr('disabled','disabled');
+					return false;
+				};
+				console.log(pro);
+				var cityData = [];
+				$.each(citylist, function(j,val) {
+					if(val.parentId==pro){
+						cityData.push(citylist[j]);
+					}
+				});
+				getSeectList('#city',cityData);
+				$('#city').removeAttr('disabled');
+			});
+			$('#city').on('change',function(){
+				var city = $(this).val();
+				if(city=='none'){
+					alert('请选择市区！');
+					return false;
+				};
+			});
+			//时间选择
+			var start = {
+			    format: 'YYYY-MM-DD',
+			    onClose: false, 
+			    minDate: $.nowDate({DD:0}),
+			    okfun: function(obj){
+			        end.minDate = obj.val;
+			        $("#inpend").removeAttr("disabled");
+			        endDates();
+			    }
+			};
+			var end = {
+			    format: 'YYYY-MM-DD',
+			    onClose: false,
+			    minDate: $.nowDate({DD:0}),
+			};
+			function endDates() {
+			    end.trigger = false;
+			    $("#inpend").jeDate(end);
+			};
+			$('#inpstart').jeDate(start);
+			$('#inpend').jeDate(end);
+		})
+	</script>
+</html>

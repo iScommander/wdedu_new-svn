@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>院校详情</title>
+    <link rel="stylesheet" href="${base}/r/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${base}/r/css/combo.select.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css"/>
+
+</head>
+
+<body data-spy="scroll" data-target="#myScrollspy">
+<!--顶部-->
+[#include "../include/header.html"/]
+<!--路径-->
+<div class="route">
+    <div class="flex-container width1200">
+        <div>
+            <a href="${base}">首页 </a> &lt;&lt; 志愿填报 &lt;&lt;找大学 &lt;&lt;院校详情
+        </div>
+        <div></div>
+    </div>
+</div>
+<!--主体-->
+<main class="schoolDetailsMain width1200">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3 headlineLeft" id="myScrollspy">
+                <ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="125">
+                    <li class="active">
+                        <a href="#section-1">院校信息</a>
+                    </li>
+                    <!--<li>-->
+                        <!--<a href="#section-2">计划数据</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="#section-3">历史录取</a>-->
+                    <!--</li>-->
+                    <li>
+                        <a href="#section-4">招生章程</a>
+                    </li>
+                    <li>
+                        <a href="#section-5">大学实力</a>
+                    </li>
+                    <li>
+                        <a href="#section-6">专业排名</a>
+                    </li>
+                    <li>
+                        <a href="#section-7">中外合作办学</a>
+                    </li>
+                    <li>
+                        <a href="#section-8">自主招生章程</a>
+                    </li>
+                    <li>
+                        <a href="#section-9">就业报告</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-9 contentRight">
+                [#if tDataUniversityDetailList?? ]
+                [#list tDataUniversityDetailList as t]
+                <div>
+                    <h2 id="section-1">院校信息</h2>
+                    <div style="min-height: 200px;">${t.descr!}</div>
+                </div>
+
+                <!--<div>-->
+                    <!--<h2 id="section-2">计划数据</h2>-->
+                    <!--<div class="academyEnrollDetails_list73 lishishuju">-->
+                        <!--<ul id="nianTab" class="nav nav-tabs ChooseToOption_tabs yearTab_tabs">-->
+                            <!--<li>-->
+                                <!--<a href="#nianTab1" data-toggle="tab">2016</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="#nianTab2" data-toggle="tab">2017</a>-->
+                            <!--</li>-->
+                            <!--<li class="active">-->
+                                <!--<a href="#nianTab3" data-toggle="tab">2018</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                        <!--<div id="nianTabContent" class="tab-content">-->
+                            <!--<div class="tab-pane" id="nianTab1">-->
+                                <!--<table class="table deeptable">-->
+                                    <!--<tr>-->
+                                        <!--<th>具体专业</th>-->
+                                        <!--<th>科目</th>-->
+                                        <!--<th>计划招生</th>-->
+                                        <!--<th>录取批次</th>-->
+                                    <!--</tr>-->
+                                    <!--[#if tCeeEnrollPlan?? ]-->
+                                    <!--[#list tCeeEnrollPlan as e]-->
+                                    <!--<tr>-->
+                                        <!--<td>${e.majorName!}</td>-->
+                                        <!--<td>${e.majorSubjects!}</td>-->
+                                        <!--<td>${e.planNum!}</td>-->
+                                        <!--<td>${e.batchId!}</td>-->
+                                    <!--</tr>-->
+                                    <!--[/#list]-->
+                                    <!--[/#if]-->
+                                <!--</table>-->
+                            <!--</div>-->
+                            <!--<div class="tab-pane" id="nianTab2">-->
+                                <!--<table class="table deeptable">-->
+                                    <!--<tr>-->
+                                        <!--<th>具体专业</th>-->
+                                        <!--<th>科目</th>-->
+                                        <!--<th>计划招生</th>-->
+                                        <!--<th>录取批次</th>-->
+                                    <!--</tr>-->
+                                    <!--[#if tCeeEnrollPlan1?? ]-->
+                                    <!--[#list tCeeEnrollPlan1 as ite]-->
+                                    <!--<tr>-->
+                                        <!--<td>${ite.majorName!}</td>-->
+                                        <!--<td>${ite.majorSubjects!}</td>-->
+                                        <!--<td>${ite.planNum!}</td>-->
+                                        <!--<td>${ite.batchId!}</td>-->
+                                    <!--</tr>-->
+                                    <!--[/#list]-->
+                                    <!--[/#if]-->
+                                <!--</table>-->
+                            <!--</div>-->
+                            <!--<div class="tab-pane" id="nianTab3">-->
+                                <!--<table class="table deeptable">-->
+                                    <!--<tr>-->
+                                        <!--<th>具体专业</th>-->
+                                        <!--<th>科目</th>-->
+                                        <!--<th>计划招生</th>-->
+                                        <!--<th>录取批次</th>-->
+                                    <!--</tr>-->
+                                    <!--[#if tCeeEnrollPlan2?? ]-->
+                                    <!--[#list tCeeEnrollPlan2 as sub]-->
+                                    <!--<tr>-->
+                                        <!--<td>${sub.majorName!}</td>-->
+                                        <!--<td>${sub.majorSubjects!}</td>-->
+                                        <!--<td>${sub.planNum!}</td>-->
+                                        <!--<td>${sub.batchId!}</td>-->
+                                    <!--</tr>-->
+                                    <!--[/#list]-->
+                                    <!--[/#if]-->
+                                <!--</table>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<h2 id="section-3">历史录取</h2>-->
+                <!--<div class="academyEnrollDetails_list73 lishishuju">-->
+                    <!--<ul id="yearTab" class="nav nav-tabs ChooseToOption_tabs yearTab_tabs">-->
+                        <!--<li>-->
+                            <!--<a href="#yearTab1" data-toggle="tab">2016</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="#yearTab2" data-toggle="tab">2017</a>-->
+                        <!--</li>-->
+                        <!--<li class="active">-->
+                            <!--<a href="#yearTab3" data-toggle="tab">2018</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                    <!--<div id="yearTabContent" class="tab-content">-->
+                        <!--<div class="tab-pane" id="yearTab1">-->
+                            <!--<table class="table deeptable letterSpacing0 table-striped table-bordered">-->
+                                <!--<tr>-->
+                                    <!--<th>学校/专业名称</th>-->
+                                    <!--<th>计划</th>-->
+                                    <!--<th>实录</th>-->
+                                    <!--<th>最低分</th>-->
+                                    <!--<th>最低分排名</th>-->
+                                    <!--<th>平均分</th>-->
+                                    <!--<th>平均分排名</th>-->
+                                <!--</tr>-->
+                                <!--[#if tDataUniversityDetailList1?? ]-->
+                                <!--[#list tDataUniversityDetailList1 as c]-->
+                                <!--<tr>-->
+                                    <!--<td>${c.univName!}(${c.majorName!})</td>-->
+                                    <!--<td>${c.historyPlaned!}</td>-->
+                                    <!--<td>${c.historyEnrolled!}</td>-->
+                                    <!--<td>${c.segScoreLow!}</td>-->
+                                    <!--<td>${c.rankLowScore!}</td>-->
+                                    <!--<td>${c.averageScore!}</td>-->
+                                    <!--<td>${c.rankAverageScore!}</td>-->
+                                <!--</tr>-->
+                                <!--[/#list]-->
+                                <!--[/#if]-->
+                            <!--</table>-->
+                        <!--</div>-->
+                        <!--<div class="tab-pane" id="yearTab2">-->
+                            <!--<table class="table deeptable letterSpacing0 table-striped table-bordered">-->
+                                <!--<tr>-->
+                                    <!--<th>学校/专业名称</th>-->
+                                    <!--<th>计划</th>-->
+                                    <!--<th>实录</th>-->
+                                    <!--<th>最低分</th>-->
+                                    <!--<th>最低分排名</th>-->
+                                    <!--<th>平均分</th>-->
+                                    <!--<th>平均分排名</th>-->
+                                <!--</tr>-->
+                                <!--[#if tDataUniversityDetailList3?? ]-->
+                                <!--[#list tDataUniversityDetailList3 as i]-->
+                                <!--<tr>-->
+                                    <!--<td>${i.univName!}(${i.majorName!})</td>-->
+                                    <!--<td>${i.historyPlaned!}</td>-->
+                                    <!--<td>${i.historyEnrolled!}</td>-->
+                                    <!--<td>${i.segScoreLow!}</td>-->
+                                    <!--<td>${i.rankLowScore!}</td>-->
+                                    <!--<td>${i.averageScore!}</td>-->
+                                    <!--<td>${i.rankAverageScore!}</td>-->
+                                <!--</tr>-->
+                                <!--[/#list]-->
+                                <!--[/#if]-->
+
+                            <!--</table>-->
+                        <!--</div>-->
+                        <!--<div class="tab-pane in active" id="yearTab3">-->
+                            <!--<table class="table deeptable letterSpacing0 table-striped table-bordered">-->
+                                <!--<tr>-->
+                                    <!--<th>学校/专业名称</th>-->
+                                    <!--<th>计划</th>-->
+                                    <!--<th>实录</th>-->
+                                    <!--<th>最低分</th>-->
+                                    <!--<th>最低分排名</th>-->
+                                    <!--<th>平均分</th>-->
+                                    <!--<th>平均分排名</th>-->
+                                <!--</tr>-->
+                                <!--[#if tDataUniversityDetailList4?? ]-->
+                                <!--[#list tDataUniversityDetailList4 as u]-->
+                                <!--<tr>-->
+                                    <!--<td>${u.univName!}(${u.majorName!})</td>-->
+                                    <!--<td>${u.historyPlaned!}</td>-->
+                                    <!--<td>${u.historyEnrolled!}</td>-->
+                                    <!--<td>${u.segScoreLow!}</td>-->
+                                    <!--<td>${u.rankLowScore!}</td>-->
+                                    <!--<td>${u.averageScore!}</td>-->
+                                    <!--<td>${u.rankAverageScore!}</td>-->
+                                <!--</tr>-->
+                                <!--[/#list]-->
+                                <!--[/#if]-->
+                            <!--</table>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                    <div>
+                        <h2 id="section-4">招生章程</h2>
+                        <div style="min-height: 200px;">${t.zszc!}</div>
+                    </div>
+                    <div>
+                        <h2 id="section-5">大学实力</h2>
+                        <div style="min-height: 200px;">
+                            <span>${t.mainlab!}</span>
+                            <span>${t.teacherInfo!}</span>
+                            <span>${t.studentInfo!}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 id="section-6">专业排名</h2>
+                        <div style="min-height: 200px;">
+                            <table class="table deeptable">
+                                <tr>
+                                    <th>专业排名</th>
+                                    <th>专业名称</th>
+                                    <th>学科等级</th>
+                                </tr>
+                                [#if tDataMajorRankList?? ]
+                                [#list tDataMajorRankList as d]
+                                <tr>
+
+                                    <td>${d.rank!}</td>
+                                    <td>${d.majorName!}</td>
+                                    <td>${d.grade!}</td>
+
+                                </tr>
+                                [/#list]
+                                [/#if]
+                            </table>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 id="section-7">中外合作办学</h2>
+                        <div style="min-height: 200px;">${t.zwhzbx!}</div>
+                    </div>
+                    <div>
+                        <h2 id="section-8">自主招生章程</h2>
+                        <div style="min-height: 200px;">${t.zszcYd!}</div>
+                    </div>
+                    [/#list]
+                    [/#if]
+                </div>
+            </div>
+        </div>
+</main>
+<!--js-->
+<script src="${base}/r/js/jQuery.js"></script>
+<script src="${base}/r/js/bootstrap.min.js"></script>
+<script src="${base}/r/js/itemsJs/filtrate.js"></script>
+<script src="${base}/r/js/itemsJs/common.js"></script>
+</body>
+
+</html>

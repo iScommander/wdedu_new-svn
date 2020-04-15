@@ -1,0 +1,121 @@
+<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css"/>
+<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css"/>
+<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css"/>
+<script src="${base}/r/js/bootstrap.js/bootstrap.min.js"></script>
+<script src="${base}/r/js/itemsJs/common.js"></script>
+
+<!--head-->
+<!--顶部-->
+<header class="indexHeader">
+    <div class="flex-container width1200">
+        <div>学涯云教育集团旗下升学服务站</div>
+        <div class="textR">
+					<span>
+					<a href="${base}/wxpay/wxpay.jspx">购卡中心</a>
+                     <!--<a href="${base}/alipay/fuwuzhongxin.jspx">购卡中心</a>-->
+				    </span>
+            <span>咨询热线：400-9288-985。售后服务群(744603708)。</span>
+        </div>
+    </div>
+</header>
+<!--tab切换  导航-->
+<nav class="indexNav">
+    <div class="flex-container1 width1200">
+        <div class="flex-item1">
+            <a href="${base}/index.jhtml"><img src="${base}/u/cms/www/logo/logo.png" alt=""/></a>
+            <a href="${base}/index.jhtml"><img src="${base}/u/cms/www/logo/name.png" alt=""/></a>
+        </div>
+        <div class="flex-item1">
+            <ul class="nav nav-pills">
+                <li role="presentation">
+                    <a href="${base}/index.jhtml">首页</a>
+                </li>
+
+                <!--<li role="presentation">-->
+                <!--<a href="${base}/gkxk/queryOrder.jspx">学大高考志愿</a>-->
+                <!--</li>-->
+
+                <li role="presentation">
+                    <a href="${base}/gkxk/to_choose.jspx">高考选科</a>
+                </li>
+
+                <li role="presentation">
+                    <a href="${base}/FwYl/BackgroundAscension.jspx">背景提升</a>
+                </li>
+                <li role="presentation" class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        志愿填报
+                    </a>
+                    <ul class="dropdown-menu">
+
+                        <li><a href="${base}/zytb/project.jspx">志愿填报</a></li>
+                        <li>
+                            <a href="${base}/fastZytb/volunteerFlexible.jspx">智能志愿填报</a>
+                        </li>
+                        <li><a href="${base}/zytb/toCollegeService.jspx">志愿填报服务</a></li>
+                        <li><a href="${base}/FindUniv/findUnivList.jspx">找大学</a></li>
+                        <li><a href="${base}/FindUniv/findMajor.jspx">查专业</a></li>
+                        <!--<li><a href="${base}/zytb/batchLine.jspx">批次线</a></li>-->
+                    </ul>
+                </li>
+                <li role="presentation">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">自招&综评</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="${base}/FwYl/member/fwyl.jspx">自主&综评</a></li>
+                        <li><a href="${base}/FwYl/zpfw.jspx">自招综评服务</a></li>
+                        <li><a href="${base}/FwYl/zczx.jspx">章程&资讯</a></li>
+                        <li><a href="${base}/FwYl/fwzl.jspx">自招服务资料</a></li>
+                        <li><a href="${base}/FwYl/mnwb.jspx">招生模拟网报</a></li>
+                        [#if user??]
+                        [#list user.roles as a]
+                        [#if a.id==36]
+                        <li><a href="http://www.yuncareer.com:9094/oss/">自招综评大数据</a></li>
+                        [#else]
+                        <li style="display: none"><a href="http://www.yuncareer.com:9094/oss/">${a.id}</a></li>
+                        [/#if]
+                        [/#list]
+                        [#else]
+                        <li style="display: none"><a href="http://www.yuncareer.com:9094/oss/">数据查询</a></li>
+                        [/#if]
+                    </ul>
+                </li>
+                <li role="presentation">
+                    <a href="${base}/ActiveDetailAct/expertLectures.jspx" >专家讲座</a>
+                </li>
+                <li role="presentation">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">沃得研究院</a>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="${base}/ActivityAct/zixun.jspx">沃得资讯</a>
+                        </li>
+                        <li>
+                            <a href="${base}/ActivityAct/shipin.jspx">讲座视频</a>
+                        </li>
+                        <li>
+                            <a href="${base}/ActiveDetailAct/teacherList.jspx">专家团队</a>
+                        </li>
+                        <li>
+                            <a href="${base}/alipay/fuwuzhongxin.jspx">服务中心</a>
+                        </li>
+
+                    </ul>
+
+                </li>
+            </ul>
+
+        </div>
+        <div id="loginCsiDiv" style="float:left;" class="flex-item1 logRegister"></div>
+        <script src="${base}/r/js/jQuery.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                [#if site.config.ssoEnable]
+                    Cms.loginSSO('${base!}');
+                [/#if]
+                    Cms.loginCsi("${base!}","loginCsiDiv",{"returnUrl":"${location}"});
+            });
+        </script>
+    </div>
+</nav>
+<!--head-->

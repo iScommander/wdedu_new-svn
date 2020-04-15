@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8"/>
+	<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>首页</title>
+	<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css"/>
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css"/>
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css"/>
+	<!--js-->
+	<script src="${base}/r/js/jQuery.js"></script>
+	<script src="${base}/r/cms/front.js"></script>
+	<script src="${base}/r/js/bootstrap.min.js"></script>
+	<script src="${base}/r/js/itemsJs/common.js"></script>
+	<style>
+		.width1200 {
+			height: auto;
+		}
+		/*悬浮框*/
+
+		ul.waiter-ul {
+			list-style: none;
+		}
+
+		.wuyou-waiter {
+			position: fixed;
+			right: 0px;
+			top: 50%;
+			margin-top: -90px;
+			width: 60px;
+			box-shadow: 0px 0px 20px rgba(0, 0, 0, .3);
+			z-index: 999;
+		}
+
+		.waiter-ul li {
+			position: relative;
+			height: 60px;
+			line-height: 60px;
+			border-bottom: 1px solid #fff;
+		}
+
+		.waiter-ul li a {
+			position: absolute;
+			left: 0;
+			top: 0;
+			z-index: 2;
+			color: #fff;
+			display: block;
+			width: 60px;
+			height: 60px;
+			line-height: 60px;
+			text-align: center;
+			-webkit-transition: all 0.6s;
+			-ms-transition: all 0.6s;
+			-moz-transition: all 0.6s;
+			text-decoration: none;
+			font-size: 24px;
+		}
+
+		.waiter-title {
+			position: absolute;
+			left: 0px;
+			bottom: 1px;
+			color: #fff;
+			width: 80px;
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+			-webkit-transition: all 0.6s;
+			-ms-transition: all 0.6s;
+			-moz-transition: all 0.6s;
+			background-color: #fff;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, .3);
+			z-index: 1;
+			opacity: 0;
+		}
+
+		.waiter-title:before {
+			content: '';
+			display: block;
+			width: 10px;
+			height: 10px;
+			position: absolute;
+			right: -5px;
+			top: 14px;
+			background-color: #fff;
+			transform: rotate(45deg);
+		}
+
+		.waiter-ul li:hover .waiter-title {
+			left: -88px;
+			opacity: 1;
+		}
+
+		.waiter-ul li.wuyou-shop a {
+			background: url(${base}/r/img/erji.png)no-repeat #fff;
+			background-size: 60px 60px;
+			border: 1px solid #dadada;
+		}
+
+		.waiter-ul li.wuyou-shop .waiter-title {
+			background-color: #f60;
+		}
+
+		.waiter-ul li.wuyou-shop .waiter-title:before {
+			background-color: #f60;
+		}
+
+		.waiter-ul li.wuyou-contact a {
+			background: url(${base}/r/img/minierweima.png)no-repeat #fff;
+			background-size: 60px 60px;
+			border: 1px solid #dadada;
+		}
+
+		.waiter-ul li.wuyou-contact .waiter-title {
+			background-color: #00b7ee;
+		}
+
+		.waiter-ul li.wuyou-contact .waiter-title:before {
+			background-color: #00b7ee;
+		}
+
+		.waiter-ul li.wuyou-rexian a {
+			background: url(${base}/r/img/dianhua.png)no-repeat #fff;
+			background-size: 60px 60px;
+			border: 1px solid #dadada;
+		}
+
+		.waiter-ul li.wuyou-rexian .waiter-title {
+			background-color: #05B8C3;
+		}
+
+		.waiter-ul li.wuyou-rexian .waiter-title:before {
+			background-color: #05B8C3;
+		}
+
+		.guihualunbo{
+			background: url(${base}/r/img/guihuaBg.png) no-repeat;width: 100%;height: 679px;position: relative;
+		}
+		.guihualunbo>div{
+			background: url(${base}/r/img/guihuaziBg.png) no-repeat;width: 1054px;height: 506px;position:absolute;left: 0;right: 0;margin: 75px auto;
+		}
+		.guihualunbo .guihuaxinxi{
+			color: #fff;width: 450px;padding: 70px 45px;
+		}
+		.guihualunbo .guihuaxinxi>div{
+			font-size: 24px;margin-bottom: 80px;background: url(${base}/r/img/kkk.png) no-repeat;height: 75px;line-height: 75px;
+		}
+
+		.guihualunbo .guihuaxinxi ul li{
+			font-size: 20px;
+			margin: 10px 0;
+		}
+		.guihualunbo .guihuaxinxi>div p{
+			font-size: 24px;
+			margin-left: 20px;
+		}
+		.guihualunbo .guihuamubiao{
+			width: 604px;
+		}
+		.guihualunbo .guihuamubiao ul{
+			margin: 35px 60px 0;
+		}
+		.guihualunbo .guihuamubiao ul li{
+			margin-bottom: 55px;
+		}
+		.guihualunbo .guihuamubiao ul li span{
+			font-size: 26px;
+			color: #004065;
+			vertical-align: middle;
+			margin-left: 10px;
+		}
+
+		.guihualunbo .guihuamubiao ul li p{
+			margin-top: 10px;
+			overflow : hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 5;
+			-webkit-box-orient: vertical;
+		}
+
+		.xdxt_logo{
+			background:#333;
+			height:70px;
+			line-height:70px;
+			padding:0 35px 0 25px;
+		}
+		.ui-tiptext {
+			margin: 0;
+			color: #4D4D4D;
+			position: relative;
+			font-size: 12px;
+			zoom: 1
+		}
+
+		.ui-tiptext-container-message {
+			word-wrap:break-word;
+			word-break:break-all;
+			border: 1px solid #b2e2ea;
+			background: #e5f2f8
+		}
+
+		.ui-tiptext-message .ui-tiptext-icon {
+			color: #68b5e2
+		}
+		.ui-tiptext .iconfont {
+			font-size: 1.33em;
+			line-height: 1em;
+			text-shadow: 0 1px 0 #fff;
+			position: relative;
+			top: 2px;
+			margin-right: 2px
+		}
+	</style>
+
+</head>
+
+<body onload="findUserAttr()">
+<!--head-->
+[#include "../include/header.html"/]
+<!--会员登录-->
+<div class="ui-tiptext-container ui-tiptext-container-message" style="margin-top:10px;text-align: center;">
+	<p class="ui-tiptext ui-tiptext-message">
+		<i class="ui-tiptext-icon iconfont" title="提示"></i>
+		<span id="browserV"></span>建议使用最新版本的浏览器进行使用：Firefox（<a href="http://www.firefox.com.cn/" target="_blank">下载</a>）、Chrome（<a href="https://www.google.cn/chrome/" target="_blank">下载</a>）、360（<a href="http://browser.360.cn/" target="_blank">下载</a>）。
+	</p>
+</div>
+<div class="logonbg">
+	<div id="myCarousel" class="carousel slide">
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+		</ol>
+		<!--&lt;!&ndash; 轮播（Carousel）项目 &ndash;&gt;-->
+
+		<!--<div class="carousel-inner">-->
+		<!--<div class="item active">-->
+		<!--<img src="/wdedu/r/img/logonBg.png" alt="First slide">-->
+		<!--</div>-->
+		<!--<div class="item">-->
+		<!--<img src="/wdedu/r/img/logonBg.png" alt="Second slide">-->
+		<!--</div>-->
+		<!--<div class="item">-->
+		<!--<img src="/wdedu/r/img/logonBg.png" alt="Third slide">-->
+		<!--</div>-->
+		<!--</div>-->
+
+		<div class="carousel-inner">
+			[@cms_content_list typeId='1' channelId='122' ]
+			[#list tag_list as a]
+			[#if a_index==0]
+			<div class="item active">
+				<a href="${a.url}"><img src="${a.contentImg!}" alt="First slide"></a>
+			</div>
+			[#else]
+			<div class="item">
+				<a href="${a.url}"><img src="${a.contentImg!}"  alt="Second slide"></a>
+			</div>
+			[/#if]
+			[/#list]
+			[/@cms_content_list]
+		</div>
+
+		<!-- 轮播（Carousel）导航 -->
+		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+	</div>
+</div>
+
+<!--</div>-->
+<!--主体内容-->
+<main class="indexMain">
+	<!--1.沃得教育   用心做教育-->
+	<div class="mainOne">
+		<div class="textC mainOnetop">
+			<p class="bigTitle">沃得教育<span class="blackdot"></span>用心做教育</p>
+			<p class="littleTitle">“沃得教育，伴你选科、培优、自主招生、志愿填报升学路”</p>
+		</div>
+		<div class="textC mainOnebottom width1200">
+			<div class="flex-container">
+				<div>
+					<div class="flex-item">
+						<a href="${base}/FwYl/BackgroundAscension.jspx"><img src="${base}/r/img/1.png" alt=""/></a>
+					</div>
+					<div class="flex-item">
+						<a href="${base}/FwYl/zpfw.jspx"><img src="${base}/r/img/2.png" alt=""/></a>
+					</div>
+				</div>
+				<div class="flex-item">
+					<a href="${base}/alipay/fuwuzhongxin.jspx"><img src="${base}/r/img/3.png" alt=""/></a>
+				</div>
+				<div>
+					<div class="flex-item">
+						<a href="${base}/gkxk/to_choose.jspx"><img src="${base}/r/img/4.png" alt=""/></a>
+					</div>
+					<div class="flex-item">
+						<a href="${base}/zytb/toCollegeService.jspx"><img src="${base}/r/img/5.png" alt=""/></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--2.我的生涯   沃得来教你-->
+	<div class="mainTwo">
+		<div class="textC mainTwotop">
+			<b class="bluedot"></b>
+			<span class="bigTitle borderDashed">
+						  我的生涯<span class="blackdot"></span>沃得来教你
+					</span>
+			<b class="bluedot"></b>
+			<p class="littleTitle fontColor">“沃得教育，伴你选科、培优、自主招生、志愿填报升学路”</p>
+		</div>
+		<div class="textC mainTwobottom width1200">
+			<div class="flex-container">
+				<div class="flex-item" style="width:65%;">
+					<table class="table deeptable" border="1">
+						<tr class="bgColor listTitle">
+							<th>省市</th>
+							<th>
+								<a href="${base}/ActiveDetailAct/expertLectures.jspx" style="color: #1d2b72;">讲座主题&gt;&gt;</a>
+							</th>
+							<th>时间</th>
+							<th>报名</th>
+						</tr>
+						[#if activeList??]
+						[#list activeList as list]
+						<tr>
+							<td>${list.city!}</td>
+							<td>
+								[@text_cut s=list.theme len=20 append='...'/]
+							</td>
+							<td >${list.active_time!}</td>
+							[#if list.active_time gt .now]
+							<td>
+								<button class="btn btnColorBlue" onclick="baoming('${list.active_id}',${list.id})">
+									立即报名
+								</button>
+							</td>
+							[#else]
+							<td>
+								<button class="btn btnColorGray">活动已结束</button>
+							</td>
+							[/#if]
+						</tr>
+						[/#list]
+						[/#if]
+					</table>
+				</div>
+				<div class="flex-item" style="width:35%;">
+					<p class="bgColor listTitle">背景提升项目</p>
+					<ul>
+						[@cms_content_list typeId='1' count=10  channelId='111' dateFormat='yyyy-MM-dd']
+						[#list tag_list as a]
+						<li>
+							<img src="${base}/r/img/li${a_index+1}.png" alt=""/>
+							<a href="${a.url}" target="_blank">[@text_cut s=a.title len=20 append='...'/]</a>
+						</li>
+						[/#list]
+						[/@cms_content_list]
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--3.沃得教育   生涯规划专家-->
+	<div class="mainThree">
+		<div class="textC mainThreetop marginB20">
+			<b class="bluedot"></b>
+			<span class="bigTitle borderDashed">
+							沃得教育<span class="blackdot"></span>生涯规划专家
+					</span>
+			<b class="bluedot"></b>
+			<p class="littleTitle fontColor">“沃得教育，伴你选科、培优、自主招生、志愿填报升学路”</p>
+		</div>
+		<div class="mainThreebottom">
+			<div class="flex-container">
+				<div class="flex-item2 moveInformation">
+					<a href="${base}/ActivityAct/zixun.jspx#zixunList_2">
+						<img src="${base}/r/img/information.png" alt=""/>
+						<b >高招信息</b>
+					</a>
+					<ul>
+						[@cms_content_list typeId='1' count=4  channelId='103' dateFormat='yyyy-MM-dd']
+						[#list tag_list as a]
+						<li>
+							<img src="${base}/r/img/reddot.png" alt=""/>
+							<a href="${a.url}" target="_blank">[@text_cut s=a.title len=12 append='...'/]</a>
+						</li>
+						[/#list]
+						[/@cms_content_list]
+					</ul>
+				</div>
+				<div class="flex-item2 moveInformation">
+					<a href="${base}/FwYl/zpfw.jspx">
+						<img src="${base}/r/img/Judgedby.png" alt=""/>
+						<b>自招综评</b>
+					</a>
+					<ul>
+						[@cms_content_list typeId='1'  count=4  channelId='104' dateFormat='yyyy-MM-dd']
+						[#list tag_list as a]
+						<li>
+							<img src="${base}/r/img/reddot.png" alt=""/>
+							<a href="${a.url}" target="_blank">[@text_cut s=a.title len=12 append='...'/]</a>
+						</li>
+						[/#list]
+						[/@cms_content_list]
+					</ul>
+				</div>
+				<div class="flex-item2 moveInformation">
+					<a href="${base}/ActivityAct/zixun.jspx">
+						<img src="${base}/r/img/career.png" alt=""/>
+						<b>沃得生涯</b>
+					</a>
+					<ul>
+						[@cms_content_list typeId='1'  count=4 channelId='102' dateFormat='yyyy-MM-dd']
+						[#list tag_list as a]
+						<li>
+							<img src="${base}/r/img/reddot.png" alt=""/>
+							<a href="${a.url}" target="_blank">[@text_cut s=a.title len=12 append='...'/]</a>
+						</li>
+						[/#list]
+						[/@cms_content_list]
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--4.苦读十二载   成功源于规划-->
+	<div class="mainFour" style="margin-bottom: 0;">
+		<div class="textC mainFourtop marginB20">
+			<b class="bluedot"></b>
+			<span class="bigTitle borderDashed">
+						苦读十二载<span class="blackdot"></span>成功源于规划
+					</span>
+			<b class="bluedot"></b>
+			<p class="littleTitle fontColor">“沃得教育，伴你选科、培优、自主招生、志愿填报升学路”</p>
+		</div>
+		<div id="myCarouselProject" class="mainFourbottom carousel slide">
+			<ol class="carousel-indicators">
+				<!--设置轮播器列表区域样式，就是小圆点区域样式-->
+				<li data-target="#myCarouselProject" data-slide-to="0" class="active"></li>
+				<!--设置当前列表首选-->
+				<li data-target="#myCarouselProject" data-slide-to="1"></li>
+				<li data-target="#myCarouselProject" data-slide-to="2"></li>
+			</ol>
+			<div class="guihualunbo carousel-inner">
+				<div class="item active tp1">
+					<div class="fl guihuaxinxi">
+						[@cms_content_list typeId='1'  channelId='109' dateFormat='yyyy-MM-dd']
+						[#list tag_list as a]
+						[#if a.id=172]
+						<p>${a.txt!}</p>
+						[/#if]
+						[/#list]
+						[/@cms_content_list]
+					</div>
+					<div class="fl guihuamubiao" >
+						[@cms_content_list typeId='1'  channelId='109' dateFormat='yyyy-MM-dd']
+						[#list tag_list as a]
+						[#if a.id=173]
+						<p>${a.txt!}</p>
+						[/#if]
+						[/#list]
+						[/@cms_content_list]
+					</div>
+				</div>
+				<div class="item tp2">
+					<div class="fl guihuaxinxi">
+						[@cms_content_list typeId='1'  channelId='109' dateFormat='yyyy-MM-dd']
+						[#list tag_list as a]
+						[#if a.id=174]
+						<p>${a.txt!}</p>
+						[/#if]
+						[/#list]
+						[/@cms_content_list]
+					</div>
+					<div class="fl guihuamubiao" >
+						[@cms_content_list typeId='1'  channelId='109' dateFormat='yyyy-MM-dd']
+						[#list tag_list as a]
+						[#if a.id=175]
+
+						<p>${a.txt!}</p>
+
+						[/#if]
+						[/#list]
+						[/@cms_content_list]
+					</div>
+				</div>
+				<!--
+                                <div class="item tp3">
+                                    <div class="fl guihuaxinxi">
+                                        <div>
+                                            <p>规划专家：<span>李可爱</span></p>
+                                        </div>
+                                        <ul>
+                                            <li>学生：<span>王谟仁</span></li>
+                                            <li>分数：<span>222</span></li>
+                                            <li>分数：<span>222</span></li>
+                                            <li>分数：<span>222</span></li>
+                                            <li>分数：<span>222</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="fl guihuamubiao" >
+                                        [@cms_content_list typeId='1'  channelId='109' dateFormat='yyyy-MM-dd']
+                                        [#list tag_list as a]
+                                        [#if a.id=174]
+                                        <ul>
+                                            <li>
+                                                <img src="${base}/r/img/dian.png" alt=""/>
+                                                <span>${a.title!}</span>
+                                            </li>
+                                            <li>
+                                                <img src="${base}/r/img/dian.png" alt=""/>
+
+                                                <p>${a.txt!}</p>
+                                            </li>
+                                        </ul>
+                                        [/#if]
+                                        [/#list]
+                                        [/@cms_content_list]
+                                    </div>
+                                </div>
+                -->
+			</div>
+			<!--设置轮播器箭头区域-->
+			<a href="#myCarouselProject" data-slide="prev" class="carousel-control left">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+			</a>
+			<a href="#myCarouselProject" data-slide="next" class="carousel-control right">
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			</a>
+		</div>
+	</div>
+
+
+	<!--悬浮窗-->
+
+
+	<!--5.苦读十二载   成功源于规划-->
+	<div class="mainFive" style="padding: 70px 0 100px 0;">
+		<div class="textC mainFivetop marginB20">
+			<b class="bluedot"></b>
+			<span class="bigTitle borderDashed">
+							苦读十二载<span class="blackdot"></span>成功源于规划
+					</span>
+			<b class="bluedot"></b>
+			<p class="littleTitle fontColor">“沃得教育，伴你选科、培优、自主招生、志愿填报升学路”</p>
+		</div>
+		<div class="mainFivebottom width1200">
+			<div class="moreExperts">
+				<a href="${base}/ActiveDetailAct/teacherList.jspx">更多专家&gt;&gt;</a>
+			</div>
+			<div class="flex-container">
+				[#if pagination??]
+				[#list pagination.list as list]
+				<div class="flex-container">
+					<div class="flex-item3 box">
+						<img src="${list.image1}" alt=""/>
+						<div class="teacherBrief">
+							<p>${list.name!}老师</p>
+							<p>${list.introduce0}</p>
+						</div>
+						<div class="cnt">
+							<p>${list.strintroduce4}</p>
+						</div>
+					</div>
+				</div>
+				[/#list]
+				[/#if]
+			</div>
+		</div>
+	</div>
+</main>
+<!--底部-->
+[#include "../include/footer.html"/]
+
+<!-- 点击 服务热线   弹出电话号码-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">服务热线</h4>
+			</div>
+			<div class="modal-body textC" style="height: 100px;line-height: 70px;">请拨打电话：400-9288-985。欢迎加入沃得VIP售后服务群，群聊号码：744603708</div>
+		</div>
+	</div>
+</div>
+
+<!-- 点击 关注官微   弹出二维码-->
+<div class="modal fade" id="myModalerweima" tabindex="-1" role="dialog" aria-labelledby="myModalLabelerweima" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-body textC" style="height: 450px;line-height: 70px;">
+				<h2 style="margin-bottom: 20px;">请扫描二维码</h2>
+				<img src="${base}/r/img/tanErweima.png" alt="" />
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+
+	//自动轮播定时
+	$('#myCarousel').carousel({
+		interval: 2000
+	})
+	$('#myCarouse2').carousel({
+		interval: 2000
+	})
+	function _login() {
+		var username = $("#username").val();
+		var password = $("#password").val();
+
+		if (username == '') {
+			alert("请填入用户名！");
+			return false;
+		}
+		if (password == '') {
+			alert("请填入密码！");
+			return false;
+		}
+
+		//验证是不是卡号
+		var card = /^[0-9]*$/;
+		if (card.test(username)) {
+			$.ajax({
+				url: 'check_card.jspx',
+				type: "post",
+				async: false,
+				data: {cardId: username},
+				error: function () {
+					alert("提交出现异常！");
+				},
+				success: function (data) {
+					var res = eval('(' + data + ')');
+					if (res && res.success == true) {
+						$.ajax({
+							url: 'login_with_card.jspx',
+							type: "post",
+							async: false,
+							data: {cardId: username, password: password},
+							error: function () {
+								alert("提交出现异常！");
+							},
+							success: function (data) {
+								var res = eval('(' + data + ')');
+								if (res && res.success == true) {
+									event.returnValue = false;
+									location.href = res.msg;
+								} else {
+									alert(res.msg);
+								}
+							}
+						});
+					} else {
+						$("#jvForm").submit();
+					}
+				}
+			});
+		} else {
+			$("#jvForm").submit();
+		}
+
+	}
+
+	function baoming(activeid, id) {
+		window.location.href = "${base}/sign/activedetail.jspx?activeid=" + activeid + "&&id=" + id
+	}
+	function findUserAttr(){
+		if (${a!}=="1231"){
+			window.location.href="${base}/ActivityAct/huiyuanshezhi.jspx"
+		}
+	}
+
+</script>
+</body>
+
+</html>

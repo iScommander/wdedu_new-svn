@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>选科查询</title>
+		<link rel="stylesheet" href="${resSys}/res/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="${resSys}/res/css/animate.css" />
+		<link rel="stylesheet" href="${base}/r/wdedu/css/head-footer.css" />
+		<link rel="stylesheet" href="${resSys}/res/css/dlsy.css" />
+		<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css"/>
+		<script src="${resSys}/res/js/jquery-1.11.3.min.js"></script>
+	</head>
+	<body>
+		[#include "../include/header_address.html"/]
+		[#include "../include/header_xgkxk.html"/]
+
+		<section class="banner_ny" style="padding-top:0px;">
+
+        		</section>
+		<div class="kxxk-title">
+			<div class="center-block gps">
+				<h2>三个维度为基,科学进行选科</h2>
+				<span>科学选科<br />专业精准</span>
+			</div>
+		</div>
+		<div class="kxxk-inner gps">
+			<section class="center-block">
+				<a href="${base}/kxxk/courceToMajor.jspx" class="wow zoomIn">
+					<img src="${resSys}/res/img/dlsy/kxxk-inner.png" alt="" />
+				</a>
+			</section>
+			<div class="kxxk-footer"></div>
+		</div>
+		[#include "../include/footer_new.html"/]
+	</body>
+	<script type="text/javascript" src="${resSys}/res/js/wow.min.js"></script>
+	<script type="text/javascript" src="${resSys}/res/js/head.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			new WOW().init();
+			var localStatus = {
+				"id":1,
+				"subId":2
+			};
+			statusActive(localStatus);
+			$(window).scroll(function() {
+				var scroll = $(window).scrollTop();
+				if(Number(scroll) >= 380) {
+					$(".kxxk-footer").addClass("animation").css("visibility","visible");
+				};
+			});
+		});
+	</script>
+</html>

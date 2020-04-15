@@ -1,0 +1,350 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>找大学</title>
+<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+   <script src="${base}/r/wdedu/js/jquery-1.11.1.min.js" type="text/javascript" ></script>
+</head>
+<body>
+
+
+
+        [#include "../include/header_address.html"/]
+     [#include "../include/header_zytb.html"/]
+
+     		<script  type="text/javascript">
+     		window.isMoused=false;
+     		function qz(obj){
+     			var text = $(obj).text();
+     			document.getElementById("text").innerText =text;
+     			gb();
+
+     		}
+     		function gb(){
+     			document.getElementById('city_nav').className='city_nav';document.getElementById('city_link').className='city_link';window.isMoused =false;return !1;
+     		}
+     			function dk(){
+     				if(window.isMoused){
+     					 gb()
+     					window.isMoused = false;
+     				   }else{
+     					   document.getElementById('city_link').className='city_link city_hovers'
+     					   window.isMoused =true;
+     				   }
+     			}
+
+     			function pro() {
+                     $("#pro input[type='checkbox']").each(function(){this.checked=false;});
+
+                 }
+
+                 function off() {
+                     $("#offOrVol input[type='checkbox']").each(function(){this.checked=false;});
+                     $("#offOrVol2 input[type='checkbox']").each(function(){this.checked=false;});
+                 }
+
+                 function level() {
+                     $("#level input[type='checkbox']").each(function(){this.checked=false;});
+                     $("#level2 input[type='checkbox']").each(function(){this.checked=false;});
+                 }
+
+                 function is(){
+                     $("#is input[type='checkbox']").each(function(){this.checked=false;});
+                     $("#is2 input[type='checkbox']").each(function(){this.checked=false;});
+                 }
+
+     	</script>
+	<div class="mbxdh_bg">
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="${base}/zytb/project.jspx">志愿填报</a>&nbsp;&gt; &nbsp; <a href="#">找大学</a>
+		</div>  
+	</div>   
+	<div class="con">					
+    <div class="xgkxk_so_zt">
+    <form action="${base}/searchUnivAndMajor/searchUnivList.jspx" accept-charset="UTF-8" method="post">
+    <div class="xgkxk_so f_l">
+    <input type="text" name="univName" placeholder="&nbsp; &nbsp;&nbsp; &nbsp;输入大学名字"/>
+    </div>
+    <div class="xgkxk_so_an f_l">
+    <input type="submit" value="搜索"/>
+    </div>
+      <div class="clearfix"></div>
+    </form >
+    </div>
+        <form id="comSearch" action="${base}/searchUnivAndMajor/searchUnivList.jspx" method="post">
+        <div class="zdx">
+    		<span >院校属地：</span>
+               <div class="zdx_suo">
+               
+                   <div class="zdx_suo_an f_l">
+                   <input id="radio_yuanxiao_0"   type="checkbox" onclick="pro()" hidden>
+                   <label for="radio_yuanxiao_0">不限</label>
+                   </div>
+
+
+                   [#if provinceList?? ]
+                   [#list provinceList as p]
+                   [#if p.provinceName != "未知"]
+                   <div id="pro" class="zdx_suo_an f_l">
+                       <input id="radio_yuanxiao_${p.provinceId!}" value="${p.provinceId!}"
+                              name="provinceId" type="checkbox" hidden
+                              [#if pro?? && pro?contains('${p.provinceName!}')]
+                       checked [/#if]>
+                       <label for="radio_yuanxiao_${p.provinceId!}">${p.provinceName!}</label>
+                   </div>
+                   [/#if]
+                   [/#list]
+                   [/#if]
+
+                                   
+			<div class="clearfix"></div>
+
+               </div>
+               <div class="clearfix"></div>
+                   <span>院校分类：</span> 
+                   <div class="zdx_suo_x" >
+                   				<!--<div class="zdx_suo_an f_l">
+                                        <input id="radio_fl_1" value="1" name="Id"  type="checkbox"hidden>
+                                        <label for="radio_fl_1">综合类 </label>
+                                    </div>-->
+                       [#if universityType?? ]
+                       [#list universityType as u]
+                       <div class="zdx_suo_an f_l">
+                           <input id="radio_fl_${u.id!}" value="${u.typeName!}" name="univType"
+                                  type="checkbox" hidden [#if univType?? && univType?contains("${u.typeName!}")]
+                           checked="checked" [/#if]>
+                           <label for="radio_fl_${u.id!}">${u.typeName!}</label>
+                       </div>
+                       [/#list]
+                       [/#if]
+
+                   </div>
+                   			<div class="clearfix"></div>
+
+                  <span>办学性质：</span> 
+                   <div class="zdx_suo_x" >
+                                        <div class="zdx_suo_an f_l">
+                                        <input id="radio_bxxz_0"    type="checkbox" onclick="off()" hidden>
+                                        <label for="radio_bxxz_0">不限</label>
+                                    	</div>
+               		    				<div id="offOrVol" class="zdx_suo_an f_l">
+                                        <input id="radio_bxxz_1" value="公办" name="offOrVol"  type="checkbox" hidden
+                                               [#if offOrVol?? && offOrVol?contains("公办")]
+                                            checked="checked" [/#if]>
+                                        <label for="radio_bxxz_1">公办</label>
+                                    </div>
+									<div id="offOrVol2" class="zdx_suo_an f_l">
+                                        <input id="radio_bxxz_2" value="民办" name="offOrVol"  type="checkbox" hidden
+                                               [#if offOrVol?? && offOrVol?contains("民办")]
+                                            checked="checked" [/#if]>
+                                        <label for="radio_bxxz_2">民办</label>
+                                    </div>
+
+                   </div>
+                                     			<div class="clearfix"></div>
+
+                                    <span>学历层次：</span> 
+                   <div class="zdx_suo_x">
+                                        <div class="zdx_suo_an f_l">
+                                        <input id="radio_xlcc_0"   type="checkbox" onclick="level()" hidden>
+                                        <label for="radio_xlcc_0">不限</label>
+                                    	</div>
+               		    				<div id="level" class="zdx_suo_an f_l">
+                                        <input id="radio_xlcc_1" value="本科" name="univLevel"  type="checkbox" hidden
+                                               [#if univLevel?? && univLevel?contains("本科")]checked="checked" [/#if]>
+                                        <label for="radio_xlcc_1">本科</label>
+                                        </div>
+                                       <div id="level2" class="zdx_suo_an f_l">
+                                       <input id="radio_xlcc_2" value="专科" name="univLevel"  type="checkbox" hidden
+                                                [#if univLevel?? && univLevel?contains("专科")]checked="checked" [/#if]>
+                                        <label for="radio_xlcc_2">专科</label>
+                                    </div>
+
+                   </div>
+                                     			<div class="clearfix"></div>
+
+                                                <span>院校特色：</span> 
+                                     <div class="zdx_suo_x">
+                                        <div class="zdx_suo_an f_l">
+                                        <input id="radio_yxts_0"   type="checkbox" onclick="is()"  hidden>
+                                        <label for="radio_yxts_0">不限</label>
+                                    	</div>
+               		    				<div id="is" class="zdx_suo_an f_l">
+                                       <!-- <input id="radio_yxts_1" value="1" name="yxts"  type="checkbox"hidden>
+                                        <label for="radio_yxts_1">985</label>-->
+
+                                            <input id="radio_yxts_1" value="1" name="is985" hidden
+                                                   type="checkbox" [#if is985?? && is985==1] checked="checked" [/#if]>
+                                            <label for="radio_yxts_1">985院校</label>
+
+                                    </div>
+									<div id="is2" class="zdx_suo_an f_l">
+                                        <!--<input id="radio_yxts_2" value="1" name="yxts"  type="checkbox"hidden>
+                                        <label for="radio_yxts_2">211</label>-->
+
+                                        <input id="radio_yxts_2" value="1" name="is211" hidden
+                                               type="checkbox" [#if is211?? && is211==1] checked="checked" [/#if]>
+                                        <label for="radio_yxts_2">211院校</label>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                  <span>院校特色：</span>
+                           <div class="zdx_suo_x">
+                              <div class="zdx_suo_an f_l">
+                              <input id="radio_isFirstRateUniv_0"   type="radio"  hidden  onclick="qx(this)">
+                              <label for="radio_isFirstRateUniv_0">不限</label>
+                          	</div>
+               				<div id="is" class="zdx_suo_an f_l">
+                                  <input id="radio_isFirstRateUniv_1" value="1" name="isFirstRateUniv" hidden
+                                         type="radio" [#if isFirstRateUniv?? && isFirstRateUniv==1] checked="checked" [/#if] >
+                                  <label for="radio_isFirstRateUniv_1">双一流</label>
+                           </div>
+               			<div id="is2" class="zdx_suo_an f_l">
+                              <input id="radio_isFirstRateUniv_2" value="2" name="isFirstRateUniv" hidden
+                                     type="radio" [#if isFirstRateUniv?? && isFirstRateUniv==2] checked="checked" [/#if]>
+                              <label for="radio_isFirstRateUniv_2">一流专业</label>
+                          </div>
+                      </div>
+             <div class="clearfix"></div>
+
+            <button class="btn-primary" type="submit" >搜索</button>
+            </div>
+            <input type="hidden" id="pageNo" name="pageNo"/>
+
+                  <div class="zdx_z_yxlb" >
+              		<ul>
+                     [#if pagination?? ]
+                     [#list pagination.list as pag ]
+                                <li>
+
+                  					<div class="da_img f_l">
+                                        [#if pag.logoUrl??&&pag.logoUrl!=""]
+										<img src="${pag.logoUrl!}" />
+                                        [#else]
+                                        <img src="${base}/r/img/noschool.png"/>
+                                        [/#if]
+									</div>
+
+									<div class="zdx_yx_xx f_l">
+											<div class="da_ch">
+												<div class="da_m f_l"><a href="${base}/searchUnivAndMajor/univDetail.jspx?id=${pag.universityBaseId!}">${pag.univName!}</a></div>
+
+												<!--<div class="da_985 f_l">985</div>
+												<div class="da_211 f_l">211</div>
+												<div class="da_z f_l">自</div>
+												<div class="da_y f_l">研</div>
+												<div class="da_g f_l">国</div>-->
+                                                <div class="clearfix"></div>
+											</div>
+                                            
+											<div class="da_ls">
+												<div class="flex-item8 f_l">隶属：<span>${pag.univBelong!}</span></div>
+												<div class="flex-item8 f_l">性质：<span>${pag.eduType!}</span></div>
+												<div class="flex-item8 f_l">所在地：<span>${pag.location!}</span></div>
+                                                <div class="clearfix"></div>
+											</div>
+											<div class="da_pz">
+                                                [#if pag.is985 ?? && pag.is985==1]
+                                                <div class="da_985 f_l">985</div>
+                                                [/#if]
+                                                [#if pag.is211 ?? && pag.is211==1]
+                                                <div class="da_211 f_l">211</div>
+                                                [/#if]
+                                                [#if pag.isFirstRateUniv ?? && pag.isFirstRateUniv==1]
+                                                <div class="da_211 f_l">双一流</div>
+                                                [/#if]
+                                                [#if pag.isFirstRateUniv ?? && pag.isFirstRateUniv==2]
+                                                <div class="da_211 f_l">一流专业</div>
+                                                [/#if]
+                                               <!-- [#if pag.isIndependence ?? && pag.isIndependence==1]
+                                                <div class="da_z f_l">自</div>
+                                                [/#if]
+                                                [#if pag.isKeylab ?? && pag.isKeylab==1]
+                                                <div class="da_y f_l">研</div>
+                                                [/#if]
+                                                [#if pag.isDefence ?? && pag.isDefence==1]
+                                                <div class="da_g f_l">国</div>
+                                                [/#if]-->
+                                                <div class="clearfix"></div>
+											</div>
+                                             
+									</div>
+                                    
+                                    
+                                    <div class="joinComparison f_r">
+										<input type="hidden" value='' />
+                                    <button class="zdx_db"><a href="${base}/searchUnivAndMajor/univDetail.jspx?id=${pag.universityBaseId!}">查看详情</a></button>
+									</div>
+                                    <div class="clearfix"></div>
+                                    <div class="zdx_suo_an_dw"></div>
+                                    </li>
+                        [/#list]
+                        [/#if]
+
+                     </ul>
+                  </div>
+        </form>
+                  <div class="zdx_fy">
+                           <!-- <input type="button" value="上一页" class="zdx_fy_s" onclick="_gotoPage('1');" disabled="disabled"/>
+                            <input type="button" value="1" class="zdx_fy_sz" onclick="_gotoPage('1');" disabled="disabled"/>
+                            <input type="button" value="2" class="zdx_fy_sz" onclick="_gotoPage('1');" disabled="disabled"/>
+                            <input type="button" value="3" class="zdx_fy_sz" onclick="_gotoPage('1');" disabled="disabled"/>
+                            <input type="button" value="下一页" class="zdx_fy_x" onclick="_gotoPage('2');"/>-->
+
+
+                          <tr>
+                              <td colspan="8" style="padding:20px 0;">
+                                  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                      <tr>
+                                          <td align="center" class="pn-sp">
+                                              共 ${pagination.totalCount} 条&nbsp; 每页 ${pagination.pageSize} 条&nbsp; 当前
+                                              ${pagination.pageNo}/${pagination.totalPage} 页 &nbsp;转到第<input type="text" id="_goPs"
+                                                                                                             onfocus="this.select();"
+                                                                                                             onkeypress="if(event.keyCode==13){$('#_goPage').click();return false;}"
+                                                                                                             style="width:50px; border:1px solid #e7e7e7;"/>页
+                                              <input id="_goPage" type="button" value="转" onclick="_gotoPage($('#_goPs').val());" [#if
+                                                     pagination.totalPage==1] disabled="disabled" [/#if] />
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <input type="button" value="首 页" class="zdx_fy_s" onclick="_gotoPage('1');" [#if pagination.firstPage]
+                                                     disabled="disabled" [/#if]/>
+                                              <input type="button" value="上一页" class="zdx_fy_sz" onclick="_gotoPage('${pagination.prePage}');" [#if
+                                                     pagination.firstPage] disabled="disabled" [/#if]/>
+                                              <input type="button" value="下一页" class="zdx_fy_sz" onclick="_gotoPage('${pagination.nextPage}');" [#if
+                                                     pagination.lastPage] disabled="disabled" [/#if]/>
+                                              <input type="button" value="尾 页" class="zdx_fy_x" onclick="_gotoPage('${pagination.totalPage}');" [#if
+                                                     pagination.lastPage] disabled="disabled" [/#if]/>
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+
+                  </div>
+                    
+     </div>	
+    		
+
+[#include "../include/footer_new.html"/]
+
+    <script>
+        //分页
+        function _gotoPage(pageNo) {
+            try {
+                var comSearch = document.getElementById("comSearch");
+                $('#pageNo').val(pageNo)
+                comSearch.action = "${base}/searchUnivAndMajor/searchUnivList.jspx";
+                comSearch.submit();
+            } catch (e) {
+                alert('_gotoPage(pageNo)方法出错');
+            }
+        }
+        function  qx(ord) {
+            $("input[name='isFirstRateUniv']").removeAttr('checked')
+        }
+    </script>
+</body>
+</html>

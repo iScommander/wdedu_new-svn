@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<title>综合信息</title>
+<link href="${base}/r/css/head_footer.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="${base}/r/css/ydyfw.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="${base}/r/js/jquery-1.8.3.min.js" language="javascript"></script>
+<script src="${base}/thirdparty/My97DatePicker/WdatePicker.js" language="javascript"></script>
+<!--[if lte IE 9]>
+<script src="${base}/r/js/html5shiv.js" language="javascript"></script>
+<script src="${base}/r/js/respond.min.js" language="javascript"></script>
+<![endif]-->
+<style>
+.xxtb_left_nav{
+	width:18%;
+    margin: 10px 2% 30px 0;
+}
+.xxtb_right_nav{
+	width:80%;
+}
+.zhxx-table{
+	width:96%;
+	font-size:15px;
+	color:#333;
+	margin:10px 2%;
+	border:1px solid #DDD;
+}
+.zhxx-table th{
+ 	height:50px;
+ 	background-color:#E6E6E6;
+}
+.zhxx-table td{
+ 	height:40px;
+}
+.zhxx-div{
+	font-size:16px;
+	font-weight:600;
+	height:40px ;
+	line-height:40px;
+	padding:0 0 0 14px;
+}
+.zhxx-div02{
+	width:100%;
+	height:40px ;
+	line-height:40px;
+	text-align:center;
+}
+.zhxx-div02 a{
+	font-size:16px;
+	color:#3399FF;
+}
+.zhxx_all_table{
+	margin:20px 0;
+}
+.zhxx_all_table td{
+	text-align:center;
+	
+}
+</style>
+</head>
+<body>
+	<div class="z_body" style="background-color:#F2F2F2;">
+		[#include "../wdedu/include/header_address.html"/]
+		[#include "../wdedu/include/header_dylq.html"/]
+		<div class="z_width_out">
+			<div class="on_line">
+				<div class="bzy_where">
+					&nbsp;您当前位置：<a href="${base}"><span class="">主页&nbsp;</span></a>><a href="${base}/ydyfw/queryOrder.jspx"><span class="">我的一对一服务清单&nbsp;</span></a>><a href="${base}/mnwb/jbxx.jspx?orderId=${order.orderId}"><span class="">&nbsp;填报个人信息&nbsp;</span></a>><span class="">&nbsp;综合信息</span>
+				</div>
+			</div>
+		</div>
+		<div class="z_width_out">
+			<div class="on_line">
+				<div class="xxtb_left_nav">
+					[#include "./left_menu.html"/]
+				</div>
+				<div class="xxtb_right_nav">
+					<div class="ydy_title">
+						<span class="ydytit_img bg_img"><img src="${base}/second_image/ydy_img/ydy_img09.png"/></span>
+						<span class="ydytit_say">
+							考生个人信息详细填写
+							[#if order.serviceType == 'zytb']
+							（志愿填报一对一）
+							[#elseif order.serviceType =='zzzs']
+							（自主招生一对一）
+							[#elseif order.serviceType =='xdzy']
+							（学大志愿一对一）
+							[#elseif order.serviceType =='bjts']
+							（背景提升项目）
+							[#else]
+							（港澳台一对一）
+							[/#if]
+						</span>
+						<span class="ddh">订单号：${order.orderId}</span>
+					</div>
+					<div class="mes_left_top">
+						<div class="ydy_shuoming">
+							<p>1、请如实填写在高中期间参与过的社会活动、获奖记录或专利，如果无任何社会活动、获奖记录或专利请跳过此步。</p>
+							<p>2、"高中期间参与过的社会活动"可填写高中阶段参与的科学研究、创新实践、文学创作、
+								<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;志愿服务、社团活动、学校或班团学生工作等。
+							</p>
+							<p>3、"高中期间的获奖记录"可填写高中阶段获得的省级（含）以上学科竞赛奖励、
+								<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校级（含）以上个人荣誉、本人所具备的文艺或体育特长等。
+							</p>
+							<p>4、"高中期间获得的专利"可填写高中阶段获得的由国家颁发专利证书，且专利类型为发明、实用新型或外观设计的专利信息。</p>
+						</div>
+					</div>
+					<ul class="mes_left_ul">
+						<li><a href="jbxx.jspx?orderId=${order.orderId}">基本信息</a></li>
+						<li><a href="grzp.jspx?orderId=${order.orderId}" id="grzp">个人照片</a></li>
+						<li><a href="zxxx.jspx?orderId=${order.orderId}" id="zxxx">中学信息</a></li>
+						<li><a href="cjxx.jspx?orderId=${order.orderId}" id="cjxx">成绩信息</a></li>
+						<li class="checked-style"><a href="zhxx.jspx?orderId=${order.orderId}">综合信息</a></li>
+						<li><a href="mkcj.jspx?orderId=${order.orderId}" id="mkcj">模考成绩</a></li>
+						<li><a href="dkpm.jspx?orderId=${order.orderId}" id="dkpm">单科排名</a></li>
+						<li><a href="tjrxx.jspx?orderId=${order.orderId}" id="tjrxx">推荐人信息</a></li>
+						<li><a href="yjxx.jspx?menuId=yjxx&orderId=${order.orderId}" id="yjxx">邮寄信息</a></li>
+					</ul>
+					<div class="mes_left_bottom">
+						<div class="zhxx_all_table">
+							<div class="zhxx-div">高中期间参与的社会活动</div>
+							<table class="zhxx-table">
+								<tr>
+									<th style="width:20%">活动名称</th>
+									<th style="width:12%">担任角色</th>
+									<th style="width:25%">活动时间</th>
+									<th style="width:25%">组织单位</th>
+									<th style="width:8%">材料数</th>
+									<th style="width:10%">操作</th>
+								</tr>
+								[#if activityList??]
+								[#list activityList as a]
+								<tr>
+									<td>${a.active!}</td>
+									<td>${a.role!}</td>
+									<td>${a.activeStratTime}&nbsp;至&nbsp;${a.activeendTime!}</td>
+									<td>${a.organizational!}</td>
+									<td>${a.photoCount!}</td>
+									<td>
+										<a href="${base}/mnwb/activity.jspx?id=${a.id}&orderId=${order.orderId}" style="color:#3399ff;">修改</a>&nbsp;
+										<a href="javascript:void(0)" onclick="_delAct('${a.id}')" style="color:#3399ff;">删除</a>
+									</td>
+								</tr>
+								[/#list]
+								[/#if]
+							</table>
+							<div class="zhxx-div02">
+								<a href="${base}/mnwb/activity.jspx?orderId=${order.orderId}">+新增活动记录</a>
+							</div>
+						</div>
+						<div class="zhxx_all_table">
+							<div class="zhxx-div">高中期间的获奖记录</div>
+							<table class="zhxx-table">
+								<tr>
+									<th>奖项名称</th>
+									<th>奖项类别</th>
+									<th>奖项级别</th>
+									<th>获奖时间</th>
+									<th>组织单位</th>
+									<th>材料数</th>
+									<th>操作</th>
+								</tr>
+								[#if awardList??]
+								[#list awardList as a]
+								<tr>
+									<td>${a.awardName!}</td>
+									<td>${a.awardType!}</td>
+									<td>${a.degree!}</td>
+									<td>${a.awardTime!}</td>
+									<td>${a.organizational!}</td>
+									<td>${a.photoCount!}</td>
+									<td>
+										<a href="${base}/mnwb/award.jspx?id=${a.id}&orderId=${order.orderId}" style="color:#3399ff;">修改</a>
+										<a href="javascript:void(0)" onclick="_delAward('${a.id}')" style="color:#3399ff;">删除</a>
+									</td>
+								</tr>
+								[/#list]
+								[/#if]
+							</table>
+							<div class="zhxx-div02">
+								<a href="${base}/mnwb/award.jspx?orderId=${order.orderId}">+新增获奖记录</a>
+							</div>
+						</div>
+						<div class="zhxx_all_table">
+							<div class="zhxx-div">高中期间获得的专利</div>
+							<table class="zhxx-table">
+								<tr>
+									<th>专利名称</th>
+									<th>专利类型</th>
+									<th>发明人/设计人</th>
+									<th>专利申请日/专利授权日</th>
+									<th>专利权人</th>
+									<th>专利号</th>
+									<th>材料数</th>
+									<th>操作</th>
+								</tr>
+								[#if patentList??]
+								[#list patentList as a]
+								<tr>
+									<td>${a.patentName!}</td>
+									<td>${a.patentType!}</td>
+									<td>${a.patentee!}</td>
+									<td>${a.applydate!}/${a.accreditDate!}</td>
+									<td>${a.patentHolder!}</td>
+									<td>${a.patentNumber!}</td>
+									<td>${a.photoCount}</td>
+									<td>
+										<a href="${base}/mnwb/patent.jspx?id=${a.id}&orderId=${order.orderId}"  style="color:#3399ff;">修改</a>
+										<a href="javascript:void(0)" onclick="_delPatent('${a.id}')" style="color:#3399ff;">删除</a>
+									</td>
+								</tr>
+								[/#list]
+								[/#if]
+							</table>
+							<div class="zhxx-div02">
+								<a href="${base}/mnwb/patent.jspx?orderId=${order.orderId}">+新增专利记录</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<!-- 底部栏目 -->
+		[#include "../wdedu/include/footer_new.html"/]
+	</div>
+	
+	<script type="text/javascript">
+		 function _delAct(id){
+			 if(confirm('确认删除?')){		 
+			 	window.location.href = "${base}/mnwb/activityDel.jspx?id="+id+"&orderId=${order.orderId}";
+			 }
+		 }
+		 
+		 function _delAward(id){
+			 if(confirm('确认删除?')){
+			 	window.location.href = "${base}/mnwb/awardDel.jspx?id="+id+"&orderId=${order.orderId}";
+			 }
+		 }
+		 
+		 function _delPatent(id){
+			 if(confirm('确认删除?')){	
+			 	window.location.href = "${base}/mnwb/patentDel.jspx?id="+id+"&orderId=${order.orderId}";
+			 }
+		 }
+		 
+		$(function(){
+			$("#tbgrxx").addClass("checked-style02");
+		});
+	</script>
+
+</body>
+</html>

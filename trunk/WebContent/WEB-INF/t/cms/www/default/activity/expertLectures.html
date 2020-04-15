@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>专家讲座</title>
+	<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+	<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+	<script src="${base}/r/cms/front.js"></script>
+</head>
+<body>
+	<!--顶部-->
+[#include "../include/header.html"/]
+	<div class="route">
+		<div class="flex-container width1200">
+			<div><a href="${base}">首页 </a> &lt;&lt; 专家讲座</div>
+			<div></div>
+		</div>
+	</div>
+	<!--主体-->
+	<main class="expertLecturesMain width1200">
+		<!--标题-->
+		<div class="expertLecturesMainTitle">
+			<p>我的生涯，沃得来教你</p>
+			<span>“学得好要考得好、考得好更要报的好，沃得教你规划生涯”</span>
+		</div>
+		<!--筛选-->
+		<form action="queryJiang.jspx" method="post">
+		<div class="expertLecturesMainFiltrate selectNumberScreen">
+			<div class="screenBox screenBackground">
+				<dl style="height: 53px;">
+					<dt style="margin: 0px 0 20px 10px;">
+						<button id="btn_clear_form" class="btn btnColorGreen">全部清理</button>
+					</dt>
+					<dt style="margin: 0px 0 20px 10px;">
+					<button id="submit" class="btn btnColorYellow">搜索</button>
+					</dt>
+				</dl>
+				<dl>
+					<dt>讲座地点 &gt;</dt>
+					<dd class="checkbox_base_group">
+						[#if tBaseProvinceList??]
+						[#list tBaseProvinceList as ts]
+						<a href="javascript:void(0)" value="${ts_index!}">
+							<input id="checkbox_didian_${ts_index+1!}" value="${ts!}" name="city${ts_index+1!}" type="checkbox">
+							<label for="checkbox_didian_${ts_index+1!}">${ts!}</label>
+						</a>
+						[/#list]
+						[/#if]
+
+					</dd>
+				</dl>
+				<dl>
+					<dt>讲座类型 &gt;</dt>
+					<dd class="checkbox_base_group">
+						[#if tScActiveDetailList1??]
+						[#list tScActiveDetailList1 as tsc]
+						<a href="javascript:void(0)" value="${tsc_index!}">
+							<input id="checkbox_liexing_${tsc_index+1!}" value="${tsc!}" name="type${tsc_index+1!}" type="checkbox">
+							<label for="checkbox_liexing_${tsc_index+1!}">${tsc!}</label>
+						</a>
+						[/#list]
+						[/#if]
+					</dd>
+				</dl>
+				<div style="border-bottom: 1px dashed #eef2f5;width: 100%;height: 53px;line-height: 53px;">
+					<span style="text-align: right;width: 100px;font-weight: 600;display:block;float: left;">讲座时间 &gt;</span>
+					<div class="comboBox" style="float: left;margin-top: 6px;margin-left: 18px;">
+						<select>
+							<option value="0">最近一周</option>
+							<option value="1">最近一月</option>
+						</select>
+					</div>
+					<div class="checkbox_base"  style="float: left;margin-left: 30px;">
+						<input id="notifyMe" type="checkbox" />
+						<label for="notifyMe" style="font-size: 12px;color: #ff0000;">我对沃得教育讲座感兴趣，有最新的讲座随时通知我</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+		<!--表格-->
+		<div class="expertLecturesMainTable">
+			<table class="table deeptable">
+				<tr>
+					<th>省市</th>
+					<th>讲座类型</th>
+					<th>讲座主题</th>
+					<th>时间/建议参与对象</th>
+					<th>报名</th>
+				</tr>
+				[#if activeList??]
+				[#list activeList as list]
+				<tr>
+					<td>${list.city!}</td>
+					<td>${list.active_type!}</td>
+					<td>
+						<p class="beyondHidden35">${list.theme!}</p>
+					</td>
+					<td>${list.active_time!}/高一、高二家长</td>
+					<td>
+						[#if list.active_start_time gt .now]
+						<button class="btn btnColorGreen" onclick="baoming('${list.active_id}',${list.id})">立即报名</button>
+						[#else]<button class="btn">活动已结束</button>[/#if]
+					</td>
+				</tr>
+				[/#list]
+				[/#if]
+			</table>
+		</div>
+	</main>
+	<!--底部-->
+		<!--<iframe MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no src="../footer.html" height="360px" width="100%"></iframe>-->
+
+	[#include "../include/footer.html"/]
+	<!--js-->
+	<script src="${base}/r/js/jQuery.js"></script>
+	<script src="${base}/r/js/bootstrap.min.js"></script>
+	<script src="${base}/r/js/jquery.combo.select.js"></script>
+	<script src="${base}/r/js/itemsJs/common.js"></script>
+	<script>
+		//全部清理
+		$("#btn_clear_form").click(function () {
+			$(".checkbox_base_group input[type=checkbox]:checked").prop("checked", false);
+		})
+		$('select').comboSelect();
+
+        function baoming(activeid,id) {
+            window.location.href="${base}/sign/activedetail.jspx?activeid="+activeid+"&&id="+id
+        }
+
+        function queryJiangZuo(city1,city2,type1,type2) {
+            $.ajax({
+                url:"queryJiang.jspx",
+                type:"post",
+                async: true,
+                dataType:'json',
+                data:{
+                    city1:city1,
+                    city2:city2,
+                    type1:type1,
+                    type2:type2,
+                },
+                success: function (data) {
+                    if(data ==''){
+                        alert("暂无讲座可报名！")
+                    }
+                    var content = "";
+                    for(var i = 0 ;i<data.length;i++){
+                        alert(data)
+                        content+="<li><p class='specialtyListTitle' onclick='nextMajor(\""+data[i][3]+"\",this)'>"+data[i][3] +"&nbsp;&nbsp;&nbsp;"+data[i][2]+"</p></li><li><ul></ul></li>"
+                    }
+                    $("#benkeneirong").html(content);
+                },
+                error : function(){
+                    alert("System Error!");
+                }
+            })
+        }
+	</script>
+</body>
+
+</html>

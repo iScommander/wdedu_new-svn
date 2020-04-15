@@ -1,0 +1,26 @@
+<div class="navbox">
+		<div class="navbox_bg">
+			<div class="nav_l fl">
+				<div id="nav">
+				<ul id="navMenu">
+				<li><a href='${base}/'>首页</a></li>
+				<li><a href='${base}/NewsDisplay/BackgroundAscension.jspx' rel='dropmenu1'>背景提升</a></li>
+				<li><a  href='${base}/NewsDisplay/UniversityStudies.jspx' rel='dropmenu2'>高校研学</a></li>
+				<li><a  href='${base}/NewsDisplay/InternationalStudies.jspx' rel='dropmenu3'>名企研学</a></li>
+				<li><a href='${base}/NewsDisplay/WorkExperience.jspx' rel='dropmenu4'>职业体验</a></li>
+				<li><a href='${base}/NewsDisplay/SubjectStudy.jspx' rel='dropmenu5'>课题研究</a></li>
+				<li><a href='${base}/NewsDisplay/EventGuide.jspx' rel='dropmenu6'>赛事指南</a></li>
+				<li><a href='${base}/NewsDisplay/Yoosure.jspx' rel='dropmenu7'>海外游学</a></li>
+				<li><a href='${base}/NewsDisplay/SocialPractice.jspx' rel='dropmenu8'>社会实践</a></li>
+				</ul>
+				</div>
+
+			</div>
+			[#if user??]
+			<div class="nav_r fr">
+				<a href="${base}/admissonSvcAct/findbaseInfo.jspx">尊敬的[@text_cut s=user.username?substring(0,5) len=3 append='..'/]</a>
+			</div>
+			[/#if]
+		<div class="clearfix"></div>
+		</div>
+	</div>

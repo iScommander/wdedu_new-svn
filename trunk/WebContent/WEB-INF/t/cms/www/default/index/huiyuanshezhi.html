@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>会员设置</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+	</head>
+
+	<body>
+		<!--顶部线条-->
+		<div class="topLine"></div>
+		<!--tab切换  导航-->
+
+		<!--路径-->
+		<!--<div class="route">-->
+			<!--<div class="flex-container1 width1200">-->
+				<!--<div>-->
+					<!--<a href="../index.html">首页 </a> &lt;&lt;志愿填报 &lt;&lt;用户中心</div>-->
+			<!--</div>-->
+		<!--</div>-->
+		<!--主体-->
+		<mian class="huiyuanshezhiMain">
+			<div class="width1200">
+				<p>会员基本信息</p>
+				<form action="savaOrUpd.jspx" method="post">
+					<table class="table table-bordered">
+						[#if pro?? && pro=='yes']
+						<tr>
+							<th>参考高考所在省份</th>
+							<td>
+								<select class="batch" name="province_id" id="province">
+									<option value="" disabled selected hidden>请选择</option>
+									[#if tBaseProvince2?? ]
+									[#list tBaseProvince2 as t]
+									[#if t.provinceName!="未知"]
+									<option [#if (pid?? && pid !="") && t.provinceId?number=pid?number ] selected [/#if] value="${t.provinceId!}">${t.provinceName!}</option>
+									[/#if]
+									[/#list]
+									[/#if]
+								</select>
+								<span>省份选择后不可更改，如需更改，请联系沃得教育客服人员。</span>
+								<input type="hidden" name="pro" id="pro" value="${pro!}">
+							</td>
+						</tr>
+						[#else]
+						[#if shenfen??]
+						[#if provinces??]
+						[#list provinces as province]
+						<tr>
+							<th>参考高考所在省份</th>
+							<td>
+								<input type="text" name="province_name" value="${province.provinceName!}" readonly="readonly" />
+								<input type="hidden" name="province_id" id="province" value="${province.provinceId!}">
+								<span>省份选择后不可更改，如需更改，请联系沃得教育客服人员。</span>
+							</td>
+						</tr>
+						[/#list]
+						[/#if]
+						[#else]
+						<tr>
+							<th>参考高考所在省份</th>
+							<td>
+								<select class="batch" name="province_id" id="province">
+									<option value="" disabled selected hidden>请选择</option>
+									[#if tBaseProvince2?? ]
+									[#list tBaseProvince2 as t]
+									[#if t.provinceName!="未知"]
+									<option value="${t.provinceId!}">${t.provinceName!}</option>
+									[/#if]
+									[/#list]
+									[/#if]
+								</select>
+								<span>省份选择后不可更改，如需更改，请联系沃得教育客服人员。</span>
+							</td>
+						</tr>
+						[/#if]
+						[/#if]
+
+                        <tr>
+                            <th>城市</th>
+                            <td>
+                                <select id="shiqu" name="cityId">
+                                    <option value="" disabled selected hidden>请选择</option>
+                                    [#if cityList?? ]
+                                    [#list cityList as school]
+                                    <option value="${school[1]!}" [#if cityName?? && cityName?contains('${school[1]!}')] selected="selected" [/#if] >${school[0]!}</option>
+                                    [/#list]
+                                    [/#if]
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>区县</th>
+                            <td>
+                                <select class="batch" id="quxian" name="quxianId">
+                                    <option value="" disabled selected hidden>请选择</option>
+									[#if tBaseHighshoolList1??]
+									[#list tBaseHighshoolList1 as quxian]
+									<option value="${quxian[1]!}" [#if quxianName?? && quxianName?contains('${quxian[1]!}')] selected="selected" [/#if] >${quxian[0]!}</option>
+									[/#list]
+									[/#if]
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>中学名称</th>
+                            <td>
+                                <select class="batch" id="school" name="school_id">
+                                    <option value="" disabled selected hidden>请选择</option>
+									[#if tBaseHighshoolList2??]
+									[#list tBaseHighshoolList2 as schools]
+									<option value="${schools[0]!}" [#if schoolName?? && schoolName?contains('${schools[0]!}')] selected="selected" [/#if] >${schools[1]!}</option>
+									[/#list]
+									[/#if]
+                                </select>
+                                <span>学校选择后不可更改，如需更改，如学校不存，请联系沃得教育客服人员。</span>
+                            </td>
+                        </tr>
+
+                        [#if major?? && major=='yes']
+                        <tr>
+                            <th>科目类型</th>
+                            <td>
+                                <div class="radio_base">
+                                    <input id="subjectsType4" class="styled indexRadio" type="radio" name="major_type_id" value="1" [#if wenli?? &&  wenli == "1"] checked="checked" [/#if]>
+                                    <label for="subjectsType4" class="font-bolder">文科</label>
+                                </div>
+                                <div class="radio_base">
+                                    <input id="subjectsType5" class="styled indexRadio" type="radio" name="major_type_id" value="2" [#if wenli?? && wenli == "2"] checked="checked" [/#if]>
+                                    <label for="subjectsType5" class="font-bolder">理科</label>
+                                </div>
+                                <div class="radio_base">
+                                    <input id="subjectsType6" class="styled indexRadio" type="radio" name="major_type_id" value="3" [#if wenli?? && wenli == "3"] checked="checked" [/#if]>
+                                    <label for="subjectsType6" class="font-bolder">综合改革</label>
+                                </div>
+                                <p>综合改革选项为已实施新高改革的省份的学生选择项（新高考改革：6选3或 7选3的省份）</p>
+								<input type="hidden" name="major" id="major" value="${major!}">
+                            </td>
+                        </tr>
+                        [#else]
+                            [#if wenli??]
+                            <tr>
+                                <th>科目类型</th>
+                                <td>
+                                    <div class="radio_base">
+                                        <input id="subjectsType7" class="styled indexRadio" type="radio" disabled name="major_type_id" value="1" [#if wenli?? && wenli == "1"] checked="checked" [/#if]>
+                                        <label for="subjectsType4" class="font-bolder">文科</label>
+                                    </div>
+                                    <div class="radio_base">
+                                        <input id="subjectsType8" class="styled indexRadio" type="radio" disabled name="major_type_id" value="2" [#if wenli?? && wenli == "2"] checked="checked" [/#if]>
+                                        <label for="subjectsType5" class="font-bolder">理科</label>
+                                    </div>
+                                    <div class="radio_base">
+                                        <input id="subjectsType9" class="styled indexRadio" type="radio" disabled name="major_type_id" value="3" [#if wenli?? && wenli == "3"] checked="checked" [/#if]>
+                                        <label for="subjectsType6" class="font-bolder">综合改革</label>
+                                    </div>
+                                    <p>综合改革选项为已实施新高改革的省份的学生选择项（新高考改革：6选3或 7选3的省份）</p>
+                                </td>
+                            </tr>
+                            [#else]
+                            <tr>
+                                <th>科目类型</th>
+                                <td>
+                                    <div class="radio_base">
+                                        <input id="subjectsType1" class="styled indexRadio" type="radio" name="major_type_id" value="1" checked>
+                                        <label for="subjectsType1" class="font-bolder">文科</label>
+                                    </div>
+                                    <div class="radio_base">
+                                        <input id="subjectsType2" class="styled indexRadio" type="radio" name="major_type_id" value="2">
+                                        <label for="subjectsType2" class="font-bolder">理科</label>
+                                    </div>
+                                    <div class="radio_base">
+                                        <input id="subjectsType3" class="styled indexRadio" type="radio" name="major_type_id" value="3">
+                                        <label for="subjectsType3" class="font-bolder">综合改革</label>
+                                    </div>
+                                    <p>综合改革选项为已实施新高改革的省份的学生选择项（新高考改革：6选3或 7选3的省份）</p>
+                                </td>
+                            </tr>
+                            [/#if]
+                        [/#if]
+
+
+						<tr>
+							<th>高中毕业年份</th>
+							<td>
+								<select class="batch" name="biyeYear">
+									<option value="" disabled selected hidden>请选择</option>
+									[#if biyeList??]
+									[#list biyeList as biye]
+									<option value="${biye.code!}" [#if biyeYear?? && biyeYear?contains('${biye.code!}')] selected="selected" [/#if]>${biye.code!}届</option>
+									[/#list]
+									[/#if]
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>
+								所在班级
+							</th>
+							<td>
+								<input type="text" placeholder="请输入班级名称" name="banji" value="${banji!}"/>
+							</td>
+						</tr>
+						<tr>
+							<th>姓名</th>
+							<td>
+								<input type="text" name="realName" value="${realName!}"/>
+							</td>
+						</tr>
+						<tr>
+							<th>性别</th>
+							<td>
+								<div class="radio_base">
+									<input id="man" class="styled indexRadio" type="radio" value="1" name="sex" [#if sex?? && sex?contains('1')] checked="checked" [/#if]>
+									<label for="man" class="font-bolder">男</label>
+								</div>
+								<div class="radio_base">
+									<input id="woman" class="styled indexRadio" type="radio" value="2" name="sex" [#if sex?? && sex?contains('2')] checked="checked" [/#if]>
+									<label for="woman" class="font-bolder">女</label>
+								</div>
+							</td>
+						</tr>
+
+						<tr>
+							<th>QQ</th>
+							<td>
+								<input type="text" name="qq" value="${qq!}" />
+							</td>
+						</tr>
+						<tr>
+							<th>常用邮箱</th>
+							<td>
+								<input type="text" name="msn" value="${msn!}" />
+							</td>
+						</tr>
+						<tr>
+							<th>常用手机号</th>
+							<td>
+								<input type="text" name="phone" value="${phone!}" />
+							</td>
+						</tr>
+						<!--<tr>-->
+							<!--<th>关联学涯云账号</th>-->
+							<!--<td>-->
+								<!--<input type="text" />-->
+								<!--<p>已在“学涯云生涯规划系统”使用的用户，请输入关联账号以便及时查看孩子的生涯档案；未开设账号的考生，请联系沃得客服或者 学校管理</p>-->
+							<!--</td>-->
+						<!--</tr>-->
+					</table>
+					<div class="huiyuansehzhiBtn">
+						<button type="submit">保存个人信息</button>
+						<!--<button>修改密码</button>-->
+					</div>
+				</form>
+			</div>
+		</mian>
+		<!--底部-->
+		<!--<iframe MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no src="../footer.html" height="360px" width="100%"></iframe>-->
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/jquery.combo.select.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+		<script>
+			//下拉弹出框
+			$(function() {
+				$('select').comboSelect();
+				$(".combo-input").attr("readonly", "readonly").css("cursor", "pointer")
+			});
+			function abc() {
+				alert("00000")
+            }
+            $("#province").change(function () {
+                var province_id = $("#province").val();
+                $.ajax({
+                    url:"city.jspx",
+                    type:"post",
+                    async: true,
+                    dataType:'json',
+                    data:{
+                        province_id:province_id
+                    },
+                    success: function (data) {
+                        if(data ==''){
+                            alert("请联系管理员添加数据！")
+                        }
+                        var content = "<option value='' disabled selected hidden>请选择</option>";
+                        for(var i = 0 ;i<data.length;i++){
+                            content+="<option value='"+data[i][1]+"'>"+data[i][0]+"</option>"
+                        }
+                        $("#shiqu").html(content);
+                        $("#shiqu").comboSelect();
+                    }
+                })
+			})
+            $("#shiqu").change(function () {
+                var cityId = $("#shiqu").val();
+                $.ajax({
+                    url:"quxian.jspx",
+                    type:"post",
+                    async: true,
+                    dataType:'json',
+                    data:{
+                        cityId:cityId
+                    },
+                    success: function (data) {
+                        if(data ==''){
+                            alert("请联系管理员添加数据！")
+                        }
+                        var content = "<option value='' disabled selected hidden>请选择</option>";
+                        for(var i = 0 ;i<data.length;i++){
+                            content+="<option value='"+data[i][0]+"'>"+data[i][1]+"</option>"
+                        }
+                        $("#quxian").html(content);
+                        $("#quxian").comboSelect();
+                    }
+                })
+            })
+            $("#quxian").change(function () {
+                var quxianId = $("#quxian").val();
+                $.ajax({
+                    url:"school.jspx",
+                    type:"post",
+                    async: true,
+                    dataType:'json',
+                    data:{
+                        quxianId:quxianId
+                    },
+                    success: function (data) {
+                        if(data ==''){
+                            alert("请联系管理员添加数据！")
+                        }
+                        var content = "<option value='' disabled selected hidden>请选择</option>";
+                        for(var i = 0 ;i<data.length;i++){
+                            content+="<option value='"+data[i][1]+"'>"+data[i][0]+"</option>"
+                        }
+                        $("#school").html(content);
+                        $("#school").comboSelect();
+                    }
+                })
+            })
+		</script>
+	</body>
+
+</html>

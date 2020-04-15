@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>高校计划与历史数据</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<style>
+			header {
+				background: #d7f5f9;
+				height: 73px;
+				line-height: 73px;
+				text-align: center;
+			}
+			
+			header>div {
+				color: #51412a;
+				font-size: 24px;
+			}
+			
+			.collegePlansMain .flex-container1 li {
+				background: url(${base}/r/img/tabBg.png) no-repeat;
+				width: 157px;
+				height: 47px;
+				position: relative;
+				left: 0;
+			}
+			
+			.collegePlansMain .flex-container1 li:nth-child(2) {
+				left: -10px;
+			}
+			
+			.collegePlansMain .flex-container1 li:nth-child(3) {
+				left: -20px;
+			}
+			
+			.collegePlansMain .flex-container1 li:nth-child(4) {
+				left: -30px;
+			}
+			
+			.collegePlansMain .flex-container1 li:nth-child(5) {
+				left: -40px;
+			}
+			
+			.collegePlansMain .flex-container1 li:nth-child(6) {
+				left: -50px;
+			}
+			
+			.collegePlansMain .flex-container1 li.active {
+				background: url(${base}/r/img/tabBg1.png) no-repeat;
+				width: 157px;
+				z-index: 99;
+			}
+			
+			.collegePlansMain .flex-container1 li a p {
+				color: #fff;
+				height: 47px;
+				line-height: 47px;
+				margin-left: 38px;
+			}
+			
+			.collegePlansMain .flex-container1 li.jihua-4 a p {
+				margin-left: 20px;
+			}
+			
+			.collegePlansMain .collegePlansMainTab-content div.shuoming {
+				margin: 15px 0;
+			}
+			
+			.collegePlansMain .collegePlansMainTab-content div.shuoming>p {
+				color: #e84c3d;
+				margin: 8px 0;
+			}
+			
+			.collegePlansMain>p {
+				text-align: center;
+				font-size: 18px;
+				color: #51412a;
+				margin: 25px 0 40px;
+			}
+			
+			.collegePlansMain .collegePlansMainTab-content .collegePlansBtn {
+				text-align: center;
+			}
+			
+			.collegePlansMain .collegePlansMainTab-content .collegePlansBtn button {
+				width: 153px;
+				height: 45px;
+				margin: 70px 10px 50px;
+			}
+			
+			.collegePlansMain .collegePlansMainTab-content table tr {
+				font-size: 14px;
+			}
+			
+			.collegePlansMain .collegePlansMainTab-content table tr td>a {
+				color: #2bbdc7;
+			}
+			
+			.collegePlansMain .collegePlansMainTab-content #jihuaList_6>table {
+				margin: 20px 0;
+			}
+			
+			.collegePlansMain .collegePlansMainTab-content #jihuaList_6>div>p {
+				color: #e84c3d;
+				font-size: 14px;
+				margin: 10px 0;
+			}
+			#jihuaList_2 table{
+				margin: 20px 0 40px;
+			}
+			ul.liList li {
+				float: left;
+				width: 46px;
+			}
+			
+			table.tablePadding tr td,
+			table.tablePadding tr th {
+				padding: 8px 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--顶部-->
+		<header>
+			<div>北京朝阳区理科考生001，您好！您的市排名为：8252-15155</div>
+		</header>
+		<!--主体-->
+		<main class="collegePlansMain width1200">
+			<p>您所查看的学校北京大学属于本科一批，学校编号是1202</p>
+			<div class="tab-pane in active" id="jihuaList">
+				<ul class="flex-container1">
+					<li class="jihua-1 active">
+						<a href="#jihuaList_1" data-toggle="tab">
+							<p>招生计划</p>
+						</a>
+					</li>
+					<li class="jihua-2">
+						<a href="#jihuaList_2" data-toggle="tab">
+							<p>历年数据</p>
+						</a>
+					</li>
+					<li class="jihua-3">
+						<a href="#jihuaList_3" data-toggle="tab">
+							<p>招生章程</p>
+						</a>
+					</li>
+					<li class="jihua-4">
+						<a href="#jihuaList_4" data-toggle="tab">
+							<p>自主招生章程</p>
+						</a>
+					</li>
+					<li class="jihua-5">
+						<a href="#jihuaList_5" data-toggle="tab">
+							<p>学校概况</p>
+						</a>
+					</li>
+					<li class="jihua-6">
+						<a href="#jihuaList_6" data-toggle="tab">
+							<p>志愿填报</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="collegePlansMainTab-content">
+				<div class="tab-content">
+					<!--招生计划-->
+					<div class="tab-pane in active" id="jihuaList_1">
+						<div class="shuoming">
+							<p>说明：</p>
+							<p><img src="${base}/r/img/zhuyi.png" alt="" /> 注：有“要求外语考试”的均需参加外语口试，具体时间由教育考试院统一通知；</p>
+							<p><img src="${base}/r/img/zhuyi.png" alt="" /> 注：有“要求面试”的均需面试，有关面试办法另行通知；</p>
+							<p>目录中所列每学年学费收费标准为xxxxx元（不含住宿费）是根据院校提供的数字公布的，仅供参考；</p>
+							<p>凡专业名称后未注明学制的，本科为四年，专科（高职）学制为三年；提前录取批次中未注明学制的专业为四年制本科；</p>
+						</div>
+						<table class="table table-bordered deeptable tablePadding">
+							<tr>
+								<th>编号</th>
+								<th>专业名称</th>
+								<th>计划</th>
+								<th>学费</th>
+								<th>其他</th>
+								<th>专业排名</th>
+								<th>专业等级</th>
+								<th>查看详情</th>
+							</tr>
+							<tr>
+								<td>32</td>
+								<td>工科实验班类</td>
+								<td>5</td>
+								<td>5000</td>
+								<td>含数学与应用数学（数学），含数学与应用数学（数学）</td>
+								<td></td>
+								<td>A+</td>
+								<td>
+									<a href="">查看</a>
+								</td>
+							</tr>
+							<tr>
+								<td>32</td>
+								<td>工科实验班类</td>
+								<td>5</td>
+								<td>5000</td>
+								<td>含数学与应用数学（数学），含数学与应用数学（数学）</td>
+								<td></td>
+								<td>A+</td>
+								<td>
+									<a href="">查看</a>
+								</td>
+							</tr>
+							<tr>
+								<td>32</td>
+								<td>工科实验班类</td>
+								<td>5</td>
+								<td>5000</td>
+								<td>含数学与应用数学（数学），含数学与应用数学（数学）</td>
+								<td></td>
+								<td>A+</td>
+								<td>
+									<a href="">查看</a>
+								</td>
+							</tr>
+						</table>
+						<p>以上专业办学地点：校本部</p>
+						<div class="collegePlansBtn">
+							<button class="btn btnColorGreen">返回志愿表</button>
+							<button class="btn btnColorGreen">返回学校列表</button>
+						</div>
+					</div>
+					<!--历年数据-->
+					<div class="tab-pane" id="jihuaList_2">
+						<table class="table table-bordered deeptable tablePadding">
+							<tr>
+								<th>年份</th>
+								<th width="250">大学名称</th>
+								<th>计划</th>
+								<th>报名数</th>
+								<th>上线数</th>
+								<th>录取</th>
+								<th>一志</th>
+								<th>一专</th>
+								<th>征集</th>
+								<th>录取比例</th>
+								<th>录取线</th>
+								<th>分数范围</th>
+								<th>排名范围</th>
+								<th>考试院数据</th>
+								<th>其他数据</th>
+							</tr>
+                            [#if tCeeEnrollHistoryList??]
+                            [#list tCeeEnrollHistoryList as history]
+							<tr>
+								<td>${history.year!}</td>
+								<td>${history.univName!}</td>
+								<td>${history.historyPlaned!}</td>
+								<td>${history.signNum!}</td>
+								<td>${history.reachNum!}</td>
+								<td>${history.historyEnrolled!}</td>
+								<td>${history.firstCeeNum!}</td>
+								<td>${history.firstMajorNum!}</td>
+								<td>${history.addNum!}</td>
+								<td>${history.enrollRate!}</td>
+								<td>${history.lowScore!}</td>
+								<td>${history.lowScore!}-${history.highScore!}</td>
+								<td>${history.rankLowScore}-${history.rankHighScore!}</td>
+								<td>
+									<a onclick="queryHistory(${history.year!})" data-toggle="modal" data-target="#myModal">查看</a>
+								</td>
+								<td></td>
+							</tr>
+                            [/#list]
+                            [/#if]
+						</table>
+					</div>
+					<!--招生章程-->
+					<div class="tab-pane" id="jihuaList_3">
+						3
+					</div>
+					<!--自主招生章程-->
+					<div class="tab-pane" id="jihuaList_4">
+						4
+					</div>
+					<!--学校概况-->
+					<div class="tab-pane" id="jihuaList_5">
+						5
+					</div>
+					<!--志愿填报-->
+					<div class="tab-pane" id="jihuaList_6">
+						<table class="table table-bordered deeptable">
+							<tr>
+								<th>专业代码</th>
+								<th width="500">所选专业</th>
+								<th>一专率</th>
+								<th>平均分</th>
+								<th>排序</th>
+								<th>操作</th>
+							</tr>
+							<tr>
+								<td>待选专业</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>待选专业</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>待选专业</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>待选专业</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>待选专业</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>待选专业</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+						<div>
+							<p>选择专业时需要注意专业级差，请仔细阅读招生简章</p>
+							<table class="table table-bordered deeptable">
+								<tr>
+									<th>专业代码</th>
+									<th>风险</th>
+									<th width="200">专业名称</th>
+									<th>计划数</th>
+									<th>选择</th>
+									<th>往年计划数</th>
+									<th>录取数</th>
+									<th>一志</th>
+									<th>一专</th>
+									<th>一专率</th>
+									<th>平均分</th>
+									<th>分数范围</th>
+									<th>市排名范围</th>
+									<th>查看详情</th>
+								</tr>
+								<tr>
+									<td>22</td>
+									<td>
+										<img src="${base}/r/img/fengxian.png" alt="" />
+									</td>
+									<td>新闻传播学类</td>
+									<td>8</td>
+									<td>
+										<a href="">选择</a>
+									</td>
+									<td>4</td>
+									<td>33</td>
+									<td>33</td>
+									<td>33</td>
+									<td>100%</td>
+									<td>688</td>
+									<td>671-679</td>
+									<td>671-679</td>
+									<td>
+										<a href="">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td>22</td>
+									<td>
+										<img src="${base}/r/img/fengxian.png" alt="" />
+									</td>
+									<td>新闻传播学类</td>
+									<td>8</td>
+									<td>
+										<a href="">选择</a>
+									</td>
+									<td>4</td>
+									<td>33</td>
+									<td>33</td>
+									<td>33</td>
+									<td>100%</td>
+									<td>688</td>
+									<td>671-679</td>
+									<td>671-679</td>
+									<td>
+										<a href="">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td>22</td>
+									<td>
+										<img src="${base}/r/img/fengxian.png" alt="" />
+									</td>
+									<td>新闻传播学类</td>
+									<td>8</td>
+									<td>
+										<a href="">选择</a>
+									</td>
+									<td>4</td>
+									<td>33</td>
+									<td>33</td>
+									<td>33</td>
+									<td>100%</td>
+									<td>688</td>
+									<td>671-679</td>
+									<td>671-679</td>
+									<td>
+										<a href="">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td>22</td>
+									<td>
+										<img src="${base}/r/img/fengxian.png" alt="" />
+									</td>
+									<td>新闻传播学类</td>
+									<td>8</td>
+									<td>
+										<a href="">选择</a>
+									</td>
+									<td>4</td>
+									<td>33</td>
+									<td>33</td>
+									<td>33</td>
+									<td>100%</td>
+									<td>688</td>
+									<td>671-679</td>
+									<td>671-679</td>
+									<td>
+										<a href="">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td>22</td>
+									<td>
+										<img src="${base}/r/img/fengxian.png" alt="" />
+									</td>
+									<td>新闻传播学类</td>
+									<td>8</td>
+									<td>
+										<a href="">选择</a>
+									</td>
+									<td>4</td>
+									<td>33</td>
+									<td>33</td>
+									<td>33</td>
+									<td>100%</td>
+									<td>688</td>
+									<td>671-679</td>
+									<td>671-679</td>
+									<td>
+										<a href="">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td>22</td>
+									<td>
+										<img src="${base}/r/img/fengxian.png" alt="" />
+									</td>
+									<td>新闻传播学类</td>
+									<td>8</td>
+									<td>
+										<a href="">选择</a>
+									</td>
+									<td>4</td>
+									<td>33</td>
+									<td>33</td>
+									<td>33</td>
+									<td>100%</td>
+									<td>688</td>
+									<td>671-679</td>
+									<td>671-679</td>
+									<td>
+										<a href="">查看</a>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class="collegePlansBtn">
+							<button class="btn btnColorGreen">返回志愿表</button>
+							<button class="btn btnColorGreen">返回学校列表</button>
+							<button class="btn btnColorGreen">完成</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<!-- 点击历年数据  查看   查看详情 -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width: 1200px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <iframe id="iframe" name="iframe" style="height: 650px; min-width: 100%"></iframe>
+                    </div>
+                </div>
+			</div>
+		</div>
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+        <script src="${base}/r/js/itemsJs/filtrate.js"></script>
+	</body>
+<script>
+    function queryHistory(year){
+        $.ajax({
+            url:"${base}/queryHistoryPlanDoor.jspx",
+            type:"post",
+            async: true,
+            dataType:'json',
+            data:{
+                province_id:${province_id!},
+                major_type_id:${major_type_id!},
+                batch_id:${batch_id!},
+                univ_id:${univ_id!},
+                year:year,
+            },
+            success : function(data) {
+                var res = data
+                if(res && res.success == true){
+                    event.returnValue=false;
+                    $($("#iframe")[0].contentWindow.document.body).remove();
+                    $('#iframe').attr('src', res.msg);
+                    $('#myModal').modal('show');
+                    // window.location.reload();
+                }else{
+                    alert(res.msg);
+                }
+            }
+        })
+    }
+</script>
+
+</html>

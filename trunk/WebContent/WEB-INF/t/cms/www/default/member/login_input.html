@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>登录</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+	</head>
+
+	<body onkeydown="_keyLogin()">
+		<div class="dlzcjhbg">
+			<div class="loginContent">
+				<p>欢迎使用沃得教育生涯规划系统</p>
+				<div class="flex-container">
+					<!--左-->
+					<div class="loginContentLeft flex-item10 textC">
+						<p class="logoziImg"><img src="${base}/u/cms/www/logo/logozi.png" alt="" /></p>
+						<p><img src="${base}/r/img/erweima.png" alt="" /></p>
+					</div>
+					<!--右-->
+					<div class="loginContentRight flex-item10">
+						<form id="jvForm" action="${base}/login.jspx" method="post">
+							<div>
+								<span><img src="${base}/r/img/shouji.png" alt="" /></span>
+								<input id="username" name="username" class="f-origin" type="text" placeholder="请输入手机号/沃得账号" />
+							</div>
+							<div>
+								<span><img src="${base}/r/img/mima.png" alt="" /></span>
+								<input id="password" name="password" class="f-origin" type="password" placeholder="请输入登录密码" />
+							</div>
+							<div class="wjmm">
+								<a href="${base}/user_register.jspx">还没有账户/忘记密码？</a>
+							</div>
+							<div class="loginBtn">
+								<button type="button" onclick="_login()" id="login" class="btn10 btnColorGreen">登录</button>
+								<button type="button" onclick="_rtnBtn()" class="btn9">暂不登录</button>
+							</div>
+							<div class="">我的高中生涯，沃得教育规划</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+		<script>
+			//input选中变色
+			window.onload = function() {
+				var aInput = document.getElementsByTagName('input');
+				for(var i = 0; i < aInput.length; i++) {
+					aInput[i].onfocus = function() {
+						this.className = 'f-text';
+					}
+					aInput[i].onblur = function() {
+						this.className = 'f-origin';
+					}
+				}
+			}
+
+			function _rtnBtn() {
+                location.href='${base}/';
+            }
+            
+            //
+            function _login(){
+                var username = $("#username").val();
+                var password = $("#password").val();
+
+                if (username == '') {
+                    alert("请填入用户名！");
+                    return false;
+                }
+                if (password == '') {
+                    alert("请填入密码！");
+                    return false;
+                }
+
+                //验证是不是卡号
+                var card = /^[0-9]*$/;
+                if(card.test(username)){
+                    $.ajax({
+                        url : 'check_card.jspx',
+                        type : "post",
+                        async:false,
+                        data:{cardId:username},
+                        error : function(){
+                            alert("提交出现异常！");
+                        },
+                        success : function(data){
+                            var res = eval('(' + data + ')');
+                            if(res && res.success == true){
+                                $.ajax({
+                                    url : 'login_with_card.jspx',
+                                    type : "post",
+                                    async:false,
+                                    data:{cardId:username,password:password},
+                                    error : function(){
+                                        alert("提交出现异常！");
+                                    },
+                                    success : function(data){
+                                        var res = eval('(' + data + ')');
+                                        if(res && res.success == true){
+                                            event.returnValue=false;
+                                            location.href=res.msg;
+                                        }else {
+                                            alert(res.msg);
+                                        }
+                                    }
+                                });
+                            }else {
+                                $("#jvForm").submit();
+                            }
+                        }
+                    });
+                } else {
+                    $("#jvForm").submit();
+                }
+            }
+
+            function _keyLogin(){
+                if (event.keyCode==13) {
+                    $("#login").click();  //调用登录按钮的登录事件
+                }
+            }
+		</script>
+		
+	</body>
+</html>

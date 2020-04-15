@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="${base}/r/wdedu/css/index.css" />
+  <!--<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>-->
+    <script src="${base}/r/wdedu/js/jquery-1.10.2.js"></script>
+  <script type="text/javascript" src="${base}/r/wdedu/js/js/web.js"></script>
+   <script src="${base}/r/wdedu/js/jquery-1.10.2.min.js" type="text/javascript" ></script>
+  <link rel="stylesheet" href="${base}/r/wdedu/css/pignose.tab.min.css" />
+  <style type="text/css">
+    table thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+    }
+    table tr:last-child{
+    border-bottom: 1px solid #ececec;
+    }
+    table thead {
+    width: calc( 100% - 1em )
+    }table tbody {
+     display:block;
+     height:195px;
+     overflow-y:scroll;
+     }
+  	#wrapper {
+  		padding-bottom: 40px;
+  	}  	.tzy_popup_z{
+          z-index: 99;
+          }
+  	.article {
+  		margin: 0 auto;
+  		text-align: center;
+  	}
+  	.article h3 {
+  		margin-bottom: 40px;
+  	}
+  	.article table {
+  		font-size: 115%;
+  		text-align: left;
+  	}
+  	.article pre {
+  		font-size: 115%;
+  	}
+  	.nav.tab { width: auto; max-width: 100%; margin: 0; border: 0; padding: 0; border-bottom: 1px solid #ddd; }
+  	.pignose-sub-tab { border: 0; margin: 0; padding: 0;}
+  	.table { width: 100%; table-layout: fixed; }
+  	.table .subject { text-align: left; padding-left: 5%; }
+  	.table .date { text-align: right; padding-right: 5%; }
+  </style>
+    <script>
+        var fillListId="";
+        function fna(xx,mc) {
+              var majorNum= '${majorNum!}';
+             majorNum = eval(majorNum);
+
+            var b = document.getElementById(xx).innerHTML;
+             if (b == "已选择") {
+                     document.getElementById(xx).innerHTML = "选择专业";
+                     document.getElementById(xx).style.background="#ff8d00"
+                     var box = document.getElementById("idl"+xx);
+                     box.parentNode.removeChild(box);
+                 }
+           var li = $("#tzy_join li").length;
+             if (li<majorNum) {
+               if (b == "选择专业") {
+                                            document.getElementById(xx).innerHTML = "已选择";
+                                            document.getElementById(xx).style.background="#a8a8a8"
+                                            var ids="idl"+xx;
+                                            var html = document.getElementById("tzy_join").innerHTML;
+                                            var sb = '<li class="flex-container2 specialty_move dl" value="'+xx+'" id='+ids+'>';
+                                            sb += '<input type="hidden" name="id" value=""/>';
+                                            sb += '<div class="flex-item6 beyondHidden35 f_l" style=" width:77%;">'+mc+'</div>';
+                                            sb += '<div class="flex_yd flex-item6 f_r">';
+                                            sb += '<img class="specialty_up f_l" src="${base}/r/wdedu/images/mntb_5.png" onclick="djsj(this)" />';
+                                            sb += '<img class="specialty_down f_l" src="${base}/r/wdedu/images/mntb_4.png" onclick="djsj(this)"/>';
+                                            sb += '<img class="school_info_move_down2 delete f_r" src="${base}/r/wdedu/images/del.png"  onclick="remove_app(this,'+xx+')"/>';
+                                            sb += '<div class="clearfix"></div>';
+                                            sb += '</div>';
+                                            sb += '<div class="clearfix"></div>';
+                                            sb += '</li>';
+                                            document.getElementById("tzy_join").innerHTML = html + sb;
+                                        }
+             }else{
+                 alert("必须小于规定专业数："+majorNum)
+             }
+
+
+        };
+        function remove_app(self,xx) {
+           var switch1 = "switch"+ xx;
+            var box = document.getElementById("idl"+xx);
+            box.parentNode.removeChild(box);
+            var b = document.getElementById(xx).innerHTML;
+              document.getElementById(xx).innerHTML = "选择专业";
+               document.getElementById(xx).style.background="#ff8d00"
+        }
+        function djsj(obj){
+            var parent = $(obj).parents(".specialty_move");
+            var this_index = $(obj).parent().parent().index();
+            var list = $(obj).parents(".specialtyList").find(".specialty_move");
+            var list_count = list.length - 1;
+            var this_IsUp = $(obj).hasClass("specialty_up"); //上移操作还是下移操作
+            if (this_index == 0 && this_IsUp) {
+                alert('顶部')
+                return;
+            } else if (this_index == list_count && !this_IsUp) {
+                alert('底部')
+                return;
+            }
+            var next_index = this_IsUp ? this_index + -1 : this_index + 1;
+            if (this_IsUp) {
+                var prev = parent.prev();
+                parent.insertBefore(prev);
+            } else {
+                var next = parent.next();
+                parent.insertAfter(next);
+            }
+        }
+        //取消保存
+function CloseDiv2() {
+var application_id = $("#application_id").val();
+   var batch_id = $("#batch_id").val();
+     var pageNo= $("#pageNo").val();var setPageNum= $("#setPageNum").val();
+ var  url="${base}/zytb/projectFast.jspx?applicationId="+application_id+"&batchId="+batch_id+"&pageNo="+pageNo+"&setPageNum="+setPageNum;
+    parent.location.href=url;
+}
+        //关闭弹出层,保存
+        function CloseDiv(show_div, bg_div) {
+            fillListId="";
+            $("#tzy_join li").each(function(){
+                var i=  $(this).val();
+                fillListId+=i+",";
+            })
+            var application_id = $("#application_id").val();
+            var batch_id = $("#batch_id").val();
+            var univ_list_id = $("#univ_list_id").val();
+            var univ_order = $("#univ_order").val();
+            var major_num = $("#major_num").val();
+            var is_formal = $("#is_formal").val();
+            $.ajax({
+                url:"${base}/fastZytb/saveOrUpdateIntentMajor.jspx",
+                data:{
+
+                    applicationId:application_id,
+                    batchId:batch_id,
+                    intent_univId:univ_list_id,
+                    // univOrder:univ_order,
+                    // majorNum:major_num,
+                    // isFormal:is_formal,
+                    majorId:fillListId
+                },
+                type:"post",
+                err:function (data) {
+                    alert("提交失败！\r\n"+data);
+                    fillListId="";
+                },
+                success:function (data) {
+                     if (fillListId==null||fillListId==""){
+                       alert("未选择专业！")
+                   }else {
+                           alert("保存成功")
+                   }
+         fillListId="";
+         var pageNo= $("#pageNo").val();var setPageNum= $("#setPageNum").val();
+        var  url="${base}/zytb/projectFast.jspx?applicationId="+application_id+"&batchId="+batch_id+"&pageNo="+pageNo+"&setPageNum="+setPageNum;
+              parent.location.href=url;
+
+                }
+            });
+
+/*            document.getElementById(show_div).style.display = 'none';
+            document.getElementById(bg_div).style.display = 'none';*/
+        }
+
+
+    </script>
+    <script type="text/javascript">
+
+    window.onload=function (){
+                $("#tzy_join li").each(function(){
+                    var i=  $(this).val();
+                   var lengli = $("#tzy_join li").length;
+                for(var j = 0; j <=lengli ; j++) {
+                   var len=     document.getElementsByTagName("li")[j].id;
+                       var k= len.slice(3);
+                     var b = document.getElementById(k).innerHTML;
+                      document.getElementById(k).innerHTML = "已选择";
+                       document.getElementById(k).style.background="#a8a8a8"
+                }
+                });
+    }
+
+                function getCookie(name) {
+                    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+                    if (arr = document.cookie.match(reg))
+                        return unescape(arr[2]);
+                    else
+                        return null;
+                }
+                  $(function () {
+                 var PcXs=getCookie("PcXs");
+                     $("#PcXs").text(PcXs);
+                  });
+    </script>
+</head>
+<body>
+        <div id="MyDiv" class="white_content">
+            <div style="cursor: default; height: 40px;text-align: right; " class="xzanniu">
+              <span class="tcys" onclick="CloseDiv('MyDiv','fade')">保存</span>
+               <span class="tcys" onclick="CloseDiv2('MyDiv','fade')" style="background-color:#ececec; color: #333;">取消</span>
+                              <div class="mntbb_lb  information" style="margin-top: 0px;">
+
+                                   	<div class="flex-item f_l">
+                                   	院校代码：<span>[${tCeeEnrollUnivList.univCode!}]</span>
+                                   	</div>
+                                   	<div class="  flex-item f_l">
+                                      院校名称：<span>${tCeeEnrollUnivList.univName!}</span>
+                                      </div>
+                                   	<div class="  flex-item f_l">
+                                   		省份：<span>${tCeeEnrollUnivList.univCity!}</span>
+                                   	</div>
+                                   	<div class="  flex-item f_l">
+                                        	批次：<span id="PcXs"></span>
+                                        </div>
+                                        <div class="  flex-item f_l">
+                                          招生计划人数：<span>${tCeeEnrollUnivList.changePlanNum!}</span>
+                                           </div>
+
+                                    </div>
+                                     <div class="clearfix"></div>
+                     </div>
+                <div class="tzy_popup">
+                    <div class="tzy_popup_z f_l" style="height: 500px; overflow-y:scroll;">
+                        <div class="tzy_titl">
+                            已选择专业
+                        </div>
+                        <ul class="dl specialtyList" id="tzy_join">
+                            <!--li标签后不能有任何标签，影响上下移动-->
+                        [#if tCeeEnrollFillLists??]
+                            [#list tCeeEnrollFillLists as bs]
+                              [#list list as list]
+                              [#if bs.id?? && list.id??  ]
+                                [#if bs.id == list.id&&bs.majorName == list.majorName]
+                            <li class="flex-container2 specialty_move dl" value="${bs.id!}" id="idl${bs.id!}">
+                           <input type="hidden" name="id" value=""/>
+                            <div class="flex-item6 beyondHidden35 f_l" style=" width:77%;">${bs.majorName!}</div>
+                         <div class="flex_yd flex-item6 f_r">
+                             <img class="specialty_up f_l" src="${base}/r/wdedu/images/mntb_5.png" onclick="djsj(this)" />
+                         <img class="specialty_down f_l" src="${base}/r/wdedu/images/mntb_4.png" onclick="djsj(this)"/>
+                         <img class="school_info_move_down2 delete f_r" src="${base}/r/wdedu/images/del.png"  onclick="remove_app(this,'${bs.id!}')"/>
+                     <div class="clearfix"></div>
+                       </div>
+                            <div class="clearfix"></div>
+                         </li>
+                         [/#if]
+                         [/#if]
+                         [/#list]
+                            [/#list]
+                        [/#if]
+                        </ul>
+                    </div>
+                    <div class="tzy_popup_y f_r">
+                        <input type="hidden" value="${applicationId!}" name="application_id" id="application_id">
+                        <input type="hidden" value="${batchId!}" name="batch_id" id="batch_id">
+                        <input type="hidden" value="${univListId!}" name="univ_list_id" id="univ_list_id">
+                        <input type="hidden" value="${univOrder!}" name="univ_order" id="univ_order">
+                        <input type="hidden" value="${majorNum!}" name="major_num" id="major_num">
+                        <input type="hidden" value="${isFormal!}" name="is_formal" id="is_formal">
+                              <input type="hidden" id="pageNo" name="pageNo" value="${pageNo!}"/>
+                                <input type="hidden" id="setPageNum" name="setPageNum" value="${setPageNum!}"/>
+                        <table width="100%%" border="0" cellspacing="0" cellpadding="0">
+                         <thead class="gdxf">
+                            <tr>
+                                <th scope="col" width="60px;">代码</th>
+                                <th scope="col" width="180px;">专业名称</th>
+                                <th scope="col" width="35px;">学制</th>
+                                <th scope="col" width="80px;">学费</th>
+                                [#if tBaseProvince.limitlitModel??]
+                                [#if tBaseProvince.limitlitModel == 2 || tBaseProvince.limitlitModel == 4]
+                                <th scope="col" width="150px;">限选科目</th>
+                                [/#if]
+                                [/#if]
+                                <th scope="col" width="75px;">${tBaseProvince.dataPlanYear!}年计划</th>
+                                <th scope="col" width="80px;">${tBaseProvince.dataEnrollYear-tBaseProvince.dataEnrollYearMajor!}年录取</th>
+                                <th scope="col" width="80px;">${tBaseProvince.dataEnrollYear-tBaseProvince.dataEnrollYearMajor-1!}年录取</th>
+                                <th scope="col" width="80px;">${tBaseProvince.dataEnrollYear-tBaseProvince.dataEnrollYearMajor-2!}年录取</th>
+                                <th scope="col" width="80px;">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody style="height:500px;overflow-y:scroll;width: 100%;">
+                         <!--   <tr>
+                            <td width="60px;">${tCeeEnrollUnivList.univCode!}</td>
+                            <td width="200px;">${tCeeEnrollUnivList.univName!}</td>
+                            <td width="55px;"></td>
+                            <td width="90px;"></td>
+                            <td width="75px;">${tCeeEnrollUnivList.changePlanNum!}</td>
+                            <td width="110px;">
+                                <div>${tCeeEnrollUnivList.enrolledNum1!}</div>
+                                <div>${tCeeEnrollUnivList.scoreLow1!}</div>
+                                <div>${tCeeEnrollUnivList.rankScoreLow1!}</div>
+                            </td>
+                            <td width="110px;">
+                                <div>${tCeeEnrollUnivList.enrolledNum2!}</div>
+                                <div>${tCeeEnrollUnivList.scoreLow2!}</div>
+                                <div>${tCeeEnrollUnivList.rankScoreLow2!}</div>
+                            </td>
+                            <td width="110px;">
+                                <div>${tCeeEnrollUnivList.enrolledNum3!}</div>
+                                <div>${tCeeEnrollUnivList.scoreLow3!}</div>
+                                <div>${tCeeEnrollUnivList.rankScoreLow3!}</div>
+                            </td>
+                            <td width="90px;"></td>
+                            </tr>-->
+                         [#if list??]
+                            [#list list as list]
+                                        <tr>
+                                            <td  width="60px;">${list .majorCode!}</td>
+                                            <td width="180px;">${list.majorName!}</td>
+                                            <td  width="35px;">${list.planSchoolLength!}</td>
+                                            <td width="80px;">${list.planFee!}</td>
+                                            [#if tBaseProvince.limitlitModel??]
+                                            [#if tBaseProvince.limitlitModel == 2 || tBaseProvince.limitlitModel == 4 ]
+                                            <td width="150px;">${list.majorSubjectsRemark!}</td>
+                                            [/#if]
+                                            [/#if]
+                                            <td width="75px;">${list.planNum!}</td>
+                                            <td  width="80px;">
+                                                <div>${list.histNum1!}</div>
+                                                <div class="ghbs">${list.histLowScore1!}</div>
+                                                <div class="ghbs2">${list.histLowRank1!}</div>
+                                            </td>
+                                            <td width="80px;">
+                                                <div>${list.histNum2!}</div>
+                                                <div class="ghbs">${list.histLowScore2!}</div>
+                                                <div class="ghbs2">${list.histLowRank2!}</div>
+                                            </td>
+                                            <td width="80px;">
+                                                <div>${list.histNum3!}</div>
+                                                <div class="ghbs">${list.histLowScore3!}</div>
+                                                <div class="ghbs2">${list.histLowRank3!}</div>
+                                            </td>
+                                            <td width="80px;">
+                                                <div class="switch" id="switch${list.id}">
+                                                    <!--<input id="choose" value="1" name="lx" type="checkbox" hidden="">
+                                                    <label for="choose" id="test_label" onclick="chooseMajor(${list.id},${applicationId!});">选择专业</label>
+                                                    -->
+                                     [#if list.isQualification??&&list.isQualification==0]
+                                       <input id="lx_${list.id}" value="1" name="lx" type="checkbox" hidden="" style="pointer-events: none;">
+                                       <label for="lx_${list.id}" id="${list.id}" style="background-color: red;color: white; pointer-events: none;">无资格</label>
+                                       [#else]
+                                       <input id="lx_${list.id}" value="1" name="lx" type="checkbox" hidden="">
+                                       <label for="lx_${list.id}" id="${list.id}" onclick="fna('${list.id}','${list.majorName!}')">选择专业</label>
+                                       [/#if]
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        [/#list]
+                            [/#if]
+                                        </tbody>
+                        </table>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+        </div>
+        <div id="fade" class="black_overlay"></div>
+
+</body>
+</html>

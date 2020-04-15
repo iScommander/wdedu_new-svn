@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>历史数据</title>
+    <link rel="stylesheet" href="${base}/r/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${base}/r/css/combo.select.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css"/>
+    <link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css"/>
+</head>
+
+<body>
+<!--顶部线条-->
+<div class="topLine"></div>
+<!--tab切换  导航-->
+[#include "../include/header_zy.html"/]
+<!--路径-->
+<div class="route">
+    <div class="flex-container1 width1200">
+        <div>
+            <a href="${base}/">首页 </a> &lt;&lt;志愿填报 &lt;&lt;志愿填报 &lt;&lt;院校录取详情 &lt;&lt; <a onclick="window.location.href='javascript:history.back(-1);'">返回上一级</a>
+        </div>
+    </div>
+</div>
+<!--主体-->
+<main class="width1200 academyEnrollDetails">
+    <div class="academyEnrollDetails_list25">
+        [#if name??]
+        <p>${name[0]}</p>
+        [/#if]
+        <div id="treeview" class=""></div>
+    </div>
+    <div class="academyEnrollDetails_list73 lishishuju">
+        <ul id="yearTab" class="nav nav-tabs ChooseToOption_tabs yearTab_tabs">
+            <li>
+                <a href="#yearTab1" data-toggle="tab">2016</a>
+            </li>
+            <li>
+                <a href="#yearTab2" data-toggle="tab">2017</a>
+            </li>
+            <li class="active">
+                <a href="#yearTab3" data-toggle="tab">2018</a>
+            </li>
+        </ul>
+        <div id="yearTabContent" class="tab-content">
+            <div class="tab-pane" id="yearTab1">
+                <table class="table deeptable letterSpacing0 table-striped table-bordered">
+                    <tr>
+                        <th>学校/专业名称</th>
+                        <th>计划</th>
+                        <th>实录</th>
+                        <th>最低分</th>
+                        <th>最低分排名</th>
+                        <th>平均分</th>
+                        <th>平均分排名</th>
+                    </tr>
+                    [#if tCeeEnrollHistoryList??]
+                    [#list tCeeEnrollHistoryList as t]
+                    [#if t.year == 2016]
+                    [#if t.historyType==0]
+                    <tr>
+                    <td>${t.univName!}</td>
+                    <td>${t.historyPlaned!}</td>
+                    <td>${t.historyEnrolled!}</td>
+                    <td>${t.lowScore!}</td>
+                    <td>${t.rankLowScore!}</td>
+                    <td>${t.averageScore!}</td>
+                    <td>${t.rankAverageScore!}</td>
+                    </tr>
+                    [#else]
+                    <tr>
+                    <td>(${t.univName!})${t.majorName!}</td>
+                    <td>${t.historyPlaned!}</td>
+                    <td>${t.historyEnrolled!}</td>
+                    <td>${t.lowScore!}</td>
+                    <td>${t.rankLowScore!}</td>
+                    <td>${t.averageScore!}</td>
+                    <td>${t.rankAverageScore!}</td>
+                    </tr>
+                    [/#if]
+                    [/#if]
+                    [/#list]
+                    [/#if]
+                </table>
+            </div>
+            <div class="tab-pane" id="yearTab2">
+                <table class="table deeptable letterSpacing0 table-striped table-bordered">
+                    <tr>
+                        <th>学校/专业名称</th>
+                        <th>计划</th>
+                        <th>实录</th>
+                        <th>最低分</th>
+                        <th>最低分排名</th>
+                        <th>平均分</th>
+                        <th>平均分排名</th>
+                    </tr>
+                    [#if tCeeEnrollHistoryList??]
+                    [#list tCeeEnrollHistoryList as t]
+                    [#if t.year == 2017]
+                    [#if t.historyType==0]
+                    <tr>
+                        <td>${t.univName!}</td>
+                        <td>${t.historyPlaned!}</td>
+                        <td>${t.historyEnrolled!}</td>
+                        <td>${t.lowScore!}</td>
+                        <td>${t.rankLowScore!}</td>
+                        <td>${t.averageScore!}</td>
+                        <td>${t.rankAverageScore!}</td>
+                    </tr>
+                    [#else]
+                    <tr>
+                        <td>(${t.univName!})${t.majorName!}</td>
+                        <td>${t.historyPlaned!}</td>
+                        <td>${t.historyEnrolled!}</td>
+                        <td>${t.lowScore!}</td>
+                        <td>${t.rankLowScore!}</td>
+                        <td>${t.averageScore!}</td>
+                        <td>${t.rankAverageScore!}</td>
+                    </tr>
+                    [/#if]
+                    [/#if]
+                    [/#list]
+                    [/#if]
+                </table>
+            </div>
+            <div class="tab-pane in active" id="yearTab3">
+                <table class="table deeptable letterSpacing0 table-striped table-bordered">
+                    <tr>
+                        <th>学校/专业名称</th>
+                        <th>计划</th>
+                        <th>实录</th>
+                        <th>最低分</th>
+                        <th>最低分排名</th>
+                        <th>平均分</th>
+                        <th>平均分排名</th>
+                    </tr>
+                    [#if tCeeEnrollHistoryList??]
+                    [#list tCeeEnrollHistoryList as t]
+                    [#if t.year == 2018]
+                    [#if t.historyType==0]
+                    <tr>
+                        <td>${t.univName!}</td>
+                        <td>${t.historyPlaned!}</td>
+                        <td>${t.historyEnrolled!}</td>
+                        <td>${t.lowScore!}</td>
+                        <td>${t.rankLowScore!}</td>
+                        <td>${t.averageScore!}</td>
+                        <td>${t.rankAverageScore!}</td>
+                    </tr>
+                    [#else]
+                    <tr>
+                        <td>(${t.univName!})${t.majorName!}</td>
+                        <td>${t.historyPlaned!}</td>
+                        <td>${t.historyEnrolled!}</td>
+                        <td>${t.lowScore!}</td>
+                        <td>${t.rankLowScore!}</td>
+                        <td>${t.averageScore!}</td>
+                        <td>${t.rankAverageScore!}</td>
+                    </tr>
+                    [/#if]
+                    [/#if]
+                    [/#list]
+                    [/#if]
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<!--底部-->
+<!--js-->
+<script src="${base}/r/js/jQuery.js"></script>
+<script src="${base}/r/js/bootstrap.min.js"></script>
+<script src="${base}/r/js/jquery.combo.select.js"></script>
+<script src="${base}/r/js/bootstrap-treeview.min.js"></script>
+<script src="${base}/r/js/itemsJs/common.js"></script>
+<script>
+    //下拉弹出框
+    $(function () {
+        $('select').comboSelect();
+        $(".combo-input").attr("readonly", "readonly").css("cursor", "pointer")
+    });
+
+    //树
+    var defaultData = [{
+        text: '计划数据',
+        href: '${base}/schoolPlan.jspx?province_id=${province_id!}&&major_type_id=${major_type_id!}&&batch_id=${batch_id!}&&univ_id=${univ_id!}',
+        tags: ['0']
+    }, {
+        text: '历史数据',
+        href: '${base}/findUnivDetail.jspx?province_id=${province_id!}&&major_type_id=${major_type_id!}&&batch_id=${batch_id!}&&univ_id=${univ_id!}',
+        tags: ['0'],
+        state: {
+            selected: true
+        },
+    }]
+    $('#treeview').treeview({
+        color: "#333",
+        expandIcon: 'glyphicon glyphicon-chevron-right',
+        collapseIcon: 'glyphicon glyphicon-chevron-down',
+        //			nodeIcon: 'glyphicon glyphicon-bookmark',
+        data: defaultData
+    });
+    //选中事件监听nodeSelected
+    $('#treeview').on('nodeSelected', function (event, data) {
+        clickNode(event, data)
+    });
+    //取消选中事件监听nodeUnselected
+    $('#treeview').on('nodeUnselected', function (event, data) {
+        clickNode(event, data)
+    });
+
+    function clickNode(event, data) {
+        console.log(JSON.stringify(data));
+        console.log(data.text);
+        console.log(data.href);
+        console.log(data.nodeId);
+        if (data.tags != 0) {
+            return;
+        }
+        window.location.href = data.href;
+    }
+</script>
+</body>
+
+</html>

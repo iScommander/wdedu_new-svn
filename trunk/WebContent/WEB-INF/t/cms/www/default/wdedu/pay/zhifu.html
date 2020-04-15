@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>支付</title>
+<link href="../css/public.css" rel="stylesheet" type="text/css" />
+<script src="http://www.jq22.com/jquery/1.9.1/jquery.min.js"></script>
+<script language="javascript" src="../js/common.js"></script>
+<link  type="text/css" rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+    <div class="index_top_bg">
+		<div class="index_top">
+			<div class="index_top_l fl">
+				<p>欢迎光临沃得生涯教育集团！</p>
+				<span>免费热线：<i>400-9288-985</i></span>
+				<div class="clearfix"></div>
+			</div>
+			<div class="index_top_r fr">
+				<p><a href="">新手教程</a></p>
+				<p><a href="">官方微信</a></p>
+				<i><a href="">会员中心</a></i>
+				<span><a href="">快速登录</a></span><span><a href="">/&nbsp;注册</a></span>
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>	
+    <div class="index_logo">
+		<div class="index_logo_l fl">
+			<a href=""><img src="../images/index_3.png"></a>
+		</div>
+		<div class="index_logo_city fl">
+            <div class="city">
+                <div class="city_now" onclick="dk()">
+                    <span class="fl" id="text" >北京</span>
+                    <div class="fl">
+                        <span class="city_nav" id="city_nav" ><img src="../images/city_2.png"></span>
+                    </div>
+                </div>
+                <div id="city_link" class="city_link">
+                    <div class="city_show">
+                        <span class="f_red f_r" href="javascript:;" title="关闭窗口" onclick="gb()">[关闭]</span>
+                    </div>
+					<a class="city_links" href="#" onclick="qz(this)" >南京</a>
+                    <a class="city_links" href="#" onclick="qz(this)" >上海</a>
+                    <a class="city_links" href="#" onclick="qz(this)" >河南</a>
+                    <a class="city_links" href="#" onclick="qz(this)" >深圳</a>
+                </div>
+            </div>
+        </div>
+        <script src="../js/jquery-1.11.1.min.js" type="text/javascript" ></script>
+		<script  type="text/javascript">
+		window.isMoused=false;
+		function qz(obj){
+			var text = $(obj).text();
+			document.getElementById("text").innerText =text;
+			gb();
+			
+		}
+		function gb(){
+			document.getElementById('city_nav').className='city_nav';document.getElementById('city_link').className='city_link';window.isMoused =false;return !1;
+		}
+			function dk(){
+				if(window.isMoused){
+					 gb()
+					window.isMoused = false;	
+				   }else{
+					   document.getElementById('city_link').className='city_link city_hovers'
+					   window.isMoused =true;
+				   }  
+			}
+			
+	</script>
+		<div class="index_logo_c fl">
+			<form id="form1" name="form1" method="post" action="">
+				<input type="text" name="textfield" id="textfield" class="qgt_ssnr" placeholder="查大学 / 查专业 / 搜文章" />
+				<input type="image" name="button" id="button" value="提交" src="../images/index_5.png" class="qgt_ssan" />
+			</form>
+		</div>
+		<div class="index_logo_r fr">
+			<p><a href="${base}/NewsDisplay/EntranceCard.jspx">开通VIP</a></p><span><a href="">高考小助手</a></span><div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	
+	<script type='text/javascript' src='../js/dropdown.js'></script>
+    
+    
+    <div class="navbox">
+		<div class="navbox_bg">
+			<div class="nav_l fl">
+				<div id="nav">
+				<ul id="navMenu">
+				<li><a href='../index.html'>首页</a></li>
+				<li><a class="current" href='' rel='dropmenu1'>填志愿</a></li>
+				<li><a  href='' rel='dropmenu2'>找大学</a></li>
+				<li><a  href='' rel='dropmenu3'>查专业</a></li>
+				<li><a href='' rel='dropmenu4'>看就业</a></li>
+				<li><a href='' rel='dropmenu5'>测性格</a></li>
+				<li><a href='' rel='dropmenu6'>排行榜</a></li>
+				<li><a href='' rel='dropmenu7'>大数据</a></li>
+				</ul>
+				</div>
+				
+			</div>
+		<div class="nav_r fr">
+		  <a href="">189****8843</a>
+		</div>
+		<div class="clearfix"></div>
+		<script type="text/javascript">cssdropdown.startchrome("navMenu")</script>
+		</div>
+	</div>
+	<div class="mbxdh_bg">
+		<div class="mbxdh">
+			<a href="${base}/">首页</a>&nbsp;&gt; &nbsp;<a href="#">沃得生涯</a>&nbsp;&gt; &nbsp; <a href="#">了解沃得</a>
+		</div>  
+	</div>   
+		<div class="con">
+        <div class="pay">
+        		<div class="pay_z f_l">
+                		<div class="pay_z_bt">
+                        	<span>支付方式：</span>
+                            <div class="pay_z_zt">
+                           
+                            <div class="pay_xx_z f_l pay_kz2">
+                             <div class="pay_z_zt_nr" onclick="paykz(this);">
+                            <input type="radio" name="pay" id="wx" value="wx" checked="true"/>
+                            <label for="wx">
+                            <div class="pay_img f_l">
+                            <img src="../images/pay_1.png"/>
+                            </div>
+							<small>微信支付</small></label>
+                             <div class="clearfix"></div>
+                            </div>
+                            </div>
+                           
+                            <div class="pay_xx_y f_r pay_kz">
+                             <div class="pay_y_zt_nr" onclick="paykz(this);">
+                            <input type="radio" name="pay" id="albaba" value="albaba"  />
+                            <label for="albaba">  <div class="pay_img f_l">
+                            <img src="../images/pay_2.png"/>
+                            </div>
+							<small>支付宝支付</small></label>
+                          
+                             <div class="clearfix"></div>
+                            </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            </div>
+                            <div class="pay_je"><span>支付金额：<i>263</i>元</span></div>
+                        </div>
+                
+                </div>
+                <div class="pay_y f_r">
+                		<div class="pay_xs">
+                        <i>扫码支付</i>
+                        <div class="pay_ew_img">
+                        <img src="../images/pay_3.png"/>
+                        </div>
+                        <span>使用<b>支付宝</b>APP扫码完成支付</span>
+                        </div>
+                
+                </div>
+        
+        <div class="clearfix"></div>
+        </div>
+        </div>
+	<div class="index_footer_bg">
+		<div class="index_footer">
+			<div class="index_footer_l fl">
+				<img src="../images/index_35.png">
+			</div>
+			<div class="index_footer_c fl">
+				<i><a href="">沃得生涯服务</a><a href="">新高考选科 </a><a href="">综合素质提升</a><a href="">自招综评</a><a href="">志愿填报</a><div class="clearfix"></div></i>
+				<i><a href="">关于沃得生涯</a><a href="">了解沃得 </a><a href="">沃得声明 </a><a href="">加入沃得</a><a href="">合作加盟</a><a href="">联系沃得</a><div class="clearfix"></div></i>
+			</div>
+			<div class="index_footer_r fr">
+				<p><img src="../images/index_36.png"></p>
+				<span>【 扫码进入沃得公众号 】</span>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<div class="index_last_bg">
+		<div class="index_last">
+			<p>备案号：苏ICP备18041837号-2</p><span>沃得生涯教育咨询有限公司</span><div class="clearfix"></div>
+		</div>
+	</div>
+    
+
+<script>
+function paykz(kx){
+	var val=$('input:radio[name="pay"]:checked').val();
+				if(val=="wx"){
+					$(".pay_xx_z").removeClass("pay_kz")
+					$(".pay_xx_z").addClass("pay_kz2");
+					$(".pay_xx_y").removeClass("pay_kz2")
+					$(".pay_xx_y").addClass("pay_kz");
+					}
+					if(val=="albaba"){
+					$(".pay_xx_y").removeClass("pay_kz")
+					$(".pay_xx_y").addClass("pay_kz2");
+					$(".pay_xx_z").removeClass("pay_kz2")
+					$(".pay_xx_z").addClass("pay_kz");
+					}
+				
+	
+		}
+			
+			
+			
+</script>
+</body>
+</html>

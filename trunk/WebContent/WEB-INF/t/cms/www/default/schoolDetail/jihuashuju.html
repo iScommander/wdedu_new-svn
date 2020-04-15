@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>计划数据</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<style>
+			.academyEnrollDetails .academyEnrollDetails_list73.jihuashuju table tr th{
+				background: #004468;
+				color: #fff;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--顶部线条-->
+		<div class="topLine"></div>
+		<!--tab切换  导航-->
+		[#include "../include/header_zy.html"/]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container1 width1200">
+				<div>
+					<a href="${base}/">首页 </a> &lt;&lt;志愿填报 &lt;&lt;志愿填报 &lt;&lt;院校录取详情 &lt;&lt; <a onclick="window.location.href='javascript:history.back(-1);'">返回上一级</a>
+				</div>
+			</div>
+		</div>
+		<!--主体-->
+		<main class="width1200 academyEnrollDetails">
+			<div class="academyEnrollDetails_list25">
+				[#if name??]
+				<p>2018年${name[0]}年招生计划</p>
+				[/#if]
+				<div id="treeview" class=""></div>
+			</div>
+			<div class="academyEnrollDetails_list73 jihuashuju">
+				<table class="table table-bordered deeptable">
+					<tr>
+						<th width="500" rowspan="2">
+							<p>(专业代码)</p>
+							<p>专业名称</p>
+						</th>
+						<th colspan="3">招生计划</th>
+					</tr>
+					<tr>
+						<th width="150">人数</th>
+						<th width="150">学费</th>
+						<th width="150">备注</th>
+					</tr>
+					[#if tCeeEnrollPlanList??]
+					[#list tCeeEnrollPlanList as plan]
+					<tr>
+						[#if plan.planType==0 ]
+						<td>【${plan.univCode!}】${plan.univName!}</td>
+						[#else]
+						<td>【${plan.majorCode!}】${plan.majorName!}</td>
+						[/#if]
+						<td>${plan.planNum!}</td>
+						<td>${plan.majorFee!}</td>
+						<td>${plan.majorRemark!}</td>
+					</tr>
+					[/#list]
+					[/#if]
+				</table>
+			</div>
+		</main>
+		<!--底部-->
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/jquery.combo.select.js"></script>
+		<script src="${base}/r/js/bootstrap-treeview.min.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+		<script>
+			//下拉弹出框
+			$(function() {
+				$('select').comboSelect();
+				$(".combo-input").attr("readonly", "readonly").css("cursor", "pointer")
+			});
+
+			//树
+			var defaultData = [{
+				text: '计划数据',
+				href: '${base}/schoolPlan.jspx?province_id=${province_id!}&&major_type_id=${major_type_id!}&&batch_id=${batch_id!}&&univ_id=${univ_id!}',
+				tags: ['0'],
+				state: {
+					selected: true
+				},
+			}, {
+				text: '历史数据',
+				href: '${base}/findUnivDetail.jspx?province_id=${province_id!}&&major_type_id=${major_type_id!}&&batch_id=${batch_id!}&&univ_id=${univ_id!}',
+				tags: ['0']
+			}];
+			$('#treeview').treeview({
+				color: "#333",
+				expandIcon: 'glyphicon glyphicon-chevron-right',
+				collapseIcon: 'glyphicon glyphicon-chevron-down',
+				//			nodeIcon: 'glyphicon glyphicon-bookmark',
+				data: defaultData
+			});
+			//选中事件监听nodeSelected
+			$('#treeview').on('nodeSelected', function(event, data) {
+				clickNode(event, data)
+			});
+			//取消选中事件监听nodeUnselected
+			$('#treeview').on('nodeUnselected', function(event, data) {
+				clickNode(event, data)
+			});
+
+			function clickNode(event, data) {
+				console.log(JSON.stringify(data));
+				console.log(data.text);
+				console.log(data.href);
+				console.log(data.nodeId);
+				if(data.tags != 0) {
+					return;
+				}
+				window.location.href = data.href;
+			}
+		</script>
+	</body>
+
+</html>

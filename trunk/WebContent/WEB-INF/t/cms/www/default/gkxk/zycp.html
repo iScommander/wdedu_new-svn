@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<title>霍兰德职业兴趣测评</title>
+		<link rel="stylesheet" href="${resSys}/res/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="${resSys}/res/css/amazeui.css" />
+		<link rel="stylesheet" href="${resSys}/res/css/head-footer.css" />
+		<link rel="stylesheet" href="${resSys}/res/css/cs.css" />
+		<script src="${resSys}/res/js/jquery-1.11.3.min.js"></script>
+        		<link href="${base}/r/wdedu/css/public.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<!--tab切换  导航-->
+	       [#include "../wdedu/include/header_address.html"/]
+    		[#include "../wdedu/include/header_xgkxk.html"/]
+		<section class="gps ">
+			<img src="${resSys}/res/img/dlsy/holland.jpg" alt="" />
+		</section>
+		<section class="center-block">
+			<p class="cs-p">这份量表可以帮助你更清楚地认识自己的职业兴趣所在。如果你能够认真按照指示，逐页填完本表，你将会觉得这是一个很有意思的经历。<br />填写时不用急,一边细想一边填,你的收获会更大! 完成本量表大概需要20分钟的时间。</p>
+			<div class="bbx-ks-wrap gps box-shadow">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">开始测试</button>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<p class="cs-warn">下面是一组描述日常生活中活动的语句。请你根据自己对每个活动的喜好，选择“喜欢”或“不喜欢”。<br />请注意，不必考虑你实际从事这项活动的能力或操作的可能性，只需凭感觉判断喜不喜欢。</p>
+					<ul>
+					[#list onelist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id=${'1_'+(list_index+1)} typeid="${list.value1}" />
+								<label for=${'1_'+(list_index+1)}>${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id=${'11_'+(list_index+1)} typeid="${list.value2!}"/>
+								<label for=${'11_'+(list_index+1)}>${list.option2!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${onelist?size!}</span>第一部分
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(onelist?size!100)}%"></div>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">第二部分</button>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<p class="cs-warn">下面是一组语句是关于各种能力的评估，请你根据自己的实际情况，选择“是”或“否”。</p>
+				<ul>	
+					[#list twolist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id=${'2_'+(list_index+1)} typeid="${list.value1}" />
+								<label for=${'2_'+(list_index+1)}>${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id=${'22_'+(list_index+1)} typeid="${list.value2!}"/>
+								<label for=${'22_'+(list_index+1)}>${list.option2!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${twolist?size!}</span>第二部分
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(twolist?size!100)}%"></div>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" class="am-btn bg-green abs-center" onclick="showContent(this)">第三部分</button>
+				</div>
+			</div>
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks">
+				<p class="cs-warn">以下是一些社会中实际存在的职业。请你根据自己对该职业内容的想象，判断是否有兴趣从事该职业。<br />请注意，不用考虑实际情况中你是否会从事这个职业，也不用考虑经济、社会地位等外在因素，只需根据你对这个职业内容的兴趣判断即可。</p>
+				<ul>
+					[#list threelist as list]
+						<li class="am-hide">
+							<h5>${(list_index+1)+"."+list.content}</h5>
+							<div>
+								<input type="radio" name="ans1" id=${'3_'+(list_index+1)} typeid="${list.value1}" />
+								<label for=${'3_'+(list_index+1)}>${list.option1!}</label>
+							</div>
+							<div>
+								<input type="radio" name="ans1" id=${'33_'+(list_index+1)} typeid="${list.value2!}"/>
+								<label for=${'33_'+(list_index+1)}>${list.option2!}</label>
+							</div>
+						</li>
+					[/#list]
+					</ul>
+					<div class="bbx-ks-nums color-green">
+						<span class="bbx-index">1</span>/<span class="bbx-counts">${threelist?size!}</span>第三部分
+					</div>
+				</div>
+				<div class="am-progress">
+					<div class="am-progress-bar" style="width: ${100/(threelist?size!100)}%"></div>
+				</div>
+			</div>
+			<!--提交-->
+			<div class="bbx-ks-wrap gps box-shadow am-hide">
+				<div class="bbx-xgcs-ks gps">
+					<button type="button" id="tj"  onclick="tj(this)" class="am-btn bg-green abs-center">提交测试</button>
+				</div>
+			</div>
+			<form action="careerQuizReport.jspx" id="careerQuizReport" method="post">
+				<input type="hidden" id="ajaxData" name="ajaxData" >
+				<input type="hidden" id="report_A" name="report_A" >
+				<input type="hidden" id="report_C" name="report_C" >
+				<input type="hidden" id="report_E" name="report_E" >
+				<input type="hidden" id="report_I" name="report_I" >
+				<input type="hidden" id="report_S" name="report_S" >
+				<input type="hidden" id="report_R" name="report_R" >
+			</form>
+		</section>
+	[#include "../wdedu/include/footer_new.html"/]
+	</body>
+	<script type="text/javascript" src="${resSys}/res/js/head.js"></script>
+	<script type="text/javascript">
+		var localStatus = {
+			"id":1,
+			"subId":0
+		};
+		statusActive(localStatus);
+		var index=1,count=2;
+		var A=0,C=0,E=0,I=0,R=0,S=0;
+		function showContent(obj){
+			index = 1;
+			count = 2;
+			$(obj).parents(".bbx-ks-wrap").addClass("am-hide");
+			$(obj).parents(".bbx-ks-wrap").next().removeClass("am-hide");
+			$(obj).parents(".bbx-ks-wrap").next().find("ul").children("li:first-child").removeClass("am-hide");
+		};
+		function radioClick(obj){
+			var typeid = $(obj).attr("typeid");
+			if(typeid=='A'){
+				A=A+1;
+			};
+			if(typeid=='C'){
+				C=C+1;
+			};
+			if(typeid=='E'){
+				E=E+1;
+			};
+			if(typeid=='I'){
+				I=I+1;
+			};
+			if(typeid=='R'){
+				R=R+1;
+			};
+			if(typeid=='S'){
+				S=S+1;
+			};
+			var indexCounts = parseInt($(obj).parents("ul").next().find(".bbx-counts").text());
+			console.log('indexCounts',indexCounts)
+			var widths='';
+			setTimeout(function(){
+				widths =count * (100/indexCounts)+"%";
+				$(obj).parents("li").addClass("am-hide");
+				if(index < indexCounts){
+					$(obj).parents("li").next().removeClass("am-hide");
+					$(obj).parents("ul").next().find(".bbx-index").text(index+1);
+					$(obj).parents(".bbx-xgcs-ks").next().find(".am-progress-bar").css("width",widths);
+					index+=1;
+					count+=1;
+				}else{
+					index==1;
+					$(obj).parents(".bbx-ks-wrap").addClass("am-hide");
+					$(obj).parents(".bbx-ks-wrap").next().removeClass("am-hide");;
+				};
+			},300);
+			console.log('A',A,'C',C,'E',E,'I',I,'S',S,'R',R)
+		};
+		$('input[type="radio"]').on('click',function(event){
+			event.stopPropagation();
+			radioClick(this);
+			$(this).unbind('click');
+		});
+		function tj(obj){
+			$("input[name='report_A']").val(A);
+			$("input[name='report_C']").val(C);
+			$("input[name='report_E']").val(E);
+			$("input[name='report_I']").val(I);
+			$("input[name='report_S']").val(S);
+			$("input[name='report_R']").val(R);
+			$('#careerQuizReport').submit();
+		}
+	</script>
+</html>

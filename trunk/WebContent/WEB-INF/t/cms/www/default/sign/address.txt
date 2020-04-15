@@ -1,0 +1,1 @@
+WEB-INF/t/cms/www/default/sign

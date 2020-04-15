@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>志愿服务一对一</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<style>
+			.oneToOneMain>div>div:first-child {
+				text-align: center;
+				margin: 40px 0;
+			}
+			
+			.oneToOneMain>div>div:first-child>p {
+				font-size: 26px;
+			}
+			
+			.oneToOneMain>div>div:first-child>span {
+				display: inline-block;
+				width: 62px;
+				height: 5px;
+				background: #05B8C3;
+				border-radius: 5px;
+			}
+			
+			.oneToOneMain .yiduiyi .flex-container2 div>p {
+				border: 1px solid #dadada;
+				font-size: 14px;
+				color: #666;
+				padding: 30px 0 55px 0;
+				text-align: center;
+				margin-top: 15px;
+			}
+			.oneToOneMain .yiduiyi .flex-container2 div:hover p{
+				background: #fac63c;
+				color: #fff;
+				border:none;
+				margin-top: 0;
+				height: 123px;
+				padding-top: 45px;
+			}
+			.oneToOneMain .wrongRegion .flex-container {
+				background: url('${base}/r/img/10bg.png') no-repeat;
+				height: 510px;
+			}
+			
+			.oneToOneMain .wrongRegion .flex-container ul li {
+				margin: 30px 50px;
+				color: #fff;
+			}
+			
+			.oneToOneMain .wrongRegion .flex-container ul li img {
+				margin-right: 10px;
+			}
+			
+			.oneToOneMain .toCollege .flex-container {
+				height: 450px;
+				border-top: 1px solid #caf0f2;
+				border-bottom: 1px solid #caf0f2;
+			}
+			
+			.oneToOneMain .toCollege .flex-container>div:first-child>p {
+				font-size: 20px;
+				color: #05B8C3;
+				font-weight: bold;
+				margin-bottom: 20px;
+			}
+			
+			.oneToOneMain .toCollege .flex-container>div:first-child span.fangkuai {
+				display: inline-block;
+				width: 10px;
+				height: 10px;
+				background: #05B8C3;
+				margin: 0 10px;
+			}
+			
+			.oneToOneMain .toCollege .flex-container>div:first-child ul li {
+				color: #666;
+				width: 600px;
+				word-wrap: break-word;
+			}
+			
+			.oneToOneMain .toCollege .flex-container>div {
+				margin: 90px 40px;
+			}
+			
+			.oneToOneMain .trilogy .flex-container {
+				height: 250px;
+				line-height: 250px;
+			}
+			
+			.oneToOneMain .trilogy .flex-container>div {
+				margin: 0 130px;
+			}
+			
+			#four_flash {
+				position: relative;
+				width: 1100px;
+				height: 400px;
+				margin: 0 auto;
+				/*position: absolute;
+				bottom: 40px*/
+			}
+			
+			#four_flash .flashBg {
+				width: 998px;
+				height: 400px;
+				margin: 0 auto;
+				position: relative;
+				overflow: hidden
+			}
+			
+			#four_flash .flashBg ul.mobile {
+				width: 2e3%;
+				height: 320px;
+				position: absolute;
+				top: 15;
+				left: 0
+			}
+			
+			#four_flash .flashBg ul.mobile li {
+				border: 1px solid #dadada;
+				float: left;
+				width: 274px;
+				height: 320px;
+				margin: 0 26px;
+				padding: 25px 9px 0;
+			}
+			
+			#four_flash .flashBg ul.mobile li img {
+				display: block;
+				margin: 0 auto;
+			}
+			
+			#four_flash .flashBg ul.mobile li p {
+				font-size: 18px;
+				text-align: center;
+				font-weight: bold;
+				margin: 30px 0 20px;
+			}
+			
+			#four_flash .flashBg ul.mobile li span {
+				font-size: 14px;
+				color: #666;
+				display: block;
+				text-align: center;
+			}
+			
+			#four_flash .but_left {
+				width: 50px;
+				height: 100px;
+				position: absolute;
+				top: 120px;
+				left: 0
+			}
+			
+			#four_flash .but_right {
+				width: 50px;
+				height: 100px;
+				position: absolute;
+				top: 120px;
+				right: 0
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--顶部-->
+		[#include "../include/header.html"/]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container1 width1200">
+				<div>首页 &lt;&lt; 高考选科 &lt;&lt;志愿服务一对一</div>
+			</div>
+		</div>
+		<!--主体-->
+		<main class="oneToOneMain">
+			<!--志愿服务一对一-->
+			<div class="yiduiyi width1200">
+				<div class="yiduiyiTitle">
+					<p>志愿服务一对一</p>
+					<span></span>
+				</div>
+				<div class="flex-container2">
+					<div>
+						<img src="${base}/r/img/yiduiyi1.png" alt="" />
+						<p>多维度判断</p>
+					</div>
+					<div>
+						<img src="${base}/r/img/yiduiyi2.png" alt="" />
+						<p>科学智能分析</p>
+					</div>
+					<div>
+						<img src="${base}/r/img/yiduiyi3.png" alt="" />
+						<p>专家填报与评估</p>
+					</div>
+				</div>
+			</div>
+			<!--志愿填报常见十大误区-->
+			<div class="wrongRegion">
+				<div class="wrongRegionTitle">
+					<p>志愿填报常见十大误区</p>
+					<span></span>
+				</div>
+				<div class="flex-container">
+					<ul class="flex-item5">
+						<li>
+							<img src="${base}/r/img/yiduiyi01.png" alt="" />
+							<span>一门心思奔名校“名牌”大学并非所有专业都是优势专业</span>
+						</li>
+						<li>
+							<img src="${base}/r/img/yiduiyi02.png" alt="" />
+							<span>不仔细看招生章程高考志愿别冷落了招生章程</span>
+						</li>
+						<li>
+							<img src="${base}/r/img/yiduiyi03.png" alt="" />
+							<span>志愿之间没有拉开梯度不同志愿填报方式要区别对待</span>
+						</li>
+						<li>
+							<img src="${base}/r/img/yiduiyi04.png" alt="" />
+							<span>全部填报热门、紧俏专业“冷热”结合对考生更为有利</span>
+						</li>
+						<li>
+							<img src="${base}/r/img/yiduiyi05.png" alt="" />
+							<span>只凭学校（或专业）名称来选择有些专业</span>
+						</li>
+					</ul>
+					<ul class="flex-item5">
+						<li>
+							<img src="${base}/r/img/yiduiyi06.png" alt="" />
+							<span>不服从专业调剂服从调剂可以增加被录取的机会</span>
+						</li>
+						<li>
+							<img src="${base}/r/img/yiduiyi07.png" alt="" />
+							<span>平行志愿没有风险“投档而被退档”是最大的风险</span>
+						</li>
+						<li>
+							<img src="${base}/r/img/yiduiyi08.png" alt="" />
+							<span>选择专业时，不考虑考生的兴趣和特长</span>
+							<li>
+								<img src="${base}/r/img/yiduiyi09.png" alt="" />
+								<span>填报志愿是家长的事，孩子只负责学习</span>
+							</li>
+							<li>
+								<img src="${base}/r/img/yiduiyi10.png" alt="" />
+								<span>照搬往年的录取分数来报志愿高校录取分数线存在波动</span>
+							</li>
+					</ul>
+				</div>
+			</div>
+			<!--一对一专家志愿填报-->
+			<div class="toCollege">
+				<div class="toCollegeTitle">
+					<p>一对一专家志愿填报</p>
+					<span></span>
+				</div>
+				<div class="flex-container">
+					<div>
+						<p><span class="fangkuai"></span>一对一专家志愿填报</p>
+						<ul>
+							<li>俗话说，高考考学生，志愿考家长；七分成绩定，三分志愿拼。</li>
+							<li>关于高考志愿填报，您知道多少？如果您不熟悉高考招生的政策形势，又无时间研究</li>
+							<li>如果您不会分析录取分数线和录取预测排名等专业数据；如果您不知道如何规避风险和科学填报</li>
+							<li>如果您不清楚高校、专业、就业等有价值的信息；如果您不明白如何让高考志愿和孩子职业生涯规划完美结合？怎么办？</li>
+							<li>预约就有机会得到资深志愿专家一对一的全称陪护和指导！志愿无忧做的不仅仅是志愿填报。。。</li>
+						</ul>
+					</div>
+					<div>
+						<img src="${base}/r/img/111.png" alt="" />
+					</div>
+				</div>
+			</div>
+			<!--志愿填报三部曲-->
+			<div class="trilogy width1200">
+				<div class="trilogyTitle">
+					<p>志愿填报三部曲</p>
+					<span></span>
+				</div>
+				<div class="flex-container">
+					<div>
+						<img src="${base}/r/img/trilogy1.png" alt="" />
+					</div>
+					<div>
+						<img src="${base}/r/img/trilogy2.png" alt="" />
+					</div>
+					<div>
+						<img src="${base}/r/img/trilogy3.png" alt="" />
+					</div>
+				</div>
+			</div>
+			<!--志愿报考老师团队-->
+			<div class="teacherTeam">
+				<div class="teacherTeamTitle">
+					<p>志愿报考老师团队</p>
+					<span></span>
+				</div>
+				<div id="four_flash">
+					<div class="flashBg">
+						<ul class="mobile">
+							<li>
+								<img src="${base}/r/img/laoshi.png" />
+								<p>韩老师</p>
+								<span>志愿无忧首席报考专家</span>
+							</li>
+							<li>
+								<img src="${base}/r/img/laoshi.png" />
+								<p>韩老师</p>
+								<span>志愿无忧首席报考专家</span>
+							</li>
+							<li>
+								<img src="${base}/r/img/laoshi.png" />
+								<p>韩老师</p>
+								<span>志愿无忧首席报考专家</span>
+							</li>
+							<li>
+								<img src="${base}/r/img/laoshi.png" />
+								<p>韩老师</p>
+								<span>志愿无忧首席报考专家</span>
+							</li>
+							<li>
+								<img src="${base}/r/img/laoshi.png" />
+								<p>韩老师</p>
+								<span>志愿无忧首席报考专家</span>
+							</li>
+							<li>
+								<img src="${base}/r/img/laoshi.png" />
+								<p>韩老师</p>
+								<span>志愿无忧首席报考专家</span>
+							</li>
+						</ul>
+					</div>
+					<div class="but_left"><img src="${base}/r/img/qianxleft.png" /></div>
+					<div class="but_right"><img src="${base}/r/img/qianxr.png" /></div>
+				</div>
+			</div>
+			<!--我们的案例-->
+			<div class="case width1200">
+				<div class="caseTitle">
+					<p>我们的案例</p>
+					<span></span>
+				</div>
+				<div class="textC">
+					<img src="${base}/r/img/anli.png" alt="" />
+				</div>
+			</div>
+		</main>
+		<!--底部-->
+		[#include "../include/footer.html"/]
+<!--
+		<iframe MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no src="../footer.html" height="360px" width="100%"></iframe>
+-->
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/itemsJs/filtrate.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+		<script type="text/javascript">
+			//志愿报考老师团队左右箭头点击
+			var _index5 = 0;
+			$("#four_flash .but_right img").click(function() {
+				_index5++;
+				var len = $(".flashBg ul.mobile li").length;
+				if(_index5 + 5 > len) {
+					$("#four_flash .flashBg ul.mobile").stop().append($("ul.mobile").html());
+				}
+				$("#four_flash .flashBg ul.mobile").stop().animate({
+					left: -_index5 * 326
+				}, 1000);
+			});
+
+			$("#four_flash .but_left img").click(function() {
+				if(_index5 == 0) {
+					$("ul.mobile").prepend($("ul.mobile").html());
+					$("ul.mobile").css("left", "-1380px");
+					_index5 = 6
+				}
+				_index5--;
+				$("#four_flash .flashBg ul.mobile").stop().animate({
+					left: -_index5 * 326
+				}, 1000);
+			});
+		</script>
+	</body>
+
+</html>

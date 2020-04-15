@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>章程&资讯</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+		<script src="${base}/r/cms/front.js"></script>
+	</head>
+	<style>
+		main.zizhuJudgedBy3Main .zizhuJournalism ul li .JournalismContent a {
+			font-size: 18px;
+			color: #05B8C3;
+			margin-bottom: 15px;
+			font-weight: bold;
+		}
+	</style>
+	<body>
+		<!--顶部-->
+		[#include "../include/header.html"/]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container width1200">
+				<div>首页 &lt;&lt; 自主&综评 &lt;&lt; 服务资料</div>
+				<div></div>
+			</div>
+		</div>
+		<!--搜索框-->
+		<form action="fwzl.jspx" method="post">
+			<div class="flex-container">
+				<div class="flex-item hugeSearch">
+					<input type="text" placeholder="" name="title" value="${title!}"/>
+				</div>
+				<div class="flex-item">
+					<button class="btn6 btnColorGreen advancedSearch" type="submit">搜索</button>
+				</div>
+			</div>
+		</form>
+		<!--主体-->
+		<main class="zizhuJudgedBy3Main width1200">
+			<div class="flex-container2">
+				<!--自主招生章程-->
+				<div class="admissionsNews">
+					<p class="zizhuTitlt"><span>自主招生</span>自招服务资料</p>
+					<p class="zizhuTitltEnglish">Information</p>
+					<div class="zizhuJournalism">
+						<ul>
+							[@cms_content_list typeId='1' title=title  channelId='117' dateFormat='yyyy-MM-dd']
+							[#list tag_list as a]
+							<li>
+								<div href="" class="flex-container">
+									<!--日期-->
+									<div class="JournalismDate" style="width:20%">
+										<p>${a.sortDate!?string("yyyy-MM")}</p>
+										<b>${a.sortDate!?string("dd")}</b>
+									</div>
+									<!--内容-->
+									<div class="JournalismContent" style="width:80%">
+										<a href="${a.url}" target="_blank">[@text_cut s=a.title len=20 append='...'/]</a>
+										<span>[@text_cut s=a.description len=50 append='...'/]</span>
+									</div>
+								</div>
+							</li>
+							[/#list]
+							[/@cms_content_list]
+						</ul>
+					</div>
+				</div>
+				<!--搜索热点-->
+				<div class="SearchForHot">
+					<p>
+						<img src="${base}/r/img/huo.png" alt="" />
+						<span>相关搜索</span>
+					</p>
+					<ul>
+						[@cms_content_list typeId='1' count=10  channelId='117' dateFormat='yyyy-MM-dd']
+						[#list tag_list as a]
+						<li>
+							<img src="${base}/r/img/reddot.png" alt=""/>
+							<a href="${a.url}" target="_blank">[@text_cut s=a.title len=12 append='..'/]</a>
+						</li>
+						[/#list]
+						[/@cms_content_list]
+					</ul>
+				</div>
+			</div>
+		</main>
+		<!--底部-->
+		[#include "../include/footer.html"/]
+		
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+	</body>
+</html>

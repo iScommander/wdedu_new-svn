@@ -1,0 +1,84 @@
+<header class="indexHeader">
+    <div class="flex-container width1200">
+        <div>学涯云教育集团旗下升学服务站</div>
+        <div class="textR">
+					<span>
+					<a href="${base}/wxpay/wxpay.jspx">购卡中心</a>
+                     <!--<a href="${base}/alipay/fuwuzhongxin.jspx">购卡中心</a>-->
+				    </span>
+            <span>咨询热线：400-9288-985。售后服务群(744603708)。</span>
+        </div>
+    </div>
+</header>
+<!--tab切换  导航-->
+<nav class="indexNav">
+    <div class="flex-container1 width1200">
+        <div class="flex-item1">
+            <a href="${base}/index.jhtml"><img src="${base}/u/cms/www/logo/logo.png" alt=""/></a>
+            <a href="${base}/index.jhtml"><img src="${base}/u/cms/www/logo/name.png" alt=""/></a>
+        </div>
+        <div class="flex-item1">
+            <ul class="nav nav-pills">
+                <!--<li role="presentation">-->
+                <!--<a href="../../volunteerPage.html">志愿</a>-->
+                <!--</li>-->
+                <li role="presentation">
+                    <a href="${base}/fastZytb/volunteerFlexible.jspx" style="width: 120px">志愿填报</a>
+                </li>
+                <li role="presentation">
+                    <a href="${base}/fastZytb/volunteerVideo.jspx?ksType=1">志愿视频</a>
+                </li>
+                <li role="presentation">
+                    <a href="${base}/evaluation/index.jspx?ksType=1">专业测评</a>
+                </li>
+                <li role="presentation" class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">报考大数据</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="${base}/bkck/one_segment_query.jspx?ksType=1">一分一段表</a>
+                        </li>
+                        <li>
+                            <a href="${base}/bkck/batch_query.jspx?ksType=1">批次查询</a>
+                        </li>
+                        <li>
+                            <a href="${base}/bcdsj/universityRank.jspx?ksType=1">院校排行榜</a>
+                        </li>
+                        <li>
+                            <a href="${base}/bcdsj/professionRank.jspx?ksType=1">专业排行榜</a>
+                        </li>
+                        <li>
+                            <a href="${base}/bcdsj/universityTeam.jspx?ksType=1">中外合作办学</a>
+                        </li>
+                        <li>
+                            <a href="${base}/bcdsj/professionAndLab.jspx?ksType=1">重点学科实验室</a>
+                        </li>
+                        <li>
+                            <a href="${base}/bcdsj/professionalBooks.jspx?ksType=1">职业大全</a>
+                        </li>
+                        <li>
+                            <a href="${base}/bkck/enroll_rules.jspx?ksType=1">招生章程</a>
+                        </li>
+                    </ul>
+                </li>
+                <li role="presentation">
+                    <a href="${base}/fastZytb/CompleteExplain.jspx">填报说明</a>
+                </li>
+
+                <li role="presentation">
+                    <a href="${base}/BkyxAct/userCenter.jspx?ksType=1">用户中心</a>
+                </li>
+            </ul>
+        </div>
+        <div id="loginCsiDiv" style="float:left;" class="flex-item1 logRegister"></div>
+        <script src="${base}/r/js/jQuery.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                [#if site.config.ssoEnable]
+                    Cms.loginSSO('${base!}');
+                [/#if]
+                    Cms.loginCsi("${base!}","loginCsiDiv",{"returnUrl":"${location}"});
+            });
+        </script>
+    </div>
+</nav>
+<!--head-->

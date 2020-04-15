@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!--#以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>批次线</title>
+		<link rel="stylesheet" href="${base}/r/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${base}/r/css/combo.select.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/initialize.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/common.css" />
+		<link rel="stylesheet" href="${base}/r/css/itemsCSS/extend.css" />
+	</head>
+	<body>
+		<!--顶部-->
+		<header class="indexHeader">
+			<div class="flex-container width1200">
+				<div>学涯云教育集团旗下升学服务站</div>
+				<div class="textR">
+					<span>
+					<a href="${base}/FwYl/swithtype.jspx">管理中心</a>
+				</span>
+					<span>咨询热线：400-0985-200</span>
+					<span>微信小程序</span>
+				</div>
+			</div>
+		</header>
+		<!--tab切换  导航-->
+		[#include "../include/header_zy.html"/]
+		<!--路径-->
+		<div class="route">
+			<div class="flex-container width1200">
+				<div><a href="${base}">首页 </a> &lt;&lt; 志愿填报 &lt;&lt;批次线</div>
+				<div></div>
+			</div>
+		</div>
+		<!--主体-->
+		<form action="batchLine.jspx" method="post" id="divForm">
+		<main class="width1200">
+			<!--筛选条件-->
+			<div class="selectNumberScreen">
+				<div class="hasBeenSelected">
+					<dl>
+						<dt>您已选择：</dt>
+						<div class="filtrateConditionSearch">
+							<button class="btn btnColorYellow">搜索</button>
+						</div>
+						<dd style="DISPLAY: none" class="clearDd">
+							<div class="clearList">
+								<div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div>
+								<div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div>
+								<div class="selectedInfor selectedShow" style="display:none"><span></span><label></label><em></em></div>
+							</div>
+							<div style="DISPLAY: none" class="eliminateCriteria">
+								<!--清除筛选条件-->
+								<button class="btn btnColorGreen">全部清理</button>
+							</div>
+						</dd>
+					</dl>
+				</div>
+				<div id="selectList" class="screenBox screenBackground">
+					<dl class="listIndex" attr="terminal_brand_s">
+						<dt>省份 &gt;</dt>
+						<dd class="inputList">
+							<a href="javascript:void(0)" value="2">
+								<input id="radio_yuanxiao_1" value="1" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_1">北京</label>
+							</a>
+							<a href="javascript:void(0)" value="1">
+								<input id="radio_yuanxiao_2" value="2" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_2">天津</label>
+							</a>
+							<a href="javascript:void(0)" value="2">
+								<input id="radio_yuanxiao_3" value="3" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_3">辽宁</label>
+							</a>
+							<a href="javascript:void(0)" value="3">
+								<input id="radio_yuanxiao_4" value="4" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_4">河北</label>
+							</a>
+							<a href="javascript:void(0)" value="4">
+								<input id="radio_yuanxiao_5" value="5" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_5">河南</label>
+							</a>
+							<a href="javascript:void(0)" value="5">
+								<input id="radio_yuanxiao_6" value="6" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_6">吉林</label>
+							</a>
+
+							<a href="javascript:void(0)" value="6">
+								<input id="radio_yuanxiao_7" value="7" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_7">黑龙江</label>
+							</a>
+							<a href="javascript:void(0)" value="7">
+								<input id="radio_yuanxiao_8" value="8" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_8">内蒙古</label>
+							</a>
+							<a href="javascript:void(0)" value="8">
+								<input id="radio_yuanxiao_9" value="9" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_9">山东</label>
+							</a>
+							<a href="javascript:void(0)" value="9">
+								<input id="radio_yuanxiao_10" value="10" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_10">山西</label>
+							</a>
+							<a href="javascript:void(0)" value="10">
+								<input id="radio_yuanxiao_11" value="11" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_11">陕西</label>
+							</a>
+							<a href="javascript:void(0)" value="11">
+								<input id="radio_yuanxiao_12" value="12" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_12">甘肃</label>
+							</a>
+							<a href="javascript:void(0)" value="12">
+								<input id="radio_yuanxiao_13" value="13" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_13">宁夏</label>
+							</a>
+							<a href="javascript:void(0)" value="13">
+								<input id="radio_yuanxiao_14" value="14" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_14">青海</label>
+							</a>
+							<a href="javascript:void(0)" value="14">
+								<input id="radio_yuanxiao_15" value="15" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_15">新疆</label>
+							</a>
+							<a href="javascript:void(0)" value="15">
+								<input id="radio_yuanxiao_16" value="16" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_16">上海</label>
+							</a>
+							<a href="javascript:void(0)" value="16">
+								<input id="radio_yuanxiao_17" value="17" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_17">江苏</label>
+							</a>
+							<a href="javascript:void(0)" value="17">
+								<input id="radio_yuanxiao_18" value="18" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_18">浙江</label>
+							</a>
+							<a href="javascript:void(0)" value="18">
+								<input id="radio_yuanxiao_19" value="19" name="provinceId"  type="radio">
+								<label for="radio_yuanxiao_19">安徽</label>
+							</a>
+							<span class="more" ><label>更多</label><em class="open"></em></span></dd>
+						</dd>
+					</dl>
+					<dl class="listIndex" attr="">
+						<dt>文理科 &gt;</dt>
+						<dd>
+							<a href="javascript:void(0)" value="">
+								<input id="radio_majorTypeId_1" value="1" name="majorTypeId"  type="radio">
+								<label for="radio_majorTypeId_1">文科</label>
+							</a>
+
+							<a href="javascript:void(0)" value="">
+								<input id="radio_majorTypeId_2" value="2" name="majorTypeId"  type="radio">
+								<label for="radio_majorTypeId_2">理科</label>
+							</a>
+
+							<a href="javascript:void(0)" value="">
+								<input id="radio_majorTypeId_3" value="3" name="majorTypeId"  type="radio">
+								<label for="radio_majorTypeId_3">综合改革</label>
+							</a>
+						</dd>
+					</dl>
+					<dl class="listIndex" attr="">
+						<dt>高考年份 &gt;</dt>
+						<dd>
+							<a href="javascript:void(0)" value="">
+								<input id="radio_year_1" value="2016" name="year"  type="radio">
+								<label for="radio_year_1">2016</label>
+							</a>
+							<a href="javascript:void(0)" value="">
+								<input id="radio_year_2" value="2017" name="year"  type="radio">
+								<label for="radio_year_2">2017</label>
+							</a>
+							<a href="javascript:void(0)" value="">
+								<input id="radio_year_3" value="2018" name="year"  type="radio">
+								<label for="radio_year_3">2018</label>
+							</a>
+						</dd>
+					</dl>
+				</div>
+			</div>
+
+
+			<table class="table deeptable ">
+				<tr>
+					<th>年份</th>
+					<th>省份</th>
+					<th>文理科</th>
+					<th>批次</th>
+					<th>分数</th>
+					<th>志愿类别</th>
+				</tr>
+				[#if pagination?? ]
+				[#list pagination.list as a ]
+
+				<tr>
+					<th>${a.year!}</th>
+                    [#if a.provinceId==1]<th>北京 </th>[/#if]
+                    [#if a.provinceId==2]<th>天津 </th>[/#if]
+                    [#if a.provinceId==3]<th>辽宁 </th>[/#if]
+                    [#if a.provinceId==4]<th>河北 </th>[/#if]
+                    [#if a.provinceId==5]<th>河南 </th>[/#if]
+                    [#if a.provinceId==6]<th>吉林 </th>[/#if]
+                    [#if a.provinceId==7]<th>黑龙江 </th>[/#if]
+                    [#if a.provinceId==8]<th>内蒙古 </th>[/#if]
+                    [#if a.provinceId==9]<th>山东 </th>[/#if]
+                    [#if a.provinceId==10]<th>山西 </th>[/#if]
+                    [#if a.provinceId==11]<th>陕西 </th>[/#if]
+                    [#if a.provinceId==12]<th>甘肃 </th>[/#if]
+                    [#if a.provinceId==13]<th>宁夏 </th>[/#if]
+                    [#if a.provinceId==14]<th>青海 </th>[/#if]
+                    [#if a.provinceId==15]<th>新疆 </th>[/#if]
+                    [#if a.provinceId==16]<th>上海 </th>[/#if]
+                    [#if a.provinceId==17]<th>江苏 </th>[/#if]
+                    [#if a.provinceId==18]<th>浙江 </th>[/#if]
+                    [#if a.provinceId==19]<th>安徽 </th>[/#if]
+                    [#if a.provinceId==20]<th>广东 </th>[/#if]
+                    [#if a.provinceId==21]<th>海南 </th>[/#if]
+                    [#if a.provinceId==22]<th>广西 </th>[/#if]
+                    [#if a.provinceId==23]<th>云南 </th>[/#if]
+                    [#if a.provinceId==24]<th>贵州 </th>[/#if]
+                    [#if a.provinceId==25]<th>四川 </th>[/#if]
+                    [#if a.provinceId==26]<th>重庆 </th>[/#if]
+                    [#if a.provinceId==27]<th>西藏 </th>[/#if]
+                    [#if a.provinceId==28]<th>香港 </th>[/#if]
+                    [#if a.provinceId==29]<th>澳门 </th>[/#if]
+                    [#if a.provinceId==30]<th>福建 </th>[/#if]
+                    [#if a.provinceId==31]<th>江西 </th>[/#if]
+                    [#if a.provinceId==32]<th>湖南 </th>[/#if]
+                    [#if a.provinceId==33]<th>湖北 </th>[/#if]
+                    [#if a.provinceId==34]<th>台湾 </th>[/#if]
+					<!--<th >${a.provinceId!}</th>-->
+                    [#if a.majorTypeId==1]<th>文科 </th>[/#if]
+                    [#if a.majorTypeId==2]<th>理科 </th>[/#if]
+                    [#if a.majorTypeId==3]<th>综合改革 </th>[/#if]
+					<!--<th>${a.majorTypeId!}</th>-->
+					<!--<th>${a.batchId!}</th>-->
+					<th>${a.batchName!}</th>
+					<th>${a.score!}</th>
+					<th>${a.ceePre!}</th>
+				</tr>
+
+				[/#list]
+				[/#if]
+			</table>
+		</main>
+		</form>
+			<div class="textC paging">
+				<tr>
+					<table width="100%" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td align="center" class="pn-sp">
+								共 ${pagination.totalCount} 条&nbsp;
+								每页 ${pagination.pageSize} 条&nbsp;
+								当前 ${pagination.pageNo}/${pagination.totalPage} 页 &nbsp;转到第<input type="text" id="_goPs" onfocus="this.select();" onkeypress="if(event.keyCode==13){$('#_goPage').click();return false;}" style="width:50px; border:1px solid #e7e7e7;"/>页
+								<input id="_goPage" type="button" value="转" onclick="_gotoPage($('#_goPs').val());"[#if pagination.totalPage==1] disabled="disabled"[/#if] />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="button" value="首 页" onclick="_gotoPage('1');"[#if pagination.firstPage] disabled="disabled"[/#if]/>
+								<input type="button" value="上一页" onclick="_gotoPage('${pagination.prePage}');"[#if pagination.firstPage] disabled="disabled"[/#if]/>
+								<input type="button" value="下一页" onclick="_gotoPage('${pagination.nextPage}');"[#if pagination.lastPage] disabled="disabled"[/#if]/>
+								<input type="button" value="尾 页" onclick="_gotoPage('${pagination.totalPage}');"[#if pagination.lastPage] disabled="disabled"[/#if]/>
+							</td>
+						</tr>
+					</table>
+					</td>
+				</tr>
+			</div>
+
+
+
+		<!--底部-->
+		[#include "../include/footer.html"/]
+		<!--js-->
+		<script src="${base}/r/js/jQuery.js"></script>
+		<script src="${base}/r/js/bootstrap.min.js"></script>
+		<script src="${base}/r/js/itemsJs/filtrate.js"></script>
+		<script src="${base}/r/js/itemsJs/common.js"></script>
+
+		<script charset="utf-8">
+            //点击高级搜索弹出隐藏层
+            $('.advancedSearch').click(function(){
+                $('.selectNumberScreen').toggle();
+            })
+            function _gotoPage(pageNo) {
+                try{
+                    var divForm = document.getElementById("divForm");
+                    $('#pageNo').val(pageNo)
+                    divForm.action="batchLine.jspx";
+                    divForm.submit();
+                } catch(e) {
+                    alert('_gotoPage(pageNo)方法出错');
+                }
+            }
+
+		</script>
+
+	</body>
+</html>

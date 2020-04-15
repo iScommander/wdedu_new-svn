@@ -1,0 +1,84 @@
+<div class="navbox">
+    <div class="navbox_bg">
+        <div class="nav_l fl">
+            <div id="nav">
+                <ul id="navMenu">
+                    <li><a href='${base}/'>首页</a></li>
+                    <li><a href='javascript:yhpd(1);' rel='dropmenu1'>新高考选科</a></li>
+                    <li><a href='${base}/NewsDisplay/IndependentRecruitment.jspx' rel='dropmenu2'>多元录取</a></li>
+                    <li><a href='${base}/NewsDisplay/BackgroundAscension.jspx' rel='dropmenu3'>综合素质提升</a></li>
+                    <li><a href='${base}/zytb/project.jspx' rel='dropmenu4'>志愿填报</a></li>
+                    <li><a href='${base}/ActiveDetailAct/expertLectures.jspx' rel='dropmenu5'>名师大讲堂</a></li>
+                    <li><a href='${base}/NewsDisplay/TeamOfExperts.jspx' rel='dropmenu6'>专家团队</a></li>
+                    <li><a href='${base}/NewsDisplay/testSxk.jspx' rel='dropmenu7'>一站式服务</a></li>
+                    <li><a href='${base}/NewsDisplay/InstituteOfWorld.jspx' rel='dropmenu8'>沃得学院</a></li>
+                </ul>
+            </div>
+            <ul id="dropmenu1" class="dropMenu">
+                <li><a href="javascript:yhpd(1);">选科测评</a></li>
+                <li><a href="${base}/NewsDisplay/InformationOnTheNewCollegeEntranceExamination.jspx">新高考资讯</a></li>
+                <li><a href=" ">根据大学选科目</a></li>
+                <li><a href="javascript:yhpd(3);">根据科目选专业</a></li>
+                <li><a href="javascript:yhpd(4);">根据专业选科目</a></li>
+                <!--<li><a href="javascript:yhpd(5);">根据职业选专业</a></li>-->
+            </ul>
+            <ul id="dropmenu2" class="dropMenu">
+
+                <li><a href="${base}/NewsDisplay/IndependentRecruitment.jspx">强基计划</a></li>
+                <li><a href="${base}/NewsDisplay/ComprehensiveAssessment.jspx">综合评价</a></li>
+                <li><a href="${base}/NewsDisplay/SinoforeignCooperativeEducation.jspx">中外合作办学</a></li>
+                <li><a href="${base}/NewsDisplay/HongKongMacaoTaiwan.jspx">港澳台申请</a></li>
+                <li><a href="${base}/NewsDisplay/Arts.jspx">艺术类</a></li>
+            </ul>
+            <ul id="dropmenu3" class="dropMenu">
+                <li><a href="${base}/NewsDisplay/BackgroundAscension.jspx">背景提升</a></li>
+                <li><a href="${base}/NewsDisplay/UniversityStudies.jspx">高校研学</a></li>
+                <li><a href="${base}/NewsDisplay/InternationalStudies.jspx">名企研习</a></li>
+                <li><a href="${base}/NewsDisplay/WorkExperience.jspx">职业体验</a></li>
+                <li><a href="${base}/NewsDisplay/SubjectStudy.jspx">课题研究</a></li>
+                <li><a href="${base}/NewsDisplay/EventGuide.jspx">竞赛指南</a></li>
+                <li><a href="${base}/NewsDisplay/Yoosure.jspx">海外游学</a></li>
+                <li><a href="${base}/NewsDisplay/SocialPractice.jspx">社会实践</a></li>
+
+            </ul>
+            <ul id="dropmenu4" class="dropMenu">
+                <li><a href="javascript:yhpd(6);">填志愿</a></li>
+                <li><a href="javascript:yhpd(7);">找大学</a></li>
+                <li><a href="javascript:yhpd(8);">查专业</a></li>
+                <li><a href="javascript:yhpd(9);">看就业</a></li>
+                <li><a href="javascript:yhpd(10);">测性格</a></li>
+                <li><a href="javascript:yhpd(11);">排行榜</a></li>
+                <li><a href="javascript:yhpd(12);">大数据</a></li>
+            </ul>
+            <ul id="dropmenu5" class="dropMenu">
+                <li><a href="${base}/ActiveDetailAct/expertLectures.jspx">公益讲座</a></li>
+                <!--<li><a href="${base}/NewsDisplay/AdmissionsOfficeLectureHall.jspx">招办讲堂</a></li>-->
+                <li><a href="${base}/NewsDisplay/WodecareerELesson.jspx">沃得e课</a></li>
+                <!-- <li><a href="${base}/NewsDisplay/MediaInterviews.jspx">媒体访谈</a></li>-->
+                <li><a href="${base}/NewsDisplay/TheNationalTour.jspx">全国巡讲</a></li>
+            </ul>
+            <ul id="dropmenu6" class="dropMenu">
+                <li><a href="${base}/NewsDisplay/TeamOfExperts.jspx">专家团队</a></li>
+                <li><a href="${base}/NewsDisplay/AllCases.jspx">历年案例</a></li>
+                <li><a href="${base}/NewsDisplay/HonorList.jspx">荣誉榜单</a></li>
+                <!--<li><a href="${base}/NewsDisplay/ParentsFeedback.jspx">家长反馈</a></li>-->
+            </ul>
+            <ul id="dropmenu7" class="dropMenu">
+                <li><a href="${base}/NewsDisplay/testSxk.jspx">升学卡服务</a></li>
+                <li><a href="${base}/NewsDisplay/AcademicPlanningExpertServices.jspx">升学规划专家服务</a></li>
+                <li><a href="${base}/NewsDisplay/MultipleAdmissionExpertServices.jspx">多元录取专家服务</a></li>
+                <li><a href="${base}/NewsDisplay/VolunteerExpertServices.jspx">志愿填报专家服务</a></li>
+                <li><a href="${base}/NewsDisplay/ApplicationServiceForHongKongMacaoTaiwan.jspx">港澳台申请服务</a></li>
+            </ul>
+            <ul id="dropmenu8">
+            </ul>
+        </div>
+        [#if user??]
+        <div class="nav_r fr">
+            <a href="${base}/admissonSvcAct/findbaseInfo.jspx">尊敬的[@text_cut s=user.username?substring(0,5) len=3 append='..'/]</a>
+        </div>
+        [/#if]
+        <div class="clearfix"></div>
+        <script type="text/javascript">cssdropdown.startchrome("navMenu")</script>
+    </div>
+</div>

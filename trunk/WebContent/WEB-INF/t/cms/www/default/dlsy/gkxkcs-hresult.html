@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<title>高考选科测评报告--Holland</title>
+		<link rel="stylesheet" href="${resSys}/res/css/head-footer.css" />
+		<link rel="stylesheet" href="${resSys}/res/css/cs.css" />
+		<style type="text/css">
+			mark{background: none;}
+			.zyxq-chart{padding: 15px 0;background: #3A3A3A;margin-top: 30px;}
+			.zyxq-chart h2{padding-bottom: 20px;font-size: 20px;}
+			.num-year{color: #FFC001;left: 170px;top: 50px;font-size: 42px;}
+			.num-name,.num-date{color: #666;bottom: 20%;font-size: 26px;}
+			.num-name{left: 170px;}.num-date{left: 400px;}
+			.title{position: absolute;top: 140px;left: 170px;color: #FFC001;font-size: 44px;}
+			.title mark{color: #343434;position: relative;}
+			.title mark:after,.sec-title span:after{position: absolute;content: '';width: 100%;height: 4px;background: #9D9D9D;bottom: -6px;left: 0;}
+			.mark{position: absolute;top: 210px;left: 170px;background: #8F8F8F;padding: 4px;color: #fff;font-size: 18px;}
+			.shape{position: relative;display: inline-block;width: 30px;height: 30px;background: #5B5B5B;margin-right: 22px;}
+			.shape:after{position: absolute;content: '';top: 0;left: 30px;border-top: 15px solid transparent; border-left: 15px solid #5B5B5B; border-bottom: 15px solid transparent;}
+			.sec-title{padding: 20px 0 5px;font-size: 20px;}
+			.sec-title span:after{height: 3px;background: #FDD13D;}
+			.sec-title span{display: inline-block;vertical-align: top;line-height: 30px;}
+			.info{width: 500px;text-indent: 2em;font-size: 16px;text-align: justify;line-height: 1.5em;margin: 20px 0 0 100px}
+			.info mark{font-size: 20px;color: #262626;}
+			.list{margin: 20px 0 15px 128px;font-size: 16px;}
+			.list i,.pp li i{display: inline-block;width: 15px;height: 15px;background: #FFC001;border-radius: 50%;vertical-align: middle;margin-right: 8px;}
+			.secone-right{position: absolute;z-index: -1;width: 454px;height: 100%;top: -2px;right: 0;background:url(${resSys}/res/img/dlsy/secone-right.png);}
+			.qy{position: absolute;top: 195px;right: 200px;font-size: 25px;color: #fff;letter-spacing: 4px;}
+			.qy-en{position: absolute;top: 230px;right: 198px;font-size: 16px;color: #fff;letter-spacing: 1px;}
+			.qy-line{position: absolute;top: 250px;right: 198px;width: 58px;height: 2px;background: #FFC001;}
+			.sectwo{width: 104px;height: 368px;background: url(${resSys}/res/img/dlsy/sectwo.png);}
+			.sectwo-wrap{margin: 50px 0 50px 180px;}
+			.bar-wrap{position: absolute;top: 1px;left: 103px;}
+			.sectwo-bar{width: 400px;height: 43px;background: #E5E5E5;border-top-right-radius: 42px;border-bottom-right-radius: 42px;overflow: hidden;margin-bottom: 22px;}
+			.sectwo-bar div{height: 43px;border-top-right-radius: 42px;border-bottom-right-radius: 42px;padding-right: 15px;text-align: right;line-height: 42px;font-size:16px;color: #fff;}
+			.bar-r{background: #719FF1;}.bar-i{background: #ED7D31;}.bar-a{background: #FFC000;}
+			.bar-s{background: #21BDEA;}.bar-e{background: #9AA3C9;}.bar-c{background: #92C638;}
+			.bar1{border-top-left-radius: 3px;border-bottom-left-radius: 3px;}
+			.bar2,.bar2 div{height: 42px;}.bar3{margin-bottom: 21px;}.bar3,.bar3 div{height: 44px;}
+			.bar4,.bar4 div{height: 45px;}.bar4{margin-bottom: 23px;}.bar5,.bar5 div{height: 39px;}
+			.bar5{margin-bottom: 23px;}
+			.bar6,.bar6 div{height: 38px;border-bottom-left-radius: 3px;}
+			.sectwo-right{position: absolute;padding: 10px 15px 0;border-radius: 10px;top: 0;right: 100px;}
+			.sectwo-right li{margin-bottom: 5px;font-size: 15px;}
+			.sectwo-right li:last-child{margin-bottom: 10px;}
+			.sectwo-right li mark{font-size: 16px;margin: 0 10px}
+			.sectwo-right li i{display: inline-block;width: 30px;height: 12px;border-radius: 12px;vertical-align: middle;}
+			.sectwo-sjr{position: absolute;right: 0;bottom: 20px;border-top: 80px solid transparent; border-right: 40px solid #FFC001; border-bottom: 80px solid transparent;}
+			.sectwo-sjl1,.sectwo-sjl2{position: absolute;left: 0;border-top: 200px solid transparent; border-left: 80px solid #FFC001; border-bottom: 200px solid transparent;}
+			.sectwo-sjl1{top: 50px;}
+			.sectwo-sjl2{bottom: -50px;border-left-color: #3A3A3A;}
+			.sectwo-line{position: absolute;top: 133px;left: -45px;width: 180px;height: 2px;background: #D6D6D6;-webkit-transform: rotate(68deg);-moz-transform: rotate(68deg);-moz-transform: rotate(68deg);transform: rotate(68deg);}
+			.center{width: 1050px;margin: 0 auto;}
+			.sec-three{margin: 30px;border-radius: 10px;border:2px solid #FEC200;padding: 30px 40px;}
+			.sec-result{color: #fff;font-size: 16px;text-indent: 2em;line-height: 1.4em;}
+			.sec-result mark{color: #FFC000;font-weight: 500;}
+			.sec-three-nav{position: absolute;top: -12px;left: 35px;line-height: 24px;background: #FEC103;display: table;padding: 0 1em;border-radius: 24px;color: #fff;}
+			.result-item{background: #fff;border-radius: 10px;margin-top: 25px;padding-bottom: 10px;}
+			.result-item-nav{color: #fff;width: 172px;height: 32px;background: url(${resSys}/res/img/dlsy/rs-item.png);line-height: 37px;margin-left: -4px;padding-left: 10px;}
+			.result-item p{padding: 15px 30px;text-align: justify;font-size: 16px;}
+			.pd{padding: 20px 40px;}
+			.pd h4{color: #fff;font-size: 18px;text-align: center;}
+			.h-line{width: 3em;height: 2px;background: #FFC001;margin: 6px auto 25px;}
+			.pp{padding-top: 20px;color: #fff;}
+			.pp li{margin-bottom: 5px;font-size: 16px;}.pp li mark{color: #fff;}
+			.pp p{font-size: 15px;padding-left: 25px;margin-bottom: 15px;}
+			.table-nav{border-left:4px solid #fff;font-size: 15px;margin: 30px 5px 6px 0;color: #fff;}
+			.table-a td{border:none;}.table-a tbody tr{background: #D1D9FE;}
+			.table-a .first{background: #FCD5D9;}
+			.table-a .last{background: #FAF7CA;}
+			.table-a .tr-gap{border-bottom:2px solid #3A3A3A;}
+			.table-a .table-row{background: #5DAEE5;color: #fff;border-bottom:2px solid #3A3A3A;}
+			table{font-size: 15px;}.jy{color: #fff;padding: 4px 0;}
+			.table-b tbody tr{border:1px solid #ccc;}
+			.table-b thead tr{border:1px solid #FFC001;}
+			.table-b th{background: #FFC001;}.table-b tbody tr{background: #fff;}
+			.table-b tbody tr td:first-child{background: #EA8C35;color: #fff;}
+			.warn{color: #EA8C35;padding-top:10px;}table td{height: 40px;color: #333;}
+			.next{display:table;margin:20px auto;padding:.4em 1em;border-radius:2px;background:#44D0E5;color:#fff;font-size:16px;}
+		.mb_db_gd_zt {
+            text-align: center;
+            caret-color: transparent;
+        }.mb_db_gd {
+             height: 64px;
+         }
+         .mb_db_gd {
+             height: 95px;
+             background-color: #5e6b9b;
+             opacity: 0.9;
+             position: fixed;
+             z-index: 1;
+             bottom: 0;
+             padding-left: 15px;
+             width: 100%;
+         }.mb_db_gd span {
+              color: #FFF;
+              font-size: 28px;
+              text-align: center;
+              line-height: 95px;
+          }.mb_db_gd_an {
+               width: 200px;
+               height: 48px;
+               line-height: 48px;
+           }
+           .mb_db_gd_an {
+               display: inline-block;
+               background-color: #ff8d00;
+               width: 244px;
+               height: 60px;
+               font-size: 24px;
+               color: #FFFFFF;
+               border-radius: 5px;
+               line-height: 60px;
+               text-align: center;
+               margin-left: 20px;
+               cursor: pointer;
+           }
+
+		</style>
+		<script src="${resSys}/res/js/jquery-1.11.3.min.js"></script>
+		<script src="${resSys}/res/js/echarts.min.js"></script>
+	</head>
+	<body >
+	<div class="center-block">
+		<section class="gps">
+			<img src="${resSys}/res/img/dlsy/gkxkcs-result.png" alt="" />
+			<section class="center-block abs-center" style="height: 100%;">
+				<h1 class="title"><mark>Holland职业兴趣</mark>测评报告</h1>
+				<mark class="mark">Holland professional interest assessment report</mark>
+				<h1 class="num-year">${date?substring(0,4)}</h1>
+				<h2 class="num-name">姓名：${qstResult.userName!}</h2>
+				<h2 class="num-date">日期：${date!}</h2>
+			</section>
+		</section>
+		[#if haveTianZhiyuan??&&haveTianZhiyuan=="true"]
+		<section class="gps sec-one">
+			<div class="sec-title">
+				<i class="shape"></i>
+				<span class="gps">Holland职业兴趣测量</span>
+			</div>
+			<p class="info"><mark>Holland职业兴趣测量</mark>是在职业心理学界以及职业咨询实践中运用的最为广泛的心理测验。在国内外的大量研究中，该测验对于个人职业生涯发展的预测性一再得到证实。这份报告将基于Holland职业兴趣测量理论分析和探讨你的职业兴趣和风格，并且进一步帮助你了解可能会适合你学习的专业。</p>
+			<p class="info"> 现在，请你花一点时间从头到尾仔细地阅读这份报告。通过这份测验报告，你将对你自己专业选择和职业发展的可能性拥有更加深刻的认识。Holland职业兴趣测评报告主要包含三方面的内容：</p>
+			<div class="list"><i></i>对你职业兴趣的探讨和分析</div>
+			<div class="list"><i></i>不同大学专业和你职业兴趣的匹配程度</div>
+			<div class="list"><i></i>对你专业选择的建议</div>
+			<div class="secone-right"></div>
+			<div class="qy">前言</div>
+			<div class="qy-en">Perface</div>
+			<div class="qy-line"></div>
+		</section>
+		<section class="gps">
+			<div class="sec-title">
+				<i class="shape"></i>
+				<span class="gps">我的职业风格</span>
+			</div>
+			<div class="sectwo-wrap gps">
+				<div class="sectwo"></div>
+				<div class="bar-wrap">
+					<div class="sectwo-bar bar1">
+						<div class="bar-r" style="width: ${txmap.R}%;">${txmap.R!}%</div>
+					</div>
+					<div class="sectwo-bar bar2">
+						<div class="bar-i" style="width: ${txmap.I}%;">${txmap.I!}%</div>
+					</div>
+					<div class="sectwo-bar bar3">
+						<div class="bar-a" style="width: ${txmap.A}%;">${txmap.A!}%</div>
+					</div>
+					<div class="sectwo-bar bar4">
+						<div class="bar-s" style="width: ${txmap.S}%;">${txmap.S!}%</div>
+					</div>
+					<div class="sectwo-bar bar5">
+						<div class="bar-e" style="width: ${txmap.E}%;">${txmap.E!}%</div>
+					</div>
+					<div class="sectwo-bar bar6">
+						<div class="bar-c" style="width: ${txmap.C}%;">${txmap.C!}%</div>
+					</div>
+				</div>
+				<div class="sectwo-right box-shadow">
+					<ol>
+						<li><i class="bar-r"></i><mark>实践型(R)</mark>realistic</li>
+						<li><i class="bar-i"></i><mark>研究型(I)</mark>investigative</li>
+						<li><i class="bar-a"></i><mark>艺术型(A)</mark>artistic</li>
+						<li><i class="bar-s"></i><mark>社会型(S)</mark>social</li>
+						<li><i class="bar-e"></i><mark>企业型(E)</mark>enterprise</li>
+						<li><i class="bar-c"></i><mark>常规型(C)</mark>conventional</li>
+					</ol>
+				</div>
+				<div class="sectwo-sjr"></div>
+			</div>
+			<div class="sectwo-sjl1"></div>
+			<div class="sectwo-sjl2"></div>
+			<div class="sectwo-line"></div>
+		</section>
+		<section class="zyxq-chart">
+			<h2>如下图,您的职业兴趣倾向是<span>${qstResult.rst_A!}</span></h2>
+			<div id="Echart" class="chart-xqcs"></div>
+			<section class="center">
+				<div class="sec-three gps">
+					<div class="sec-three-nav">结果分析</div>
+					<p class="sec-result">职业风格并不是仅仅由一种单一的职业兴趣构成的。相反的，不同种类型的职业风格往往同时存在于一个人身上，只是各有强弱。 通过测验结果，我们总结出了你身上相对明显的三种职业兴趣类型，它们分别是：<mark>${resultvalue!}</mark>。这三种职业兴趣特质将在你今后的职业发展道路中起主导作用。</p>
+					<div class="result-item gps">
+						<div class="result-item-nav">${one.what!}</div>
+						<p>${one.describe!}</p>
+					</div>
+					<div class="result-item gps">
+						<div class="result-item-nav">${twp.what!}</div>
+						<p>${twp.describe!}</p>
+					</div>
+					<div class="result-item gps">
+						<div class="result-item-nav">${three.what!}</div>
+						<p>${three.describe!}</p>
+					</div>
+				</div>
+				<div class="pd">
+					<h4>我的专业匹配表</h4>
+					<div class="h-line"></div>
+					<p class="sec-result">通过专业的Holland职业兴趣匹配方法，我们将你的职业兴趣和现有的大学专业进行了系统的匹配。下表罗列出了各个专业和你的职业兴趣的具体匹配程度。匹配程度按照高低被分为三类：<mark>高度匹配、中度匹配、低度匹配</mark></p>
+					<ol class="pp">
+						<li><i class="bar-r"></i><mark>高度匹配</mark></li>
+						<p>表示从职业兴趣的角度来看，这个专业非常适合你。你具备这个专业所要求的学习风格和能力，如果进入这个专业学习，你将能很好地适应。</p>
+						<li><i class="bar-i"></i><mark>中度匹配</mark></li>
+						<p>表示你对这个专业有一定的兴趣，但还并不很高。如果进入这个专业学习，你可能需要花一些时间来调整你自己学习和做事风格，以适应这个专业的环境和要求。</p>
+						<li><i class="bar-a"></i><mark>低度匹配</mark></li>
+						<p>表示你对这个专业的兴趣很低，也不具备这个专业所要求的学习和做事风格。如果坚持在这个专业发展下去，你也许最终会感到迷茫和痛苦。</p>
+					</ol>
+					<div class="table-nav">&nbsp;匹配程度结果(不同匹配程度可用不同颜色表示)</div>
+					<table class="table-a">
+						<thead>
+							<tr>
+								<th>学科门类</th>
+								<th>专业类别</th>
+								<th>匹配分数</th>
+								<th>匹配程度</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- <tr class="first">
+								<td rowspan="3" class="table-row">哲学</td>
+								<td>伦理类</td>
+								<td>33</td>
+								<td>高度匹配</td>
+							</tr>
+							<tr>
+								<td>啊类</td>
+								<td>33</td>
+								<td>中度匹配</td>
+							</tr>
+							<tr class="last">
+								<td>嗯类</td>
+								<td>3</td>
+								<td>低度匹配</td>
+							</tr> -->
+							[#if majorMatchingList??]
+								[#list majorMatchingList as items]
+									[#if items.list??]
+										[#list items.list as item]
+																			
+										<tr>
+											[#if item.aid??]
+												<td rowspan="${item.arow!}" class="table-row">${item.aname!}</td>
+											[/#if]
+											[#if item.bid?? && item.degree=="高度匹配"]
+												<td class="first [#if item_index == item.last]tr-gap[/#if]">${item.bname!}</td>
+												<td class="first [#if item_index == item.last]tr-gap[/#if]">${item.fraction!}</td>
+												<td class="first [#if item_index == item.last]tr-gap[/#if]">${item.degree!}</td>
+											[/#if]
+											[#if item.bid?? && item.degree=="中度匹配"]
+												<td [#if item_index == item.last]class="tr-gap"[/#if]>${item.bname!}</td>
+												<td [#if item_index == item.last]class="tr-gap"[/#if]>${item.fraction!}</td>
+												<td [#if item_index == item.last]class="tr-gap"[/#if]>${item.degree!}</td>
+											[/#if]
+											[#if item.bid?? && item.degree=="低度匹配"]
+												<td class="last [#if item_index == item.last]tr-gap[/#if]">${item.bname!}</td>
+												<td class="last [#if item_index == item.last]tr-gap[/#if]">${item.fraction!}</td>
+												<td class="last [#if item_index == item.last]tr-gap[/#if]">${item.degree!}</td>
+											[/#if]
+										</tr>
+										[/#list]
+									[/#if]
+								[/#list]
+							[/#if]
+						</tbody>
+					</table>
+					<div class="table-nav">&nbsp;建议和结语</div>
+					<p class="jy">现在，你已经了解了你的职业兴趣风格，并且知道了从职业兴趣的角度来看，哪些专业适合你，而哪些不适合你。为了让你有一个更加直观的了解，我们罗列出了和你最为匹配的前十个专业：</p>
+					<table class="table-b">
+						<thead>
+							<tr>
+								<th>匹配排名</th>
+								<th>专业类别</th>
+								<th>匹配分数</th>
+								<th>匹配程度</th>
+							</tr>
+						</thead>
+						<tbody>
+						[#list tenList as list]
+							<tr>
+								<td>${list_index+1!}</td>
+								<td>${list.bname!}</td>
+								<td>${list.fraction!}</td>
+								<td>${list.degree!}</td>
+							</tr>
+						[/#list]	
+						<!-- 	<tr>
+								<td>2</td>
+								<td>啊类</td>
+								<td>33</td>
+								<td>高度匹配</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>嗯类</td>
+								<td>3</td>
+								<td>高度匹配</td>
+							</tr> -->
+						</tbody>
+					</table>
+					<p class="warn">注意：职业兴趣只是在个人专业选择和职业规划过程中所需要参考的其中一个方面，并不是全部的依据标准哦</p>
+					<a class="next" href="${base}/evaluation/MBTI.jspx">继续下一个测评</a>
+				</div>
+			</section>
+		</section>
+[/#if]
+				<input type="hidden" id="report_A" name="report_A" value="${qstResult.retA_A!}">
+				<input type="hidden" id="report_C" name="report_C" value="${qstResult.retA_C!}">
+				<input type="hidden" id="report_E" name="report_E" value="${qstResult.retA_E!}">
+				<input type="hidden" id="report_I" name="report_I" value="${qstResult.retA_I!}">
+				<input type="hidden" id="report_S" name="report_S" value="${qstResult.retA_S!}">
+				<input type="hidden" id="report_R" name="report_R" value="${qstResult.retA_R!}">
+</div>
+[#if haveTianZhiyuan??&&haveTianZhiyuan=="false"]
+<div class="mb_db_gd" id="box2">
+    <div class="mb_db_gd_zt">
+        <span>&nbsp;&nbsp; 购买VIP后可查看详细数据&nbsp;&nbsp;点击</span>
+        <a class="mb_db_gd_an" href="${base}/NewsDisplay/testSxk.jspx">购买</a>
+    </div>
+    <div class="clearfix"></div>
+</div>
+[/#if]
+	</body>
+	<script type="text/javascript">
+		var A=document.getElementById("report_A").value; 
+		var C=document.getElementById("report_C").value; 
+		var E=document.getElementById("report_E").value; 
+		var I=document.getElementById("report_I").value; 
+		var S=document.getElementById("report_S").value; 
+		var R=document.getElementById("report_R").value; 
+		
+		var mda =[A, I, R, C, E, S];
+		var myChart = echarts.init(document.getElementById('Echart'));
+		myChart.setOption({
+//			tooltip:{
+//					trigger:'item',
+//					padding:[5,20,5,8],
+//					formatter: function(params){
+//						var data = params.data.value;
+//						var html = "测评结果:<br/>";
+//						html += 'A艺术型： '+data[0]+'<br/>';
+//						html += 'I 研究型：  '+data[1]+'<br/>';
+//						html += 'R实际型： '+data[2]+'<br/>';
+//						html += 'C传统型： '+data[3]+'<br/>';
+//						html += 'E企业型： '+data[4]+'<br/>';
+//						html += 'S社会型： '+data[5]+'<br/>';
+//						return html;
+//					}
+//				},
+			radar: {
+				indicator: [{
+						name: 'A',
+						max: 18,
+					},
+					{
+						name: 'I',
+						max: 18
+					},
+					{
+						name: 'R',
+						max: 18
+					},
+					{
+						name: 'C',
+						max: 18
+					},
+					{
+						name: 'E',
+						max: 18
+					},
+					{
+						name: 'S',
+						max: 18
+					}
+				],
+				center: ['50%', '50%'],
+				radius: 200,
+				name: {
+					formatter: function(value) {
+						return '{' + value + '|}\n';
+					},
+					rich: {
+						value: {
+							color: 'transparent',
+						},
+						A: {
+							height: 76,
+							backgroundColor: {
+								image: "${resSys}/res/img/sygj/xq-a.png"
+							}
+						},
+						I: {
+							height: 36,
+							backgroundColor: {
+								image: "${resSys}/res/img/sygj/xq-i.png"
+							}
+						},
+						R: {
+							height: 36,
+							verticalAlign:"bottom",
+							lineHeight:66,
+							backgroundColor: {
+								image: "${resSys}/res/img/sygj/xq-r.png"
+							}
+						},
+						C: {
+							height: 78,
+							backgroundColor: {
+								image: "${resSys}/res/img/sygj/xq-c.png"
+							}
+						},
+						E: {
+							height: 36,
+							verticalAlign:"bottom",
+							lineHeight:66,
+							backgroundColor: {
+								image: "${resSys}/res/img/sygj/xq-e.png"
+							}
+						},
+						S: {
+							height: 36,
+							backgroundColor: {
+								image: "${resSys}/res/img/sygj/xq-s.png"
+							}
+						}
+					},
+				},
+				shape: "polygon",
+				nameGap: -20,
+				splitArea: {
+					show: true,
+					areaStyle: {
+						 color:['#e3e2e2', '#89c3ff', '#f6dd68', '#ffb539', '#78d8d6']
+					}
+				},
+//				axisLabel:{
+//					show:true
+//				},
+				axisLine: {
+					lineStyle: {
+						color: 'rgba(70,99,106,.6)',
+						width: 2,
+					}
+				},
+				splitLine: {
+					lineStyle: {
+						color: 'rgb(217,233,246)',
+						width: 2
+					}
+				}
+			},
+			series: [{
+				name: "测评结果",
+				type: 'radar',
+				symbol: "circle",
+				symbolSize: 10,
+				label: {
+					normal: {
+						show: true,
+						color: '#fff',
+						fontSize: 20,
+						distance: 0,
+						verticalAlign: 'top',
+						offset: [12, -5],
+						fontWeight: 500,
+						fontFamily: "Helvetica  Arial"
+					}
+				},
+				itemStyle: {
+					normal: {
+						color: 'rgba(245,110,29,.8)'
+					}
+				},
+				lineStyle: {
+					normal: {
+						color: 'rgba(0,0,0,0)'
+					}
+				},
+				areaStyle: {
+					normal: {
+						color: "rgba(204,0,255,.75)"
+					}
+				},
+				silent:true,
+				data: [{
+//					value: [3, 3, 5, 8, 2, 4]
+					value: mda
+				}]
+			}],
+		});
+	</script>
+</html>

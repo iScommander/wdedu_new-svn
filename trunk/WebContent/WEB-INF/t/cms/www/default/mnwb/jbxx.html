@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>基本信息</title>
+    <link href="${base}/r/css/new_zywy/reset.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="${base}/r/css/new_zywy/bootstrap.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="${base}/r/css/new_zywy/publicStyle.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="${base}/r/css/new_zywy/newMain.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="${base}/r/css/head_footer.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script type="text/javascript" src="${base}/r/js/new_js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="${base}/r/js/new_js/bootstrap.js"></script>
+	<!--[if lte IE 9]>
+	<script src="${base}/r/js/new_js/html5shiv.js" language="javascript"></script>
+	<script src="${base}/r/js/new_js/respond.min.js" language="javascript"></script>
+	<![endif]-->
+</head>
+<body>
+    <div class="z-outer" style="background:#F5F5F5">
+		[#include "../wdedu/include/header_address.html"/]
+		[#include "../wdedu/include/header_dylq.html"/]
+        <div class="container">
+            <div class="row clearfix navigation-style">
+                <div class="col-md-12 column">
+                    <div class="navigation"><span>当前位置：</span><a href="${base}">主页</a><span>&lt;</span><a href="${base}/ydyfw/queryOrder.jspx">我的一对一服务清单</a><span>&lt;</span><a href="ase}/mnwb/jbxx.jspx?orderId=${order.orderId}">填报个人信息</a><span>&lt;</span><a>基本信息</a></div>
+                </div>
+            </div>
+	        <div class="row clearfix ydy_content">
+	            <div class="col-md-3 column zjf-choose-left">
+					[#include "./left_menu.html"/]
+	            </div>
+	            <div class="col-md-9 column zjf-choose-right">
+			        <div class="row clearfix ydy_title">
+			            <div class="col-md-9 column">
+							<span class="ydy_title_span">
+								考生个人信息详细填写
+								[#if order.serviceType == 'zytb']
+								（志愿填报一对一）
+								[#elseif order.serviceType =='zzzs']
+								（自主招生一对一）
+								[#elseif order.serviceType =='xdzy']
+								（学大志愿一对一）
+								[#elseif order.serviceType =='bjts']
+								（背景提升项目）
+								[#else]
+								（港澳台一对一）
+								[/#if]
+							</span>
+			            </div>
+			            <div class="col-md-3 column">
+							<span>订单号：${order.orderId}</span>
+			            </div>
+			        </div>
+			        <div class="row clearfix">
+			            <div class="col-md-12 column">
+							<div class="mes_left_top">
+								<div class="ydy_shuoming">填写基本信息、中学信息、成绩信息，模考成绩、单科成绩等</div>
+							</div>
+							<ul class="mes_left_ul">
+								<li class="checked-style"><a href="jbxx.jspx?orderId=${order.orderId}">基本信息</a></li>
+								<li><a href="grzp.jspx?orderId=${order.orderId}" id="grzp">个人照片</a></li>
+								<li><a href="zxxx.jspx?orderId=${order.orderId}" id="zxxx">中学信息</a></li>
+								<li><a href="cjxx.jspx?orderId=${order.orderId}" id="cjxx">成绩信息</a></li>
+								<li><a href="zhxx.jspx?orderId=${order.orderId}">综合信息</a></li>
+								<li><a href="mkcj.jspx?orderId=${order.orderId}" id="mkcj">模考成绩</a></li>
+								<li><a href="dkpm.jspx?orderId=${order.orderId}" id="dkpm">单科排名</a></li>
+								<li><a href="tjrxx.jspx?menuId=tjrxx&orderId=${order.orderId}" id="tjrxx">推荐人信息</a></li>
+								<li><a href="yjxx.jspx?menuId=yjxx&orderId=${order.orderId}" id="yjxx">邮寄信息</a></li>
+							</ul>
+							<div class="mes_left_bottom">
+								<table class="zydy-table">
+									<tr>
+										<td class="ydy-td1"><strong>姓名：</strong></td>
+										<td>[#if tnUser??]${tnUser.userName!}[/#if]</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>证件号码：</strong></td>
+										<td>[#if tnUser??]${tnUser.identityNumber!}[/#if]</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>手机号码：</strong></td>
+										<td>[#if tnUser??]${tnUser.telephone!}[/#if]</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>性别：</strong></td>
+										<td>[#if tnUser??] [#if tnUser.sex?? && tnUser.sex=='1']男[#else]女[/#if] [#else]-[/#if]</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>出生日期：</strong></td>
+										<td>[#if tnUser??]${tnUser.birthday!}[/#if]</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>民族：</strong></td>
+										<td>[#if tnUser??]${tnUser.nation!}[/#if]</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>政治面貌：</strong></td>
+										<td>[#if tnUser??]${tnUser.politics!}[/#if]</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>裸眼视力（左/右）：</strong></td>
+										<td><span>[#if tnUser??]${tnUser.leftEyesight!}[/#if]</span>&nbsp;/&nbsp;<span>[#if tnUser??]${tnUser.rightEyesight!}[/#if]</span></td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>是否色盲：</strong></td>
+										<td>[#if tnUser??]${tnUser.colorBlind!}[/#if]</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>身高(cm)：</strong></td>
+										<td>[#if tnUser??]${tnUser.height!}[/#if]</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>体重(kg)：</strong></td>
+										<td>[#if tnUser??]${tnUser.weight!}[/#if]</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>高考报名所在地：</strong></td>
+										<td><span>[#if tnUser??]${tnUser.examProvince!}[/#if]</span><span>[#if tnUser??]${tnUser.examCity!}[/#if]</span><span>[#if tnUser??]${tnUser.examRegion!}[/#if]</span></td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>高考报名号：</strong></td>
+										<td>[#if tnUser??]${tnUser.examNumber!}[/#if]</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>考生类型：</strong></td>
+										<td>[#if tnUser??]${tnUser.studentType!}[/#if]
+										</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>外语语种：</strong></td>
+										<td>[#if tnUser??]${tnUser.language!}[/#if]</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>学科类型：</strong></td>
+										<td>[#if tnUser??]${tnUser.subjectType!}[/#if]</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>联系电话：</strong></td>
+										<td>[#if tnUser??]${tnUser.phoneNumber!}[/#if]</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>联系地址：</strong></td>
+										<td>[#if tnUser??]<span>${tnUser.mailProvince!}${tnUser.mailCity!}${tnUser.mailRegion!}${tnUser.mailAddress!}</span>[/#if]</td>
+									</tr>
+									<tr>
+										<td class="ydy-td1"><strong>邮政编码：</strong></td>
+										<td>[#if tnUser??]${tnUser.postcode!}[/#if]</td>
+									</tr>
+									<tr>
+										<td class="ydy-td3"><strong>家庭信息：</strong></td>
+										<td>
+											<table class="zydy-table-inner">
+												<tr>
+													<td align="right">父亲姓名：</td><td>[#if father??]${father.name!}[#else]-[/#if]</td>
+													<td align="right">联系电话：</td><td>[#if father??]${father.telephone!}[#else]-[/#if]</td>
+												</tr>
+												<tr>
+													<td align="right">文化程度：</td>
+													<td>
+														[#if father??]${father.educationLevel!}[/#if]
+													</td>
+													<td align="right">职业：</td><td>[#if father??]${father.job!}[#else]-[/#if]</td>
+												</tr>
+												<tr>
+													<td align="right">工作单位：</td><td>[#if father??]${father.office!}[#else]-[/#if]</td>
+													<td align="right">职务：</td><td>[#if father??]${father.vote!}[#else]-[/#if]</td>
+												</tr>
+												<tr>
+													<td align="right">母亲姓名：</td><td>[#if mother??]${mother.name!}[#else]-[/#if]</td>
+													<td align="right">联系电话：</td><td>[#if mother??]${mother.telephone!}[#else]-[/#if]</td>
+												</tr>
+												<tr>
+													<td align="right">文化程度：</td>
+													<td>
+														[#if mother??]${mother.educationLevel!}[/#if]
+													</td>
+													<td align="right">职业：</td><td>[#if mother??]${mother.job!}[#else]-[/#if]</td>
+													
+												</tr>
+												<tr>
+													<td align="right">工作单位：</td><td>[#if mother??]${mother.office!}[#else]-[/#if]</td>
+													<td align="right">职务：</td><td>[#if mother??]${mother.vote!}[#else]-[/#if]</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+						        <div class="row clearfix up-down">
+						            <div class="col-md-12 column">
+						            	<a class="zjf-bt pull-right" href="${base}/mnwb/jbxx_new.jspx?orderId=${order.orderId}" style="margin-right: 20px;">修改</a>
+						            </div>
+						        </div>
+							</div>
+			            </div>
+			        </div>
+	            </div>
+	        </div>
+        </div>
+		[#include "../wdedu/include/footer_new.html"/]
+    </div>
+<script>
+    $(function(){
+		$("#tbgrxx").addClass("zjf-active");
+	});
+</script>
+</body>
+</html>
